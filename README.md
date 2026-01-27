@@ -53,9 +53,24 @@ This approach provides:
 
 ## Getting Started
 
+### Project Structure
+
+```text
+IMPACT-Boston/
+├─ impact-boston/        # Next.js frontend
+│  ├─ src/
+│  │  ├─ app/            # App Router pages and layouts
+│  │  ├─ components/     # Reusable UI components
+│  │  └─ sanity/         # Sanity client, GROQ queries, utilities
+│  ├─ public/            # Static assets
+│  └─ package.json
+├─ studio/               # Sanity Studio (hosted and deployed separately)
+└─ README.md
+```
+
 ### Setup
 
-1. Make sure you have **Node.js** installed (v18+ recommended)
+1. Make sure you have **Node.js** installed (v22+ recommended)
 
 2. Clone the repository to your local machine:
 
@@ -63,27 +78,13 @@ This approach provides:
    git clone https://github.com/Artists-for-Humanity/IMPACT-Boston.git
    ```
 
-3. Navigate into the project directory:
-
-   ```bash
-   cd impact-boston
-   ```
-
-4. Install dependencies:
-
-   ```bash
-   npm install
-   # or
-   yarn
-   ```
-
-5. Copy the environment variables file:
+3. Copy the environment variables file:
 
    ```bash
    cp .env.example .env.local
    ```
 
-6. Add the required Sanity environment variables to `.env.local`:
+4. Add the required Sanity environment variables to `.env.local`:
 
    ```env
    NEXT_PUBLIC_SANITY_PROJECT_ID=
@@ -91,6 +92,21 @@ This approach provides:
    NEXT_PUBLIC_SANITY_API_VERSION=
    SANITY_API_READ_TOKEN=
    ```
+
+5. Navigate into the project directory:
+
+   ```bash
+   cd impact-boston
+   ```
+
+6. Install dependencies:
+
+   ```bash
+   npm install
+   # or
+   yarn
+   ```
+
 
 7. Start the development server:
 
