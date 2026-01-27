@@ -7,12 +7,10 @@ const config: Config = {
     extend: {
       colors: {
         brand: {
-          "blue": "#5C85A9", 
-          "orange": "#F46036",
-          "purple": "#191325",
-          "black": "#000000",
-          "white": "#ffffff", 
-          "gray": "#808285",
+          "dark-purple": "#421656", 
+          "light-purple": "#6c3789",
+          "orange": "#e86834",
+       
         },
       },
     },
