@@ -4,6 +4,12 @@ export const postType = defineType({
   name: 'post',
   title: 'Post',
   type: 'document',
+  preview: {
+    select: {
+      title: 'title',
+      slug: 'slug.current',
+    },
+  },
   fields: [
     defineField({
       name: 'title',
