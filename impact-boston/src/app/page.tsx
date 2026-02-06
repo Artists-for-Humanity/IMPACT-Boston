@@ -1,21 +1,31 @@
 import Link from "next/link";
 import { type SanityDocument } from "next-sanity";
+import { draftMode } from "next/headers";
 
 import { client } from "@/sanity/client";
+import { DraftModeIndicator } from "@/components/DraftModeIndicator";
 
 const POSTS_QUERY = `*[
   _type == "post"
   && defined(slug.current)
 ]|order(publishedAt desc)[0...12]{_id, title, slug, publishedAt}`;
 
-const options = { next: { revalidate: 30 } };
-
 export default async function IndexPage() {
-  const posts = await client.fetch<SanityDocument[]>(POSTS_QUERY, {}, options);
+  const { isEnabled: isDraftMode } = await draftMode();
+  const posts = await client.fetch<SanityDocument[]>(
+    POSTS_QUERY,
+    {},
+    {
+      next: { revalidate: isDraftMode ? 0 : 30 },
+      perspective: isDraftMode ? "previewDrafts" : "published",
+    }
+  );
 
   return (
-    <div className="mx-auto w-full max-w-5xl px-4 py-10 sm:px-6">
-      <div className="grid grid-cols-12 gap-6">
+    <>
+      <DraftModeIndicator />
+      <div className="mx-auto w-full max-w-5xl px-4 py-10 sm:px-6">
+        <div className="grid grid-cols-12 gap-6">
         <div className="col-span-12">
           <h1 className="text-4xl font-bold">Posts</h1>
           <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
@@ -43,8 +53,7 @@ export default async function IndexPage() {
           </ul>
         </div>
       </div>
-    </div>
+      </div>
+    </>
   );
-
-
 }
