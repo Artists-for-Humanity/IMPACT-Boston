@@ -11,17 +11,46 @@ export const metadata: Metadata = {
   description: "IMPACT Boston website",
 };
 
-export default function RootLayout({
+// export default function RootLayout({
+//   children,
+// }: Readonly<{ children: React.ReactNode }>) {
+//   return (
+//     <html lang="en"  className={poppins.variable}>
+//       <body className="min-h-screen bg-white text-gray-900 antialiased dark:bg-gray-950 dark:text-gray-100">
+//         <div className="flex min-h-screen flex-col">
+//           <Header />
+//           <main className="flex-1">{children}</main>
+//           <Footer />
+//         </div>
+//       </body>
+//     </html>
+//   );
+// }
+
+import { VisualEditing } from "next-sanity/visual-editing";
+import { draftMode } from "next/headers";
+import { DisableDraftMode } from "../components/DisableDraftMode";
+
+export default async function RootLayout({
   children,
-}: Readonly<{ children: React.ReactNode }>) {
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   return (
-    <html lang="en"  className={poppins.variable}>
-      <body className="min-h-screen bg-white text-gray-900 antialiased dark:bg-gray-950 dark:text-gray-100">
-        <div className="flex min-h-screen flex-col">
-          <Header />
-          <main className="flex-1">{children}</main>
-          <Footer />
-        </div>
+    <html lang="en">
+         <body className="min-h-screen bg-white text-gray-900 antialiased dark:bg-gray-950 dark:text-gray-100">
+          <div className="flex min-h-screen flex-col">
+         <Header />
+        <main className="flex-1">{children}</main>
+        {(await draftMode()).isEnabled && (
+          <>
+            <VisualEditing />
+            <DisableDraftMode />
+         
+          </>
+        )}
+           <Footer />
+           </div>
       </body>
     </html>
   );
