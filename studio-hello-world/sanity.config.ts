@@ -2,25 +2,25 @@ import {defineConfig} from 'sanity'
 import {structureTool} from 'sanity/structure'
 import {visionTool} from '@sanity/vision'
 import {schemaTypes} from './schemaTypes'
-import { presentationTool } from "sanity/presentation";
+import {presentationTool} from 'sanity/presentation'
 
 
 export default defineConfig({
   name: 'default',
-  title: 'Impact Boston',
+  title: 'Visual-Editing-Test',
 
-  projectId: 'ddrwhofx',
+  projectId: "ddrwhofx",
   dataset: 'production',
 
   plugins: [
     structureTool(), 
-    visionTool(),
+    visionTool(), 
      presentationTool({
       previewUrl: {
         initial: process.env.SANITY_STUDIO_PREVIEW_ORIGIN,
-        preview: "/",
+        preview: '/',
         previewMode: {
-          enable: "/api/draft-mode/enable",
+          enable: '/api/draft-mode/enable',
         },
       },
     }),
