@@ -27,8 +27,8 @@ export default async function Home() {
   )
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col gap-8 py-24 px-8 bg-white dark:bg-black sm:items-start">
+    <div className="flex items-center justify-center bg-zinc-50 font-sans dark:bg-black">
+      <main className="flex  w-full max-w-3xl flex-col gap-8 py-24 px-8 bg-white dark:bg-black sm:items-start">
         <header className="flex w-full flex-col gap-2">
           <h1 className="text-3xl font-semibold tracking-tight text-black dark:text-zinc-50">
             Posts

@@ -23,7 +23,7 @@ export default async function RootLayout({
   return (
      <html lang="en">
          <body className="min-h-screen bg-white text-gray-900 antialiased dark:bg-gray-950 dark:text-gray-100">
-          <div className="flex min-h-screen flex-col">
+          <div className="flex  flex-col">
          <Header />
         <main className="flex-1">{children}</main>
         {(await draftMode()).isEnabled && (
