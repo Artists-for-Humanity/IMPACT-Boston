@@ -3,6 +3,13 @@ import {defineQuery} from 'next-sanity'
 import {draftMode} from 'next/headers'
 import {client} from '@/sanity/client'
 
+type Post = {
+  _id: string
+  title?: string | null
+  slug?: string | null
+  publishedAt?: string | null
+}
+
 const postsQuery = defineQuery(`*[_type == "post"]|order(publishedAt desc){
   _id,
   title,
@@ -13,7 +20,7 @@ const postsQuery = defineQuery(`*[_type == "post"]|order(publishedAt desc){
 export default async function Home() {
   const {isEnabled} = await draftMode()
 
-  const posts = await client.fetch(
+  const posts = await client.fetch<Post[]>(
     postsQuery,
     {},
     isEnabled ? {perspective: 'drafts', useCdn: false, stega: true} : undefined
