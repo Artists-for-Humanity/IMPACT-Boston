@@ -7,7 +7,7 @@ import {presentationTool} from 'sanity/presentation'
 
 export default defineConfig({
   name: 'default',
-  title: 'Visual-Editing-Test',
+  title: 'Impact Boston',
 
   projectId: "ddrwhofx",
   dataset: 'production',
