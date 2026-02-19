@@ -3,6 +3,14 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --color-primary: #421956;
+  --color-primary-shade: #6b3789;
+  --color-secondary: #6C3789;
+  --color-complementary: #C83B19;
+  --color-accent-orange: #Fe6634;
+  --color-black: #000000;
+  --color-gray-light: #F4F5F5;
+  --color-gray-mid: #D3D3D3;
 }
 
 @theme inline {
@@ -22,5 +30,36 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-ibm-plex-sans), sans-serif;
+}
+
+.container-grid {
+  width: 100%;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  /* padding-left: 120px; */
+  /* padding-right: 120px; */
+  padding: 24px 32px;
+}
+
+@media (max-width: 1439px) {
+  .container-grid {
+    padding-left: 80px;
+    padding-right: 80px;
+  }
+}
+
+@media (max-width: 744px) {
+  .container-grid {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+}
+
+@media (max-width: 390px) {
+  .container-grid {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
 }
