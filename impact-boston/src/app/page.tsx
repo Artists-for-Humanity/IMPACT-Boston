@@ -7,13 +7,13 @@ export default function IndexPage() {
       <HeroSection
         headline={
           <HeroHeadline>
-            <HeroHeadlinePart color="black">Empowering </HeroHeadlinePart>
-            <HeroHeadlinePart color="primary">Communities</HeroHeadlinePart>
-            <HeroHeadlinePart color="black"> Through </HeroHeadlinePart>
-            <HeroHeadlinePart color="complementary">Self-Defense</HeroHeadlinePart>
+            <HeroHeadlinePart color="black">Courage </HeroHeadlinePart>
+            <HeroHeadlinePart color="primary">makes</HeroHeadlinePart>
+            <HeroHeadlinePart color="black"> us </HeroHeadlinePart>
+            <HeroHeadlinePart customColor="#6D3386">safer</HeroHeadlinePart>
           </HeroHeadline>
         }
-        body="IMPACT Boston teaches practical self-defense and personal safety skills to people of all ages and abilities. Our evidence-based programs build confidence, awareness, and physical techniques to help you stay safe."
+        body="IMPACT believes everyone has the right to be safe. Our self-defense and abuse prevention programs equip individuals and communities with practical, inclusive safety skills."
         ctaText="Get Started Today"
         ctaHref="/register"
         imageSrc="https://placehold.co/1200x800/F4F5F5/6C3789?text=Hero+Image"

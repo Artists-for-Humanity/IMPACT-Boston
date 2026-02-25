@@ -6,7 +6,7 @@ import Button from '@/components/common/Button'
 import HeroHeadline from './HeroHeadline'
 
 interface HeroContentProps {
-  headline: React.ReactNode
+  headline: React.ReactNode | null
   body: string
   ctaText: string
   ctaHref: string
@@ -22,13 +22,13 @@ export default function HeroContent({
 }: HeroContentProps) {
   return (
     <div className={`flex flex-col gap-6 ${className}`}>
-      {typeof headline === 'string' ? (
+      {headline && (typeof headline === 'string' ? (
         <HeroHeadline>{headline}</HeroHeadline>
       ) : (
         headline
-      )}
+      ))}
 
-      <p className="text-body1 font-body text-black leading-relaxed max-w-lg">
+      <p className="font-[IBM_Plex_Sans] text-[18px] font-normal leading-normal max-w-lg" style={{ color: '#333' }}>
         {body}
       </p>
 

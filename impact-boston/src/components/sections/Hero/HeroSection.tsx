@@ -27,17 +27,25 @@ export default function HeroSection({
   return (
     <section className={`w-full bg-brand-gray-light ${className}`}>
       <div className="container-grid">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center min-h-[600px]">
+        <div className="grid-12-col items-center min-h-[600px]">
           {/* Left side  Content */}
-          <HeroContent
-            headline={headline}
-            body={body}
-            ctaText={ctaText}
-            ctaHref={ctaHref}
-          />
+          <div className="col-start-1 col-span-4">
+            {headline}
+          </div>
+
+          <div className="col-start-1 col-span-4">
+            <HeroContent
+              headline={null}
+              body={body}
+              ctaText={ctaText}
+              ctaHref={ctaHref}
+            />
+          </div>
 
           {/* Right side  Image */}
-          <HeroImage src={imageSrc} alt={imageAlt} />
+          <div className="col-start-6 col-span-7">
+            <HeroImage src={imageSrc} alt={imageAlt} />
+          </div>
         </div>
       </div>
     </section>
