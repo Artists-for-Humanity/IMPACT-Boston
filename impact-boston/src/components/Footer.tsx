@@ -14,15 +14,15 @@ export default function Footer() {
         <div className="grid-12-col">
           {/* Left Column - IMPACT Wordmark & Contact Info */}
           <div className="col-span-12 lg:col-start-1 lg:col-span-5 space-y-8">
-            <h2 className="font-[Poppins] text-[48px] font-medium leading-[56px] tracking-[-1.728px] text-white">
+            <h2 className="font-[Poppins] text-[48px] font-medium leading-[56px] tracking-[-1.728px] text-white pb-12 mb-0">
               IMPACT
             </h2>
 
             {/* Contact Info Blocks */}
             <div className="space-y-6">
               {/* Address */}
-              <div>
-                <p className="text-white font-[IBM_Plex_Sans] text-base font-bold leading-normal mb-1">
+              <div className="pb-6 mb-0">
+                <p className="text-white font-[IBM_Plex_Sans] text-base font-bold leading-normal">
                   Address
                 </p>
                 <p className="font-[IBM_Plex_Sans] text-base text-[#888] font-normal leading-normal">
@@ -31,8 +31,8 @@ export default function Footer() {
               </div>
 
               {/* Email */}
-              <div>
-                <p className="text-white font-[IBM_Plex_Sans] text-base font-bold leading-normal mb-1">
+              <div className="pb-6 mb-0">
+                <p className="text-white font-[IBM_Plex_Sans] text-base font-bold leading-normal">
                   Email
                 </p>
                 <a
@@ -44,8 +44,8 @@ export default function Footer() {
               </div>
 
               {/* Call */}
-              <div>
-                <p className="text-white font-[IBM_Plex_Sans] text-base font-bold leading-normal mb-1">
+              <div className="pb-0 mb-0">
+                <p className="text-white font-[IBM_Plex_Sans] text-base font-bold leading-normal">
                   Call
                 </p>
                 <a
@@ -59,26 +59,26 @@ export default function Footer() {
           </div>
 
           {/* Right Column - Contact Form */}
-          <div className="col-span-12 lg:col-start-8 lg:col-span-5 flex flex-col justify-end items-start gap-5 flex-1 self-stretch">
-            <h3 className="font-[Poppins] text-2xl font-semibold">
-              Contact Us
+          <div className="col-span-12 lg:col-start-8 lg:col-span-5 flex flex-col justify-start items-start flex-1 self-stretch pt-20">
+            <h3 className="font-[Poppins] text-base font-medium leading-normal text-white">
+              Join Our Newsletter
             </h3>
-            <p className="font-[IBM_Plex_Sans] text-sm text-gray-400">
-              We're here to help, reach out anytime.
+            <p className="font-[IBM_Plex_Sans] text-sm text-gray-400 pb-5">
+              Stay updated on programs, events, and community resources.
             </p>
 
             <form className="space-y-4 w-full">
               <input
                 type="email"
                 placeholder="Enter your email"
-                className="w-full px-4 py-3 bg-transparent border border-gray-600 focus:border-gray-400 focus:outline-none text-white placeholder-gray-500 font-[IBM_Plex_Sans]"
+                className="w-full flex h-16 px-[19px] py-5 justify-between items-center self-stretch bg-[#1F2122] focus:border-gray-400 focus:outline-none text-white placeholder-gray-500 font-[IBM_Plex_Sans]"
                 aria-label="Email address"
               />
               <button
                 type="submit"
-                className="w-full px-4 py-3 bg-white text-black font-[IBM_Plex_Sans] font-medium hover:bg-gray-200 transition-colors flex items-center justify-between"
+                className="w-full flex h-16 px-[19px] py-5 justify-between items-center self-stretch bg-[#1F2122] hover:bg-[#2a2c2d] transition-colors text-white text-center font-[IBM_Plex_Sans] text-base font-medium leading-normal"
               >
-                <span>Submit</span>
+                <span>Join</span>
                 <svg
                   width="20"
                   height="20"
@@ -105,14 +105,14 @@ export default function Footer() {
         <div className="grid-12-col">
           {/* About Column */}
           <div className="col-span-12 md:col-start-1 md:col-span-4 space-y-4">
-            <h4 className="font-[Poppins] text-lg font-semibold text-white">
+            <h4 className="text-white font-[IBM_Plex_Sans] text-base font-medium leading-normal pb-3 mb-0">
               About
             </h4>
-            <ul className="space-y-2">
+            <ul className="space-y-0">
               <li>
                 <Link
                   href="/about"
-                  className="font-[IBM_Plex_Sans] text-sm text-gray-400 hover:text-white transition-colors"
+                  className="font-[IBM_Plex_Sans] text-base text-[#B7B7B7] font-normal leading-normal hover:text-white transition-colors"
                 >
                   About Impact
                 </Link>
@@ -120,7 +120,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/board-staff"
-                  className="font-[IBM_Plex_Sans] text-sm text-gray-400 hover:text-white transition-colors"
+                  className="font-[IBM_Plex_Sans] text-base text-[#B7B7B7] font-normal leading-normal hover:text-white transition-colors"
                 >
                   Board and Staff
                 </Link>
@@ -128,7 +128,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/accessibility"
-                  className="font-[IBM_Plex_Sans] text-sm text-gray-400 hover:text-white transition-colors"
+                  className="font-[IBM_Plex_Sans] text-base text-[#B7B7B7] font-normal leading-normal hover:text-white transition-colors"
                 >
                   Accessibility
                 </Link>
@@ -136,7 +136,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/blog"
-                  className="font-[IBM_Plex_Sans] text-sm text-gray-400 hover:text-white transition-colors"
+                  className="font-[IBM_Plex_Sans] text-base text-[#B7B7B7] font-normal leading-normal hover:text-white transition-colors"
                 >
                   Blog
                 </Link>
@@ -146,14 +146,14 @@ export default function Footer() {
 
           {/* Programs Column */}
           <div className="col-span-12 md:col-start-5 md:col-span-4 space-y-4">
-            <h4 className="font-[Poppins] text-lg font-semibold text-white">
+            <h4 className="text-white font-[IBM_Plex_Sans] text-base font-medium leading-normal pb-3 mb-0">
               Programs
             </h4>
-            <ul className="space-y-2">
+            <ul className="space-y-0">
               <li>
                 <Link
                   href="/programs/self-defense"
-                  className="font-[IBM_Plex_Sans] text-sm text-gray-400 hover:text-white transition-colors"
+                  className="font-[IBM_Plex_Sans] text-base text-[#B7B7B7] font-normal leading-normal hover:text-white transition-colors"
                 >
                   Self-Defense Classes
                 </Link>
@@ -161,7 +161,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/programs/schools-colleges"
-                  className="font-[IBM_Plex_Sans] text-sm text-gray-400 hover:text-white transition-colors"
+                  className="font-[IBM_Plex_Sans] text-base text-[#B7B7B7] font-normal leading-normal hover:text-white transition-colors"
                 >
                   Schools & Colleges
                 </Link>
@@ -169,7 +169,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/programs/disabilities"
-                  className="font-[IBM_Plex_Sans] text-sm text-gray-400 hover:text-white transition-colors"
+                  className="font-[IBM_Plex_Sans] text-base text-[#B7B7B7] font-normal leading-normal hover:text-white transition-colors"
                 >
                   People With Disabilities
                 </Link>
@@ -177,7 +177,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/programs/de-escalation"
-                  className="font-[IBM_Plex_Sans] text-sm text-gray-400 hover:text-white transition-colors"
+                  className="font-[IBM_Plex_Sans] text-base text-[#B7B7B7] font-normal leading-normal hover:text-white transition-colors"
                 >
                   De-escalation
                 </Link>
@@ -185,7 +185,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/programs/community"
-                  className="font-[IBM_Plex_Sans] text-sm text-gray-400 hover:text-white transition-colors"
+                  className="font-[IBM_Plex_Sans] text-base text-[#B7B7B7] font-normal leading-normal hover:text-white transition-colors"
                 >
                   Community Organizations
                 </Link>
@@ -193,7 +193,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/programs/workplace"
-                  className="font-[IBM_Plex_Sans] text-sm text-gray-400 hover:text-white transition-colors"
+                  className="font-[IBM_Plex_Sans] text-base text-[#B7B7B7] font-normal leading-normal hover:text-white transition-colors"
                 >
                   Workplace
                 </Link>
@@ -201,7 +201,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/programs/activist-safety"
-                  className="font-[IBM_Plex_Sans] text-sm text-gray-400 hover:text-white transition-colors"
+                  className="font-[IBM_Plex_Sans] text-base text-[#B7B7B7] font-normal leading-normal hover:text-white transition-colors"
                 >
                   Know Your Rights & Activist Safety
                 </Link>
@@ -209,7 +209,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/programs/customized"
-                  className="font-[IBM_Plex_Sans] text-sm text-gray-400 hover:text-white transition-colors"
+                  className="font-[IBM_Plex_Sans] text-base text-[#B7B7B7] font-normal leading-normal hover:text-white transition-colors"
                 >
                   Customized Programs
                 </Link>
@@ -219,14 +219,14 @@ export default function Footer() {
 
           {/* Our Approach Column */}
           <div className="col-span-12 md:col-start-9 md:col-span-4 space-y-4">
-            <h4 className="font-[Poppins] text-lg font-semibold text-white">
+            <h4 className="text-white font-[IBM_Plex_Sans] text-base font-medium leading-normal pb-3 mb-0">
               Our Approach
             </h4>
-            <ul className="space-y-2">
+            <ul className="space-y-0">
               <li>
                 <Link
                   href="/fact-check-fridays"
-                  className="font-[IBM_Plex_Sans] text-sm text-gray-400 hover:text-white transition-colors"
+                  className="font-[IBM_Plex_Sans] text-base text-[#B7B7B7] font-normal leading-normal hover:text-white transition-colors"
                 >
                   Fact Check Fridays
                 </Link>
@@ -234,7 +234,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/books"
-                  className="font-[IBM_Plex_Sans] text-sm text-gray-400 hover:text-white transition-colors"
+                  className="font-[IBM_Plex_Sans] text-base text-[#B7B7B7] font-normal leading-normal hover:text-white transition-colors"
                 >
                   Books by Meg Stone
                 </Link>
@@ -242,7 +242,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/press"
-                  className="font-[IBM_Plex_Sans] text-sm text-gray-400 hover:text-white transition-colors"
+                  className="font-[IBM_Plex_Sans] text-base text-[#B7B7B7] font-normal leading-normal hover:text-white transition-colors"
                 >
                   Press
                 </Link>
@@ -340,7 +340,7 @@ export default function Footer() {
           </div>
 
           {/* Copyright */}
-          <p className="font-[IBM_Plex_Sans] text-sm text-gray-500">
+          <p className="text-[#B7B7B7] text-right font-[Poppins] text-[15px] font-normal leading-normal">
             All rights reserved © IMPACT Inc. {year}
           </p>
           </div>
