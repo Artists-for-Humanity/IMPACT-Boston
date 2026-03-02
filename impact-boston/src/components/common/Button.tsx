@@ -27,10 +27,10 @@ export default function Button({
   type = 'button',
   disabled = false,
 }: ButtonProps) {
-  const base = 'flex items-center justify-center gap-0.5 font-nav font-normal rounded-[5px] transition-colors duration-150'
+  const base = 'flex items-center justify-between font-nav font-normal transition-colors duration-150'
 
   const variants: Record<ButtonVariant, string> = {
-    primary: 'text-[#FFF] bg-[#6E3388] hover:bg-brand-primary',
+    primary: 'text-[#FFF] bg-[#000] hover:bg-[#222]',
     secondary: 'text-[#FFF] bg-brand-complementary hover:bg-[#A83315]',
     outline: 'text-black border border-[#959595] hover:border-gray-400 hover:text-gray-900',
   }
@@ -38,16 +38,29 @@ export default function Button({
   const sizes: Record<ButtonSize, string> = {
     sm: 'px-3 py-0.5 text-sm',
     md: 'px-4 py-1 text-base',
-    lg: 'px-6 py-2 text-lg',
+    lg: 'p-6 text-lg w-[284px]',
   }
 
   const classes = `${base} ${variants[variant]} ${sizes[size]} ${className}`
-  const inlineStyles = { lineHeight: '25px' }
+  const inlineStyles = size === 'lg' ? {
+    color: '#FFF',
+    fontFamily: 'Poppins',
+    fontSize: '16px',
+    fontWeight: 500,
+    lineHeight: '24px',
+  } : { lineHeight: '25px' }
+
+  const ChevronIcon = () => (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M9 18L15 12L9 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+    </svg>
+  )
 
   if (href) {
     return (
       <a href={href} className={classes} style={inlineStyles}>
         {children}
+        {size === 'lg' && <ChevronIcon />}
       </a>
     )
   }
@@ -61,6 +74,7 @@ export default function Button({
       style={inlineStyles}
     >
       {children}
+      {size === 'lg' && <ChevronIcon />}
     </button>
   )
 }

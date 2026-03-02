@@ -14,9 +14,9 @@ export default function IndexPage() {
           </HeroHeadline>
         }
         body="IMPACT believes everyone has the right to be safe. Our self-defense and abuse prevention programs equip individuals and communities with practical, inclusive safety skills."
-        ctaText="Get Started Today"
+        ctaText="Learn More"
         ctaHref="/register"
-        imageSrc="https://placehold.co/1200x800/F4F5F5/6C3789?text=Hero+Image"
+        imageSrc="https://placehold.co/1200x800/311E41/ffffff?text=Hero+Image"
         imageAlt="IMPACT Boston self-defense training"
       />
     </main>

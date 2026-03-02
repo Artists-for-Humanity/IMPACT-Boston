@@ -2,7 +2,6 @@
 // Right side image container for hero section
 
 import Image from 'next/image'
-import React from 'react'
 
 interface HeroImageProps {
   src: string
@@ -16,7 +15,13 @@ export default function HeroImage({
   className = '',
 }: HeroImageProps) {
   return (
-    <div className={`relative w-full h-full min-h-[500px] ${className}`}>
+    <div className={`relative w-full h-full ${className}`} style={{ backgroundColor: '#311E41' }}>
+      <div
+        className="absolute top-0 left-0 right-0 h-[7px] z-10"
+        style={{
+          background: 'linear-gradient(to right, #E36A38 0%, #E36A38 22%, #874E9F 22%, #874E9F 86%, #462458 86%, #462458 100%)'
+        }}
+      />
       <Image
         src={src}
         alt={alt}

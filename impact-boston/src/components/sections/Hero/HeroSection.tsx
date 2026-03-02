@@ -29,13 +29,9 @@ export default function HeroSection({
       <div className="container-grid">
         <div className="grid-12-col items-center min-h-[600px]">
           {/* Left side  Content */}
-          <div className="col-start-1 col-span-4">
-            {headline}
-          </div>
-
-          <div className="col-start-1 col-span-4">
+          <div className="col-start-1 col-span-4 h-full">
             <HeroContent
-              headline={null}
+              headline={headline}
               body={body}
               ctaText={ctaText}
               ctaHref={ctaHref}
@@ -43,7 +39,7 @@ export default function HeroSection({
           </div>
 
           {/* Right side  Image */}
-          <div className="col-start-6 col-span-7">
+          <div className="col-start-6 col-span-7 h-full">
             <HeroImage src={imageSrc} alt={imageAlt} />
           </div>
         </div>

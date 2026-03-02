@@ -37,10 +37,10 @@ body {
   width: 100%;
   margin-left: 0px;
   margin-right: 0px;
-  padding-left: 120px;
-  padding-right: 120px;
-  padding-top: 24px;
-  padding-bottom: 24px;
+  padding-left: 144px;
+  padding-right: 144px;
+  padding-top: 72px;
+  padding-bottom: 72px;
 }
 
 @media (max-width: 1439px) {

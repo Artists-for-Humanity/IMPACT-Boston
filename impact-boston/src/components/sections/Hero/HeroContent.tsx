@@ -21,7 +21,7 @@ export default function HeroContent({
   className = '',
 }: HeroContentProps) {
   return (
-    <div className={`flex flex-col gap-6 ${className}`}>
+    <div className={`flex flex-col gap-8 h-full ${className}`}>
       {headline && (typeof headline === 'string' ? (
         <HeroHeadline>{headline}</HeroHeadline>
       ) : (
@@ -32,7 +32,7 @@ export default function HeroContent({
         {body}
       </p>
 
-      <div className="mt-4">
+      <div className="mt-auto">
         <Button href={ctaHref} variant="primary" size="lg">
           {ctaText}
         </Button>
