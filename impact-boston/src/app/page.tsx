@@ -1,6 +1,9 @@
 import HeroSection from "@/components/sections/Hero/HeroSection";
 import HeroHeadline, { HeroHeadlinePart } from "@/components/sections/Hero/HeroHeadline";
 import CTASection from "@/components/CTASection";
+import OfferingsSection from "@/components/OfferingsSection";
+import HighlightsSection from "@/components/HighlightsSection";
+import TestimonialsSection from "@/components/TestimonialsSection";
 
 export default function IndexPage() {
   return (
@@ -21,6 +24,9 @@ export default function IndexPage() {
         imageAlt="IMPACT Boston self-defense training"
       />
       <CTASection />
+      <OfferingsSection />
+      <HighlightsSection />
+      <TestimonialsSection />
     </main>
   );
 }
