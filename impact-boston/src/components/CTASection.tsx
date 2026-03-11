@@ -2,7 +2,7 @@
 // Call-to-action section with three action cards for registration, classes, and donations
 
 import Link from "next/link";
-import { GraduationCap, DollarSign, ChevronRight } from "lucide-react";
+import { GraduationCap, DollarSign, ChevronRight, Handshake, User } from "lucide-react";
 
 export default function CTASection() {
   return (
@@ -28,33 +28,36 @@ export default function CTASection() {
         <div className="grid-12-col gap-0">
           {/* Card 1 - Sign up Today */}
           <Link
-            href="/register"
-            className="col-span-12 md:col-span-6 lg:col-span-4 flex flex-col items-start gap-4 p-8 self-stretch bg-[#4B2E83] hover:opacity-90 transition-opacity"
+            href="/programs"
+            className="col-span-12 md:col-span-6 lg:col-span-4 flex flex-col items-start justify-between p-8 self-stretch bg-[#E86834] hover:opacity-90 transition-opacity"
             style={{ flex: '1 0 0', height: '325px' }}
           >
-            {/* Top - Title and Chevron */}
+            {/* Top - Icon and Chevron */}
             <div className="flex justify-between items-start w-full">
-              <h3 className="font-[Poppins] text-[32px] font-medium text-white">
-                Sign up Today
-              </h3>
+              <Handshake className="w-14 h-14 text-white" strokeWidth={1} />
               <ChevronRight className="w-8 h-8 text-white flex-shrink-0" strokeWidth={2} />
             </div>
 
-            {/* Bottom - Body */}
-            <p className="font-[Poppins] text-base text-[#AFC5DE] font-normal leading-normal max-w-[75%]">
-              Sign up in minutes. Secure and simple registration.
-            </p>
+            {/* Bottom - Title and Body */}
+            <div className="flex flex-col gap-2">
+              <h4 className="font-[Poppins] text-[24px] font-medium text-white">
+                Hire Us to Come to Today
+              </h4>
+              <p className="font-[IBM_Plex_Sans] text-base text-white leading-relaxed max-w-[100%]">
+                If you’re a school, organization, workplace, or other group, explore our classes and programs.
+              </p>
+            </div>
           </Link>
 
           {/* Card 2 - Classes & Programs */}
           <Link
             href="/programs"
-            className="col-span-12 md:col-span-6 lg:col-span-4 flex flex-col items-start justify-between p-8 self-stretch bg-[#D4541A] hover:opacity-90 transition-opacity"
+            className="col-span-12 md:col-span-6 lg:col-span-4 flex flex-col items-start justify-between p-8 self-stretch bg-[#563672] hover:opacity-90 transition-opacity"
             style={{ flex: '1 0 0', height: '325px' }}
           >
             {/* Top - Icon and Chevron */}
             <div className="flex justify-between items-start w-full">
-              <GraduationCap className="w-14 h-14 text-white" strokeWidth={1} />
+              <User className="w-14 h-14 text-white" strokeWidth={1} />
               <ChevronRight className="w-8 h-8 text-white flex-shrink-0" strokeWidth={2} />
             </div>
 
@@ -63,7 +66,7 @@ export default function CTASection() {
               <h4 className="font-[Poppins] text-[24px] font-medium text-white">
                 Classes & Programs
               </h4>
-              <p className="font-[IBM_Plex_Sans] text-base text-white leading-relaxed max-w-[75%]">
+              <p className="font-[IBM_Plex_Sans] text-base text-white leading-relaxed max-w-[100%]">
                 See what we offer. Find the right class for you.
               </p>
             </div>
@@ -72,7 +75,7 @@ export default function CTASection() {
           {/* Card 3 - Make a Donation */}
           <Link
             href="/donate"
-            className="col-span-12 md:col-span-6 lg:col-span-4 flex flex-col items-start justify-between p-8 self-stretch bg-[#2E7D4F] hover:opacity-90 transition-opacity"
+            className="col-span-12 md:col-span-6 lg:col-span-4 flex flex-col items-start justify-between p-8 self-stretch bg-[#311E41] hover:opacity-90 transition-opacity"
             style={{ flex: '1 0 0', height: '325px' }}
           >
             {/* Top - Icon and Chevron */}
@@ -86,7 +89,7 @@ export default function CTASection() {
               <h4 className="font-[Poppins] text-[24px] font-medium text-white">
                 Make a Donation
               </h4>
-              <p className="font-[IBM_Plex_Sans] text-base text-white leading-relaxed max-w-[75%]">
+              <p className="font-[IBM_Plex_Sans] text-base text-white leading-relaxed max-w-[100%]">
                 Support our mission. Every gift makes an impact.
               </p>
             </div>

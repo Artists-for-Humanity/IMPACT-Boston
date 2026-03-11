@@ -35,7 +35,7 @@ export default function OfferingsSection() {
                   text-left pl-2 border-l-4 transition-all duration-200 whitespace-nowrap lg:whitespace-normal
                   ${
                     activeTab === tab.id
-                      ? 'border-[#D4541A] font-[Poppins] text-[32px] font-medium leading-[40px] tracking-[-1.28px] text-[#311E41]'
+                      ? 'border-[#E86834] font-[Poppins] text-[32px] font-medium leading-[40px] tracking-[-1.28px] text-[#311E41]'
                       : 'border-gray-200 font-[Poppins] text-[32px] font-medium leading-[40px] tracking-[-1.28px] text-[rgba(0,0,0,0.30)] hover:text-gray-700 hover:border-gray-300'
                   }
                 `}

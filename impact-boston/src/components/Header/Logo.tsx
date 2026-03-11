@@ -21,9 +21,9 @@ export default function Logo({ src, alt = 'IMPACT Boston', href = '/' }: LogoPro
       <Image
         src="/images/logos/logo-full-color.png"
         alt="IMPACT Boston"
-        height={40}
-        width={160}
-        className="h-10 w-auto object-contain"
+        height={24}
+        width={108}
+        className="h-6 w-[108px] object-contain"
       />
     </a>
   )

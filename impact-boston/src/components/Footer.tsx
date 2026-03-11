@@ -253,7 +253,7 @@ export default function Footer() {
         </div>
 
         {/* Footer Bar - Social & Copyright */}
-        <div className="w-full border-t border-gray-700 pt-6">
+        <div className="w-full pt-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-6">
           {/* Social Icons */}
           <div className="flex items-center gap-4">

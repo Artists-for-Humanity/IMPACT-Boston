@@ -1,6 +1,6 @@
 // components/Header/Navigation.tsx
 // Primary navigation — matches nav-a.png design:
-// - 3 nav items with dropdowns: About, Programs, Resources
+// - 3 nav items with dropdowns: About, Programs, Learn more
 // - Active item is bold + purple
 // - Register (filled purple button) + Donate (outlined button) on the right
 // - Search icon far right
@@ -43,8 +43,8 @@ const DEFAULT_NAV_ITEMS: NavItem[] = [
     ],
   },
   {
-    label: 'Resources',
-    link: '/resources',
+    label: 'Learn more',
+    link: '/learn-more',
     subItems: [
       { label: 'Class Descriptions', link: '/resources/class-descriptions' },
       { label: 'Accessibility Information', link: '/resources/accessibility' },
