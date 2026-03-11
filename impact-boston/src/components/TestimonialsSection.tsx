@@ -60,7 +60,7 @@ export default function TestimonialsSection() {
         {/* Top Row - Heading and Navigation */}
         <div className="grid-12-col">
           {/* Left - Heading and Subtext */}
-          <div className="col-span-12 lg:col-span-10 space-y-4">
+          <div className="col-span-12 lg:col-span-4 space-y-4">
             <h2 className="font-[Poppins] text-[48px] font-medium leading-tight text-[#000]">
               What People are Saying
             </h2>
@@ -70,7 +70,7 @@ export default function TestimonialsSection() {
           </div>
 
           {/* Right - Arrow Navigation */}
-          <div className="col-span-12 lg:col-span-2 flex gap-4 justify-start lg:justify-end self-start mt-4 lg:mt-0">
+          <div className="col-span-12 lg:col-span-2 lg:col-start-11 flex gap-4 justify-start lg:justify-end self-start lg:self-end mt-4 lg:mt-0">
             <button
               onClick={prevSlide}
               className="w-12 h-12 relative flex items-center justify-center transition-opacity hover:opacity-80"
@@ -106,12 +106,14 @@ export default function TestimonialsSection() {
               {testimonials.map((testimonial, index) => (
                 <div
                   key={index}
-                  className="flex-shrink-0 w-full md:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] bg-white flex flex-col"
+                  className="flex-shrink-0 w-[calc(25%-18px)] md:w-[calc(33.333%-16px)] lg:w-[calc(50%-12px)] bg-white flex flex-col"
                 >
                   {/* Colored Top Border */}
                   <div
-                    className="h-1.5 w-full"
-                    style={{ backgroundColor: borderColors[index % borderColors.length] }}
+                    className="h-[7px] w-full"
+                    style={{
+                      background: 'linear-gradient(to right, #E36A38 0%, #E36A38 22%, #874E9F 22%, #874E9F 86%, #462458 86%, #462458 100%)'
+                    }}
                   />
 
                   {/* Card Content */}
@@ -121,13 +123,10 @@ export default function TestimonialsSection() {
                       "{testimonial.quote}
                     </p>
 
-                    {/* Read More Link */}
-                    <a
-                      href={testimonial.readMoreLink}
-                      className="font-[IBM_Plex_Sans] text-sm text-gray-500 hover:text-gray-700 underline transition-colors"
-                    >
-                      read more
-                    </a>
+                    {/* Author */}
+                    <p className="font-[Poppins] text-sm font-medium text-[#000]">
+                      - {testimonial.author}
+                    </p>
                   </div>
                 </div>
               ))}
