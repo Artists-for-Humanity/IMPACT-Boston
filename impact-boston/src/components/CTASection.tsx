@@ -2,7 +2,7 @@
 // Call-to-action section with three action cards for registration, classes, and donations
 
 import Link from "next/link";
-import { GraduationCap, DollarSign, ChevronRight, Handshake, User } from "lucide-react";
+import { GraduationCap, DollarSign, ChevronRight, Handshake, User as UserIcon } from "lucide-react";
 
 export default function CTASection() {
   return (
@@ -57,7 +57,7 @@ export default function CTASection() {
           >
             {/* Top - Icon and Chevron */}
             <div className="flex justify-between items-start w-full">
-              <User className="w-14 h-14 text-white" strokeWidth={1} />
+              <UserIcon className="w-14 h-14 text-white" strokeWidth={1} />
               <ChevronRight className="w-8 h-8 text-white flex-shrink-0" strokeWidth={2} />
             </div>
 

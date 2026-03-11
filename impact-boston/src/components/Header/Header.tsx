@@ -46,7 +46,7 @@ export default function Header({
           ${scrolled ? 'shadow-[0_2px_12px_rgba(0,0,0,0.08)]' : ''}
         `}
       >
-        <div className="flex justify-between items-center w-full max-w-[1440px] mx-auto px-8 py-6">
+        <div className="flex justify-between items-center w-full max-w-[1440px] mx-auto px-6 md:px-8 py-6">
           <Logo src={logoSrc} alt={logoAlt} />
           <Navigation items={navItems} />
         </div>

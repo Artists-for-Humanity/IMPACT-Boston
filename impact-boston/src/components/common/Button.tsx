@@ -38,14 +38,13 @@ export default function Button({
   const sizes: Record<ButtonSize, string> = {
     sm: 'px-3 py-0.5 text-sm',
     md: 'px-4 py-1 text-base',
-    lg: 'p-6 text-lg w-[284px]',
+    lg: 'px-6 h-12 text-sm w-[212px] md:p-6 md:w-[284px] md:h-auto md:text-base',
   }
 
   const classes = `${base} ${variants[variant]} ${sizes[size]} ${className}`
   const inlineStyles = size === 'lg' ? {
     color: '#FFF',
     fontFamily: 'Poppins',
-    fontSize: '16px',
     fontWeight: 500,
     lineHeight: '24px',
   } : { lineHeight: '25px' }
