@@ -7,11 +7,11 @@ import { GraduationCap, DollarSign, ChevronRight, Handshake, User as UserIcon } 
 export default function CTASection() {
   return (
     <section className="w-full bg-[#F0EEF5] flex justify-center">
-      <div className="flex flex-col gap-14 w-full max-w-[1440px] px-6 md:px-20 lg:px-[120px] py-[88px]">
+      <div className="flex flex-col gap-10 w-full max-w-[1440px] py-6 px-4 md:px-20 lg:px-[120px] md:py-[88px]">
         {/* Header Row */}
         <div className="grid-12-col">
           {/* Title */}
-          <h3 className="col-span-12 lg:col-span-4 font-[Poppins] text-[32px] font-medium leading-[40px] tracking-[-1.28px] text-[#000]">
+          <h3 className="col-span-12 lg:col-span-4 font-[Poppins] text-[24px] md:text-[32px] font-medium leading-normal md:leading-[40px] md:tracking-[-1.28px] text-[#183B63] md:text-[#000] text-center md:text-left">
             Everything You Need <br></br> to Get Involved.
           </h3>
 
@@ -25,12 +25,11 @@ export default function CTASection() {
         </div>
 
         {/* Cards Row */}
-        <div className="grid-12-col gap-0">
+        <div className="flex flex-col items-start gap-6 md:grid md:grid-cols-12 md:gap-6">
           {/* Card 1 - Sign up Today */}
           <Link
             href="/programs"
-            className="col-span-12 md:col-span-6 lg:col-span-4 flex flex-col items-start justify-between p-8 self-stretch bg-[#E86834] hover:opacity-90 transition-opacity"
-            style={{ flex: '1 0 0', height: '325px' }}
+            className="w-full md:col-span-6 lg:col-span-4 flex flex-col items-start gap-14 md:gap-0 md:justify-between md:h-[325px] p-6 md:p-8 bg-[#E86834] hover:opacity-90 transition-opacity"
           >
             {/* Top - Icon and Chevron */}
             <div className="flex justify-between items-start w-full">
@@ -39,9 +38,9 @@ export default function CTASection() {
             </div>
 
             {/* Bottom - Title and Body */}
-            <div className="flex flex-col gap-2">
-              <h4 className="font-[Poppins] text-[24px] font-medium text-white">
-                Hire Us to Come to Today
+            <div className="flex flex-col gap-2 mt-auto md:mt-0">
+              <h4 className="font-[Poppins] text-[20px] md:text-[24px] font-medium leading-normal text-white">
+                Hire Us to Come to You
               </h4>
               <p className="font-[IBM_Plex_Sans] text-base text-white leading-relaxed max-w-[100%]">
                 If you’re a school, organization, workplace, or other group, explore our classes and programs.
@@ -52,8 +51,7 @@ export default function CTASection() {
           {/* Card 2 - Classes & Programs */}
           <Link
             href="/programs"
-            className="col-span-12 md:col-span-6 lg:col-span-4 flex flex-col items-start justify-between p-8 self-stretch bg-[#563672] hover:opacity-90 transition-opacity"
-            style={{ flex: '1 0 0', height: '325px' }}
+            className="w-full md:col-span-6 lg:col-span-4 flex flex-col items-start gap-14 md:gap-0 md:justify-between md:h-[325px] p-6 md:p-8 bg-[#563672] hover:opacity-90 transition-opacity"
           >
             {/* Top - Icon and Chevron */}
             <div className="flex justify-between items-start w-full">
@@ -62,8 +60,8 @@ export default function CTASection() {
             </div>
 
             {/* Bottom - Title and Body */}
-            <div className="flex flex-col gap-2">
-              <h4 className="font-[Poppins] text-[24px] font-medium text-white">
+            <div className="flex flex-col gap-2 mt-auto md:mt-0">
+              <h4 className="font-[Poppins] text-[20px] md:text-[24px] font-medium leading-normal text-white">
                 Classes & Programs
               </h4>
               <p className="font-[IBM_Plex_Sans] text-base text-white leading-relaxed max-w-[100%]">
@@ -75,8 +73,7 @@ export default function CTASection() {
           {/* Card 3 - Make a Donation */}
           <Link
             href="/donate"
-            className="col-span-12 md:col-span-6 lg:col-span-4 flex flex-col items-start justify-between p-8 self-stretch bg-[#311E41] hover:opacity-90 transition-opacity"
-            style={{ flex: '1 0 0', height: '325px' }}
+            className="w-full md:col-span-6 lg:col-span-4 flex flex-col items-start gap-14 md:gap-0 md:justify-between md:h-[325px] p-6 md:p-8 bg-[#311E41] hover:opacity-90 transition-opacity"
           >
             {/* Top - Icon and Chevron */}
             <div className="flex justify-between items-start w-full">
@@ -85,8 +82,8 @@ export default function CTASection() {
             </div>
 
             {/* Bottom - Title and Body */}
-            <div className="flex flex-col gap-2">
-              <h4 className="font-[Poppins] text-[24px] font-medium text-white">
+            <div className="flex flex-col gap-2 mt-auto md:mt-0">
+              <h4 className="font-[Poppins] text-[20px] md:text-[24px] font-medium leading-normal text-white">
                 Make a Donation
               </h4>
               <p className="font-[IBM_Plex_Sans] text-base text-white leading-relaxed max-w-[100%]">

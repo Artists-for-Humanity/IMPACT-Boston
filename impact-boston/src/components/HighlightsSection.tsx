@@ -121,7 +121,7 @@ export default function HighlightsSection() {
         {/* Content Row */}
         <div className="grid-12-col">
           {/* Left Panel - Heading and Dots */}
-          <div className="col-span-12 lg:col-span-5 flex flex-col gap-8 mb-8 lg:mb-0">
+          <div className="col-span-4 lg:col-span-5 flex flex-col gap-8 mb-8 lg:mb-0">
             <div className="grid">
               {slides.map((slide, index) => (
                 <div
@@ -152,7 +152,7 @@ export default function HighlightsSection() {
           </div>
 
           {/* Right Panel - Image, Body and CTA */}
-          <div className="col-span-12 lg:col-span-6 lg:col-start-7">
+          <div className="col-span-4 lg:col-span-6 lg:col-start-7">
             <div className="grid grid-cols-6 gap-8">
               {/* Image Placeholder */}
               {slides.map((slide, index) => (

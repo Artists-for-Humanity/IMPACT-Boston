@@ -60,7 +60,7 @@ export default function TestimonialsSection() {
         {/* Top Row - Heading and Navigation */}
         <div className="grid-12-col">
           {/* Left - Heading and Subtext */}
-          <div className="col-span-12 lg:col-span-4 space-y-4">
+          <div className="col-span-4 lg:col-span-4 space-y-4">
             <h2 className="font-[Poppins] text-[48px] font-medium leading-tight text-[#000]">
               What People are Saying
             </h2>
@@ -70,7 +70,7 @@ export default function TestimonialsSection() {
           </div>
 
           {/* Right - Arrow Navigation */}
-          <div className="col-span-12 lg:col-span-2 lg:col-start-11 flex gap-4 justify-start lg:justify-end self-start lg:self-end mt-4 lg:mt-0">
+          <div className="col-span-4 lg:col-span-2 lg:col-start-11 flex gap-4 justify-start lg:justify-end self-start lg:self-end mt-4 lg:mt-0">
             <button
               onClick={prevSlide}
               className="w-12 h-12 relative flex items-center justify-center transition-opacity hover:opacity-80"
