@@ -88,7 +88,7 @@ export default function HighlightsSection() {
 
   return (
     <section className="w-full bg-black flex justify-center">
-      <div className="flex flex-col gap-14 w-full max-w-[1440px] px-6 md:px-20 lg:px-[120px] py-[88px]">
+      <div className="flex flex-col gap-14 w-full max-w-[1440px] px-4 py-12 md:px-20 lg:px-[120px] md:py-[88px]">
         {/* Top Row - Label and Navigation */}
         <div className="flex justify-between items-center">
           <h5 className="font-[Poppins] text-sm uppercase text-white font-semibold tracking-wider">
@@ -119,9 +119,9 @@ export default function HighlightsSection() {
         </div>
 
         {/* Content Row */}
-        <div className="grid-12-col">
-          {/* Left Panel - Heading and Dots */}
-          <div className="col-span-4 lg:col-span-5 flex flex-col gap-8 mb-8 lg:mb-0">
+        <div className="grid-12-col !gap-8 md:!gap-6">
+          {/* Left Panel - Heading */}
+          <div className="col-span-4 lg:col-span-5 flex flex-col gap-8">
             <div className="grid">
               {slides.map((slide, index) => (
                 <div
@@ -130,15 +130,15 @@ export default function HighlightsSection() {
                     currentSlide === index ? 'opacity-100 z-10' : 'opacity-0 pointer-events-none'
                   }`}
                 >
-                  <h3 className="font-[Poppins] text-[32px] md:text-[32px] font-medium leading-tight text-white">
+                  <h3 className="font-[Poppins] text-[24px] md:text-[32px] font-medium leading-normal md:leading-tight text-white">
                     {slide.heading}
                   </h3>
                 </div>
               ))}
             </div>
 
-            {/* Dot Indicators */}
-            <div className="flex gap-3">
+            {/* Dot Indicators - Desktop only */}
+            <div className="hidden lg:flex gap-3">
               {slides.map((_, index) => (
                 <button
                   key={index}
@@ -153,7 +153,7 @@ export default function HighlightsSection() {
 
           {/* Right Panel - Image, Body and CTA */}
           <div className="col-span-4 lg:col-span-6 lg:col-start-7">
-            <div className="grid grid-cols-6 gap-8">
+            <div className="grid grid-cols-6 gap-8 md:gap-8">
               {/* Image Placeholder */}
               {slides.map((slide, index) => (
                 <div
@@ -180,7 +180,7 @@ export default function HighlightsSection() {
                     currentSlide === index ? 'opacity-100 z-10' : 'opacity-0 pointer-events-none'
                   }`}
                 >
-                  <p className="font-[IBM_Plex_Sans] text-lg leading-relaxed text-white">
+                  <p className="font-[IBM_Plex_Sans] text-base md:text-lg font-normal leading-normal md:leading-relaxed text-white">
                     {slide.body}
                   </p>
                 </div>
@@ -188,33 +188,45 @@ export default function HighlightsSection() {
 
               {/* CTA Button */}
               {slides.map((slide, index) => (
-                <Link
-                  key={index}
-                  href={slide.ctaLink}
-                  className={`col-span-3 col-start-1 row-start-3 mt-4 flex bg-white text-black font-[Poppins] text-base font-medium px-6 py-6 flex items-center justify-between hover:bg-gray-100 transition-colors ${
-                    currentSlide === index ? 'opacity-100 z-10' : 'opacity-0 pointer-events-none'
-                  }`}
-                >
-                  <span>{slide.ctaText}</span>
-                  <ChevronRight className="w-5 h-5" strokeWidth={2} />
-                </Link>
+                <div key={index} className={`col-span-6 md:col-span-3 col-start-1 row-start-3 pt-6 md:pt-0 transition-opacity duration-500 ${currentSlide === index ? 'opacity-100 z-10' : 'opacity-0 pointer-events-none'}`}>
+                  <Link
+                    href={slide.ctaLink}
+                    className="flex bg-white text-black font-[Poppins] text-base font-medium px-6 py-6 items-center justify-between hover:bg-gray-100 transition-colors"
+                  >
+                    <span>{slide.ctaText}</span>
+                    <ChevronRight className="w-5 h-5" strokeWidth={2} />
+                  </Link>
+                </div>
               ))}
 
               {/* Additional Text */}
               {slides.map((slide, index) => (
                 <div
                   key={index}
-                  className={`col-span-5 col-start-1 row-start-4 -mt-5 transition-opacity duration-500 ${
+                  className={`col-span-6 md:col-span-5 col-start-1 row-start-4 -mt-4 md:-mt-5 transition-opacity duration-500 ${
                     currentSlide === index ? 'opacity-100 z-10' : 'opacity-0 pointer-events-none'
                   }`}
                 >
-                  <p className="font-[IBM_Plex_Sans] text-base font-normal leading-normal" style={{ color: 'rgba(255, 255, 255, 0.60)' }}>
+                  <p className="font-[IBM_Plex_Sans] text-sm md:text-base font-normal leading-normal" style={{ color: 'rgba(255, 255, 255, 0.60)' }}>
                     {renderTextWithEmailLinks(slide.additionalText)}
                   </p>
                 </div>
               ))}
             </div>
           </div>
+        </div>
+
+        {/* Dot Indicators - Mobile only, centered at bottom */}
+        <div className="flex lg:hidden gap-3 justify-center">
+          {slides.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => goToSlide(index)}
+              className="w-3 h-3 rounded-full transition-all duration-300"
+              style={{ backgroundColor: currentSlide === index ? '#FFFFFF' : '#9F84B5' }}
+              aria-label={`Go to slide ${index + 1}`}
+            />
+          ))}
         </div>
       </div>
     </section>

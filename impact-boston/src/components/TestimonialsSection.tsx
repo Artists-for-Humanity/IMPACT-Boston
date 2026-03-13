@@ -56,21 +56,21 @@ export default function TestimonialsSection() {
 
   return (
     <section className="w-full bg-[#F0EEF5] flex justify-center overflow-hidden">
-      <div className="flex flex-col gap-14 w-full max-w-[1440px] px-6 md:px-20 lg:px-[120px] py-[88px]">
+      <div className="flex flex-col gap-14 w-full max-w-[1440px] px-4 py-12 md:px-20 lg:px-[120px] md:py-[88px]">
         {/* Top Row - Heading and Navigation */}
         <div className="grid-12-col">
           {/* Left - Heading and Subtext */}
-          <div className="col-span-4 lg:col-span-4 space-y-4">
-            <h2 className="font-[Poppins] text-[48px] font-medium leading-tight text-[#000]">
+          <div className="col-span-4 lg:col-span-4 flex flex-col gap-6 md:space-y-4 md:gap-0">
+            <h2 className="font-[Poppins] text-[32px] md:text-[48px] font-medium leading-[40px] md:leading-tight tracking-[-0.512px] md:tracking-normal text-[#000] text-center md:text-left">
               What People are Saying
             </h2>
-            <p className="font-[IBM_Plex_Sans] text-base text-gray-600">
+            <p className="font-[IBM_Plex_Sans] text-base font-medium md:font-normal leading-normal text-[#333] text-center md:text-left">
               Hear from 20 people who've worked with us.
             </p>
           </div>
 
-          {/* Right - Arrow Navigation */}
-          <div className="col-span-4 lg:col-span-2 lg:col-start-11 flex gap-4 justify-start lg:justify-end self-start lg:self-end mt-4 lg:mt-0">
+          {/* Right - Arrow Navigation - Desktop only */}
+          <div className="hidden lg:flex col-span-4 lg:col-span-2 lg:col-start-11 gap-4 justify-end self-end">
             <button
               onClick={prevSlide}
               className="w-12 h-12 relative flex items-center justify-center transition-opacity hover:opacity-80"
@@ -132,6 +132,30 @@ export default function TestimonialsSection() {
               ))}
             </div>
           </div>
+        </div>
+
+        {/* Arrow Navigation - Mobile only, centered at bottom */}
+        <div className="flex lg:hidden gap-4 justify-center">
+          <button
+            onClick={prevSlide}
+            className="w-12 h-12 relative flex items-center justify-center transition-opacity hover:opacity-80"
+            aria-label="Previous testimonial"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="46" height="46" viewBox="0 0 46 46" fill="none" className="absolute">
+              <circle cx="23" cy="23" r="23" transform="rotate(-180 23 23)" fill="black" fillOpacity="0.1" />
+            </svg>
+            <ChevronLeft className="w-6 h-6 text-black relative z-10" strokeWidth={2} />
+          </button>
+          <button
+            onClick={nextSlide}
+            className="w-12 h-12 relative flex items-center justify-center transition-opacity hover:opacity-80"
+            aria-label="Next testimonial"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="46" height="46" viewBox="0 0 46 46" fill="none" className="absolute">
+              <circle cx="23" cy="23" r="23" transform="rotate(-180 23 23)" fill="black" fillOpacity="0.1" />
+            </svg>
+            <ChevronRight className="w-6 h-6 text-black relative z-10" strokeWidth={2} />
+          </button>
         </div>
       </div>
     </section>
