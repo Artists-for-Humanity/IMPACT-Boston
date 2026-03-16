@@ -56,7 +56,7 @@ export default function TestimonialsSection() {
 
   return (
     <section className="w-full bg-[#F0EEF5] flex justify-center overflow-hidden">
-      <div className="flex flex-col gap-14 w-full max-w-[1440px] px-4 py-12 md:px-20 lg:px-[120px] md:py-[88px]">
+      <div className="flex flex-col gap-8 md:gap-14 w-full max-w-[1440px] px-4 py-12 md:px-20 lg:px-[120px] md:py-[88px]">
         {/* Top Row - Heading and Navigation */}
         <div className="grid-12-col">
           {/* Left - Heading and Subtext */}
@@ -77,7 +77,7 @@ export default function TestimonialsSection() {
               aria-label="Previous testimonial"
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="46" height="46" viewBox="0 0 46 46" fill="none" className="absolute">
-                <circle cx="23" cy="23" r="23" transform="rotate(-180 23 23)" fill="black" fillOpacity="0.1" />
+                <circle cx="23" cy="23" r="22.5" transform="rotate(-180 23 23)" stroke="black" strokeOpacity="0.1" fill="none" />
               </svg>
               <ChevronLeft className="w-6 h-6 text-black relative z-10" strokeWidth={2} />
             </button>
@@ -87,7 +87,7 @@ export default function TestimonialsSection() {
               aria-label="Next testimonial"
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="46" height="46" viewBox="0 0 46 46" fill="none" className="absolute">
-                <circle cx="23" cy="23" r="23" transform="rotate(-180 23 23)" fill="black" fillOpacity="0.1" />
+                <circle cx="23" cy="23" r="22.5" transform="rotate(-180 23 23)" stroke="black" strokeOpacity="0.1" fill="none" />
               </svg>
               <ChevronRight className="w-6 h-6 text-black relative z-10" strokeWidth={2} />
             </button>
@@ -100,13 +100,13 @@ export default function TestimonialsSection() {
             <div
               className="flex gap-6 transition-transform duration-500 ease-in-out"
               style={{
-                transform: `translateX(-${currentIndex * (100 / 3 + 2)}%)`
+                transform: `translateX(calc(-${currentIndex * 75}% - ${currentIndex * 24}px))`
               }}
             >
               {testimonials.map((testimonial, index) => (
                 <div
                   key={index}
-                  className="flex-shrink-0 w-[calc(25%-18px)] md:w-[calc(33.333%-16px)] lg:w-[calc(50%-12px)] bg-white flex flex-col"
+                  className="flex-shrink-0 w-[max(296px,calc(75%-18px))] md:w-[calc(33.333%-16px)] lg:w-[calc(50%-12px)] bg-white flex flex-col"
                 >
                   {/* Colored Top Border */}
                   <div
@@ -118,8 +118,8 @@ export default function TestimonialsSection() {
 
                   {/* Card Content */}
                   <div className="p-8 flex flex-col gap-4">
-                    {/* Quote with line-clamp */}
-                    <p className="font-[IBM_Plex_Sans] text-base leading-relaxed text-[#333] line-clamp-6">
+                    {/* Quote */}
+                    <p className="font-[IBM_Plex_Sans] text-base font-normal leading-normal md:leading-relaxed text-[#000] md:text-[#333]">
                       "{testimonial.quote}
                     </p>
 
@@ -142,7 +142,7 @@ export default function TestimonialsSection() {
             aria-label="Previous testimonial"
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="46" height="46" viewBox="0 0 46 46" fill="none" className="absolute">
-              <circle cx="23" cy="23" r="23" transform="rotate(-180 23 23)" fill="black" fillOpacity="0.1" />
+              <circle cx="23" cy="23" r="22.5" transform="rotate(-180 23 23)" stroke="black" strokeOpacity="0.1" fill="none" />
             </svg>
             <ChevronLeft className="w-6 h-6 text-black relative z-10" strokeWidth={2} />
           </button>
@@ -152,7 +152,7 @@ export default function TestimonialsSection() {
             aria-label="Next testimonial"
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="46" height="46" viewBox="0 0 46 46" fill="none" className="absolute">
-              <circle cx="23" cy="23" r="23" transform="rotate(-180 23 23)" fill="black" fillOpacity="0.1" />
+              <circle cx="23" cy="23" r="22.5" transform="rotate(-180 23 23)" stroke="black" strokeOpacity="0.1" fill="none" />
             </svg>
             <ChevronRight className="w-6 h-6 text-black relative z-10" strokeWidth={2} />
           </button>

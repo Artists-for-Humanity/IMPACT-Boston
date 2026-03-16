@@ -91,7 +91,7 @@ export default function HighlightsSection() {
       <div className="flex flex-col gap-14 w-full max-w-[1440px] px-4 py-12 md:px-20 lg:px-[120px] md:py-[88px]">
         {/* Top Row - Label and Navigation */}
         <div className="flex justify-between items-center">
-          <h5 className="font-[Poppins] text-sm uppercase text-white font-semibold tracking-wider">
+          <h5 className="font-[Poppins] text-[14px] text-white font-medium leading-normal">
             Highlights
           </h5>
           <div className="flex gap-4">
@@ -119,9 +119,9 @@ export default function HighlightsSection() {
         </div>
 
         {/* Content Row */}
-        <div className="grid-12-col !gap-8 md:!gap-6">
+        <div className="flex flex-col lg:grid lg:grid-cols-12 gap-8 lg:gap-6">
           {/* Left Panel - Heading */}
-          <div className="col-span-4 lg:col-span-5 flex flex-col gap-8">
+          <div className="lg:col-span-5 lg:row-span-4 flex flex-col gap-8">
             <div className="grid">
               {slides.map((slide, index) => (
                 <div
@@ -151,68 +151,76 @@ export default function HighlightsSection() {
             </div>
           </div>
 
-          {/* Right Panel - Image, Body and CTA */}
-          <div className="col-span-4 lg:col-span-6 lg:col-start-7">
-            <div className="grid grid-cols-6 gap-8 md:gap-8">
-              {/* Image Placeholder */}
-              {slides.map((slide, index) => (
-                <div
-                  key={index}
-                  className={`col-span-6 col-start-1 row-start-1 relative aspect-[16/9] transition-opacity duration-500 ${
-                    currentSlide === index ? 'opacity-100 z-10' : 'opacity-0 pointer-events-none'
-                  }`}
-                  style={{ backgroundColor: '#311E41' }}
-                >
-                  <Image
-                    src={slide.imageSrc}
-                    alt={slide.imageAlt}
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-              ))}
+          {/* Image - Desktop: all slides in same grid cell with z-index */}
+          <div className="lg:col-span-6 lg:col-start-7 lg:row-start-1 grid">
+            {slides.map((slide, index) => (
+              <div
+                key={index}
+                className={`col-start-1 row-start-1 relative aspect-[16/9] transition-opacity duration-500 ${
+                  currentSlide === index ? 'opacity-100 z-10' : 'opacity-0 pointer-events-none hidden lg:block'
+                }`}
+                style={{ backgroundColor: '#311E41' }}
+              >
+                <Image
+                  src={slide.imageSrc}
+                  alt={slide.imageAlt}
+                  fill
+                  className="object-cover"
+                />
+              </div>
+            ))}
+          </div>
 
-              {/* Body Text */}
-              {slides.map((slide, index) => (
-                <div
-                  key={index}
-                  className={`col-span-6 col-start-1 row-start-2 -mt-1 transition-opacity duration-500 ${
-                    currentSlide === index ? 'opacity-100 z-10' : 'opacity-0 pointer-events-none'
-                  }`}
-                >
-                  <p className="font-[IBM_Plex_Sans] text-base md:text-lg font-normal leading-normal md:leading-relaxed text-white">
-                    {slide.body}
-                  </p>
-                </div>
-              ))}
+          {/* Body Text - Desktop: all slides in same grid cell with z-index */}
+          <div className="lg:col-span-6 lg:col-start-7 lg:row-start-2 grid">
+            {slides.map((slide, index) => (
+              <div
+                key={index}
+                className={`col-start-1 row-start-1 transition-opacity duration-500 ${
+                  currentSlide === index ? 'opacity-100 z-10' : 'opacity-0 pointer-events-none hidden lg:block'
+                }`}
+              >
+                <p className="font-[IBM_Plex_Sans] text-base md:text-lg font-normal leading-normal md:leading-relaxed text-white">
+                  {slide.body}
+                </p>
+              </div>
+            ))}
+          </div>
 
-              {/* CTA Button */}
-              {slides.map((slide, index) => (
-                <div key={index} className={`col-span-6 md:col-span-3 col-start-1 row-start-3 pt-6 md:pt-0 transition-opacity duration-500 ${currentSlide === index ? 'opacity-100 z-10' : 'opacity-0 pointer-events-none'}`}>
-                  <Link
-                    href={slide.ctaLink}
-                    className="flex bg-white text-black font-[Poppins] text-base font-medium px-6 py-6 items-center justify-between hover:bg-gray-100 transition-colors"
-                  >
-                    <span>{slide.ctaText}</span>
-                    <ChevronRight className="w-5 h-5" strokeWidth={2} />
-                  </Link>
-                </div>
-              ))}
-
-              {/* Additional Text */}
-              {slides.map((slide, index) => (
-                <div
-                  key={index}
-                  className={`col-span-6 md:col-span-5 col-start-1 row-start-4 -mt-4 md:-mt-5 transition-opacity duration-500 ${
-                    currentSlide === index ? 'opacity-100 z-10' : 'opacity-0 pointer-events-none'
-                  }`}
+          {/* CTA Button - Desktop: all slides in same grid cell with z-index */}
+          <div className="mt-6 -mb-4 lg:mt-5 lg:mb-0 lg:col-span-3 lg:col-start-7 lg:row-start-3 grid">
+            {slides.map((slide, index) => (
+              <div
+                key={index}
+                className={`col-start-1 row-start-1 transition-opacity duration-500 ${
+                  currentSlide === index ? 'opacity-100 z-10' : 'opacity-0 pointer-events-none hidden lg:block'
+                }`}
+              >
+                <Link
+                  href={slide.ctaLink}
+                  className="flex bg-white text-black font-[Poppins] text-base font-medium px-6 py-6 items-center justify-between hover:bg-gray-100 transition-colors"
                 >
-                  <p className="font-[IBM_Plex_Sans] text-sm md:text-base font-normal leading-normal" style={{ color: 'rgba(255, 255, 255, 0.60)' }}>
-                    {renderTextWithEmailLinks(slide.additionalText)}
-                  </p>
-                </div>
-              ))}
-            </div>
+                  <span>{slide.ctaText}</span>
+                  <ChevronRight className="w-5 h-5" strokeWidth={2} />
+                </Link>
+              </div>
+            ))}
+          </div>
+
+          {/* Additional Text - Desktop: all slides in same grid cell with z-index */}
+          <div className="lg:col-span-5 lg:col-start-7 lg:row-start-4 grid">
+            {slides.map((slide, index) => (
+              <div
+                key={index}
+                className={`col-start-1 row-start-1 transition-opacity duration-500 ${
+                  currentSlide === index ? 'opacity-100 z-10' : 'opacity-0 pointer-events-none hidden lg:block'
+                }`}
+              >
+                <p className="font-[IBM_Plex_Sans] text-sm md:text-base font-normal leading-normal" style={{ color: 'rgba(255, 255, 255, 0.60)' }}>
+                  {renderTextWithEmailLinks(slide.additionalText)}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
 
