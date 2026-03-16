@@ -13,7 +13,7 @@ export default function HeroHeadline({
   className = '',
 }: HeroHeadlineProps) {
   return (
-    <h1 className={`font-[Poppins] text-[48px] font-medium leading-[56px] tracking-[-1.92px] text-center min-[744px]:!text-[64px] min-[744px]:!leading-[64px] min-[744px]:!tracking-[-2.56px] min-[744px]:text-center lg:!text-[80px] lg:!leading-[80px] lg:!tracking-[-3.2px] lg:text-left self-stretch ${className}`} style={{ color: '#061629' }}>
+    <h1 className={`font-[Poppins] text-[48px] font-medium leading-[56px] tracking-[-1.92px] text-center md:text-[64px] md:leading-[64px] md:tracking-[-4px] md:text-center lg:text-[80px] lg:leading-[80px] lg:tracking-[-4px] lg:text-left self-stretch ${className}`} style={{ color: '#061629' }}>
       {children}
     </h1>
   )

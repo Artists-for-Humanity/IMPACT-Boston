@@ -45,10 +45,10 @@ const config: Config = {
         '12': 'repeat(12, minmax(0, 1fr))',
       },
       screens: {
-        'mobile': '390px',
-        'tablet': '744px',
-        'md': '768px',
-        'desktop': '1440px',
+        'sm': '390px',     // Mobile
+        'md': '744px',     // Tablet
+        'lg': '1024px',    // Desktop start
+        'xl': '1440px',    // Desktop max
       },
     },
   },

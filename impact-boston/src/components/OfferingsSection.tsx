@@ -24,23 +24,28 @@ export default function OfferingsSection() {
   return (
     <section className="w-full bg-white flex justify-center">
       <div className="flex flex-col gap-14 w-full max-w-[1440px] px-4 py-12 md:px-20 lg:px-[120px] md:py-[88px]">
-        <div className="grid-12-col gap-6 md:gap-0">
+        <div className="grid-12-col !gap-0 md:!gap-0">
           {/* Left Column - Tab Navigation */}
-          <div className="col-span-4 min-[744px]:col-span-12 lg:col-span-3 flex flex-row lg:flex-col justify-between min-[744px]:justify-start lg:justify-start gap-0 overflow-x-auto lg:overflow-visible">
-            {tabs.map((tab, index) => (
+          <div className="col-span-4 md:col-span-12 lg:col-span-3 flex flex-row lg:flex-col justify-between md:justify-start lg:justify-start gap-0 overflow-x-auto lg:overflow-visible">
+            {tabs.map((tab) => (
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
                 className={`
-                  flex-1 min-[744px]:flex-none md:flex-none min-[744px]:pl-0 md:pl-2 border-b-[3px] min-[744px]:border-b-[5px] md:border-b-0 md:border-l-4 transition-all duration-200 whitespace-nowrap lg:whitespace-normal
-                  font-[Poppins] font-medium leading-normal min-[744px]:leading-[48px] md:leading-[40px] md:tracking-[-1.28px]
-                  text-center min-[744px]:text-left md:text-left
-                  text-[24px] min-[744px]:text-[48px] md:text-[32px]
-                  ${index > 0 ? '-ml-[3px] min-[744px]:ml-0 md:ml-0' : ''}
+                  flex-1 md:flex-none lg:flex-none md:pl-0 lg:pl-2 transition-all duration-200 whitespace-nowrap lg:whitespace-normal
+                  font-[Poppins] font-medium leading-[24px] md:leading-[32px] lg:leading-[40px] tracking-[0px] md:tracking-[0px] lg:tracking-[-1.28px]
+                  text-center md:text-left lg:text-left
+                  text-[24px] md:text-[32px] lg:text-[32px]
+                  border-solid
+                  [border-left-width:0px] [border-right-width:0px] [border-top-width:0px] [border-bottom-width:3px]
+                  md:[border-left-width:0px] md:[border-right-width:0px] md:[border-top-width:0px] md:[border-bottom-width:5px]
+                  lg:[border-bottom-width:0px] lg:[border-right-width:0px] lg:[border-top-width:0px] lg:[border-left-width:4px]
+                  [border-left-color:transparent] [border-right-color:transparent] [border-top-color:transparent]
+                  md:[border-left-color:transparent] md:[border-right-color:transparent] md:[border-top-color:transparent]
                   ${
                     activeTab === tab.id
-                      ? 'border-[#E86834] text-[#183B63] min-[744px]:text-[#000] md:text-[#311E41]'
-                      : 'border-gray-200 text-[rgba(24,59,99,0.30)] min-[744px]:text-[rgba(0,0,0,0.30)] md:text-[rgba(0,0,0,0.30)] hover:text-[#183B63] min-[744px]:hover:text-gray-700 md:hover:text-gray-700 hover:border-gray-300'
+                      ? 'border-b-[#E86834] md:border-b-[#E86834] lg:border-b-transparent lg:border-l-[#E86834] text-[#183B63] md:text-[#000] lg:text-[#311E41]'
+                      : 'border-b-gray-200 md:border-b-gray-200 lg:border-b-transparent lg:border-l-gray-200 text-[rgba(24,59,99,0.30)] md:text-[rgba(0,0,0,0.30)] lg:text-[rgba(0,0,0,0.30)] hover:text-[#183B63] md:hover:text-gray-700 lg:hover:text-gray-700 hover:border-b-gray-300 md:hover:border-b-gray-300 lg:hover:border-l-gray-300'
                   }
                 `}
               >
@@ -50,19 +55,19 @@ export default function OfferingsSection() {
           </div>
 
           {/* Right Column - Content */}
-          <div className="col-span-4 min-[744px]:col-span-12 lg:col-span-7 lg:col-start-6">
+          <div className="col-span-4 md:col-span-12 lg:col-span-7 lg:col-start-6">
             <div className="grid">
               <div className={`space-y-6 transition-opacity duration-300 col-start-1 row-start-1 ${activeTab === 'what' ? 'opacity-100 z-10' : 'opacity-0 pointer-events-none'}`}>
-                <h2 className="hidden font-[Poppins] text-[32px] md:text-[48px] font-medium leading-[40px] md:leading-tight tracking-[-0.512px] md:tracking-normal text-[#000]">
+                <h2 className="hidden font-[Poppins] text-[32px] md:text-[40px] lg:text-[48px] font-medium leading-[40px] md:leading-[48px] lg:leading-[56px] tracking-[-0.512px] md:tracking-[-1.6px] lg:tracking-[-3.6px] text-[#000]">
                   What We Offer
                 </h2>
-                <p className="font-[IBM_Plex_Sans] text-base min-[744px]:text-[18px] md:text-[18px] font-normal leading-normal text-[#000] md:text-[#333]">
+                <p className="font-[IBM_Plex_Sans] text-base md:text-base lg:text-[18px] font-normal leading-base md:leading-base lg:leading-[18px] tracking-[0px] text-[#000] lg:text-[#333]">
                   IMPACT offers self-defense education and training designed to meet the needs of
                   individuals, schools, and organizations. Our programs are open to the public and
                   tailored for a wide range of communities, with classes and workshops available throughout the year.
                 </p>
 
-                <p className="font-[IBM_Plex_Sans] text-base min-[744px]:text-[18px] md:text-[18px] font-normal leading-normal text-[#000] md:text-[#333]">
+                <p className="font-[IBM_Plex_Sans] text-base md:text-base lg:text-[18px] font-normal leading-base md:leading-base lg:leading-[18px] tracking-[0px] text-[#000] lg:text-[#333]">
                   We focus on empowering participants with practical skills, confidence, and awareness to
                   protect themselves in real-world situations. Our instructors bring extensive experience
                   in safety, martial arts, and personal protection, ensuring high-quality guidance in every
@@ -74,11 +79,11 @@ export default function OfferingsSection() {
                   with the tools to respond effectively under pressure. Our offerings include:
                 </p>
                 <ul className="space-y-6 mt-8">
-                  <li className="font-[IBM_Plex_Sans] text-base min-[744px]:text-[18px] md:text-[18px] font-normal leading-normal text-[#000] md:text-[#333]">
+                  <li className="font-[IBM_Plex_Sans] text-base md:text-base lg:text-[18px] font-normal leading-base md:leading-base lg:leading-[18px] tracking-[0px] text-[#000] lg:text-[#333]">
                     <strong> Public self-defense classes:</strong> Open to the community and held year-round. View the In-Person Class Schedule
                     for upcoming sessions or explore Class Descriptions for more details.
                   </li>
-                  <li className="font-[IBM_Plex_Sans] text-base min-[744px]:text-[18px] md:text-[18px] font-normal leading-normal text-[#000] md:text-[#333]">
+                  <li className="font-[IBM_Plex_Sans] text-base md:text-base lg:text-[18px] font-normal leading-base md:leading-base lg:leading-[18px] tracking-[0px] text-[#000] lg:text-[#333]">
                     <strong> Customized workshops:</strong> Designed for schools, disability service organizations, community groups,
                     businesses, human service agencies, and survivors of domestic violence and
                     sexual assault. Workshops can cover topics such as Abuse prevention,
@@ -89,10 +94,10 @@ export default function OfferingsSection() {
 
               <div className={`space-y-6 transition-opacity duration-300 col-start-1 row-start-1 ${activeTab === 'how' ? 'opacity-100 z-10' : 'opacity-0 pointer-events-none'}`}>
                 {/* TODO: Replace with Sanity CMS content */}
-                <h2 className="hidden font-[Poppins] text-[32px] md:text-[48px] font-medium leading-[40px] md:leading-tight tracking-[-0.512px] md:tracking-normal text-[#000]">
+                <h2 className="hidden font-[Poppins] text-[32px] md:text-[40px] lg:text-[48px] font-medium leading-[40px] md:leading-[48px] lg:leading-[56px] tracking-[-0.512px] md:tracking-[-1.6px] lg:tracking-[-3.6px] text-[#000]">
                   How We Do It
                 </h2>
-                <p className="font-[IBM_Plex_Sans] text-base min-[744px]:text-[18px] md:text-[18px] font-normal leading-normal text-[#000] md:text-[#333]">
+                <p className="font-[IBM_Plex_Sans] text-base md:text-base lg:text-[18px] font-normal leading-base md:leading-base lg:leading-[18px] tracking-[0px] text-[#000] lg:text-[#333]">
                   Content coming soon. This section will explain our methodology and approach
                   to self-defense training.
                 </p>
@@ -100,10 +105,10 @@ export default function OfferingsSection() {
 
               <div className={`space-y-6 transition-opacity duration-300 col-start-1 row-start-1 ${activeTab === 'why' ? 'opacity-100 z-10' : 'opacity-0 pointer-events-none'}`}>
                 {/* TODO: Replace with Sanity CMS content */}
-                <h2 className="hidden font-[Poppins] text-[32px] md:text-[48px] font-medium leading-[40px] md:leading-tight tracking-[-0.512px] md:tracking-normal text-[#000]">
+                <h2 className="hidden font-[Poppins] text-[32px] md:text-[40px] lg:text-[48px] font-medium leading-[40px] md:leading-[48px] lg:leading-[56px] tracking-[-0.512px] md:tracking-[-1.6px] lg:tracking-[-3.6px] text-[#000]">
                   Why Choose IMPACT
                 </h2>
-                <p className="font-[IBM_Plex_Sans] text-base min-[744px]:text-[18px] md:text-[18px] font-normal leading-normal text-[#000] md:text-[#333]">
+                <p className="font-[IBM_Plex_Sans] text-base md:text-base lg:text-[18px] font-normal leading-base md:leading-base lg:leading-[18px] tracking-[0px] text-[#000] lg:text-[#333]">
                   Content coming soon. This section will explain why IMPACT's approach is
                   effective and important.
                 </p>

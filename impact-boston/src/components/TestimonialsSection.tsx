@@ -60,17 +60,17 @@ export default function TestimonialsSection() {
         {/* Top Row - Heading and Navigation */}
         <div className="grid-12-col">
           {/* Left - Heading and Subtext */}
-          <div className="col-span-4 min-[744px]:col-span-12 lg:col-span-4 flex flex-col gap-6 md:space-y-4 md:gap-0 min-[744px]:items-center lg:items-start">
-            <h2 className="font-[Poppins] text-[32px] min-[744px]:text-[48px] md:text-[48px] font-medium leading-[40px] min-[744px]:leading-[96px] md:leading-tight tracking-[-0.512px] md:tracking-normal text-[#000] text-center min-[744px]:text-center md:text-left">
+          <div className="col-span-4 md:col-span-12 lg:col-span-4 flex flex-col gap-6 md:space-y-4 md:gap-0 md:items-center lg:items-start">
+            <h2 className="font-[Poppins] text-[32px] md:text-[40px] lg:text-[48px] font-medium leading-[40px] md:leading-[48px] lg:leading-[56px] tracking-[-0.512px] md:tracking-[-1.6px] lg:tracking-[-3.6px] text-[#000] text-center md:text-center lg:text-left">
               What People are Saying
             </h2>
-            <p className="font-[IBM_Plex_Sans] text-base font-medium md:font-normal leading-normal text-[#333] text-center min-[744px]:text-center md:text-left">
+            <p className="font-[IBM_Plex_Sans] text-base md:text-base lg:text-base font-medium md:font-normal lg:font-normal leading-base md:leading-base lg:leading-[18px] tracking-[0px] text-[#333] text-center md:text-center lg:text-left">
               Hear from 20 people who've worked with us.
             </p>
           </div>
 
           {/* Right - Arrow Navigation - Tablet and Desktop */}
-          <div className="hidden min-[744px]:flex lg:flex col-span-4 min-[744px]:col-span-12 lg:col-span-2 lg:col-start-11 gap-4 min-[744px]:justify-center lg:justify-end self-end">
+          <div className="hidden md:flex lg:flex col-span-4 md:col-span-12 lg:col-span-2 lg:col-start-11 gap-4 md:justify-center lg:justify-end self-end">
             <button
               onClick={prevSlide}
               className="w-12 h-12 relative flex items-center justify-center transition-opacity hover:opacity-80"
@@ -106,7 +106,7 @@ export default function TestimonialsSection() {
               {testimonials.map((testimonial, index) => (
                 <div
                   key={index}
-                  className="flex-shrink-0 w-[max(296px,calc(75%-18px))] min-[744px]:w-[calc(50%-12px)] md:w-[calc(33.333%-16px)] lg:w-[calc(50%-12px)] bg-white flex flex-col"
+                  className="flex-shrink-0 w-[max(296px,calc(75%-18px))] md:w-[calc(50%-12px)] lg:w-[calc(50%-12px)] bg-white flex flex-col"
                 >
                   {/* Colored Top Border */}
                   <div
@@ -119,12 +119,12 @@ export default function TestimonialsSection() {
                   {/* Card Content */}
                   <div className="p-8 flex flex-col gap-4">
                     {/* Quote */}
-                    <p className="font-[IBM_Plex_Sans] text-base font-normal leading-normal md:leading-relaxed text-[#000] md:text-[#333]">
+                    <p className="font-[IBM_Plex_Sans] text-base md:text-base lg:text-base font-normal leading-base md:leading-base lg:leading-[18px] tracking-[0px] text-[#000] lg:text-[#333]">
                       "{testimonial.quote}
                     </p>
 
                     {/* Author */}
-                    <p className="font-[Poppins] text-sm font-medium text-[#000]">
+                    <p className="font-[Poppins] text-[14px] md:text-[14px] lg:text-[14px] font-medium leading-[14px] md:leading-[14px] lg:leading-[14px] tracking-[0px] text-[#000]">
                       - {testimonial.author}
                     </p>
                   </div>
@@ -135,7 +135,7 @@ export default function TestimonialsSection() {
         </div>
 
         {/* Arrow Navigation - Mobile only, centered at bottom */}
-        <div className="flex min-[744px]:hidden lg:hidden gap-4 justify-center">
+        <div className="flex md:hidden lg:hidden gap-4 justify-center">
           <button
             onClick={prevSlide}
             className="w-12 h-12 relative flex items-center justify-center transition-opacity hover:opacity-80"
