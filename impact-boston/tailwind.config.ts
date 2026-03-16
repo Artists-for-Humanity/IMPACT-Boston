@@ -47,6 +47,7 @@ const config: Config = {
       screens: {
         'mobile': '390px',
         'tablet': '744px',
+        'md': '768px',
         'desktop': '1440px',
       },
     },

@@ -30,11 +30,11 @@ export default function HeroContent({
         ))}
       </div>
 
-      <p className="font-[IBM_Plex_Sans] text-[18px] font-normal leading-normal max-w-lg text-center md:text-left mb-8 md:mb-8" style={{ color: '#333' }}>
+      <p className="font-[IBM_Plex_Sans] text-[18px] font-normal leading-normal max-w-lg text-center min-[744px]:text-center md:text-left mb-8 md:mb-8" style={{ color: '#333' }}>
         {body}
       </p>
 
-      <div className="mt-auto flex justify-center md:justify-start">
+      <div className="mt-auto flex justify-center min-[744px]:justify-center md:justify-start">
         <Button href={ctaHref} variant="primary" size="lg">
           {ctaText}
         </Button>

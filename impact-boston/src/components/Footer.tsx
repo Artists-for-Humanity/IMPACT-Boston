@@ -14,7 +14,7 @@ export default function Footer() {
         <div className="grid-12-col">
           {/* Left Column - IMPACT Wordmark & Contact Info */}
           <div className="col-span-4 lg:col-start-1 lg:col-span-5 space-y-8">
-            <h2 className="font-[Poppins] text-[32px] md:text-[48px] font-medium leading-[40px] md:leading-[56px] tracking-[-0.512px] md:tracking-[-1.728px] text-white pb-8 md:pb-12 mb-0">
+            <h2 className="font-[Poppins] text-[32px] min-[744px]:text-[48px] md:text-[48px] font-medium leading-[40px] min-[744px]:leading-[56px] md:leading-[56px] tracking-[-0.512px] min-[744px]:tracking-[-1.728px] md:tracking-[-1.728px] text-white pb-8 min-[744px]:pb-12 md:pb-12 mb-0">
               IMPACT
             </h2>
 
@@ -22,22 +22,22 @@ export default function Footer() {
             <div className="space-y-6">
               {/* Address */}
               <div className="pb-6 mb-0">
-                <p className="text-white font-[IBM_Plex_Sans] text-sm md:text-base font-bold leading-normal">
+                <p className="text-white font-[IBM_Plex_Sans] text-sm min-[744px]:text-base md:text-base font-bold leading-normal">
                   Address
                 </p>
-                <p className="font-[IBM_Plex_Sans] text-sm md:text-base text-[#888] font-normal leading-normal">
+                <p className="font-[IBM_Plex_Sans] text-sm min-[744px]:text-base md:text-base text-[#888] font-normal leading-normal">
                   89 South Street, Suite 600 Boston, MA
                 </p>
               </div>
 
               {/* Email */}
               <div className="pb-6 mb-0">
-                <p className="text-white font-[IBM_Plex_Sans] text-sm md:text-base font-bold leading-normal">
+                <p className="text-white font-[IBM_Plex_Sans] text-sm min-[744px]:text-base md:text-base font-bold leading-normal">
                   Email
                 </p>
                 <a
                   href="mailto:info@impactboston.org"
-                  className="font-[IBM_Plex_Sans] text-sm md:text-base text-[#888] font-normal leading-normal hover:text-white transition-colors"
+                  className="font-[IBM_Plex_Sans] text-sm min-[744px]:text-base md:text-base text-[#888] font-normal leading-normal hover:text-white transition-colors"
                 >
                   info@impactboston.org
                 </a>
@@ -45,12 +45,12 @@ export default function Footer() {
 
               {/* Call */}
               <div className="pb-0 mb-0">
-                <p className="text-white font-[IBM_Plex_Sans] text-sm md:text-base font-bold leading-normal">
+                <p className="text-white font-[IBM_Plex_Sans] text-sm min-[744px]:text-base md:text-base font-bold leading-normal">
                   Call
                 </p>
                 <a
                   href="tel:+1234567890"
-                  className="font-[IBM_Plex_Sans] text-sm md:text-base text-[#888] font-normal leading-normal hover:text-white transition-colors"
+                  className="font-[IBM_Plex_Sans] text-sm min-[744px]:text-base md:text-base text-[#888] font-normal leading-normal hover:text-white transition-colors"
                 >
                   +1 617-597-4945
                 </a>
@@ -60,23 +60,23 @@ export default function Footer() {
 
           {/* Right Column - Contact Form */}
           <div className="col-span-4 lg:col-start-8 lg:col-span-5 flex flex-col justify-start items-start flex-1 self-stretch pt-10 lg:pt-20">
-            <h3 className="font-[Poppins] text-sm md:text-base font-medium leading-normal text-white">
+            <h3 className="font-[Poppins] text-sm min-[744px]:text-base md:text-base font-medium leading-normal text-white">
               Join Our Newsletter
             </h3>
-            <p className="font-[IBM_Plex_Sans] text-sm text-[#888] pb-5">
+            <p className="font-[IBM_Plex_Sans] text-sm min-[744px]:text-base text-[#888] pb-5">
               Stay updated on programs, events, and community resources.
             </p>
 
-            <form className="space-y-2 md:space-y-4 w-full">
+            <form className="space-y-2 min-[744px]:space-y-4 md:space-y-4 w-full">
               <input
                 type="email"
                 placeholder="Enter your email"
-                className="w-full flex h-16 px-[8px] py-5 justify-between items-center self-stretch bg-[#1F2122] focus:border-gray-400 focus:outline-none text-white placeholder:text-[rgba(255,255,255,0.40)] placeholder:font-[Poppins] placeholder:text-sm placeholder:font-medium md:placeholder:font-[IBM_Plex_Sans] font-[IBM_Plex_Sans]"
+                className="w-full flex h-16 px-[8px] py-5 justify-between items-center self-stretch bg-[#1F2122] focus:border-gray-400 focus:outline-none text-white placeholder:text-[rgba(255,255,255,0.40)] placeholder:font-[Poppins] placeholder:text-sm placeholder:font-medium min-[744px]:placeholder:font-[IBM_Plex_Sans] md:placeholder:font-[IBM_Plex_Sans] font-[IBM_Plex_Sans]"
                 aria-label="Email address"
               />
               <button
                 type="submit"
-                className="w-full flex h-16 px-[19px] py-5 justify-between items-center self-stretch bg-[#1F2122] hover:bg-[#2a2c2d] transition-colors text-white text-center font-[IBM_Plex_Sans] text-sm md:text-base font-normal md:font-medium leading-normal"
+                className="w-full flex h-16 px-[19px] py-5 justify-between items-center self-stretch bg-[#1F2122] hover:bg-[#2a2c2d] transition-colors text-white text-center font-[IBM_Plex_Sans] text-sm min-[744px]:text-base md:text-base font-normal min-[744px]:font-medium md:font-medium leading-normal"
               >
                 <span>Join</span>
                 <svg
@@ -104,8 +104,8 @@ export default function Footer() {
         <div className="w-full border-t border-gray-700 pt-6">
         <div className="grid-12-col">
           {/* About Column */}
-          <div className="col-span-2 col-start-1 row-start-1 md:col-start-1 md:col-span-4 md:row-start-auto space-y-4">
-            <h4 className="text-white font-[IBM_Plex_Sans] text-base font-medium md:font-medium leading-normal pb-3 mb-0">
+          <div className="col-span-2 col-start-1 row-start-1 min-[744px]:col-start-1 min-[744px]:col-span-4 md:col-start-1 md:col-span-4 md:row-start-auto space-y-4">
+            <h4 className="text-white font-[IBM_Plex_Sans] text-base font-medium min-[744px]:font-medium md:font-medium leading-normal pb-3 mb-0">
               About
             </h4>
             <ul className="space-y-0">
@@ -145,8 +145,8 @@ export default function Footer() {
           </div>
 
           {/* Programs Column */}
-          <div className="col-span-4 col-start-1 row-start-2 mt-4 md:mt-0 md:col-start-5 md:col-span-4 md:row-start-auto space-y-4">
-            <h4 className="text-white font-[IBM_Plex_Sans] text-base font-medium md:font-medium leading-normal pb-3 mb-0">
+          <div className="col-span-4 col-start-1 row-start-2 mt-4 min-[744px]:mt-0 min-[744px]:col-start-5 min-[744px]:col-span-4 md:mt-0 md:col-start-5 md:col-span-4 md:row-start-auto space-y-4">
+            <h4 className="text-white font-[IBM_Plex_Sans] text-base font-medium min-[744px]:font-medium md:font-medium leading-normal pb-3 mb-0">
               Programs
             </h4>
             <ul className="space-y-0">
@@ -218,8 +218,8 @@ export default function Footer() {
           </div>
 
           {/* Learn More Column */}
-          <div className="col-span-2 col-start-3 row-start-1 md:col-start-9 md:col-span-4 md:row-start-auto space-y-4">
-            <h4 className="text-white font-[IBM_Plex_Sans] text-base font-medium md:font-medium leading-normal pb-3 mb-0">
+          <div className="col-span-2 col-start-3 row-start-1 min-[744px]:col-start-9 min-[744px]:col-span-4 md:col-start-9 md:col-span-4 md:row-start-auto space-y-4">
+            <h4 className="text-white font-[IBM_Plex_Sans] text-base font-medium min-[744px]:font-medium md:font-medium leading-normal pb-3 mb-0">
               Learn More
             </h4>
             <ul className="space-y-0">
@@ -254,9 +254,9 @@ export default function Footer() {
 
         {/* Footer Bar - Social & Copyright */}
         <div className="w-full pt-2 md:pt-6">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-6">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
           {/* Social Icons */}
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-0 md:gap-4">
             <a
               href="https://instagram.com"
               target="_blank"

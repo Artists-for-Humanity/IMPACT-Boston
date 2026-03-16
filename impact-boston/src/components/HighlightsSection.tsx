@@ -91,7 +91,7 @@ export default function HighlightsSection() {
       <div className="flex flex-col gap-14 w-full max-w-[1440px] px-4 py-12 md:px-20 lg:px-[120px] md:py-[88px]">
         {/* Top Row - Label and Navigation */}
         <div className="flex justify-between items-center">
-          <h5 className="font-[Poppins] text-[14px] text-white font-medium leading-normal">
+          <h5 className="font-[Poppins] text-[14px] min-[744px]:text-[16px] text-white font-medium leading-normal">
             Highlights
           </h5>
           <div className="flex gap-4">
@@ -130,7 +130,7 @@ export default function HighlightsSection() {
                     currentSlide === index ? 'opacity-100 z-10' : 'opacity-0 pointer-events-none'
                   }`}
                 >
-                  <h3 className="font-[Poppins] text-[24px] md:text-[32px] font-medium leading-normal md:leading-tight text-white">
+                  <h3 className="font-[Poppins] text-[24px] min-[744px]:text-[48px] md:text-[32px] font-medium leading-normal min-[744px]:leading-[96px] md:leading-tight text-white">
                     {slide.heading}
                   </h3>
                 </div>
@@ -180,7 +180,7 @@ export default function HighlightsSection() {
                   currentSlide === index ? 'opacity-100 z-10' : 'opacity-0 pointer-events-none hidden lg:block'
                 }`}
               >
-                <p className="font-[IBM_Plex_Sans] text-base md:text-lg font-normal leading-normal md:leading-relaxed text-white">
+                <p className="font-[IBM_Plex_Sans] text-base min-[744px]:text-[18px] md:text-lg font-normal leading-normal md:leading-relaxed text-white">
                   {slide.body}
                 </p>
               </div>
@@ -216,7 +216,7 @@ export default function HighlightsSection() {
                   currentSlide === index ? 'opacity-100 z-10' : 'opacity-0 pointer-events-none hidden lg:block'
                 }`}
               >
-                <p className="font-[IBM_Plex_Sans] text-sm md:text-base font-normal leading-normal" style={{ color: 'rgba(255, 255, 255, 0.60)' }}>
+                <p className="font-[IBM_Plex_Sans] text-sm min-[744px]:text-[16px] md:text-base font-normal leading-normal" style={{ color: 'rgba(255, 255, 255, 0.60)' }}>
                   {renderTextWithEmailLinks(slide.additionalText)}
                 </p>
               </div>
