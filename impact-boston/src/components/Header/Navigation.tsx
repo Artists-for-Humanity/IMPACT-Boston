@@ -5,67 +5,66 @@
 // - Register (filled purple button) + Donate (outlined button) on the right
 // - Search icon far right
 
-'use client'
+"use client";
 
-import { useState } from 'react'
-import Image from 'next/image'
-
+import { useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
 interface NavItem {
-  label: string
-  link: string
-  subItems?: { label: string; link: string }[]
+  label: string;
+  link: string;
+  subItems?: { label: string; link: string }[];
 }
 
 interface NavigationProps {
-  items?: NavItem[]
-  activeItem?: string
+  items?: NavItem[];
+  activeItem?: string;
 }
 
 const DEFAULT_NAV_ITEMS: NavItem[] = [
   {
-    label: 'About',
-    link: '/about',
+    label: "About",
+    link: "/about",
     subItems: [
-      { label: 'Our Mission', link: '/about/mission' },
-      { label: 'Impact Blog', link: '/about/blog' },
-      { label: 'Employment', link: '/about/employment' },
-      { label: 'Supporters & Partners', link: '/about/partners' },
+      { label: "Our Mission", link: "/about/mission" },
+      { label: "Impact Blog", link: "/about/blog" },
+      { label: "Employment", link: "/about/employment" },
+      { label: "Supporters & Partners", link: "/about/partners" },
     ],
   },
   {
-    label: 'Programs',
-    link: '/programs',
+    label: "Programs",
+    link: "/programs",
     subItems: [
-      { label: 'In-Person Class Schedule', link: '/programs/in-person' },
-      { label: 'Line Drawn', link: '/programs/line-drawn' },
-      { label: 'Shelter In Safety', link: '/programs/shelter-in-safety' },
-      { label: 'Community Collaborators', link: '/programs/community' },
+      { label: "In-Person Class Schedule", link: "/programs/in-person" },
+      { label: "Line Drawn", link: "/programs/line-drawn" },
+      { label: "Shelter In Safety", link: "/programs/shelter-in-safety" },
+      { label: "Community Collaborators", link: "/programs/community" },
     ],
   },
   {
-    label: 'Learn more',
-    link: '/learn-more',
+    label: "Learn more",
+    link: "/learn-more",
     subItems: [
-      { label: 'Class Descriptions', link: '/resources/class-descriptions' },
-      { label: 'Accessibility Information', link: '/resources/accessibility' },
+      { label: "Class Descriptions", link: "/resources/class-descriptions" },
+      { label: "Accessibility Information", link: "/resources/accessibility" },
     ],
   },
-]
+];
 
 export default function Navigation({
   items = DEFAULT_NAV_ITEMS,
   activeItem,
 }: NavigationProps) {
-  const [mobileOpen, setMobileOpen] = useState(false)
-  const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
 
   return (
     <nav aria-label="Main navigation" className="flex items-center gap-6">
-
       {/* ── Desktop nav items ────────────────────────────────────── */}
       <ul className="hidden md:flex items-center gap-1">
         {items.map((item) => {
-          const isActive = activeItem === item.label
+          const isActive = activeItem === item.label;
           return (
             <li
               key={item.label}
@@ -75,13 +74,13 @@ export default function Navigation({
             >
               <button
                 className={`
-                  flex items-center justify-center gap-1 px-2 py-0.5 text-base font-nav tracking-normal text-black
+                  flex items-center justify-center gap-1 px-2 py-0.5 text-base font-bold tracking-normal text-black
                   transition-colors duration-150
-                  ${isActive ? 'font-semibold' : ''}
+                  ${isActive ? "font-semibold" : ""}
                 `}
-                style={{ lineHeight: '25px' }}
+                style={{ lineHeight: "25px" }}
                 aria-expanded={activeDropdown === item.label}
-                aria-haspopup={item.subItems ? 'true' : undefined}
+                aria-haspopup={item.subItems ? "true" : undefined}
               >
                 {item.label}
                 {item.subItems && (
@@ -91,7 +90,7 @@ export default function Navigation({
                     height={12}
                     alt=""
                     className={` transition-transform duration-150 ${
-                      activeDropdown === item.label ? 'rotate-[270deg]' : ''
+                      activeDropdown === item.label ? "rotate-[270deg]" : ""
                     }`}
                   />
                 )}
@@ -113,29 +112,29 @@ export default function Navigation({
                 </ul>
               )}
             </li>
-          )
+          );
         })}
       </ul>
 
       {/* ── CTA buttons ─────────────────────────────────────────── */}
       <div className="hidden md:flex items-center gap-2">
         {/* Register — filled purple */}
-        <a
+        <Link
           href="/register"
           className="flex items-center gap-0.5 px-4 py-1 text-base font-nav font-normal text-[#FFF] bg-[#6E3388] hover:bg-brand-primary rounded-[5px] transition-colors duration-150"
-          style={{ lineHeight: '25px' }}
+          style={{ lineHeight: "25px" }}
         >
           Register
-        </a>
+        </Link>
 
         {/* Donate — outlined */}
-        <a
+        <Link
           href="/donate"
           className="flex items-center gap-0.5 px-4 py-1 text-base font-nav font-normal text-black border border-[#959595] rounded-[5px] hover:border-gray-400 hover:text-gray-900 transition-colors duration-150"
-          style={{ lineHeight: '25px' }}
+          style={{ lineHeight: "25px" }}
         >
           Donate
-        </a>
+        </Link>
       </div>
 
       {/* ── Search icon ─────────────────────────────────────────── */}
@@ -143,28 +142,43 @@ export default function Navigation({
         aria-label="Search"
         className="hidden md:flex p-1.5 text-gray-400 hover:text-gray-700 transition-colors duration-150"
       >
-        <Image
-          src="/icons/search.svg"
-          width={18}
-          height={18}
-          alt="Search"
-        />
+        <Image src="/icons/search.svg" width={18} height={18} alt="Search" />
       </button>
 
       {/* ── Mobile hamburger ─────────────────────────────────────── */}
       <button
         className="md:hidden p-2 text-gray-600 hover:text-gray-900 transition-colors"
         onClick={() => setMobileOpen(!mobileOpen)}
-        aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
+        aria-label={mobileOpen ? "Close menu" : "Open menu"}
         aria-expanded={mobileOpen}
       >
         {mobileOpen ? (
-          <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+          <svg
+            className="w-5 h-5"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth={2}
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M6 18L18 6M6 6l12 12"
+            />
           </svg>
         ) : (
-          <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+          <svg
+            className="w-5 h-5"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth={2}
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M4 6h16M4 12h16M4 18h16"
+            />
           </svg>
         )}
       </button>
@@ -196,15 +210,21 @@ export default function Navigation({
             ))}
           </ul>
           <div className="px-4 py-4 flex flex-col gap-2 border-t border-gray-100">
-            <a href="/register" className="w-full text-center px-5 py-2.5 text-sm font-semibold text-white bg-brand-primary-shade">
+            <Link
+              href="/register"
+              className="w-full text-center px-5 py-2.5 text-sm font-semibold text-white bg-brand-primary-shade"
+            >
               Register
-            </a>
-            <a href="/donate" className="w-full text-center px-5 py-2.5 text-sm font-semibold text-gray-700 border border-gray-300">
+            </Link>
+            <Link
+              href="/donate"
+              className="w-full text-center px-5 py-2.5 text-sm font-semibold text-gray-700 border border-gray-300"
+            >
               Donate
-            </a>
+            </Link>
           </div>
         </div>
       )}
     </nav>
-  )
+  );
 }

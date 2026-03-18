@@ -1,12 +1,12 @@
-'use client';
+"use client";
 
 // components/HighlightsSection.tsx
 // Highlights section with carousel showcasing key messages and features
 
-import { useState } from 'react';
-import Link from 'next/link';
-import Image from 'next/image';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { useState } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 interface Slide {
   heading: string;
@@ -41,33 +41,34 @@ const renderTextWithEmailLinks = (text: string) => {
 
 const slides: Slide[] = [
   {
-    heading: 'Find your courage and make the world safer.',
+    heading: "Find your courage and make the world safer.",
     body: "IMPACT has been teaching solutions for safe living since 1971. We provide realistic personal safety training that gives people the skills to respond appropriately to threatening situations in the moment of fear or intimidation. We also collaborate with schools and organizations to create programs that proactively prevent abuse. IMPACT's prevention programs emphasize giving people the tools to manage their stress responses so they can intervene effectively when they observe risky situations. Too often abuse goes unchallenged because people don't feel safe speaking up. IMPACT programs help people increase their ability to safely advocate for themselves and others.",
-    ctaText: 'Learn More',
-    ctaLink: '/about',
-    additionalText: 'FOR MORE INFO: Contact Shay Orent, Training Manager IMPACT Boston, sorent@impactboston.org',
-    imageSrc: '/images/hero-placeholder.jpg',
-    imageAlt: 'IMPACT Boston training session',
+    ctaText: "Learn More",
+    ctaLink: "/about",
+    additionalText:
+      "FOR MORE INFO: Contact Shay Orent, Training Manager IMPACT Boston, sorent@impactboston.org",
+    imageSrc: "/images/hero-placeholder.jpg",
+    imageAlt: "IMPACT Boston training session",
   },
   {
     // TODO: Replace with Sanity CMS content
-    heading: 'Empowering communities through education.',
-    body: 'Content coming soon. This slide will showcase our community impact and educational programs.',
-    ctaText: 'Learn More',
-    ctaLink: '/programs',
-    additionalText: 'Additional information or context can be added here.',
-    imageSrc: '/images/hero-placeholder.jpg',
-    imageAlt: 'Community education program',
+    heading: "Empowering communities through education.",
+    body: "Content coming soon. This slide will showcase our community impact and educational programs.",
+    ctaText: "Learn More",
+    ctaLink: "/programs",
+    additionalText: "Additional information or context can be added here.",
+    imageSrc: "/images/hero-placeholder.jpg",
+    imageAlt: "Community education program",
   },
   {
     // TODO: Replace with Sanity CMS content
-    heading: 'Building safer environments together.',
-    body: 'Content coming soon. This slide will highlight our collaborative approach to creating safer spaces.',
-    ctaText: 'Learn More',
-    ctaLink: '/about',
-    additionalText: 'Additional information or context can be added here.',
-    imageSrc: '/images/hero-placeholder.jpg',
-    imageAlt: 'Safe environment collaboration',
+    heading: "Building safer environments together.",
+    body: "Content coming soon. This slide will highlight our collaborative approach to creating safer spaces.",
+    ctaText: "Learn More",
+    ctaLink: "/about",
+    additionalText: "Additional information or context can be added here.",
+    imageSrc: "/images/hero-placeholder.jpg",
+    imageAlt: "Safe environment collaboration",
   },
 ];
 
@@ -100,20 +101,54 @@ export default function HighlightsSection() {
               className="w-12 h-12 relative flex items-center justify-center transition-opacity hover:opacity-80"
               aria-label="Previous slide"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" width="46" height="46" viewBox="0 0 46 46" fill="none" className="absolute">
-                <circle cx="23" cy="23" r="23" transform="rotate(-180 23 23)" fill="white" fillOpacity="0.2" />
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="46"
+                height="46"
+                viewBox="0 0 46 46"
+                fill="none"
+                className="absolute"
+              >
+                <circle
+                  cx="23"
+                  cy="23"
+                  r="23"
+                  transform="rotate(-180 23 23)"
+                  fill="white"
+                  fillOpacity="0.2"
+                />
               </svg>
-              <ChevronLeft className="w-6 h-6 text-white relative z-10" strokeWidth={2} />
+              <ChevronLeft
+                className="w-6 h-6 text-white relative z-10"
+                strokeWidth={2}
+              />
             </button>
             <button
               onClick={nextSlide}
               className="w-12 h-12 relative flex items-center justify-center transition-opacity hover:opacity-80"
               aria-label="Next slide"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" width="46" height="46" viewBox="0 0 46 46" fill="none" className="absolute">
-                <circle cx="23" cy="23" r="23" transform="rotate(-180 23 23)" fill="white" fillOpacity="0.2" />
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="46"
+                height="46"
+                viewBox="0 0 46 46"
+                fill="none"
+                className="absolute"
+              >
+                <circle
+                  cx="23"
+                  cy="23"
+                  r="23"
+                  transform="rotate(-180 23 23)"
+                  fill="white"
+                  fillOpacity="0.2"
+                />
               </svg>
-              <ChevronRight className="w-6 h-6 text-white relative z-10" strokeWidth={2} />
+              <ChevronRight
+                className="w-6 h-6 text-white relative z-10"
+                strokeWidth={2}
+              />
             </button>
           </div>
         </div>
@@ -127,7 +162,9 @@ export default function HighlightsSection() {
                 <div
                   key={index}
                   className={`col-start-1 row-start-1 transition-opacity duration-500 ${
-                    currentSlide === index ? 'opacity-100 z-10' : 'opacity-0 pointer-events-none'
+                    currentSlide === index
+                      ? "opacity-100 z-10"
+                      : "opacity-0 pointer-events-none"
                   }`}
                 >
                   <h3 className="font-[Poppins] text-[24px] md:text-[32px] lg:text-[32px] font-medium leading-[24px] md:leading-[32px] lg:leading-[40px] tracking-[0px] md:tracking-[0px] lg:tracking-[-1.28px] text-white">
@@ -144,7 +181,10 @@ export default function HighlightsSection() {
                   key={index}
                   onClick={() => goToSlide(index)}
                   className="w-3 h-3 rounded-full transition-all duration-300"
-                  style={{ backgroundColor: currentSlide === index ? '#FFFFFF' : '#9F84B5' }}
+                  style={{
+                    backgroundColor:
+                      currentSlide === index ? "#FFFFFF" : "#9F84B5",
+                  }}
                   aria-label={`Go to slide ${index + 1}`}
                 />
               ))}
@@ -157,9 +197,11 @@ export default function HighlightsSection() {
               <div
                 key={index}
                 className={`col-start-1 row-start-1 relative aspect-[16/9] transition-opacity duration-500 ${
-                  currentSlide === index ? 'opacity-100 z-10' : 'opacity-0 pointer-events-none hidden lg:block'
+                  currentSlide === index
+                    ? "opacity-100 z-10"
+                    : "opacity-0 pointer-events-none hidden lg:block"
                 }`}
-                style={{ backgroundColor: '#311E41' }}
+                style={{ backgroundColor: "#311E41" }}
               >
                 <Image
                   src={slide.imageSrc}
@@ -177,10 +219,12 @@ export default function HighlightsSection() {
               <div
                 key={index}
                 className={`col-start-1 row-start-1 transition-opacity duration-500 ${
-                  currentSlide === index ? 'opacity-100 z-10' : 'opacity-0 pointer-events-none hidden lg:block'
+                  currentSlide === index
+                    ? "opacity-100 z-10"
+                    : "opacity-0 pointer-events-none hidden lg:block"
                 }`}
               >
-                <p className="font-[IBM_Plex_Sans] text-base md:text-base lg:text-[18px] font-normal leading-base md:leading-base lg:leading-[18px] tracking-[0px] text-white">
+                <p className="font-[IBM_Plex_Sans] text-base md:text-base lg:text-[18px] font-normal leading-[25px] md:leading-base lg:leading-[25px] tracking-[0px] text-white">
                   {slide.body}
                 </p>
               </div>
@@ -193,7 +237,9 @@ export default function HighlightsSection() {
               <div
                 key={index}
                 className={`col-start-1 row-start-1 transition-opacity duration-500 ${
-                  currentSlide === index ? 'opacity-100 z-10' : 'opacity-0 pointer-events-none hidden lg:block'
+                  currentSlide === index
+                    ? "opacity-100 z-10"
+                    : "opacity-0 pointer-events-none hidden lg:block"
                 }`}
               >
                 <Link
@@ -213,10 +259,15 @@ export default function HighlightsSection() {
               <div
                 key={index}
                 className={`col-start-1 row-start-1 transition-opacity duration-500 ${
-                  currentSlide === index ? 'opacity-100 z-10' : 'opacity-0 pointer-events-none hidden lg:block'
+                  currentSlide === index
+                    ? "opacity-100 z-10"
+                    : "opacity-0 pointer-events-none hidden lg:block"
                 }`}
               >
-                <p className="font-[IBM_Plex_Sans] text-[14px] md:text-[14px] lg:text-base font-normal leading-[14px] md:leading-[14px] lg:leading-[18px] tracking-[0px]" style={{ color: 'rgba(255, 255, 255, 0.60)' }}>
+                <p
+                  className="font-[IBM_Plex_Sans] text-[14px] md:text-[14px] lg:text-base font-normal leading-[14px] md:leading-[14px] lg:leading-[18px] tracking-[0px]"
+                  style={{ color: "rgba(255, 255, 255, 0.60)" }}
+                >
                   {renderTextWithEmailLinks(slide.additionalText)}
                 </p>
               </div>
@@ -231,7 +282,9 @@ export default function HighlightsSection() {
               key={index}
               onClick={() => goToSlide(index)}
               className="w-3 h-3 rounded-full transition-all duration-300"
-              style={{ backgroundColor: currentSlide === index ? '#FFFFFF' : '#9F84B5' }}
+              style={{
+                backgroundColor: currentSlide === index ? "#FFFFFF" : "#9F84B5",
+              }}
               aria-label={`Go to slide ${index + 1}`}
             />
           ))}
