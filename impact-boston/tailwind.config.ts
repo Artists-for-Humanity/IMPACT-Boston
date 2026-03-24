@@ -7,6 +7,12 @@ const config: Config = {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+    screens: {
+      'sm': '390px',
+      'md': '744px',
+      'lg': '1024px',
+      'xl': '1440px',
+    },
     extend: {
       colors: {
         brand: {
@@ -43,12 +49,6 @@ const config: Config = {
       },
       gridTemplateColumns: {
         '12': 'repeat(12, minmax(0, 1fr))',
-      },
-      screens: {
-        'sm': '390px',     // Mobile
-        'md': '744px',     // Tablet
-        'lg': '1024px',    // Desktop start
-        'xl': '1440px',    // Desktop max
       },
     },
   },

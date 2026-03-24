@@ -63,7 +63,7 @@ export default function OfferingsSection() {
                 <h2 className=" font-[Poppins] text-[32px] md:text-[40px] lg:text-[48px] font-medium leading-[40px] md:leading-[48px] lg:leading-[56px] tracking-[-0.512px] md:tracking-[-1.6px] lg:tracking-[-3.6px] text-[#000]">
                   What We Offer
                 </h2>
-                <p className="font-[IBM_Plex_Sans] text-base md:text-base lg:text-[18px] font-normal leading-base md:leading-base lg:leading-[18px] tracking-[0px] text-[#000] lg:text-[#333]">
+                <p className="font-[IBM_Plex_Sans] text-base md:text-base lg:text-[18px] font-normal leading-[24px] md:leading-[24px] lg:leading-[24px] tracking-[0px] text-[#000] lg:text-[#333]">
                   IMPACT offers self-defense education and training designed to
                   meet the needs of individuals, schools, and organizations. Our
                   programs are open to the public and tailored for a wide range
@@ -88,13 +88,13 @@ export default function OfferingsSection() {
                   effectively under pressure. Our offerings include:
                 </p>
                 <ul className="space-y-6 mt-8">
-                  <li className="font-[IBM_Plex_Sans] text-base md:text-base lg:text-[18px] font-normal leading-base md:leading-base lg:leading-[18px] tracking-[0px] text-[#000] lg:text-[#333]">
+                  <li className="font-[IBM_Plex_Sans] text-base md:text-base lg:text-[18px] font-normal leading-[24px] md:leading-[24px] lg:leading-[24px] tracking-[0px] text-[#000] lg:text-[#333]">
                     <strong> Public self-defense classes:</strong> Open to the
                     community and held year-round. View the In-Person Class
                     Schedule for upcoming sessions or explore Class Descriptions
                     for more details.
                   </li>
-                  <li className="font-[IBM_Plex_Sans] text-base md:text-base lg:text-[18px] font-normal leading-base md:leading-base lg:leading-[18px] tracking-[0px] text-[#000] lg:text-[#333]">
+                  <li className="font-[IBM_Plex_Sans] text-base md:text-base lg:text-[18px] font-normal leading-[24px] md:leading-[24px] lg:leading-[24px] tracking-[0px] text-[#000] lg:text-[#333]">
                     <strong> Customized workshops:</strong> Designed for
                     schools, disability service organizations, community groups,
                     businesses, human service agencies, and survivors of

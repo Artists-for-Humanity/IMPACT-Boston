@@ -224,7 +224,7 @@ export default function HighlightsSection() {
                     : "opacity-0 pointer-events-none hidden lg:block"
                 }`}
               >
-                <p className="font-[IBM_Plex_Sans] text-base md:text-base lg:text-[18px] font-normal leading-[25px] md:leading-base lg:leading-[25px] tracking-[0px] text-white">
+                <p className="font-[IBM_Plex_Sans] text-base md:text-base lg:text-[18px] font-normal leading-[24px] md:leading-[24px] lg:leading-[24px] tracking-[0px] text-white">
                   {slide.body}
                 </p>
               </div>
@@ -265,7 +265,7 @@ export default function HighlightsSection() {
                 }`}
               >
                 <p
-                  className="font-[IBM_Plex_Sans] text-[14px] md:text-[14px] lg:text-base font-normal leading-[14px] md:leading-[14px] lg:leading-[18px] tracking-[0px]"
+                  className="font-[IBM_Plex_Sans] text-[14px] md:text-[14px] lg:text-base font-normal leading-[24px] md:leading-[24px] lg:leading-[24px] tracking-[0px]"
                   style={{ color: "rgba(255, 255, 255, 0.60)" }}
                 >
                   {renderTextWithEmailLinks(slide.additionalText)}
