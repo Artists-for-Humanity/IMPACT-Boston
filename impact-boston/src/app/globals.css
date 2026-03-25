@@ -3,6 +3,14 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --color-primary: #421956;
+  --color-primary-shade: #6b3789;
+  --color-secondary: #6C3789;
+  --color-complementary: #C83B19;
+  --color-accent-orange: #Fe6634;
+  --color-black: #000000;
+  --color-gray-light: #F4F5F5;
+  --color-gray-mid: #D3D3D3;
 }
 
 @theme inline {
@@ -10,17 +18,70 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  --breakpoint-sm: 390px;
+  --breakpoint-md: 744px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1440px;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #FFFFFF;
+    --foreground: #171717;
   }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-ibm-plex-sans), sans-serif;
+}
+
+/* Mobile-first container grid */
+.container-grid {
+  width: 100%;
+  margin-left: 0px;
+  margin-right: 0px;
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-top: 32px;
+  padding-bottom: 32px;
+}
+
+@media (min-width: 391px) {
+  .container-grid {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+}
+
+@media (min-width: 744px) {
+  .container-grid {
+    padding-left: 80px;
+    padding-right: 80px;
+    padding-top: 72px;
+    padding-bottom: 72px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .container-grid {
+    padding-left: 144px;
+    padding-right: 144px;
+  }
+}
+
+/* Responsive grid system */
+.grid-12-col {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+@media (min-width: 744px) {
+  .grid-12-col {
+    grid-template-columns: repeat(12, 1fr);
+    gap: 24px;
+  }
 }

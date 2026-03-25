@@ -1,20 +1,22 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Poppins, IBM_Plex_Sans } from "next/font/google";
 import "./globals.css";
 import { VisualEditing } from "next-sanity/visual-editing";
 import { draftMode } from "next/headers";
 import { DisableDraftMode } from "@/components/DisableDraftMode";
 import  Footer  from "@/components/Footer";
-import  Header  from "@/components/Header";
+import Header from '@/components/Header/Header'
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+const poppins = Poppins({
+  subsets: ['latin'],
+  weight: ['400', '500', '700'],
+  variable: '--font-poppins',
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+const ibmPlexSans = IBM_Plex_Sans({
+  subsets: ['latin'],
+  weight: ['400', '500', '700'],
+  variable: '--font-ibm-plex-sans',
 });
 
 export const metadata: Metadata = {
@@ -28,9 +30,9 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-     
-        <body className={`${geistSans.variable} ${geistMono.variable} antialiased`} >
+    <html lang="en" className={`${poppins.variable} ${ibmPlexSans.variable}`}>
+
+        <body className="antialiased">
            <Header />
 
         {children}
