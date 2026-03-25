@@ -40,7 +40,7 @@ export default function HeroContent({
         {body}
       </p>
 
-      <div className="mt-auto flex justify-center md:justify-center lg:justify-start">
+      <div className="mt-auto mb-10 flex justify-center md:justify-center lg:justify-start">
         <Button href={ctaHref} variant="primary" size="lg">
           {ctaText}
         </Button>

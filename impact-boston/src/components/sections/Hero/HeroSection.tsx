@@ -26,8 +26,8 @@ export default function HeroSection({
 }: HeroSectionProps) {
   return (
     <section className={`w-full bg-brand-gray-light ${className}`}>
-      <div className="container-grid">
-        <div className="grid-12-col items-center md:min-h-[600px] !gap-10 md:!gap-6">
+      {/* <div className="container-grid"> */}
+        <div className=" items-center md:min-h-[600px] col-start-1 col-span-4">
           {/* Content - full width on mobile, left side on desktop */}
           <div className="col-span-4 md:col-start-1 md:col-span-4 h-full">
             <HeroContent
@@ -43,7 +43,7 @@ export default function HeroSection({
             <HeroImage src={imageSrc} alt={imageAlt} />
           </div>
         </div>
-      </div>
+      {/* </div> */}
     </section>
   )
 }
