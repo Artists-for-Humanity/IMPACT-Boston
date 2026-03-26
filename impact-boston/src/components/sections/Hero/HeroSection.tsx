@@ -1,7 +1,5 @@
-// components/sections/Hero/HeroSection.tsx
-// Main container  orchestrates split-screen hero layout
-
 import React from 'react'
+import Grid from '@/components/common/Grid'
 import HeroContent from './HeroContent'
 import HeroImage from './HeroImage'
 
@@ -25,25 +23,20 @@ export default function HeroSection({
   className = '',
 }: HeroSectionProps) {
   return (
-    <section className={`w-full bg-brand-gray-light ${className}`}>
-      {/* <div className="container-grid"> */}
-        <div className=" items-center md:min-h-[600px] col-start-1 col-span-4">
-          {/* Content - full width on mobile, left side on desktop */}
-          <div className="col-span-4 md:col-start-1 md:col-span-4 h-full">
-            <HeroContent
-              headline={headline}
-              body={body}
-              ctaText={ctaText}
-              ctaHref={ctaHref}
-            />
-          </div>
-
-          {/* Image - full width on mobile below content, right side on desktop */}
-          <div className="col-span-4 md:col-start-6 md:col-span-7 h-full">
-            <HeroImage src={imageSrc} alt={imageAlt} />
-          </div>
+    <section className={`bg-brand-gray-light my-8 ${className}`}>
+      <Grid>
+        <div className="col-span-4 md:col-span-8 lg:col-span-5">
+          <HeroContent
+            headline={headline}
+            body={body}
+            ctaText={ctaText}
+            ctaHref={ctaHref}
+          />
         </div>
-      {/* </div> */}
+        <div className="col-span-4 md:col-span-8 lg:col-span-7 h-[544px]">
+          <HeroImage src={imageSrc} alt={imageAlt} />
+        </div>
+      </Grid>
     </section>
   )
 }

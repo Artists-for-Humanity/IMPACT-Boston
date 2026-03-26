@@ -1,6 +1,3 @@
-// components/sections/Hero/HeroContent.tsx
-// Left side content for hero section  headline, body text, CTA button
-
 import React from "react";
 import Button from "@/components/common/Button";
 import HeroHeadline from "./HeroHeadline";
@@ -21,9 +18,7 @@ export default function HeroContent({
   className = "",
 }: HeroContentProps) {
   return (
-    <div
-      className={`flex flex-col h-full items-center  lg:items-start ${className}`}
-    >
+    <div className={`flex flex-col h-full items-center lg:items-start ${className}`}>
       <div className="mb-3 md:mb-8">
         {headline &&
           (typeof headline === "string" ? (
@@ -33,14 +28,11 @@ export default function HeroContent({
           ))}
       </div>
 
-      <p
-        className="font-[IBM_Plex_Sans] text-[16px] font-normal leading-[25px] max-w-lg text-center md:text-[16px] md:leading-[25px] md:text-center lg:text-[18px] lg:leading-[25px] lg:text-left mb-8 md:mb-8"
-        style={{ color: "#333" }}
-      >
+      <p className="p1 max-w-lg text-center lg:text-left mb-8" style={{ color: "#333" }}>
         {body}
       </p>
 
-      <div className="mt-auto mb-10 flex justify-center md:justify-center lg:justify-start">
+      <div className="mt-auto mb-10 flex justify-center lg:justify-start">
         <Button href={ctaHref} variant="primary" size="lg">
           {ctaText}
         </Button>

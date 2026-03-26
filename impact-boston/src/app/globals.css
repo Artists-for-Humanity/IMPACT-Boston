@@ -72,6 +72,77 @@ body {
   }
 } */
 
+/* Typography system */
+@layer components {
+  .h1 {
+    @apply font-medium tracking-[-0.04em] text-[48px] leading-14
+          md:text-[64px] md:leading-16
+          lg:text-[80px] lg:leading-20;
+    font-family: var(--font-poppins), sans-serif;
+  }
+
+  .h2 {
+    @apply font-medium tracking-[-0.016em] text-[32px] leading-10
+           md:text-[40px] md:leading-12
+           lg:text-[48px] lg:leading-14;
+    font-family: var(--font-poppins), sans-serif;
+  }
+
+  .h3 {
+    @apply font-medium tracking-[0em] text-[24px] leading-none
+           md:text-[32px]
+           lg:text-[32px];
+    font-family: var(--font-poppins), sans-serif;
+  }
+
+  .sub-1 {
+    @apply font-medium tracking-[0em] text-[20px] leading-none
+           md:text-[20px]
+           lg:text-[24px];
+    font-family: var(--font-poppins), sans-serif;
+  }
+
+  .sub-2 {
+    @apply font-medium tracking-[0em] text-[14px] leading-none
+           md:text-[14px]
+           lg:text-[16px] lg:font-semibold;
+    font-family: var(--font-poppins), sans-serif;
+  }
+
+  .p1 {
+    @apply font-normal tracking-[0em] text-[16px] leading-normal
+           md:text-[16px]
+           lg:text-[18px];
+    font-family: var(--font-ibm-plex-sans), sans-serif;
+  }
+
+  .p1-bold {
+    @apply font-medium tracking-[0em] text-[16px] leading-normal
+           md:text-[16px]
+           lg:text-[18px];
+    font-family: var(--font-ibm-plex-sans), sans-serif;
+  }
+
+  .p2 {
+    @apply font-normal tracking-[0em] text-[14px] leading-normal
+           md:text-[14px]
+           lg:text-[16px];
+    font-family: var(--font-ibm-plex-sans), sans-serif;
+  }
+
+  .medium-label {
+    @apply font-medium tracking-[0em] text-[16px] leading-none;
+    font-family: var(--font-poppins), sans-serif;
+  }
+
+  .button {
+    @apply font-semibold leading-none text-[14px]
+           md:text-[16px]
+           lg:text-[18px];
+    font-family: var(--font-poppins), sans-serif;
+  }
+}
+
 /* Responsive grid system */
 /* .grid-12-col {
   display: grid;

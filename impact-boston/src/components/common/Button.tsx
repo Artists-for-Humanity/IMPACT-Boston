@@ -27,7 +27,7 @@ export default function Button({
   type = 'button',
   disabled = false,
 }: ButtonProps) {
-  const base = 'flex items-center justify-between font-nav font-normal transition-colors duration-150'
+  const base = 'button flex items-center justify-between transition-colors duration-150'
 
   const variants: Record<ButtonVariant, string> = {
     primary: 'text-[#FFF] bg-[#000] hover:bg-[#222]',
@@ -38,16 +38,11 @@ export default function Button({
   const sizes: Record<ButtonSize, string> = {
     sm: 'px-3 py-0.5 text-sm',
     md: 'px-4 py-1 text-base',
-    lg: 'px-6 h-12 text-sm w-[212px] md:p-6 md:w-[284px] md:h-auto md:text-base',
+    lg: 'px-6 h-12 w-[212px] md:p-6 md:w-[284px] md:h-auto',
   }
 
   const classes = `${base} ${variants[variant]} ${sizes[size]} ${className}`
-  const inlineStyles = size === 'lg' ? {
-    color: '#FFF',
-    fontFamily: 'Poppins',
-    fontWeight: 500,
-    lineHeight: '24px',
-  } : { lineHeight: '25px' }
+  const inlineStyles = {}
 
   const ChevronIcon = () => (
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

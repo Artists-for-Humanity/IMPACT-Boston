@@ -15,7 +15,7 @@ export default function HeroImage({
   className = '',
 }: HeroImageProps) {
   return (
-    <div className={`relative w-full min-h-[300px] md:h-full ${className}`} style={{ backgroundColor: '#311E41' }}>
+    <div className={`relative w-full h-full ${className}`} style={{ backgroundColor: '#311E41' }}>
       <div
         className="absolute top-0 left-0 right-0 h-[7px] z-10"
         style={{
