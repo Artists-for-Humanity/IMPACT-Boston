@@ -14,7 +14,7 @@ import Grid from "./common/Grid";
 export default function CTASection() {
   return (
     <section className="w-full bg-[#F0EEF5] flex justify-center">
-      <div className="flex flex-col gap-10 w-full max-w-[1440px] py-6 md:py-[88px]">
+      <div className="flex flex-col gap-10 w-full max-w-[1440px] mx-auto py-6 md:py-[88px]">
         {/* Header Row */}
         <Grid>
           {/* Title */}

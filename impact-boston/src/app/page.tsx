@@ -27,12 +27,8 @@ export default function IndexPage() {
       />
       <CTASection />
       <OfferingsSection />
-
-
-      {/* <Grid>
-        <HighlightsSection />
-        <TestimonialsSection />
-      </Grid> */}
+      <HighlightsSection />
+      <TestimonialsSection />
     </main>
   );
 }

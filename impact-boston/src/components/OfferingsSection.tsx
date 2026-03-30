@@ -24,16 +24,16 @@ export default function OfferingsSection() {
 
   return (
     <section className="w-full bg-white flex justify-center">
-      <div className="flex flex-col gap-14 w-full max-w-[1440px] py-12 md:py-[88px]">
+      <div className="flex flex-col gap-14 w-full max-w-[1440px] mx-auto py-12 md:py-[88px]">
         <Grid>
           {/* Left Column - Tab Navigation */}
-          <div className="col-span-4 md:col-span-8 lg:col-span-3 flex flex-row lg:flex-col justify-evenly md:justify-start lg:justify-start gap-0 overflow-x-auto lg:overflow-visible pb-2">
+          <div className="col-span-4 md:col-span-8 lg:col-span-3 flex flex-row lg:flex-col justify-evenly md:justify-start lg:justify-start gap-0 overflow-x-auto lg:overflow-visible pb-2 md:pb-6">
             {tabs.map((tab) => (
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
                 className={`
-                  flex-1 cursor-pointer lg:flex-none lg:pl-2 transition-all duration-200 whitespace-nowrap lg:whitespace-normal
+                  flex-1 cursor-pointer lg:flex-none lg:pl-2 lg:pb-2 transition-all duration-200 whitespace-nowrap lg:whitespace-normal
                   h3
                   text-center lg:text-left
                   border-solid
