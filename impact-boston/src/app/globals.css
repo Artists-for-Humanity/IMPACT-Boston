@@ -3,14 +3,6 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
-  --color-primary: #421956;
-  --color-primary-shade: #6b3789;
-  --color-secondary: #6C3789;
-  --color-complementary: #C83B19;
-  --color-accent-orange: #Fe6634;
-  --color-black: #000000;
-  --color-gray-light: #F4F5F5;
-  --color-gray-mid: #D3D3D3;
 }
 
 @theme inline {
@@ -23,6 +15,42 @@
   --breakpoint-md: 744px;
   --breakpoint-lg: 1024px;
   --breakpoint-xl: 1440px;
+
+  /* purple primary */
+  --color-primary: #421656;
+
+  --color-primary-dark: #280d34;
+  --color-primary-darker: #0d0411;
+
+  --color-primary-light: #8e739a;
+  --color-primary-lighter: #d9d0dd;
+
+  /* pruple seconday */
+   --color-secondary: #6c3789;
+
+  --color-secondary-dark: #412152;
+  --color-secondary-darker: #160b1b;
+
+  --color-secondary-light: #a787b8;
+  --color-secondary-lighter: #e2d7e7;
+
+  /* orange accent */
+    --color-accent: #e86834;
+
+  --color-accent-dark: #8b3e1f;
+  --color-accent-darker: #2e150a;
+
+  --color-accent-light: #f1a485;
+  --color-accent-lighter: #fae1d6;
+
+  /* nuetrals */
+   --color-black: #000000;
+  --color-white: #ffffff;
+
+  --color-grey-dark: #333333;
+  --color-grey-light: #faf6fd;
+
+
 }
 
 @media (prefers-color-scheme: dark) {
@@ -143,16 +171,3 @@ body {
   }
 }
 
-/* Responsive grid system */
-/* .grid-12-col {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
-}
-
-@media (min-width: 744px) {
-  .grid-12-col {
-    grid-template-columns: repeat(12, 1fr);
-    gap: 24px;
-  }
-} */
