@@ -2,19 +2,19 @@
 // Main footer component with contact info, newsletter form, navigation, and social links
 
 import Link from "next/link";
+import Grid from "./common/Grid";
 
 export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
     <footer className="w-full bg-[#1a1a1a] text-white flex justify-center">
-      <div className="flex flex-col items-center gap-12 w-full max-w-[1440px] px-6 md:px-20 lg:px-[120px] pt-16 pb-8 md:py-[88px]">
+      <div className="flex flex-col items-center gap-12 w-full max-w-[1440px] mx-auto pt-16 pb-8 md:py-[88px]">
         {/* Top Section - Contact Info & Form */}
-        <div className="w-full">
-        <div className="grid-12-col">
+        <Grid>
           {/* Left Column - IMPACT Wordmark & Contact Info */}
           <div className="col-span-4 lg:col-start-1 lg:col-span-5 space-y-8">
-            <h2 className="font-[Poppins] text-[32px] md:text-[40px] lg:text-[48px] font-medium leading-[40px] md:leading-[48px] lg:leading-[56px] tracking-[-0.512px] md:tracking-[-1.6px] lg:tracking-[-3.6px] text-white pb-8 md:pb-12 lg:pb-12 mb-0">
+            <h2 className="h2 text-white pb-8 md:pb-12 lg:pb-12 mb-0">
               IMPACT
             </h2>
 
@@ -22,22 +22,22 @@ export default function Footer() {
             <div className="space-y-6">
               {/* Address */}
               <div className="pb-6 mb-0">
-                <p className="text-white font-[IBM_Plex_Sans] text-[14px] md:text-[14px] lg:text-base font-bold leading-[14px] md:leading-[14px] lg:leading-[18px] tracking-[0px]">
+                <p className="p2 font-bold text-white">
                   Address
                 </p>
-                <p className="font-[IBM_Plex_Sans] text-[14px] md:text-[14px] lg:text-base text-[#888] font-normal leading-[14px] md:leading-[14px] lg:leading-[18px] tracking-[0px]">
+                <p className="p2 text-[#888]">
                   89 South Street, Suite 600 Boston, MA
                 </p>
               </div>
 
               {/* Email */}
               <div className="pb-6 mb-0">
-                <p className="text-white font-[IBM_Plex_Sans] text-[14px] md:text-[14px] lg:text-base font-bold leading-[14px] md:leading-[14px] lg:leading-[18px] tracking-[0px]">
+                <p className="p2 font-bold text-white">
                   Email
                 </p>
                 <a
                   href="mailto:info@impactboston.org"
-                  className="font-[IBM_Plex_Sans] text-[14px] md:text-[14px] lg:text-base text-[#888] font-normal leading-[14px] md:leading-[14px] lg:leading-[18px] tracking-[0px] hover:text-white transition-colors"
+                  className="p2 text-[#888] hover:text-white transition-colors"
                 >
                   info@impactboston.org
                 </a>
@@ -45,12 +45,12 @@ export default function Footer() {
 
               {/* Call */}
               <div className="pb-0 mb-0">
-                <p className="text-white font-[IBM_Plex_Sans] text-[14px] md:text-[14px] lg:text-base font-bold leading-[14px] md:leading-[14px] lg:leading-[18px] tracking-[0px]">
+                <p className="p2 font-bold text-white">
                   Call
                 </p>
                 <a
                   href="tel:+1234567890"
-                  className="font-[IBM_Plex_Sans] text-[14px] md:text-[14px] lg:text-base text-[#888] font-normal leading-[14px] md:leading-[14px] lg:leading-[18px] tracking-[0px] hover:text-white transition-colors"
+                  className="p2 text-[#888] hover:text-white transition-colors"
                 >
                   +1 617-597-4945
                 </a>
@@ -60,10 +60,10 @@ export default function Footer() {
 
           {/* Right Column - Contact Form */}
           <div className="col-span-4 lg:col-start-8 lg:col-span-5 flex flex-col justify-start items-start flex-1 self-stretch pt-10 lg:pt-20">
-            <h3 className="font-[Poppins] text-[14px] md:text-[14px] lg:text-base font-medium leading-[14px] md:leading-[14px] lg:leading-[18px] tracking-[0px] text-white">
+            <h3 className="sub-2 text-white">
               Join Our Newsletter
             </h3>
-            <p className="font-[IBM_Plex_Sans] text-[14px] md:text-[14px] lg:text-base font-normal leading-[14px] md:leading-[14px] lg:leading-[18px] tracking-[0px] text-[#888] pb-5">
+            <p className="p2 text-[#888] pb-5">
               Stay updated on programs, events, and community resources.
             </p>
 
@@ -76,7 +76,7 @@ export default function Footer() {
               />
               <button
                 type="submit"
-                className="w-full flex h-16 px-[19px] py-5 justify-between items-center self-stretch bg-[#1F2122] hover:bg-[#2a2c2d] transition-colors text-white text-center font-[IBM_Plex_Sans] text-[14px] md:text-[14px] lg:text-base font-normal md:font-medium lg:font-medium leading-[14px] md:leading-[14px] lg:leading-[18px] tracking-[0px]"
+                className="w-full flex h-16 px-[19px] py-5 justify-between items-center self-stretch bg-[#1F2122] hover:bg-[#2a2c2d] transition-colors text-white text-center p2 md:font-medium lg:font-medium"
               >
                 <span>Join</span>
                 <svg
@@ -97,22 +97,21 @@ export default function Footer() {
               </button>
             </form>
           </div>
-        </div>
-        </div>
+        </Grid>
 
         {/* Bottom Nav Section */}
         <div className="w-full border-t border-gray-700 pt-6">
-        <div className="grid-12-col">
+        <Grid>
           {/* About Column */}
           <div className="col-span-2 col-start-1 row-start-1 md:col-start-1 md:col-span-4 lg:col-start-1 lg:col-span-4 lg:row-start-auto space-y-4">
-            <h4 className="text-white font-[IBM_Plex_Sans] text-base md:text-base lg:text-base font-medium leading-base md:leading-base lg:leading-[18px] tracking-[0px] pb-3 mb-0">
+            <h4 className="p2 font-medium text-white pb-3 mb-0">
               About
             </h4>
             <ul className="space-y-0">
               <li>
                 <Link
                   href="/about"
-                  className="font-[IBM_Plex_Sans] text-base md:text-base lg:text-base text-[#B7B7B7] font-normal leading-base md:leading-base lg:leading-[18px] tracking-[0px] hover:text-white transition-colors"
+                  className="p2 text-[#B7B7B7] hover:text-white transition-colors"
                 >
                   About Impact
                 </Link>
@@ -120,7 +119,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/board-staff"
-                  className="font-[IBM_Plex_Sans] text-base md:text-base lg:text-base text-[#B7B7B7] font-normal leading-base md:leading-base lg:leading-[18px] tracking-[0px] hover:text-white transition-colors"
+                  className="p2 text-[#B7B7B7] hover:text-white transition-colors"
                 >
                   Board and Staff
                 </Link>
@@ -128,7 +127,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/accessibility"
-                  className="font-[IBM_Plex_Sans] text-base md:text-base lg:text-base text-[#B7B7B7] font-normal leading-base md:leading-base lg:leading-[18px] tracking-[0px] hover:text-white transition-colors"
+                  className="p2 text-[#B7B7B7] hover:text-white transition-colors"
                 >
                   Accessibility
                 </Link>
@@ -136,7 +135,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/blog"
-                  className="font-[IBM_Plex_Sans] text-base md:text-base lg:text-base text-[#B7B7B7] font-normal leading-base md:leading-base lg:leading-[18px] tracking-[0px] hover:text-white transition-colors"
+                  className="p2 text-[#B7B7B7] hover:text-white transition-colors"
                 >
                   Blog
                 </Link>
@@ -145,15 +144,15 @@ export default function Footer() {
           </div>
 
           {/* Programs Column */}
-          <div className="col-span-4 col-start-1 row-start-2 mt-4 md:mt-0 md:col-start-5 md:col-span-4 lg:mt-0 lg:col-start-5 lg:col-span-4 lg:row-start-auto space-y-4">
-            <h4 className="text-white font-[IBM_Plex_Sans] text-base md:text-base lg:text-base font-medium leading-base md:leading-base lg:leading-[18px] tracking-[0px] pb-3 mb-0">
+          <div className="col-span-4 col-start-1 row-start-2 mt-4 md:mt-0 md:row-start-1 md:col-start-5 md:col-span-4 lg:mt-0 lg:col-start-5 lg:col-span-4 lg:row-start-auto space-y-4">
+            <h4 className="p2 font-medium text-white pb-3 mb-0">
               Programs
             </h4>
             <ul className="space-y-0">
               <li>
                 <Link
                   href="/programs/self-defense"
-                  className="font-[IBM_Plex_Sans] text-base md:text-base lg:text-base text-[#B7B7B7] font-normal leading-base md:leading-base lg:leading-[18px] tracking-[0px] hover:text-white transition-colors"
+                  className="p2 text-[#B7B7B7] hover:text-white transition-colors"
                 >
                   Self-Defense Classes
                 </Link>
@@ -161,7 +160,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/programs/schools-colleges"
-                  className="font-[IBM_Plex_Sans] text-base md:text-base lg:text-base text-[#B7B7B7] font-normal leading-base md:leading-base lg:leading-[18px] tracking-[0px] hover:text-white transition-colors"
+                  className="p2 text-[#B7B7B7] hover:text-white transition-colors"
                 >
                   Schools & Colleges
                 </Link>
@@ -169,7 +168,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/programs/disabilities"
-                  className="font-[IBM_Plex_Sans] text-base md:text-base lg:text-base text-[#B7B7B7] font-normal leading-base md:leading-base lg:leading-[18px] tracking-[0px] hover:text-white transition-colors"
+                  className="p2 text-[#B7B7B7] hover:text-white transition-colors"
                 >
                   People With Disabilities
                 </Link>
@@ -177,7 +176,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/programs/de-escalation"
-                  className="font-[IBM_Plex_Sans] text-base md:text-base lg:text-base text-[#B7B7B7] font-normal leading-base md:leading-base lg:leading-[18px] tracking-[0px] hover:text-white transition-colors"
+                  className="p2 text-[#B7B7B7] hover:text-white transition-colors"
                 >
                   De-escalation
                 </Link>
@@ -185,7 +184,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/programs/community"
-                  className="font-[IBM_Plex_Sans] text-base md:text-base lg:text-base text-[#B7B7B7] font-normal leading-base md:leading-base lg:leading-[18px] tracking-[0px] hover:text-white transition-colors"
+                  className="p2 text-[#B7B7B7] hover:text-white transition-colors"
                 >
                   Community Organizations
                 </Link>
@@ -193,7 +192,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/programs/workplace"
-                  className="font-[IBM_Plex_Sans] text-base md:text-base lg:text-base text-[#B7B7B7] font-normal leading-base md:leading-[18px] lg:leading-[18px] tracking-[0px] hover:text-white transition-colors"
+                  className="p2 text-[#B7B7B7] hover:text-white transition-colors"
                 >
                   Workplace
                 </Link>
@@ -201,7 +200,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/programs/activist-safety"
-                  className="font-[IBM_Plex_Sans] text-base md:text-base lg:text-base text-[#B7B7B7] font-normal leading-base md:leading-base lg:leading-[18px] tracking-[0px] hover:text-white transition-colors"
+                  className="p2 text-[#B7B7B7] hover:text-white transition-colors"
                 >
                   Know Your Rights & Activist Safety
                 </Link>
@@ -209,7 +208,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/programs/customized"
-                  className="font-[IBM_Plex_Sans] text-base md:text-base lg:text-base text-[#B7B7B7] font-normal leading-base md:leading-base lg:leading-[18px] tracking-[0px] hover:text-white transition-colors"
+                  className="p2 text-[#B7B7B7] hover:text-white transition-colors"
                 >
                   Customized Programs
                 </Link>
@@ -219,14 +218,14 @@ export default function Footer() {
 
           {/* Learn More Column */}
           <div className="col-span-2 col-start-3 row-start-1 md:col-start-9 md:col-span-4 lg:col-start-9 lg:col-span-4 lg:row-start-auto space-y-4">
-            <h4 className="text-white font-[IBM_Plex_Sans] text-base md:text-base lg:text-base font-medium leading-base md:leading-base lg:leading-[18px] tracking-[0px] pb-3 mb-0">
+            <h4 className="p2 font-medium text-white pb-3 mb-0">
               Learn More
             </h4>
             <ul className="space-y-0">
               <li>
                 <Link
                   href="/fact-check-fridays"
-                  className="font-[IBM_Plex_Sans] text-base md:text-base lg:text-base text-[#B7B7B7] font-normal leading-base md:leading-base lg:leading-[18px] tracking-[0px] hover:text-white transition-colors"
+                  className="p2 text-[#B7B7B7] hover:text-white transition-colors"
                 >
                   Fact Check Fridays
                 </Link>
@@ -234,7 +233,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/books"
-                  className="font-[IBM_Plex_Sans] text-base md:text-base lg:text-base text-[#B7B7B7] font-normal leading-base md:leading-base lg:leading-[18px] tracking-[0px] hover:text-white transition-colors"
+                  className="p2 text-[#B7B7B7] hover:text-white transition-colors"
                 >
                   Books by Meg Stone
                 </Link>
@@ -242,21 +241,21 @@ export default function Footer() {
               <li>
                 <Link
                   href="/press"
-                  className="font-[IBM_Plex_Sans] text-base md:text-base lg:text-base text-[#B7B7B7] font-normal leading-base md:leading-base lg:leading-[18px] tracking-[0px] hover:text-white transition-colors"
+                  className="p2 text-[#B7B7B7] hover:text-white transition-colors"
                 >
                   Press
                 </Link>
               </li>
             </ul>
           </div>
-        </div>
+        </Grid>
         </div>
 
         {/* Footer Bar - Social & Copyright */}
         <div className="w-full pt-2 md:pt-6">
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+          <Grid>
           {/* Social Icons */}
-          <div className="flex items-center gap-0 md:gap-4">
+          <div className="col-span-4 md:col-span-4 lg:col-span-6 flex items-center gap-0 md:gap-4">
             <a
               href="https://instagram.com"
               target="_blank"
@@ -340,10 +339,10 @@ export default function Footer() {
           </div>
 
           {/* Copyright */}
-          <p className="text-[#B7B7B7] text-right font-[Poppins] text-[14px] md:text-[14px] lg:text-[15px] font-normal leading-[14px] md:leading-[14px] lg:leading-[15px] tracking-[0px]">
+          <p className="col-span-4 md:col-span-4 lg:col-span-6 p2 text-[#B7B7B7] text-left md:text-right">
             All rights reserved © IMPACT Inc. {year}
           </p>
-          </div>
+          </Grid>
         </div>
       </div>
     </footer>

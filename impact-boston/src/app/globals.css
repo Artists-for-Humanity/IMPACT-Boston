@@ -66,40 +66,6 @@ body {
   font-family: var(--font-ibm-plex-sans), sans-serif;
 }
 
-/* Mobile-first container grid */
-/* .container-grid {
-  width: 100%;
-  margin-left: 0px;
-  margin-right: 0px;
-  padding-left: 16px;
-  padding-right: 16px;
-  padding-top: 32px;
-  padding-bottom: 32px;
-} */
-
-/* @media (min-width: 391px) {
-  .container-grid {
-    padding-left: 40px;
-    padding-right: 40px;
-  }
-}
-
-@media (min-width: 744px) {
-  .container-grid {
-    padding-left: 80px;
-    padding-right: 80px;
-    padding-top: 72px;
-    padding-bottom: 72px;
-  }
-}
-
-@media (min-width: 1440px) {
-  .container-grid {
-    padding-left: 144px;
-    padding-right: 144px;
-  }
-} */
-
 /* Typography system */
 @layer components {
   .h1 {
