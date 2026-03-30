@@ -3,14 +3,6 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
-  --color-primary: #421956;
-  --color-primary-shade: #6b3789;
-  --color-secondary: #6C3789;
-  --color-complementary: #C83B19;
-  --color-accent-orange: #Fe6634;
-  --color-black: #000000;
-  --color-gray-light: #F4F5F5;
-  --color-gray-mid: #D3D3D3;
 }
 
 @theme inline {
@@ -23,6 +15,42 @@
   --breakpoint-md: 744px;
   --breakpoint-lg: 1024px;
   --breakpoint-xl: 1440px;
+
+  /* purple primary */
+  --color-primary: #421656;
+
+  --color-primary-dark: #280d34;
+  --color-primary-darker: #0d0411;
+
+  --color-primary-light: #8e739a;
+  --color-primary-lighter: #d9d0dd;
+
+  /* pruple seconday */
+   --color-secondary: #6c3789;
+
+  --color-secondary-dark: #412152;
+  --color-secondary-darker: #160b1b;
+
+  --color-secondary-light: #a787b8;
+  --color-secondary-lighter: #e2d7e7;
+
+  /* orange accent */
+    --color-accent: #e86834;
+
+  --color-accent-dark: #8b3e1f;
+  --color-accent-darker: #2e150a;
+
+  --color-accent-light: #f1a485;
+  --color-accent-lighter: #fae1d6;
+
+  /* nuetrals */
+   --color-black: #000000;
+  --color-white: #ffffff;
+
+  --color-grey-dark: #333333;
+  --color-grey-light: #faf6fd;
+
+
 }
 
 @media (prefers-color-scheme: dark) {
@@ -38,50 +66,74 @@ body {
   font-family: var(--font-ibm-plex-sans), sans-serif;
 }
 
-/* Mobile-first container grid */
-.container-grid {
-  width: 100%;
-  margin-left: 0px;
-  margin-right: 0px;
-  padding-left: 16px;
-  padding-right: 16px;
-  padding-top: 32px;
-  padding-bottom: 32px;
-}
+/* Typography system */
+@layer components {
+  .h1 {
+    @apply font-medium tracking-[-0.04em] text-[48px] leading-14
+          md:text-[64px] md:leading-16
+          lg:text-[80px] lg:leading-20;
+    font-family: var(--font-poppins), sans-serif;
+  }
 
-@media (min-width: 391px) {
-  .container-grid {
-    padding-left: 40px;
-    padding-right: 40px;
+  .h2 {
+    @apply font-medium tracking-[-0.016em] text-[32px] leading-10
+           md:text-[40px] md:leading-12
+           lg:text-[48px] lg:leading-14;
+    font-family: var(--font-poppins), sans-serif;
+  }
+
+  .h3 {
+    @apply font-medium tracking-[0em] text-[24px] leading-none
+           md:text-[32px]
+           lg:text-[32px];
+    font-family: var(--font-poppins), sans-serif;
+  }
+
+  .sub-1 {
+    @apply font-medium tracking-[0em] text-[20px] leading-none
+           md:text-[20px]
+           lg:text-[24px];
+    font-family: var(--font-poppins), sans-serif;
+  }
+
+  .sub-2 {
+    @apply font-medium tracking-[0em] text-[14px] leading-none
+           md:text-[14px]
+           lg:text-[16px] lg:font-semibold;
+    font-family: var(--font-poppins), sans-serif;
+  }
+
+  .p1 {
+    @apply font-normal tracking-[0em] text-[16px] leading-normal
+           md:text-[16px]
+           lg:text-[18px];
+    font-family: var(--font-ibm-plex-sans), sans-serif;
+  }
+
+  .p1-bold {
+    @apply font-medium tracking-[0em] text-[16px] leading-normal
+           md:text-[16px]
+           lg:text-[18px];
+    font-family: var(--font-ibm-plex-sans), sans-serif;
+  }
+
+  .p2 {
+    @apply font-normal tracking-[0em] text-[14px] leading-normal
+           md:text-[14px]
+           lg:text-[16px];
+    font-family: var(--font-ibm-plex-sans), sans-serif;
+  }
+
+  .medium-label {
+    @apply font-medium tracking-[0em] text-[16px] leading-none;
+    font-family: var(--font-poppins), sans-serif;
+  }
+
+  .button {
+    @apply font-semibold leading-none text-[14px]
+           md:text-[16px]
+           lg:text-[18px];
+    font-family: var(--font-poppins), sans-serif;
   }
 }
 
-@media (min-width: 744px) {
-  .container-grid {
-    padding-left: 80px;
-    padding-right: 80px;
-    padding-top: 72px;
-    padding-bottom: 72px;
-  }
-}
-
-@media (min-width: 1440px) {
-  .container-grid {
-    padding-left: 144px;
-    padding-right: 144px;
-  }
-}
-
-/* Responsive grid system */
-.grid-12-col {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
-}
-
-@media (min-width: 744px) {
-  .grid-12-col {
-    grid-template-columns: repeat(12, 1fr);
-    gap: 24px;
-  }
-}

@@ -26,7 +26,7 @@ const DEFAULT_NAV_ITEMS: NavItem[] = [
     label: "About",
     link: "/about",
     subItems: [
-      { label: "Our Mission", link: "/about/mission" },
+      { label: "About Impact", link: "/AboutImpact" },
       { label: "Impact Blog", link: "/about/blog" },
       { label: "Employment", link: "/about/employment" },
       { label: "Supporters & Partners", link: "/about/partners" },
@@ -62,7 +62,7 @@ export default function Navigation({
   return (
     <nav aria-label="Main navigation" className="flex items-center gap-6">
       {/* ── Desktop nav items ────────────────────────────────────── */}
-      <ul className="hidden md:flex items-center gap-1">
+      <ul className="hidden lg:flex items-center gap-1">
         {items.map((item) => {
           const isActive = activeItem === item.label;
           return (
@@ -117,7 +117,7 @@ export default function Navigation({
       </ul>
 
       {/* ── CTA buttons ─────────────────────────────────────────── */}
-      <div className="hidden md:flex items-center gap-2">
+      <div className="hidden lg:flex items-center gap-2">
         {/* Register — filled purple */}
         <Link
           href="/register"
@@ -140,14 +140,14 @@ export default function Navigation({
       {/* ── Search icon ─────────────────────────────────────────── */}
       <button
         aria-label="Search"
-        className="hidden md:flex p-1.5 text-gray-400 hover:text-gray-700 transition-colors duration-150"
+        className="hidden lg:flex p-1.5 text-gray-400 hover:text-gray-700 transition-colors duration-150"
       >
         <Image src="/icons/search.svg" width={18} height={18} alt="Search" />
       </button>
 
       {/* ── Mobile hamburger ─────────────────────────────────────── */}
       <button
-        className="md:hidden p-2 text-gray-600 hover:text-gray-900 transition-colors"
+        className="lg:hidden p-2 text-gray-600 hover:text-gray-900 transition-colors"
         onClick={() => setMobileOpen(!mobileOpen)}
         aria-label={mobileOpen ? "Close menu" : "Open menu"}
         aria-expanded={mobileOpen}
@@ -185,7 +185,7 @@ export default function Navigation({
 
       {/* ── Mobile panel ─────────────────────────────────────────── */}
       {mobileOpen && (
-        <div className="md:hidden absolute top-full left-0 w-full bg-white border-t border-gray-100 shadow-lg z-50">
+        <div className="lg:hidden absolute top-full left-0 w-full bg-white border-t border-gray-100 shadow-lg z-50">
           <ul className="px-4 py-3 flex flex-col gap-1">
             {items.map((item) => (
               <li key={item.label}>

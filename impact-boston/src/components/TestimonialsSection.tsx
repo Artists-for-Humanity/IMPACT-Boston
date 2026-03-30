@@ -3,8 +3,9 @@
 // components/TestimonialsSection.tsx
 // Testimonials section with carousel showcasing client feedback
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import Grid from './common/Grid';
 
 interface Testimonial {
   quote: string;
@@ -44,33 +45,84 @@ const testimonials: Testimonial[] = [
 const borderColors = ['#6B4EA0', '#D4541A', '#2E7D4F'];
 
 export default function TestimonialsSection() {
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(testimonials.length);
+  const [isTransitioning, setIsTransitioning] = useState(true);
+  const [isMobile, setIsMobile] = useState(true);
+  const [isTablet, setIsTablet] = useState(false);
+
+  // Duplicate testimonials for infinite loop
+  const duplicatedTestimonials = [...testimonials, ...testimonials, ...testimonials];
+  const startIndex = testimonials.length;
+
+  // Detect screen size
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 744);
+      setIsTablet(window.innerWidth >= 744 && window.innerWidth < 1024);
+    };
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const nextSlide = () => {
-    setCurrentIndex((prev) => (prev + 1) % testimonials.length);
+    setIsTransitioning(true);
+    setCurrentIndex((prev) => prev + 1);
   };
 
   const prevSlide = () => {
-    setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+    setIsTransitioning(true);
+    setCurrentIndex((prev) => prev - 1);
+  };
+
+  const handleTransitionEnd = () => {
+    if (currentIndex >= startIndex + testimonials.length) {
+      setIsTransitioning(false);
+      setCurrentIndex(startIndex);
+    } else if (currentIndex < startIndex) {
+      setIsTransitioning(false);
+      setCurrentIndex(startIndex + testimonials.length - 1);
+    }
+  };
+
+  // Reset transitioning state after jump
+  useEffect(() => {
+    if (!isTransitioning) {
+      setTimeout(() => setIsTransitioning(true), 50);
+    }
+  }, [isTransitioning]);
+
+  // Calculate transform based on screen size
+  const getTransform = () => {
+    if (isMobile) {
+      return `translateX(calc(-${currentIndex * 75}% - ${currentIndex * 4}px))`;
+    } else if (isTablet) {
+      return `translateX(calc(-${currentIndex * 50}% - ${currentIndex * 16}px + 25%))`;
+    } else {
+      // Desktop: card width is calc(50% - 60px), gap is 24px
+      // Total shift per card = 50% - 60px + 24px = 50% - 36px
+      return `translateX(calc(-${currentIndex * 50}% + ${currentIndex * 36}px + 25%))`;
+    }
   };
 
   return (
     <section className="w-full bg-[#F0EEF5] flex justify-center overflow-hidden">
-      <div className="flex flex-col gap-8 md:gap-14 w-full max-w-[1440px] px-4 py-12 md:px-20 lg:px-[120px] md:py-[88px]">
+      <div className="flex flex-col gap-8 md:gap-14 w-full max-w-[1440px] mx-auto py-12 md:py-[88px]">
         {/* Top Row - Heading and Navigation */}
-        <div className="grid-12-col">
+        <Grid>
           {/* Left - Heading and Subtext */}
-          <div className="col-span-4 md:col-span-12 lg:col-span-4 flex flex-col gap-6 md:space-y-4 md:gap-0 md:items-center lg:items-start">
-            <h2 className="font-[Poppins] text-[32px] md:text-[40px] lg:text-[48px] font-medium leading-[40px] md:leading-[48px] lg:leading-[56px] tracking-[-0.512px] md:tracking-[-1.6px] lg:tracking-[-3.6px] text-[#000] text-center md:text-center lg:text-left">
+          <div className="col-span-4 md:col-span-8 lg:col-span-4 flex flex-col gap-6 md:space-y-4 md:gap-0 md:items-center lg:items-start">
+            <h2 className="h2 text-[#000] text-center md:text-center lg:text-left">
               What People are Saying
             </h2>
-            <p className="font-[IBM_Plex_Sans] text-base md:text-base lg:text-base font-medium md:font-normal lg:font-normal leading-base md:leading-base lg:leading-[18px] tracking-[0px] text-[#333] text-center md:text-center lg:text-left">
+            <p className="p2 text-[#333] text-center md:text-center lg:text-left">
               Hear from 20 people who've worked with us.
             </p>
           </div>
 
           {/* Right - Arrow Navigation - Tablet and Desktop */}
-          <div className="hidden md:flex lg:flex col-span-4 md:col-span-12 lg:col-span-2 lg:col-start-11 gap-4 md:justify-center lg:justify-end self-end">
+          <div className="hidden md:flex lg:flex col-span-4 md:col-span-8 lg:col-span-2 lg:col-start-11 gap-4 md:justify-center lg:justify-end self-end">
             <button
               onClick={prevSlide}
               className="w-12 h-12 relative flex items-center justify-center transition-opacity hover:opacity-80"
@@ -92,21 +144,22 @@ export default function TestimonialsSection() {
               <ChevronRight className="w-6 h-6 text-black relative z-10" strokeWidth={2} />
             </button>
           </div>
-        </div>
+        </Grid>
 
         {/* Cards Carousel */}
-        <div className="relative -mx-6 md:-mx-20 lg:-mx-0">
-          <div className="overflow-visible px-6 md:px-20 lg:px-0">
+        <div className="relative pl-4 md:pl-0 lg:pl-0 lg:mx-auto lg:max-w-[1440px]">
+          <div className="overflow-hidden md:overflow-visible lg:overflow-visible">
             <div
-              className="flex gap-6 transition-transform duration-500 ease-in-out"
+              className={`flex gap-4 md:gap-4 lg:gap-6 ${isTransitioning ? 'transition-transform duration-500 ease-in-out' : ''}`}
               style={{
-                transform: `translateX(calc(-${currentIndex * 75}% - ${currentIndex * 24}px))`
+                transform: getTransform(),
               }}
+              onTransitionEnd={handleTransitionEnd}
             >
-              {testimonials.map((testimonial, index) => (
+              {duplicatedTestimonials.map((testimonial, index) => (
                 <div
                   key={index}
-                  className="flex-shrink-0 w-[max(296px,calc(75%-18px))] md:w-[calc(50%-12px)] lg:w-[calc(50%-12px)] bg-white flex flex-col"
+                  className="flex-shrink-0 w-[calc(75%-12px)] md:w-[50%] lg:w-[calc(50%-60px)] bg-white flex flex-col"
                 >
                   {/* Colored Top Border */}
                   <div
@@ -119,12 +172,12 @@ export default function TestimonialsSection() {
                   {/* Card Content */}
                   <div className="p-8 flex flex-col gap-4">
                     {/* Quote */}
-                    <p className="font-[IBM_Plex_Sans] text-base md:text-base lg:text-base font-normal leading-base md:leading-base lg:leading-[18px] tracking-[0px] text-[#000] lg:text-[#333]">
+                    <p className="p1 text-[#000] lg:text-[#333]">
                       "{testimonial.quote}
                     </p>
 
                     {/* Author */}
-                    <p className="font-[Poppins] text-[14px] md:text-[14px] lg:text-[14px] font-medium leading-[14px] md:leading-[14px] lg:leading-[14px] tracking-[0px] text-[#000]">
+                    <p className="sub-2 text-[#000]">
                       - {testimonial.author}
                     </p>
                   </div>
