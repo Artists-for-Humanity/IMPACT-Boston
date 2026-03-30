@@ -25,9 +25,11 @@ export default function IndexPage() {
         imageSrc="/images/hero-place-holder-a.png"
         imageAlt="IMPACT Boston self-defense training"
       />
+      <CTASection />
+      <OfferingsSection />
+
+
       {/* <Grid>
-        <CTASection />
-        <OfferingsSection />
         <HighlightsSection />
         <TestimonialsSection />
       </Grid> */}
