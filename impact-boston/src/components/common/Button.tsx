@@ -27,7 +27,7 @@ export default function Button({
   type = 'button',
   disabled = false,
 }: ButtonProps) {
-  const base = 'button flex items-center justify-between transition-colors duration-150'
+  const base = 'link flex items-center justify-between transition-colors duration-150'
 
   const variants: Record<ButtonVariant, string> = {
     primary: 'text-[#FFF] bg-[#000] hover:bg-[#222]',
@@ -38,7 +38,7 @@ export default function Button({
   const sizes: Record<ButtonSize, string> = {
     sm: 'px-3 py-0.5 text-sm',
     md: 'px-4 py-1 text-base',
-    lg: 'px-6 h-12 w-[212px] md:p-6 md:w-[284px] md:h-auto',
+    lg: 'px-6 h-14 w-[270px] md:p-6 md:w-[284px] md:h-auto',
   }
 
   const classes = `${base} ${variants[variant]} ${sizes[size]} ${className}`

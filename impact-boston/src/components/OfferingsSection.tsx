@@ -23,11 +23,12 @@ export default function OfferingsSection() {
   const [activeTab, setActiveTab] = useState<TabId>("what");
 
   return (
-    <section className="w-full bg-white flex justify-center">
-      <div className="flex flex-col gap-14 w-full max-w-[1440px] mx-auto py-12 md:py-[88px]">
+    <section className="w-full bg-white flex justify-center py-8">
+      <div className="flex flex-col gap-14 w-full max-w-[1440px] mx-auto md:py-[88px]">
         <Grid>
+          <div className="col-span-4 md:col-span-8 lg:contents flex flex-col gap-12">
           {/* Left Column - Tab Navigation */}
-          <div className="col-span-4 md:col-span-8 lg:col-span-3 flex flex-row lg:flex-col justify-evenly md:justify-start lg:justify-start gap-0 overflow-x-auto lg:overflow-visible pb-2 md:pb-6">
+          <div className="col-span-4 md:col-span-8 lg:col-span-3 flex flex-row lg:flex-col justify-evenly md:justify-start lg:justify-start gap-0 overflow-x-auto lg:overflow-visible">
             {tabs.map((tab) => (
               <button
                 key={tab.id}
@@ -131,6 +132,7 @@ export default function OfferingsSection() {
                 </p>
               </div>
             </div>
+          </div>
           </div>
         </Grid>
       </div>

@@ -23,7 +23,7 @@ export default function HeroSection({
   className = '',
 }: HeroSectionProps) {
   return (
-    <section className={`bg-brand-gray-light my-8 ${className}`}>
+    <section className={`bg-brand-gray-light py-8 ${className}`}>
       <Grid>
         <div className="col-span-4 md:col-span-8 lg:col-span-5">
           <HeroContent

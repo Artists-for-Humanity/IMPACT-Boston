@@ -13,12 +13,12 @@ import Grid from "./common/Grid";
 
 export default function CTASection() {
   return (
-    <section className="w-full bg-[#F0EEF5] flex justify-center">
-      <div className="flex flex-col gap-10 w-full max-w-[1440px] mx-auto py-6 md:py-[88px]">
+    <section className="w-full bg-[#F0EEF5] flex justify-center py-8">
+      <div className="flex flex-col gap-10 w-full max-w-[1440px] mx-auto md:py-[88px]">
         {/* Header Row */}
         <Grid>
           {/* Title */}
-          <h2 className="col-span-4 md:col-span-8 lg:col-span-4 h2 text-[#183B63] md:text-[#000] lg:text-[#000] text-left">
+          <h2 className="col-span-4 md:col-span-8 lg:col-span-4 h2 text-black text-left">
             Everything You Need <br className="hidden md:inline lg:hidden"></br>{" "}
             to Get Involved.
           </h2>
@@ -27,7 +27,7 @@ export default function CTASection() {
           <div className="hidden lg:block lg:col-span-4" />
 
           {/* Subtext */}
-          <p className="col-span-4 md:col-span-4 lg:col-span-3 lg:col-start-10 p2 font-semibold text-gray-600 md:text-left lg:text-right self-end">
+          <p className="col-span-4 md:col-span-4 lg:col-span-3 lg:col-start-10 p2 text-gray-600 md:text-left lg:text-right self-end">
             Register for classes, make donations, or explore programs.
           </p>
         </Grid>
@@ -53,7 +53,7 @@ export default function CTASection() {
               <h4 className="sub-1 text-white">
                 Hire Us to Come to You
               </h4>
-              <p className="p2 text-white max-w-[100%]">
+              <p className="p2 text-white/87 max-w-[100%]">
                 If you're a school, organization, workplace, or other group,
                 explore our classes and programs.
               </p>
@@ -79,7 +79,7 @@ export default function CTASection() {
               <h4 className="sub-1 text-white">
                 Join a Class Today
               </h4>
-              <p className="p2 text-white max-w-[100%]">
+              <p className="p2 text-white/87 max-w-[100%]">
                 If you're an individual seeking a self-defense class, explore
                 options and register here online today.
               </p>
@@ -105,7 +105,7 @@ export default function CTASection() {
               <h4 className="sub-1 text-white">
                 Make a Donation
               </h4>
-              <p className="p2 text-white max-w-[100%]">
+              <p className="p2 text-white/87 max-w-[100%]">
                 Support our mission. Every gift makes an impact. Help bring self
                 defense training to all folks today!
               </p>

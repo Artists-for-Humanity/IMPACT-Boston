@@ -8,8 +8,8 @@ export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="w-full bg-[#1a1a1a] text-white flex justify-center">
-      <div className="flex flex-col items-center gap-12 w-full max-w-[1440px] mx-auto pt-16 pb-8 md:py-[88px]">
+    <footer className="w-full bg-[#1a1a1a] text-white flex justify-center pt-16 pb-8">
+      <div className="flex flex-col items-center gap-12 w-full max-w-[1440px] mx-auto md:py-[88px]">
         {/* Top Section - Contact Info & Form */}
         <Grid>
           {/* Left Column - IMPACT Wordmark & Contact Info */}

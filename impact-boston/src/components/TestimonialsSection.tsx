@@ -107,8 +107,8 @@ export default function TestimonialsSection() {
   };
 
   return (
-    <section className="w-full bg-[#F0EEF5] flex justify-center overflow-hidden">
-      <div className="flex flex-col gap-8 md:gap-14 w-full max-w-[1440px] mx-auto py-12 md:py-[88px]">
+    <section className="w-full bg-[#F0EEF5] flex justify-center overflow-hidden py-8">
+      <div className="flex flex-col gap-8 md:gap-14 w-full max-w-[1440px] mx-auto md:py-[88px]">
         {/* Top Row - Heading and Navigation */}
         <Grid>
           {/* Left - Heading and Subtext */}
@@ -195,7 +195,7 @@ export default function TestimonialsSection() {
             aria-label="Previous testimonial"
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="46" height="46" viewBox="0 0 46 46" fill="none" className="absolute">
-              <circle cx="23" cy="23" r="22.5" transform="rotate(-180 23 23)" stroke="black" strokeOpacity="0.1" fill="none" />
+              <circle cx="23" cy="23" r="22.5" stroke="black" strokeOpacity="0.5" fill="white" />
             </svg>
             <ChevronLeft className="w-6 h-6 text-black relative z-10" strokeWidth={2} />
           </button>
@@ -205,7 +205,7 @@ export default function TestimonialsSection() {
             aria-label="Next testimonial"
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="46" height="46" viewBox="0 0 46 46" fill="none" className="absolute">
-              <circle cx="23" cy="23" r="22.5" transform="rotate(-180 23 23)" stroke="black" strokeOpacity="0.1" fill="none" />
+              <circle cx="23" cy="23" r="22.5" stroke="black" strokeOpacity="0.5" fill="white" />
             </svg>
             <ChevronRight className="w-6 h-6 text-black relative z-10" strokeWidth={2} />
           </button>

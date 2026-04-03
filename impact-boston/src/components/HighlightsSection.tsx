@@ -89,8 +89,8 @@ export default function HighlightsSection() {
   };
 
   return (
-    <section className="w-full bg-black flex justify-center">
-      <div className="flex flex-col gap-14 w-full max-w-[1440px] mx-auto py-12 md:py-[88px]">
+    <section className="w-full bg-black flex justify-center py-8">
+      <div className="flex flex-col gap-14 w-full max-w-[1440px] mx-auto md:py-[88px]">
         {/* Top Row - Label and Navigation */}
         <Grid>
           <div className="col-span-4 md:col-span-8 lg:col-span-12 flex justify-between items-center">
@@ -159,7 +159,7 @@ export default function HighlightsSection() {
         {/* Content Row */}
         <Grid>
           {/* Left Panel - Heading */}
-          <div className="col-span-4 md:col-span-8 lg:col-span-5 lg:row-span-4 flex flex-col gap-8">
+          <div className="col-span-4 md:col-span-8 lg:col-span-5 lg:row-span-4 flex flex-col gap-6">
             <div className="grid">
               {slides.map((slide, index) => (
                 <div
@@ -177,13 +177,28 @@ export default function HighlightsSection() {
               ))}
             </div>
 
+            {/* Dot Indicators - Mobile/Tablet: below heading */}
+            <div className="lg:hidden flex gap-3">
+              {slides.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => goToSlide(index)}
+                  className="w-2 h-2 rounded-full transition-all duration-300"
+                  style={{
+                    backgroundColor: currentSlide === index ? "#FFFFFF" : "#9F84B5",
+                  }}
+                  aria-label={`Go to slide ${index + 1}`}
+                />
+              ))}
+            </div>
+
             {/* Dot Indicators - Desktop only */}
             <div className="hidden lg:flex gap-3">
               {slides.map((_, index) => (
                 <button
                   key={index}
                   onClick={() => goToSlide(index)}
-                  className="w-3 h-3 rounded-full transition-all duration-300"
+                  className="w-2 h-2 rounded-full transition-all duration-300"
                   style={{
                     backgroundColor:
                       currentSlide === index ? "#FFFFFF" : "#9F84B5",
@@ -247,7 +262,7 @@ export default function HighlightsSection() {
               >
                 <Link
                   href={slide.ctaLink}
-                  className="flex bg-white text-black sub-2 px-6 py-6 items-center justify-between hover:bg-gray-100 transition-colors"
+                  className="flex bg-white text-black link px-6 py-6 items-center justify-between hover:bg-gray-100 transition-colors"
                 >
                   <span>{slide.ctaText}</span>
                   <ChevronRight className="w-5 h-5" strokeWidth={2} />
@@ -274,23 +289,6 @@ export default function HighlightsSection() {
                   {renderTextWithEmailLinks(slide.additionalText)}
                 </p>
               </div>
-            ))}
-          </div>
-        </Grid>
-
-        {/* Dot Indicators - Mobile only, centered at bottom */}
-        <Grid>
-          <div className="col-span-4 md:col-span-8 lg:hidden flex gap-3 justify-center">
-            {slides.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => goToSlide(index)}
-                className="w-3 h-3 rounded-full transition-all duration-300"
-                style={{
-                  backgroundColor: currentSlide === index ? "#FFFFFF" : "#9F84B5",
-                }}
-                aria-label={`Go to slide ${index + 1}`}
-              />
             ))}
           </div>
         </Grid>
