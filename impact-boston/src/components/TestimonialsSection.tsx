@@ -107,8 +107,8 @@ export default function TestimonialsSection() {
   };
 
   return (
-    <section className="w-full bg-[#F0EEF5] flex justify-center overflow-hidden py-8">
-      <div className="flex flex-col gap-8 md:gap-14 w-full max-w-[1440px] mx-auto md:py-[88px]">
+    <section className="w-full bg-[#F0EEF5] flex justify-center overflow-hidden py-8 md:py-10 lg:py-18">
+      <div className="flex flex-col gap-8 md:gap-14 w-full max-w-[1440px] mx-auto">
         {/* Top Row - Heading and Navigation */}
         <Grid>
           {/* Left - Heading and Subtext */}

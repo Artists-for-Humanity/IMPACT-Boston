@@ -144,7 +144,7 @@ export default function Navigation({
 
       {/* ── Mobile hamburger ─────────────────────────────────────── */}
       <button
-        className="lg:hidden p-2 text-gray-600 hover:text-gray-900 transition-colors"
+        className="lg:hidden text-gray-600 hover:text-gray-900 transition-colors"
         onClick={() => setMobileOpen(!mobileOpen)}
         aria-label={mobileOpen ? "Close menu" : "Open menu"}
         aria-expanded={mobileOpen}

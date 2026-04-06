@@ -89,8 +89,8 @@ export default function HighlightsSection() {
   };
 
   return (
-    <section className="w-full bg-black flex justify-center py-8">
-      <div className="flex flex-col gap-14 w-full max-w-[1440px] mx-auto md:py-[88px]">
+    <section className="w-full bg-black flex justify-center py-8 md:py-10 lg:py-18">
+      <div className="flex flex-col gap-14 w-full max-w-[1440px] mx-auto">
         {/* Top Row - Label and Navigation */}
         <Grid>
           <div className="col-span-4 md:col-span-8 lg:col-span-12 flex justify-between items-center">

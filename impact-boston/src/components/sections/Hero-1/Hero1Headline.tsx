@@ -1,14 +1,14 @@
 import React from 'react'
 
-interface HeroHeadlineProps {
+interface Hero1HeadlineProps {
   children: React.ReactNode
   className?: string
 }
 
-export default function HeroHeadline({
+export default function Hero1Headline({
   children,
   className = '',
-}: HeroHeadlineProps) {
+}: Hero1HeadlineProps) {
   return (
     <h1 className={`h1 text-center lg:text-left ${className}`} style={{ color: '#061629' }}>
       {children}
@@ -16,17 +16,17 @@ export default function HeroHeadline({
   )
 }
 
-interface HeroHeadlinePartProps {
+interface Hero1HeadlinePartProps {
   children: React.ReactNode
   color?: 'primary' | 'complementary' | 'black'
   customColor?: string
 }
 
-export function HeroHeadlinePart({
+export function Hero1HeadlinePart({
   children,
   color = 'black',
   customColor,
-}: HeroHeadlinePartProps) {
+}: Hero1HeadlinePartProps) {
   const colorMap = {
     primary: 'text-brand-primary',
     complementary: 'text-brand-complementary',

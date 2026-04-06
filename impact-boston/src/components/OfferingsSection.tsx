@@ -23,8 +23,8 @@ export default function OfferingsSection() {
   const [activeTab, setActiveTab] = useState<TabId>("what");
 
   return (
-    <section className="w-full bg-white flex justify-center py-8">
-      <div className="flex flex-col gap-14 w-full max-w-[1440px] mx-auto md:py-[88px]">
+    <section className="w-full bg-white flex justify-center py-8 md:py-10 lg:py-18">
+      <div className="flex flex-col gap-14 w-full max-w-[1440px] mx-auto">
         <Grid>
           <div className="col-span-4 md:col-span-8 lg:contents flex flex-col gap-12">
           {/* Left Column - Tab Navigation */}
