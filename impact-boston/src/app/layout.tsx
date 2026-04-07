@@ -4,8 +4,8 @@ import "./globals.css";
 import { VisualEditing } from "next-sanity/visual-editing";
 import { draftMode } from "next/headers";
 import { DisableDraftMode } from "@/components/DisableDraftMode";
-import  Footer  from "@/components/Footer";
-import Header from '@/components/Header/Header'
+// import  Footer  from "@/components/Footer";
+// import Header from '@/components/Header/Header'
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -33,7 +33,7 @@ export default async function RootLayout({
     <html lang="en" className={`${poppins.variable} ${ibmPlexSans.variable}`}>
 
         <body className="antialiased">
-           <Header />
+           {/* <Header /> */}
 
         {children}
           {(await draftMode()).isEnabled && (
@@ -42,7 +42,7 @@ export default async function RootLayout({
             <DisableDraftMode />
           </>
         )}
-       <Footer />
+       {/* <Footer /> */}
          
       </body>
      
