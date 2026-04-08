@@ -12,16 +12,44 @@ export default function Header() {
       />
       <div className="flex gap-8">
         <div className="flex gap-4">
-          <div className="">About</div>
-          <div className="">Programs</div>
-          <div className="">Learn More</div>
+          <div className="flex gap-1">
+            About
+            <Image
+              src="/icons/chevron-right.svg"
+              alt="chevron-right"
+              width={16}
+              height={16}
+            />
+          </div>
+          <div className="flex gap-1">
+            Programs
+            <Image
+              src="/icons/chevron-right.svg"
+              alt="chevron-right"
+              width={16}
+              height={16}
+            />
+          </div>
+          <div className="flex gap-1">
+            Learn More
+            <Image
+              src="/icons/chevron-right.svg"
+              alt="chevron-right"
+              width={16}
+              height={16}
+            />
+          </div>
         </div>
-        <div className="">
+        <div className="flex">
           <Image src="/icons/search.svg" alt="search" width={20} height={20} />
         </div>
         <div className="flex gap-2">
-          <div className="">Register</div>
-          <div className="">Donate</div>
+          <div className="bg-size-300 bg-purple-700 border-1 rounded-lg">
+            Register
+          </div>
+          <div className="bg-size-300 bg-white-500 border-1 rounded-lg">
+            Donate
+          </div>
         </div>
       </div>
     </nav>
