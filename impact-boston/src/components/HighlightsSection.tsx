@@ -90,7 +90,7 @@ export default function HighlightsSection() {
 
   return (
     <section className="w-full bg-black flex justify-center py-8 md:py-10 lg:py-18">
-      <div className="flex flex-col gap-14 w-full max-w-[1440px] mx-auto">
+      <div className="flex flex-col gap-10 md:gap-12 lg:gap-[50px] w-full max-w-[1440px] mx-auto">
         {/* Top Row - Label and Navigation */}
         <Grid>
           <div className="col-span-4 md:col-span-8 lg:col-span-12 flex justify-between items-center">
@@ -159,7 +159,7 @@ export default function HighlightsSection() {
         {/* Content Row */}
         <Grid>
           {/* Left Panel - Heading */}
-          <div className="col-span-4 md:col-span-8 lg:col-span-5 lg:row-span-4 flex flex-col gap-6">
+          <div className="col-span-4 md:col-span-8 lg:col-span-5 flex flex-col gap-6">
             <div className="grid">
               {slides.map((slide, index) => (
                 <div
@@ -209,87 +209,93 @@ export default function HighlightsSection() {
             </div>
           </div>
 
-          {/* Image - Desktop: all slides in same grid cell with z-index */}
-          <div className="col-span-4 md:col-span-8 lg:col-span-6 lg:col-start-7 lg:row-start-1 grid">
-            {slides.map((slide, index) => (
-              <div
-                key={index}
-                className={`col-start-1 row-start-1 relative aspect-[16/9] transition-opacity duration-500 ${
-                  currentSlide === index
-                    ? "opacity-100 z-10"
-                    : "opacity-0 pointer-events-none hidden lg:block"
-                }`}
-                style={{ backgroundColor: "#311E41" }}
-              >
-                <Image
-                  src={slide.imageSrc}
-                  alt={slide.imageAlt}
-                  fill
-                  className="object-cover"
-                />
-              </div>
-            ))}
-          </div>
-
-          {/* Body Text - Desktop: all slides in same grid cell with z-index */}
-          <div className="col-span-4 md:col-span-8 lg:col-span-6 lg:col-start-7 lg:row-start-2 grid">
-            {slides.map((slide, index) => (
-              <div
-                key={index}
-                className={`col-start-1 row-start-1 transition-opacity duration-500 ${
-                  currentSlide === index
-                    ? "opacity-100 z-10"
-                    : "opacity-0 pointer-events-none hidden lg:block"
-                }`}
-              >
-                <p className="p1 text-white">
-                  {slide.body}
-                </p>
-              </div>
-            ))}
-          </div>
-
-          {/* CTA Button - Desktop: all slides in same grid cell with z-index */}
-          <div className="pt-10 -mb-4 lg:mt-5 lg:mb-0 col-span-4 md:col-span-4 lg:col-span-4 lg:col-start-7 lg:row-start-3 grid">
-            {slides.map((slide, index) => (
-              <div
-                key={index}
-                className={`col-start-1 row-start-1 transition-opacity duration-500 ${
-                  currentSlide === index
-                    ? "opacity-100 z-10"
-                    : "opacity-0 pointer-events-none hidden lg:block"
-                }`}
-              >
-                <Link
-                  href={slide.ctaLink}
-                  className="flex bg-white text-black link px-6 py-6 items-center justify-between hover:bg-gray-100 transition-colors"
+          {/* Right Panel - Content with custom gap spacing */}
+          <div className="col-span-4 md:col-span-8 lg:col-span-6 lg:col-start-7 flex flex-col gap-10 md:gap-10 lg:gap-7">
+            {/* Image - Desktop: all slides in same grid cell with z-index */}
+            <div className="grid">
+              {slides.map((slide, index) => (
+                <div
+                  key={index}
+                  className={`col-start-1 row-start-1 relative aspect-[16/9] transition-opacity duration-500 ${
+                    currentSlide === index
+                      ? "opacity-100 z-10"
+                      : "opacity-0 pointer-events-none hidden lg:block"
+                  }`}
+                  style={{ backgroundColor: "#311E41" }}
                 >
-                  <span>{slide.ctaText}</span>
-                  <ChevronRight className="w-5 h-5" strokeWidth={2} />
-                </Link>
-              </div>
-            ))}
-          </div>
+                  <Image
+                    src={slide.imageSrc}
+                    alt={slide.imageAlt}
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+              ))}
+            </div>
 
-          {/* Additional Text - Desktop: all slides in same grid cell with z-index */}
-          <div className="col-span-4 md:col-span-4 md:row-start-5 lg:col-span-4 lg:col-start-7 lg:row-start-4 grid">
-            {slides.map((slide, index) => (
-              <div
-                key={index}
-                className={`col-start-1 row-start-1 transition-opacity duration-500 ${
-                  currentSlide === index
-                    ? "opacity-100 z-10"
-                    : "opacity-0 pointer-events-none hidden lg:block"
-                }`}
-              >
-                <p
-                  className="p2 pt-4"
-                  style={{ color: "rgba(255, 255, 255, 0.60)" }}
+            {/* Body Text - Desktop: all slides in same grid cell with z-index */}
+            <div className="grid">
+              {slides.map((slide, index) => (
+                <div
+                  key={index}
+                  className={`col-start-1 row-start-1 transition-opacity duration-500 ${
+                    currentSlide === index
+                      ? "opacity-100 z-10"
+                      : "opacity-0 pointer-events-none hidden lg:block"
+                  }`}
                 >
-                  {renderTextWithEmailLinks(slide.additionalText)}
-                </p>
+                  <p className="p1 text-white">
+                    {slide.body}
+                  </p>
+                </div>
+              ))}
+            </div>
+
+            {/* CTA and Additional Text wrapper with flex gap */}
+            <div className="flex flex-col gap-4 lg:gap-4">
+              {/* CTA Button - Desktop: all slides in same grid cell with z-index */}
+              <div className="grid">
+                {slides.map((slide, index) => (
+                  <div
+                    key={index}
+                    className={`col-start-1 row-start-1 transition-opacity duration-500 ${
+                      currentSlide === index
+                        ? "opacity-100 z-10"
+                        : "opacity-0 pointer-events-none hidden lg:block"
+                    }`}
+                  >
+                    <Link
+                      href={slide.ctaLink}
+                      className="flex bg-white text-black link px-6 py-6 items-center justify-between hover:bg-gray-100 transition-colors w-full lg:w-2/3"
+                    >
+                      <span>{slide.ctaText}</span>
+                      <ChevronRight className="w-5 h-5" strokeWidth={2} />
+                    </Link>
+                  </div>
+                ))}
               </div>
-            ))}
+
+              {/* Additional Text - Desktop: all slides in same grid cell with z-index */}
+              <div className="grid">
+                {slides.map((slide, index) => (
+                  <div
+                    key={index}
+                    className={`col-start-1 row-start-1 transition-opacity duration-500 ${
+                      currentSlide === index
+                        ? "opacity-100 z-10"
+                        : "opacity-0 pointer-events-none hidden lg:block"
+                    }`}
+                  >
+                    <p
+                      className="p2 lg:w-2/3"
+                      style={{ color: "rgba(255, 255, 255, 0.60)" }}
+                    >
+                      {renderTextWithEmailLinks(slide.additionalText)}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </Grid>
       </div>

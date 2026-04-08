@@ -18,9 +18,8 @@ export default function ActionPanel() {
         {/* Header Row */}
         <Grid>
           {/* Title */}
-          <h2 className="col-span-4 md:col-span-8 lg:col-span-6 h2 text-black text-left">
-            Everything You Need <br className="hidden md:inline lg:hidden"></br>{" "}
-            to Get Involved.
+          <h2 className="col-span-4 md:col-span-7 lg:col-span-6 h2 text-black text-left">
+            Everything You Need to Get Involved.
           </h2>
 
           {/* Empty Middle */}
