@@ -141,3 +141,12 @@ body {
   width: 16px;
   transform: rotate(90deg);
 }
+
+.submit_arrow {
+  color: var(--White, #ffffff);
+  text-align: center;
+  font-family: Inter;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 400;
+}
