@@ -13,8 +13,8 @@ import Grid from "./common/Grid";
 
 export default function ActionPanel() {
   return (
-    <section className="w-full bg-[#F0EEF5] flex justify-center py-8 md:py-10 lg:py-18">
-      <div className="flex flex-col gap-8 lg:gap-12 w-full max-w-[1440px] mx-auto">
+    <section className="w-full bg-[#F0EEF5] py-8 md:py-10 lg:py-18">
+      <div className="flex flex-col gap-8 lg:gap-12 mx-4 md:mx-8 lg:mx-36">
         {/* Header Row */}
         <Grid>
           {/* Title */}

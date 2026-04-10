@@ -96,7 +96,9 @@ export default function TestimonialsSection() {
   // Calculate transform based on screen size
   const getTransform = () => {
     if (isMobile) {
-      return `translateX(calc(-${currentIndex * 75}% - ${currentIndex * 4}px))`;
+      // Mobile: 288px cards + 16px gap
+      // Center the active card: 50% viewport - (card width / 2) - (index * (card + gap))
+      return `translateX(calc(50% - 144px - ${currentIndex * 304}px))`;
     } else if (isTablet) {
       return `translateX(calc(-${currentIndex * 50}% - ${currentIndex * 16}px + 25%))`;
     } else {
@@ -107,12 +109,13 @@ export default function TestimonialsSection() {
   };
 
   return (
-    <section className="w-full bg-[#F0EEF5] flex justify-center overflow-hidden py-8 md:py-10 lg:py-18">
-      <div className="flex flex-col gap-8 md:gap-14 w-full max-w-[1440px] mx-auto">
+    <section className="w-full bg-[#F0EEF5] overflow-hidden py-8 md:py-10 lg:py-18">
+      <div className="flex flex-col gap-8 md:gap-6 lg:gap-8 mx-4 md:mx-8 lg:mx-36">
+        <div className="flex flex-col gap-8">
         {/* Top Row - Heading and Navigation */}
         <Grid>
           {/* Left - Heading and Subtext */}
-          <div className="col-span-4 md:col-span-8 lg:col-span-4 flex flex-col gap-6 md:space-y-4 md:gap-0 md:items-center lg:items-start">
+          <div className="col-span-4 md:col-span-8 lg:col-span-6 flex flex-col gap-4 lg:gap-2 md:items-center lg:items-start">
             <h2 className="h2 text-[#000] text-center md:text-center lg:text-left">
               What People are Saying
             </h2>
@@ -121,15 +124,15 @@ export default function TestimonialsSection() {
             </p>
           </div>
 
-          {/* Right - Arrow Navigation - Tablet and Desktop */}
-          <div className="hidden md:flex lg:flex col-span-4 md:col-span-8 lg:col-span-2 lg:col-start-11 gap-4 md:justify-center lg:justify-end self-end">
+          {/* Right - Arrow Navigation - Desktop Only */}
+          <div className="hidden lg:flex col-span-4 md:col-span-8 lg:col-span-2 lg:col-start-11 gap-4 lg:justify-end self-end">
             <button
               onClick={prevSlide}
               className="w-12 h-12 relative flex items-center justify-center transition-opacity hover:opacity-80"
               aria-label="Previous testimonial"
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="46" height="46" viewBox="0 0 46 46" fill="none" className="absolute">
-                <circle cx="23" cy="23" r="22.5" transform="rotate(-180 23 23)" stroke="black" strokeOpacity="0.1" fill="none" />
+                <circle cx="23" cy="23" r="22.5" stroke="black" strokeOpacity="0.5" fill="white" />
               </svg>
               <ChevronLeft className="w-6 h-6 text-black relative z-10" strokeWidth={2} />
             </button>
@@ -139,7 +142,7 @@ export default function TestimonialsSection() {
               aria-label="Next testimonial"
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="46" height="46" viewBox="0 0 46 46" fill="none" className="absolute">
-                <circle cx="23" cy="23" r="22.5" transform="rotate(-180 23 23)" stroke="black" strokeOpacity="0.1" fill="none" />
+                <circle cx="23" cy="23" r="22.5" stroke="black" strokeOpacity="0.5" fill="white" />
               </svg>
               <ChevronRight className="w-6 h-6 text-black relative z-10" strokeWidth={2} />
             </button>
@@ -147,8 +150,8 @@ export default function TestimonialsSection() {
         </Grid>
 
         {/* Cards Carousel */}
-        <div className="relative pl-4 md:pl-0 lg:pl-0 lg:mx-auto lg:max-w-[1440px]">
-          <div className="overflow-hidden md:overflow-visible lg:overflow-visible">
+        <div className="relative md:ml-0 lg:ml-0">
+          <div className="overflow-visible md:overflow-visible lg:overflow-visible md:pl-0 lg:pl-0">
             <div
               className={`flex gap-4 md:gap-4 lg:gap-6 ${isTransitioning ? 'transition-transform duration-500 ease-in-out' : ''}`}
               style={{
@@ -159,7 +162,7 @@ export default function TestimonialsSection() {
               {duplicatedTestimonials.map((testimonial, index) => (
                 <div
                   key={index}
-                  className="flex-shrink-0 w-[calc(75%-12px)] md:w-[50%] lg:w-[calc(50%-60px)] bg-white flex flex-col"
+                  className="flex-shrink-0 w-[288px] md:w-[50%] lg:w-[calc(50%-60px)] bg-white flex flex-col"
                 >
                   {/* Colored Top Border */}
                   <div
@@ -170,15 +173,10 @@ export default function TestimonialsSection() {
                   />
 
                   {/* Card Content */}
-                  <div className="p-8 flex flex-col gap-4">
+                  <div className="px-4 py-8 lg:p-8">
                     {/* Quote */}
                     <p className="p1 text-[#000] lg:text-[#333]">
                       "{testimonial.quote}
-                    </p>
-
-                    {/* Author */}
-                    <p className="sub-2 text-[#000]">
-                      - {testimonial.author}
                     </p>
                   </div>
                 </div>
@@ -187,8 +185,10 @@ export default function TestimonialsSection() {
           </div>
         </div>
 
-        {/* Arrow Navigation - Mobile only, centered at bottom */}
-        <div className="flex md:hidden lg:hidden gap-4 justify-center">
+        </div>
+
+        {/* Arrow Navigation - Mobile and Tablet, centered at bottom */}
+        <div className="flex lg:hidden gap-4 justify-center">
           <button
             onClick={prevSlide}
             className="w-12 h-12 relative flex items-center justify-center transition-opacity hover:opacity-80"

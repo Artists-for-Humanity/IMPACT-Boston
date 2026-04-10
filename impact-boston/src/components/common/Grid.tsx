@@ -7,12 +7,10 @@ type GridProps = {
 
 const Grid: React.FC<GridProps> = ({ children, className = '' }) => {
   return (
-    <div className="w-full">
-      <div
-        className={`grid grid-cols-4 gap-4 mx-4 md:grid-cols-8 md:gap-4 md:mx-8 lg:grid-cols-12 lg:gap-6 lg:mx-auto h-full max-w-300 m-auto ${className}`}
-      >
-        {children}
-      </div>
+    <div
+      className={`grid grid-cols-4 gap-10 md:grid-cols-8 md:gap-4 lg:grid-cols-12 lg:gap-6 ${className}`}
+    >
+      {children}
     </div>
   );
 };

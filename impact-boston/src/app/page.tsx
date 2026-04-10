@@ -3,7 +3,7 @@ import Hero1Headline, {
   Hero1HeadlinePart,
 } from "@/components/sections/Hero-1/Hero1Headline";
 import ActionPanel from "@/components/ActionPanel";
-import OfferingsSection from "@/components/OfferingsSection";
+import SideTabsPanel from "@/components/SideTabsPanel";
 import HighlightsSection from "@/components/HighlightsSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
 
@@ -26,7 +26,7 @@ export default function IndexPage() {
         imageAlt="IMPACT Boston self-defense training"
       />
       <ActionPanel />
-      <OfferingsSection />
+      <SideTabsPanel />
       <HighlightsSection />
       <TestimonialsSection />
     </main>

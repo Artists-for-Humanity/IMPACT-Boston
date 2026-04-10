@@ -8,10 +8,10 @@ export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="w-full bg-[#1a1a1a] text-white flex justify-center">
-      <div className="flex flex-col items-center gap-12 w-full max-w-[1440px] mx-auto py-16 md:pt-[88px] md:pb-[32px]">
+    <footer className="w-full bg-[#1a1a1a] text-white">
+      <div className="flex flex-col items-center gap-12 mx-4 md:mx-8 lg:mx-36 pt-16 pb-8 md:pt-[88px] md:pb-[32px] lg:pb-[88px]">
         {/* Top Section - Contact Info & Form */}
-        <Grid>
+        <Grid className="w-full">
           {/* Left Column - IMPACT Wordmark & Contact Info */}
           <div className="col-span-4 lg:col-start-1 lg:col-span-5 space-y-8">
             <h2 className="h2 text-white pb-8 md:pb-12 lg:pb-12 mb-0">
@@ -100,8 +100,8 @@ export default function Footer() {
         </Grid>
 
         {/* Bottom Nav Section */}
-        <div className="w-full border-t border-gray-700 pt-6">
-        <Grid>
+        <div className="border-t border-gray-700 pt-6 w-full">
+        <Grid className="w-full">
           {/* About Column */}
           <div className="col-span-2 col-start-1 row-start-1 md:col-start-1 md:col-span-4 lg:col-start-1 lg:col-span-4 lg:row-start-auto space-y-4">
             <h4 className="p2 font-medium text-white pb-3 mb-0">
@@ -252,8 +252,8 @@ export default function Footer() {
         </div>
 
         {/* Footer Bar - Social & Copyright */}
-        <div className="w-full pt-2 md:pt-6">
-          <Grid>
+        <div className="pt-2 md:pt-6 w-full">
+          <Grid className="w-full">
           {/* Social Icons */}
           <div className="col-span-4 md:col-span-4 lg:col-span-6 flex items-center gap-0 md:gap-4">
             <a

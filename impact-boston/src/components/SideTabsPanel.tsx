@@ -1,7 +1,8 @@
 "use client";
 
-// components/OfferingsSection.tsx
-// Offerings section with tabbed navigation for What, How, and Why content
+// components/SideTabsPanel.tsx
+// Reusable side tabs panel component with tabbed navigation
+// Used for the Offerings section and can be reused for other tabbed content sections
 
 import { useState } from "react";
 import Grid from "./common/Grid";
@@ -19,12 +20,12 @@ const tabs: Tab[] = [
   { id: "why", label: "The Why" },
 ];
 
-export default function OfferingsSection() {
+export default function SideTabsPanel() {
   const [activeTab, setActiveTab] = useState<TabId>("what");
 
   return (
-    <section className="w-full bg-white flex justify-center py-8 md:py-10 lg:py-18">
-      <div className="flex flex-col gap-14 w-full max-w-[1440px] mx-auto">
+    <section className="w-full bg-white py-8 md:py-10 lg:py-18">
+      <div className="flex flex-col gap-14 mx-4 md:mx-8 lg:mx-36">
         <Grid>
           <div className="col-span-4 md:col-span-8 lg:contents flex flex-col gap-12">
           {/* Left Column - Tab Navigation */}
