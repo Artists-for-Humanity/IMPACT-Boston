@@ -1,4 +1,6 @@
 import Grid from "./Grid";
+import Image from "next/image";
+import social from "../../../public/images/84c4f9334b2fd437fe1f04898db65eac2dd3a3db.svg";
 export default function Footer() {
   return (
     <>
@@ -31,28 +33,32 @@ export default function Footer() {
           </div>
 
           <div className="Contact grid lg:col-start-7 lg:col-span-full">
-            <div id="head">
-              <h2 id="contactUs" className="sub2 text-white">
-                Contact Us
-              </h2>
-              <p className="p2 text-[#B7B7B7]" id="info-contact">
-                We’re here to help, reach out anytime.
-              </p>
-            </div>
+            <div className="ContactContain grid gap-[20px]">
+              <div id="head">
+                <div id="title">
+                  <h2 id="contactUs" className="sub2 text-white">
+                    Contact Us
+                  </h2>
+                  <p className="p2 text-[#B7B7B7]" id="info-contact">
+                    We’re here to help, reach out anytime.
+                  </p>
+                </div>
+              </div>
 
-            <div id="input" className="flex gap-[8px] flex-col">
-              <input
-                type="text"
-                className="h-[64px] py-[20px] px-[19px] bg-[#1F2122] w-full sub2 text-[#B7B7B7]"
-                placeholder="Enter your email"
-              ></input>
-              <button
-                type="submit"
-                className="h-[64px] flex justify-between flex py-[20px] px-[19px] bg-[#1F2122] w-full p2 text-[#B7B7B7]"
-              >
-                <p className="p2">Submit</p>
-                <p className="submit_arrow">&#8594;</p>
-              </button>
+              <div id="input" className="flex gap-[8px] flex-col">
+                <input
+                  type="text"
+                  className="h-[64px] py-[20px] px-[19px] bg-[#1F2122] w-full sub2 text-[#B7B7B7]"
+                  placeholder="Enter your email"
+                ></input>
+                <button
+                  type="submit"
+                  className="h-[64px] flex justify-between flex py-[20px] px-[19px] bg-[#1F2122] w-full p2 text-[#B7B7B7]"
+                >
+                  <p className="p2">Submit</p>
+                  <p className="submit_arrow">&#8594;</p>
+                </button>
+              </div>
             </div>
           </div>
           <div
@@ -99,6 +105,18 @@ export default function Footer() {
               <li className="p2">Defense</li>
             </ul>
           </div>
+
+          <section
+            id="socialInfo"
+            className="flex items-center justify-between col-span-full"
+          >
+            <Image
+              src={social}
+              alt="social media"
+              className="w-auto h-[20px]"
+            ></Image>
+            <p className="p2 text-[#B7B7B7]">all rights reserved©IMPACT Inc.</p>
+          </section>
         </Grid>
       </div>
     </>
