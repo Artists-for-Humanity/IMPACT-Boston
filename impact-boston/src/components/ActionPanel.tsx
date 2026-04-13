@@ -13,31 +13,30 @@ import Grid from "./common/Grid";
 
 export default function ActionPanel() {
   return (
-    <section className="w-full bg-[#F0EEF5] flex justify-center py-8">
-      <div className="flex flex-col gap-10 w-full max-w-[1440px] mx-auto md:py-[88px]">
+    <section className="w-full bg-[#F0EEF5] py-8 md:py-10 lg:py-18">
+      <div className="flex flex-col gap-8 lg:gap-12 mx-4 md:mx-8 lg:mx-36">
         {/* Header Row */}
         <Grid>
           {/* Title */}
-          <h2 className="col-span-4 md:col-span-8 lg:col-span-4 h2 text-black text-left">
-            Everything You Need <br className="hidden md:inline lg:hidden"></br>{" "}
-            to Get Involved.
+          <h2 className="col-span-4 md:col-span-7 lg:col-span-6 h2 text-black text-left">
+            Everything You Need to Get Involved.
           </h2>
 
           {/* Empty Middle */}
-          <div className="hidden lg:block lg:col-span-4" />
+          <div className="hidden lg:block lg:col-span-3" />
 
           {/* Subtext */}
-          <p className="col-span-4 md:col-span-4 lg:col-span-3 lg:col-start-10 p2 text-gray-600 md:text-left lg:text-right self-end">
+          <p className="col-span-4 md:col-span-4 lg:col-span-3 lg:col-start-10 p2 text-gray-600 md:text-left lg:text-right self-end lg:self-center">
             Register for classes, make donations, or explore programs.
           </p>
         </Grid>
 
         {/* Cards Row */}
-        <Grid className="flex-col md:flex-row">
+        <Grid className="flex-col md:flex-row gap-y-2 md:gap-y-2">
           {/* Card 1 - Sign up Today */}
           <Link
             href="/programs"
-            className="col-span-4 md:col-span-8 lg:col-span-4 flex flex-col items-start gap-14 md:gap-0 md:justify-between md:h-[245px] lg:h-[325px] p-6 md:p-8 lg:p-8 bg-[#E86834] hover:opacity-90 transition-opacity"
+            className="col-span-4 md:col-span-8 lg:col-span-4 flex flex-col items-start gap-14 md:gap-0 md:justify-between md:h-[245px] lg:h-[325px] p-6 lg:p-8 bg-[#E86834] hover:opacity-90 transition-opacity"
           >
             {/* Top - Icon and Chevron */}
             <div className="flex justify-between items-start w-full">
@@ -63,7 +62,7 @@ export default function ActionPanel() {
           {/* Card 2 - Classes & Programs */}
           <Link
             href="/programs"
-            className="col-span-4 md:col-span-8 lg:col-span-4 flex flex-col items-start gap-14 md:gap-0 md:justify-between md:h-[256px] lg:h-[325px] p-6 md:p-8 lg:p-8 bg-[#563672] hover:opacity-90 transition-opacity"
+            className="col-span-4 md:col-span-8 lg:col-span-4 flex flex-col items-start gap-14 md:gap-0 md:justify-between md:h-[256px] lg:h-[325px] p-6 lg:p-8 bg-[#563672] hover:opacity-90 transition-opacity"
           >
             {/* Top - Icon and Chevron */}
             <div className="flex justify-between items-start w-full">
@@ -89,7 +88,7 @@ export default function ActionPanel() {
           {/* Card 3 - Make a Donation */}
           <Link
             href="/donate"
-            className="col-span-4 md:col-span-8 lg:col-span-4 flex flex-col items-start gap-14 md:gap-0 md:justify-between md:h-[260px] lg:h-[325px] p-6 md:p-8 lg:p-8 bg-[#311E41] hover:opacity-90 transition-opacity"
+            className="col-span-4 md:col-span-8 lg:col-span-4 flex flex-col items-start gap-14 md:gap-0 md:justify-between md:h-[260px] lg:h-[325px] p-6 lg:p-8 bg-[#311E41] hover:opacity-90 transition-opacity"
           >
             {/* Top - Icon and Chevron */}
             <div className="flex justify-between items-start w-full">

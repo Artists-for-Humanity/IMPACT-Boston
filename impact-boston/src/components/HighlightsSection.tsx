@@ -89,8 +89,8 @@ export default function HighlightsSection() {
   };
 
   return (
-    <section className="w-full bg-black flex justify-center">
-      <div className="flex flex-col gap-14 w-full max-w-[1440px] mx-auto py-12 md:py-[88px]">
+    <section className="w-full bg-black py-8 md:py-10 lg:py-18">
+      <div className="flex flex-col gap-10 md:gap-12 lg:gap-[50px] mx-4 md:mx-8 lg:mx-36">
         {/* Top Row - Label and Navigation */}
         <Grid>
           <div className="col-span-4 md:col-span-8 lg:col-span-12 flex justify-between items-center">
@@ -157,9 +157,9 @@ export default function HighlightsSection() {
         </Grid>
 
         {/* Content Row */}
-        <Grid>
+        <Grid className="md:gap-y-12">
           {/* Left Panel - Heading */}
-          <div className="col-span-4 md:col-span-8 lg:col-span-5 lg:row-span-4 flex flex-col gap-8">
+          <div className="col-span-4 md:col-span-8 lg:col-span-5 flex flex-col gap-6 lg:gap-9">
             <div className="grid">
               {slides.map((slide, index) => (
                 <div
@@ -177,13 +177,28 @@ export default function HighlightsSection() {
               ))}
             </div>
 
+            {/* Dot Indicators - Mobile/Tablet: below heading */}
+            <div className="lg:hidden flex gap-3">
+              {slides.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => goToSlide(index)}
+                  className="w-2 h-2 rounded-full transition-all duration-300"
+                  style={{
+                    backgroundColor: currentSlide === index ? "#FFFFFF" : "#9F84B5",
+                  }}
+                  aria-label={`Go to slide ${index + 1}`}
+                />
+              ))}
+            </div>
+
             {/* Dot Indicators - Desktop only */}
             <div className="hidden lg:flex gap-3">
               {slides.map((_, index) => (
                 <button
                   key={index}
                   onClick={() => goToSlide(index)}
-                  className="w-3 h-3 rounded-full transition-all duration-300"
+                  className="w-2 h-2 rounded-full transition-all duration-300"
                   style={{
                     backgroundColor:
                       currentSlide === index ? "#FFFFFF" : "#9F84B5",
@@ -194,104 +209,98 @@ export default function HighlightsSection() {
             </div>
           </div>
 
-          {/* Image - Desktop: all slides in same grid cell with z-index */}
-          <div className="col-span-4 md:col-span-8 lg:col-span-6 lg:col-start-7 lg:row-start-1 grid">
-            {slides.map((slide, index) => (
-              <div
-                key={index}
-                className={`col-start-1 row-start-1 relative aspect-[16/9] transition-opacity duration-500 ${
-                  currentSlide === index
-                    ? "opacity-100 z-10"
-                    : "opacity-0 pointer-events-none hidden lg:block"
-                }`}
-                style={{ backgroundColor: "#311E41" }}
-              >
-                <Image
-                  src={slide.imageSrc}
-                  alt={slide.imageAlt}
-                  fill
-                  className="object-cover"
-                />
+          {/* Right Panel - Content with custom gap spacing */}
+          <div className="col-span-4 md:col-span-8 lg:col-span-6 lg:col-start-7 flex flex-col gap-10 md:gap-12 lg:gap-12">
+            {/* Image and Body Text wrapper */}
+            <div className="flex flex-col gap-6 lg:gap-7">
+              {/* Image - Desktop: all slides in same grid cell with z-index */}
+              <div className="grid">
+                {slides.map((slide, index) => (
+                  <div
+                    key={index}
+                    className={`col-start-1 row-start-1 relative aspect-[16/9] transition-opacity duration-500 ${
+                      currentSlide === index
+                        ? "opacity-100 z-10"
+                        : "opacity-0 pointer-events-none hidden lg:block"
+                    }`}
+                    style={{ backgroundColor: "#311E41" }}
+                  >
+                    <Image
+                      src={slide.imageSrc}
+                      alt={slide.imageAlt}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
 
-          {/* Body Text - Desktop: all slides in same grid cell with z-index */}
-          <div className="col-span-4 md:col-span-8 lg:col-span-6 lg:col-start-7 lg:row-start-2 grid">
-            {slides.map((slide, index) => (
-              <div
-                key={index}
-                className={`col-start-1 row-start-1 transition-opacity duration-500 ${
-                  currentSlide === index
-                    ? "opacity-100 z-10"
-                    : "opacity-0 pointer-events-none hidden lg:block"
-                }`}
-              >
-                <p className="p1 text-white">
-                  {slide.body}
-                </p>
+              {/* Body Text - Desktop: all slides in same grid cell with z-index */}
+              <div className="grid">
+                {slides.map((slide, index) => (
+                  <div
+                    key={index}
+                    className={`col-start-1 row-start-1 transition-opacity duration-500 ${
+                      currentSlide === index
+                        ? "opacity-100 z-10"
+                        : "opacity-0 pointer-events-none hidden lg:block"
+                    }`}
+                  >
+                    <p className="p1 text-white">
+                      {slide.body}
+                    </p>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
+            </div>
 
-          {/* CTA Button - Desktop: all slides in same grid cell with z-index */}
-          <div className="pt-10 -mb-4 lg:mt-5 lg:mb-0 col-span-4 md:col-span-4 lg:col-span-4 lg:col-start-7 lg:row-start-3 grid">
-            {slides.map((slide, index) => (
-              <div
-                key={index}
-                className={`col-start-1 row-start-1 transition-opacity duration-500 ${
-                  currentSlide === index
-                    ? "opacity-100 z-10"
-                    : "opacity-0 pointer-events-none hidden lg:block"
-                }`}
-              >
-                <Link
-                  href={slide.ctaLink}
-                  className="flex bg-white text-black sub-2 px-6 py-6 items-center justify-between hover:bg-gray-100 transition-colors"
-                >
-                  <span>{slide.ctaText}</span>
-                  <ChevronRight className="w-5 h-5" strokeWidth={2} />
-                </Link>
+            {/* CTA and Additional Text wrapper with flex gap */}
+            <div className="md:grid md:grid-cols-8 lg:block">
+              <div className="md:col-span-4 lg:col-auto flex flex-col gap-2">
+                {/* CTA Button - Desktop: all slides in same grid cell with z-index */}
+                <div className="grid">
+                {slides.map((slide, index) => (
+                  <div
+                    key={index}
+                    className={`col-start-1 row-start-1 transition-opacity duration-500 ${
+                      currentSlide === index
+                        ? "opacity-100 z-10"
+                        : "opacity-0 pointer-events-none hidden lg:block"
+                    }`}
+                  >
+                    <Link
+                      href={slide.ctaLink}
+                      className="flex bg-white text-black link px-6 py-6 items-center justify-between hover:bg-gray-100 transition-colors lg:w-2/3"
+                    >
+                      <span>{slide.ctaText}</span>
+                      <ChevronRight className="w-5 h-5" strokeWidth={2} />
+                    </Link>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
 
-          {/* Additional Text - Desktop: all slides in same grid cell with z-index */}
-          <div className="col-span-4 md:col-span-4 md:row-start-5 lg:col-span-4 lg:col-start-7 lg:row-start-4 grid">
-            {slides.map((slide, index) => (
-              <div
-                key={index}
-                className={`col-start-1 row-start-1 transition-opacity duration-500 ${
-                  currentSlide === index
-                    ? "opacity-100 z-10"
-                    : "opacity-0 pointer-events-none hidden lg:block"
-                }`}
-              >
-                <p
-                  className="p2 pt-4"
-                  style={{ color: "rgba(255, 255, 255, 0.60)" }}
-                >
-                  {renderTextWithEmailLinks(slide.additionalText)}
-                </p>
+              {/* Additional Text - Desktop: all slides in same grid cell with z-index */}
+              <div className="grid">
+                {slides.map((slide, index) => (
+                  <div
+                    key={index}
+                    className={`col-start-1 row-start-1 transition-opacity duration-500 ${
+                      currentSlide === index
+                        ? "opacity-100 z-10"
+                        : "opacity-0 pointer-events-none hidden lg:block"
+                    }`}
+                  >
+                    <p
+                      className="p2"
+                      style={{ color: "rgba(255, 255, 255, 0.60)" }}
+                    >
+                      {renderTextWithEmailLinks(slide.additionalText)}
+                    </p>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
-        </Grid>
-
-        {/* Dot Indicators - Mobile only, centered at bottom */}
-        <Grid>
-          <div className="col-span-4 md:col-span-8 lg:hidden flex gap-3 justify-center">
-            {slides.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => goToSlide(index)}
-                className="w-3 h-3 rounded-full transition-all duration-300"
-                style={{
-                  backgroundColor: currentSlide === index ? "#FFFFFF" : "#9F84B5",
-                }}
-                aria-label={`Go to slide ${index + 1}`}
-              />
-            ))}
+              </div>
+            </div>
           </div>
         </Grid>
       </div>

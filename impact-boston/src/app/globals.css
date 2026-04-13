@@ -69,35 +69,35 @@ body {
 /* Typography system */
 @layer components {
   .h1 {
-    @apply font-medium tracking-[-0.04em] text-[48px] leading-14
-          md:text-[64px] md:leading-16
-          lg:text-[80px] lg:leading-20;
+    @apply font-medium tracking-[-0.04em] text-[48px] leading-[56px]
+          md:text-[64px] md:leading-[64px]
+          lg:text-[80px] lg:leading-[80px];
     font-family: var(--font-poppins), sans-serif;
   }
 
   .h2 {
-    @apply font-medium tracking-[-0.016em] text-[32px] leading-10
-           md:text-[40px] md:leading-12
-           lg:text-[48px] lg:leading-14;
+    @apply font-medium tracking-[-0.016em] text-[32px] leading-[40px]
+           md:text-[40px] md:leading-[48px]
+           lg:text-[48px] lg:leading-[56px];
     font-family: var(--font-poppins), sans-serif;
   }
 
   .h3 {
-    @apply font-medium tracking-[0em] text-[24px] leading-none
+    @apply font-medium tracking-[0em] text-[24px] leading-normal
            md:text-[32px]
-           lg:text-[32px];
+           lg:text-[32px] lg:leading-[40px];
     font-family: var(--font-poppins), sans-serif;
   }
 
   .sub-1 {
-    @apply font-medium tracking-[0em] text-[20px] leading-none
+    @apply font-medium tracking-[0em] text-[20px] leading-normal
            md:text-[20px]
-           lg:text-[24px];
+           lg:text-[24px] lg:leading-[24px];
     font-family: var(--font-poppins), sans-serif;
   }
 
   .sub-2 {
-    @apply font-medium tracking-[0em] text-[14px] leading-none
+    @apply font-medium tracking-[0em] text-[14px] leading-normal
            md:text-[14px]
            lg:text-[16px] lg:font-semibold;
     font-family: var(--font-poppins), sans-serif;
@@ -125,15 +125,16 @@ body {
   }
 
   .medium-label {
-    @apply font-medium tracking-[0em] text-[16px] leading-none;
+    @apply font-medium tracking-[0em] text-[16px] leading-normal;
     font-family: var(--font-poppins), sans-serif;
   }
 
-  .button {
-    @apply font-semibold leading-none text-[14px]
-           md:text-[16px]
-           lg:text-[18px];
-    font-family: var(--font-poppins), sans-serif;
+  .link {
+    font-family: var(--font-ibm-plex-sans), sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 25px; /* 156.25% */
   }
 }
 

@@ -74,11 +74,10 @@ export default function Navigation({
             >
               <button
                 className={`
-                  flex items-center justify-center gap-1 px-2 py-0.5 text-base font-bold tracking-normal text-black
+                  link flex items-center justify-center gap-1 px-2 py-0.5 text-black
                   transition-colors duration-150
                   ${isActive ? "font-semibold" : ""}
                 `}
-                style={{ lineHeight: "25px" }}
                 aria-expanded={activeDropdown === item.label}
                 aria-haspopup={item.subItems ? "true" : undefined}
               >
@@ -103,7 +102,7 @@ export default function Navigation({
                     <li key={sub.label}>
                       <a
                         href={sub.link}
-                        className="block px-4 py-2.5 text-sm font-body text-gray-600 hover:text-gray-900 hover:bg-gray-50 transition-colors duration-150"
+                        className="link block px-4 py-2.5 text-gray-600 hover:text-gray-900 hover:bg-gray-50 transition-colors duration-150"
                       >
                         {sub.label}
                       </a>
@@ -121,8 +120,7 @@ export default function Navigation({
         {/* Register — filled purple */}
         <Link
           href="/register"
-          className="flex items-center gap-0.5 px-4 py-1 text-base font-nav font-normal text-[#FFF] bg-[#6E3388] hover:bg-brand-primary rounded-[5px] transition-colors duration-150"
-          style={{ lineHeight: "25px" }}
+          className="link flex items-center gap-0.5 px-4 py-1 text-[#FFF] bg-[#6E3388] hover:bg-brand-primary rounded-[5px] transition-colors duration-150"
         >
           Register
         </Link>
@@ -130,8 +128,7 @@ export default function Navigation({
         {/* Donate — outlined */}
         <Link
           href="/donate"
-          className="flex items-center gap-0.5 px-4 py-1 text-base font-nav font-normal text-black border border-[#959595] rounded-[5px] hover:border-gray-400 hover:text-gray-900 transition-colors duration-150"
-          style={{ lineHeight: "25px" }}
+          className="link flex items-center gap-0.5 px-4 py-1 text-black border border-[#959595] rounded-[5px] hover:border-gray-400 hover:text-gray-900 transition-colors duration-150"
         >
           Donate
         </Link>
@@ -147,7 +144,7 @@ export default function Navigation({
 
       {/* ── Mobile hamburger ─────────────────────────────────────── */}
       <button
-        className="lg:hidden p-2 text-gray-600 hover:text-gray-900 transition-colors"
+        className="lg:hidden text-gray-600 hover:text-gray-900 transition-colors"
         onClick={() => setMobileOpen(!mobileOpen)}
         aria-label={mobileOpen ? "Close menu" : "Open menu"}
         aria-expanded={mobileOpen}
@@ -168,16 +165,32 @@ export default function Navigation({
           </svg>
         ) : (
           <svg
-            className="w-5 h-5"
-            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
             viewBox="0 0 24 24"
-            stroke="currentColor"
-            strokeWidth={2}
+            fill="none"
           >
             <path
+              d="M3 12H21"
+              stroke="black"
+              strokeWidth="2"
               strokeLinecap="round"
               strokeLinejoin="round"
-              d="M4 6h16M4 12h16M4 18h16"
+            />
+            <path
+              d="M3 6H21"
+              stroke="black"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            <path
+              d="M3 18H21"
+              stroke="black"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             />
           </svg>
         )}
@@ -191,7 +204,7 @@ export default function Navigation({
               <li key={item.label}>
                 <a
                   href={item.link}
-                  className="block px-3 py-3 text-base text-gray-700 hover:text-brand-primary-shade font-body border-b border-gray-50 transition-colors duration-150"
+                  className="link block px-3 py-3 text-gray-700 hover:text-brand-primary-shade border-b border-gray-50 transition-colors duration-150"
                   onClick={() => setMobileOpen(false)}
                 >
                   {item.label}
@@ -200,7 +213,7 @@ export default function Navigation({
                   <a
                     key={sub.label}
                     href={sub.link}
-                    className="block px-6 py-2 text-sm text-gray-500 hover:text-gray-800 transition-colors duration-150"
+                    className="link block px-6 py-2 text-gray-500 hover:text-gray-800 transition-colors duration-150"
                     onClick={() => setMobileOpen(false)}
                   >
                     {sub.label}
@@ -212,13 +225,13 @@ export default function Navigation({
           <div className="px-4 py-4 flex flex-col gap-2 border-t border-gray-100">
             <Link
               href="/register"
-              className="w-full text-center px-5 py-2.5 text-sm font-semibold text-white bg-brand-primary-shade"
+              className="link w-full text-center px-5 py-2.5 text-white bg-brand-primary-shade"
             >
               Register
             </Link>
             <Link
               href="/donate"
-              className="w-full text-center px-5 py-2.5 text-sm font-semibold text-gray-700 border border-gray-300"
+              className="link w-full text-center px-5 py-2.5 text-gray-700 border border-gray-300"
             >
               Donate
             </Link>

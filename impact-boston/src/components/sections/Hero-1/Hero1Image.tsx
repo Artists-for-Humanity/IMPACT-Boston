@@ -1,19 +1,19 @@
-// components/sections/Hero/HeroImage.tsx
+// components/sections/Hero-1/Hero1Image.tsx
 // Right side image container for hero section
 
 import Image from 'next/image'
 
-interface HeroImageProps {
+interface Hero1ImageProps {
   src: string
   alt: string
   className?: string
 }
 
-export default function HeroImage({
+export default function Hero1Image({
   src,
   alt,
   className = '',
-}: HeroImageProps) {
+}: Hero1ImageProps) {
   return (
     <div className={`relative w-full h-full ${className}`} style={{ backgroundColor: '#311E41' }}>
       <div
