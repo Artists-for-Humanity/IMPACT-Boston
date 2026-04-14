@@ -111,7 +111,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/about"
-                  className="p2 text-[#B7B7B7] hover:text-white transition-colors"
+                  className="p2 text-text-grey-light hover:text-white transition-colors"
                 >
                   About Impact
                 </Link>
@@ -119,7 +119,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/board-staff"
-                  className="p2 text-[#B7B7B7] hover:text-white transition-colors"
+                  className="p2 text-text-grey-light hover:text-white transition-colors"
                 >
                   Board and Staff
                 </Link>
@@ -127,7 +127,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/accessibility"
-                  className="p2 text-[#B7B7B7] hover:text-white transition-colors"
+                  className="p2 text-text-grey-light hover:text-white transition-colors"
                 >
                   Accessibility
                 </Link>
@@ -135,7 +135,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/blog"
-                  className="p2 text-[#B7B7B7] hover:text-white transition-colors"
+                  className="p2 text-text-grey-light hover:text-white transition-colors"
                 >
                   Blog
                 </Link>
@@ -152,7 +152,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/programs/self-defense"
-                  className="p2 text-[#B7B7B7] hover:text-white transition-colors"
+                  className="p2 text-text-grey-light hover:text-white transition-colors"
                 >
                   Self-Defense Classes
                 </Link>
@@ -160,7 +160,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/programs/schools-colleges"
-                  className="p2 text-[#B7B7B7] hover:text-white transition-colors"
+                  className="p2 text-text-grey-light hover:text-white transition-colors"
                 >
                   Schools & Colleges
                 </Link>
@@ -168,7 +168,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/programs/disabilities"
-                  className="p2 text-[#B7B7B7] hover:text-white transition-colors"
+                  className="p2 text-text-grey-light hover:text-white transition-colors"
                 >
                   People With Disabilities
                 </Link>
@@ -176,7 +176,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/programs/de-escalation"
-                  className="p2 text-[#B7B7B7] hover:text-white transition-colors"
+                  className="p2 text-text-grey-light hover:text-white transition-colors"
                 >
                   De-escalation
                 </Link>
@@ -184,7 +184,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/programs/community"
-                  className="p2 text-[#B7B7B7] hover:text-white transition-colors"
+                  className="p2 text-text-grey-light hover:text-white transition-colors"
                 >
                   Community Organizations
                 </Link>
@@ -192,7 +192,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/programs/workplace"
-                  className="p2 text-[#B7B7B7] hover:text-white transition-colors"
+                  className="p2 text-text-grey-light hover:text-white transition-colors"
                 >
                   Workplace
                 </Link>
@@ -200,7 +200,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/programs/activist-safety"
-                  className="p2 text-[#B7B7B7] hover:text-white transition-colors"
+                  className="p2 text-text-grey-light hover:text-white transition-colors"
                 >
                   Know Your Rights & Activist Safety
                 </Link>
@@ -208,7 +208,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/programs/customized"
-                  className="p2 text-[#B7B7B7] hover:text-white transition-colors"
+                  className="p2 text-text-grey-light hover:text-white transition-colors"
                 >
                   Customized Programs
                 </Link>
@@ -225,7 +225,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/fact-check-fridays"
-                  className="p2 text-[#B7B7B7] hover:text-white transition-colors"
+                  className="p2 text-text-grey-light hover:text-white transition-colors"
                 >
                   Fact Check Fridays
                 </Link>
@@ -233,7 +233,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/books"
-                  className="p2 text-[#B7B7B7] hover:text-white transition-colors"
+                  className="p2 text-text-grey-light hover:text-white transition-colors"
                 >
                   Books by Meg Stone
                 </Link>
@@ -241,7 +241,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/press"
-                  className="p2 text-[#B7B7B7] hover:text-white transition-colors"
+                  className="p2 text-text-grey-light hover:text-white transition-colors"
                 >
                   Press
                 </Link>
@@ -339,7 +339,7 @@ export default function Footer() {
           </div>
 
           {/* Copyright */}
-          <p className="col-span-4 md:col-span-4 lg:col-span-6 p2 text-[#B7B7B7] text-left md:text-right">
+          <p className="col-span-4 md:col-span-4 lg:col-span-6 p2 text-text-grey-light text-left md:text-right">
             All rights reserved © IMPACT Inc. {year}
           </p>
           </Grid>
