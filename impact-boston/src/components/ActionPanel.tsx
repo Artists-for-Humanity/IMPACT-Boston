@@ -16,7 +16,7 @@ export default function ActionPanel() {
     <section className="w-full bg-[#F0EEF5] py-8 md:py-10 lg:py-18">
       <div className="flex flex-col gap-8 lg:gap-12 mx-4 md:mx-8 lg:mx-36">
         {/* Header Row */}
-        <Grid>
+        <Grid className="gap-y-4">
           {/* Title */}
           <h2 className="col-span-4 md:col-span-7 lg:col-span-6 h2 text-black text-left">
             Everything You Need to Get Involved.

@@ -37,7 +37,7 @@ export default function Hero1Content({
       </div>
 
       <div className="flex justify-center lg:justify-start lg:mt-auto w-full">
-        <div className="lg:grid lg:grid-cols-5 lg:gap-6 w-full">
+        <div className="grid grid-cols-6 md:grid-cols-6 lg:grid-cols-5 gap-6 w-full">
           <Button href={ctaHref} variant="primary" size="lg">
             {ctaText}
           </Button>
