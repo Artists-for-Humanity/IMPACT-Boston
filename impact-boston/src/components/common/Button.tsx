@@ -38,7 +38,7 @@ export default function Button({
   const sizes: Record<ButtonSize, string> = {
     sm: 'px-3 py-0.5 text-sm',
     md: 'px-4 py-1 text-base',
-    lg: 'p-6 h-14 w-[270px] md:p-6 md:w-auto lg:h-18 lg:w-auto lg:col-span-3',
+    lg: 'p-6 h-14 w-full col-start-2 col-span-4 md:col-start-2 md:col-span-4 md:p-6 md:w-full lg:h-18 lg:w-auto lg:col-start-auto lg:col-span-3',
   }
 
   const classes = `${base} ${variants[variant]} ${sizes[size]} ${className}`

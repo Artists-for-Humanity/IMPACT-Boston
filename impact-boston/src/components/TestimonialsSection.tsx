@@ -132,7 +132,7 @@ export default function TestimonialsSection() {
               aria-label="Previous testimonial"
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="46" height="46" viewBox="0 0 46 46" fill="none" className="absolute">
-                <circle cx="23" cy="23" r="22.5" stroke="black" strokeOpacity="0.5" fill="white" />
+                <circle cx="23" cy="23" r="22.5" stroke="#dddddd" fill="white" />
               </svg>
               <ChevronLeft className="w-6 h-6 text-black relative z-10" strokeWidth={2} />
             </button>
@@ -142,7 +142,7 @@ export default function TestimonialsSection() {
               aria-label="Next testimonial"
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="46" height="46" viewBox="0 0 46 46" fill="none" className="absolute">
-                <circle cx="23" cy="23" r="22.5" stroke="black" strokeOpacity="0.5" fill="white" />
+                <circle cx="23" cy="23" r="22.5" stroke="#dddddd" fill="white" />
               </svg>
               <ChevronRight className="w-6 h-6 text-black relative z-10" strokeWidth={2} />
             </button>
@@ -195,7 +195,7 @@ export default function TestimonialsSection() {
             aria-label="Previous testimonial"
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="46" height="46" viewBox="0 0 46 46" fill="none" className="absolute">
-              <circle cx="23" cy="23" r="22.5" stroke="black" strokeOpacity="0.5" fill="white" />
+              <circle cx="23" cy="23" r="22.5" stroke="#dddddd" fill="white" />
             </svg>
             <ChevronLeft className="w-6 h-6 text-black relative z-10" strokeWidth={2} />
           </button>
@@ -205,7 +205,7 @@ export default function TestimonialsSection() {
             aria-label="Next testimonial"
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="46" height="46" viewBox="0 0 46 46" fill="none" className="absolute">
-              <circle cx="23" cy="23" r="22.5" stroke="black" strokeOpacity="0.5" fill="white" />
+              <circle cx="23" cy="23" r="22.5" stroke="#dddddd" fill="white" />
             </svg>
             <ChevronRight className="w-6 h-6 text-black relative z-10" strokeWidth={2} />
           </button>
