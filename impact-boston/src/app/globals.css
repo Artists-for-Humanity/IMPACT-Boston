@@ -16,39 +16,38 @@
   --breakpoint-lg: 1024px;
   --breakpoint-xl: 1440px;
 
-  /* purple primary */
-  --color-primary: #421656;
+   /* Brand palette */
+  --color-primary: #311e41;
+  --color-secondary: #563672;
+  --color-complementary: #e86834;
 
-  --color-primary-dark: #280d34;
-  --color-primary-darker: #0d0411;
+  --color-primary-light: #fcf9ff;
+  --color-secondary-light: #fefcff;
+  --color-complementary-light: #fffaf7;
 
-  --color-primary-light: #8e739a;
-  --color-primary-lighter: #d9d0dd;
+  /* Backgrounds */
+  --color-bg-lavender: #faf6fd;
+  --color-bg-dark: #0f0f0f;
 
-  /* pruple seconday */
-   --color-secondary: #6c3789;
-
-  --color-secondary-dark: #412152;
-  --color-secondary-darker: #160b1b;
-
-  --color-secondary-light: #a787b8;
-  --color-secondary-lighter: #e2d7e7;
-
-  /* orange accent */
-    --color-accent: #e86834;
-
-  --color-accent-dark: #8b3e1f;
-  --color-accent-darker: #2e150a;
-
-  --color-accent-light: #f1a485;
-  --color-accent-lighter: #fae1d6;
-
-  /* nuetrals */
-   --color-black: #000000;
+  /* Neutrals */
+  --color-black: #000000;
+  --color-grey: #333333;
   --color-white: #ffffff;
 
-  --color-grey-dark: #333333;
-  --color-grey-light: #faf6fd;
+  /* Borders / dividers */
+  --color-line-divider: #dddddd;
+  --color-text-grey-light: #b7b7b7;
+  --color-image-placeholder: #ededed;
+
+  /* Supporting tones */
+  --color-dusty-purple: #6c5778;
+
+  /* Opacity-based tokens */
+  --color-white-87: rgb(255 255 255 / 87%);
+  --color-white-67: rgb(255 255 255 / 67%);
+  --color-black-60: rgb(0 0 0 / 60%);
+  --color-inactive-tab: rgb(0 0 0 / 30%);
+  --color-line-divider-dark: rgb(183 183 183 / 16%);
 
 
 }
