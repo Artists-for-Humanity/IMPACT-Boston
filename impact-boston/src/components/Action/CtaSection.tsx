@@ -15,10 +15,11 @@ export default function CtaSection({
     iconSrc: string;
     iconWidth: number;
     iconHeight: number;
+  
   }[];
 }) {
   return (
-    <div className="md:flex">
+    <div className="md:flex max-w-[2000px] mx-auto">
       {panels.map((panel, index) => (
         <CtaPanel key={index} {...panel} />
       ))}
@@ -49,7 +50,7 @@ function CtaPanel({
 }) {
   return (
     <div className={wrapperClassName}>
-      <div className="py-14 px-10 flex flex-col gap-4 h-full justify-between">
+      <div className="py-14 px-10 flex flex-col gap-4 h-full justify-between ">
         <h3 className="h3 text-white">
           {title}
           {titleLine2 ? (
