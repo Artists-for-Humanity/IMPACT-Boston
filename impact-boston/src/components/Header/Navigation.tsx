@@ -13,7 +13,7 @@ import Link from "next/link";
 interface NavItem {
   label: string;
   link: string;
-  subItems?: { label: string; link: string }[];
+  subItems?: { label: string; link: string; description: string; }[];
 }
 
 interface NavigationProps {
@@ -26,36 +26,35 @@ const DEFAULT_NAV_ITEMS: NavItem[] = [
     label: "About",
     link: "/about",
     subItems: [
-      { label: "About Impact", link: "/AboutImpact" },
-      { label: "Board and Staff", link: "/BoardAndStaff" },
-      { label: "Resources", link: "/Resources" },
-      { label: "Blog", link: "/Blog" },
-      { label: "Accessibility", link: "/Accessibility" },
+      { label: "About Impact", link: "/AboutImpact", description: "Learn about our mission, vision and approach to self-defense." },
+      { label: "Board and Staff", link: "/BoardAndStaff", description: "Meet the people behind Impact." },
+      { label: "Resources", link: "/Resources", description: "Explore our collection of self-defense resources." },
+      { label: "Blog", link: "/Blog", description: "Read our latest articles and updates." },
+      { label: "Accessibility", link: "/Accessibility", description: "Learn about our commitment to accessibility." },
     ],
   },
   {
     label: "Programs",
     link: "/programs",
     subItems: [
-      { label: "Self-Defense Classes", link: "/SelfDefense" },
-      { label: "Schools & Colleges", link: "/SchoolsAndColleges" },
-      { label: "People With Disabilities", link: "/PeopleWithDisabilities" },
-      { label: "De-escalation", link: "/De-escalation" },
-      { label: "Community Organizations", link: "/CommunityOrganizations" },
-      { label: "Workplace Programs", link: "/WorkplacePrograms" },
-      { label: "Know Your Rights", link: "/KnowYourRights" },
-      { label: "Customized Programs", link: "/CustomizedPrograms" },
-
+      { label: "Self-Defense Classes", link: "/SelfDefense", description: "Learn about our self-defense classes." },
+      { label: "Schools & Colleges", link: "/SchoolsAndColleges", description: "Explore our programs for schools and colleges." },
+      { label: "People With Disabilities", link: "/PeopleWithDisabilities", description: "Discover resources for people with disabilities." },
+      { label: "De-escalation", link: "/De-escalation", description: "Learn about de-escalation techniques." },
+      { label: "Community Organizations", link: "/CommunityOrganizations", description: "Find out about our community partnerships." },
+      { label: "Workplace Programs", link: "/WorkplacePrograms", description: "Explore our workplace self-defense programs." },
+      { label: "Know Your Rights", link: "/KnowYourRights", description: "Learn about your rights in self-defense situations." },
+      { label: "Customized Programs", link: "/CustomizedPrograms", description: "Discover our customized self-defense programs." },
     ],
   },
   {
     label: "Learn more",
     link: "/learn-more",
     subItems: [
-      { label: "Fact Check Fridays", link: "/FactCheckFriday" },
-      { label: "Books by Meg Stone", link: "/BooksByMegStone" },
-      { label: "Press", link: "/Press" },
-      { label: "What is Empowerment", link: "/WhatIsEmpowerment" },
+      { label: "Fact Check Fridays", link: "/FactCheckFriday", description: "Stay informed with our weekly fact checks." },
+      { label: "Books by Meg Stone", link: "/BooksByMegStone", description: "Explore the works of our founder." },
+      { label: "Press", link: "/Press", description: "Read our latest press releases and media coverage." },
+      { label: "What is Empowerment", link: "/WhatIsEmpowerment", description: "Learn about the principles of empowerment." },
     ],
   },
 ];
@@ -105,14 +104,15 @@ export default function Navigation({
 
               {/* Dropdown */}
               {item.subItems && activeDropdown === item.label && (
-                <ul className="absolute top-full left-0 mt-1 w-52 bg-white border border-gray-100 shadow-lg py-1 z-50 ">
+                <ul className="absolute top-full right-[-30] mt-1 min-w-xl bg-white border border-gray-100 shadow-lg py-1 z-50 px-8 py-4 rounded-2xl grid grid-cols-2">
                   {item.subItems.map((sub) => (
                     <li key={sub.label}>
                       <a
                         href={sub.link}
-                        className="link block px-4 py-2.5 text-gray-600 hover:text-gray-900 hover:bg-gray-50 transition-colors duration-150"
+                        className="link block px-4 py-1 text-gray-600 hover:text-gray-900 hover:bg-gray-50 transition-colors duration-150"
                       >
-                        {sub.label}
+                        <p className="p1-bold text-secondary">{sub.label}</p>
+                        <p className="p2">{sub.description}</p>
                       </a>
                     </li>
                   ))}
