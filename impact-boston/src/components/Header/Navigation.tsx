@@ -37,18 +37,25 @@ const DEFAULT_NAV_ITEMS: NavItem[] = [
     label: "Programs",
     link: "/programs",
     subItems: [
-      { label: "In-Person Class Schedule", link: "/programs/in-person" },
-      { label: "Line Drawn", link: "/programs/line-drawn" },
-      { label: "Shelter In Safety", link: "/programs/shelter-in-safety" },
-      { label: "Community Collaborators", link: "/programs/community" },
+      { label: "Self-Defense Classes", link: "/SelfDefense" },
+      { label: "Schools & Colleges", link: "/SchoolsAndColleges" },
+      { label: "People With Disabilities", link: "/PeopleWithDisabilities" },
+      { label: "De-escalation", link: "/De-escalation" },
+      { label: "Community Organizations", link: "/CommunityOrganizations" },
+      { label: "Workplace Programs", link: "/WorkplacePrograms" },
+      { label: "Know Your Rights", link: "/KnowYourRights" },
+      { label: "Customized Programs", link: "/CustomizedPrograms" },
+
     ],
   },
   {
     label: "Learn more",
     link: "/learn-more",
     subItems: [
-      { label: "Class Descriptions", link: "/resources/class-descriptions" },
-      { label: "Accessibility Information", link: "/resources/accessibility" },
+      { label: "Fact Check Fridays", link: "/FactCheckFriday" },
+      { label: "Books by Meg Stone", link: "/BooksByMegStone" },
+      { label: "Press", link: "/Press" },
+      { label: "What is Empowerment", link: "/WhatIsEmpowerment" },
     ],
   },
 ];
