@@ -12,7 +12,7 @@ type DoubleProps = {
   cards: DoubleCard[];
 };
 
-export default function ContentTriple({ cards }: DoubleProps) {
+export default function ContentDouble({ cards }: DoubleProps) {
   return (
     <div className="mx-4 md:mx-8 lg:mx-36 py-8 md:py-10 lg:py-18">
       <Grid>

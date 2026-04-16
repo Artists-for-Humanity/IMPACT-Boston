@@ -27,6 +27,7 @@ const DEFAULT_NAV_ITEMS: NavItem[] = [
     link: "/about",
     subItems: [
       { label: "About Impact", link: "/AboutImpact" },
+      { label: "Board and Staff", link: "/BoardAndStaff" },
       { label: "Impact Blog", link: "/about/blog" },
       { label: "Employment", link: "/about/employment" },
       { label: "Supporters & Partners", link: "/about/partners" },

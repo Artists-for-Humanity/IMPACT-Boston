@@ -34,7 +34,7 @@ export default function Hero2({
           ) : null}
         </h1>
 
-        <p className="p1 col-span-full text-center text-grey">{description}</p>
+        <p className="p1 col-span-full lg:col-start-3 lg:col-span-8 text-center text-grey">{description}</p>
 
         <Image
           src={imageSrc}
