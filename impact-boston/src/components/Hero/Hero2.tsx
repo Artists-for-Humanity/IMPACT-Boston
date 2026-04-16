@@ -2,6 +2,7 @@ import Image from "next/image";
 import Grid from "../common/Grid";
 
 export default function Hero2({
+  tag,
   title,
   highlight,
   highlightColor = 'secondary',
@@ -9,6 +10,7 @@ export default function Hero2({
   imageSrc,
   imageAlt,
 }: {
+  tag?: string;
   title: string;
   highlight?: string;
   highlightColor?: 'primary' | 'secondary' | 'complementary';
@@ -24,9 +26,16 @@ export default function Hero2({
 
   const highlightClass = highlightClassMap[highlightColor];
 
+  console.log(tag);
+
   return (
     <div className="mx-4 md:mx-8 lg:mx-36 py-8 md:py-10 lg:py-18">
       <Grid>
+        {tag && (
+          <div className="sub-2 col-span-full flex justify-center text-black mb-4 ">
+            <div className="tag bg-secondary-light bg-opacity-50 p-2">{tag}</div>
+          </div>
+        )}
         <h1 className="h1 col-span-full text-center text-black">
           {title}{' '}
           {highlight ? (
