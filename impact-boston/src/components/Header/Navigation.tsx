@@ -28,9 +28,9 @@ const DEFAULT_NAV_ITEMS: NavItem[] = [
     subItems: [
       { label: "About Impact", link: "/AboutImpact" },
       { label: "Board and Staff", link: "/BoardAndStaff" },
-      { label: "Impact Blog", link: "/about/blog" },
-      { label: "Employment", link: "/about/employment" },
-      { label: "Supporters & Partners", link: "/about/partners" },
+      { label: "Resources", link: "/Resources" },
+      { label: "Blog", link: "/Blog" },
+      { label: "Accessibility", link: "/Accessibility" },
     ],
   },
   {
@@ -98,7 +98,7 @@ export default function Navigation({
 
               {/* Dropdown */}
               {item.subItems && activeDropdown === item.label && (
-                <ul className="absolute top-full left-0 mt-1 w-52 bg-white border border-gray-100 shadow-lg py-1 z-50">
+                <ul className="absolute top-full left-0 mt-1 w-52 bg-white border border-gray-100 shadow-lg py-1 z-50 ">
                   {item.subItems.map((sub) => (
                     <li key={sub.label}>
                       <a

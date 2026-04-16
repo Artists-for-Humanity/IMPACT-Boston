@@ -45,19 +45,20 @@ function DoubleCard({
   className?: string;
 }) {
   return (
-    <div className={className}>
-      <div className="flex flex-col gap-y-4">
-        <h3 className="h3 text-black">{title}</h3>
-        <p className="p2">{description}</p>
-      </div>
+   <div className={className}>
+  <div className="flex flex-col gap-y-4">
+    <h3 className="h3 text-black">{title}</h3>
+    <p className="p2">{description}</p>
+  </div>
 
-      <Image
-        src={imageSrc}
-        width={500}
-        height={500}
-        alt={imageAlt}
-        className="w-full h-auto"
-      />
-    </div>
+  <div className="relative w-full aspect-[6/3]">
+    <Image
+      src={imageSrc}
+      alt={imageAlt}
+      fill
+      className="object-cover"
+    />
+  </div>
+</div>
   );
 }
