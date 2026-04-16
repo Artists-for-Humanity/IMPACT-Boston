@@ -109,7 +109,7 @@ export default function Navigation({
                     <li key={sub.label}>
                       <a
                         href={sub.link}
-                        className="link block px-4 py-1 text-gray-600 hover:text-gray-900 hover:bg-gray-50 transition-colors duration-150"
+                        className="link block px-4 py-1 text-gray-600 hover:text-gray-900 hover:bg-gray-50 transition-colors duration-150 rounded-lg"
                       >
                         <p className="p1-bold text-secondary">{sub.label}</p>
                         <p className="p2">{sub.description}</p>
