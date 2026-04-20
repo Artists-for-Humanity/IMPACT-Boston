@@ -7,7 +7,7 @@ interface Highlight2Props {
     body: string[];
     ctaLabel: string;
     ctaHref: string;
-    supportingText: string;
+    supportingText?: string;
     backgroundColor?: string;
     textColor?: string;
 }
