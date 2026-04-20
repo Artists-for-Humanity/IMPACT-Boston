@@ -38,7 +38,12 @@ export default function Hero1Content({
 
       <div className="flex justify-center lg:justify-start lg:mt-auto w-full">
         <div className="grid grid-cols-6 md:grid-cols-6 lg:grid-cols-5 gap-6 w-full">
-          <Button href={ctaHref} variant="primary" size="lg">
+          <Button
+            href={ctaHref}
+            variant="primary"
+            size="lg"
+            className="w-full col-start-2 col-span-4 md:col-start-2 md:col-span-4 md:w-full lg:w-auto lg:col-start-auto lg:col-span-3"
+          >
             {ctaText}
           </Button>
         </div>

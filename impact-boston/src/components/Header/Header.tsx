@@ -8,12 +8,7 @@
 import { useState, useEffect } from 'react'
 import Logo from './Logo'
 import Navigation from './Navigation'
-
-interface NavItem {
-  label: string
-  link: string
-  subItems?: { label: string; link: string }[]
-}
+import type { NavItem } from './Navigation'
 
 interface HeaderProps {
   // Logo props

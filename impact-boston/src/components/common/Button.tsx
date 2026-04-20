@@ -12,9 +12,18 @@ interface ButtonProps {
   onClick?: () => void
   variant?: ButtonVariant
   size?: ButtonSize
+  showChevron?: boolean
   className?: string
   type?: 'button' | 'submit' | 'reset'
   disabled?: boolean
+}
+
+function ChevronIcon() {
+  return (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M9 18L15 12L9 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+    </svg>
+  )
 }
 
 export default function Button({
@@ -23,6 +32,7 @@ export default function Button({
   onClick,
   variant = 'primary',
   size = 'md',
+  showChevron = false,
   className = '',
   type = 'button',
   disabled = false,
@@ -38,23 +48,17 @@ export default function Button({
   const sizes: Record<ButtonSize, string> = {
     sm: 'px-3 py-0.5 text-sm',
     md: 'px-4 py-1 text-base',
-    lg: 'p-6 h-14 w-full col-start-2 col-span-4 md:col-start-2 md:col-span-4 md:p-6 md:w-full lg:h-18 lg:w-auto lg:col-start-auto lg:col-span-3',
+    lg: 'p-6 h-14 md:p-6 lg:h-18',
   }
 
   const classes = `${base} ${variants[variant]} ${sizes[size]} ${className}`
   const inlineStyles = {}
 
-  const ChevronIcon = () => (
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M9 18L15 12L9 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-    </svg>
-  )
-
   if (href) {
     return (
       <a href={href} className={classes} style={inlineStyles}>
         {children}
-        {size === 'lg' && <ChevronIcon />}
+        {(showChevron || size === 'lg') && <ChevronIcon />}
       </a>
     )
   }
@@ -68,7 +72,7 @@ export default function Button({
       style={inlineStyles}
     >
       {children}
-      {size === 'lg' && <ChevronIcon />}
+      {(showChevron || size === 'lg') && <ChevronIcon />}
     </button>
   )
 }
