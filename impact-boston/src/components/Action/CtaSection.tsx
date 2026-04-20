@@ -64,11 +64,11 @@ function CtaPanel({
         <p className="p1 text-white">{description}</p>
 
         <Button
-          className="col-span-full bg-white flex justify-between cursor-pointer py-4 lg:w-1/2"
+          className="col-span-full bg-white flex justify-between cursor-pointer py-4 lg:w-1/2 group"
           href={href}
         >
-          <p className="p1-bold text-black">{buttonText}</p>
-          <Image src={iconSrc} width={iconWidth} height={iconHeight} alt="" />
+          <p className="p1-bold text-black group-hover:text-white">{buttonText}</p>
+          <Image src={iconSrc} width={iconWidth} height={iconHeight} alt="" className="group-hover:invert" />
         </Button>
       </div>
     </div>
