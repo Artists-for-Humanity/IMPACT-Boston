@@ -3,6 +3,7 @@ import Hero2 from '@/components/Hero/Hero2';
 // import SideTabsPanel from '@/components/SideTabsPanel';
 import SideTabs from '@/components/TabsPanel/SideTabs';
 import CtaSection from '@/components/Action/CtaSection';
+import Split from '@/components/Content/Split';
 
 export default function SchoolAndColleges() {
   return (
@@ -353,7 +354,27 @@ export default function SchoolAndColleges() {
         },
          ]}
         />
-
+        <Split
+        backgroundColor='bg-bg-lavender'
+        title="Safety Skills are Life Skills."
+        description="IMPACT teaches age-appropriate comprehensive violence prevention programs and evidence-based safety trainings for Elementary, Middle, High School, and College-aged students. We teach students of all ages the skills to communicate their boundaries, foster healthy relationships, recognize and resist coercion, de-escalate conflicts, advocate for themselves and others and protect their bodies from harm."
+        cards={[
+            {
+            title: "For Students",
+            description:
+                "Empowerment Self-Defense, Healthy Relationships, Sex Education, Bystander Intervention, Online Safety, Peer Leadership for Abuse Prevention",
+            },
+            {
+            title: "For Educators",
+            description:
+                "De-escalation, Challenging Conversations for Abuse, Boundaries, Organizational Abuse Prevention Policy Development.",
+            },
+        ]}
+        topImageSrc="/images/schoolsAndColleges/skills1.png"
+        topImageAlt="Students participating in an IMPACT training session"
+        bottomImageSrc="/images/schoolsAndColleges/skills2.png"
+        bottomImageAlt="Children participating in an IMPACT workshop"
+        />
         
 
       <CtaSection
