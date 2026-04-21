@@ -1,8 +1,14 @@
 import Image from "next/image";
 import Grid from "../common/Grid";
 
+//possibly multiple tags
+type TagItem = {
+  text: string;
+  className?: string;
+};
+
 interface Hero2Props {
-  tag?: string;
+   tag?: string | TagItem[];
   title: string;
   highlight?: string;
   highlightColor?: 'primary' | 'secondary' | 'complementary';
@@ -34,10 +40,21 @@ export default function Hero2({
     <div className="mx-4 md:mx-8 lg:mx-36 py-8 md:py-10 lg:py-18">
       <Grid>
         {tag && (
-          <div className="sub-2 col-span-full flex justify-center text-black mb-4 ">
-            <div className="tag bg-secondary-light bg-opacity-50 p-2">{tag}</div>
+          <div className="sub-2 col-span-full flex justify-center text-black">
+            <div className="tag bg-secondary-light/50 p-2 flex items-center gap-2 rounded-full">
+              {typeof tag === "string" ? (
+                <span>{tag}</span>
+              ) : (
+                tag.map((item, idx) => (
+                  <span key={idx} className={item.className}>
+                    {item.text}
+                  </span>
+                ))
+              )}
+            </div>
           </div>
         )}
+
         <h1 className="h1 col-span-full text-center text-black">
           {title}{' '}
           {highlight ? (

@@ -11,8 +11,8 @@ export default function WorkplacePrograms() {
     <>
       <Hero2
         tag='Workplace Programs'
-        title="De-Escalate with Confidence"
-        description="IMPACT De-Escalation Training teaches practical, scenario-based skills for creating and maintaining safety in high-stress situations. Built for frontline workers, educators, and community members, our training prepares you to respond not just react, when someone becomes angry, threatening, or disruptive."
+        title="Team Building with a Purpose"
+        description="IMPACT offers fun, interactive, and practical self-defense and effective communication workshops that help employees increase their confidence and awareness. Employees can learn practical strategies to set boundaries, have challenging conversations, de-escalate potentially dangerous situations, and resist attempted violence. Whether you are addressing a specific concern or looking for an addition to your organization’s employee training program, IMPACT’s workplace programs can help."
         imageSrc="/images/workplacePrograms/placeholder.png"
         imageAlt="Group Pictures"
       />
@@ -57,8 +57,8 @@ export default function WorkplacePrograms() {
       cards={[
         {
           type: "default",
-          title: "Assertiveness/Boundary Setting",
-          description: "Our self-defense classes simulate scenarios of threat, intimidation and violence perpetrated by strangers and people we know. Classes are taught by a team of two instructors, one of whom takes on the role of a perpetrator. They wear a full suit of body armor so students can safely defend themselves using the same force needed in a real attack.",
+          title: "Boundary Setting",
+          description: "Students learn practical steps to identify, communicate, and reinforce their boundaries, as well as skills to negotiate effectively. Practicing these skills in realistic scenarios gives students the opportunity to learn how to stay calm and explain their needs in situations involving strangers and people they know.",
           bgClass: 'bg-complementary-light',
         },
         {
@@ -79,9 +79,9 @@ export default function WorkplacePrograms() {
     <Testimonial
       heading="Participant Spotlight"
       subheading="Hear From One of Our Participants"
-      quote="Meg Stone has written a powerful, accessible, and devastatingly acute analysis of the pervasiveness of gender-based violence and why our efforts to prevent it have failed, packed with expert insight drawn from her decades-long career and practical tips to empower women and others who are targeted. The Cost of Fear moved me, enraged me, and educated me. I don't think I'll ever stop thinking about it. I wish this book weren't necessary. But until we live in a better world, get this book."
-      author="Alex Marzano-Lesnevich"
-      authorTitle='author of "The Fact of a Body"'
+      quote="I thought the class was fantastic! I liked that there was an equal emphasis on physical presence, use of voice and awareness. Learning about statistics and the common behaviors of attackers was just as important to me as the hands on practice. The instructors were very convincing in their roles and created realistic scenarios. I’d definitely take another class if offered."
+      author="Employee"
+      authorTitle='Merrimack Pharmaceuticals'
     />
     <Highlight2
       title="The right training changes everything."
@@ -92,8 +92,6 @@ export default function WorkplacePrograms() {
       ctaLabel="Book a session"
       ctaHref="/Sessions"
       supportingText="Custom scheduling available. Most organizations book 4–6 weeks out."
-      // backgroundColor="var(--color-secondary)"
-      // textColor="var(--color-secondary-light)"
     />
     </>
   );

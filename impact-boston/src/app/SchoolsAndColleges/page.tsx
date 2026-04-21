@@ -298,60 +298,7 @@ export default function SchoolAndColleges() {
             },
         ],
         },
-        {
-        label: "Nonprofit",
-        content: [
-            {
-            type: "heading",
-            text: "Safety training that fits how nonprofits actually work",
-            },
-            {
-            type: "paragraph",
-            text: "IMPACT partners with nonprofit organizations to deliver flexible, customized safety and communication training that meets the unique demands of mission-driven work.",
-            },
-            {
-            type: "paragraph",
-            text: "From helping rape crisis counselors manage secondary trauma to equipping shelter workers with conflict de-escalation skills and empowering child care providers to challenge potential abusers, IMPACT tailors its programs to your organization's specific goals, offering large-group demonstrations or hands-on interactive sessions that integrate seamlessly into your existing training structure.",
-            },
-        ],
-        },
-        {
-        label: "Home Visitors",
-        content: [
-            {
-            type: "heading",
-            text: "2 specialized programs for Home Visitors",
-            },
-            {
-            type: "paragraph",
-            text: "Home visitors face a unique challenge. You're in someone else's space, often alone, with no way to fully predict what you'll walk into. These 2 programs were built specifically for that reality.",
-            },
-            {
-            type: "subheading",
-            text: "Verbal Self-Defense & Assertive Communication",
-            },
-            {
-            type: "paragraph",
-            text: "This program covers everything you need to handle tension before it becomes danger. You'll practice de-escalation strategies for diffusing hostility in the moment, boundary-setting techniques for holding your ground with confidence, and skills for navigating difficult or uncomfortable conversations without backing down. Everything is learned through realistic scenario-based practice — not lectures, not handouts.",
-            },
-            {
-            type: "paragraph",
-            text: "Best for teams looking to build everyday communication confidence and a strong first line of response.",
-            },
-            {
-            type: "subheading",
-            text: "Verbal & Physical Self-Defense",
-            },
-            {
-            type: "paragraph",
-            text: "Everything in the verbal training, plus the physical skills to protect yourself if it ever comes to that. Physical defense is always the last resort; the goal is always to de-escalate and exit safely. But knowing you have those skills changes how you carry yourself in the field. Participants leave with more than techniques. They leave with a different kind of confidence.",
-            },
-            {
-            type: "paragraph",
-            text: "Best for home visitors in higher-risk environments, or organizations that want to give their teams the most complete preparation possible.",
-            },
-        ],
-        },
+       
          ]}
         />
         <Split
