@@ -12,7 +12,7 @@ export default function AboutImpact() {
     <>
       <Hero2
         title="About"
-        highlight="Impact"
+        highlight="IMPACT"
         highlightColor="secondary"
         description="IMPACT believes everyone has the right to be safe. Our self-defense programs equip individuals and communities with practical, inclusive safety skills. Our abuse prevention programs equip organizations with the tools to create safe environments and disrupt abuse. And our educational programs equip youth with the knowledge to identify healthy relationships and sexual encounters, as well as advocate for themselves in unhealthy situations."
         imageSrc="/images/aboutImpact/group1.png"

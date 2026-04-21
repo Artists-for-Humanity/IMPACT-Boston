@@ -13,8 +13,8 @@ interface Hero2Props {
   highlight?: string;
   highlightColor?: 'primary' | 'secondary' | 'complementary';
   description: string;
-  imageSrc: string;
-  imageAlt: string;
+  imageSrc?: string;
+  imageAlt?: string;
 }
 
 export default function Hero2({
@@ -58,19 +58,21 @@ export default function Hero2({
         <h1 className="h1 col-span-full text-center text-black">
           {title}{' '}
           {highlight ? (
-            <span className={`${highlightClass} uppercase`}>{highlight}</span>
+            <span className={highlightClass}>{highlight}</span>
           ) : null}
         </h1>
 
         <p className="p1 col-span-full lg:col-start-3 lg:col-span-8 text-center text-grey">{description}</p>
 
-        <Image
-          src={imageSrc}
-          width={500}
-          height={500}
-          alt={imageAlt}
-          className="col-span-full w-full h-auto"
-        />
+        {imageSrc && (
+          <Image
+            src={imageSrc}
+            width={500}
+            height={500}
+            alt={imageAlt ?? ""}
+            className="col-span-full w-full h-auto"
+          />
+        )}
       </Grid>
     </div>
   );
