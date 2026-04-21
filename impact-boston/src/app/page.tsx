@@ -1,7 +1,7 @@
-import Hero1Section from "@/components/sections/Hero-1/Hero1Section";
-import Hero1Headline, {
+import Hero1, {
+  Hero1Headline,
   Hero1HeadlinePart,
-} from "@/components/sections/Hero-1/Hero1Headline";
+} from "@/components/Hero/Hero1";
 import ActionPanel from "@/components/ActionPanel";
 import SideTabsPanel from "@/components/SideTabsPanel";
 import HighlightsSection from "@/components/HighlightsSection";
@@ -10,7 +10,7 @@ import TestimonialsSection from "@/components/TestimonialsSection";
 export default function IndexPage() {
   return (
     <main>
-      <Hero1Section
+      <Hero1
         headline={
           <Hero1Headline>
             <Hero1HeadlinePart color="black">Courage </Hero1HeadlinePart>
