@@ -106,15 +106,15 @@ body {
 
   .p1 {
     @apply font-normal tracking-[0em] text-[16px] leading-normal
-           md:text-[16px]
-           lg:text-[18px];
+           md:text-[16px] md:leading-normal
+           lg:text-[18px] lg:leading-normal;
     font-family: var(--font-ibm-plex-sans), sans-serif;
   }
 
   .p1-bold {
     @apply font-medium tracking-[0em] text-[16px] leading-normal
-           md:text-[16px]
-           lg:text-[18px];
+           md:text-[16px] md:leading-normal
+           lg:text-[18px] lg:leading-normal;
     font-family: var(--font-ibm-plex-sans), sans-serif;
   }
 

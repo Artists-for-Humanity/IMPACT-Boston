@@ -55,14 +55,16 @@ export default function Hero2({
           </div>
         )}
 
-        <h1 className="h1 col-span-full text-center text-black">
-          {title}{' '}
-          {highlight ? (
-            <span className={highlightClass}>{highlight}</span>
-          ) : null}
-        </h1>
+        <div className="col-span-full lg:col-start-3 lg:col-span-8 flex flex-col gap-6 md:gap-4 lg:gap-6">
+          <h1 className="h1 text-center text-black">
+            {title}{' '}
+            {highlight ? (
+              <span className={highlightClass}>{highlight}</span>
+            ) : null}
+          </h1>
 
-        <p className="p1 col-span-full lg:col-start-3 lg:col-span-8 text-center text-grey">{description}</p>
+          <p className="p1 text-center text-grey">{description}</p>
+        </div>
 
         {imageSrc && (
           <Image
