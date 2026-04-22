@@ -18,9 +18,8 @@ export default function Testimonial({
     backgroundColor,
 }: TestimonialProps) {
     return (
-
-
-        <Grid className={` ${backgroundColor ? backgroundColor : ''}`}>
+        <div className={` ${backgroundColor ? backgroundColor : ''}`}>
+        <Grid >
 
             <div className="col-span-full text-center flex flex-col space-evenly gap-8">
                 <div>
@@ -36,6 +35,7 @@ export default function Testimonial({
             </div>
         
         </Grid>
+        </div>
      
     )
 }
