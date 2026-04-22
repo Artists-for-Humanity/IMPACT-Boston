@@ -17,6 +17,7 @@ interface SingleContentProps {
   reverse?: boolean;
   purchaseLink?: { href: string; text: string };
   className?: string;
+  backgroundColor?: string;
 }
 
 export default function SingleContent({
@@ -28,6 +29,7 @@ export default function SingleContent({
   reverse = false,
   purchaseLink,
   className,
+  backgroundColor
 }: SingleContentProps) {
   const imageCol = reverse
     ? 'col-span-full lg:col-span-6 lg:col-start-1'
@@ -38,7 +40,7 @@ export default function SingleContent({
     : 'col-span-full not-last:lg:col-span-5';
 
   return (
-    <div className={`${className}`}>
+    <div className={`${className} ${backgroundColor ? backgroundColor : ''}`}>
       <Grid>
         {reverse && (
           <div className={`${imageCol} w-full object-cover md:w-full md:h-auto`}>

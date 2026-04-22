@@ -16,6 +16,7 @@ export default function BooksByMeg() {
       />
 
       <SingleContent
+        backgroundColor='bg-primary-light'
         title="The Cost of Fear"
         paragraphs={[
           { text: "IMPACT has been teaching solutions for safe living since 1971.  We provide realistic personal safety training that gives people the skills to respond appropriately to threatening situations in the moment of fear or intimidation. We also collaborate with schools and organizations to create programs that proactively prevent abuse. IMPACT’s prevention programs emphasize giving people the tools to manage their stress responses so they can intervene effectively when they observe risky situations. Too often abuse goes unchallenged because people don’t feel safe speaking up. IMPACT programs help people increase their ability to safely advocate for themselves and others." }
@@ -29,6 +30,7 @@ export default function BooksByMeg() {
       />
 
       <SingleContent
+        backgroundColor='bg-primary-light'
         title="Don’t Fight Back"
         paragraphs={[
           { text: "IMPACT has been teaching solutions for safe living since 1971.  We provide realistic personal safety training that gives people the skills to respond appropriately to threatening situations in the moment of fear or intimidation. We also collaborate with schools and organizations to create programs that proactively prevent abuse. IMPACT’s prevention programs emphasize giving people the tools to manage their stress responses so they can intervene effectively when they observe risky situations. Too often abuse goes unchallenged because people don’t feel safe speaking up. IMPACT programs help people increase their ability to safely advocate for themselves and others." }
@@ -48,6 +50,7 @@ export default function BooksByMeg() {
             quote="Meg Stone has written a powerful, accessible, and devastatingly acute analysis of the pervasiveness of gender-based violence and why our efforts to prevent it have failed, packed with expert insight drawn from her decades-long career and practical tips to empower women and others who are targeted. The Cost of Fear moved me, enraged me, and educated me. I don’t think I’ll ever stop thinking about it. I wish this book weren’t necessary. But until we live in a better world, get this book."
             author="Alex Marzano-Lesnevich"
             authorTitle={'author of \u2018The Fact of a Body\u2019'}
+            backgroundColor='bg-complementary-light'
           />
     </>
   );
