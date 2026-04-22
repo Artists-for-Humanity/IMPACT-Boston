@@ -1,8 +1,104 @@
+'use client';
 
 import Hero2 from '@/components/Hero/Hero2';
 import SideTabs from '@/components/TabsPanel/SideTabs';
 import Highlight2 from '@/components/Highlights/Highlight2';
 import CenterImage from '@/components/common/CenterImage';
+import List from '@/components/CommunityCollab/List';
+
+const collaborators = [
+  "Andover High School",
+  "Babson College",
+  "Belmonte Saugus Middle School",
+  "Berklee School of Music",
+  "Beverly High School",
+  "Boston Community Leadership Academy",
+  "Boston Green Academy",
+  "Boston International High School",
+  "Brighton High School",
+  "Brimmer and May School",
+  "Brockton High School",
+  "Buckingham Browne & Nichols Summer Camp",
+  "Buckingham Browne & Nichols School",
+  "Cambridge School of Weston",
+  "Camp Fernwood",
+  "CASH High School",
+  "Charlestown High School",
+  "Commonwealth School",
+  "Curley Middle School",
+  "Dana Hall School",
+  "East Boston High School",
+  "Edwards Middle School",
+  "The English High School",
+  "Everett High School",
+  "Excel High School",
+  "Fenway High School",
+  "Fontbonne Academy",
+  "Frederick Middle School",
+  "Gardner Pilot Academy",
+  "Girls Reflecting Our World Mentorship (GROW)",
+  "Groton School",
+  "Harvard Business School",
+  "Harvard Law School",
+  "Haverhill High School",
+  "Henderson Inclusion School",
+  "Higginson-Lewis Middle School",
+  "International School of Boston",
+  "Jackson Mann Middle School",
+  "Jeremiah E Burke High School",
+  "Joseph Lee K-8 School",
+  "Josiah Quincy Upper School",
+  "Lasell University",
+  "Lawrence Academy",
+  "Lesley University",
+  "Lincoln-Sudbury High School",
+  "Lyndon Pilot School",
+  "Madison Park Technical Vocational High School",
+  "Malden Catholic High School",
+  "Malden High School",
+  "McCormack Middle School",
+  "McKinley Elementary School",
+  "McKinley South End Academy",
+  "Medfield High School",
+  "Medford High School",
+  "Middlesex School",
+  "Mildred Ave Middle School",
+  "Mt. Alvernia High School",
+  "Nashoba Brooks School",
+  "New Mission High School",
+  "Newton Country Day School",
+  "Newton North High School",
+  "Okemo Mountain School",
+  "Orchard Gardens Middle School",
+  "Perkins School for the Blind",
+  "Pinkerton Academy",
+  "POST Academy",
+  "Putnam Avenue Upper School",
+  "Quincy Upper High School",
+  "Richard J Murphy School",
+  "Riverdale Elementary School",
+  "Rivers School",
+  "Salem State University",
+  "Saugus High School",
+  "SEEM Collaborative",
+  "Simmons College",
+  "Somerville High School",
+  "Spaulding Hospital",
+  "St. Mark’s School",
+  "Stoneham High School",
+  "TechBoston Academy",
+  "Trotter Middle School",
+  "Tufts University",
+  "Umana Middle School",
+  "Up Academy Dorchester",
+  "Waltham High School",
+  "Warren Prescott Middle School",
+  "Wellesley High School",
+  "Wheaton College",
+  "Williams College",
+  "Winsor School",
+  "Woburn High School"
+];
 
 export default function SchoolAndColleges() {
   return (
@@ -100,6 +196,13 @@ export default function SchoolAndColleges() {
     imageSrc="/images/de-escalation/placeholder.png"
     imageAlt="Group Pictures" 
 />
+
+    <List
+      heading="Community Collaborators"
+      buttonText="See All"
+      backgroundColor="bg-complementary-light"
+      listItems={collaborators}
+    />
 
       
  <Highlight2
