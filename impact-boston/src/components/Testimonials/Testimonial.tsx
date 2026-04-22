@@ -19,16 +19,17 @@ export default function Testimonial({
 }: TestimonialProps) {
     return (
 
+
         <Grid className={` ${backgroundColor ? backgroundColor : ''}`}>
+
             <div className="col-span-full text-center flex flex-col space-evenly gap-8">
                 <div>
                     <h3 className="h3">{heading}</h3>
                     <p className="p2">{subheading}</p>
                 </div>
-                <div>
-                    <p className="p1">{quote}</p>
-                </div>
-                <div>
+                
+                <div className="flex flex-col space-evenly gap-4 p-4  bg-white">
+                     <p className="p1">{quote}</p>
                     <p className="p2 font-bold">{author}</p>
                     <p className="p2">{authorTitle}</p>
                 </div>
