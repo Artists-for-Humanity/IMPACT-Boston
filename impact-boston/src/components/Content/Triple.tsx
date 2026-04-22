@@ -38,7 +38,6 @@ export default function Triple({
   cards,
 }: TripleProps) {
   return (
-    <div className="mx-4 md:mx-8 lg:mx-36 py-8 md:py-10 lg:py-18">
       <Grid>
         <h2 className="h2 col-span-full">{title}</h2>
 
@@ -51,7 +50,6 @@ export default function Triple({
           ))}
         </div>
       </Grid>
-    </div>
   );
 }
 

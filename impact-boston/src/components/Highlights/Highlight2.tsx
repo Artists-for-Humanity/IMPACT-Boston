@@ -28,7 +28,7 @@ export default function Highlight2({
 
     return (
         <div
-            className="px-4 md:px-8 lg:px-36 py-8 md:py-10 lg:py-18"
+            className=""
             style={containerStyles}
         >
         <Grid>

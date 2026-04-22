@@ -13,7 +13,7 @@ export default function CenterImage({
   className = "",
 }: CenterImageProps) {
   return (
-    <div className={`mx-4 md:mx-8 lg:mx-36 py-8 md:py-10 lg:py-18 ${className}`}>
+    <div className={`${className}`}>
       <Grid>
         <div className="col-span-full">
           <div className="relative w-full h-75 md:h-100 lg:h-130">

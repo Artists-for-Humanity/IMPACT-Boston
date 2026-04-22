@@ -14,7 +14,6 @@ type DoubleProps = {
 
 export default function ContentDouble({ cards }: DoubleProps) {
   return (
-    <div className="mx-4 md:mx-8 lg:mx-36 py-8 md:py-10 lg:py-18">
       <Grid>
         {cards.map((card) => (
           <DoubleCard
@@ -27,7 +26,6 @@ export default function ContentDouble({ cards }: DoubleProps) {
           />
         ))}
       </Grid>
-    </div>
   );
 }
 

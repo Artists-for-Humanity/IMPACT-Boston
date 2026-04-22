@@ -9,7 +9,7 @@ export default function Footer() {
 
   return (
     <footer className="w-full bg-black text-white">
-      <div className="flex flex-col items-center gap-12 mx-4 md:mx-8 lg:mx-36 pt-16 pb-8 md:pt-[88px] md:pb-[32px] lg:pb-[88px]">
+      <div className=" ">
         {/* Top Section - Contact Info & Form */}
         <Grid className="w-full">
           {/* Left Column - IMPACT Wordmark & Contact Info */}

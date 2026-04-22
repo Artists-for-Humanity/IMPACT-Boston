@@ -8,7 +8,7 @@ type GridProps = {
 const Grid: React.FC<GridProps> = ({ children, className = '' }) => {
   return (
     <div
-      className={`grid grid-cols-4 gap-10 md:grid-cols-8 md:gap-4 lg:grid-cols-12 lg:gap-6 max-w-[1920px] mx-auto ${className}`}
+      className={`grid grid-cols-4 gap-10 md:grid-cols-8 md:gap-4 lg:grid-cols-12 lg:gap-6 max-w-[1920px] mx-auto px-4 md:px-8 lg:px-36 py-8 md:py-10 lg:py-18${className}`}
     >
       {children}
     </div>
