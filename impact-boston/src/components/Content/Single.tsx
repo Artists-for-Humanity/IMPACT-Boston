@@ -1,5 +1,6 @@
 import Grid from '@/components/common/Grid';
 import Image from 'next/image';
+import Link from 'next/link';
 
 interface Paragraph {
   text: string;
@@ -14,6 +15,7 @@ interface SingleContentProps {
   imageSrc: string;
   imageAlt: string;
   reverse?: boolean;
+  purchaseLink?: { href: string; text: string };
   className?: string;
 }
 
@@ -24,6 +26,7 @@ export default function SingleContent({
   imageSrc,
   imageAlt,
   reverse = false,
+  purchaseLink,
   className,
 }: SingleContentProps) {
   const imageCol = reverse
@@ -73,6 +76,11 @@ export default function SingleContent({
                 {para.text}
               </p>
             ))}
+            {purchaseLink && (
+              <Link href={purchaseLink.href} target="_blank" rel="noopener noreferrer" className="p1-bold underline">
+                {purchaseLink.text}
+              </Link>
+            )}
           </div>
         </div>
 
