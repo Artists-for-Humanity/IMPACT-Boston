@@ -30,7 +30,7 @@ export default function Split({
   className = "",
 }:SplitProps) {
   return (
-    <div className={`px-4 md:px-8 lg:px-36 py-8 md:py-10 lg:py-18 ${backgroundColor} ${className}`}>
+    <div className={` ${backgroundColor} ${className}`}>
       <Grid>
         <div className="col-span-full lg:col-span-5 flex flex-col justify-between">
             <div>

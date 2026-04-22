@@ -152,7 +152,6 @@ function StatementSection({
 }) {
   return (
     <div className={backgroundClassName}>
-      <div className="mx-4 md:mx-8 lg:mx-36 py-8 md:py-10 lg:py-18 "> 
       <Grid >
         <h2 className="h2 col-span-full">{title}</h2>
         <p className="p1 col-span-full">{description}</p>
@@ -165,7 +164,6 @@ function StatementSection({
         />
       </Grid>
       </div>
-    </div>
   );
 }
 

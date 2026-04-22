@@ -6,6 +6,7 @@ interface TestimonialProps {
     quote: string;
     author: string;
     authorTitle: string;
+    backgroundColor?: string;
 }
 
 export default function Testimonial({
@@ -14,10 +15,11 @@ export default function Testimonial({
     quote,
     author,
     authorTitle,
+    backgroundColor,
 }: TestimonialProps) {
     return (
-        <div className="mx-4 md:mx-8 lg:mx-36 py-8 md:py-10 lg:py-18">
-        <Grid>
+
+        <Grid className={` ${backgroundColor ? backgroundColor : ''}`}>
             <div className="col-span-full text-center flex flex-col space-evenly gap-8">
                 <div>
                     <h3 className="h3">{heading}</h3>
@@ -33,6 +35,6 @@ export default function Testimonial({
             </div>
         
         </Grid>
-        </div>
+     
     )
 }

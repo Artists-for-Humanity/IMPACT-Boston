@@ -38,7 +38,7 @@ export default function SingleContent({
     : 'col-span-full not-last:lg:col-span-5';
 
   return (
-    <div className={`mx-4 md:mx-8 lg:mx-36 py-8 md:py-10 lg:py-18 ${className}`}>
+    <div className={`${className}`}>
       <Grid>
         {reverse && (
           <div className={`${imageCol} w-full object-cover md:w-full md:h-auto`}>

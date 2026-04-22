@@ -67,7 +67,7 @@ export default function SideTabs({ tabs }: { tabs: Tab[] }) {
   };
 
   return (
-    <div className="mx-4 py-8 md:mx-8 md:py-10 lg:mx-36 lg:py-18">
+    <div className="">
       <Grid>
         <div className="scrollbar-hide relative col-span-full flex overflow-x-auto overflow-y-hidden lg:col-span-5 lg:flex-col">
           <div

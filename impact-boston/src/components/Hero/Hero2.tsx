@@ -37,7 +37,6 @@ export default function Hero2({
   console.log(tag);
 
   return (
-    <div className="mx-4 md:mx-8 lg:mx-36 py-8 md:py-10 lg:py-18">
       <Grid>
         {tag && (
           <div className="sub-2 col-span-full flex justify-center text-black">
@@ -76,6 +75,5 @@ export default function Hero2({
           />
         )}
       </Grid>
-    </div>
   );
 }

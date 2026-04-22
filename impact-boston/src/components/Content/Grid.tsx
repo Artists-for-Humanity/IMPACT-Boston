@@ -23,7 +23,7 @@ export default function GridContent({
   members,
 }: GridContentProps) {
   return (
-    <div className={`mx-4 md:mx-8 lg:mx-36 py-8 md:py-10 lg:py-18 ${className}`}>
+    <div className={` ${className}`}>
       <Grid>
         <h3 className="h3 col-span-full lg:col-span-6">{title}</h3>
 
@@ -65,6 +65,9 @@ export default function GridContent({
             </div>
           </div>
         ))}
+
+
+
       </Grid>
     </div>
   );
