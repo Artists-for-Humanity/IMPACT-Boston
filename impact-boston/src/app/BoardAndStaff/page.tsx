@@ -2,8 +2,6 @@
 import Hero2 from '@/components/Hero/Hero2';
 import SingleContent from '@/components/Content/Single';
 import GridContent from '@/components/Content/Grid';
-import { Grid } from 'lucide-react';
-
 
 
 export default function AboutImpact() {
