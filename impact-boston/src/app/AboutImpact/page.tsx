@@ -6,6 +6,8 @@ import ContentDouble from '@/components/Content/Double';
 import ContentTriple from '@/components/Content/Triple';
 import CtaSection from '@/components/Action/CtaSection';
 
+import BlockWithCards from '@/components/Content/Cards';
+
 
 export default function AboutImpact() {
   return (
@@ -72,7 +74,56 @@ export default function AboutImpact() {
         backgroundClassName="bg-[#FAF6FD]"
       />
 
+      <BlockWithCards
+        title="Empowerment through Education"
+        subtitle="Building skills, confidence, and safer communities through targeted education"
+        description="Beyond its core self-defense classes, IMPACT Boston offers a wide range of educational programs designed to equip people with the skills and confidence to advocate for their own safety and the well-being of their communities. Through workshops in schools, community organizations, and workplaces, participants learn practical tools such as assertive communication, conflict de-escalation, and bystander intervention. Programs are tailored for diverse groups—including youth, people with disabilities, and professionals in human service fields—using realistic, scenario-based training that helps individuals respond effectively in challenging situations. By combining physical self-protection with education about healthy relationships, boundaries, and community responsibility, IMPACT empowers participants to build safer environments for themselves and others."
+        backgroundColor="#fff"
+        cards={[
+          {
+            title: "8+ Programs Strengthening Safer Communities",
+            contentBlocks: [
+              {
+                type: "tags",
+                tags: [
+                  "Self-Defense Classes",
+                  "Schools & Colleges",
+                  "De-escalation",
+                  "People With Disabilities",
+                  "Community Organizations",
+                  "Know Your Rights & Activist Safety",
+                  "Customized Programs",
+                ],
+              },
+            ],
+            backgroundColor: "bg-complementary-light",
+          },
+          {
+            title: "70,000+ lives impacted since 1992",
+            contentBlocks: [
+              {
+                type: "text",
+                content:
+                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam lobortis nisl sed luctus laoreet. Interdum et malesuada fames ac ante ipsum primis in faucibus. Proin eros nisl, dignissim sit amet nisl vel, feugiat con",
+              },
+            ],
+            backgroundColor: "bg-primary-light",
+          },
+          {
+            title: "600+ classes annually, reaching 1,800+ students.",
+            contentBlocks: [
+              {
+                type: "text",
+                content:
+                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam lobortis nisl sed luctus laoreet. Interdum et malesuada fames ac ante ipsum primis in faucibus. Proin eros nisl, dignissim sit amet nisl vel, feugiat con",
+              },
+            ],
+            backgroundColor: "bg-secondary-light",
+          },
+        ]}
+      />
 
+{/* 
       <ContentTriple
         title="Empowerment through Education"
         subtitle="Building skills, confidence, and safer communities through targeted education"
@@ -105,7 +156,7 @@ export default function AboutImpact() {
             bgClass: "bg-secondary-light",
           },
         ]}
-      />
+      /> */}
 
       <CtaSection
         panels={[

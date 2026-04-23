@@ -1,5 +1,6 @@
 import Grid from "../common/Grid";
 
+
 type DefaultCard = {
   type: "default";
   title: string;
