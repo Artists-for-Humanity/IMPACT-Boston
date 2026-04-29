@@ -105,7 +105,8 @@ export default function Navigation({
 
               {/* Dropdown */}
               {item.subItems && activeDropdown === item.label && (
-                <ul className="absolute top-full right-[-30] mt-1 min-w-xl bg-white border border-gray-100 shadow-lg py-1 z-50 px-8 py-4 rounded-2xl grid grid-cols-2">
+                <div className="absolute top-full right-[-30] pt-2 z-50">
+                <ul className="min-w-xl bg-white border border-gray-100 shadow-lg z-50 px-8 py-4 rounded-2xl grid grid-cols-2">
                   {item.subItems.map((sub) => (
                     <li key={sub.label}>
                       <a
@@ -118,6 +119,7 @@ export default function Navigation({
                     </li>
                   ))}
                 </ul>
+                </div>
               )}
             </li>
           );
