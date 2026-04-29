@@ -7,6 +7,22 @@ interface Paragraph {
   bold?: boolean;
 }
 
+interface ThumbnailImage {
+  type: 'image';
+  label: string;
+  imageSrc: string;
+  imageAlt: string;
+}
+
+interface ThumbnailVideo {
+  type: 'video';
+  label: string;
+  videoSrc: string;
+  title: string;
+}
+
+type Thumbnail = ThumbnailImage | ThumbnailVideo;
+
 interface SingleContentProps {
   title: string;
   paragraphs: Paragraph[];
@@ -18,6 +34,8 @@ interface SingleContentProps {
   purchaseLink?: { href: string; text: string };
   className?: string;
   backgroundColor?: string;
+  gridClassName?: string;
+  thumbnails?: Thumbnail[];
 }
 
 export default function SingleContent({
@@ -29,7 +47,9 @@ export default function SingleContent({
   reverse = false,
   purchaseLink,
   className,
-  backgroundColor
+  backgroundColor,
+  gridClassName,
+  thumbnails
 }: SingleContentProps) {
   const imageCol = reverse
     ? 'col-span-full lg:col-span-6 lg:col-start-1'
@@ -41,7 +61,7 @@ export default function SingleContent({
 
   return (
     <div className={`${className} ${backgroundColor ? backgroundColor : ''}`}>
-      <Grid>
+      <Grid className={gridClassName}>
         {reverse && (
           <div className={`${imageCol} w-full object-cover md:w-full md:h-auto`}>
             <div
@@ -114,13 +134,40 @@ export default function SingleContent({
                 display: 'block',
                 width: '100%',
                 height: '400px',
-                objectFit: 'cover', 
+                objectFit: 'cover',
                 borderTopLeftRadius: 0,
                 borderTopRightRadius: 0,
               }}
             />
           </div>
         )}
+
+        {thumbnails && thumbnails.map((thumb, idx) => (
+          <div key={idx} className="col-span-4 flex flex-col gap-2">
+            <p className="p1-bold text-left text-grey">{thumb.label}</p>
+            {thumb.type === 'image' ? (
+              <Image
+                src={thumb.imageSrc}
+                width={1000}
+                height={1000}
+                alt={thumb.imageAlt}
+                className="w-full object-cover"
+                style={{ height: '210px', objectFit: 'cover' }}
+              />
+            ) : (
+              <div className="relative w-full" style={{ height: '210px' }}>
+                <iframe
+                  src={thumb.videoSrc}
+                  title={thumb.title}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerPolicy="strict-origin-when-cross-origin"
+                  allowFullScreen
+                  className="absolute inset-0 w-full h-full"
+                />
+              </div>
+            )}
+          </div>
+        ))}
       </Grid>
     </div>
   );
