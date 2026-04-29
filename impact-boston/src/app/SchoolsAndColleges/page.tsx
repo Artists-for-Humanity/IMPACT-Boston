@@ -1,6 +1,5 @@
 
 import Hero2 from '@/components/Hero/Hero2';
-// import SideTabsPanel from '@/components/SideTabsPanel';
 import SideTabs from '@/components/TabsPanel/SideTabs';
 import CtaSection from '@/components/Action/CtaSection';
 import Split from '@/components/Content/Split';
