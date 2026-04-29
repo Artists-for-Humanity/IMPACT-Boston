@@ -51,15 +51,22 @@ export default function SingleContent({
                 background: 'linear-gradient(to right, #E36A38 0%, #E36A38 22%, #874E9F 22%, #874E9F 86%, #462458 86%, #462458 100%)',
               }}
             />
-            <Image
+             <Image
               src={imageSrc}
-              width={5000}
-              height={5000}
+              width={1000}
+              height={1000}
               alt={imageAlt}
-              className=""
+              className="object-cover"
               loading="eager"
               priority={true}
-              style={{ display: 'block', width: '100%', height: 'auto', borderTopLeftRadius: 0, borderTopRightRadius: 0 }}
+              style={{
+                display: 'block',
+                width: '100%',
+                height: '400px', 
+                objectFit: 'cover',
+                borderTopLeftRadius: 0,
+                borderTopRightRadius: 0,
+              }}
             />
           </div>
         )}
@@ -95,15 +102,22 @@ export default function SingleContent({
                 background: 'linear-gradient(to right, #E36A38 0%, #E36A38 22%, #874E9F 22%, #874E9F 86%, #462458 86%, #462458 100%)',
               }}
             />
-            <Image
+             <Image
               src={imageSrc}
-              width={5000}
-              height={5000}
+              width={1000}
+              height={1000}
               alt={imageAlt}
-              className=""
+              className="object-cover"
               loading="eager"
               priority={true}
-              style={{ display: 'block', width: '100%', height: 'auto', borderTopLeftRadius: 0, borderTopRightRadius: 0 }}
+              style={{
+                display: 'block',
+                width: '100%',
+                height: '400px',
+                objectFit: 'cover', 
+                borderTopLeftRadius: 0,
+                borderTopRightRadius: 0,
+              }}
             />
           </div>
         )}
