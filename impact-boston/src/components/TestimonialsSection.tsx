@@ -120,7 +120,7 @@ export default function TestimonialsSection() {
               What People are Saying
             </h2>
             <p className="p2 text-[#333] text-center md:text-center lg:text-left">
-              Hear from 20 people who've worked with us.
+              Hear from 20 people who&apos;ve worked with us.
             </p>
           </div>
 
@@ -176,7 +176,7 @@ export default function TestimonialsSection() {
                   <div className="px-4 py-8 lg:p-8">
                     {/* Quote */}
                     <p className="p1 text-[#000] lg:text-[#333]">
-                      "{testimonial.quote}
+                      &ldquo;{testimonial.quote}
                     </p>
                   </div>
                 </div>

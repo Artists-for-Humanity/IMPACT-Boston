@@ -53,7 +53,7 @@ export default function ActionPanel() {
                 Hire Us to Come to You
               </h4>
               <p className="p2 text-white/87 max-w-[100%]">
-                If you're a school, organization, workplace, or other group,
+                If you&apos;re a school, organization, workplace, or other group,
                 explore our classes and programs.
               </p>
             </div>
@@ -79,7 +79,7 @@ export default function ActionPanel() {
                 Join a Class Today
               </h4>
               <p className="p2 text-white/87 max-w-[100%]">
-                If you're an individual seeking a self-defense class, explore
+                If you&apos;re an individual seeking a self-defense class, explore
                 options and register here online today.
               </p>
             </div>
