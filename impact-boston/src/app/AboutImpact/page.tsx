@@ -45,23 +45,25 @@ export default function AboutImpact() {
       subtitle="Realistic Scenarios, De-escalation Skills & Rebuilding Safety and Confidence"
       cards={[
         {
-          type: "default",
-          title: "Realistic",
-          titleLine2: "Scenarios",
-          description: "Our self-defense classes simulate scenarios of threat, intimidation and violence perpetrated by strangers and people we know. Classes are taught by a team of two instructors, one of whom takes on the role of a perpetrator. They wear a full suit of body armor so students can safely defend themselves using the same force needed in a real attack.",
           bgClass: 'bg-complementary-light',
+          content: [
+            { type: "title", value: "Realistic", line2: "Scenarios" },
+            { type: "description", value: "Our self-defense classes simulate scenarios of threat, intimidation and violence perpetrated by strangers and people we know. Classes are taught by a team of two instructors, one of whom takes on the role of a perpetrator. They wear a full suit of body armor so students can safely defend themselves using the same force needed in a real attack." },
+          ],
         },
         {
-          type: "default",
-          title: "De-escalation Skills",
-          description: "Our self-defense classes simulate scenarios of threat, intimidation and violence perpetrated by strangers and people we know. Classes are taught by a team of two instructors, one of whom takes on the role of a perpetrator. They wear a full suit of body armor so students can safely defend themselves using the same force needed in a real attack.",
           bgClass: "bg-primary-light",
+          content: [
+            { type: "title", value: "De-escalation Skills" },
+            { type: "description", value: "Our self-defense classes simulate scenarios of threat, intimidation and violence perpetrated by strangers and people we know. Classes are taught by a team of two instructors, one of whom takes on the role of a perpetrator. They wear a full suit of body armor so students can safely defend themselves using the same force needed in a real attack." },
+          ],
         },
         {
-          type: "default",
-          title: "Rebuilding Safety and Confidence",
-          description: "IMPACT - formerly known as \"Model Mugging\" - helps survivors heal from trauma, retrain their bodies and nervous systems, and regain safety and control.",
           bgClass: "bg-secondary-light",
+          content: [
+            { type: "title", value: "Rebuilding Safety and Confidence" },
+            { type: "description", value: "IMPACT - formerly known as \"Model Mugging\" - helps survivors heal from trauma, retrain their bodies and nervous systems, and regain safety and control." },
+          ],
         },
       ]}
     />
@@ -123,41 +125,6 @@ export default function AboutImpact() {
         ]}
       />
 
-{/* 
-      <ContentTriple
-        title="Empowerment through Education"
-        subtitle="Building skills, confidence, and safer communities through targeted education"
-        intro="Beyond its core self-defense classes, IMPACT Boston offers a wide range of educational programs designed to equip people with the skills and confidence to advocate for their own safety and the well-being of their communities. Through workshops in schools, community organizations, and workplaces, participants learn practical tools such as assertive communication, conflict de-escalation, and bystander intervention. Programs are tailored for diverse groups—including youth, people with disabilities, and professionals in human service fields—using realistic, scenario-based training that helps individuals respond effectively in challenging situations. By combining physical self-protection with education about healthy relationships, boundaries, and community responsibility, IMPACT empowers participants to build safer environments for themselves and others."
-        cards={[
-          {
-            type: "tagList",
-            title: "8+ Programs Strengthening Safer Communities",
-            tags: [
-              "Self-Defense Classes",
-              "Schools & Colleges",
-              "De-escalation",
-              "People With Disabilities",
-              "Community Organizations",
-              "Know Your Rights & Activist Safety",
-              "Customized Programs",
-            ],
-            bgClass: "bg-complementary-light",
-          },
-          {
-            type: "stat",
-            title: "70,000+ lives impacted since 1992",
-            description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam lobortis nisl sed luctus laoreet.",
-            bgClass: "bg-primary-light",
-          },
-          {
-            type: "stat",
-            title: "600+ classes annually, reaching 1,800+ students.",
-            description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam lobortis nisl sed luctus laoreet.",
-            bgClass: "bg-secondary-light",
-          },
-        ]}
-      /> */}
-
       <CtaSection
         panels={[
           {
@@ -217,4 +184,3 @@ function StatementSection({
       </div>
   );
 }
-

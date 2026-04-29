@@ -56,23 +56,25 @@ export default function WorkplacePrograms() {
       subtitle="Realistic Scenarios, De-escalation Skills & Rebuilding Safety and Confidence"
       cards={[
         {
-          type: "default",
-          title: "Boundary Setting",
-          description: "Students learn practical steps to identify, communicate, and reinforce their boundaries, as well as skills to negotiate effectively. Practicing these skills in realistic scenarios gives students the opportunity to learn how to stay calm and explain their needs in situations involving strangers and people they know.",
           bgClass: 'bg-complementary-light',
+          content: [
+            { type: "title", value: "Boundary Setting" },
+            { type: "description", value: "Students learn practical steps to identify, communicate, and reinforce their boundaries, as well as skills to negotiate effectively. Practicing these skills in realistic scenarios gives students the opportunity to learn how to stay calm and explain their needs in situations involving strangers and people they know." },
+          ],
         },
         {
-          type: "default",
-          title: "Challenging",
-          titleLine2: "Conversations",
-          description: "In this interactive training, students develop the skills to engage in challenging conversations. Students learn how to remain calm when addressing difficult issues with strangers and people they know, how to successfully negotiate, and how to respond effectively to common forms of defensiveness.",
           bgClass: "bg-primary-light",
+          content: [
+            { type: "title", value: "Challenging", line2: "Conversations" },
+            { type: "description", value: "In this interactive training, students develop the skills to engage in challenging conversations. Students learn how to remain calm when addressing difficult issues with strangers and people they know, how to successfully negotiate, and how to respond effectively to common forms of defensiveness." },
+          ],
         },
         {
-          type: "default",
-          title: "De-escalation:",
-          description: "In these workshops, instructors demonstrate realistic scenarios and strategies for staying calm and safe, which can be customized to the group’s needs. Participants practice their skills with an instructor acting as the escalating person, helping them manage stress and respond effectively in the moment. Trainings are available both in person and online through Zoom.",
           bgClass: "bg-secondary-light",
+          content: [
+            { type: "title", value: "De-escalation:" },
+            { type: "description", value: "In these workshops, instructors demonstrate realistic scenarios and strategies for staying calm and safe, which can be customized to the group’s needs. Participants practice their skills with an instructor acting as the escalating person, helping them manage stress and respond effectively in the moment. Trainings are available both in person and online through Zoom." },
+          ],
         },
       ]}
     />

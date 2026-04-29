@@ -1,32 +1,18 @@
 import Grid from "../common/Grid";
 
+type TripleCardContent =
+  | { type: "title"; value: string; line2?: string }
+  | { type: "description"; value: string }
+  | { type: "tags"; value: string[] };
 
-type DefaultCard = {
-  type: "default";
-  title: string;
-  titleLine2?: string;
-  description: string;
-  bgClass: string;
+type TripleCard = {
+  bgClass?: string;
+  className?: string;
+  content: TripleCardContent[];
 };
-
-type TagListCardType = {
-  type: "tagList";
-  title: string;
-  tags: string[];
-  bgClass: string;
-};
-
-type StatCardType = {
-  type: "stat";
-  title: string;
-  description: string;
-  bgClass: string;
-};
-
-type TripleCard = DefaultCard | TagListCardType | StatCardType;
 
 type TripleProps = {
-  title: string;
+  title?: string;
   subtitle?: string;
   intro?: string;
   cards: TripleCard[];
@@ -40,12 +26,12 @@ export default function Triple({
 }: TripleProps) {
   return (
       <Grid>
-        <h2 className="h2 col-span-full">{title}</h2>
+        {title ? <h2 className="h2 col-span-full">{title}</h2> : null}
 
         {subtitle ? <p className="p1-bold col-span-full">{subtitle}</p> : null}
         {intro ? <p className="p1 col-span-full">{intro}</p> : null}
 
-        <div className="col-span-full md:grid md:grid-cols-3 md:gap-x-4">
+        <div className="col-span-full md:grid md:grid-cols-3 gap-y-4 md:gap-y-0 md:gap-x-4">
           {cards.map((card, index) => (
             <TripleCardRenderer key={index} card={card} />
           ))}
@@ -55,104 +41,44 @@ export default function Triple({
 }
 
 function TripleCardRenderer({ card }: { card: TripleCard }) {
-  switch (card.type) {
-    case "default":
-      return (
-        <DefaultCard
-          title={card.title}
-          titleLine2={card.titleLine2}
-          description={card.description}
-          bgClass={card.bgClass}
-        />
-      );
-
-    case "tagList":
-      return (
-        <TagListCard
-          title={card.title}
-          tags={card.tags}
-          bgClass={card.bgClass}
-        />
-      );
-
-    case "stat":
-      return (
-        <StatCard
-          title={card.title}
-          description={card.description}
-          bgClass={card.bgClass}
-        />
-      );
-
-    default:
-      return null;
-  }
-}
-
-function DefaultCard({
-  title,
-  titleLine2,
-  description,
-  bgClass,
-}: {
-  title: string;
-  titleLine2?: string;
-  description: string;
-  bgClass: string;
-}) {
   return (
-    <div className={`${bgClass} py-8 px-4 flex flex-col gap-4`}>
-      <p className="sub-1">
-        {title}
-        {titleLine2 ? (
-          <>
-            <br />
-            {titleLine2}
-          </>
-        ) : null}
-      </p>
-      <p className="p2">{description}</p>
-    </div>
-  );
-}
+    <div className={`${card.bgClass ?? ""} ${card.className ?? ""} py-8 px-4 flex flex-col gap-4`}>
+      {card.content.map((item, index) => {
+        switch (item.type) {
+          case "title":
+            return (
+              <p className="sub-1" key={`${item.type}-${index}`}>
+                {item.value}
+                {item.line2 ? (
+                  <>
+                    <br />
+                    {item.line2}
+                  </>
+                ) : null}
+              </p>
+            );
 
-function TagListCard({
-  title,
-  tags,
-  bgClass,
-}: {
-  title: string;
-  tags: string[];
-  bgClass: string;
-}) {
-  return (
-    <div className={`${bgClass} py-8 px-4 flex flex-col gap-4`}>
-      <p className="sub-1">{title}</p>
-      {tags.map((tag) => (
-        <p
-          key={tag}
-          className="p2 self-start bg-white px-1.5 border border-line-divider rounded"
-        >
-          {tag}
-        </p>
-      ))}
-    </div>
-  );
-}
+          case "description":
+            return (
+              <p className="p2" key={`${item.type}-${index}`}>
+                {item.value}
+              </p>
+            );
 
-function StatCard({
-  title,
-  description,
-  bgClass,
-}: {
-  title: string;
-  description: string;
-  bgClass: string;
-}) {
-  return (
-    <div className={`${bgClass} py-8 px-4 flex flex-col gap-4 lg:justify-between`}>
-      <p className="sub-1">{title}</p>
-      <p className="p2">{description}</p>
+          case "tags":
+            return item.value.map((tag) => (
+              <p
+                key={tag}
+                className="p2 self-start bg-white px-1.5 border border-line-divider rounded"
+              >
+                {tag}
+              </p>
+            ));
+
+          default:
+            return null;
+        }
+      })}
     </div>
   );
 }
