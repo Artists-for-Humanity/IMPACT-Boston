@@ -3,7 +3,6 @@ import Hero2 from '@/components/Hero/Hero2';
 import SideTabs from '@/components/TabsPanel/SideTabs';
 import CtaSection from '@/components/Action/CtaSection';
 import Split from '@/components/Content/Split';
-// import Highlight2 from '@/components/Highlights/Highlight2';
 
 export default function SchoolAndColleges() {
   return (
