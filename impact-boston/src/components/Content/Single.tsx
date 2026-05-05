@@ -1,6 +1,7 @@
 import Grid from '@/components/common/Grid';
 import Image from 'next/image';
 import Link from 'next/link';
+import ScriptEmbed from './ScriptEmbed';
 
 interface Paragraph {
   text: string;
@@ -21,7 +22,13 @@ interface ThumbnailVideo {
   title: string;
 }
 
-type Thumbnail = ThumbnailImage | ThumbnailVideo;
+interface ThumbnailEmbed {
+  type: 'embed';
+  label: string;
+  scriptSrc: string;
+}
+
+type Thumbnail = ThumbnailImage | ThumbnailVideo | ThumbnailEmbed;
 
 interface SingleContentProps {
   title: string;
@@ -154,12 +161,16 @@ export default function SingleContent({
                 className="w-full object-cover"
                 style={{ height: '210px', objectFit: 'cover' }}
               />
+            ) : thumb.type === 'embed' ? (
+              <div className="relative w-full" style={{ height: '210px' }}>
+                <ScriptEmbed scriptSrc={thumb.scriptSrc} />
+              </div>
             ) : (
               <div className="relative w-full" style={{ height: '210px' }}>
                 <iframe
                   src={thumb.videoSrc}
                   title={thumb.title}
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen; clipboard-write; web-share"
                   referrerPolicy="strict-origin-when-cross-origin"
                   allowFullScreen
                   className="absolute inset-0 w-full h-full"
