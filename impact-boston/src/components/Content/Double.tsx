@@ -14,7 +14,7 @@ type DoubleProps = {
 
 export default function ContentDouble({ cards }: DoubleProps) {
   return (
-      <Grid>
+      <Grid className='md:gap-10 lg:gap-x-12'>
         {cards.map((card) => (
           <DoubleCard
             key={card.title}
@@ -44,7 +44,7 @@ function DoubleCard({
 }) {
   return (
    <div className={className}>
-  <div className="flex flex-col gap-y-4">
+  <div className="flex flex-col gap-y-4 md:gap-y-2">
     <h3 className="h3 text-black">{title}</h3>
     <p className="p2">{description}</p>
   </div>
