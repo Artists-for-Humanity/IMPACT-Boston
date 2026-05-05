@@ -1,12 +1,10 @@
 import Grid from '@/components/common/Grid';
 import Image from 'next/image';
-
 import Hero2 from '@/components/Hero/Hero2';
 import ContentDouble from '@/components/Content/Double';
 import ContentTriple from '@/components/Content/Triple';
 import CtaSection from '@/components/Action/CtaSection';
 
-import BlockWithCards from '@/components/Content/Cards';
 
 
 export default function AboutImpact() {
@@ -16,7 +14,7 @@ export default function AboutImpact() {
         title="About"
         highlight="IMPACT"
         highlightColor="secondary"
-        description="IMPACT believes everyone has the right to be safe. Our self-defense programs equip individuals and communities with practical, inclusive safety skills. Our abuse prevention programs equip organizations with the tools to create safe environments and disrupt abuse. And our educational programs equip youth with the knowledge to identify healthy relationships and sexual encounters, as well as advocate for themselves in unhealthy situations."
+        description="Everyone deserves to feel safe in their body, their relationships, and their community. IMPACT builds that safety through practical, inclusive self-defense programs for individuals and communities; organizational tools that help disrupt abuse before it starts; and educational programs that give young people the knowledge to recognize healthy relationships, understand consent, and advocate for themselves."
         imageSrc="/images/aboutImpact/group1.png"
         imageAlt="Group Pictures"
       />
@@ -76,18 +74,19 @@ export default function AboutImpact() {
         backgroundClassName="bg-[#FAF6FD]"
       />
 
-      <BlockWithCards
+
+      <ContentTriple
         title="Empowerment through Education"
         subtitle="Building skills, confidence, and safer communities through targeted education"
-        description="Beyond its core self-defense classes, IMPACT Boston offers a wide range of educational programs designed to equip people with the skills and confidence to advocate for their own safety and the well-being of their communities. Through workshops in schools, community organizations, and workplaces, participants learn practical tools such as assertive communication, conflict de-escalation, and bystander intervention. Programs are tailored for diverse groups—including youth, people with disabilities, and professionals in human service fields—using realistic, scenario-based training that helps individuals respond effectively in challenging situations. By combining physical self-protection with education about healthy relationships, boundaries, and community responsibility, IMPACT empowers participants to build safer environments for themselves and others."
-        backgroundColor="#fff"
+        intro="Beyond its core self-defense classes, IMPACT Boston offers a wide range of educational programs designed to equip people with the skills and confidence to advocate for their own safety and the well-being of their communities. Through workshops in schools, community organizations, and workplaces, participants learn practical tools such as assertive communication, conflict de-escalation, and bystander intervention. Programs are tailored for diverse groups—including youth, people with disabilities, and professionals in human service fields—using realistic, scenario-based training that helps individuals respond effectively in challenging situations. By combining physical self-protection with education about healthy relationships, boundaries, and community responsibility, IMPACT empowers participants to build safer environments for themselves and others."
         cards={[
           {
-            title: "8+ Programs Strengthening Safer Communities",
-            contentBlocks: [
+            bgClass: "bg-complementary-light",
+            content: [
+              { type: "title", value: "8+ Programs Strengthening Safer Communities" },
               {
                 type: "tags",
-                tags: [
+                value: [
                   "Self-Defense Classes",
                   "Schools & Colleges",
                   "De-escalation",
@@ -98,32 +97,30 @@ export default function AboutImpact() {
                 ],
               },
             ],
-            backgroundColor: "bg-complementary-light",
           },
           {
-            title: "70,000+ lives impacted since 1992",
-            contentBlocks: [
+            bgClass: "bg-primary-light",
+            content: [
+              { type: "title", value: "70,000+ lives impacted since 1992" },
               {
-                type: "text",
-                content:
-                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam lobortis nisl sed luctus laoreet. Interdum et malesuada fames ac ante ipsum primis in faucibus. Proin eros nisl, dignissim sit amet nisl vel, feugiat con",
+                type: "description",
+                value: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam lobortis nisl sed luctus laoreet. Interdum et malesuada fames ac ante ipsum primis in faucibus. Proin eros nisl, dignissim sit amet nisl vel, feugiat con",
               },
             ],
-            backgroundColor: "bg-primary-light",
           },
           {
-            title: "600+ classes annually, reaching 1,800+ students.",
-            contentBlocks: [
+            bgClass: "bg-secondary-light",
+            content: [
+              { type: "title", value: "600+ classes annually, reaching 1,800+ students." },
               {
-                type: "text",
-                content:
-                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam lobortis nisl sed luctus laoreet. Interdum et malesuada fames ac ante ipsum primis in faucibus. Proin eros nisl, dignissim sit amet nisl vel, feugiat con",
+                type: "description",
+                value: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam lobortis nisl sed luctus laoreet. Interdum et malesuada fames ac ante ipsum primis in faucibus. Proin eros nisl, dignissim sit amet nisl vel, feugiat con",
               },
             ],
-            backgroundColor: "bg-secondary-light",
           },
         ]}
       />
+
 
       <CtaSection
         panels={[
@@ -170,17 +167,29 @@ function StatementSection({
 }) {
   return (
     <div className={backgroundClassName}>
-      <Grid >
-        <h2 className="h2 col-span-full">{title}</h2>
-        <p className="p1 col-span-full">{description}</p>
-        <Image
-          src={imageSrc}
-          width={500}
-          height={500}
-          alt={imageAlt}
-          className="col-span-full h-[35vh] w-auto object-cover md:w-full md:h-auto"
-        />
+      <Grid>
+        <div className="col-span-full flex flex-col gap-6 lg:col-span-5">
+          <h3 className="h3">{title}</h3>
+          <p className="p1">{description}</p>
+        </div>
+        <div className="col-span-full lg:col-start-7 lg:col-span-6">
+          <div
+            style={{
+              height: '8px',
+              width: '100%',
+              background:
+                'linear-gradient(to right, #E36A38 0%, #E36A38 22%, #874E9F 22%, #874E9F 86%, #462458 86%, #462458 100%)',
+            }}
+          />
+          <Image
+            src={imageSrc}
+            width={500}
+            height={500}
+            alt={imageAlt}
+            className="block h-auto w-full object-cover lg:h-[400px]"
+          />
+        </div>
       </Grid>
-      </div>
+    </div>
   );
 }

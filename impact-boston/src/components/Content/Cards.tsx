@@ -85,8 +85,10 @@ const BlockWithCards: React.FC<BlockWithCardsProps> = ({
   cards,
 }) => (
     <Grid className={`${backgroundColor}`}>
+      <div>
       <h2 className="h2 col-span-full lg:col-span-8">{title}</h2>
       {subtitle && <p className="p1 col-span-full lg:col-span-8">{subtitle}</p>}
+      </div>
       {description && <p className="p1 col-span-full lg:col-span-8">{description}</p>}
       <div className="col-span-full flex flex-wrap gap-4 grid grid-cols-subgrid">
         {cards.map((card, idx) => (

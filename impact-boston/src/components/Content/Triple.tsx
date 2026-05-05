@@ -25,13 +25,15 @@ export default function Triple({
   cards,
 }: TripleProps) {
   return (
-      <Grid>
-        {title ? <h2 className="h2 col-span-full">{title}</h2> : null}
+      <Grid className="sm:gap-8 md:gap-8 lg:gap-y-10">
+        <div className="col-span-full md:col-span-8 flex flex-col gap-2">
+        {title ? <h3 className="h3 ">{title}</h3> : null}
 
-        {subtitle ? <p className="p1-bold col-span-full">{subtitle}</p> : null}
-        {intro ? <p className="p1 col-span-full">{intro}</p> : null}
+        {subtitle ? <p className="p2">{subtitle}</p> : null}
+        </div>
+        {intro ? <p className="p1 col-span-full md:col-span-8">{intro}</p> : null}
 
-        <div className="col-span-full md:grid md:grid-cols-3 gap-y-4 md:gap-y-0 md:gap-x-4">
+        <div className="col-span-full grid  gap-y-5 md:gap-y-6  lg:grid-cols-3 lg:gap-x-6">
           {cards.map((card, index) => (
             <TripleCardRenderer key={index} card={card} />
           ))}
@@ -42,21 +44,23 @@ export default function Triple({
 
 function TripleCardRenderer({ card }: { card: TripleCard }) {
   return (
-    <div className={`${card.bgClass ?? ""} ${card.className ?? ""} py-8 px-4 flex flex-col gap-4`}>
+    <div className={`${card.bgClass ?? ""} ${card.className ?? ""} p-5 md:py-8 md:px-4 lg:p-8 flex flex-col justify-between gap-4`}>
       {card.content.map((item, index) => {
         switch (item.type) {
-          case "title":
-            return (
-              <p className="sub-1" key={`${item.type}-${index}`}>
-                {item.value}
-                {item.line2 ? (
-                  <>
-                    <br />
-                    {item.line2}
-                  </>
-                ) : null}
-              </p>
-            );
+        case "title":
+        return (
+          <p className="sub-1" key={`${item.type}-${index}`}>
+            {item.value}
+            {item.line2 ? (
+              <>
+                <br className="md:hidden" />
+                <span className="hidden md:inline"> </span>
+                {item.line2}
+              </>
+            ) : null}
+          </p>
+        );
+
 
           case "description":
             return (
@@ -69,7 +73,7 @@ function TripleCardRenderer({ card }: { card: TripleCard }) {
             return item.value.map((tag) => (
               <p
                 key={tag}
-                className="p2 self-start bg-white px-1.5 border border-line-divider rounded"
+                className="p2 self-start bg-white px-1.5 border border-line-divider rounded lg:p-2"
               >
                 {tag}
               </p>
