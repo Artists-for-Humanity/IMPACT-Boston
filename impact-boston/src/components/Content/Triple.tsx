@@ -33,7 +33,7 @@ export default function Triple({
         </div>
         {intro ? <p className="p1 col-span-full md:col-span-8">{intro}</p> : null}
 
-        <div className="col-span-full grid  gap-y-5 md:gap-y-6  lg:grid-cols-3">
+        <div className="col-span-full grid  gap-y-5 md:gap-y-6  lg:grid-cols-3 lg:gap-x-6">
           {cards.map((card, index) => (
             <TripleCardRenderer key={index} card={card} />
           ))}

@@ -1,6 +1,5 @@
 import Grid from '@/components/common/Grid';
 import Image from 'next/image';
-
 import Hero2 from '@/components/Hero/Hero2';
 import ContentDouble from '@/components/Content/Double';
 import ContentTriple from '@/components/Content/Triple';
