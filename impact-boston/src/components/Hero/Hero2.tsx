@@ -54,7 +54,7 @@ export default function Hero2({
           </div>
         )}
 
-        <div className="col-span-full lg:col-start-3 lg:col-span-8 flex flex-col gap-6 md:gap-4 lg:gap-6">
+        <div className="col-span-full lg:col-start-3 lg:col-span-8 flex flex-col gap-6 md:gap-6 lg:gap-6">
           <h1 className="h1 text-center text-black">
             {title}{' '}
             {highlight ? (
