@@ -7,7 +7,8 @@ export default function IndexPage() {
     <main>
       {/* all of your main code goes in here */}
       <Header></Header>
-      <Hero1></Hero1>
+      {/* <Hero1></Hero1> */}
+
       <Footer></Footer>
     </main>
   );
