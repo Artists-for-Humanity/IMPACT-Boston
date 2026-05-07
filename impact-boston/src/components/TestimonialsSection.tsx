@@ -110,7 +110,7 @@ export default function TestimonialsSection() {
 
   return (
     <section className="w-full bg-[#F0EEF5] overflow-hidden py-8 md:py-10 lg:py-18">
-      <div className="flex flex-col gap-8 md:gap-6 lg:gap-8 mx-4 md:mx-8 lg:mx-36">
+      <div className="flex flex-col gap-8 md:gap-6 lg:gap-8">
         <div className="flex flex-col gap-8">
         {/* Top Row - Heading and Navigation */}
         <Grid>

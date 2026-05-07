@@ -61,7 +61,6 @@ export default function Hero1({
 }: Hero1Props) {
   return (
     <section className={`bg-brand-gray-light py-8 md:py-10 lg:py-18 ${className}`}>
-      <div className="mx-4 md:mx-8 lg:mx-36">
         <Grid className="gap-y-10 md:gap-y-10 lg:gap-y-0">
           <div className="col-span-4 md:col-span-6 md:col-start-2 lg:col-span-5 lg:col-start-1">
             <div className="flex flex-col h-full items-center lg:items-start gap-8 lg:gap-0">
@@ -117,7 +116,6 @@ export default function Hero1({
             </div>
           </div>
         </Grid>
-      </div>
     </section>
   );
 }
