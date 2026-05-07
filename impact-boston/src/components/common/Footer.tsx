@@ -5,7 +5,7 @@ export default function Footer() {
   return (
     <>
       <div className="bg-black">
-        <Grid className="py-[88px]">
+        <Grid>
           <div className="Impact gap-[50px] grid lg:col-start-0 lg:col-span-3">
             <h1 className="h2 text-white uppercase">Impact</h1>
             <section id="infor" className="grid gap-[24px]">
