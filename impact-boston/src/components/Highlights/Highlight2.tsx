@@ -10,8 +10,9 @@ interface Highlight2Props {
     supportingText?: string;
     backgroundColor?: string;
     textColor?: string;
+    buttonBgColor?: string;      // NEW
+    buttonTextColor?: string;    // NEW
 }
-
 export default function Highlight2({
     title,
     body,
@@ -20,6 +21,8 @@ export default function Highlight2({
     supportingText,
     backgroundColor,
     textColor,
+    buttonBgColor,
+    buttonTextColor,
 }: Highlight2Props) {
     const containerStyles: CSSProperties = {
         ...(backgroundColor ? { backgroundColor } : {}),
@@ -39,14 +42,20 @@ export default function Highlight2({
                 {body.map((paragraph, index) => (
                     <p key={index} className="p1 col-span-full">{paragraph}</p>
                 ))}
-                <Button
-                    href={ctaHref}
-                    variant="primary"
-                    size="lg"
-                    className="w-full col-start-1 col-span-4 md:col-start-1 md:col-span-4 md:w-full lg:w-auto lg:col-start-auto lg:col-span-3"
-                >
-                    {ctaLabel}
-                </Button>
+              <div className="w-full col-start-1 col-span-4 md:col-start-1 md:col-span-4 md:w-full lg:w-auto lg:col-start-auto lg:col-span-3">
+                    <Button
+                        href={ctaHref}
+                        variant="primary"
+                        size="lg"
+                        className="w-full"
+                        style={{
+                            ...(buttonBgColor ? { backgroundColor: buttonBgColor } : {}),
+                            ...(buttonTextColor ? { color: buttonTextColor } : {}),
+                        }}
+                    >
+                        {ctaLabel}
+                    </Button>
+                </div>
                 <p className="p2 col-span-full">{supportingText}</p>
             </div>      
         </Grid>
