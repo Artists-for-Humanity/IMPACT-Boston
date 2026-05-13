@@ -90,9 +90,9 @@ export default function HighlightsSection() {
 
   return (
     <section className="w-full bg-black py-8 md:py-10 lg:py-18">
-      <div className="flex flex-col gap-10 md:gap-12 lg:gap-[50px] mx-4 md:mx-8 lg:mx-36">
+      <div className="flex flex-col gap-10 md:gap-12 lg:gap-[50px]">
         {/* Top Row - Label and Navigation */}
-        <Grid>
+        <Grid noPadding>
           <div className="col-span-4 md:col-span-8 lg:col-span-12 flex justify-between items-center">
             <h5 className="sub-2 text-white">
               Highlights
@@ -157,7 +157,7 @@ export default function HighlightsSection() {
         </Grid>
 
         {/* Content Row */}
-        <Grid className="md:gap-y-12">
+        <Grid noPadding className="md:gap-y-12">
           {/* Left Panel - Heading */}
           <div className="col-span-4 md:col-span-8 lg:col-span-5 flex flex-col gap-6 lg:gap-9">
             <div className="grid">
