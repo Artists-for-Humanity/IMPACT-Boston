@@ -38,8 +38,8 @@ const DEFAULT_NAV_ITEMS: NavItem[] = [
     label: "Programs",
     link: "/programs",
     subItems: [
-      { label: "Self-Defense Classes", link: "/SelfDefense", description: "Learn about our self-defense classes." },
       { label: "Schools & Colleges", link: "/SchoolsAndColleges", description: "Explore our programs for schools and colleges." },
+      { label: "Public Classes", link: "/PublicClasses", description: "Learn about our public self-defense classes." },
       { label: "People With Disabilities", link: "/PeopleWithDisabilities", description: "Discover resources for people with disabilities." },
       { label: "De-escalation", link: "/De-escalation", description: "Learn about de-escalation techniques." },
       { label: "Community Organizations", link: "/CommunityOrganizations", description: "Find out about our community partnerships." },

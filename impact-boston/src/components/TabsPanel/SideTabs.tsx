@@ -8,7 +8,8 @@ type TabContentBlock =
   | { type: "subheading"; text: string }
   | { type: "bullets"; items: string[] }
   | { type: "list"; items: string[] }
-  | { type: "columns"; items: string[][] };
+  | { type: "columns"; items: string[][] }
+  | { type: "link"; text: string; href: string };
 
 type Tab = {
   label: string;
@@ -148,6 +149,19 @@ export default function SideTabs({ tabs }: { tabs: Tab[] }) {
                       </ul>
                     ))}
                   </div>
+                );
+
+              case "link":
+                return (
+                  <a
+                    key={i}
+                    href={block.href}
+                    className="text-primary underline hover:text-primary-dark transition p1 inline-block"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {block.text}
+                  </a>
                 );
 
               default:
