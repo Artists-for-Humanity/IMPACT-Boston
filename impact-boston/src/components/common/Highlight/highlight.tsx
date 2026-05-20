@@ -4,6 +4,7 @@ import Grid from "../Grid";
 import Image from "next/image";
 import arrow from "../../../../public/images/HighlightArrow.svg";
 import LearnMore from "@/components/utility/LearnMore";
+import higlight1 from "../../../../public/images/highlights-1.png";
 import { useState } from "react";
 export default function Highlight() {
   const [page, setPage] = useState(0);
@@ -34,7 +35,9 @@ export default function Highlight() {
           </section>
           <section className="col-start-7 col-span-full pb-6">
             <div className="grid gap-3">
-              <div className="h-[212px] bg-[#D9D9D9]"></div>
+              <div className="h-[212px] bg-[#D9D9D9]">
+                <Image src={higlight1} alt="highlight1" />
+              </div>
               <p className="p1 text-white">
                 IMPACT has been teaching solutions for safe living since 1971.
                 We provide realistic personal safety training that gives people
