@@ -7,7 +7,7 @@ import search from "../../../public/icons/search.svg";
 export default function Header() {
   return (
     <>
-      <nav className="navigation px-[32px] py-[24px] flex justify-between">
+      <nav className="navigation fixed w-[100vw] bg-white px-[32px] py-[24px] flex justify-between">
         <div className="logo flex items-center">
           <Image
             className="w-[107px] h-[24px]"

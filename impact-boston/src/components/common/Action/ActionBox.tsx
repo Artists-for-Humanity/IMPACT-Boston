@@ -1,5 +1,5 @@
 import Image from "next/image";
-import arrow from "../../../../public/images/ActionArrowIcon.svg";
+import arrow from "../../../../public/images/WhiteArrow.svg";
 interface Content {
   icon: string;
   title: string;

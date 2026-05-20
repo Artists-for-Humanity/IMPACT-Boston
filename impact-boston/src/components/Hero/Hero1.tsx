@@ -1,13 +1,13 @@
 import Grid from "../common/Grid";
-import buttonArrow from "../../../public/images/ActionArrowIcon.svg";
 import Image from "next/image";
 import Hero from "../../../public/images/hero-place-holder.png";
+import LearnMore from "../utility/LearnMore";
 export default function Hero1() {
   return (
     <Grid>
       <section
         id="HeroSection"
-        className="grid grid-cols-subgrid col-span-full"
+        className="grid py-[72px] grid-cols-subgrid col-span-full"
       >
         <div id="content" className="flex lg:col-span-4 gap-[10px]">
           <div id="container" className="lg:col-span-5 lg:col-start-1 ">
@@ -23,21 +23,11 @@ export default function Hero1() {
                   and communities with practical, inclusive safety skills.
                 </p>
               </div>
-              <div className="flex justfy-center lg:justify-start w-full">
-                <div className="lg:grid lg:grid-cols-4 lg:gap-6 w-full">
-                  <button
-                    type="button"
-                    className="flex bg-black lg:col-span-3 justify-between items-center p-[24px]"
-                  >
-                    <p className="link text-white">Learn More</p>
-                    <Image
-                      draggable="false"
-                      src={buttonArrow}
-                      alt="buttonArrow"
-                    ></Image>
-                  </button>
-                </div>
-              </div>
+              <LearnMore
+                desktop={4}
+                color="black"
+                textColor="white"
+              ></LearnMore>
             </div>
           </div>
         </div>
