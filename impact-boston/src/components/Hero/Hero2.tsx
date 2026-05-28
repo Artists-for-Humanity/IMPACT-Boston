@@ -37,7 +37,7 @@ export default function Hero2({
   console.log(tag);
 
   return (
-      <Grid>
+      <Grid className="md:gap-12 lg:gap-8">
         {tag && (
           <div className="sub-2 col-span-full flex justify-center text-black">
             <div className="tag bg-secondary-light/50 p-2 flex items-center gap-2 rounded-full">
