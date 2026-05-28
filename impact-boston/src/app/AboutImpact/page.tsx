@@ -53,22 +53,22 @@ export default function AboutImpact() {
         {
           bgClass: 'bg-complementary-light',
           content: [
-            { type: "title", value: "Realistic", line2: "Scenarios" },
+            { type: "title", value: "Realistic Scenarios" },
             { type: "description", value: "Our self-defense classes simulate scenarios of threat, intimidation and violence perpetrated by strangers and people we know. Classes are taught by a team of two instructors, one of whom takes on the role of a perpetrator. They wear a full suit of body armor so students can safely defend themselves using the same force needed in a real attack." },
           ],
         },
         {
           bgClass: "bg-primary-light",
           content: [
-            { type: "title", value: "De-escalation Skills" },
-            { type: "description", value: "Our self-defense classes simulate scenarios of threat, intimidation and violence perpetrated by strangers and people we know. Classes are taught by a team of two instructors, one of whom takes on the role of a perpetrator. They wear a full suit of body armor so students can safely defend themselves using the same force needed in a real attack." },
+            { type: "title", value: "A Fight Avoided is", line2: "a Fight Won" },
+            { type: "description", value: "Physical self-defense is always a last resort. Students learn verbal skills to de-escalate conflict and avoid unnecessary violence. Many assailants use verbal threats to intimidate people, so IMPACT teaches students to stay calm and respond effectively to harassment." },
           ],
         },
         {
           bgClass: "bg-secondary-light",
           content: [
             { type: "title", value: "Rebuilding Safety and Confidence" },
-            { type: "description", value: "IMPACT - formerly known as \"Model Mugging\" - helps survivors heal from trauma, retrain their bodies and nervous systems, and regain safety and control." },
+            { type: "description", value: "IMPACT gives people the opportunity to be effective and successful in the face of fear. Having this experience has helped people heal from past trauma and take on new challenges." },
           ],
         },
       ]}
