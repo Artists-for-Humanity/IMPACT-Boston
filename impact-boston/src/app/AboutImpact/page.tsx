@@ -38,6 +38,14 @@ export default function AboutImpact() {
         ]}
       />
 
+      <StatementSection
+        title="Violence is not inevitable. We all have the ability to stop it."
+        description="IMPACT has been teaching solutions for safe living since 1971. We provide realistic personal safety training that gives people the skills to respond appropriately to threatening situations in the moment of fear or intimidation. We also collaborate with schools and organizations to create programs that proactively prevent abuse. IMPACT’s prevention programs emphasize giving people the tools to manage their stress responses so they can intervene effectively when they observe risky situations. Too often abuse goes unchallenged because people don’t feel safe speaking up. IMPACT programs help people increase their ability to safely advocate for themselves and others."
+        imageSrc="/images/aboutImpact/defense.png"
+        imageAlt="Self-defense training"
+        backgroundClassName="bg-[#FAF6FD]"
+      />
+
     <ContentTriple
       title="Our Approach to Self-Defense"
       subtitle="Realistic Scenarios, De-escalation Skills & Rebuilding Safety and Confidence"
@@ -66,13 +74,7 @@ export default function AboutImpact() {
       ]}
     />
 
-      <StatementSection
-        title="Violence is not inevitable. We all have the ability to stop it."
-        description="IMPACT has been teaching solutions for safe living since 1971. We provide realistic personal safety training that gives people the skills to respond appropriately to threatening situations in the moment of fear or intimidation. We also collaborate with schools and organizations to create programs that proactively prevent abuse. IMPACT’s prevention programs emphasize giving people the tools to manage their stress responses so they can intervene effectively when they observe risky situations. Too often abuse goes unchallenged because people don’t feel safe speaking up. IMPACT programs help people increase their ability to safely advocate for themselves and others."
-        imageSrc="/images/aboutImpact/defense.png"
-        imageAlt="Self-defense training"
-        backgroundClassName="bg-[#FAF6FD]"
-      />
+      
 
 
       <ContentTriple
@@ -167,8 +169,8 @@ function StatementSection({
 }) {
   return (
     <div className={backgroundClassName}>
-      <Grid>
-        <div className="col-span-full flex flex-col gap-6 lg:col-span-5">
+      <Grid className="gap-y-6 md:gap-y-10">
+        <div className="col-span-full flex flex-col gap-6 lg:gap-8 lg:col-span-5">
           <h3 className="h3">{title}</h3>
           <p className="p1">{description}</p>
         </div>
