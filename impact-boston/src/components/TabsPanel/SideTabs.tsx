@@ -1,8 +1,9 @@
 "use client";
 import { useRef, useState, useEffect } from "react";
+import { PortableText, type PortableTextBlock, type PortableTextComponents } from "next-sanity";
 import Grid from "../common/Grid";
 
-type TabContentBlock =
+export type StructuredTabContentBlock =
   | { type: "heading"; text: string }
   | { type: "paragraph"; text: string }
   | { type: "subheading"; text: string }
@@ -10,13 +11,52 @@ type TabContentBlock =
   | { type: "list"; items: string[] }
   | { type: "columns"; items: string[][] };
 
-type Tab = {
+export type SideTab = {
   label: string;
-  content: TabContentBlock[];
+  content: StructuredTabContentBlock[] | PortableTextBlock[];
 };
 
-export default function SideTabs({ tabs }: { tabs: Tab[] }) {
+const portableTextComponents: PortableTextComponents = {
+  block: {
+    h1: ({ children }) => <h2 className="h2">{children}</h2>,
+    h2: ({ children }) => <h2 className="h2">{children}</h2>,
+    h3: ({ children }) => <h3 className="text-lg font-bold">{children}</h3>,
+    normal: ({ children }) => <p className="p1">{children}</p>,
+  },
+  list: {
+    bullet: ({ children }) => (
+      <ul className="list-disc space-y-1 pl-6">{children}</ul>
+    ),
+    number: ({ children }) => (
+      <ol className="list-decimal space-y-1 pl-6">{children}</ol>
+    ),
+  },
+  listItem: {
+    bullet: ({ children }) => <li className="p1">{children}</li>,
+    number: ({ children }) => <li className="p1">{children}</li>,
+  },
+  marks: {
+    link: ({ children, value }) => {
+      const href = typeof value?.href === "string" ? value.href : "#";
+
+      return (
+        <a className="underline hover:opacity-80" href={href}>
+          {children}
+        </a>
+      );
+    },
+  },
+};
+
+function isPortableTextContent(
+  content: StructuredTabContentBlock[] | PortableTextBlock[]
+): content is PortableTextBlock[] {
+  return content.some((block) => "_type" in block && typeof block._type === "string");
+}
+
+export default function SideTabs({ tabs }: { tabs: SideTab[] }) {
   const [active, setActive] = useState(0);
+  const safeActive = tabs.length && active < tabs.length ? active : 0;
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const [indicatorStyle, setIndicatorStyle] = useState<React.CSSProperties>({});
 
@@ -48,13 +88,13 @@ export default function SideTabs({ tabs }: { tabs: Tab[] }) {
   };
 
   useEffect(() => {
-    updateIndicator(active);
+    updateIndicator(safeActive);
 
-    const onResize = () => updateIndicator(active);
+    const onResize = () => updateIndicator(safeActive);
     window.addEventListener("resize", onResize);
 
     return () => window.removeEventListener("resize", onResize);
-  }, [active, tabs.length]);
+  }, [safeActive, tabs.length]);
 
   const handleTabClick = (idx: number) => {
     setActive(idx);
@@ -65,6 +105,13 @@ export default function SideTabs({ tabs }: { tabs: Tab[] }) {
     });
     updateIndicator(idx);
   };
+
+  if (!tabs.length) {
+    return null;
+  }
+
+  const activeTab = tabs[safeActive] ?? tabs[0];
+  const activeContent = activeTab.content;
 
   return (
     <div className="">
@@ -84,7 +131,7 @@ export default function SideTabs({ tabs }: { tabs: Tab[] }) {
               className={`h3 cursor-pointer whitespace-nowrap lg:whitespace-normal border-b-4 px-4 py-2 transition-colors duration-150 lg:border-b-0 lg:border-l-4 lg:text-left ${
                 tabs.length <= 3 ? "flex-1 lg:flex-none" : ""
               } ${
-                active === idx
+                safeActive === idx
                   ? "border-transparent font-bold"
                   : "border-gray-300 text-gray-500"
               }`}
@@ -97,7 +144,13 @@ export default function SideTabs({ tabs }: { tabs: Tab[] }) {
         </div>
 
         <div className="col-span-full mt-6 space-y-4 lg:col-span-7 lg:mt-0">
-          {tabs[active].content.map((block, i) => {
+          {isPortableTextContent(activeContent) ? (
+            <PortableText
+              components={portableTextComponents}
+              value={activeContent}
+            />
+          ) : (
+            activeContent.map((block, i) => {
             switch (block.type) {
               case "heading":
                 return (
@@ -153,7 +206,8 @@ export default function SideTabs({ tabs }: { tabs: Tab[] }) {
               default:
                 return null;
             }
-          })}
+          })
+          )}
         </div>
       </Grid>
     </div>
