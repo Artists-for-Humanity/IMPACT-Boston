@@ -50,21 +50,23 @@ function CtaPanel({
 }) {
   return (
     <div className={wrapperClassName}>
-      <div className="py-14 px-10 flex flex-col gap-4 h-full justify-between ">
-        <h3 className="h3 text-white">
-          {title}
-          {titleLine2 ? (
-            <>
-              <br />
-              {titleLine2}
-            </>
-          ) : null}
-        </h3>
+      <div className="flex flex-col gap-8 h-full justify-between">
+        <div className="flex flex-col gap-2">
+          <h3 className="h3 text-white">
+            {title}
+            {titleLine2 ? (
+              <>
+                <br />
+                {titleLine2}
+              </>
+            ) : null}
+          </h3>
 
-        <p className="p1 text-white">{description}</p>
+          <p className="p1 text-white">{description}</p>
+        </div>
 
         <Button
-          className="col-span-full bg-white flex justify-between cursor-pointer py-4 lg:w-1/2 group"
+          className="col-span-full bg-white flex justify-between cursor-pointer py-4 w-[270px] md:w-full lg:w-[270px] group"
           href={href}
         >
           <p className="p1-bold text-black group-hover:text-white">{buttonText}</p>

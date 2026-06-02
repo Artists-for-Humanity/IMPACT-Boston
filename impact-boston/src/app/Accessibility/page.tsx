@@ -58,7 +58,7 @@ export default function Accessibility() {
     <CtaSection
         panels={[
           {
-            wrapperClassName: 'bg-complementary md:w-1/2 lg:px-20 lg:py-27',
+            wrapperClassName: 'bg-complementary md:w-1/2 py-14 px-10 md:p-10 lg:py-[118px] lg:px-[144px]',
             title: 'Non-discrimination Policy ',
             titleLine2: 'and Grievance Procedure',
             description: 'Our commitment to equal treatment and how to report concerns.',
@@ -69,7 +69,7 @@ export default function Accessibility() {
             iconHeight: 24,
           },
           {
-            wrapperClassName: 'bg-primary md:w-1/2 lg:px-20 lg:py-27',
+            wrapperClassName: 'bg-primary md:w-1/2 py-14 px-10 md:p-10 lg:py-[118px] lg:px-[144px]',
             title: 'Language Access Policy',
             description: 'How we support participants who need language assistance.',
             buttonText: 'Read Document',
