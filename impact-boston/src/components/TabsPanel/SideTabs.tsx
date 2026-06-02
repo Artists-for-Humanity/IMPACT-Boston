@@ -28,6 +28,7 @@ type TabContentBlock =
       previewCount?: number;
       items: ResourceListItem[];
     };
+  | { type: "link"; text: string; href: string };
 
 export type SideTab = {
   label: string;
@@ -182,6 +183,17 @@ export default function SideTabs({ tabs }: { tabs: Tab[] }) {
                     key={i}
                     previewCount={block.previewCount}
                   />
+              case "link":
+                return (
+                  <a
+                    key={i}
+                    href={block.href}
+                    className="text-primary underline hover:text-primary-dark transition p1 inline-block"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {block.text}
+                  </a>
                 );
 
               default:

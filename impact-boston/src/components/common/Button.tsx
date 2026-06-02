@@ -1,6 +1,3 @@
-// components/common/Button.tsx
-// Primary CTA button — reusable across Header, Hero, FeatureBreak, etc.
-
 import React from 'react'
 
 type ButtonVariant = 'primary' | 'secondary' | 'outline'
@@ -16,6 +13,7 @@ interface ButtonProps {
   className?: string
   type?: 'button' | 'submit' | 'reset'
   disabled?: boolean
+  style?: React.CSSProperties // <-- Add this line
 }
 
 function ChevronIcon() {
@@ -36,6 +34,7 @@ export default function Button({
   className = '',
   type = 'button',
   disabled = false,
+  style, // <-- Add this line
 }: ButtonProps) {
   const base = 'link flex items-center justify-between transition-colors duration-150'
 
@@ -52,11 +51,10 @@ export default function Button({
   }
 
   const classes = `${base} ${variants[variant]} ${sizes[size]} ${className}`
-  const inlineStyles = {}
 
   if (href) {
     return (
-      <a href={href} className={classes} style={inlineStyles}>
+      <a href={href} className={classes} style={style}>
         {children}
         {(showChevron || size === 'lg') && <ChevronIcon />}
       </a>
@@ -69,7 +67,7 @@ export default function Button({
       onClick={onClick}
       disabled={disabled}
       className={classes}
-      style={inlineStyles}
+      style={style}
     >
       {children}
       {(showChevron || size === 'lg') && <ChevronIcon />}
