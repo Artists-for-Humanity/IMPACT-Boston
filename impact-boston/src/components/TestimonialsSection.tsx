@@ -10,6 +10,7 @@ import Grid from './common/Grid';
 interface Testimonial {
   quote: string;
   author?: string;
+  authorTitle?: string;
   readMoreLink?: string;
 }
 
@@ -18,6 +19,7 @@ interface TestimonialsSectionProps {
   subheading?: string;
   testimonials?: Testimonial[];
   showAuthors?: boolean;
+  authorPrefix?: string;
 }
 
 // TODO: Replace with Sanity CMS content
@@ -54,6 +56,7 @@ export default function TestimonialsSection({
   subheading = "Hear from 20 people who've worked with us.",
   testimonials = defaultTestimonials,
   showAuthors = false,
+  authorPrefix = "- ",
 }: TestimonialsSectionProps) {
   const testimonialItems = testimonials.length > 0 ? testimonials : defaultTestimonials;
   const [currentIndex, setCurrentIndex] = useState(testimonialItems.length);
@@ -175,11 +178,11 @@ export default function TestimonialsSection({
               {duplicatedTestimonials.map((testimonial, index) => (
                 <div
                   key={index}
-                  className="flex-shrink-0 w-[288px] md:w-[50%] lg:w-[calc(50%-60px)] bg-white flex flex-col"
+                  className="shrink-0 w-[288px] md:w-[50%] lg:w-[calc(50%-60px)] bg-white flex flex-col"
                 >
                   {/* Colored Top Border */}
                   <div
-                    className="h-[7px] w-full"
+                    className="h-1.75 w-full"
                     style={{
                       background: 'linear-gradient(to right, #E36A38 0%, #E36A38 22%, #874E9F 22%, #874E9F 86%, #462458 86%, #462458 100%)'
                     }}
@@ -188,12 +191,17 @@ export default function TestimonialsSection({
                   {/* Card Content */}
                   <div className="px-4 py-8 lg:p-8">
                     {/* Quote */}
-                    <p className="p1 text-[#000] lg:text-[#333]">
+                    <p className="p1 whitespace-pre-line text-[#000] lg:text-[#333]">
                       &ldquo;{testimonial.quote}&rdquo;
                     </p>
                     {showAuthors && testimonial.author ? (
                       <p className="p2 mt-6 text-[#000] lg:text-[#333]">
-                        - {testimonial.author}
+                        {authorPrefix}{testimonial.author}
+                      </p>
+                    ) : null}
+                    {showAuthors && testimonial.authorTitle ? (
+                      <p className="p2 text-text-grey-light">
+                        {testimonial.authorTitle}
                       </p>
                     ) : null}
                   </div>
