@@ -16,10 +16,11 @@ type ResourceListItem = {
 
 type TabContentBlock =
   | { type: "heading"; text: string }
-  | { type: "paragraph"; text: string }
+  | { type: "paragraph"; text: string; bold?: boolean }
   | { type: "subheading"; text: string }
   | { type: "bullets"; items: string[] }
   | { type: "list"; items: string[] }
+  | { type: "numberedList"; items: string[] }
   | { type: "columns"; items: string[][] }
   | { type: "divider" }
   | {
@@ -123,7 +124,7 @@ export default function SideTabs({ tabs }: { tabs: Tab[] }) {
             switch (block.type) {
               case "heading":
                 return (
-                  <h2 className="h2" key={i}>
+                  <h2 className="h2 pb-10" key={i}>
                     {block.text}
                   </h2>
                 );
@@ -137,7 +138,7 @@ export default function SideTabs({ tabs }: { tabs: Tab[] }) {
 
               case "paragraph":
                 return (
-                  <p className="p1" key={i}>
+                  <p className={`p1${block.bold ? " font-bold" : ""}`} key={i}>
                     {block.text}
                   </p>
                 );
@@ -152,6 +153,17 @@ export default function SideTabs({ tabs }: { tabs: Tab[] }) {
                       </li>
                     ))}
                   </ul>
+                );
+
+              case "numberedList":
+                return (
+                  <ol className="list-decimal space-y-4 pl-6" key={i}>
+                    {block.items.map((item, j) => (
+                      <li key={j} className="p1">
+                        {item}
+                      </li>
+                    ))}
+                  </ol>
                 );
 
               case "columns":

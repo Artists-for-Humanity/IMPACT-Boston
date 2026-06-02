@@ -124,8 +124,6 @@ export default function SchoolAndColleges() {
       ctaLabel="Book a session"
       ctaHref="/Sessions"
       supportingText="Subtitle or secondary line of text that helps the CTA"
-      // backgroundColor="var(--color-secondary)"
-      // textColor="var(--color-secondary-light)"
     />
     
   
