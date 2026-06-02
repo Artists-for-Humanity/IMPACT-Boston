@@ -2,6 +2,7 @@
 import Header from "../components/Header/Header";
 import Hero2 from "../components/Hero/Hero2";
 import Footer from "../components/Footer/Footer";
+import Image from "next/image";
 
 export default function IndexPage() {
   return (
