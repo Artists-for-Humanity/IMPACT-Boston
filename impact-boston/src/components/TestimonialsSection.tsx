@@ -3,30 +3,27 @@
 // components/TestimonialsSection.tsx
 // Testimonials section with carousel showcasing client feedback
 
-import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import Grid from './common/Grid';
 
-export interface Testimonial {
-  quote?: string | null;
-  author?: string | null;
-  readMoreLink?: string | null;
+interface Testimonial {
+  quote: string;
+  author?: string;
+  authorTitle?: string;
+  readMoreLink?: string;
 }
 
-type ResolvedTestimonial = {
-  quote: string;
-  author: string;
-  readMoreLink: string;
-};
+interface TestimonialsSectionProps {
+  heading?: string;
+  subheading?: string;
+  testimonials?: Testimonial[];
+  showAuthors?: boolean;
+  authorPrefix?: string;
+}
 
-type TestimonialsSectionProps = {
-  heading?: string | null;
-  subtext?: string | null;
-  testimonials?: Testimonial[] | null;
-};
-
-const FALLBACK_TESTIMONIALS: ResolvedTestimonial[] = [
+// TODO: Replace with Sanity CMS content
+const defaultTestimonials: Testimonial[] = [
   {
     quote: "My therapist introduced me to IMPACT back in 1989 and I went through the course back then. Gratefully, I have never been in a situation where I have had to use the physical skills I learned during that time. (Although I still feel like they are within me). However, the course was as much mental as physical, and I think it gave me my 'voice' which I have confidently used over the years. In the last few decades, I have often thought about taking a refresher course...",
     author: "Anonymous",
@@ -54,41 +51,22 @@ const FALLBACK_TESTIMONIALS: ResolvedTestimonial[] = [
   }
 ];
 
-function resolveTestimonial(
-  testimonial: Testimonial,
-  index: number
-): ResolvedTestimonial {
-  const fallback =
-    FALLBACK_TESTIMONIALS[index % FALLBACK_TESTIMONIALS.length];
-
-  return {
-    quote: testimonial.quote || fallback.quote,
-    author: testimonial.author || fallback.author,
-    readMoreLink: testimonial.readMoreLink || fallback.readMoreLink,
-  };
-}
-
 export default function TestimonialsSection({
-  heading,
-  subtext,
-  testimonials,
-}: TestimonialsSectionProps = {}) {
-  const resolvedTestimonials = testimonials?.length
-    ? testimonials.map(resolveTestimonial)
-    : FALLBACK_TESTIMONIALS;
-
-  const [currentIndex, setCurrentIndex] = useState(resolvedTestimonials.length);
+  heading = "What People are Saying",
+  subheading = "Hear from 20 people who've worked with us.",
+  testimonials = defaultTestimonials,
+  showAuthors = false,
+  authorPrefix = "- ",
+}: TestimonialsSectionProps) {
+  const testimonialItems = testimonials.length > 0 ? testimonials : defaultTestimonials;
+  const [currentIndex, setCurrentIndex] = useState(testimonialItems.length);
   const [isTransitioning, setIsTransitioning] = useState(true);
   const [isMobile, setIsMobile] = useState(true);
   const [isTablet, setIsTablet] = useState(false);
 
   // Duplicate testimonials for infinite loop
-  const duplicatedTestimonials = [
-    ...resolvedTestimonials,
-    ...resolvedTestimonials,
-    ...resolvedTestimonials,
-  ];
-  const startIndex = resolvedTestimonials.length;
+  const duplicatedTestimonials = [...testimonialItems, ...testimonialItems, ...testimonialItems];
+  const startIndex = testimonialItems.length;
 
   // Detect screen size
   useEffect(() => {
@@ -113,12 +91,12 @@ export default function TestimonialsSection({
   };
 
   const handleTransitionEnd = () => {
-    if (currentIndex >= startIndex + resolvedTestimonials.length) {
+    if (currentIndex >= startIndex + testimonialItems.length) {
       setIsTransitioning(false);
       setCurrentIndex(startIndex);
     } else if (currentIndex < startIndex) {
       setIsTransitioning(false);
-      setCurrentIndex(startIndex + resolvedTestimonials.length - 1);
+      setCurrentIndex(startIndex + testimonialItems.length - 1);
     }
   };
 
@@ -153,11 +131,13 @@ export default function TestimonialsSection({
           {/* Left - Heading and Subtext */}
           <div className="col-span-4 md:col-span-8 lg:col-span-6 flex flex-col gap-4 lg:gap-2 md:items-center lg:items-start">
             <h2 className="h2 text-[#000] text-center md:text-center lg:text-left">
-              {heading || "What People are Saying"}
+              {heading}
             </h2>
-            <p className="p2 text-[#333] text-center md:text-center lg:text-left">
-              {subtext || "Hear from 20 people who've worked with us."}
-            </p>
+            {subheading ? (
+              <p className="p2 text-[#333] text-center md:text-center lg:text-left">
+                {subheading}
+              </p>
+            ) : null}
           </div>
 
           {/* Right - Arrow Navigation - Desktop Only */}
@@ -198,11 +178,11 @@ export default function TestimonialsSection({
               {duplicatedTestimonials.map((testimonial, index) => (
                 <div
                   key={index}
-                  className="flex-shrink-0 w-[288px] md:w-[50%] lg:w-[calc(50%-60px)] bg-white flex flex-col"
+                  className="shrink-0 w-[288px] md:w-[50%] lg:w-[calc(50%-60px)] bg-white flex flex-col"
                 >
                   {/* Colored Top Border */}
                   <div
-                    className="h-[7px] w-full"
+                    className="h-1.75 w-full"
                     style={{
                       background: 'linear-gradient(to right, #E36A38 0%, #E36A38 22%, #874E9F 22%, #874E9F 86%, #462458 86%, #462458 100%)'
                     }}
@@ -211,21 +191,18 @@ export default function TestimonialsSection({
                   {/* Card Content */}
                   <div className="px-4 py-8 lg:p-8">
                     {/* Quote */}
-                    <p className="p1 text-[#000] lg:text-[#333]">
+                    <p className="p1 whitespace-pre-line text-[#000] lg:text-[#333]">
                       &ldquo;{testimonial.quote}&rdquo;
                     </p>
-                    {testimonial.author ? (
-                      <p className="p2 mt-6 text-[#333]">
-                        {testimonial.author}
+                    {showAuthors && testimonial.author ? (
+                      <p className="p2 mt-6 text-[#000] lg:text-[#333]">
+                        {authorPrefix}{testimonial.author}
                       </p>
                     ) : null}
-                    {testimonial.readMoreLink && testimonial.readMoreLink !== "#" ? (
-                      <Link
-                        href={testimonial.readMoreLink}
-                        className="link mt-4 inline-block text-brand-primary hover:opacity-80"
-                      >
-                        Read More
-                      </Link>
+                    {showAuthors && testimonial.authorTitle ? (
+                      <p className="p2 text-text-grey-light">
+                        {testimonial.authorTitle}
+                      </p>
                     ) : null}
                   </div>
                 </div>

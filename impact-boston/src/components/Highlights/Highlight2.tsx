@@ -47,7 +47,9 @@ export default function Highlight2({
                 >
                     {ctaLabel}
                 </Button>
-                <p className="p2 col-span-full">{supportingText}</p>
+                {supportingText ? (
+                    <p className="p2 col-span-full">{supportingText}</p>
+                ) : null}
             </div>      
         </Grid>
         </div>
