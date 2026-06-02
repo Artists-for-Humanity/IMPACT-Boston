@@ -1,10 +1,3 @@
-// components/Header/Navigation.tsx
-// Primary navigation — matches nav-a.png design:
-// - 3 nav items with dropdowns: About, Programs, Learn more
-// - Active item is bold + purple
-// - Register (filled purple button) + Donate (outlined button) on the right
-// - Search icon far right
-
 "use client";
 
 import { useState } from "react";
@@ -27,35 +20,106 @@ const DEFAULT_NAV_ITEMS: NavItem[] = [
     label: "About",
     link: "/about",
     subItems: [
-      { label: "About Impact", link: "/AboutImpact", description: "Learn about our mission, vision and approach to self-defense." },
-      { label: "Board and Staff", link: "/BoardAndStaff", description: "Meet the people behind Impact." },
-      { label: "Resources", link: "/Resources", description: "Explore our collection of self-defense resources." },
-      { label: "Blog", link: "/Blog", description: "Read our latest articles and updates." },
-      { label: "Accessibility", link: "/Accessibility", description: "Learn about our commitment to accessibility." },
+      {
+        label: "About Impact",
+        link: "/AboutImpact",
+        description: "Building confidence for personal & community safety.",
+      },
+      {
+        label: "Board and Staff",
+        link: "/BoardAndStaff",
+        description: "Meet the people leading our mission forward.",
+      },
+      {
+        label: "Resources",
+        link: "/Resources",
+        description: "Tools and guidance to support safer communities.",
+      },
+      {
+        label: "Blog",
+        link: "/Blog",
+        description: "Stories, insights, and updates from our work.",
+      },
+      {
+        label: "Accessibility",
+        link: "/Accessibility",
+        description: "Self-defense program disability accommodations overview.",
+      },
     ],
   },
   {
     label: "Programs",
     link: "/programs",
     subItems: [
-      { label: "Schools & Colleges", link: "/SchoolsAndColleges", description: "Explore our programs for schools and colleges." },
-      { label: "Public Classes", link: "/PublicClasses", description: "Learn about our public self-defense classes." },
-      { label: "People With Disabilities", link: "/PeopleWithDisabilities", description: "Discover resources for people with disabilities." },
-      { label: "De-escalation", link: "/De-escalation", description: "Learn about de-escalation techniques." },
-      { label: "Community Organizations", link: "/CommunityOrganizations", description: "Find out about our community partnerships." },
-      { label: "Workplace Programs", link: "/WorkplacePrograms", description: "Explore our workplace self-defense programs." },
-      { label: "Know Your Rights", link: "/KnowYourRights", description: "Learn about your rights in self-defense situations." },
-      { label: "Healthy Relationships and Sex Education", link: "/HealthyRelationships", description: "tbd" },
+      {
+        label: "Public Classes",
+        link: "/SelfDefense",
+        description: "Register as an individual for a self-defense class",
+      },
+      {
+        label: "Schools & Colleges",
+        link: "/SchoolsAndColleges",
+        description: "Explore program options for schools and colleges",
+      },
+      {
+        label: "People with Disabilities",
+        link: "/PeopleWithDisabilities",
+        description:
+          "Explore programs for people with disabilities and trainings for those who support them",
+      },
+      {
+        label: "De-escalation",
+        link: "/De-escalation",
+        description: "Hire us for a de-escalation workshop",
+      },
+      {
+        label: "Community Organizations",
+        link: "/CommunityOrganizations",
+        description: "Explore training options that strengthen communities",
+      },
+      {
+        label: "Workplace Programs",
+        link: "/WorkplacePrograms",
+        description: "Hire us for a dynamic workshop for your team",
+      },
+      {
+        label: "Know Your Rights",
+        link: "/KnowYourRights",
+        description:
+          "Learn about our trauma-informed approach to practicing know your rights scenarios",
+      },
+      {
+        label: "Healthy Relationships & Sex Education",
+        link: "/HealthyRelationships",
+        description:
+          "For schools, after-school programs, and summer youth programs",
+      },
     ],
   },
   {
-    label: "Learn more",
+    label: "Learn More",
     link: "/learn-more",
     subItems: [
-      { label: "Fact Check Fridays", link: "/FactCheckFriday", description: "Stay informed with our weekly fact checks." },
-      { label: "Books by Meg Stone", link: "/BooksByMegStone", description: "Explore the works of our founder." },
-      { label: "Press", link: "/Press", description: "Read our latest press releases and media coverage." },
-      { label: "What is Empowerment", link: "/Empowerment", description: "Learn about the principles of empowerment." },
+      {
+        label: "Fact Check Fridays",
+        link: "/FactCheckFriday",
+        description: "Stay informed with our weekly fact checks.",
+      },
+      {
+        label: "Books by Meg Stone",
+        link: "/BooksByMegStone",
+        description: "Explore the works of our founder.",
+      },
+      {
+        label: "Press",
+        link: "/Press",
+        description: "Read our latest press releases and media coverage.",
+      },
+      {
+        label: "What is Empowerment Self-Defense?",
+        link: "/Empowerment",
+        description: "Learn about the principles of empowerment.",
+      },
     ],
   },
 ];
@@ -97,7 +161,7 @@ export default function Navigation({
                     height={12}
                     alt=""
                     className={` transition-transform duration-150 ${
-                      activeDropdown === item.label ? "rotate-270" : ""
+                      activeDropdown === item.label ? "" : ""
                     }`}
                   />
                 )}
@@ -105,20 +169,43 @@ export default function Navigation({
 
               {/* Dropdown */}
               {item.subItems && activeDropdown === item.label && (
-                <div className="absolute top-full right-0 pt-2 z-50">
-                <ul className="min-w-xl bg-white border border-gray-100 shadow-lg z-50 px-8 py-4 rounded-2xl grid grid-cols-2">
-                  {item.subItems.map((sub) => (
-                    <li key={sub.label}>
-                      <a
-                        href={sub.link}
-                        className="link block px-4 py-1 text-gray-600 hover:text-gray-900 hover:bg-gray-50 transition-colors duration-150 rounded-lg"
-                      >
-                        <p className="p1-bold text-secondary">{sub.label}</p>
-                        <p className="p2">{sub.description}</p>
-                      </a>
-                    </li>
-                  ))}
-                </ul>
+                <div className="absolute top-full left-1/2 transform -translate-x-1/2 pt-4 z-50 drop-shadow-lg">
+                  <div
+                    aria-hidden
+                    className="absolute top-2 left-1/2 z-0 h-4 w-4 -translate-x-1/2 rotate-45 border-l border-t border-gray-100 bg-white shadow-sm"
+                  />
+                  <ul className="relative z-10 min-w-xl bg-white border border-gray-100 px-8 py-4 rounded-2xl grid grid-cols-2 gap-x-6">
+                    {item.subItems.map((sub, subIdx) => {
+                      // desktop dropdown uses 2 columns; compute which items are in the last row
+                      const cols = 2;
+                      const total = item.subItems!.length;
+                      const lastRowCount =
+                        total % cols === 0 ? cols : total % cols;
+                      const firstIndexOfLastRow = total - lastRowCount;
+                      const isInLastRow = subIdx >= firstIndexOfLastRow;
+
+                      return (
+                        <li
+                          key={sub.label}
+                          className={`border-solid border-gray-100 ${
+                            isInLastRow ? "border-b-0" : "border-b-2"
+                          }`}
+                        >
+                          <a
+                            href={sub.link}
+                            className="link block p-4 text-gray-600 hover:text-gray-900 hover:bg-gray-50 transition-colors duration-150 rounded-lg"
+                          >
+                            <p className="p1-bold text-secondary">
+                              {sub.label}
+                            </p>
+                            <p className="p2 text-[14px]">
+                              {sub.description}
+                            </p>
+                          </a>
+                        </li>
+                      );
+                    })}
+                  </ul>
                 </div>
               )}
             </li>
@@ -128,16 +215,25 @@ export default function Navigation({
 
       {/* ── CTA buttons ─────────────────────────────────────────── */}
       <div className="hidden lg:flex items-center gap-2">
-        {/* Register — filled purple */}
-        <Link
-          href="/register"
-          className="link flex items-center gap-0.5 px-4 py-1 text-[#FFF] bg-[#6E3388] hover:bg-brand-primary rounded-[5px] transition-colors duration-150"
-        >
-          Register
-        </Link>
 
-        {/* Donate — outlined */}
-        <Link
+          {/* ── Search icon ─────────────────────────────────────────── */}
+      <button
+        aria-label="Search"
+        className="hidden lg:flex p-1.5 text-gray-400 hover:text-gray-700 transition-colors duration-150"
+      >
+        <Image src="/icons/search.svg" width={18} height={18} alt="Search" />
+      </button>
+
+      {/* ── Register button ──────────────────────────────────────── */}
+      <Link
+        href="/register"
+        className="link flex items-center gap-0.5 px-4 py-1 text-[#FFF] bg-[#000000] hover:bg-brand-primary rounded-[5px] transition-colors duration-150"
+      >
+        Register
+      </Link>
+
+      {/* ── Donate button ────────────────────────────────────────── */}
+      <Link
           href="/donate"
           className="link flex items-center gap-0.5 px-4 py-1 text-black border border-[#959595] rounded-[5px] hover:border-gray-400 hover:text-gray-900 transition-colors duration-150"
         >
@@ -145,13 +241,7 @@ export default function Navigation({
         </Link>
       </div>
 
-      {/* ── Search icon ─────────────────────────────────────────── */}
-      <button
-        aria-label="Search"
-        className="hidden lg:flex p-1.5 text-gray-400 hover:text-gray-700 transition-colors duration-150"
-      >
-        <Image src="/icons/search.svg" width={18} height={18} alt="Search" />
-      </button>
+    
 
       {/* ── Mobile hamburger ─────────────────────────────────────── */}
       <button
@@ -209,40 +299,60 @@ export default function Navigation({
 
       {/* ── Mobile panel ─────────────────────────────────────────── */}
       {mobileOpen && (
-        <div className="lg:hidden absolute top-full left-0 w-full bg-white border-t border-gray-100 shadow-lg z-50">
-          <ul className="px-4 py-3 flex flex-col gap-1">
-            {items.map((item) => (
-              <li key={item.label}>
-                <a
+        <div className="lg:hidden absolute top-full left-0 z-50 max-h-[calc(100vh-73px)] w-full overflow-y-auto bg-white border-t border-line-divider shadow-lg">
+          <ul className="px-6 py-8 md:px-10 md:py-10">
+            {items.map((item, itemIdx) => (
+              <li
+                key={item.label}
+                className={`${
+                  itemIdx === items.length - 1
+                    ? ""
+                    : "mb-8 border-b border-line-divider pb-8 md:mb-9 md:pb-9"
+                }`}
+              >
+                <Link
                   href={item.link}
-                  className="link block px-3 py-3 text-gray-700 hover:text-brand-primary-shade border-b border-gray-50 transition-colors duration-150"
+                  className="sub-1 mb-7 block text-black hover:text-secondary transition-colors duration-150"
                   onClick={() => setMobileOpen(false)}
                 >
                   {item.label}
-                </a>
-                {item.subItems?.map((sub) => (
-                  <a
-                    key={sub.label}
-                    href={sub.link}
-                    className="link block px-6 py-2 text-gray-500 hover:text-gray-800 transition-colors duration-150"
-                    onClick={() => setMobileOpen(false)}
-                  >
-                    {sub.label}
-                  </a>
-                ))}
+                </Link>
+
+                {item.subItems && (
+                  <ul className="grid grid-cols-1 gap-y-7 md:grid-cols-2 md:gap-x-16 md:gap-y-8">
+                    {item.subItems.map((sub) => (
+                      <li key={sub.label}>
+                        <Link
+                          href={sub.link}
+                          className="group block"
+                          onClick={() => setMobileOpen(false)}
+                        >
+                          <p className="p1-bold text-secondary group-hover:underline group-hover:underline-offset-2">
+                            {sub.label}
+                          </p>
+                          <p className="p2 mt-1 text-grey">
+                            {sub.description}
+                          </p>
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </li>
             ))}
           </ul>
-          <div className="px-4 py-4 flex flex-col gap-2 border-t border-gray-100">
+          <div className="flex flex-col gap-2 border-t border-line-divider px-6 py-6 md:flex-row md:px-10">
             <Link
               href="/register"
-              className="link w-full text-center px-5 py-2.5 text-white bg-brand-primary-shade"
+              className="link w-full text-center px-5 py-2.5 text-white bg-black hover:bg-brand-primary rounded-[5px] transition-colors duration-150 md:w-auto"
+              onClick={() => setMobileOpen(false)}
             >
               Register
             </Link>
             <Link
               href="/donate"
-              className="link w-full text-center px-5 py-2.5 text-gray-700 border border-gray-300"
+              className="link w-full text-center px-5 py-2.5 text-black border border-[#959595] rounded-[5px] hover:border-gray-400 hover:text-gray-900 transition-colors duration-150 md:w-auto"
+              onClick={() => setMobileOpen(false)}
             >
               Donate
             </Link>
