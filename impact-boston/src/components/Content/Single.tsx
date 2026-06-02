@@ -42,6 +42,7 @@ interface SingleContentProps {
   purchaseLink?: { href: string; text: string };
   cta?: { href: string; text: string };
   className?: string;
+  subtitleClassName?: string;
   backgroundColor?: string;
   gridClassName?: string;
   thumbnails?: Thumbnail[];
@@ -57,6 +58,7 @@ export default function SingleContent({
   purchaseLink,
   cta,
   className,
+  subtitleClassName,
   backgroundColor,
   gridClassName,
   thumbnails
@@ -73,7 +75,7 @@ export default function SingleContent({
     <div className={`${className} ${backgroundColor ? backgroundColor : ''}`}>
       <Grid className={gridClassName}>
         {reverse && (
-          <div className={`${imageCol} w-full object-cover md:w-full md:h-auto`}>
+          <div className={`${imageCol} w-full md:w-full lg:h-full lg:flex lg:flex-col`}>
             <div
               style={{
                 height: '8px',
@@ -86,17 +88,10 @@ export default function SingleContent({
               width={1000}
               height={1000}
               alt={imageAlt}
-              className="object-cover"
+              className="object-cover w-full h-[400px] lg:flex-1 lg:min-h-0 lg:h-auto"
               loading="eager"
               priority={true}
-              style={{
-                display: 'block',
-                width: '100%',
-                height: '400px', 
-                objectFit: 'cover',
-                borderTopLeftRadius: 0,
-                borderTopRightRadius: 0,
-              }}
+              style={{ objectFit: 'cover' }}
             />
           </div>
         )}
@@ -104,7 +99,7 @@ export default function SingleContent({
         <div className={`${contentCol} flex flex-col gap-6 lg:gap-8`}>
           <div className="flex flex-col gap-2">
             <h3 className="h3">{title}</h3>
-            {subtitle && <div className="sub-2 text-secondary">{subtitle}</div>}
+            {subtitle && <div className={`sub-2 ${subtitleClassName ?? 'text-secondary'}`}>{subtitle}</div>}
           </div>
           <div className="flex flex-col gap-2">
             {paragraphs.map((para, idx) => (

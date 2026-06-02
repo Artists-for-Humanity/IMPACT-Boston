@@ -78,12 +78,12 @@ export default function Hero2({
         )}
 
         <div className="col-span-full lg:col-start-3 lg:col-span-8 flex flex-col gap-6 md:gap-6 lg:gap-6">
-          <h2 className="h2 text-center text-black">
+          <h1 className="h1 text-center text-black">
             {title}{' '}
             {highlight ? (
               <span className={highlightClass}>{highlight}</span>
             ) : null}
-          </h2>
+          </h1>
 
           <p className="p1 text-center text-grey">{description}</p>
         </div>

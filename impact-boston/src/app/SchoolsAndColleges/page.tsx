@@ -326,7 +326,7 @@ export default function SchoolAndColleges() {
       <CtaSection
         panels={[
           {
-            wrapperClassName: 'bg-secondary md:w-1/2 lg:px-20 lg:py-27',
+            wrapperClassName: 'bg-secondary md:w-1/2 py-14 px-10 md:p-10 lg:py-[118px] lg:px-[144px]',
             title: 'IMPACT School',
             titleLine2: 'Brochure',
             description: 'Browse brochures for Elementary, Middle, and High School.',
@@ -337,7 +337,7 @@ export default function SchoolAndColleges() {
             iconHeight: 24,
           },
           {
-            wrapperClassName: 'bg-primary md:w-1/2 lg:px-20 lg:py-27',
+            wrapperClassName: 'bg-primary md:w-1/2 py-14 px-10 md:p-10 lg:py-[118px] lg:px-[144px]',
             title: 'Be Part of the',
             titleLine2: 'IMPACT Mission',
             description: 'Invest in violence prevention and community care.',
