@@ -45,7 +45,7 @@ const DEFAULT_NAV_ITEMS: NavItem[] = [
       { label: "Community Organizations", link: "/CommunityOrganizations", description: "Find out about our community partnerships." },
       { label: "Workplace Programs", link: "/WorkplacePrograms", description: "Explore our workplace self-defense programs." },
       { label: "Know Your Rights", link: "/KnowYourRights", description: "Learn about your rights in self-defense situations." },
-      { label: "Customized Programs", link: "/CustomizedPrograms", description: "Discover our customized self-defense programs." },
+      { label: "Healthy Relationships and Sex Education", link: "/HealthyRelationships", description: "tbd" },
     ],
   },
   {

@@ -9,12 +9,19 @@ import Grid from './common/Grid';
 
 interface Testimonial {
   quote: string;
-  author: string;
-  readMoreLink: string;
+  author?: string;
+  readMoreLink?: string;
+}
+
+interface TestimonialsSectionProps {
+  heading?: string;
+  subheading?: string;
+  testimonials?: Testimonial[];
+  showAuthors?: boolean;
 }
 
 // TODO: Replace with Sanity CMS content
-const testimonials: Testimonial[] = [
+const defaultTestimonials: Testimonial[] = [
   {
     quote: "My therapist introduced me to IMPACT back in 1989 and I went through the course back then. Gratefully, I have never been in a situation where I have had to use the physical skills I learned during that time. (Although I still feel like they are within me). However, the course was as much mental as physical, and I think it gave me my 'voice' which I have confidently used over the years. In the last few decades, I have often thought about taking a refresher course...",
     author: "Anonymous",
@@ -42,17 +49,21 @@ const testimonials: Testimonial[] = [
   }
 ];
 
-const borderColors = ['#6B4EA0', '#D4541A', '#2E7D4F'];
-
-export default function TestimonialsSection() {
-  const [currentIndex, setCurrentIndex] = useState(testimonials.length);
+export default function TestimonialsSection({
+  heading = "What People are Saying",
+  subheading = "Hear from 20 people who've worked with us.",
+  testimonials = defaultTestimonials,
+  showAuthors = false,
+}: TestimonialsSectionProps) {
+  const testimonialItems = testimonials.length > 0 ? testimonials : defaultTestimonials;
+  const [currentIndex, setCurrentIndex] = useState(testimonialItems.length);
   const [isTransitioning, setIsTransitioning] = useState(true);
   const [isMobile, setIsMobile] = useState(true);
   const [isTablet, setIsTablet] = useState(false);
 
   // Duplicate testimonials for infinite loop
-  const duplicatedTestimonials = [...testimonials, ...testimonials, ...testimonials];
-  const startIndex = testimonials.length;
+  const duplicatedTestimonials = [...testimonialItems, ...testimonialItems, ...testimonialItems];
+  const startIndex = testimonialItems.length;
 
   // Detect screen size
   useEffect(() => {
@@ -77,12 +88,12 @@ export default function TestimonialsSection() {
   };
 
   const handleTransitionEnd = () => {
-    if (currentIndex >= startIndex + testimonials.length) {
+    if (currentIndex >= startIndex + testimonialItems.length) {
       setIsTransitioning(false);
       setCurrentIndex(startIndex);
     } else if (currentIndex < startIndex) {
       setIsTransitioning(false);
-      setCurrentIndex(startIndex + testimonials.length - 1);
+      setCurrentIndex(startIndex + testimonialItems.length - 1);
     }
   };
 
@@ -117,11 +128,13 @@ export default function TestimonialsSection() {
           {/* Left - Heading and Subtext */}
           <div className="col-span-4 md:col-span-8 lg:col-span-6 flex flex-col gap-4 lg:gap-2 md:items-center lg:items-start">
             <h2 className="h2 text-[#000] text-center md:text-center lg:text-left">
-              What People are Saying
+              {heading}
             </h2>
-            <p className="p2 text-[#333] text-center md:text-center lg:text-left">
-              Hear from 20 people who&apos;ve worked with us.
-            </p>
+            {subheading ? (
+              <p className="p2 text-[#333] text-center md:text-center lg:text-left">
+                {subheading}
+              </p>
+            ) : null}
           </div>
 
           {/* Right - Arrow Navigation - Desktop Only */}
@@ -176,8 +189,13 @@ export default function TestimonialsSection() {
                   <div className="px-4 py-8 lg:p-8">
                     {/* Quote */}
                     <p className="p1 text-[#000] lg:text-[#333]">
-                      &ldquo;{testimonial.quote}
+                      &ldquo;{testimonial.quote}&rdquo;
                     </p>
+                    {showAuthors && testimonial.author ? (
+                      <p className="p2 mt-6 text-[#000] lg:text-[#333]">
+                        - {testimonial.author}
+                      </p>
+                    ) : null}
                   </div>
                 </div>
               ))}
