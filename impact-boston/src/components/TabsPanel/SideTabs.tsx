@@ -27,7 +27,7 @@ type TabContentBlock =
       eyebrow: string;
       previewCount?: number;
       items: ResourceListItem[];
-    };
+    }
   | { type: "link"; text: string; href: string };
 
 export type SideTab = {
@@ -183,6 +183,8 @@ export default function SideTabs({ tabs }: { tabs: Tab[] }) {
                     key={i}
                     previewCount={block.previewCount}
                   />
+                );
+
               case "link":
                 return (
                   <a

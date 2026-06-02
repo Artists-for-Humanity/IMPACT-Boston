@@ -10,6 +10,8 @@ interface Highlight2Props {
     supportingText?: string;
     backgroundColor?: string;
     textColor?: string;
+    buttonBgColor?: string;
+    buttonTextColor?: string;
 }
 
 export default function Highlight2({
@@ -20,6 +22,8 @@ export default function Highlight2({
     supportingText,
     backgroundColor,
     textColor,
+    buttonBgColor,
+    buttonTextColor,
 }: Highlight2Props) {
     const containerStyles: CSSProperties = {
         ...(backgroundColor ? { backgroundColor } : {}),
@@ -44,6 +48,7 @@ export default function Highlight2({
                     variant="primary"
                     size="lg"
                     className="w-full col-start-1 col-span-4 md:col-start-1 md:col-span-4 md:w-full lg:w-auto lg:col-start-auto lg:col-span-3"
+                    style={{ ...(buttonBgColor ? { backgroundColor: buttonBgColor } : {}), ...(buttonTextColor ? { color: buttonTextColor } : {}) }}
                 >
                     {ctaLabel}
                 </Button>
