@@ -38,34 +38,6 @@ export default function AboutImpact() {
         ]}
       />
 
-    <ContentTriple
-      title="Our Approach to Self-Defense"
-      subtitle="Realistic Scenarios, De-escalation Skills & Rebuilding Safety and Confidence"
-      cards={[
-        {
-          bgClass: 'bg-complementary-light',
-          content: [
-            { type: "title", value: "Realistic", line2: "Scenarios" },
-            { type: "description", value: "Our self-defense classes simulate scenarios of threat, intimidation and violence perpetrated by strangers and people we know. Classes are taught by a team of two instructors, one of whom takes on the role of a perpetrator. They wear a full suit of body armor so students can safely defend themselves using the same force needed in a real attack." },
-          ],
-        },
-        {
-          bgClass: "bg-primary-light",
-          content: [
-            { type: "title", value: "De-escalation Skills" },
-            { type: "description", value: "Our self-defense classes simulate scenarios of threat, intimidation and violence perpetrated by strangers and people we know. Classes are taught by a team of two instructors, one of whom takes on the role of a perpetrator. They wear a full suit of body armor so students can safely defend themselves using the same force needed in a real attack." },
-          ],
-        },
-        {
-          bgClass: "bg-secondary-light",
-          content: [
-            { type: "title", value: "Rebuilding Safety and Confidence" },
-            { type: "description", value: "IMPACT - formerly known as \"Model Mugging\" - helps survivors heal from trauma, retrain their bodies and nervous systems, and regain safety and control." },
-          ],
-        },
-      ]}
-    />
-
       <StatementSection
         title="Violence is not inevitable. We all have the ability to stop it."
         description="IMPACT has been teaching solutions for safe living since 1971. We provide realistic personal safety training that gives people the skills to respond appropriately to threatening situations in the moment of fear or intimidation. We also collaborate with schools and organizations to create programs that proactively prevent abuse. IMPACT’s prevention programs emphasize giving people the tools to manage their stress responses so they can intervene effectively when they observe risky situations. Too often abuse goes unchallenged because people don’t feel safe speaking up. IMPACT programs help people increase their ability to safely advocate for themselves and others."
@@ -73,6 +45,36 @@ export default function AboutImpact() {
         imageAlt="Self-defense training"
         backgroundClassName="bg-[#FAF6FD]"
       />
+
+    <ContentTriple
+      title="Our Approach to Self-Defense"
+      subtitle="Realistic Scenarios, De-escalation Skills & Rebuilding Safety and Confidence"
+      cards={[
+        {
+          bgClass: 'bg-complementary-light',
+          content: [
+            { type: "title", value: "Realistic Scenarios" },
+            { type: "description", value: "Our self-defense classes simulate scenarios of threat, intimidation and violence perpetrated by strangers and people we know. Classes are taught by a team of two instructors, one of whom takes on the role of a perpetrator. They wear a full suit of body armor so students can safely defend themselves using the same force needed in a real attack." },
+          ],
+        },
+        {
+          bgClass: "bg-primary-light",
+          content: [
+            { type: "title", value: "A Fight Avoided is", line2: "a Fight Won" },
+            { type: "description", value: "Physical self-defense is always a last resort. Students learn verbal skills to de-escalate conflict and avoid unnecessary violence. Many assailants use verbal threats to intimidate people, so IMPACT teaches students to stay calm and respond effectively to harassment." },
+          ],
+        },
+        {
+          bgClass: "bg-secondary-light",
+          content: [
+            { type: "title", value: "Rebuilding Safety and Confidence" },
+            { type: "description", value: "IMPACT gives people the opportunity to be effective and successful in the face of fear. Having this experience has helped people heal from past trauma and take on new challenges." },
+          ],
+        },
+      ]}
+    />
+
+      
 
 
       <ContentTriple
@@ -167,8 +169,8 @@ function StatementSection({
 }) {
   return (
     <div className={backgroundClassName}>
-      <Grid>
-        <div className="col-span-full flex flex-col gap-6 lg:col-span-5">
+      <Grid className="gap-y-6 md:gap-y-10">
+        <div className="col-span-full flex flex-col gap-6 lg:gap-8 lg:col-span-5">
           <h3 className="h3">{title}</h3>
           <p className="p1">{description}</p>
         </div>

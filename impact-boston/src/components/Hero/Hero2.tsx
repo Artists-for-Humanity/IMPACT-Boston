@@ -60,7 +60,7 @@ export default function Hero2({
   const tagBoxClass = tagBackground ? 'rounded-xl px-3 py-2 md:px-4' : '';
 
   return (
-      <Grid>
+      <Grid className="md:gap-12 lg:gap-8">
         {tag && (
           <div className={`sub-2 col-span-full flex justify-center ${tagColorClass}`}>
             <div className={`tag flex items-center gap-2 ${tagBoxClass} ${tagBackgroundClass}`}>
