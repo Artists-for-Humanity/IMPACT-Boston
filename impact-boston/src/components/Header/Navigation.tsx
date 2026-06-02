@@ -55,7 +55,7 @@ const DEFAULT_NAV_ITEMS: NavItem[] = [
       { label: "Fact Check Fridays", link: "/FactCheckFriday", description: "Stay informed with our weekly fact checks." },
       { label: "Books by Meg Stone", link: "/BooksByMegStone", description: "Explore the works of our founder." },
       { label: "Press", link: "/Press", description: "Read our latest press releases and media coverage." },
-      { label: "What is Empowerment", link: "/WhatIsEmpowerment", description: "Learn about the principles of empowerment." },
+      { label: "What is Empowerment", link: "/Empowerment", description: "Learn about the principles of empowerment." },
     ],
   },
 ];
@@ -97,7 +97,7 @@ export default function Navigation({
                     height={12}
                     alt=""
                     className={` transition-transform duration-150 ${
-                      activeDropdown === item.label ? "rotate-[270deg]" : ""
+                      activeDropdown === item.label ? "rotate-270" : ""
                     }`}
                   />
                 )}

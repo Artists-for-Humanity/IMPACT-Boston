@@ -175,11 +175,11 @@ export default function TestimonialsSection({
               {duplicatedTestimonials.map((testimonial, index) => (
                 <div
                   key={index}
-                  className="flex-shrink-0 w-[288px] md:w-[50%] lg:w-[calc(50%-60px)] bg-white flex flex-col"
+                  className="shrink-0 w-[288px] md:w-[50%] lg:w-[calc(50%-60px)] bg-white flex flex-col"
                 >
                   {/* Colored Top Border */}
                   <div
-                    className="h-[7px] w-full"
+                    className="h-1.75 w-full"
                     style={{
                       background: 'linear-gradient(to right, #E36A38 0%, #E36A38 22%, #874E9F 22%, #874E9F 86%, #462458 86%, #462458 100%)'
                     }}

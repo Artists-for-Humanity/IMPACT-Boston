@@ -186,7 +186,7 @@ function StatementSection({
             width={500}
             height={500}
             alt={imageAlt}
-            className="block h-auto w-full object-cover lg:h-[400px]"
+            className="block h-auto w-full object-cover lg:h-100"
           />
         </div>
       </Grid>

@@ -8,7 +8,8 @@ type TabContentBlock =
   | { type: "subheading"; text: string }
   | { type: "bullets"; items: string[] }
   | { type: "list"; items: string[] }
-  | { type: "columns"; items: string[][] };
+  | { type: "columns"; items: string[][] }
+  | { type: "divider" };
 
 type Tab = {
   label: string;
@@ -149,6 +150,9 @@ export default function SideTabs({ tabs }: { tabs: Tab[] }) {
                     ))}
                   </div>
                 );
+
+              case "divider":
+                return <hr className="border-line-divider" key={i} />;
 
               default:
                 return null;
