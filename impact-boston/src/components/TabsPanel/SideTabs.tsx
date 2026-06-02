@@ -29,10 +29,12 @@ type TabContentBlock =
       items: ResourceListItem[];
     };
 
-type Tab = {
+export type SideTab = {
   label: string;
   content: TabContentBlock[];
 };
+
+type Tab = SideTab;
 
 export default function SideTabs({ tabs }: { tabs: Tab[] }) {
   const [active, setActive] = useState(0);

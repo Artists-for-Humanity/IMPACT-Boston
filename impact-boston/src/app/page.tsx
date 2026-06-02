@@ -158,7 +158,7 @@ function resolveSideTabs(sideTabs?: SanitySideTab[] | null): SideTab[] {
     )
     .map((tab) => ({
       label: tab.label,
-      content: tab.content,
+      content: tab.content as unknown as SideTab['content'],
     }))
 
   return normalizedTabs?.length ? normalizedTabs : FALLBACK_SIDE_TABS
@@ -299,9 +299,9 @@ function HomeSection({ section }: { section: HomePageSection }) {
     case 'homeTestimonialsSection':
       return (
         <TestimonialsSection
-          heading={section.heading}
-          subtext={section.subtext}
-          testimonials={section.testimonials}
+          heading={section.heading ?? undefined}
+          subheading={section.subtext ?? undefined}
+          testimonials={section.testimonials ?? undefined}
         />
       )
 
