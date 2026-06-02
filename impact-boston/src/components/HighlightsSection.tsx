@@ -9,7 +9,17 @@ import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import Grid from "./common/Grid";
 
-interface Slide {
+export interface HighlightSlide {
+  heading?: string | null;
+  body?: string | null;
+  ctaText?: string | null;
+  ctaLink?: string | null;
+  additionalText?: string | null;
+  imageSrc?: string | null;
+  imageAlt?: string | null;
+}
+
+type ResolvedHighlightSlide = {
   heading: string;
   body: string;
   ctaText: string;
@@ -17,7 +27,12 @@ interface Slide {
   additionalText: string;
   imageSrc: string;
   imageAlt: string;
-}
+};
+
+type HighlightsSectionProps = {
+  label?: string | null;
+  slides?: HighlightSlide[] | null;
+};
 
 // Helper function to convert email addresses in text to clickable links
 const renderTextWithEmailLinks = (text: string) => {
@@ -40,7 +55,7 @@ const renderTextWithEmailLinks = (text: string) => {
   });
 };
 
-const slides: Slide[] = [
+const FALLBACK_HIGHLIGHT_SLIDES: ResolvedHighlightSlide[] = [
   {
     heading: "Find your courage and make the world safer.",
     body: "IMPACT has been teaching solutions for safe living since 1971. We provide realistic personal safety training that gives people the skills to respond appropriately to threatening situations in the moment of fear or intimidation. We also collaborate with schools and organizations to create programs that proactively prevent abuse. IMPACT's prevention programs emphasize giving people the tools to manage their stress responses so they can intervene effectively when they observe risky situations. Too often abuse goes unchallenged because people don't feel safe speaking up. IMPACT programs help people increase their ability to safely advocate for themselves and others.",
@@ -73,15 +88,38 @@ const slides: Slide[] = [
   },
 ];
 
-export default function HighlightsSection() {
+function resolveSlide(slide: HighlightSlide, index: number): ResolvedHighlightSlide {
+  const fallback =
+    FALLBACK_HIGHLIGHT_SLIDES[index % FALLBACK_HIGHLIGHT_SLIDES.length];
+
+  return {
+    heading: slide.heading || fallback.heading,
+    body: slide.body || fallback.body,
+    ctaText: slide.ctaText || fallback.ctaText,
+    ctaLink: slide.ctaLink || fallback.ctaLink,
+    additionalText: slide.additionalText || fallback.additionalText,
+    imageSrc: slide.imageSrc || fallback.imageSrc,
+    imageAlt: slide.imageAlt || fallback.imageAlt,
+  };
+}
+
+export default function HighlightsSection({
+  label,
+  slides,
+}: HighlightsSectionProps = {}) {
+  const resolvedSlides = slides?.length
+    ? slides.map(resolveSlide)
+    : FALLBACK_HIGHLIGHT_SLIDES;
+
   const [currentSlide, setCurrentSlide] = useState(0);
+  const activeSlide = currentSlide < resolvedSlides.length ? currentSlide : 0;
 
   const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % slides.length);
+    setCurrentSlide((prev) => (prev + 1) % resolvedSlides.length);
   };
 
   const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
+    setCurrentSlide((prev) => (prev - 1 + resolvedSlides.length) % resolvedSlides.length);
   };
 
   const goToSlide = (index: number) => {
@@ -95,7 +133,7 @@ export default function HighlightsSection() {
         <Grid noPadding>
           <div className="col-span-4 md:col-span-8 lg:col-span-12 flex justify-between items-center">
             <h5 className="sub-2 text-white">
-              Highlights
+              {label || "Highlights"}
             </h5>
             <div className="flex gap-4">
               <button
@@ -161,11 +199,11 @@ export default function HighlightsSection() {
           {/* Left Panel - Heading */}
           <div className="col-span-4 md:col-span-8 lg:col-span-5 flex flex-col gap-6 lg:gap-9">
             <div className="grid">
-              {slides.map((slide, index) => (
+              {resolvedSlides.map((slide, index) => (
                 <div
                   key={index}
                   className={`col-start-1 row-start-1 transition-opacity duration-500 ${
-                    currentSlide === index
+                    activeSlide === index
                       ? "opacity-100 z-10"
                       : "opacity-0 pointer-events-none"
                   }`}
@@ -179,13 +217,13 @@ export default function HighlightsSection() {
 
             {/* Dot Indicators - Mobile/Tablet: below heading */}
             <div className="lg:hidden flex gap-3">
-              {slides.map((_, index) => (
+              {resolvedSlides.map((_, index) => (
                 <button
                   key={index}
                   onClick={() => goToSlide(index)}
                   className="w-2 h-2 rounded-full transition-all duration-300"
                   style={{
-                    backgroundColor: currentSlide === index ? "#FFFFFF" : "#9F84B5",
+                    backgroundColor: activeSlide === index ? "#FFFFFF" : "#9F84B5",
                   }}
                   aria-label={`Go to slide ${index + 1}`}
                 />
@@ -194,14 +232,14 @@ export default function HighlightsSection() {
 
             {/* Dot Indicators - Desktop only */}
             <div className="hidden lg:flex gap-3">
-              {slides.map((_, index) => (
+              {resolvedSlides.map((_, index) => (
                 <button
                   key={index}
                   onClick={() => goToSlide(index)}
                   className="w-2 h-2 rounded-full transition-all duration-300"
                   style={{
                     backgroundColor:
-                      currentSlide === index ? "#FFFFFF" : "#9F84B5",
+                      activeSlide === index ? "#FFFFFF" : "#9F84B5",
                   }}
                   aria-label={`Go to slide ${index + 1}`}
                 />
@@ -215,11 +253,11 @@ export default function HighlightsSection() {
             <div className="flex flex-col gap-6 lg:gap-7">
               {/* Image - Desktop: all slides in same grid cell with z-index */}
               <div className="grid">
-                {slides.map((slide, index) => (
+                {resolvedSlides.map((slide, index) => (
                   <div
                     key={index}
                     className={`col-start-1 row-start-1 relative aspect-[16/9] transition-opacity duration-500 ${
-                      currentSlide === index
+                      activeSlide === index
                         ? "opacity-100 z-10"
                         : "opacity-0 pointer-events-none hidden lg:block"
                     }`}
@@ -237,11 +275,11 @@ export default function HighlightsSection() {
 
               {/* Body Text - Desktop: all slides in same grid cell with z-index */}
               <div className="grid">
-                {slides.map((slide, index) => (
+                {resolvedSlides.map((slide, index) => (
                   <div
                     key={index}
                     className={`col-start-1 row-start-1 transition-opacity duration-500 ${
-                      currentSlide === index
+                      activeSlide === index
                         ? "opacity-100 z-10"
                         : "opacity-0 pointer-events-none hidden lg:block"
                     }`}
@@ -259,11 +297,11 @@ export default function HighlightsSection() {
               <div className="md:col-span-4 lg:col-auto flex flex-col gap-2">
                 {/* CTA Button - Desktop: all slides in same grid cell with z-index */}
                 <div className="grid">
-                {slides.map((slide, index) => (
+                {resolvedSlides.map((slide, index) => (
                   <div
                     key={index}
                     className={`col-start-1 row-start-1 transition-opacity duration-500 ${
-                      currentSlide === index
+                      activeSlide === index
                         ? "opacity-100 z-10"
                         : "opacity-0 pointer-events-none hidden lg:block"
                     }`}
@@ -281,11 +319,11 @@ export default function HighlightsSection() {
 
               {/* Additional Text - Desktop: all slides in same grid cell with z-index */}
               <div className="grid">
-                {slides.map((slide, index) => (
+                {resolvedSlides.map((slide, index) => (
                   <div
                     key={index}
                     className={`col-start-1 row-start-1 transition-opacity duration-500 ${
-                      currentSlide === index
+                      activeSlide === index
                         ? "opacity-100 z-10"
                         : "opacity-0 pointer-events-none hidden lg:block"
                     }`}

@@ -44,7 +44,7 @@ export default function Triple({
 
 function TripleCardRenderer({ card }: { card: TripleCard }) {
   return (
-    <div className={`${card.bgClass ?? ""} ${card.className ?? ""} p-5 md:py-8 md:px-4 lg:p-8 flex flex-col justify-between gap-4`}>
+    <div className={`${card.bgClass ?? ""} ${card.className ?? ""} p-5 md:py-8 md:px-4 lg:p-8 flex flex-col justify-between gap-5 md:gap-6 lg:gap-0 lg:h-[360px]`}>
       {card.content.map((item, index) => {
         switch (item.type) {
         case "title":
@@ -53,8 +53,8 @@ function TripleCardRenderer({ card }: { card: TripleCard }) {
             {item.value}
             {item.line2 ? (
               <>
-                <br className="md:hidden" />
-                <span className="hidden md:inline"> </span>
+                <br className="md:hidden lg:block" />
+                <span className="hidden md:inline lg:hidden"> </span>
                 {item.line2}
               </>
             ) : null}

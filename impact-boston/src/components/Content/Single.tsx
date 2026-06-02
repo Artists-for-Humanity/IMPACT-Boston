@@ -2,6 +2,7 @@ import Grid from '@/components/common/Grid';
 import Image from 'next/image';
 import Link from 'next/link';
 import ScriptEmbed from './ScriptEmbed';
+import Button from '../common/Button';
 
 interface Paragraph {
   text: string;
@@ -39,6 +40,7 @@ interface SingleContentProps {
   imageAlt: string;
   reverse?: boolean;
   purchaseLink?: { href: string; text: string };
+  cta?: { href: string; text: string };
   className?: string;
   backgroundColor?: string;
   gridClassName?: string;
@@ -53,6 +55,7 @@ export default function SingleContent({
   imageAlt,
   reverse = false,
   purchaseLink,
+  cta,
   className,
   backgroundColor,
   gridClassName,
@@ -116,6 +119,11 @@ export default function SingleContent({
               <Link href={purchaseLink.href} target="_blank" rel="noopener noreferrer" className="p1-bold underline">
                 {purchaseLink.text}
               </Link>
+            )}
+            {cta && (
+              <Button href={cta.href} variant="primary" size="lg" className="mt-4 w-full lg:w-auto">
+                {cta.text}
+              </Button>
             )}
           </div>
         </div>
