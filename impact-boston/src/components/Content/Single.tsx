@@ -32,6 +32,7 @@ interface ThumbnailEmbed {
 type Thumbnail = ThumbnailImage | ThumbnailVideo | ThumbnailEmbed;
 
 interface SingleContentProps {
+  id?: string;
   title: string;
   paragraphs: Paragraph[];
   subtitle?: string;
@@ -49,6 +50,7 @@ interface SingleContentProps {
 }
 
 export default function SingleContent({
+  id,
   title,
   subtitle,
   paragraphs,
@@ -72,7 +74,7 @@ export default function SingleContent({
     : 'col-span-full not-last:lg:col-span-5';
 
   return (
-    <div className={`${className} ${backgroundColor ? backgroundColor : ''}`}>
+    <div id={id} className={`${className} ${backgroundColor ? backgroundColor : ''}`}>
       <Grid className={gridClassName}>
         {reverse && (
           <div className={`${imageCol} w-full md:w-full lg:h-full lg:flex lg:flex-col`}>
@@ -116,7 +118,12 @@ export default function SingleContent({
               </Link>
             )}
             {cta && (
-              <Button href={cta.href} variant="primary" size="lg" className="mt-4 w-full lg:w-auto">
+              <Button
+                href={cta.href}
+                variant="primary"
+                showChevron
+                className="mt-4 h-12 w-full px-5 md:w-[214px]"
+              >
                 {cta.text}
               </Button>
             )}

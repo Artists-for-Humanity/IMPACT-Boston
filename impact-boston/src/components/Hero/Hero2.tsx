@@ -20,6 +20,41 @@ interface Hero2Props {
   description: string;
   imageSrc?: string;
   imageAlt?: string;
+  youtubeUrl?: string;
+  videoTitle?: string;
+  mediaClassName?: string;
+}
+
+function getYouTubeEmbedUrl(youtubeUrl: string) {
+  try {
+    const url = new URL(youtubeUrl);
+    const hostname = url.hostname.replace(/^www\./, "");
+
+    if (
+      (hostname === "youtube.com" || hostname === "youtube-nocookie.com") &&
+      url.pathname.startsWith("/embed/")
+    ) {
+      return youtubeUrl;
+    }
+
+    let videoId = "";
+
+    if (hostname === "youtu.be") {
+      videoId = url.pathname.split("/").filter(Boolean)[0] ?? "";
+    }
+
+    if (hostname === "youtube.com" || hostname === "m.youtube.com") {
+      if (url.pathname.startsWith("/shorts/")) {
+        videoId = url.pathname.split("/").filter(Boolean)[1] ?? "";
+      } else {
+        videoId = url.searchParams.get("v") ?? "";
+      }
+    }
+
+    return videoId ? `https://www.youtube.com/embed/${videoId}` : youtubeUrl;
+  } catch {
+    return youtubeUrl;
+  }
 }
 
 export default function Hero2({
@@ -32,6 +67,9 @@ export default function Hero2({
   description,
   imageSrc,
   imageAlt,
+  youtubeUrl,
+  videoTitle,
+  mediaClassName,
 }: Hero2Props) {
   const highlightClassMap = {
     primary: 'text-primary',
@@ -58,6 +96,8 @@ export default function Hero2({
   const tagColorClass = tagColor ? tagColorClassMap[tagColor] : '';
   const tagBackgroundClass = tagBackground ? tagBackgroundClassMap[tagBackground] : '';
   const tagBoxClass = tagBackground ? 'rounded-xl px-3 py-2 md:px-4' : '';
+  const mediaWrapperClass = mediaClassName ?? 'col-span-full w-full';
+  const youtubeEmbedUrl = youtubeUrl ? getYouTubeEmbedUrl(youtubeUrl) : null;
 
   return (
       <Grid className="md:gap-12 lg:gap-8">
@@ -88,15 +128,26 @@ export default function Hero2({
           <p className="p1 text-center text-grey">{description}</p>
         </div>
 
-        {imageSrc && (
+        {youtubeEmbedUrl ? (
+          <div className={`${mediaWrapperClass} aspect-video overflow-hidden bg-image-placeholder`}>
+            <iframe
+              src={youtubeEmbedUrl}
+              title={videoTitle ?? title}
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerPolicy="strict-origin-when-cross-origin"
+              allowFullScreen
+              className="h-full w-full"
+            />
+          </div>
+        ) : imageSrc ? (
           <Image
             src={imageSrc}
             width={500}
             height={500}
             alt={imageAlt ?? ""}
-            className="col-span-full w-full h-auto"
+            className={`${mediaWrapperClass} h-auto`}
           />
-        )}
+        ) : null}
       </Grid>
   );
 }
