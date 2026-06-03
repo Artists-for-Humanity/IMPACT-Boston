@@ -1,8 +1,8 @@
 import {defineField, defineType} from 'sanity'
 
-export const homeSideTabsSectionType = defineType({
-  name: 'homeSideTabsSection',
-  title: 'Side Tabs',
+export const sideTabsBlockType = defineType({
+  name: 'sideTabsBlock',
+  title: 'Side Tabs Block',
   type: 'object',
   fields: [
     defineField({
@@ -38,7 +38,7 @@ export const homeSideTabsSectionType = defineType({
   ],
   preview: {
     prepare() {
-      return {title: 'Side Tabs'}
+      return {title: 'Side Tabs Block'}
     },
   },
 })

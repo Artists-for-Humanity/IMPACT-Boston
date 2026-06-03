@@ -1,15 +1,15 @@
 import {landingPageType} from './landingPageType'
-import {homeActionPanelSectionType} from './blocks/homeActionPanelSection'
-import {homeHeroSectionType} from './blocks/homeHeroSection'
-import {homeHighlightsSectionType} from './blocks/homeHighlightsSection'
-import {homeSideTabsSectionType} from './blocks/homeSideTabsSection'
-import {homeTestimonialsSectionType} from './blocks/homeTestimonialsSection'
+import {actionPanelBlockType} from './blocks/actionPanelBlock'
+import {heroBlockType} from './blocks/heroBlock'
+import {highlightsBlockType} from './blocks/highlightsBlock'
+import {sideTabsBlockType} from './blocks/sideTabsBlock'
+import {testimonialsBlockType} from './blocks/testimonialsBlock'
 
 export const schemaTypes = [
   landingPageType,
-  homeHeroSectionType,
-  homeActionPanelSectionType,
-  homeSideTabsSectionType,
-  homeHighlightsSectionType,
-  homeTestimonialsSectionType,
+  heroBlockType,
+  actionPanelBlockType,
+  sideTabsBlockType,
+  highlightsBlockType,
+  testimonialsBlockType,
 ]

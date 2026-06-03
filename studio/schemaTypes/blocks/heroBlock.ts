@@ -1,9 +1,9 @@
 import {defineField, defineType} from 'sanity'
 import {HeadlineColorInput, headlineColorOptions} from '../../components/HeadlineColorInput'
 
-export const homeHeroSectionType = defineType({
-  name: 'homeHeroSection',
-  title: 'Hero',
+export const heroBlockType = defineType({
+  name: 'heroBlock',
+  title: 'Hero Block',
   type: 'object',
   fields: [
     defineField({
@@ -86,7 +86,7 @@ export const homeHeroSectionType = defineType({
   ],
   preview: {
     prepare() {
-      return {title: 'Hero'}
+      return {title: 'Hero Block'}
     },
   },
 })

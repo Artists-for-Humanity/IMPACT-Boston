@@ -2,9 +2,9 @@ import {defineField, defineType} from 'sanity'
 import {BackgroundColorInput} from '../../components/BackgroundColorInput'
 import {IconInput, isValidIconValue} from '../../components/IconInput'
 
-export const homeActionPanelSectionType = defineType({
-  name: 'homeActionPanelSection',
-  title: 'Action Panel',
+export const actionPanelBlockType = defineType({
+  name: 'actionPanelBlock',
+  title: 'Action Panel Block',
   type: 'object',
   fields: [
     defineField({
@@ -88,7 +88,7 @@ export const homeActionPanelSectionType = defineType({
   preview: {
     select: {title: 'title'},
     prepare({title}) {
-      return {title: title || 'Action Panel', subtitle: 'Action Panel'}
+      return {title: title || 'Action Panel Block', subtitle: 'Action Panel Block'}
     },
   },
 })

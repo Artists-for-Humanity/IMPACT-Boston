@@ -1,52 +1,73 @@
-import { draftMode } from 'next/headers'
-import { createImageUrlBuilder, type SanityImageSource } from '@sanity/image-url'
-import { type PortableTextBlock } from 'next-sanity'
-import { Fragment } from 'react'
+import { draftMode } from "next/headers";
+import {
+  createImageUrlBuilder,
+  type SanityImageSource,
+} from "@sanity/image-url";
+import { type PortableTextBlock } from "next-sanity";
+import { Fragment } from "react";
 
-import Hero1, { Hero1Headline, Hero1HeadlinePart } from '@/components/Hero/Hero1'
-import ActionPanel, { type ActionPanelCard } from '@/components/Action/ActionPanel'
-import SideTabs, { type SideTab } from '@/components/TabsPanel/SideTabs'
-import HighlightsSection, { type HighlightSlide } from '@/components/HighlightsSection'
-import TestimonialsSection, { type Testimonial } from '@/components/TestimonialsSection'
-import { client } from '@/sanity/client'
-import { LANDING_PAGE_QUERY } from '@/sanity/queries'
+import Hero1, {
+  Hero1Headline,
+  Hero1HeadlinePart,
+} from "@/components/Hero/Hero1";
+import ActionPanel, {
+  type ActionPanelCard,
+} from "@/components/Action/ActionPanel";
+import SideTabs, { type SideTab } from "@/components/TabsPanel/SideTabs";
+import HighlightsSection, {
+  type HighlightSlide,
+} from "@/components/HighlightsSection";
+import TestimonialsSection, {
+  type Testimonial,
+} from "@/components/TestimonialsSection";
+import { client } from "@/sanity/client";
+import { LANDING_PAGE_QUERY } from "@/sanity/queries";
 
 // Extract projectId and dataset from the Sanity client configuration to construct image URLs. The urlFor function takes a SanityImageSource and returns a URL for the image, applying transformations for width, height, and cropping as needed. This allows for dynamic image handling based on the content stored in Sanity.
-const { projectId, dataset } = client.config()
+const { projectId, dataset } = client.config();
 const urlFor = (source: SanityImageSource) =>
   projectId && dataset
     ? createImageUrlBuilder({ projectId, dataset }).image(source)
-    : null
+    : null;
 
 // Map Sanity color values to the hero text color tokens.
-const COLOR_MAP: Record<string, 'primary' | 'secondary' | 'complementary' | 'black'> = {
-  primary: 'primary',
-  secondary: 'secondary',
-  custom_purple: 'secondary',
-  complementary: 'complementary',
-  black: 'black',
-}
+const COLOR_MAP: Record<
+  string,
+  "primary" | "secondary" | "complementary" | "black"
+> = {
+  primary: "primary",
+  secondary: "secondary",
+  custom_purple: "secondary",
+  complementary: "complementary",
+  black: "black",
+};
 
 //Fallback content to use if Sanity data is missing or incomplete. This ensures the homepage remains functional and visually appealing even if there are issues with the CMS data.
 const FALLBACK_HERO = {
   headlineParts: [
-    { text: 'Courage ', color: 'black' },
-    { text: 'safer', color: 'custom_purple' },
+    { text: "Courage ", color: "black" },
+    { text: "safer", color: "custom_purple" },
   ],
-  body: 'IMPACT believes everyone has the right to be safe. Our self-defense and abuse prevention programs equip individuals and communities with practical, inclusive safety skills.',
-  ctaText: 'Learn More',
-  ctaHref: '/register',
-  imageSrc: '/images/hero-place-holder-a.png',
-  imageAlt: 'IMPACT Boston self-defense training',
-}
+  body: "IMPACT believes everyone has the right to be safe. Our self-defense and abuse prevention programs equip individuals and communities with practical, inclusive safety skills.",
+  ctaText: "Learn More",
+  ctaHref: "/register",
+  imageSrc: "/images/hero-place-holder-a.png",
+  imageAlt: "IMPACT Boston self-defense training",
+};
 
 const FALLBACK_SIDE_TABS: SideTab[] = [
   {
     label: "The What",
     content: [
       { type: "heading", text: "What We Offer" },
-      { type: "paragraph", text: "IMPACT offers self-defense education and training designed to meet the needs of individuals, schools, and organizations. Our programs are open to the public and tailored for a wide range of communities, with classes and workshops available throughout the year." },
-      { type: "paragraph", text: "We focus on empowering participants with practical skills, confidence, and awareness to protect themselves in real-world situations. Our instructors bring extensive experience in safety, martial arts, and personal protection, ensuring high-quality guidance in every session. In addition to traditional self-defense techniques, our curriculum covers situational awareness, conflict de-escalation, and mental preparedness. Programs are suitable for all ages and skill levels, from beginners to advanced practitioners. IMPACT also collaborates with schools, workplaces, and community organizations to create customized workshops that address specific safety concerns. Our goal is to foster safer environments and equip individuals with the tools to respond effectively under pressure. Our offerings include:" },
+      {
+        type: "paragraph",
+        text: "IMPACT offers self-defense education and training designed to meet the needs of individuals, schools, and organizations. Our programs are open to the public and tailored for a wide range of communities, with classes and workshops available throughout the year.",
+      },
+      {
+        type: "paragraph",
+        text: "We focus on empowering participants with practical skills, confidence, and awareness to protect themselves in real-world situations. Our instructors bring extensive experience in safety, martial arts, and personal protection, ensuring high-quality guidance in every session. In addition to traditional self-defense techniques, our curriculum covers situational awareness, conflict de-escalation, and mental preparedness. Programs are suitable for all ages and skill levels, from beginners to advanced practitioners. IMPACT also collaborates with schools, workplaces, and community organizations to create customized workshops that address specific safety concerns. Our goal is to foster safer environments and equip individuals with the tools to respond effectively under pressure. Our offerings include:",
+      },
       {
         type: "list",
         items: [
@@ -59,17 +80,22 @@ const FALLBACK_SIDE_TABS: SideTab[] = [
   {
     label: "The How",
     content: [
-      { type: "paragraph", text: "Content coming soon. This section will explain our methodology and approach to self-defense training." },
+      {
+        type: "paragraph",
+        text: "Content coming soon. This section will explain our methodology and approach to self-defense training.",
+      },
     ],
   },
   {
     label: "The Why",
     content: [
-      { type: "paragraph", text: "Content coming soon. This section will explain why IMPACT's approach is effective and important." },
+      {
+        type: "paragraph",
+        text: "Content coming soon. This section will explain why IMPACT's approach is effective and important.",
+      },
     ],
   },
-]
-
+];
 
 // Define TypeScript types for the Sanity data structures. These types mirror the expected structure of the data returned from Sanity and are used for type checking and IntelliSense in the codebase.
 type SanityHeroFields = {
@@ -79,24 +105,23 @@ type SanityHeroFields = {
   ctaHref?: string | null;
   image?: SanityImageSource | null;
   imageAlt?: string | null;
-}
+};
 
 type SanityHeroHeadlinePart = {
   text?: string | null;
   color?: string | null;
-}
+};
 
 type SanityActionPanelFields = {
   title?: string | null;
   subtext?: string | null;
   cards?: ActionPanelCard[] | null;
-}
+};
 
 type SanitySideTab = {
   label?: string | null;
   content?: PortableTextBlock[] | null;
-}
-
+};
 
 type SanityHighlight = {
   heading?: string | null;
@@ -106,55 +131,49 @@ type SanityHighlight = {
   additionalText?: string | null;
   image?: SanityImageSource | null;
   imageAlt?: string | null;
-}
+};
 
-
-
-// Base type for all home page sections, containing common fields. Each specific section type extends this base type and adds its own unique fields. This allows for a flexible and extensible structure for the homepage content, accommodating various types of sections while maintaining a consistent format for shared properties.
-type HomeSectionBase = {
+type PageBlockBase = {
   _key?: string | null;
-}
+};
 
-// Specific types for each home page section, extending the base type and including fields relevant to that section. The _type field is used to differentiate between the various section types when rendering the homepage, allowing for dynamic content based on the data structure defined in Sanity.
-type HomeHeroSection = HomeSectionBase &
+type HeroBlock = PageBlockBase &
   SanityHeroFields & {
-    _type: 'homeHeroSection';
-  }
+    _type: "heroBlock";
+  };
 
-type HomeActionPanelSection = HomeSectionBase &
+type ActionPanelBlock = PageBlockBase &
   SanityActionPanelFields & {
-    _type: 'homeActionPanelSection';
-  }
+    _type: "actionPanelBlock";
+  };
 
-type HomeSideTabsSection = HomeSectionBase & {
-  _type: 'homeSideTabsSection';
+type SideTabsBlock = PageBlockBase & {
+  _type: "sideTabsBlock";
   tabs?: SanitySideTab[] | null;
-}
+};
 
-type HomeHighlightsSection = HomeSectionBase & {
-  _type: 'homeHighlightsSection';
+type HighlightsBlock = PageBlockBase & {
+  _type: "highlightsBlock";
   label?: string | null;
   slides?: SanityHighlight[] | null;
-}
+};
 
-type HomeTestimonialsSection = HomeSectionBase & {
-  _type: 'homeTestimonialsSection';
+type TestimonialsBlock = PageBlockBase & {
+  _type: "testimonialsBlock";
   heading?: string | null;
   subtext?: string | null;
   testimonials?: Testimonial[] | null;
-}
+};
 
-// Union type representing all possible home page sections.
-type HomePageSection =
-  | HomeHeroSection
-  | HomeActionPanelSection
-  | HomeSideTabsSection
-  | HomeHighlightsSection
-  | HomeTestimonialsSection
+type LandingPageBlock =
+  | HeroBlock
+  | ActionPanelBlock
+  | SideTabsBlock
+  | HighlightsBlock
+  | TestimonialsBlock;
 
-// Type representing the entire landing page data structure, including all sections and their content.
 type LandingPageData = {
-  sections?: HomePageSection[] | null;
+  sections?: LandingPageBlock[] | null;
   hero?: SanityHeroFields | null;
   actionPanel?: SanityActionPanelFields | null;
   sideTabs?: SanitySideTab[] | null;
@@ -163,25 +182,26 @@ type LandingPageData = {
   testimonialsHeading?: string | null;
   testimonialsSubtext?: string | null;
   testimonials?: Testimonial[] | null;
-}
+};
 
 function resolveSideTabs(sideTabs?: SanitySideTab[] | null): SideTab[] {
   const normalizedTabs = sideTabs
-    ?.filter(
-      (tab): tab is { label: string; content: PortableTextBlock[] } =>
-        Boolean(tab?.label && Array.isArray(tab.content))
+    ?.filter((tab): tab is { label: string; content: PortableTextBlock[] } =>
+      Boolean(tab?.label && Array.isArray(tab.content)),
     )
     .map((tab) => ({
       label: tab.label,
       content: tab.content,
-    }))
+    }));
 
-  return normalizedTabs?.length ? normalizedTabs : FALLBACK_SIDE_TABS
+  return normalizedTabs?.length ? normalizedTabs : FALLBACK_SIDE_TABS;
 }
 
-function resolveHighlights(highlights?: SanityHighlight[] | null): HighlightSlide[] | undefined {
+function resolveHighlights(
+  highlights?: SanityHighlight[] | null,
+): HighlightSlide[] | undefined {
   if (!highlights?.length) {
-    return undefined
+    return undefined;
   }
 
   return highlights.map((highlight) => ({
@@ -191,84 +211,89 @@ function resolveHighlights(highlights?: SanityHighlight[] | null): HighlightSlid
     ctaLink: highlight.ctaLink,
     additionalText: highlight.additionalText,
     imageSrc: highlight.image
-      ? urlFor(highlight.image)?.width(1200).height(675).fit('crop').url()
+      ? urlFor(highlight.image)?.width(1200).height(675).fit("crop").url()
       : undefined,
-    imageAlt: highlight.imageAlt || highlight.heading || 'IMPACT Boston highlight',
-  }))
+    imageAlt:
+      highlight.imageAlt || highlight.heading || "IMPACT Boston highlight",
+  }));
 }
 
 function resolveHeadlineParts(headlineParts?: SanityHeroHeadlinePart[] | null) {
   const validHeadlineParts = headlineParts?.filter(
-    (part): part is { text: string; color?: string | null } => Boolean(part?.text)
-  )
+    (part): part is { text: string; color?: string | null } =>
+      Boolean(part?.text),
+  );
 
-  return validHeadlineParts?.length ? validHeadlineParts : FALLBACK_HERO.headlineParts
+  return validHeadlineParts?.length
+    ? validHeadlineParts
+    : FALLBACK_HERO.headlineParts;
 }
 
-function getLegacySections(data: LandingPageData | null): HomePageSection[] {
+function getLegacyBlocks(data: LandingPageData | null): LandingPageBlock[] {
   return [
     {
-      _key: 'legacy-home-hero',
-      _type: 'homeHeroSection',
+      _key: "legacy-home-hero",
+      _type: "heroBlock",
       ...(data?.hero ?? {}),
     },
     {
-      _key: 'legacy-home-action-panel',
-      _type: 'homeActionPanelSection',
+      _key: "legacy-home-action-panel",
+      _type: "actionPanelBlock",
       ...(data?.actionPanel ?? {}),
     },
     {
-      _key: 'legacy-home-side-tabs',
-      _type: 'homeSideTabsSection',
+      _key: "legacy-home-side-tabs",
+      _type: "sideTabsBlock",
       tabs: data?.sideTabs,
     },
     {
-      _key: 'legacy-home-highlights',
-      _type: 'homeHighlightsSection',
+      _key: "legacy-home-highlights",
+      _type: "highlightsBlock",
       label: data?.highlightsLabel,
       slides: data?.highlights,
     },
     {
-      _key: 'legacy-home-testimonials',
-      _type: 'homeTestimonialsSection',
+      _key: "legacy-home-testimonials",
+      _type: "testimonialsBlock",
       heading: data?.testimonialsHeading,
       subtext: data?.testimonialsSubtext,
       testimonials: data?.testimonials,
     },
-  ]
+  ];
 }
 
-function getHomeSections(data: LandingPageData | null): HomePageSection[] {
-  return data?.sections?.length ? data.sections : getLegacySections(data)
+function getPageBlocks(data: LandingPageData | null): LandingPageBlock[] {
+  return data?.sections?.length ? data.sections : getLegacyBlocks(data);
 }
 
-function HomeHero({ section }: { section: HomeHeroSection }) {
-  const headlineParts = resolveHeadlineParts(section.headlineParts)
-  const body = section.body ?? FALLBACK_HERO.body
-  const ctaText = section.ctaText ?? FALLBACK_HERO.ctaText
-  const ctaHref = section.ctaHref ?? FALLBACK_HERO.ctaHref
-  const imageAlt = section.imageAlt ?? FALLBACK_HERO.imageAlt
+function HomeHero({ section }: { section: HeroBlock }) {
+  const headlineParts = resolveHeadlineParts(section.headlineParts);
+  const body = section.body ?? FALLBACK_HERO.body;
+  const ctaText = section.ctaText ?? FALLBACK_HERO.ctaText;
+  const ctaHref = section.ctaHref ?? FALLBACK_HERO.ctaHref;
+  const imageAlt = section.imageAlt ?? FALLBACK_HERO.imageAlt;
   const imageSrc = section.image
-    ? urlFor(section.image)?.width(1400).height(1088).fit('crop').url() ?? FALLBACK_HERO.imageSrc
-    : FALLBACK_HERO.imageSrc
+    ? (urlFor(section.image)?.width(1400).height(1088).fit("crop").url() ??
+      FALLBACK_HERO.imageSrc)
+    : FALLBACK_HERO.imageSrc;
 
   const headline = (
     <Hero1Headline>
       {headlineParts.map((part, idx) => {
-        const color = part.color ?? 'black'
-        const text = part.text.trim()
+        const color = part.color ?? "black";
+        const text = part.text.trim();
 
         return (
           <Fragment key={idx}>
-            {idx > 0 ? ' ' : null}
-            <Hero1HeadlinePart color={COLOR_MAP[color] ?? 'black'}>
+            {idx > 0 ? " " : null}
+            <Hero1HeadlinePart color={COLOR_MAP[color] ?? "black"}>
               {text}
             </Hero1HeadlinePart>
           </Fragment>
-        )
+        );
       })}
     </Hero1Headline>
-  )
+  );
 
   return (
     <Hero1
@@ -279,80 +304,87 @@ function HomeHero({ section }: { section: HomeHeroSection }) {
       imageSrc={imageSrc}
       imageAlt={imageAlt}
     />
-  )
+  );
 }
 
-function HomeSection({ section }: { section: HomePageSection }) {
+function PageBlock({ section }: { section: LandingPageBlock }) {
   switch (section._type) {
-    case 'homeHeroSection':
-      return <HomeHero section={section} />
+    case "heroBlock":
+      return <HomeHero section={section} />;
 
-    case 'homeActionPanelSection':
+    case "actionPanelBlock":
       return (
         <ActionPanel
           title={section.title}
           subtext={section.subtext}
           cards={section.cards}
         />
-      )
+      );
 
-    case 'homeSideTabsSection':
+    case "sideTabsBlock":
       return (
         <section className="w-full bg-white">
           <SideTabs tabs={resolveSideTabs(section.tabs)} />
         </section>
-      )
+      );
 
-    case 'homeHighlightsSection':
+    case "highlightsBlock":
       return (
         <HighlightsSection
           label={section.label}
           slides={resolveHighlights(section.slides)}
         />
-      )
+      );
 
-    case 'homeTestimonialsSection':
+    case "testimonialsBlock":
       return (
         <TestimonialsSection
           heading={section.heading ?? undefined}
           subheading={section.subtext ?? undefined}
           testimonials={section.testimonials ?? undefined}
         />
-      )
+      );
 
     default:
-      return null
+      return null;
   }
 }
 
-async function getLandingPageData(isDraftModeEnabled: boolean): Promise<LandingPageData | null> {
+async function getLandingPageData(
+  isDraftModeEnabled: boolean,
+): Promise<LandingPageData | null> {
   try {
     return await client.fetch<LandingPageData | null>(
       LANDING_PAGE_QUERY,
       {},
       isDraftModeEnabled
-        ? { perspective: 'drafts', useCdn: false, stega: true, cache: 'no-store' }
-        : { next: { revalidate: 60 } }
-    )
+        ? {
+            perspective: "drafts",
+            useCdn: false,
+            stega: true,
+            cache: "no-store",
+          }
+        : { next: { revalidate: 60 } },
+    );
   } catch (error) {
-    console.error('Failed to fetch landing page content from Sanity.', error)
-    return null
+    console.error("Failed to fetch landing page content from Sanity.", error);
+    return null;
   }
 }
 
 export default async function IndexPage() {
-  const { isEnabled } = await draftMode()
-  const data = await getLandingPageData(isEnabled)
-  const sections = getHomeSections(data)
+  const { isEnabled } = await draftMode();
+  const data = await getLandingPageData(isEnabled);
+  const blocks = getPageBlocks(data);
 
   return (
     <main>
-      {sections.map((section, index) => (
-        <HomeSection
-          key={section._key || `${section._type}-${index}`}
-          section={section}
+      {blocks.map((block, index) => (
+        <PageBlock
+          key={block._key || `${block._type}-${index}`}
+          section={block}
         />
       ))}
     </main>
-  )
+  );
 }
