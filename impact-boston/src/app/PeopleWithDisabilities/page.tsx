@@ -43,7 +43,7 @@ export default function PeopleWithDisabilities() {
         imageSrc="/images/disabilities/placeholder.png"
         imageAlt="placeholder"
         cta={{
-          href: "#asap",
+          href: "/PeopleWithDisabilities/ASAP",
           text: "Know More",
         }}
       />
