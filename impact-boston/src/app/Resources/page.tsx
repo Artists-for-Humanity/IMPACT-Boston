@@ -267,7 +267,6 @@ export default function Resources() {
     <>
       <Hero2
         title="Resources"
-        description="IMPACT is committed to making our programs accessible. Some people with disabilities do best in classes where everyone has similar disabilities so that skills and strategies can be more closely matched to people's ways of moving or taking in information. Other people with disabilities do best in classes for women, LGBTQ people, trauma survivors, or other mixed gender, mixed disability groups."
         imageSrc="/images/resources/placeholder.png"
         imageAlt=""
       />

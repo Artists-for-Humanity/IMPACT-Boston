@@ -17,7 +17,7 @@ interface Hero2Props {
   title: string;
   highlight?: string;
   highlightColor?: 'primary' | 'secondary' | 'complementary';
-  description: string;
+  description?: string;
   imageSrc?: string;
   imageAlt?: string;
   youtubeUrl?: string;
@@ -125,7 +125,7 @@ export default function Hero2({
             ) : null}
           </h1>
 
-          <p className="p1 text-center text-grey">{description}</p>
+          {description && <p className="p1 text-center text-grey">{description}</p>}
         </div>
 
         {youtubeEmbedUrl ? (

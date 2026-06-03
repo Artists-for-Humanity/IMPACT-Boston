@@ -63,13 +63,16 @@ export default function SideTabs({ tabs }: { tabs: Tab[] }) {
     if (!el) return;
 
     if (window.innerWidth < 1024) {
+      const container = el.parentElement as HTMLElement;
+      const containerRect = container.getBoundingClientRect();
+      const elRect = el.getBoundingClientRect();
       setIndicatorStyle({
-        left: el.offsetLeft,
-        width: el.offsetWidth,
-        top: undefined,
+        left: elRect.left - containerRect.left + container.scrollLeft,
+        width: elRect.width,
+        top: elRect.bottom - containerRect.top + container.scrollTop - 4,
         right: undefined,
         height: 4,
-        bottom: 0,
+        bottom: undefined,
         transition: "all 0.3s cubic-bezier(.4,0,.2,1)",
       });
     } else {
@@ -107,7 +110,9 @@ export default function SideTabs({ tabs }: { tabs: Tab[] }) {
   return (
     <div className="">
       <Grid>
-        <div className="scrollbar-hide relative col-span-full flex overflow-x-auto overflow-y-hidden lg:col-span-5 lg:flex-col">
+        <div className="scrollbar-hide relative col-span-full flex overflow-x-auto overflow-y-hidden lg:col-span-5 lg:flex-col lg:gap-y-4 lg:self-start">
+          <div className="hidden lg:block absolute left-0 top-0 h-full w-[4px] bg-gray-300" />
+          <div className="lg:hidden absolute bottom-0 left-0 w-full h-[4px] bg-gray-300 z-0" />
           <div
             className="absolute z-10 rounded bg-complementary"
             style={indicatorStyle}
@@ -119,17 +124,19 @@ export default function SideTabs({ tabs }: { tabs: Tab[] }) {
               ref={(el) => {
                 tabRefs.current[idx] = el;
               }}
-              className={`h3 cursor-pointer whitespace-nowrap lg:whitespace-normal border-b-4 px-4 py-2 transition-colors duration-150 lg:border-b-0 lg:border-l-4 lg:text-left ${
+              className={`h3 cursor-pointer whitespace-nowrap lg:whitespace-normal transition-colors duration-150 flex items-center gap-x-8 md:gap-x-16 lg:gap-x-2 lg:text-left ${
                 tabs.length <= 3 ? "flex-1 lg:flex-none" : ""
               } ${
                 active === idx
-                  ? "border-transparent font-bold"
-                  : "border-gray-300 text-gray-500"
+                  ? "font-medium text-primary"
+                  : "text-inactive-tab"
               }`}
               onClick={() => handleTabClick(idx)}
               type="button"
             >
-              {tab.label}
+              <span aria-hidden="true" />
+              <span>{tab.label}</span>
+              <span aria-hidden="true" className="lg:hidden" />
             </button>
           ))}
         </div>
