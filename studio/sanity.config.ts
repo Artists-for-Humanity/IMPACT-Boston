@@ -2,8 +2,26 @@ import {defineConfig} from 'sanity'
 import {structureTool} from 'sanity/structure'
 import {visionTool} from '@sanity/vision'
 import {schemaTypes} from './schemaTypes'
-import { presentationTool } from "sanity/presentation";
+import {defineDocuments, presentationTool} from 'sanity/presentation'
 
+declare const process: {
+  env: {
+    SANITY_STUDIO_PREVIEW_ORIGIN?: string
+  }
+}
+
+const previewOrigin = process.env.SANITY_STUDIO_PREVIEW_ORIGIN || 'http://localhost:3000'
+const allowOrigins = Array.from(new Set(['http://localhost:*', previewOrigin]))
+const mainDocuments = defineDocuments([
+  {
+    route: '/',
+    type: 'landingPage',
+  },
+  {
+    route: '/:slug',
+    filter: `_type == "post" && slug.current == $slug`,
+  },
+])
 
 export default defineConfig({
   name: 'default',
@@ -13,15 +31,19 @@ export default defineConfig({
   dataset: 'production',
 
   plugins: [
-    structureTool(), 
+    structureTool(),
     visionTool(),
-     presentationTool({
+    presentationTool({
       previewUrl: {
-        initial: process.env.SANITY_STUDIO_PREVIEW_ORIGIN,
-        preview: "/",
+        initial: previewOrigin,
+        preview: '/',
         previewMode: {
-          enable: "/api/draft-mode/enable",
+          enable: '/api/draft-mode/enable',
         },
+      },
+      allowOrigins,
+      resolve: {
+        mainDocuments,
       },
     }),
   ],

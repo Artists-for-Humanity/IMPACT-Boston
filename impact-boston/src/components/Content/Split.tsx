@@ -59,6 +59,7 @@ export default function Split({
                 src={topImageSrc}
                 alt={topImageAlt}
                 fill
+                sizes="(min-width: 1024px) 58vw, 100vw"
                 className="object-cover"
               />
             </div>
@@ -68,6 +69,7 @@ export default function Split({
                 src={bottomImageSrc}
                 alt={bottomImageAlt}
                 fill
+                sizes="(min-width: 1024px) 58vw, 100vw"
                 className="object-cover"
               />
             </div>

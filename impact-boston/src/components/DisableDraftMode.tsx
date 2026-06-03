@@ -8,8 +8,8 @@ export function DisableDraftMode() {
   const [pending, startTransition] = useTransition();
   const isPresentationTool = useIsPresentationTool();
   
-// Only show the disable draft mode button when outside of Presentation Tool
-  if (isPresentationTool === null && isPresentationTool !== true) {
+  // Only show the disable draft mode button when outside of Presentation Tool.
+  if (isPresentationTool !== false) {
     return null;
   }
 

@@ -157,10 +157,10 @@ export default function Navigation({
                 {item.subItems && (
                   <Image
                     src="/icons/chevron-right.svg"
-                    width={12}
-                    height={12}
+                    width={10}
+                    height={6}
                     alt=""
-                    className={` transition-transform duration-150 ${
+                    className={`h-auto w-3 transition-transform duration-150 ${
                       activeDropdown === item.label ? "" : ""
                     }`}
                   />

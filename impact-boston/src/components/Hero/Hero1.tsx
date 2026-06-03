@@ -110,6 +110,7 @@ export default function Hero1({
                 src={imageSrc}
                 alt={imageAlt}
                 fill
+                sizes="(min-width: 1024px) 58vw, 100vw"
                 className="object-cover"
                 priority
               />
