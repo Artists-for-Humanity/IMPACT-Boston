@@ -7,11 +7,6 @@ export default function AboutImpact() {
   return (
     <>
       <Hero2
-       tag={[
-          { text: "Supportive.", className: "text-complementary" },
-          { text: "Specialized.", className: "text-secondary" },
-          { text: "IMPACTFUL.", className: "text-black" },
-        ]}
         title="Board & Staff"
         description="IMPACT instructors will travel to your school and work with you to design a program that best fits your educational goals and schedule.  Programming schedules can vary from an intensive one-day workshop to year-long classes. We have experience collaborating with educators in Physical Education, Health, Wellness, Guidance & Counseling, English, Social Studies, and extracurricular programs."
         imageSrc="/images/boardAndStaff/group.png"

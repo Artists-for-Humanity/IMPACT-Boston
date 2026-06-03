@@ -141,7 +141,7 @@ function StatementSection({
         <div className="col-span-full lg:col-start-7 lg:col-span-6">
           <div
             style={{
-              height: '8px',
+              height: '4px',
               width: '100%',
               background:
                 'linear-gradient(to right, #E36A38 0%, #E36A38 22%, #874E9F 22%, #874E9F 86%, #462458 86%, #462458 100%)',
