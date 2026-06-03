@@ -1,14 +1,12 @@
-import {postType} from './postType'
 import {landingPageType} from './landingPageType'
-import {homeActionPanelSectionType} from './sections/homeActionPanelSection'
-import {homeHeroSectionType} from './sections/homeHeroSection'
-import {homeHighlightsSectionType} from './sections/homeHighlightsSection'
-import {homeSideTabsSectionType} from './sections/homeSideTabsSection'
-import {homeTestimonialsSectionType} from './sections/homeTestimonialsSection'
+import {homeActionPanelSectionType} from './blocks/homeActionPanelSection'
+import {homeHeroSectionType} from './blocks/homeHeroSection'
+import {homeHighlightsSectionType} from './blocks/homeHighlightsSection'
+import {homeSideTabsSectionType} from './blocks/homeSideTabsSection'
+import {homeTestimonialsSectionType} from './blocks/homeTestimonialsSection'
 
 export const schemaTypes = [
   landingPageType,
-  postType,
   homeHeroSectionType,
   homeActionPanelSectionType,
   homeSideTabsSectionType,

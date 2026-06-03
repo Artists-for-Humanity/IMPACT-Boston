@@ -1,6 +1,7 @@
 import { draftMode } from 'next/headers'
 import { createImageUrlBuilder, type SanityImageSource } from '@sanity/image-url'
 import { type PortableTextBlock } from 'next-sanity'
+import { Fragment } from 'react'
 
 import Hero1, { Hero1Headline, Hero1HeadlinePart } from '@/components/Hero/Hero1'
 import ActionPanel, { type ActionPanelCard } from '@/components/Action/ActionPanel'
@@ -10,18 +11,23 @@ import TestimonialsSection, { type Testimonial } from '@/components/Testimonials
 import { client } from '@/sanity/client'
 import { LANDING_PAGE_QUERY } from '@/sanity/queries'
 
+// Extract projectId and dataset from the Sanity client configuration to construct image URLs. The urlFor function takes a SanityImageSource and returns a URL for the image, applying transformations for width, height, and cropping as needed. This allows for dynamic image handling based on the content stored in Sanity.
 const { projectId, dataset } = client.config()
 const urlFor = (source: SanityImageSource) =>
   projectId && dataset
     ? createImageUrlBuilder({ projectId, dataset }).image(source)
     : null
 
-const COLOR_MAP: Record<string, 'primary' | 'complementary' | 'black'> = {
+// Map Sanity color values to the hero text color tokens.
+const COLOR_MAP: Record<string, 'primary' | 'secondary' | 'complementary' | 'black'> = {
   primary: 'primary',
+  secondary: 'secondary',
+  custom_purple: 'secondary',
   complementary: 'complementary',
   black: 'black',
 }
 
+//Fallback content to use if Sanity data is missing or incomplete. This ensures the homepage remains functional and visually appealing even if there are issues with the CMS data.
 const FALLBACK_HERO = {
   headlineParts: [
     { text: 'Courage ', color: 'black' },
@@ -64,10 +70,33 @@ const FALLBACK_SIDE_TABS: SideTab[] = [
   },
 ]
 
+
+// Define TypeScript types for the Sanity data structures. These types mirror the expected structure of the data returned from Sanity and are used for type checking and IntelliSense in the codebase.
+type SanityHeroFields = {
+  headlineParts?: SanityHeroHeadlinePart[] | null;
+  body?: string | null;
+  ctaText?: string | null;
+  ctaHref?: string | null;
+  image?: SanityImageSource | null;
+  imageAlt?: string | null;
+}
+
 type SanityHeroHeadlinePart = {
   text?: string | null;
   color?: string | null;
 }
+
+type SanityActionPanelFields = {
+  title?: string | null;
+  subtext?: string | null;
+  cards?: ActionPanelCard[] | null;
+}
+
+type SanitySideTab = {
+  label?: string | null;
+  content?: PortableTextBlock[] | null;
+}
+
 
 type SanityHighlight = {
   heading?: string | null;
@@ -79,30 +108,14 @@ type SanityHighlight = {
   imageAlt?: string | null;
 }
 
-type SanitySideTab = {
-  label?: string | null;
-  content?: PortableTextBlock[] | null;
-}
 
-type SanityHeroFields = {
-  headlineParts?: SanityHeroHeadlinePart[] | null;
-  body?: string | null;
-  ctaText?: string | null;
-  ctaHref?: string | null;
-  image?: SanityImageSource | null;
-  imageAlt?: string | null;
-}
 
-type SanityActionPanelFields = {
-  title?: string | null;
-  subtext?: string | null;
-  cards?: ActionPanelCard[] | null;
-}
-
+// Base type for all home page sections, containing common fields. Each specific section type extends this base type and adds its own unique fields. This allows for a flexible and extensible structure for the homepage content, accommodating various types of sections while maintaining a consistent format for shared properties.
 type HomeSectionBase = {
   _key?: string | null;
 }
 
+// Specific types for each home page section, extending the base type and including fields relevant to that section. The _type field is used to differentiate between the various section types when rendering the homepage, allowing for dynamic content based on the data structure defined in Sanity.
 type HomeHeroSection = HomeSectionBase &
   SanityHeroFields & {
     _type: 'homeHeroSection';
@@ -131,6 +144,7 @@ type HomeTestimonialsSection = HomeSectionBase & {
   testimonials?: Testimonial[] | null;
 }
 
+// Union type representing all possible home page sections.
 type HomePageSection =
   | HomeHeroSection
   | HomeActionPanelSection
@@ -138,6 +152,7 @@ type HomePageSection =
   | HomeHighlightsSection
   | HomeTestimonialsSection
 
+// Type representing the entire landing page data structure, including all sections and their content.
 type LandingPageData = {
   sections?: HomePageSection[] | null;
   hero?: SanityHeroFields | null;
@@ -158,7 +173,7 @@ function resolveSideTabs(sideTabs?: SanitySideTab[] | null): SideTab[] {
     )
     .map((tab) => ({
       label: tab.label,
-      content: tab.content as unknown as SideTab['content'],
+      content: tab.content,
     }))
 
   return normalizedTabs?.length ? normalizedTabs : FALLBACK_SIDE_TABS
@@ -241,15 +256,15 @@ function HomeHero({ section }: { section: HomeHeroSection }) {
     <Hero1Headline>
       {headlineParts.map((part, idx) => {
         const color = part.color ?? 'black'
+        const text = part.text.trim()
 
-        return color === 'custom_purple' ? (
-          <Hero1HeadlinePart key={idx} customColor="#6D3386">
-            {part.text}
-          </Hero1HeadlinePart>
-        ) : (
-          <Hero1HeadlinePart key={idx} color={COLOR_MAP[color] ?? 'black'}>
-            {part.text}
-          </Hero1HeadlinePart>
+        return (
+          <Fragment key={idx}>
+            {idx > 0 ? ' ' : null}
+            <Hero1HeadlinePart color={COLOR_MAP[color] ?? 'black'}>
+              {text}
+            </Hero1HeadlinePart>
+          </Fragment>
         )
       })}
     </Hero1Headline>

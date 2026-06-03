@@ -3,6 +3,7 @@ import {structureTool} from 'sanity/structure'
 import {visionTool} from '@sanity/vision'
 import {schemaTypes} from './schemaTypes'
 import {defineDocuments, presentationTool} from 'sanity/presentation'
+import {singletonTypes, structure} from './structure'
 
 declare const process: {
   env: {
@@ -15,7 +16,7 @@ const allowOrigins = Array.from(new Set(['http://localhost:*', previewOrigin]))
 const mainDocuments = defineDocuments([
   {
     route: '/',
-    type: 'landingPage',
+    filter: `_id == "landingPage"`,
   },
   {
     route: '/:slug',
@@ -31,7 +32,7 @@ export default defineConfig({
   dataset: 'production',
 
   plugins: [
-    structureTool(),
+    structureTool({structure}),
     visionTool(),
     presentationTool({
       previewUrl: {
@@ -50,5 +51,19 @@ export default defineConfig({
 
   schema: {
     types: schemaTypes,
+    templates: (templates) =>
+      templates.filter((template) => !singletonTypes.has(template.schemaType)),
+  },
+
+  document: {
+    actions: (actions, context) =>
+      singletonTypes.has(context.schemaType)
+        ? actions.filter(
+            (action) =>
+              action.action === 'publish' ||
+              action.action === 'discardChanges' ||
+              action.action === 'restore',
+          )
+        : actions,
   },
 })

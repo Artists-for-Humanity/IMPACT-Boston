@@ -1,6 +1,11 @@
 "use client";
 import { useRef, useState, useEffect } from "react";
 import { ChevronDown, ChevronRight, ExternalLink } from "lucide-react";
+import {
+  PortableText,
+  type PortableTextBlock,
+  type PortableTextComponents,
+} from "next-sanity";
 import Grid from "../common/Grid";
 
 type ResourceListItem = {
@@ -48,15 +53,84 @@ type TabContentBlock =
 
 export type SideTab = {
   label: string;
-  content: TabContentBlock[];
+  content: Array<TabContentBlock | PortableTextBlock>;
 };
 
 type Tab = SideTab;
+
+const portableTextComponents: PortableTextComponents = {
+  block: {
+    h1: ({ children }) => <h1 className="h1 pb-6">{children}</h1>,
+    h2: ({ children }) => <h2 className="h2 pb-6">{children}</h2>,
+    h3: ({ children }) => <h3 className="text-lg font-bold">{children}</h3>,
+    h4: ({ children }) => <h3 className="text-lg font-bold">{children}</h3>,
+    normal: ({ children }) => <p className="p1">{children}</p>,
+    blockquote: ({ children }) => (
+      <blockquote className="border-l-4 border-complementary pl-4">
+        <p className="p1">{children}</p>
+      </blockquote>
+    ),
+  },
+  list: {
+    bullet: ({ children }) => (
+      <ul className="list-disc space-y-1 pl-6">{children}</ul>
+    ),
+    number: ({ children }) => (
+      <ol className="list-decimal space-y-4 pl-6">{children}</ol>
+    ),
+  },
+  listItem: {
+    bullet: ({ children }) => <li className="p1">{children}</li>,
+    number: ({ children }) => <li className="p1">{children}</li>,
+  },
+  marks: {
+    strong: ({ children }) => <strong className="font-bold">{children}</strong>,
+    em: ({ children }) => <em>{children}</em>,
+    link: ({ children, value }) => {
+      const href = typeof value?.href === "string" ? value.href : "";
+
+      if (!href) {
+        return <>{children}</>;
+      }
+
+      const isExternal = /^https?:\/\//.test(href);
+
+      return (
+        <a
+          href={href}
+          className="text-secondary underline underline-offset-2 hover:text-primary"
+          target={isExternal ? "_blank" : undefined}
+          rel={isExternal ? "noopener noreferrer" : undefined}
+        >
+          {children}
+        </a>
+      );
+    },
+  },
+};
+
+function isPortableTextBlock(
+  block: TabContentBlock | PortableTextBlock,
+): block is PortableTextBlock {
+  return (
+    typeof block === "object" &&
+    block !== null &&
+    "_type" in block &&
+    block._type === "block"
+  );
+}
+
+function isPortableTextContent(
+  content: Array<TabContentBlock | PortableTextBlock>,
+): content is PortableTextBlock[] {
+  return content.length > 0 && content.every(isPortableTextBlock);
+}
 
 export default function SideTabs({ tabs }: { tabs: Tab[] }) {
   const [active, setActive] = useState(0);
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const [indicatorStyle, setIndicatorStyle] = useState<React.CSSProperties>({});
+  const activeContent = tabs[active]?.content ?? [];
 
   const updateIndicator = (idx: number) => {
     const el = tabRefs.current[idx];
@@ -135,111 +209,129 @@ export default function SideTabs({ tabs }: { tabs: Tab[] }) {
         </div>
 
         <div className="col-span-full mt-6 space-y-4 lg:col-span-7 lg:mt-0">
-          {tabs[active].content.map((block, i) => {
-            switch (block.type) {
-              case "heading":
+          {isPortableTextContent(activeContent) ? (
+            <div className="space-y-4">
+              <PortableText
+                value={activeContent}
+                components={portableTextComponents}
+              />
+            </div>
+          ) : (
+            activeContent.map((block, i) => {
+              if (isPortableTextBlock(block)) {
                 return (
-                  <h2 className="h2 pb-10" key={i}>
-                    {block.text}
-                  </h2>
-                );
-
-              case "subheading":
-                return (
-                  <h3 className="text-lg font-bold" key={i}>
-                    {block.text}
-                  </h3>
-                );
-
-              case "paragraph":
-                return (
-                  <p className={`p1${block.bold ? " font-bold" : ""}`} key={i}>
-                    {block.text}
-                  </p>
-                );
-
-              case "bullets":
-              case "list":
-                return (
-                  <ul className="list-disc space-y-1 pl-6" key={i}>
-                    {block.items.map((item, j) => (
-                      <li key={j} className={`p1${block.bold ? " font-bold" : ""}`}>
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                );
-
-              case "numberedList":
-                return (
-                  <ol className="list-decimal space-y-4 pl-6" key={i}>
-                    {block.items.map((item, j) => (
-                      <li key={j} className="p1">
-                        {item}
-                      </li>
-                    ))}
-                  </ol>
-                );
-
-              case "columns":
-                return (
-                  <div
-                    key={i}
-                    className="grid grid-cols-1 gap-6 md:grid-cols-2"
-                  >
-                    {block.items.map((column, colIdx) => (
-                      <ul key={colIdx} className="space-y-1">
-                        {column.map((item, itemIdx) => (
-                          <li key={itemIdx} className="p1">
-                            {item}
-                          </li>
-                        ))}
-                      </ul>
-                    ))}
-                  </div>
-                );
-
-              case "divider":
-                return <hr className="border-line-divider" key={i} />;
-
-              case "resourceList":
-                return (
-                  <ResourceList
-                    eyebrow={block.eyebrow}
-                    items={block.items}
-                    key={i}
-                    previewCount={block.previewCount}
+                  <PortableText
+                    key={block._key ?? i}
+                    value={[block]}
+                    components={portableTextComponents}
                   />
                 );
+              }
 
-              case "trainerList":
-                return (
-                  <TrainerList
-                    items={block.items}
-                    key={i}
-                    previewCount={block.previewCount}
-                    sortLabel={block.sortLabel}
-                    state={block.state}
-                  />
-                );
+              switch (block.type) {
+                case "heading":
+                  return (
+                    <h2 className="h2 pb-10" key={i}>
+                      {block.text}
+                    </h2>
+                  );
 
-              case "link":
-                return (
-                  <a
-                    key={i}
-                    href={block.href}
-                    className="text-primary underline hover:text-primary-dark transition p1 inline-block"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {block.text}
-                  </a>
-                );
+                case "subheading":
+                  return (
+                    <h3 className="text-lg font-bold" key={i}>
+                      {block.text}
+                    </h3>
+                  );
 
-              default:
-                return null;
-            }
-          })}
+                case "paragraph":
+                  return (
+                    <p className={`p1${block.bold ? " font-bold" : ""}`} key={i}>
+                      {block.text}
+                    </p>
+                  );
+
+                case "bullets":
+                case "list":
+                  return (
+                    <ul className="list-disc space-y-1 pl-6" key={i}>
+                      {block.items.map((item, j) => (
+                        <li key={j} className={`p1${block.bold ? " font-bold" : ""}`}>
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                  );
+
+                case "numberedList":
+                  return (
+                    <ol className="list-decimal space-y-4 pl-6" key={i}>
+                      {block.items.map((item, j) => (
+                        <li key={j} className="p1">
+                          {item}
+                        </li>
+                      ))}
+                    </ol>
+                  );
+
+                case "columns":
+                  return (
+                    <div
+                      key={i}
+                      className="grid grid-cols-1 gap-6 md:grid-cols-2"
+                    >
+                      {block.items.map((column, colIdx) => (
+                        <ul key={colIdx} className="space-y-1">
+                          {column.map((item, itemIdx) => (
+                            <li key={itemIdx} className="p1">
+                              {item}
+                            </li>
+                          ))}
+                        </ul>
+                      ))}
+                    </div>
+                  );
+
+                case "divider":
+                  return <hr className="border-line-divider" key={i} />;
+
+                case "resourceList":
+                  return (
+                    <ResourceList
+                      eyebrow={block.eyebrow}
+                      items={block.items}
+                      key={i}
+                      previewCount={block.previewCount}
+                    />
+                  );
+
+                case "trainerList":
+                  return (
+                    <TrainerList
+                      items={block.items}
+                      key={i}
+                      previewCount={block.previewCount}
+                      sortLabel={block.sortLabel}
+                      state={block.state}
+                    />
+                  );
+
+                case "link":
+                  return (
+                    <a
+                      key={i}
+                      href={block.href}
+                      className="text-primary underline hover:text-primary-dark transition p1 inline-block"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {block.text}
+                    </a>
+                  );
+
+                default:
+                  return null;
+              }
+            }))}
         </div>
       </Grid>
     </div>

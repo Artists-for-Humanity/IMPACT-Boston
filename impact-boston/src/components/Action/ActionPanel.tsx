@@ -2,6 +2,7 @@
 // Call-to-action section with three action cards for registration, classes, and donations
 
 import Link from "next/link";
+import { stegaClean } from "next-sanity";
 import {
   GraduationCap,
   DollarSign,
@@ -69,8 +70,27 @@ const FALLBACK_ACTION_PANEL = {
   ] satisfies Required<ActionPanelCard>[],
 };
 
+const BRAND_BACKGROUND_COLORS: Record<string, string> = {
+  primary: "#311e41",
+  secondary: "#563672",
+  complementary: "#e86834",
+};
+
 function isActionPanelIcon(icon: string | null | undefined): icon is ActionPanelIcon {
   return Boolean(icon && icon in ICONS);
+}
+
+function getCardBackgroundColor(
+  bgColor: string | null | undefined,
+  fallbackColor: string,
+) {
+  const cleanColor = stegaClean(bgColor)?.trim();
+
+  if (!cleanColor) {
+    return fallbackColor;
+  }
+
+  return BRAND_BACKGROUND_COLORS[cleanColor.toLowerCase()] ?? cleanColor;
 }
 
 export default function ActionPanel({
@@ -106,13 +126,14 @@ export default function ActionPanel({
               FALLBACK_ACTION_PANEL.cards[index % FALLBACK_ACTION_PANEL.cards.length];
             const icon = isActionPanelIcon(card.icon) ? card.icon : fallbackCard.icon;
             const Icon = ICONS[icon];
+            const bgColor = getCardBackgroundColor(card.bgColor, fallbackCard.bgColor);
 
             return (
               <Link
                 key={`${card.title || fallbackCard.title}-${index}`}
                 href={card.href || fallbackCard.href}
                 className={`col-span-4 md:col-span-8 lg:col-span-4 flex flex-col items-start gap-14 md:gap-0 md:justify-between ${CARD_HEIGHT_CLASSES[index] ?? CARD_HEIGHT_CLASSES[0]} lg:h-[325px] p-6 lg:p-8 hover:opacity-90 transition-opacity`}
-                style={{ backgroundColor: card.bgColor || fallbackCard.bgColor }}
+                style={{ backgroundColor: bgColor }}
               >
                 {/* Top - Icon and Chevron */}
                 <div className="flex justify-between items-start w-full">

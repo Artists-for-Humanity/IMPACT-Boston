@@ -1,4 +1,5 @@
 import {defineField, defineType} from 'sanity'
+import {BackgroundColorInput} from '../../components/BackgroundColorInput'
 
 export const homeActionPanelSectionType = defineType({
   name: 'homeActionPanelSection',
@@ -64,8 +65,15 @@ export const homeActionPanelSectionType = defineType({
               name: 'bgColor',
               title: 'Background Color',
               type: 'string',
-              description: 'Hex value e.g. #E86834',
-              validation: (rule) => rule.required(),
+              description: 'Choose a brand color or enter a custom hex value.',
+              components: {
+                input: BackgroundColorInput,
+              },
+              validation: (rule) =>
+                rule.required().regex(/^#([0-9a-f]{3}|[0-9a-f]{6})$/i, {
+                  name: 'hex color',
+                  invert: false,
+                }),
             }),
           ],
           preview: {
