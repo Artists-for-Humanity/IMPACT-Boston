@@ -18,14 +18,7 @@ export default function Hero2() {
           Social Studies, and extracurricular programs.
         </div>
       </div>
-      <div className="flex mt-[80px] mb-[80px] justify-center">
-        <Image
-          src="/images/aboutimpact/schools1.png"
-          alt="schools"
-          width={1152}
-          height={485}
-        />
-      </div>
+      <div className="flex mt-[80px] mb-[80px] justify-center"></div>
     </div>
   );
 }
