@@ -103,7 +103,7 @@ export default function SingleContent({
             <h3 className="h3">{title}</h3>
             {subtitle && <div className={`sub-2 ${subtitleClassName ?? 'text-secondary'}`}>{subtitle}</div>}
           </div>
-          <div className="flex flex-col gap-2">
+          <div className="flex flex-col gap-6">
             {paragraphs.map((para, idx) => (
               <p
                 className={`p1${para.bold ? ' font-bold' : ''}`}
