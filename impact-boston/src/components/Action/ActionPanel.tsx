@@ -3,17 +3,11 @@
 
 import Link from "next/link";
 import { stegaClean } from "next-sanity";
-import {
-  GraduationCap,
-  DollarSign,
-  ChevronRight,
-  Handshake,
-  User as UserIcon,
-  type LucideIcon,
-} from "lucide-react";
+import * as LucideIcons from "lucide-react";
+import { ChevronRight, type LucideIcon } from "lucide-react";
 import Grid from "../common/Grid";
 
-export type ActionPanelIcon = "handshake" | "user" | "dollar" | "graduation";
+export type ActionPanelIcon = string;
 
 export type ActionPanelCard = {
   title?: string | null;
@@ -29,12 +23,15 @@ type ActionPanelProps = {
   cards?: ActionPanelCard[] | null;
 };
 
-const ICONS: Record<ActionPanelIcon, LucideIcon> = {
-  handshake: Handshake,
-  user: UserIcon,
-  dollar: DollarSign,
-  graduation: GraduationCap,
+const LEGACY_ACTION_ICON_ALIASES: Record<string, string> = {
+  dollar: "dollar-sign",
+  graduation: "graduation-cap",
 };
+
+const LUCIDE_ICON_COMPONENTS = LucideIcons as unknown as Record<
+  string,
+  LucideIcon | undefined
+>;
 
 const CARD_HEIGHT_CLASSES = [
   "md:h-[245px]",
@@ -76,10 +73,6 @@ const BRAND_BACKGROUND_COLORS: Record<string, string> = {
   complementary: "#e86834",
 };
 
-function isActionPanelIcon(icon: string | null | undefined): icon is ActionPanelIcon {
-  return Boolean(icon && icon in ICONS);
-}
-
 function getCardBackgroundColor(
   bgColor: string | null | undefined,
   fallbackColor: string,
@@ -91,6 +84,46 @@ function getCardBackgroundColor(
   }
 
   return BRAND_BACKGROUND_COLORS[cleanColor.toLowerCase()] ?? cleanColor;
+}
+
+function toKebabIconName(icon: string) {
+  return icon
+    .trim()
+    .replace(/([a-z0-9])([A-Z])/g, "$1-$2")
+    .replace(/[\s_]+/g, "-")
+    .replace(/-+/g, "-")
+    .replace(/^-|-$/g, "")
+    .toLowerCase();
+}
+
+function toPascalIconName(icon: string) {
+  return icon
+    .split("-")
+    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+    .join("");
+}
+
+function getLucideIcon(iconName: string | null | undefined) {
+  const cleanIconName = stegaClean(iconName)?.trim();
+
+  if (!cleanIconName) {
+    return null;
+  }
+
+  const kebabIconName = toKebabIconName(cleanIconName);
+  const normalizedIconName =
+    LEGACY_ACTION_ICON_ALIASES[kebabIconName] ?? kebabIconName;
+
+  return LUCIDE_ICON_COMPONENTS[toPascalIconName(normalizedIconName)] ?? null;
+}
+
+function getActionPanelIcon(
+  icon: string | null | undefined,
+  fallbackIcon: string,
+) {
+  return (
+    getLucideIcon(icon) ?? getLucideIcon(fallbackIcon) ?? LucideIcons.Handshake
+  );
 }
 
 export default function ActionPanel({
@@ -124,8 +157,7 @@ export default function ActionPanel({
           {visibleCards.map((card, index) => {
             const fallbackCard =
               FALLBACK_ACTION_PANEL.cards[index % FALLBACK_ACTION_PANEL.cards.length];
-            const icon = isActionPanelIcon(card.icon) ? card.icon : fallbackCard.icon;
-            const Icon = ICONS[icon];
+            const Icon = getActionPanelIcon(card.icon, fallbackCard.icon);
             const bgColor = getCardBackgroundColor(card.bgColor, fallbackCard.bgColor);
 
             return (
