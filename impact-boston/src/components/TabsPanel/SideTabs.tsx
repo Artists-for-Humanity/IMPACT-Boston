@@ -109,10 +109,9 @@ export default function SideTabs({ tabs }: { tabs: Tab[] }) {
 
   return (
     <div className="">
-      <Grid>
+      <Grid className="gap-y-12 md:gap-y-12">
         <div className="scrollbar-hide relative col-span-full flex overflow-x-auto overflow-y-hidden lg:col-span-5 lg:flex-col lg:gap-y-4 lg:self-start">
           <div className="hidden lg:block absolute left-0 top-0 h-full w-[4px] bg-gray-300" />
-          <div className="lg:hidden absolute bottom-0 left-0 w-full h-[4px] bg-gray-300 z-0" />
           <div
             className="absolute z-10 rounded bg-complementary"
             style={indicatorStyle}
@@ -124,7 +123,7 @@ export default function SideTabs({ tabs }: { tabs: Tab[] }) {
               ref={(el) => {
                 tabRefs.current[idx] = el;
               }}
-              className={`h3 cursor-pointer whitespace-nowrap lg:whitespace-normal transition-colors duration-150 flex items-center gap-x-8 md:gap-x-16 lg:gap-x-2 lg:text-left ${
+              className={`h3 cursor-pointer whitespace-nowrap lg:whitespace-normal transition-colors duration-150 flex flex-col items-center gap-y-2 lg:flex-row lg:items-center lg:gap-y-0 border-b-[4px] border-gray-300 lg:border-b-0 lg:text-left ${
                 tabs.length <= 3 ? "flex-1 lg:flex-none" : ""
               } ${
                 active === idx
@@ -134,23 +133,25 @@ export default function SideTabs({ tabs }: { tabs: Tab[] }) {
               onClick={() => handleTabClick(idx)}
               type="button"
             >
-              <span aria-hidden="true" />
-              <span>{tab.label}</span>
+              <div className="flex items-center gap-x-8 md:gap-x-16 lg:gap-x-2">
+                <span aria-hidden="true" />
+                <span>{tab.label}</span>
+                <span aria-hidden="true" className="lg:hidden" />
+              </div>
               <span aria-hidden="true" className="lg:hidden" />
             </button>
           ))}
         </div>
 
-        <div className="col-span-full mt-6 space-y-4 lg:col-span-7 lg:mt-0">
-          {tabs[active].content.map((block, i) => {
+        <div className="col-span-full flex flex-col gap-6 lg:gap-16 lg:col-span-7">
+          {tabs[active].content.filter(b => b.type === "heading").map((block, i) =>
+            block.type === "heading" && (
+              <h2 className="h2 m-0" key={i}>{block.text}</h2>
+            )
+          )}
+          <div className="flex flex-col gap-4">
+          {tabs[active].content.filter(b => b.type !== "heading").map((block, i) => {
             switch (block.type) {
-              case "heading":
-                return (
-                  <h2 className="h2 pb-10" key={i}>
-                    {block.text}
-                  </h2>
-                );
-
               case "subheading":
                 return (
                   <h3 className="text-lg font-bold" key={i}>
@@ -247,6 +248,7 @@ export default function SideTabs({ tabs }: { tabs: Tab[] }) {
                 return null;
             }
           })}
+          </div>
         </div>
       </Grid>
     </div>
