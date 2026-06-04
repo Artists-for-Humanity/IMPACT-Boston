@@ -46,7 +46,7 @@ export default function Button({
 
   const sizes: Record<ButtonSize, string> = {
     sm: 'px-3 py-0.5 text-sm',
-    md: 'px-4 py-1 text-base',
+    md: 'p-6 text-base',
     lg: 'p-6 h-14 md:p-6 lg:h-18',
   }
 

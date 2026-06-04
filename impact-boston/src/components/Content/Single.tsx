@@ -34,6 +34,7 @@ type Thumbnail = ThumbnailImage | ThumbnailVideo | ThumbnailEmbed;
 interface SingleContentProps {
   id?: string;
   title: string;
+  titleAs?: 'h2' | 'h3';
   paragraphs: Paragraph[];
   subtitle?: string;
   secondaryParagraph?: string;
@@ -52,6 +53,7 @@ interface SingleContentProps {
 export default function SingleContent({
   id,
   title,
+  titleAs: TitleTag = 'h3',
   subtitle,
   paragraphs,
   imageSrc,
@@ -100,20 +102,20 @@ export default function SingleContent({
 
         <div className={`${contentCol} flex flex-col gap-6 lg:gap-8`}>
           <div className="flex flex-col gap-2">
-            <h3 className="h3">{title}</h3>
+            <TitleTag className={TitleTag === 'h2' ? 'h2' : 'h3'}>{title}</TitleTag>
             {subtitle && <div className={`sub-2 ${subtitleClassName ?? 'text-secondary'}`}>{subtitle}</div>}
           </div>
-          <div className="flex flex-col gap-6">
+          <div className="flex flex-col gap-6 lg:grid lg:grid-cols-5 lg:gap-y-6">
             {paragraphs.map((para, idx) => (
               <p
-                className={`p1${para.bold ? ' font-bold' : ''}`}
+                className={`p1 lg:col-span-5${para.bold ? ' font-bold' : ''}`}
                 key={idx}
               >
                 {para.text}
               </p>
             ))}
             {purchaseLink && (
-              <Link href={purchaseLink.href} target="_blank" rel="noopener noreferrer" className="p1-bold underline">
+              <Link href={purchaseLink.href} target="_blank" rel="noopener noreferrer" className="p1-bold underline lg:col-span-5">
                 {purchaseLink.text}
               </Link>
             )}
@@ -122,7 +124,7 @@ export default function SingleContent({
                 href={cta.href}
                 variant="primary"
                 showChevron
-                className="mt-4 h-12 w-full px-5 md:w-[214px]"
+                className="box-content h-[25px] py-2 md:py-6 w-auto self-start lg:col-span-5 justify-self-start gap-x-16"
               >
                 {cta.text}
               </Button>

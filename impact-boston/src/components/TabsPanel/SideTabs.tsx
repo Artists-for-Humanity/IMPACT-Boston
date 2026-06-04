@@ -123,7 +123,7 @@ export default function SideTabs({ tabs }: { tabs: Tab[] }) {
               ref={(el) => {
                 tabRefs.current[idx] = el;
               }}
-              className={`h3 cursor-pointer whitespace-nowrap lg:whitespace-normal transition-colors duration-150 flex flex-col items-center gap-y-2 lg:flex-row lg:items-center lg:gap-y-0 border-b-[4px] border-gray-300 lg:border-b-0 lg:text-left ${
+              className={`h3 cursor-pointer whitespace-nowrap lg:whitespace-normal transition-colors duration-150 flex items-center gap-x-8 md:gap-x-16 lg:gap-x-2 border-b-[4px] border-gray-300 lg:border-b-0 lg:text-left ${
                 tabs.length <= 3 ? "flex-1 lg:flex-none" : ""
               } ${
                 active === idx
@@ -133,11 +133,8 @@ export default function SideTabs({ tabs }: { tabs: Tab[] }) {
               onClick={() => handleTabClick(idx)}
               type="button"
             >
-              <div className="flex items-center gap-x-8 md:gap-x-16 lg:gap-x-2">
-                <span aria-hidden="true" />
-                <span>{tab.label}</span>
-                <span aria-hidden="true" className="lg:hidden" />
-              </div>
+              <span aria-hidden="true" />
+              <span>{tab.label}</span>
               <span aria-hidden="true" className="lg:hidden" />
             </button>
           ))}
@@ -498,7 +495,7 @@ function ResourceList({
 
   return (
     <div className="flex flex-col">
-      <div className="flex items-center justify-between border-b border-line-divider pb-3">
+      <div className="flex items-center justify-between border-b border-line-divider py-4">
         <p className="p1 text-dusty-purple">{eyebrow}</p>
         {hasToggle ? (
           <button
@@ -537,6 +534,22 @@ function ResourceList({
                     aria-hidden="true"
                   />
                 </button>
+              ) : item.href ? (
+                <a
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex gap-4"
+                >
+                  <ResourceListItemContent item={item} titleAsText />
+
+                  {item.icon === "external" ? (
+                    <ExternalLink className="mt-1 size-5 shrink-0 text-grey" aria-hidden="true" />
+                  ) : null}
+                  {item.icon === "chevron" ? (
+                    <ChevronRight className="mt-1 size-5 shrink-0 text-grey" aria-hidden="true" />
+                  ) : null}
+                </a>
               ) : (
                 <div className="flex gap-4">
                   <ResourceListItemContent item={item} />
@@ -573,9 +586,9 @@ function ResourceListItemContent({
       : item.description;
 
   return (
-    <div className="min-w-0 flex-1">
+    <div className="min-w-0 flex-1 flex flex-col gap-y-1">
       {item.href && !titleAsText ? (
-        <a href={item.href} className="p1-bold block cursor-pointer text-black hover:text-secondary hover:underline">
+        <a href={item.href} className="p1-bold md:max-w-[50%] lg:max-w-[60%] cursor-pointer text-black hover:text-secondary hover:underline">
           {item.title}
         </a>
       ) : (
@@ -585,7 +598,7 @@ function ResourceListItemContent({
       {item.detail && item.detailHref ? (
         <a
           href={item.detailHref}
-          className="p1 block cursor-pointer text-secondary hover:underline"
+          className="p1 cursor-pointer text-secondary hover:underline"
           rel="noopener noreferrer"
           target="_blank"
         >
