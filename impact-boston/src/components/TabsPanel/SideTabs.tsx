@@ -1,5 +1,12 @@
 "use client";
-import { useRef, useState, useEffect } from "react";
+import {
+  useRef,
+  useState,
+  useEffect,
+  type CSSProperties,
+  type Key,
+  type ReactNode,
+} from "react";
 import { ChevronDown, ChevronRight, ExternalLink } from "lucide-react";
 import {
   PortableText,
@@ -27,7 +34,7 @@ type TrainerListItem = {
   contactHref?: string;
 };
 
-type TabContentBlock =
+export type TabContentBlock =
   | { type: "heading"; text: string }
   | { type: "paragraph"; text: string; bold?: boolean }
   | { type: "subheading"; text: string }
@@ -51,9 +58,33 @@ type TabContentBlock =
     }
   | { type: "link"; text: string; href: string };
 
+type SanityColumn = {
+  items?: string[];
+};
+
+type SanityTabContentBlock =
+  | { _key?: string; _type: "columns"; items?: Array<SanityColumn | string[]> }
+  | { _key?: string; _type: "divider" }
+  | {
+      _key?: string;
+      _type: "resourceList";
+      eyebrow?: string;
+      previewCount?: number;
+      items?: ResourceListItem[];
+    }
+  | {
+      _key?: string;
+      _type: "trainerList";
+      state?: string;
+      sortLabel?: string;
+      previewCount?: number;
+      items?: TrainerListItem[];
+    }
+  | { _key?: string; _type: "sideTabsLink"; text?: string; href?: string };
+
 export type SideTab = {
   label: string;
-  content: Array<TabContentBlock | PortableTextBlock>;
+  content: Array<TabContentBlock | SanityTabContentBlock | PortableTextBlock>;
 };
 
 type Tab = SideTab;
@@ -62,9 +93,16 @@ const portableTextComponents: PortableTextComponents = {
   block: {
     h1: ({ children }) => <h1 className="h1 pb-6">{children}</h1>,
     h2: ({ children }) => <h2 className="h2 pb-6">{children}</h2>,
-    h3: ({ children }) => <h3 className="text-lg font-bold">{children}</h3>,
+    h3: ({ children }) => <h3 className="h3">{children}</h3>,
     h4: ({ children }) => <h3 className="text-lg font-bold">{children}</h3>,
+    sub1: ({ children }) => <p className="sub-1">{children}</p>,
+    sub2: ({ children }) => <p className="sub-2">{children}</p>,
     normal: ({ children }) => <p className="p1">{children}</p>,
+    p1: ({ children }) => <p className="p1">{children}</p>,
+    p1Bold: ({ children }) => <p className="p1-bold">{children}</p>,
+    p2: ({ children }) => <p className="p2">{children}</p>,
+    mediumLabel: ({ children }) => <p className="medium-label">{children}</p>,
+    link: ({ children }) => <p className="link">{children}</p>,
     blockquote: ({ children }) => (
       <blockquote className="border-l-4 border-complementary pl-4">
         <p className="p1">{children}</p>
@@ -73,7 +111,7 @@ const portableTextComponents: PortableTextComponents = {
   },
   list: {
     bullet: ({ children }) => (
-      <ul className="list-disc space-y-1 pl-6">{children}</ul>
+      <ul className="list-disc space-y-6 pl-6">{children}</ul>
     ),
     number: ({ children }) => (
       <ol className="list-decimal space-y-4 pl-6">{children}</ol>
@@ -84,7 +122,7 @@ const portableTextComponents: PortableTextComponents = {
     number: ({ children }) => <li className="p1">{children}</li>,
   },
   marks: {
-    strong: ({ children }) => <strong className="font-bold">{children}</strong>,
+    strong: ({ children }) => <strong className="p1-bold">{children}</strong>,
     em: ({ children }) => <em>{children}</em>,
     link: ({ children, value }) => {
       const href = typeof value?.href === "string" ? value.href : "";
@@ -98,7 +136,7 @@ const portableTextComponents: PortableTextComponents = {
       return (
         <a
           href={href}
-          className="text-secondary underline underline-offset-2 hover:text-primary"
+          className="link text-secondary underline underline-offset-2 hover:text-primary hover:no-underline"
           target={isExternal ? "_blank" : undefined}
           rel={isExternal ? "noopener noreferrer" : undefined}
         >
@@ -110,7 +148,7 @@ const portableTextComponents: PortableTextComponents = {
 };
 
 function isPortableTextBlock(
-  block: TabContentBlock | PortableTextBlock,
+  block: SideTab["content"][number],
 ): block is PortableTextBlock {
   return (
     typeof block === "object" &&
@@ -120,16 +158,259 @@ function isPortableTextBlock(
   );
 }
 
-function isPortableTextContent(
-  content: Array<TabContentBlock | PortableTextBlock>,
-): content is PortableTextBlock[] {
-  return content.length > 0 && content.every(isPortableTextBlock);
+function getStructuredBlockType(
+  block: TabContentBlock | SanityTabContentBlock,
+) {
+  if ("_type" in block) {
+    return block._type;
+  }
+
+  return block.type;
+}
+
+function getStructuredBlockKey(
+  block: TabContentBlock | SanityTabContentBlock,
+  index: number,
+) {
+  return "_key" in block && block._key ? block._key : index;
+}
+
+function getColumns(block: TabContentBlock | SanityTabContentBlock) {
+  if ("type" in block && block.type === "columns") {
+    return block.items;
+  }
+
+  if (
+    "_type" in block &&
+    block._type === "columns" &&
+    Array.isArray(block.items)
+  ) {
+    return block.items
+      .map((column) => (Array.isArray(column) ? column : column.items))
+      .filter(
+        (column): column is string[] =>
+          Array.isArray(column) && column.length > 0,
+      );
+  }
+
+  return [];
+}
+
+function renderStructuredContentBlock(
+  block: TabContentBlock | SanityTabContentBlock,
+  key: Key,
+) {
+  const blockType = getStructuredBlockType(block);
+
+  switch (blockType) {
+    case "heading":
+      return (
+        <h2 className="h2 pb-10" key={key}>
+          {"text" in block ? block.text : ""}
+        </h2>
+      );
+
+    case "subheading":
+      return (
+        <h3 className="text-lg font-bold" key={key}>
+          {"text" in block ? block.text : ""}
+        </h3>
+      );
+
+    case "paragraph":
+      return (
+        <p
+          className={`p1${"bold" in block && block.bold ? " font-bold" : ""}`}
+          key={key}
+        >
+          {"text" in block ? block.text : ""}
+        </p>
+      );
+
+    case "bullets":
+    case "list":
+      if (!("items" in block)) {
+        return null;
+      }
+
+      const listItems = block.items as string[];
+
+      return (
+        <ul className="list-disc space-y-6 pl-6" key={key}>
+          {listItems.map((item, j) => (
+            <li
+              key={j}
+              className={`p1${"bold" in block && block.bold ? " font-bold" : ""}`}
+            >
+              {item}
+            </li>
+          ))}
+        </ul>
+      );
+
+    case "numberedList":
+      if (!("items" in block)) {
+        return null;
+      }
+
+      const numberedListItems = block.items as string[];
+
+      return (
+        <ol className="list-decimal space-y-4 pl-6" key={key}>
+          {numberedListItems.map((item, j) => (
+            <li key={j} className="p1">
+              {item}
+            </li>
+          ))}
+        </ol>
+      );
+
+    case "columns": {
+      const columns = getColumns(block);
+
+      if (!columns.length) {
+        return null;
+      }
+
+      return (
+        <div key={key} className="grid grid-cols-1 gap-6 md:grid-cols-2">
+          {columns.map((column, colIdx) => (
+            <ul key={colIdx} className="space-y-1">
+              {column.map((item, itemIdx) => (
+                <li key={itemIdx} className="p1">
+                  {item}
+                </li>
+              ))}
+            </ul>
+          ))}
+        </div>
+      );
+    }
+
+    case "divider":
+      return <hr className="border-line-divider" key={key} />;
+
+    case "resourceList": {
+      const items =
+        "items" in block && Array.isArray(block.items)
+          ? (block.items as ResourceListItem[])
+          : [];
+
+      if (!items.length) {
+        return null;
+      }
+
+      return (
+        <ResourceList
+          eyebrow={"eyebrow" in block && block.eyebrow ? block.eyebrow : ""}
+          items={items}
+          key={key}
+          previewCount={
+            "previewCount" in block ? block.previewCount : undefined
+          }
+        />
+      );
+    }
+
+    case "trainerList": {
+      const items =
+        "items" in block && Array.isArray(block.items)
+          ? (block.items as TrainerListItem[])
+          : [];
+
+      if (!items.length) {
+        return null;
+      }
+
+      return (
+        <TrainerList
+          items={items}
+          key={key}
+          previewCount={
+            "previewCount" in block ? block.previewCount : undefined
+          }
+          sortLabel={
+            "sortLabel" in block && block.sortLabel
+              ? block.sortLabel
+              : "Alphabetically"
+          }
+          state={
+            "state" in block && block.state ? block.state : "Massachusetts"
+          }
+        />
+      );
+    }
+
+    case "link":
+    case "sideTabsLink": {
+      const text = "text" in block ? block.text : "";
+      const href = "href" in block ? block.href : "";
+
+      if (!text || !href) {
+        return null;
+      }
+
+      return (
+        <a
+          key={key}
+          href={href}
+          className="link inline-block text-primary underline transition hover:text-secondary"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {text}
+        </a>
+      );
+    }
+
+    default:
+      return null;
+  }
+}
+
+function renderTabContent(content: SideTab["content"]) {
+  const nodes: ReactNode[] = [];
+  let portableTextGroup: PortableTextBlock[] = [];
+  let portableTextGroupKey: Key | null = null;
+
+  const flushPortableTextGroup = () => {
+    if (!portableTextGroup.length) {
+      return;
+    }
+
+    nodes.push(
+      <PortableText
+        key={`portable-text-${String(portableTextGroupKey ?? nodes.length)}`}
+        value={portableTextGroup}
+        components={portableTextComponents}
+      />,
+    );
+    portableTextGroup = [];
+    portableTextGroupKey = null;
+  };
+
+  content.forEach((block, index) => {
+    if (isPortableTextBlock(block)) {
+      portableTextGroupKey ??= block._key ?? index;
+      portableTextGroup.push(block);
+      return;
+    }
+
+    flushPortableTextGroup();
+    nodes.push(
+      renderStructuredContentBlock(block, getStructuredBlockKey(block, index)),
+    );
+  });
+
+  flushPortableTextGroup();
+
+  return nodes;
 }
 
 export default function SideTabs({ tabs }: { tabs: Tab[] }) {
   const [active, setActive] = useState(0);
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
-  const [indicatorStyle, setIndicatorStyle] = useState<React.CSSProperties>({});
+  const [indicatorStyle, setIndicatorStyle] = useState<CSSProperties>({});
   const activeContent = tabs[active]?.content ?? [];
 
   const updateIndicator = (idx: number) => {
@@ -209,129 +490,7 @@ export default function SideTabs({ tabs }: { tabs: Tab[] }) {
         </div>
 
         <div className="col-span-full mt-6 space-y-4 lg:col-span-7 lg:mt-0">
-          {isPortableTextContent(activeContent) ? (
-            <div className="space-y-4">
-              <PortableText
-                value={activeContent}
-                components={portableTextComponents}
-              />
-            </div>
-          ) : (
-            activeContent.map((block, i) => {
-              if (isPortableTextBlock(block)) {
-                return (
-                  <PortableText
-                    key={block._key ?? i}
-                    value={[block]}
-                    components={portableTextComponents}
-                  />
-                );
-              }
-
-              switch (block.type) {
-                case "heading":
-                  return (
-                    <h2 className="h2 pb-10" key={i}>
-                      {block.text}
-                    </h2>
-                  );
-
-                case "subheading":
-                  return (
-                    <h3 className="text-lg font-bold" key={i}>
-                      {block.text}
-                    </h3>
-                  );
-
-                case "paragraph":
-                  return (
-                    <p className={`p1${block.bold ? " font-bold" : ""}`} key={i}>
-                      {block.text}
-                    </p>
-                  );
-
-                case "bullets":
-                case "list":
-                  return (
-                    <ul className="list-disc space-y-1 pl-6" key={i}>
-                      {block.items.map((item, j) => (
-                        <li key={j} className={`p1${block.bold ? " font-bold" : ""}`}>
-                          {item}
-                        </li>
-                      ))}
-                    </ul>
-                  );
-
-                case "numberedList":
-                  return (
-                    <ol className="list-decimal space-y-4 pl-6" key={i}>
-                      {block.items.map((item, j) => (
-                        <li key={j} className="p1">
-                          {item}
-                        </li>
-                      ))}
-                    </ol>
-                  );
-
-                case "columns":
-                  return (
-                    <div
-                      key={i}
-                      className="grid grid-cols-1 gap-6 md:grid-cols-2"
-                    >
-                      {block.items.map((column, colIdx) => (
-                        <ul key={colIdx} className="space-y-1">
-                          {column.map((item, itemIdx) => (
-                            <li key={itemIdx} className="p1">
-                              {item}
-                            </li>
-                          ))}
-                        </ul>
-                      ))}
-                    </div>
-                  );
-
-                case "divider":
-                  return <hr className="border-line-divider" key={i} />;
-
-                case "resourceList":
-                  return (
-                    <ResourceList
-                      eyebrow={block.eyebrow}
-                      items={block.items}
-                      key={i}
-                      previewCount={block.previewCount}
-                    />
-                  );
-
-                case "trainerList":
-                  return (
-                    <TrainerList
-                      items={block.items}
-                      key={i}
-                      previewCount={block.previewCount}
-                      sortLabel={block.sortLabel}
-                      state={block.state}
-                    />
-                  );
-
-                case "link":
-                  return (
-                    <a
-                      key={i}
-                      href={block.href}
-                      className="text-primary underline hover:text-primary-dark transition p1 inline-block"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      {block.text}
-                    </a>
-                  );
-
-                default:
-                  return null;
-              }
-            }))}
+          {renderTabContent(activeContent)}
         </div>
       </Grid>
     </div>
@@ -368,7 +527,9 @@ function TrainerList({
     return a.name.localeCompare(b.name);
   });
   const hasToggle = sortedItems.length > previewCount;
-  const visibleItems = expanded ? sortedItems : sortedItems.slice(0, previewCount);
+  const visibleItems = expanded
+    ? sortedItems
+    : sortedItems.slice(0, previewCount);
 
   const handleStateChange = (nextState: string) => {
     setSelectedState(nextState);
@@ -418,7 +579,10 @@ function TrainerList({
             const contactHref = getTrainerContactHref(item);
 
             return (
-              <li className="border-b border-line-divider py-4 last:border-b-0" key={`${item.state}-${item.name}`}>
+              <li
+                className="border-b border-line-divider py-4 last:border-b-0"
+                key={`${item.state}-${item.name}`}
+              >
                 <p className="p2 text-black">{item.name}</p>
                 <p className="p2 text-text-grey-light">{item.organization}</p>
                 {item.contact && contactHref ? (
@@ -471,7 +635,10 @@ function TrainerListSelect({
           </option>
         ))}
       </select>
-      <ChevronDown className="pointer-events-none absolute right-3 size-4 text-grey" aria-hidden="true" />
+      <ChevronDown
+        className="pointer-events-none absolute right-3 size-4 text-grey"
+        aria-hidden="true"
+      />
     </label>
   );
 }
@@ -568,7 +735,9 @@ function ResourceList({
   previewCount?: number;
 }) {
   const [expanded, setExpanded] = useState(false);
-  const [expandedItems, setExpandedItems] = useState<Record<string, boolean>>({});
+  const [expandedItems, setExpandedItems] = useState<Record<string, boolean>>(
+    {},
+  );
   const hasToggle = items.length > previewCount;
   const visibleItems = expanded ? items : items.slice(0, previewCount);
 
@@ -600,7 +769,10 @@ function ResourceList({
           const isItemExpanded = Boolean(expandedItems[item.title]);
 
           return (
-            <li key={item.title} className="border-b border-line-divider py-4 last:border-b-0">
+            <li
+              key={item.title}
+              className="border-b border-line-divider py-4 last:border-b-0"
+            >
               {isExpandable ? (
                 <button
                   aria-expanded={isItemExpanded}
@@ -625,14 +797,19 @@ function ResourceList({
                   <ResourceListItemContent item={item} />
 
                   {item.icon === "external" ? (
-                    <ExternalLink className="mt-1 size-5 shrink-0 text-grey" aria-hidden="true" />
+                    <ExternalLink
+                      className="mt-1 size-5 shrink-0 text-grey"
+                      aria-hidden="true"
+                    />
                   ) : null}
                   {item.icon === "chevron" ? (
-                    <ChevronRight className="mt-1 size-5 shrink-0 text-grey" aria-hidden="true" />
+                    <ChevronRight
+                      className="mt-1 size-5 shrink-0 text-grey"
+                      aria-hidden="true"
+                    />
                   ) : null}
                 </div>
               )}
-
             </li>
           );
         })}
@@ -658,11 +835,16 @@ function ResourceListItemContent({
   return (
     <div className="min-w-0 flex-1">
       {item.href && !titleAsText ? (
-        <a href={item.href} className="p1-bold block cursor-pointer text-black hover:text-secondary hover:underline">
+        <a
+          href={item.href}
+          className="p1-bold block cursor-pointer text-black hover:text-secondary hover:underline"
+        >
           {item.title}
         </a>
       ) : (
-        <p className="p1-bold text-black group-hover:text-secondary">{item.title}</p>
+        <p className="p1-bold text-black group-hover:text-secondary">
+          {item.title}
+        </p>
       )}
 
       {item.detail && item.detailHref ? (
@@ -675,8 +857,12 @@ function ResourceListItemContent({
           {item.detail}
         </a>
       ) : null}
-      {item.detail && !item.detailHref ? <p className="p1 text-secondary">{item.detail}</p> : null}
-      {description ? <p className="p1 text-text-grey-light">{description}</p> : null}
+      {item.detail && !item.detailHref ? (
+        <p className="p1 text-secondary">{item.detail}</p>
+      ) : null}
+      {description ? (
+        <p className="p1 text-text-grey-light">{description}</p>
+      ) : null}
       {item.meta?.map((metaLine) => (
         <p className="p1 text-text-grey-light" key={metaLine}>
           {metaLine}

@@ -3,7 +3,6 @@ import {
   createImageUrlBuilder,
   type SanityImageSource,
 } from "@sanity/image-url";
-import { type PortableTextBlock } from "next-sanity";
 import { Fragment } from "react";
 
 import Hero1, {
@@ -120,7 +119,7 @@ type SanityActionPanelFields = {
 
 type SanitySideTab = {
   label?: string | null;
-  content?: PortableTextBlock[] | null;
+  content?: SideTab["content"] | null;
 };
 
 type SanityHighlight = {
@@ -186,7 +185,7 @@ type LandingPageData = {
 
 function resolveSideTabs(sideTabs?: SanitySideTab[] | null): SideTab[] {
   const normalizedTabs = sideTabs
-    ?.filter((tab): tab is { label: string; content: PortableTextBlock[] } =>
+    ?.filter((tab): tab is { label: string; content: SideTab["content"] } =>
       Boolean(tab?.label && Array.isArray(tab.content)),
     )
     .map((tab) => ({
