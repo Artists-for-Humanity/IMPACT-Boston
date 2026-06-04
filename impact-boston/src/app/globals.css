@@ -150,3 +150,16 @@ body {
   font-style: normal;
   font-weight: 400;
 }
+
+@keyframes horizontalScroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-Scroll {
+  animation: horizontalScroll 20s linear infinite;
+}
