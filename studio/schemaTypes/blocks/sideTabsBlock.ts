@@ -16,8 +16,8 @@ type TextStyleDefinition = {
   component?: (props: EditorPreviewProps) => ReactNode
 }
 
-const editorFontFamily = 'IBM Plex Sans, sans-serif'
-const editorHeadingFontFamily = 'Poppins, sans-serif'
+const editorFontFamily = 'var(--font-ibm-plex-sans, "IBM Plex Sans", sans-serif)'
+const editorHeadingFontFamily = 'var(--font-poppins, Poppins, sans-serif)'
 
 function createTextStylePreview(style: CSSProperties) {
   function TextStylePreview({children}: EditorPreviewProps) {
@@ -33,8 +33,9 @@ function StrongDecoratorPreview({children}: EditorPreviewProps) {
     {
       style: {
         fontFamily: editorFontFamily,
-        fontSize: '18px',
-        fontWeight: 500,
+        fontSize: '14px',
+        fontWeight: 800,
+        letterSpacing: '0em',
         lineHeight: 'normal',
       },
     },
@@ -77,6 +78,7 @@ const textStyles = [
       fontFamily: editorHeadingFontFamily,
       fontSize: '48px',
       fontWeight: 500,
+      letterSpacing: '-0.04em',
       lineHeight: '56px',
     }),
   },
@@ -87,6 +89,7 @@ const textStyles = [
       fontFamily: editorHeadingFontFamily,
       fontSize: '32px',
       fontWeight: 500,
+      letterSpacing: '-0.016em',
       lineHeight: '40px',
     }),
   },
@@ -97,6 +100,7 @@ const textStyles = [
       fontFamily: editorHeadingFontFamily,
       fontSize: '24px',
       fontWeight: 500,
+      letterSpacing: '0em',
       lineHeight: 'normal',
     }),
   },
@@ -107,6 +111,7 @@ const textStyles = [
       fontFamily: editorHeadingFontFamily,
       fontSize: '20px',
       fontWeight: 500,
+      letterSpacing: '0em',
       lineHeight: 'normal',
     }),
   },
@@ -116,7 +121,8 @@ const textStyles = [
     component: createTextStylePreview({
       fontFamily: editorHeadingFontFamily,
       fontSize: '14px',
-      fontWeight: 600,
+      fontWeight: 500,
+      letterSpacing: '0em',
       lineHeight: 'normal',
     }),
   },
@@ -125,8 +131,9 @@ const textStyles = [
     value: 'normal',
     component: createTextStylePreview({
       fontFamily: editorFontFamily,
-      fontSize: '18px',
+      fontSize: '14px',
       fontWeight: 400,
+      letterSpacing: '0em',
       lineHeight: 'normal',
     }),
   },
@@ -135,8 +142,9 @@ const textStyles = [
     value: 'p1Bold',
     component: createTextStylePreview({
       fontFamily: editorFontFamily,
-      fontSize: '18px',
-      fontWeight: 500,
+      fontSize: '14px',
+      fontWeight: 400,
+      letterSpacing: '0em',
       lineHeight: 'normal',
     }),
   },
@@ -145,8 +153,9 @@ const textStyles = [
     value: 'p2',
     component: createTextStylePreview({
       fontFamily: editorFontFamily,
-      fontSize: '16px',
+      fontSize: '14px',
       fontWeight: 400,
+      letterSpacing: '0em',
       lineHeight: 'normal',
     }),
   },
@@ -157,6 +166,7 @@ const textStyles = [
       fontFamily: editorHeadingFontFamily,
       fontSize: '16px',
       fontWeight: 500,
+      letterSpacing: '0em',
       lineHeight: 'normal',
     }),
   },
@@ -167,6 +177,7 @@ const textStyles = [
       fontFamily: editorFontFamily,
       fontSize: '16px',
       fontWeight: 500,
+      fontStyle: 'normal',
       lineHeight: '25px',
       textDecoration: 'underline',
       textUnderlineOffset: 2,
