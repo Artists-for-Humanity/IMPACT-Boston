@@ -124,7 +124,7 @@ export default function SingleContent({
                 href={cta.href}
                 variant="primary"
                 showChevron
-                className="box-content h-[25px] py-2 md:py-6 w-auto self-start lg:col-span-5 justify-self-start gap-x-16"
+                className="box-border md:box-content h-[8px] md:h-[25px] py-6 w-full md:w-auto md:self-start lg:col-span-5 justify-self-start gap-x-16"
               >
                 {cta.text}
               </Button>
