@@ -9,8 +9,8 @@ export default function SchoolAndColleges() {
   return (
     <>
      <Hero2
-        tag='Community Organizations'
-        title="Strategies for Safer Living"
+        // tag='Community Organizations'
+        title="Community Organizations"
         description="IMPACT helps people experience the power of their bodies and voices while gaining practical and useful safety skills. We teach self-defense that is designed for people of all body types and fitness levels. IMPACT programs are trauma-informed. We emphasize verbal skills to avoid a physical altercation, team building, and mutual support.."
         imageSrc="/images/communityOrganizations/placeholder.png"
         imageAlt="Placeholder Image"
