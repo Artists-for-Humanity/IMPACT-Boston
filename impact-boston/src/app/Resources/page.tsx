@@ -30,7 +30,7 @@ const presentationItems = [
   {
     title: "Winsor Boundaries Presentation",
     detail: "Sep 2, 2022",
-    href: "#",
+    href: "/files/Winsor-Boundaries.pdf",
     icon: "external" as const,
   },
   {
@@ -179,89 +179,6 @@ const supportServiceItems = [
   },
 ];
 
-const successStoryItems = [
-  {
-    title: "Take Your Power: A Graduate's Story",
-    description:
-      "I was on a 4th date with a charming grad student I met at a lecture. We were sipping wine in his apartment when a dumb joke led to a sweet first kiss...",
-    expandedDescription:
-      " when the moment changed. I remembered that I had choices. I slowed down, named what I wanted, and moved myself toward the door. It was not dramatic, but it was powerful. The class helped me trust the signals in my body and act before I felt trapped.",
-    icon: "chevron" as const,
-  },
-  {
-    title: "Community Programs: Lilian",
-    description:
-      "When Lilian Calderon participated in an IMPACT workshop last Fall she never believed that only two hours of training would gi...",
-    expandedDescription:
-      "ve her practical language for boundaries and help her practice using a steady voice. Weeks later, she used those skills during a difficult conversation with a neighbor and was surprised by how calm and clear she felt.",
-    icon: "chevron" as const,
-  },
-  {
-    title: "IMPACT:Ability: Getting Help",
-    description:
-      "After taking our IMPACT:Ability course, a woman with an intellectual disability used the skills she learned in class to try to prevent a male...",
-    expandedDescription:
-      " staff member from crossing her boundaries. She recognized that the situation did not feel right, moved toward a safer public area, and asked a trusted staff person for help. Her support team said the class gave her a concrete script and enough practice to use it under stress.",
-    icon: "chevron" as const,
-  },
-  {
-    title: "KidSafe: Jack",
-    description:
-      "My 6-year old son Jack participated in a two-day KidSafe program. The class addressed a variety of issues from bullying to how to...",
-    expandedDescription:
-      " identify safe adults and use a loud voice when play became too rough. His parent shared that he seemed more confident asking for help and naming what he needed.",
-    icon: "chevron" as const,
-  },
-  {
-    title: "Women's Basics: Vicky and Jamie",
-    description:
-      "Before my 16-year-old daughter Jamie traveled to Ghana to take part in a veterinary assisting program this summer...",
-    expandedDescription:
-      ", I wanted her to have practical tools for travel, friendship, and unfamiliar situations. We took class together and left with shared language for safety planning, boundaries, and checking in with each other.",
-    icon: "chevron" as const,
-  },
-  {
-    title: "College Safety: Maya",
-    description:
-      "Maya brought IMPACT skills back to campus after a workshop helped her name her boundaries and ask friends for support...",
-    expandedDescription:
-      ". She used the workshop to start a peer conversation about party safety that did not rely on blame or fear. Her group created a simple check-in plan and practiced ways to interrupt concerning behavior early.",
-    icon: "chevron" as const,
-  },
-  {
-    title: "Workplace Programs: Jordan",
-    description:
-      "After a de-escalation training, Jordan felt prepared to slow down a tense client interaction and keep the whole team safer...",
-    expandedDescription:
-      ". Jordan noticed early signs of escalation, changed position in the room, and used a calm boundary statement. The situation cooled down, and the team later used the example to update their safety plan.",
-    icon: "chevron" as const,
-  },
-  {
-    title: "Youth Programs: Sam",
-    description:
-      "Sam practiced using a strong voice in class and later used that skill to get help from a trusted adult...",
-    expandedDescription:
-      ". The practice helped Sam understand that asking for help can be part of safety, not a failure. His teacher shared that he became more willing to speak up when classmates crossed a line.",
-    icon: "chevron" as const,
-  },
-  {
-    title: "Survivor Class: Elena",
-    description:
-      "Elena described the class as the first place she could practice safety skills while feeling believed, respected, and in control...",
-    expandedDescription:
-      ". She chose which activities felt right for her and opted out when she needed to. That ability to choose was central to the class experience and helped her reconnect with a sense of agency.",
-    icon: "chevron" as const,
-  },
-  {
-    title: "Community Workshop: Priya",
-    description:
-      "Priya joined a community workshop with friends and left with practical tools for setting limits in everyday conversations...",
-    expandedDescription:
-      ". She said the most useful part was practicing words out loud. She left with phrases she could actually imagine using with family, coworkers, and people she cared about.",
-    icon: "chevron" as const,
-  },
-];
-
 export default function Resources() {
   return (
     <>
@@ -315,25 +232,12 @@ export default function Resources() {
               },
             ],
           },
-          {
-            label: "Success Stories",
-            content: [
-              {
-                type: "heading",
-                text: "Success Stories",
-              },
-              {
-                type: "resourceList",
-                eyebrow: "Latest First",
-                items: successStoryItems,
-              },
-            ],
-          },
         ]}
       />
 
       <SingleContent
         backgroundColor="bg-bg-lavender"
+        titleAs="h2"
         title="Survivors of Abuse & Trauma"
         paragraphs={[
           {
