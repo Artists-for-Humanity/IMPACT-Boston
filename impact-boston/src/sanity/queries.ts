@@ -1,7 +1,7 @@
 import { defineQuery } from 'next-sanity'
 
 export const LANDING_PAGE_QUERY = defineQuery(`
-  *[_type == "landingPage"][0]{
+  *[_id == "landingPage"][0]{
     sections[]{
       _key,
       _type,

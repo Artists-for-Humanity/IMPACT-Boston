@@ -18,7 +18,7 @@ export function Hero1Headline({ children, className = "" }: Hero1HeadlineProps) 
 
 interface Hero1HeadlinePartProps {
   children: React.ReactNode;
-  color?: "primary" | "complementary" | "black";
+  color?: "primary" | "secondary" | "complementary" | "black";
   customColor?: string;
 }
 
@@ -28,8 +28,9 @@ export function Hero1HeadlinePart({
   customColor,
 }: Hero1HeadlinePartProps) {
   const colorMap = {
-    primary: "text-brand-primary",
-    complementary: "text-brand-complementary",
+    primary: "text-primary",
+    secondary: "text-secondary",
+    complementary: "text-complementary",
     black: "text-black",
   };
 

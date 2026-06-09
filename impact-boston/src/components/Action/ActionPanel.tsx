@@ -2,17 +2,12 @@
 // Call-to-action section with three action cards for registration, classes, and donations
 
 import Link from "next/link";
-import {
-  GraduationCap,
-  DollarSign,
-  ChevronRight,
-  Handshake,
-  User as UserIcon,
-  type LucideIcon,
-} from "lucide-react";
+import { stegaClean } from "next-sanity";
+import * as LucideIcons from "lucide-react";
+import { ChevronRight, type LucideIcon } from "lucide-react";
 import Grid from "../common/Grid";
 
-export type ActionPanelIcon = "handshake" | "user" | "dollar" | "graduation";
+export type ActionPanelIcon = string;
 
 export type ActionPanelCard = {
   title?: string | null;
@@ -28,12 +23,15 @@ type ActionPanelProps = {
   cards?: ActionPanelCard[] | null;
 };
 
-const ICONS: Record<ActionPanelIcon, LucideIcon> = {
-  handshake: Handshake,
-  user: UserIcon,
-  dollar: DollarSign,
-  graduation: GraduationCap,
+const LEGACY_ACTION_ICON_ALIASES: Record<string, string> = {
+  dollar: "dollar-sign",
+  graduation: "graduation-cap",
 };
+
+const LUCIDE_ICON_COMPONENTS = LucideIcons as unknown as Record<
+  string,
+  LucideIcon | undefined
+>;
 
 const CARD_HEIGHT_CLASSES = [
   "md:h-[245px]",
@@ -69,8 +67,63 @@ const FALLBACK_ACTION_PANEL = {
   ] satisfies Required<ActionPanelCard>[],
 };
 
-function isActionPanelIcon(icon: string | null | undefined): icon is ActionPanelIcon {
-  return Boolean(icon && icon in ICONS);
+const BRAND_BACKGROUND_COLORS: Record<string, string> = {
+  primary: "#311e41",
+  secondary: "#563672",
+  complementary: "#e86834",
+};
+
+function getCardBackgroundColor(
+  bgColor: string | null | undefined,
+  fallbackColor: string,
+) {
+  const cleanColor = stegaClean(bgColor)?.trim();
+
+  if (!cleanColor) {
+    return fallbackColor;
+  }
+
+  return BRAND_BACKGROUND_COLORS[cleanColor.toLowerCase()] ?? cleanColor;
+}
+
+function toKebabIconName(icon: string) {
+  return icon
+    .trim()
+    .replace(/([a-z0-9])([A-Z])/g, "$1-$2")
+    .replace(/[\s_]+/g, "-")
+    .replace(/-+/g, "-")
+    .replace(/^-|-$/g, "")
+    .toLowerCase();
+}
+
+function toPascalIconName(icon: string) {
+  return icon
+    .split("-")
+    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+    .join("");
+}
+
+function getLucideIcon(iconName: string | null | undefined) {
+  const cleanIconName = stegaClean(iconName)?.trim();
+
+  if (!cleanIconName) {
+    return null;
+  }
+
+  const kebabIconName = toKebabIconName(cleanIconName);
+  const normalizedIconName =
+    LEGACY_ACTION_ICON_ALIASES[kebabIconName] ?? kebabIconName;
+
+  return LUCIDE_ICON_COMPONENTS[toPascalIconName(normalizedIconName)] ?? null;
+}
+
+function getActionPanelIcon(
+  icon: string | null | undefined,
+  fallbackIcon: string,
+) {
+  return (
+    getLucideIcon(icon) ?? getLucideIcon(fallbackIcon) ?? LucideIcons.Handshake
+  );
 }
 
 export default function ActionPanel({
@@ -104,15 +157,15 @@ export default function ActionPanel({
           {visibleCards.map((card, index) => {
             const fallbackCard =
               FALLBACK_ACTION_PANEL.cards[index % FALLBACK_ACTION_PANEL.cards.length];
-            const icon = isActionPanelIcon(card.icon) ? card.icon : fallbackCard.icon;
-            const Icon = ICONS[icon];
+            const Icon = getActionPanelIcon(card.icon, fallbackCard.icon);
+            const bgColor = getCardBackgroundColor(card.bgColor, fallbackCard.bgColor);
 
             return (
               <Link
                 key={`${card.title || fallbackCard.title}-${index}`}
                 href={card.href || fallbackCard.href}
                 className={`col-span-4 md:col-span-8 lg:col-span-4 flex flex-col items-start gap-14 md:gap-0 md:justify-between ${CARD_HEIGHT_CLASSES[index] ?? CARD_HEIGHT_CLASSES[0]} lg:h-[325px] p-6 lg:p-8 hover:opacity-90 transition-opacity`}
-                style={{ backgroundColor: card.bgColor || fallbackCard.bgColor }}
+                style={{ backgroundColor: bgColor }}
               >
                 {/* Top - Icon and Chevron */}
                 <div className="flex justify-between items-start w-full">

@@ -1,8 +1,10 @@
 import {defineField, defineType} from 'sanity'
+import {BackgroundColorInput} from '../../components/BackgroundColorInput'
+import {IconInput, isValidIconValue} from '../../components/IconInput'
 
-export const homeActionPanelSectionType = defineType({
-  name: 'homeActionPanelSection',
-  title: 'Action Panel',
+export const actionPanelBlockType = defineType({
+  name: 'actionPanelBlock',
+  title: 'Action Panel Block',
   type: 'object',
   fields: [
     defineField({
@@ -49,23 +51,31 @@ export const homeActionPanelSectionType = defineType({
               name: 'icon',
               title: 'Icon',
               type: 'string',
-              options: {
-                list: [
-                  {title: 'Handshake', value: 'handshake'},
-                  {title: 'Person', value: 'user'},
-                  {title: 'Dollar Sign', value: 'dollar'},
-                  {title: 'Graduation Cap', value: 'graduation'},
-                ],
-                layout: 'dropdown',
+              components: {
+                input: IconInput,
               },
-              validation: (rule) => rule.required(),
+              validation: (rule) =>
+                rule
+                  .required()
+                  .custom((value) =>
+                    !value || isValidIconValue(value)
+                      ? true
+                      : 'Use a valid Lucide icon name, like heart-handshake or book-open.',
+                  ),
             }),
             defineField({
               name: 'bgColor',
               title: 'Background Color',
               type: 'string',
-              description: 'Hex value e.g. #E86834',
-              validation: (rule) => rule.required(),
+              description: 'Choose a brand color or enter a custom hex value.',
+              components: {
+                input: BackgroundColorInput,
+              },
+              validation: (rule) =>
+                rule.required().regex(/^#([0-9a-f]{3}|[0-9a-f]{6})$/i, {
+                  name: 'hex color',
+                  invert: false,
+                }),
             }),
           ],
           preview: {
@@ -78,7 +88,7 @@ export const homeActionPanelSectionType = defineType({
   preview: {
     select: {title: 'title'},
     prepare({title}) {
-      return {title: title || 'Action Panel', subtitle: 'Action Panel'}
+      return {title: title || 'Action Panel Block', subtitle: 'Action Panel Block'}
     },
   },
 })

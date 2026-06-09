@@ -1,8 +1,8 @@
 import {defineField, defineType} from 'sanity'
 
-export const homeTestimonialsSectionType = defineType({
-  name: 'homeTestimonialsSection',
-  title: 'Testimonials',
+export const testimonialsBlockType = defineType({
+  name: 'testimonialsBlock',
+  title: 'Testimonials Block',
   type: 'object',
   fields: [
     defineField({
@@ -56,7 +56,7 @@ export const homeTestimonialsSectionType = defineType({
   preview: {
     select: {title: 'heading'},
     prepare({title}) {
-      return {title: title || 'Testimonials', subtitle: 'Testimonials'}
+      return {title: title || 'Testimonials Block', subtitle: 'Testimonials Block'}
     },
   },
 })

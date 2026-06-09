@@ -1,8 +1,9 @@
 import {defineField, defineType} from 'sanity'
+import {HeadlineColorInput, headlineColorOptions} from '../../components/HeadlineColorInput'
 
-export const homeHeroSectionType = defineType({
-  name: 'homeHeroSection',
-  title: 'Hero',
+export const heroBlockType = defineType({
+  name: 'heroBlock',
+  title: 'Hero Block',
   type: 'object',
   fields: [
     defineField({
@@ -26,11 +27,11 @@ export const homeHeroSectionType = defineType({
               title: 'Color',
               type: 'string',
               options: {
-                list: [
-                  {title: 'Black', value: 'black'},
-                  {title: 'Secondary (Purple)', value: 'custom_purple'},
-                ],
+                list: headlineColorOptions.map(({title, value}) => ({title, value})),
                 layout: 'radio',
+              },
+              components: {
+                input: HeadlineColorInput,
               },
               initialValue: 'black',
               validation: (rule) => rule.required(),
@@ -38,6 +39,14 @@ export const homeHeroSectionType = defineType({
           ],
           preview: {
             select: {title: 'text', subtitle: 'color'},
+            prepare({title, subtitle}) {
+              const color = headlineColorOptions.find((option) => option.value === subtitle)
+
+              return {
+                title,
+                subtitle: color ? `${color.title} (${color.hex})` : subtitle,
+              }
+            },
           },
         },
       ],
@@ -77,7 +86,7 @@ export const homeHeroSectionType = defineType({
   ],
   preview: {
     prepare() {
-      return {title: 'Hero'}
+      return {title: 'Hero Block'}
     },
   },
 })

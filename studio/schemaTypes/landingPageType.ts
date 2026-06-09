@@ -7,15 +7,15 @@ export const landingPageType = defineType({
   fields: [
     defineField({
       name: 'sections',
-      title: 'Page Sections',
-      description: 'Add and reorder homepage components here.',
+      title: 'Page Blocks',
+      description: 'Add and reorder page blocks here.',
       type: 'array',
       of: [
-        {type: 'homeHeroSection'},
-        {type: 'homeActionPanelSection'},
-        {type: 'homeSideTabsSection'},
-        {type: 'homeHighlightsSection'},
-        {type: 'homeTestimonialsSection'},
+        {type: 'heroBlock'},
+        {type: 'actionPanelBlock'},
+        {type: 'sideTabsBlock'},
+        {type: 'highlightsBlock'},
+        {type: 'testimonialsBlock'},
       ],
       validation: (rule) => rule.required().min(1),
     }),
