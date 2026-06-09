@@ -1,17 +1,86 @@
 import {defineField, defineType} from 'sanity'
 import {HeadlineColorInput, headlineColorOptions} from '../../components/HeadlineColorInput'
 
+const isHero2 = (parent: unknown) =>
+  typeof parent === 'object' && parent !== null && 'variant' in parent
+    ? (parent as {variant?: string}).variant === 'hero2'
+    : false
+
 export const heroBlockType = defineType({
   name: 'heroBlock',
   title: 'Hero Block',
   type: 'object',
   fields: [
     defineField({
+      name: 'variant',
+      title: 'Hero Component',
+      type: 'string',
+      description: 'Choose which component this block should use.',
+      initialValue: 'hero1',
+      options: {
+        list: [
+          {title: 'Hero 1', value: 'hero1'},
+          {title: 'Hero 2', value: 'hero2'},
+        ],
+        layout: 'radio',
+      },
+    }),
+    defineField({
+      name: 'title',
+      title: 'Title',
+      type: 'string',
+      hidden: ({parent}) => !isHero2(parent),
+      validation: (rule) =>
+        rule.custom((value, context) =>
+          isHero2(context.parent) && !value ? 'Title is required for Hero 2.' : true,
+        ),
+    }),
+    defineField({
+      name: 'highlight',
+      title: 'Highlighted Title Text',
+      type: 'string',
+      description: 'Optional colored text appended to the Hero 2 title.',
+      hidden: ({parent}) => !isHero2(parent),
+    }),
+    defineField({
+      name: 'highlightColor',
+      title: 'Highlight Color',
+      type: 'string',
+      initialValue: 'secondary',
+      hidden: ({parent}) => !isHero2(parent),
+      options: {
+        list: [
+          {title: 'Primary', value: 'primary'},
+          {title: 'Secondary', value: 'secondary'},
+          {title: 'Complementary', value: 'complementary'},
+        ],
+        layout: 'radio',
+      },
+    }),
+    defineField({
+      name: 'description',
+      title: 'Description',
+      type: 'text',
+      rows: 3,
+      hidden: ({parent}) => !isHero2(parent),
+      validation: (rule) =>
+        rule.custom((value, context) =>
+          isHero2(context.parent) && !value ? 'Description is required for Hero 2.' : true,
+        ),
+    }),
+    defineField({
       name: 'headlineParts',
       title: 'Headline Parts',
       description: 'Each word or phrase in the headline with its color.',
       type: 'array',
-      validation: (rule) => rule.required().min(1),
+      hidden: ({parent}) => isHero2(parent),
+      validation: (rule) =>
+        rule.custom((value, context) => {
+          if (isHero2(context.parent)) return true
+          return Array.isArray(value) && value.length > 0
+            ? true
+            : 'At least one headline part is required for Hero 1.'
+        }),
       of: [
         {
           type: 'object',
@@ -34,7 +103,6 @@ export const heroBlockType = defineType({
                 input: HeadlineColorInput,
               },
               initialValue: 'black',
-              validation: (rule) => rule.required(),
             }),
           ],
           preview: {
@@ -56,19 +124,31 @@ export const heroBlockType = defineType({
       title: 'Body Text',
       type: 'text',
       rows: 3,
-      validation: (rule) => rule.required(),
+      hidden: ({parent}) => isHero2(parent),
+      validation: (rule) =>
+        rule.custom((value, context) =>
+          isHero2(context.parent) || value ? true : 'Body text is required for Hero 1.',
+        ),
     }),
     defineField({
       name: 'ctaText',
       title: 'CTA Button Text',
       type: 'string',
-      validation: (rule) => rule.required(),
+      hidden: ({parent}) => isHero2(parent),
+      validation: (rule) =>
+        rule.custom((value, context) =>
+          isHero2(context.parent) || value ? true : 'CTA button text is required for Hero 1.',
+        ),
     }),
     defineField({
       name: 'ctaHref',
       title: 'CTA Button Link',
       type: 'string',
-      validation: (rule) => rule.required(),
+      hidden: ({parent}) => isHero2(parent),
+      validation: (rule) =>
+        rule.custom((value, context) =>
+          isHero2(context.parent) || value ? true : 'CTA button link is required for Hero 1.',
+        ),
     }),
     defineField({
       name: 'image',
@@ -85,8 +165,11 @@ export const heroBlockType = defineType({
     }),
   ],
   preview: {
-    prepare() {
-      return {title: 'Hero Block'}
+    select: {variant: 'variant'},
+    prepare({variant}) {
+      const title = variant === 'hero2' ? 'Hero 2' : 'Hero 1'
+
+      return {title, subtitle: 'Hero Block'}
     },
   },
 })

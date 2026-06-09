@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="420" viewBox="0 0 640 420" role="img" aria-label="Testimonials spotlight preview">
+  <rect width="640" height="420" fill="#f0eef5"/>
+  <rect x="186" y="56" width="268" height="34" rx="4" fill="#061629"/>
+  <rect x="96" y="138" width="448" height="198" rx="6" fill="#ffffff"/>
+  <rect x="96" y="138" width="104" height="8" fill="#e36a38"/>
+  <rect x="200" y="138" width="250" height="8" fill="#874e9f"/>
+  <rect x="450" y="138" width="94" height="8" fill="#462458"/>
+  <rect x="144" y="198" width="352" height="14" rx="7" fill="#4a4a4a"/>
+  <rect x="164" y="230" width="312" height="14" rx="7" fill="#4a4a4a"/>
+  <rect x="204" y="262" width="232" height="14" rx="7" fill="#4a4a4a"/>
+  <rect x="260" y="304" width="120" height="12" rx="6" fill="#874e9f"/>
+</svg>

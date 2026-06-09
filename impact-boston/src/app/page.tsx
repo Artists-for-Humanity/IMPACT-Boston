@@ -9,6 +9,7 @@ import Hero1, {
   Hero1Headline,
   Hero1HeadlinePart,
 } from "@/components/Hero/Hero1";
+import Hero2 from "@/components/Hero/Hero2";
 import ActionPanel, {
   type ActionPanelCard,
 } from "@/components/Action/ActionPanel";
@@ -98,12 +99,17 @@ const FALLBACK_SIDE_TABS: SideTab[] = [
 
 // Define TypeScript types for the Sanity data structures. These types mirror the expected structure of the data returned from Sanity and are used for type checking and IntelliSense in the codebase.
 type SanityHeroFields = {
+  variant?: string | null;
   headlineParts?: SanityHeroHeadlinePart[] | null;
   body?: string | null;
   ctaText?: string | null;
   ctaHref?: string | null;
   image?: SanityImageSource | null;
   imageAlt?: string | null;
+  title?: string | null;
+  highlight?: string | null;
+  highlightColor?: string | null;
+  description?: string | null;
 };
 
 type SanityHeroHeadlinePart = {
@@ -138,7 +144,13 @@ type PageBlockBase = {
 
 type HeroBlock = PageBlockBase &
   SanityHeroFields & {
-    _type: "heroBlock";
+    _type:
+      | "heroBlock"
+      | "hero1Block"
+      | "hero2Block"
+      | "heroSplitBlock"
+      | "heroCenteredBlock"
+      | "heroStackedBlock";
   };
 
 type ActionPanelBlock = PageBlockBase &
@@ -158,7 +170,12 @@ type HighlightsBlock = PageBlockBase & {
 };
 
 type TestimonialsBlock = PageBlockBase & {
-  _type: "testimonialsBlock";
+  _type:
+    | "testimonialsBlock"
+    | "testimonialsCarouselBlock"
+    | "testimonialsSpotlightBlock"
+    | "testimonialsGridBlock";
+  variant?: string | null;
   heading?: string | null;
   subtext?: string | null;
   testimonials?: Testimonial[] | null;
@@ -228,6 +245,16 @@ function resolveHeadlineParts(headlineParts?: SanityHeroHeadlinePart[] | null) {
     : FALLBACK_HERO.headlineParts;
 }
 
+function resolveHero2HighlightColor(
+  color?: string | null,
+): "primary" | "secondary" | "complementary" | undefined {
+  return color === "primary" ||
+    color === "secondary" ||
+    color === "complementary"
+    ? color
+    : undefined;
+}
+
 function getLegacyBlocks(data: LandingPageData | null): LandingPageBlock[] {
   return [
     {
@@ -267,14 +294,32 @@ function getPageBlocks(data: LandingPageData | null): LandingPageBlock[] {
 
 function HomeHero({ section }: { section: HeroBlock }) {
   const headlineParts = resolveHeadlineParts(section.headlineParts);
-  const body = section.body ?? FALLBACK_HERO.body;
-  const ctaText = section.ctaText ?? FALLBACK_HERO.ctaText;
-  const ctaHref = section.ctaHref ?? FALLBACK_HERO.ctaHref;
   const imageAlt = section.imageAlt ?? FALLBACK_HERO.imageAlt;
   const imageSrc = section.image
     ? (urlFor(section.image)?.width(1400).height(1088).fit("crop").url() ??
       FALLBACK_HERO.imageSrc)
     : FALLBACK_HERO.imageSrc;
+
+  if (section._type === "hero2Block" || section.variant === "hero2") {
+    return (
+      <Hero2
+        title={
+          section.title ??
+          headlineParts.map((part) => part.text.trim()).join(" ") ??
+          "Courage makes us safer"
+        }
+        highlight={section.highlight ?? undefined}
+        highlightColor={resolveHero2HighlightColor(section.highlightColor)}
+        description={section.description ?? section.body ?? FALLBACK_HERO.body}
+        imageSrc={imageSrc}
+        imageAlt={imageAlt}
+      />
+    );
+  }
+
+  const body = section.body ?? FALLBACK_HERO.body;
+  const ctaText = section.ctaText ?? FALLBACK_HERO.ctaText;
+  const ctaHref = section.ctaHref ?? FALLBACK_HERO.ctaHref;
 
   const headline = (
     <Hero1Headline>
@@ -309,6 +354,11 @@ function HomeHero({ section }: { section: HeroBlock }) {
 function PageBlock({ section }: { section: LandingPageBlock }) {
   switch (section._type) {
     case "heroBlock":
+    case "hero1Block":
+    case "hero2Block":
+    case "heroSplitBlock":
+    case "heroCenteredBlock":
+    case "heroStackedBlock":
       return <HomeHero section={section} />;
 
     case "actionPanelBlock":
@@ -336,6 +386,9 @@ function PageBlock({ section }: { section: LandingPageBlock }) {
       );
 
     case "testimonialsBlock":
+    case "testimonialsCarouselBlock":
+    case "testimonialsSpotlightBlock":
+    case "testimonialsGridBlock":
       return (
         <TestimonialsSection
           heading={section.heading ?? undefined}

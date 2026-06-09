@@ -1,10 +1,11 @@
-import { defineQuery } from 'next-sanity'
+import { defineQuery } from "next-sanity";
 
 export const LANDING_PAGE_QUERY = defineQuery(`
   *[_id == "landingPage"][0]{
     sections[]{
       _key,
       _type,
+      variant,
       headlineParts[] {
         text,
         color
@@ -14,6 +15,9 @@ export const LANDING_PAGE_QUERY = defineQuery(`
       ctaHref,
       image,
       imageAlt,
+      highlight,
+      highlightColor,
+      description,
       title,
       subtext,
       cards[] {
@@ -88,6 +92,6 @@ export const LANDING_PAGE_QUERY = defineQuery(`
       readMoreLink
     }
   }
-`)
+`);
 
-export const LANDING_PAGE_HERO_QUERY = LANDING_PAGE_QUERY
+export const LANDING_PAGE_HERO_QUERY = LANDING_PAGE_QUERY;

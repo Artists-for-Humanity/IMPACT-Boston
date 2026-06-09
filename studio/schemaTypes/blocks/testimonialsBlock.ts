@@ -6,6 +6,21 @@ export const testimonialsBlockType = defineType({
   type: 'object',
   fields: [
     defineField({
+      name: 'variant',
+      title: 'Testimonials Layout',
+      type: 'string',
+      description: 'Choose the visual layout for this testimonials block.',
+      initialValue: 'carousel',
+      options: {
+        list: [
+          {title: 'Carousel', value: 'carousel'},
+          {title: 'Spotlight', value: 'spotlight'},
+          {title: 'Grid', value: 'grid'},
+        ],
+        layout: 'radio',
+      },
+    }),
+    defineField({
       name: 'heading',
       title: 'Heading',
       type: 'string',
@@ -54,9 +69,15 @@ export const testimonialsBlockType = defineType({
     }),
   ],
   preview: {
-    select: {title: 'heading'},
-    prepare({title}) {
-      return {title: title || 'Testimonials Block', subtitle: 'Testimonials Block'}
+    select: {title: 'heading', variant: 'variant'},
+    prepare({title, variant}) {
+      const variantTitle =
+        variant === 'spotlight' ? 'Spotlight' : variant === 'grid' ? 'Grid' : 'Carousel'
+
+      return {
+        title: title || `Testimonials: ${variantTitle}`,
+        subtitle: `Testimonials: ${variantTitle}`,
+      }
     },
   },
 })

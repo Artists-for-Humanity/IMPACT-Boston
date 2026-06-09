@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="420" viewBox="0 0 640 420" role="img" aria-label="Hero 2 preview">
+  <rect width="640" height="420" fill="#ffffff"/>
+  <rect x="270" y="40" width="100" height="24" rx="12" fill="#f0eef5"/>
+  <rect x="202" y="94" width="154" height="38" rx="4" fill="#061629"/>
+  <rect x="366" y="94" width="72" height="38" rx="4" fill="#5f3a78"/>
+  <rect x="172" y="156" width="296" height="12" rx="6" fill="#4a4a4a"/>
+  <rect x="200" y="178" width="240" height="12" rx="6" fill="#4a4a4a"/>
+  <rect x="242" y="200" width="156" height="12" rx="6" fill="#4a4a4a"/>
+  <rect x="72" y="268" width="496" height="110" fill="#e9e9e9"/>
+  <rect x="72" y="268" width="118" height="8" fill="#e36a38"/>
+  <rect x="190" y="268" width="242" height="8" fill="#874e9f"/>
+  <rect x="432" y="268" width="136" height="8" fill="#462458"/>
+  <circle cx="320" cy="332" r="34" fill="#c9c9c9"/>
+  <path d="M72 378L150 320L224 354L296 308L370 354L450 318L568 378Z" fill="#d5d5d5"/>
+</svg>

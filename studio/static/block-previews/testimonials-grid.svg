@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="420" viewBox="0 0 640 420" role="img" aria-label="Testimonials grid preview">
+  <rect width="640" height="420" fill="#f0eef5"/>
+  <rect x="64" y="54" width="250" height="34" rx="4" fill="#061629"/>
+  <rect x="64" y="118" width="196" height="12" rx="6" fill="#4a4a4a"/>
+  <rect x="64" y="176" width="150" height="130" rx="4" fill="#ffffff"/>
+  <rect x="245" y="176" width="150" height="130" rx="4" fill="#ffffff"/>
+  <rect x="426" y="176" width="150" height="130" rx="4" fill="#ffffff"/>
+  <rect x="84" y="216" width="110" height="10" rx="5" fill="#4a4a4a"/>
+  <rect x="84" y="240" width="92" height="10" rx="5" fill="#4a4a4a"/>
+  <rect x="265" y="216" width="110" height="10" rx="5" fill="#4a4a4a"/>
+  <rect x="265" y="240" width="92" height="10" rx="5" fill="#4a4a4a"/>
+  <rect x="446" y="216" width="110" height="10" rx="5" fill="#4a4a4a"/>
+  <rect x="446" y="240" width="92" height="10" rx="5" fill="#4a4a4a"/>
+  <rect x="64" y="176" width="34" height="6" fill="#e36a38"/>
+  <rect x="98" y="176" width="82" height="6" fill="#874e9f"/>
+  <rect x="180" y="176" width="34" height="6" fill="#462458"/>
+  <rect x="245" y="176" width="34" height="6" fill="#e36a38"/>
+  <rect x="279" y="176" width="82" height="6" fill="#874e9f"/>
+  <rect x="361" y="176" width="34" height="6" fill="#462458"/>
+  <rect x="426" y="176" width="34" height="6" fill="#e36a38"/>
+  <rect x="460" y="176" width="82" height="6" fill="#874e9f"/>
+  <rect x="542" y="176" width="34" height="6" fill="#462458"/>
+</svg>

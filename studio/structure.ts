@@ -2,6 +2,29 @@ import type {StructureResolver} from 'sanity/structure'
 
 export const singletonTypes = new Set(['landingPage'])
 
+const aboutPages = [
+  {
+    title: 'About Impact',
+    id: 'aboutImpact',
+  },
+  {
+    title: 'Board and Staff',
+    id: 'boardAndStaff',
+  },
+  {
+    title: 'Resources',
+    id: 'resources',
+  },
+  {
+    title: 'Blog',
+    id: 'blog',
+  },
+  {
+    title: 'Accessibility',
+    id: 'accessibility',
+  },
+]
+
 export const structure: StructureResolver = (S) =>
   S.list()
     .title('Content')
@@ -14,14 +37,25 @@ export const structure: StructureResolver = (S) =>
           S.document().title('Landing Page').schemaType('landingPage').documentId('landingPage'),
         ),
       S.listItem()
-        .title('Other Landing Pages')
-        .id('otherLandingPages')
-        .schemaType('landingPage')
+        .title('About Pages')
+        .id('aboutPages')
         .child(
-          S.documentList()
-            .title('Other Landing Pages')
-            .schemaType('landingPage')
-            .filter('_type == "landingPage" && !(_id in ["landingPage", "drafts.landingPage"])'),
+          S.list()
+            .title('About Pages')
+            .items(
+              aboutPages.map((page) =>
+                S.listItem()
+                  .title(page.title)
+                  .id(page.id)
+                  .schemaType('landingPage')
+                  .child(
+                    S.document()
+                      .title(page.title)
+                      .schemaType('landingPage')
+                      .documentId(page.id),
+                  ),
+              ),
+            ),
         ),
       S.divider(),
       ...S.documentTypeListItems().filter(

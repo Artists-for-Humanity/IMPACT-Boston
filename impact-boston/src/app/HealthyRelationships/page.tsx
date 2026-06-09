@@ -1,7 +1,7 @@
-import Hero2 from '@/components/Hero/Hero2';
-import Highlight2 from '@/components/Highlights/Highlight2';
-import SideTabs from '@/components/TabsPanel/SideTabs';
-import TestimonialsSection from '@/components/Highlights/Testimonials/Carousel';
+import Hero2 from "@/components/Hero/Hero2";
+import Highlight2 from "@/components/Highlights/Highlight2";
+import SideTabs from "@/components/TabsPanel/SideTabs";
+import TestimonialsSection from "@/components/Highlights/Testimonials/Carousel";
 
 const educatorTestimonials = [
   {
@@ -15,9 +15,6 @@ export default function HealthyRelationships() {
   return (
     <>
       <Hero2
-        tag="Healthy Relationships and Sex Education"
-        tagColor="secondary"
-        tagBackground="lavender"
         title="Inclusive Sex Education for Every Student"
         description="IMPACT's approach to teaching healthy relationships and sex education focuses on empowerment through education. Our interactive, discussion-based courses help students understand what is healthy and what is not (despite what TikTok says), feel confident in their values, boundaries, and identities, and develop the skills to make safe choices."
         imageSrc="/images/healthyRelationships/placeholder.png"
