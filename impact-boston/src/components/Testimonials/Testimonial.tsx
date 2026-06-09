@@ -1,4 +1,5 @@
 import Grid from "../common/Grid";
+import ExpandableQuote from "./ExpandableQuote";
 
 interface TestimonialProps {
     heading: string;
@@ -28,7 +29,7 @@ export default function Testimonial({
                 </div>
                 
                 <div className="flex flex-col space-evenly gap-4 p-4  bg-white">
-                     <p className="p1">{quote}</p>
+                     <ExpandableQuote quote={quote} className="p1" />
                     <p className="p2 font-bold">{author}</p>
                     <p className="p2">{authorTitle}</p>
                 </div>

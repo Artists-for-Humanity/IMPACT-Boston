@@ -37,7 +37,7 @@ export const testimonialsBlockType = defineType({
               name: 'author',
               title: 'Author',
               type: 'string',
-              validation: (rule) => rule.required(),
+              // validation: (rule) => rule.required(),
             }),
             defineField({
               name: 'readMoreLink',

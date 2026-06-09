@@ -26,6 +26,13 @@ export const highlightsBlockType = defineType({
               type: 'string',
               validation: (rule) => rule.required(),
             }),
+               defineField({
+              name: 'image',
+              title: 'Image',
+              type: 'image',
+              options: {hotspot: true},
+              validation: (rule) => rule.required(),
+            }),
             defineField({
               name: 'body',
               title: 'Body Text',
@@ -52,13 +59,7 @@ export const highlightsBlockType = defineType({
               description: 'For example, contact info shown below the CTA.',
               validation: (rule) => rule.required(),
             }),
-            defineField({
-              name: 'image',
-              title: 'Image',
-              type: 'image',
-              options: {hotspot: true},
-              validation: (rule) => rule.required(),
-            }),
+         
             defineField({
               name: 'imageAlt',
               title: 'Image Alt Text',
