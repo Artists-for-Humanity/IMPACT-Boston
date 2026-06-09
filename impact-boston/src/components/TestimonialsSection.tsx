@@ -6,6 +6,7 @@
 import { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import Grid from './common/Grid';
+import ExpandableQuote from './Testimonials/ExpandableQuote';
 
 export interface Testimonial {
   quote: string;
@@ -191,9 +192,11 @@ export default function TestimonialsSection({
                   {/* Card Content */}
                   <div className="px-4 py-8 lg:p-8">
                     {/* Quote */}
-                    <p className="p1 whitespace-pre-line text-[#000] lg:text-[#333]">
-                      &ldquo;{testimonial.quote}&rdquo;
-                    </p>
+                    <ExpandableQuote
+                      quote={testimonial.quote}
+                      className="p1 whitespace-pre-line text-[#000] lg:text-[#333]"
+                      withQuotationMarks
+                    />
                     {showAuthors && testimonial.author ? (
                       <p className="p2 mt-6 text-[#000] lg:text-[#333]">
                         {authorPrefix}{testimonial.author}
