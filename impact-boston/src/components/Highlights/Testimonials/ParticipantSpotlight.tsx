@@ -1,4 +1,4 @@
-import Grid from "../common/Grid";
+import Grid from '../../../components/common/Grid';
 
 interface TestimonialProps {
     heading: string;
