@@ -3,7 +3,7 @@ import Hero2 from '@/components/Hero/Hero2';
 // import SideTabsPanel from '@/components/SideTabsPanel';
 import SideTabs from '@/components/TabsPanel/SideTabs';
 import ContentTriple from '@/components/Content/Triple';
-import Testimonial from '@/components/Testimonials/Testimonial';
+import Testimonial from '@/components/Highlights/Testimonials/ParticipantSpotlight';
 import Highlight2 from '@/components/Highlights/Highlight2';
 
 export default function WorkplacePrograms() {

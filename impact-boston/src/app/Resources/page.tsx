@@ -1,7 +1,7 @@
 import Hero2 from '@/components/Hero/Hero2';
 import SideTabs from '@/components/TabsPanel/SideTabs';
 import SingleContent from '@/components/Content/Single';
-import TestimonialsSection from '@/components/TestimonialsSection';
+import TestimonialsSection from '@/components/Highlights/Testimonials/Carousel';
 
 const survivorTestimonials = [
   {
