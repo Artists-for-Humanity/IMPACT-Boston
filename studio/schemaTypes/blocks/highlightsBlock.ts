@@ -2,7 +2,7 @@ import {defineField, defineType} from 'sanity'
 
 export const highlightsBlockType = defineType({
   name: 'highlightsBlock',
-  title: 'Highlights Block',
+  title: 'Highlights Carousel',
   type: 'object',
   fields: [
     defineField({
@@ -77,7 +77,7 @@ export const highlightsBlockType = defineType({
   preview: {
     select: {title: 'label'},
     prepare({title}) {
-      return {title: title || 'Highlights Block', subtitle: 'Highlights Block'}
+      return {title: title || 'Highlights Carousel', subtitle: 'Highlights Carousel'}
     },
   },
 })

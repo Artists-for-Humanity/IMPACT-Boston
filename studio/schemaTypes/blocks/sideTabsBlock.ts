@@ -246,7 +246,7 @@ const trainerSortOptions = [
 
 export const sideTabsBlockType = defineType({
   name: 'sideTabsBlock',
-  title: 'Side Tabs Block',
+  title: 'Side Tabs',
   type: 'object',
   fields: [
     defineField({
@@ -576,7 +576,7 @@ export const sideTabsBlockType = defineType({
   ],
   preview: {
     prepare() {
-      return {title: 'Side Tabs Block'}
+      return {title: 'Side Tabs'}
     },
   },
 })

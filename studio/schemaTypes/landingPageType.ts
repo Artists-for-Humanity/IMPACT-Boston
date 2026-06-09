@@ -68,8 +68,13 @@ export const landingPageType = defineType({
           groups: [
             {
               name: 'heroes',
-              title: 'Heroes',
+              title: 'Hero',
               of: ['hero1Block', 'hero2Block'],
+            },
+            {
+              name:'action', 
+              title: 'Action',
+              of: ['actionPanelBlock'],
             },
             {
               name: 'content',
@@ -85,6 +90,11 @@ export const landingPageType = defineType({
                 'testimonialsGridBlock',
               ],
             },
+            {
+              name:'highlights',
+              title: 'Highlights',
+              of: ['highlightsBlock'],
+            }
           ],
           views: [
             {

@@ -4,7 +4,7 @@ import {IconInput, isValidIconValue} from '../../components/IconInput'
 
 export const actionPanelBlockType = defineType({
   name: 'actionPanelBlock',
-  title: 'Action Panel Block',
+  title: 'Action Grid',
   type: 'object',
   fields: [
     defineField({
@@ -88,7 +88,7 @@ export const actionPanelBlockType = defineType({
   preview: {
     select: {title: 'title'},
     prepare({title}) {
-      return {title: title || 'Action Panel Block', subtitle: 'Action Panel Block'}
+      return {title: title || 'Action Grid', subtitle: 'Actio Grid'}
     },
   },
 })
