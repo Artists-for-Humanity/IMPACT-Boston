@@ -18,7 +18,7 @@ import HighlightsSection, {
 } from "@/components/HighlightsSection";
 import TestimonialsSection, {
   type Testimonial,
-} from "@/components/TestimonialsSection";
+} from "@/components/Highlights/Testimonials/Carousel";
 import { client } from "@/sanity/client";
 import { LANDING_PAGE_QUERY } from "@/sanity/queries";
 

@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 import Hero2 from '@/components/Hero/Hero2';
 import SingleContent from '@/components/Content/Single';
-import Testimonial from '@/components/Testimonials/Testimonial';
+import Testimonial from '@/components/Highlights/Testimonials/ParticipantSpotlight';
 
 
 export default function BooksByMeg() {

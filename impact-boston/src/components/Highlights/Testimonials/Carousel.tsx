@@ -5,7 +5,7 @@
 
 import { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import Grid from './common/Grid';
+import Grid from '@/components/common/Grid';
 
 export interface Testimonial {
   quote: string;

@@ -1,7 +1,7 @@
 import Hero2 from '@/components/Hero/Hero2';
 import Highlight2 from '@/components/Highlights/Highlight2';
 import SideTabs from '@/components/TabsPanel/SideTabs';
-import TestimonialsSection from '@/components/TestimonialsSection';
+import TestimonialsSection from '@/components/Highlights/Testimonials/Carousel';
 
 const educatorTestimonials = [
   {
