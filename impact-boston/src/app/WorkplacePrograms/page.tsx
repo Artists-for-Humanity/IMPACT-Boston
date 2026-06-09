@@ -3,7 +3,7 @@ import Hero2 from '@/components/Hero/Hero2';
 // import SideTabsPanel from '@/components/SideTabsPanel';
 import SideTabs from '@/components/TabsPanel/SideTabs';
 import ContentTriple from '@/components/Content/Triple';
-import Testimonial from '@/components/Highlights/Testimonials/ParticipantSpotlight';
+import ParticipantSpotlight from '@/components/Highlights/Testimonials/ParticipantSpotlight';
 import Highlight2 from '@/components/Highlights/Highlight2';
 
 export default function WorkplacePrograms() {
@@ -78,7 +78,7 @@ export default function WorkplacePrograms() {
         },
       ]}
     />
-    <Testimonial
+    <ParticipantSpotlight
       heading="Participant Spotlight"
       subheading="Hear From One of Our Participants"
       quote="I thought the class was fantastic! I liked that there was an equal emphasis on physical presence, use of voice and awareness. Learning about statistics and the common behaviors of attackers was just as important to me as the hands on practice. The instructors were very convincing in their roles and created realistic scenarios. I’d definitely take another class if offered."

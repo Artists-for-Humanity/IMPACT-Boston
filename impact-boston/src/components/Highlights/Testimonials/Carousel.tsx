@@ -14,12 +14,18 @@ export interface Testimonial {
   readMoreLink?: string;
 }
 
-interface TestimonialsSectionProps {
+type HeadingTag = 'h2' | 'h3';
+
+interface CarouselProps {
   heading?: string;
   subheading?: string;
   testimonials?: Testimonial[];
   showAuthors?: boolean;
   authorPrefix?: string;
+  backgroundColor?: string;
+  className?: string;
+  headingLevel?: HeadingTag;
+  headingClassName?: string;
 }
 
 // TODO: Replace with Sanity CMS content
@@ -51,13 +57,17 @@ const defaultTestimonials: Testimonial[] = [
   }
 ];
 
-export default function TestimonialsSection({
+export default function Carousel({
   heading = "What People are Saying",
   subheading = "Hear from 20 people who've worked with us.",
   testimonials = defaultTestimonials,
   showAuthors = false,
   authorPrefix = "- ",
-}: TestimonialsSectionProps) {
+  backgroundColor = "bg-[#F0EEF5]",
+  className = "",
+  headingLevel: HeadingTag = "h2",
+  headingClassName = "",
+}: CarouselProps) {
   const testimonialItems = testimonials.length > 0 ? testimonials : defaultTestimonials;
   const [currentIndex, setCurrentIndex] = useState(testimonialItems.length);
   const [isTransitioning, setIsTransitioning] = useState(true);
@@ -123,16 +133,17 @@ export default function TestimonialsSection({
   };
 
   return (
-    <section className="w-full bg-[#F0EEF5] overflow-hidden py-8 md:py-10 lg:py-18">
+    <section className={`w-full overflow-hidden py-8 md:py-10 lg:py-18 ${backgroundColor} ${className}`}>
       <div className="flex flex-col gap-8 md:gap-6 lg:gap-8">
-        <div className="flex flex-col gap-8">
+        <div className={`flex flex-col gap-8 ${headingClassName}`}>
+        {headingClassName && <div aria-hidden="true" />}
         {/* Top Row - Heading and Navigation */}
-        <Grid>
+        <Grid noPadding>
           {/* Left - Heading and Subtext */}
           <div className="col-span-4 md:col-span-8 lg:col-span-6 flex flex-col gap-4 lg:gap-2 md:items-center lg:items-start">
-            <h2 className="h2 text-[#000] text-center md:text-center lg:text-left">
+            <HeadingTag className="h2 text-[#000] text-center md:text-center lg:text-left">
               {heading}
-            </h2>
+            </HeadingTag>
             {subheading ? (
               <p className="p2 text-[#333] text-center md:text-center lg:text-left">
                 {subheading}
