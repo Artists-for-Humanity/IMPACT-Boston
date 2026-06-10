@@ -11,6 +11,7 @@ interface Hero2Props {
   youtubeUrl?: string;
   videoTitle?: string;
   mediaClassName?: string;
+  showMediaPlaceholder?: boolean;
 }
 
 function getYouTubeEmbedUrl(youtubeUrl: string) {
@@ -55,6 +56,7 @@ export default function Hero2({
   youtubeUrl,
   videoTitle,
   mediaClassName,
+  showMediaPlaceholder = false,
 }: Hero2Props) {
   const highlightClassMap = {
     primary: "text-primary",
@@ -81,7 +83,12 @@ export default function Hero2({
         )}
       </div>
 
-      {youtubeEmbedUrl ? (
+      {showMediaPlaceholder ? (
+        <div
+          className={`${mediaWrapperClass} bg-image-placeholder`}
+          aria-hidden="true"
+        />
+      ) : youtubeEmbedUrl ? (
         <div
           className={`${mediaWrapperClass} aspect-video overflow-hidden bg-image-placeholder`}
         >
