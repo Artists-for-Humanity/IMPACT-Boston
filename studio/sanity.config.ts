@@ -18,10 +18,6 @@ const mainDocuments = defineDocuments([
     route: '/',
     filter: `_id == "landingPage"`,
   },
-  {
-    route: '/:slug',
-    filter: `_type == "post" && slug.current == $slug`,
-  },
 ])
 
 export default defineConfig({
