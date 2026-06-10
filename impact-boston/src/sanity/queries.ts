@@ -1,5 +1,18 @@
 import { defineQuery } from "next-sanity";
 
+const SIDE_TABS_CONTENT_PROJECTION = `
+  content[]{
+    ...,
+    children[]{...},
+    markDefs[]{...},
+    items[]{
+      ...,
+      items[],
+      meta[]
+    }
+  }
+`;
+
 export const LANDING_PAGE_QUERY = defineQuery(`
   *[_id == "landingPage"][0]{
     sections[]{
@@ -29,7 +42,7 @@ export const LANDING_PAGE_QUERY = defineQuery(`
       },
       tabs[] {
         label,
-        content
+        ${SIDE_TABS_CONTENT_PROJECTION}
       },
       label,
       slides[] {
@@ -72,7 +85,7 @@ export const LANDING_PAGE_QUERY = defineQuery(`
     },
     sideTabs[] {
       label,
-      content
+      ${SIDE_TABS_CONTENT_PROJECTION}
     },
     highlightsLabel,
     highlights[] {
