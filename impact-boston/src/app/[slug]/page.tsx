@@ -49,10 +49,16 @@
 import Link from "next/link";
 import { PortableText, type SanityDocument, defineQuery } from "next-sanity";
 import { draftMode } from "next/headers";
-import { createImageUrlBuilder, type SanityImageSource } from "@sanity/image-url";
+import {
+  createImageUrlBuilder,
+  type SanityImageSource,
+} from "@sanity/image-url";
 import { client } from "@/sanity/client";
+import { ROUTES } from "@/routes";
 
-const POST_QUERY = defineQuery(`*[_type == "post" && slug.current == $slug][0]`);
+const POST_QUERY = defineQuery(
+  `*[_type == "post" && slug.current == $slug][0]`,
+);
 
 const { projectId, dataset } = client.config();
 const urlFor = (source: SanityImageSource) =>
@@ -82,13 +88,15 @@ export default async function PostPage({
       : {
           // For published pages keep your existing ISR behavior
           next: { revalidate: 30 },
-        }
+        },
   );
 
   if (!post) {
     return (
       <main className="container mx-auto min-h-screen max-w-3xl p-8">
-        <Link href="/" className="hover:underline">← Back to posts</Link>
+        <Link href={ROUTES.HOME} className="hover:underline">
+          ← Back to posts
+        </Link>
         <h1 className="text-2xl font-bold mt-6">Post not found</h1>
       </main>
     );
@@ -100,7 +108,7 @@ export default async function PostPage({
 
   return (
     <main className="container mx-auto min-h-screen max-w-3xl p-8 flex flex-col gap-4">
-      <Link href="/" className="hover:underline">
+      <Link href={ROUTES.HOME} className="hover:underline">
         ← Back to posts
       </Link>
 

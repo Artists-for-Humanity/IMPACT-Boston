@@ -4,6 +4,7 @@ import SideTabs from "@/components/TabsPanel/SideTabs";
 import ContentTriple from "@/components/Content/Triple";
 import Testimonial from "@/components/Highlights/Testimonials/ParticipantSpotlight";
 import Highlight2 from "@/components/Highlights/Highlight2";
+import { ROUTES } from "@/routes";
 
 export default function WorkplacePrograms() {
   return (
@@ -140,7 +141,7 @@ export default function WorkplacePrograms() {
           "This isn't compliance training. It's the kind of preparation that changes how your employees carry themselves every day how they set boundaries, handle conflict, and show up for each other when things get hard. Teams that train with IMPACT don't just learn what to do. They leave trusting themselves to actually do it.",
         ]}
         ctaLabel="Book a session"
-        ctaHref="/Sessions"
+        ctaHref={ROUTES.CONTACT}
         supportingText="Custom scheduling available. Most organizations book 4–6 weeks out."
       />
     </>

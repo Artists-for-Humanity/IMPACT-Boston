@@ -1,6 +1,7 @@
 import Hero2 from "@/components/Hero/Hero2";
 import Highlight2 from "@/components/Highlights/Highlight2";
 import ParticipantSpotlight from "@/components/Highlights/Testimonials/ParticipantSpotlight";
+import { ROUTES } from "@/routes";
 
 const coalitionQuote = `“The IMPACT Know Your Rights workshops strengthened organizational sustainability across the coalition at a moment when that sustainability and stability is intentionally under attack. In the current climate, executive directors and boards are navigating uncertainty without clear guidance, often oscillating between pre-compliance and responses shaped by fear and silence.
 
@@ -39,7 +40,7 @@ export default function KnowYourRights() {
           "This isn't compliance training. It's the kind of preparation that changes how your employees carry themselves every day, how they set boundaries, handle conflict, and show up for each other when things get hard. Teams that train with IMPACT don't just learn what to do. They leave trusting themselves to actually do it.",
         ]}
         ctaLabel="Get in Touch"
-        ctaHref="mailto:info@impactboston.org"
+        ctaHref={ROUTES.CONTACT}
         supportingText="Custom scheduling available. Most organizations book 4–6 weeks out."
       />
     </>

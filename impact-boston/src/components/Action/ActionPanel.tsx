@@ -5,6 +5,7 @@ import Link from "next/link";
 import { stegaClean } from "next-sanity";
 import * as LucideIcons from "lucide-react";
 import { ChevronRight, type LucideIcon } from "lucide-react";
+import { ROUTES } from "@/routes";
 import Grid from "../common/Grid";
 
 export type ActionPanelIcon = string;
@@ -33,11 +34,7 @@ const LUCIDE_ICON_COMPONENTS = LucideIcons as unknown as Record<
   LucideIcon | undefined
 >;
 
-const CARD_HEIGHT_CLASSES = [
-  "md:h-[245px]",
-  "md:h-[256px]",
-  "md:h-[260px]",
-];
+const CARD_HEIGHT_CLASSES = ["md:h-[245px]", "md:h-[256px]", "md:h-[260px]"];
 
 const FALLBACK_ACTION_PANEL = {
   title: "Everything You Need to Get Involved.",
@@ -46,21 +43,21 @@ const FALLBACK_ACTION_PANEL = {
     {
       title: "Hire Us to Come to You",
       body: "If you're a school, organization, workplace, or other group, explore our classes and programs.",
-      href: "/programs",
+      href: ROUTES.PROGRAMS,
       bgColor: "#E86834",
       icon: "handshake",
     },
     {
       title: "Join a Class Today",
       body: "If you're an individual seeking a self-defense class, explore options and register here online today.",
-      href: "/programs",
+      href: ROUTES.REGISTER,
       bgColor: "#563672",
       icon: "user",
     },
     {
       title: "Make a Donation",
       body: "Support our mission. Every gift makes an impact. Help bring self defense training to all folks today!",
-      href: "/donate",
+      href: ROUTES.DONATE,
       bgColor: "#311E41",
       icon: "dollar",
     },
@@ -131,7 +128,9 @@ export default function ActionPanel({
   subtext,
   cards,
 }: ActionPanelProps = {}) {
-  const visibleCards = cards?.length ? cards.slice(0, 3) : FALLBACK_ACTION_PANEL.cards;
+  const visibleCards = cards?.length
+    ? cards.slice(0, 3)
+    : FALLBACK_ACTION_PANEL.cards;
 
   return (
     <section className="w-full bg-[#F0EEF5] py-8 md:py-10 lg:py-18">
@@ -156,9 +155,14 @@ export default function ActionPanel({
         <Grid noPadding className="flex-col md:flex-row gap-y-2 md:gap-y-2">
           {visibleCards.map((card, index) => {
             const fallbackCard =
-              FALLBACK_ACTION_PANEL.cards[index % FALLBACK_ACTION_PANEL.cards.length];
+              FALLBACK_ACTION_PANEL.cards[
+                index % FALLBACK_ACTION_PANEL.cards.length
+              ];
             const Icon = getActionPanelIcon(card.icon, fallbackCard.icon);
-            const bgColor = getCardBackgroundColor(card.bgColor, fallbackCard.bgColor);
+            const bgColor = getCardBackgroundColor(
+              card.bgColor,
+              fallbackCard.bgColor,
+            );
 
             return (
               <Link

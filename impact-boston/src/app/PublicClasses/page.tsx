@@ -2,6 +2,7 @@ import Hero2 from "@/components/Hero/Hero2";
 import SideTabs from "@/components/TabsPanel/SideTabs";
 import CenterImage from "@/components/common/CenterImage";
 import Highlight2 from "@/components/Highlights/Highlight2";
+import { ROUTES } from "@/routes";
 
 export default function PublicClasses() {
   return (
@@ -164,7 +165,7 @@ IMPACT instructors use special protective gear that allows students to safely pr
           "We encourage you to reach out,  we're here to help make it work.",
         ]}
         ctaLabel="IMPACT Scholarship Application 2023"
-        ctaHref="/Sessions"
+        ctaHref={ROUTES.CONTACT}
         supportingText="Download the scholarship application and email your completed form to classes@impactboston.org."
         textColor="white"
         backgroundColor="var(--color-secondary)"

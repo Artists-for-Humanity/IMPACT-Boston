@@ -3,11 +3,12 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { ROUTES } from "@/routes";
 
 export interface NavItem {
   label: string;
   link: string;
-  subItems?: { label: string; link: string; description: string; }[];
+  subItems?: { label: string; link: string; description: string }[];
 }
 
 interface NavigationProps {
@@ -18,79 +19,79 @@ interface NavigationProps {
 const DEFAULT_NAV_ITEMS: NavItem[] = [
   {
     label: "About",
-    link: "/about",
+    link: ROUTES.ABOUT,
     subItems: [
       {
         label: "About Impact",
-        link: "/AboutImpact",
+        link: ROUTES.ABOUT_IMPACT,
         description: "Building confidence for personal & community safety.",
       },
       {
         label: "Board and Staff",
-        link: "/BoardAndStaff",
+        link: ROUTES.BOARD_AND_STAFF,
         description: "Meet the people leading our mission forward.",
       },
       {
         label: "Resources",
-        link: "/Resources",
+        link: ROUTES.RESOURCES,
         description: "Tools and guidance to support safer communities.",
       },
       {
         label: "Blog",
-        link: "/Blog",
+        link: ROUTES.BLOG,
         description: "Stories, insights, and updates from our work.",
       },
       {
         label: "Accessibility",
-        link: "/Accessibility",
+        link: ROUTES.ACCESSIBILITY,
         description: "Self-defense program disability accommodations overview.",
       },
     ],
   },
   {
     label: "Programs",
-    link: "/programs",
+    link: ROUTES.PROGRAMS,
     subItems: [
       {
         label: "Public Classes",
-        link: "/SelfDefense",
+        link: ROUTES.PUBLIC_CLASSES,
         description: "Register as an individual for a self-defense class",
       },
       {
         label: "Schools & Colleges",
-        link: "/SchoolsAndColleges",
+        link: ROUTES.SCHOOLS_AND_COLLEGES,
         description: "Explore program options for schools and colleges",
       },
       {
         label: "People with Disabilities",
-        link: "/PeopleWithDisabilities",
+        link: ROUTES.PEOPLE_WITH_DISABILITIES,
         description:
           "Explore programs for people with disabilities and trainings for those who support them",
       },
       {
         label: "De-escalation",
-        link: "/De-escalation",
+        link: ROUTES.DE_ESCALATION,
         description: "Hire us for a de-escalation workshop",
       },
       {
         label: "Community Organizations",
-        link: "/CommunityOrganizations",
+        link: ROUTES.COMMUNITY_ORGANIZATIONS,
         description: "Explore training options that strengthen communities",
       },
       {
         label: "Workplace Programs",
-        link: "/WorkplacePrograms",
+        link: ROUTES.WORKPLACE_PROGRAMS,
         description: "Hire us for a dynamic workshop for your team",
       },
       {
         label: "Know Your Rights",
-        link: "/KnowYourRights",
+        link: ROUTES.KNOW_YOUR_RIGHTS,
         description:
           "Learn about our trauma-informed approach to practicing know your rights scenarios",
       },
       {
         label: "Healthy Relationships & Sex Education",
-        link: "/HealthyRelationships",
+        link: ROUTES.HEALTHY_RELATIONSHIPS,
         description:
           "For schools, after-school programs, and summer youth programs",
       },
@@ -98,26 +99,26 @@ const DEFAULT_NAV_ITEMS: NavItem[] = [
   },
   {
     label: "Learn More",
-    link: "/learn-more",
+    link: ROUTES.LEARN_MORE,
     subItems: [
       {
         label: "Fact Check Fridays",
-        link: "/FactCheckFriday",
+        link: ROUTES.FACT_CHECK_FRIDAY,
         description: "Stay informed with our weekly fact checks.",
       },
       {
         label: "Books by Meg Stone",
-        link: "/BooksByMegStone",
+        link: ROUTES.BOOKS_BY_MEG_STONE,
         description: "Explore the works of our founder.",
       },
       {
         label: "Press",
-        link: "/Press",
+        link: ROUTES.PRESS,
         description: "Read our latest press releases and media coverage.",
       },
       {
         label: "What is Empowerment Self-Defense?",
-        link: "/Empowerment",
+        link: ROUTES.EMPOWERMENT,
         description: "Learn about the principles of empowerment.",
       },
     ],
@@ -198,9 +199,7 @@ export default function Navigation({
                             <p className="p1-bold text-secondary">
                               {sub.label}
                             </p>
-                            <p className="p2 text-[14px]">
-                              {sub.description}
-                            </p>
+                            <p className="p2 text-[14px]">{sub.description}</p>
                           </a>
                         </li>
                       );
@@ -215,33 +214,30 @@ export default function Navigation({
 
       {/* ── CTA buttons ─────────────────────────────────────────── */}
       <div className="hidden lg:flex items-center gap-2">
+        {/* ── Search icon ─────────────────────────────────────────── */}
+        <button
+          aria-label="Search"
+          className="hidden lg:flex p-1.5 text-gray-400 hover:text-gray-700 transition-colors duration-150"
+        >
+          <Image src="/icons/search.svg" width={18} height={18} alt="Search" />
+        </button>
 
-          {/* ── Search icon ─────────────────────────────────────────── */}
-      <button
-        aria-label="Search"
-        className="hidden lg:flex p-1.5 text-gray-400 hover:text-gray-700 transition-colors duration-150"
-      >
-        <Image src="/icons/search.svg" width={18} height={18} alt="Search" />
-      </button>
+        {/* ── Register button ──────────────────────────────────────── */}
+        <Link
+          href={ROUTES.REGISTER}
+          className="link flex items-center gap-0.5 px-4 py-1 text-[#FFF] bg-[#000000] hover:bg-brand-primary rounded-[5px] transition-colors duration-150"
+        >
+          Register
+        </Link>
 
-      {/* ── Register button ──────────────────────────────────────── */}
-      <Link
-        href="/register"
-        className="link flex items-center gap-0.5 px-4 py-1 text-[#FFF] bg-[#000000] hover:bg-brand-primary rounded-[5px] transition-colors duration-150"
-      >
-        Register
-      </Link>
-
-      {/* ── Donate button ────────────────────────────────────────── */}
-      <Link
-          href="/donate"
+        {/* ── Donate button ────────────────────────────────────────── */}
+        <Link
+          href={ROUTES.DONATE}
           className="link flex items-center gap-0.5 px-4 py-1 text-black border border-[#959595] rounded-[5px] hover:border-gray-400 hover:text-gray-900 transition-colors duration-150"
         >
           Donate
         </Link>
       </div>
-
-    
 
       {/* ── Mobile hamburger ─────────────────────────────────────── */}
       <button
@@ -330,9 +326,7 @@ export default function Navigation({
                           <p className="p1-bold text-secondary group-hover:underline group-hover:underline-offset-2">
                             {sub.label}
                           </p>
-                          <p className="p2 mt-1 text-grey">
-                            {sub.description}
-                          </p>
+                          <p className="p2 mt-1 text-grey">{sub.description}</p>
                         </Link>
                       </li>
                     ))}
@@ -343,14 +337,14 @@ export default function Navigation({
           </ul>
           <div className="flex flex-col gap-2 border-t border-line-divider px-6 py-6 md:flex-row md:px-10">
             <Link
-              href="/register"
+              href={ROUTES.REGISTER}
               className="link w-full text-center px-5 py-2.5 text-white bg-black hover:bg-brand-primary rounded-[5px] transition-colors duration-150 md:w-auto"
               onClick={() => setMobileOpen(false)}
             >
               Register
             </Link>
             <Link
-              href="/donate"
+              href={ROUTES.DONATE}
               className="link w-full text-center px-5 py-2.5 text-black border border-[#959595] rounded-[5px] hover:border-gray-400 hover:text-gray-900 transition-colors duration-150 md:w-auto"
               onClick={() => setMobileOpen(false)}
             >

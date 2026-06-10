@@ -2,6 +2,7 @@ import Hero2 from "@/components/Hero/Hero2";
 import SideTabs from "@/components/TabsPanel/SideTabs";
 import Highlight2 from "@/components/Highlights/Highlight2";
 import CenterImage from "@/components/common/CenterImage";
+import { ROUTES } from "@/routes";
 
 export default function SchoolAndColleges() {
   return (
@@ -119,7 +120,7 @@ export default function SchoolAndColleges() {
           "If your organization works with the public, this is the training that stays with people long after the session ends.",
         ]}
         ctaLabel="Book a session"
-        ctaHref="/Sessions"
+        ctaHref={ROUTES.CONTACT}
         supportingText="Subtitle or secondary line of text that helps the CTA"
       />
     </>

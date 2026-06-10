@@ -1,6 +1,7 @@
-import Hero2 from '@/components/Hero/Hero2';
-import SingleContent from '@/components/Content/Single';
-import Highlight2 from '@/components/Highlights/Highlight2';
+import Hero2 from "@/components/Hero/Hero2";
+import SingleContent from "@/components/Content/Single";
+import Highlight2 from "@/components/Highlights/Highlight2";
+import { ROUTES } from "@/routes";
 
 export default function PeopleWithDisabilities() {
   return (
@@ -8,9 +9,7 @@ export default function PeopleWithDisabilities() {
       <Hero2
         title="People With Disabilities"
         description="IMPACT is committed to creating safe and healthy communities for people of all abilities. Ability:IMPACT is a comprehensive, organization-wide approach to abuse prevention. It combines changes in official policies with efforts to create an organizational culture that challenges abuse and bullying while supporting self-advocacy, choice, and healthy sexuality."
-        youtubeUrl='https://www.youtube.com/watch?v=Ps0Rt9TU3ao'
-       
-
+        youtubeUrl="https://www.youtube.com/watch?v=Ps0Rt9TU3ao"
       />
 
       <SingleContent
@@ -25,7 +24,7 @@ export default function PeopleWithDisabilities() {
         imageSrc="/images/disabilities/placeholder.png"
         imageAlt="placeholder"
         cta={{
-          href: "/PeopleWithDisabilities/Ability",
+          href: ROUTES.PEOPLE_WITH_DISABILITIES_ABILITY,
           text: "Know More",
         }}
       />
@@ -43,7 +42,7 @@ export default function PeopleWithDisabilities() {
         imageSrc="/images/disabilities/placeholder.png"
         imageAlt="placeholder"
         cta={{
-          href: "/PeopleWithDisabilities/ASAP",
+          href: ROUTES.PEOPLE_WITH_DISABILITIES_ASAP,
           text: "Know More",
         }}
       />
@@ -67,7 +66,7 @@ export default function PeopleWithDisabilities() {
           "Our teaching team can work with community members to develop customized classes, facilitate stakeholder meetings, or create a detailed abuse prevention plan. ",
         ]}
         ctaLabel="Get in Touch"
-        ctaHref="/PeopleWithDisabilities"
+        ctaHref={ROUTES.CONTACT}
         supportingText="Specialized training to meet your needs"
       />
     </>

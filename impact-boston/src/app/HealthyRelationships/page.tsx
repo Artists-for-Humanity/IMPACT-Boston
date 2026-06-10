@@ -2,6 +2,7 @@ import Hero2 from "@/components/Hero/Hero2";
 import Highlight2 from "@/components/Highlights/Highlight2";
 import SideTabs from "@/components/TabsPanel/SideTabs";
 import TestimonialsSection from "@/components/Highlights/Testimonials/Carousel";
+import { ROUTES } from "@/routes";
 
 const educatorTestimonials = [
   {
@@ -99,7 +100,7 @@ export default function HealthyRelationships() {
           "We have experience collaborating with educators in Physical Education, Health, Wellness, Guidance & Counseling, English, Social Studies. We have experience teaching elective classes, extracurricular programs, or doing guest presentations in regular classes.",
         ]}
         ctaLabel="Get in Touch"
-        ctaHref="mailto:info@impactboston.org"
+        ctaHref={ROUTES.CONTACT}
       />
     </>
   );

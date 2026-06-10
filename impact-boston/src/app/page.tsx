@@ -22,6 +22,7 @@ import TestimonialsSection, {
 } from "@/components/Highlights/Testimonials/Carousel";
 import { client } from "@/sanity/client";
 import { LANDING_PAGE_QUERY } from "@/sanity/queries";
+import { ROUTES } from "@/routes";
 
 // Extract projectId and dataset from the Sanity client configuration to construct image URLs. The urlFor function takes a SanityImageSource and returns a URL for the image, applying transformations for width, height, and cropping as needed. This allows for dynamic image handling based on the content stored in Sanity.
 const { projectId, dataset } = client.config();
@@ -50,7 +51,7 @@ const FALLBACK_HERO = {
   ],
   body: "IMPACT believes everyone has the right to be safe. Our self-defense and abuse prevention programs equip individuals and communities with practical, inclusive safety skills.",
   ctaText: "Learn More",
-  ctaHref: "/register",
+  ctaHref: ROUTES.REGISTER,
   imageSrc: "/images/hero-place-holder-a.png",
   imageAlt: "IMPACT Boston self-defense training",
 };

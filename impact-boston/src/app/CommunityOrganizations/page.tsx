@@ -4,6 +4,7 @@ import Hero2 from "@/components/Hero/Hero2";
 import SideTabs from "@/components/TabsPanel/SideTabs";
 import Highlight2 from "@/components/Highlights/Highlight2";
 import CenterImage from "@/components/common/CenterImage";
+import { ROUTES } from "@/routes";
 
 export default function SchoolAndColleges() {
   return (
@@ -101,7 +102,7 @@ export default function SchoolAndColleges() {
           "Our collaborators include social service agencies, domestic violence and sexual assault programs, home visitors, youth development programs, community centers, activist groups, adult education centers, counseling centers, performance venues and many others.",
         ]}
         ctaLabel="Get in Touch"
-        ctaHref="/Sessions"
+        ctaHref={ROUTES.CONTACT}
       />
     </>
   );
