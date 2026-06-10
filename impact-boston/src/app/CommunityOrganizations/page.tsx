@@ -6,14 +6,13 @@ import Highlight2 from "@/components/Highlights/Highlight2";
 import CenterImage from "@/components/common/CenterImage";
 import { ROUTES } from "@/routes";
 
-export default function SchoolAndColleges() {
+export default function Community() {
   return (
     <>
       <Hero2
         title="Community Organizations"
         description="IMPACT helps people experience the power of their bodies and voices while gaining practical and useful safety skills. We teach self-defense that is designed for people of all body types and fitness levels. IMPACT programs are trauma-informed. We emphasize verbal skills to avoid a physical altercation, team building, and mutual support.."
-        imageSrc="/images/communityOrganizations/placeholder.png"
-        imageAlt="Placeholder Image"
+        showMediaPlaceholder
       />
       <SideTabs
         tabs={[
@@ -89,10 +88,7 @@ export default function SchoolAndColleges() {
         ]}
       />
 
-      <CenterImage
-        imageSrc="/images/de-escalation/placeholder.png"
-        imageAlt="Group Pictures"
-      />
+      <CenterImage showImagePlaceholder />
 
       <Highlight2
         title="Customized Programs"

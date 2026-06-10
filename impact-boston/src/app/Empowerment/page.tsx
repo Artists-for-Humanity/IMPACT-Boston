@@ -1,7 +1,7 @@
-import Grid from '@/components/common/Grid';
-import Hero2 from '@/components/Hero/Hero2';
-import SingleContent from '@/components/Content/Single';
-import SideTabs from '@/components/TabsPanel/SideTabs';
+import Grid from "@/components/common/Grid";
+import Hero2 from "@/components/Hero/Hero2";
+import SingleContent from "@/components/Content/Single";
+import SideTabs from "@/components/TabsPanel/SideTabs";
 
 export default function Empowerment() {
   return (
@@ -19,8 +19,7 @@ export default function Empowerment() {
             text: "Sometimes called feminist self-defense, this approach gives people who are targeted for abuse and violence the skills to protect themselves without blaming them for being attacked. We understand violence as a political and social problem, not as the fault of those who are assaulted. This approach to personal safety emphasizes choice and agency. We make ourselves safer by resisting the conditions of inequity that often show up in our personal lives as coercion and control from people we know, like, and love.",
           },
         ]}
-        imageSrc="/images/healthyRelationships/placeholder.png"
-        imageAlt=""
+        showImagePlaceholder
       />
 
       <SideTabs
@@ -92,7 +91,7 @@ export default function Empowerment() {
                   "Every activity in an ESD classroom is optional. We invite students to communicate their boundaries and we commit to respecting them.",
                   "We include opportunities to practice assertive communication that can be used in a range of situations, not just imminent danger.",
                   "Our classes are accessible - we teach physical techniques that are simple to learn, easy to remember, and able to be done by people of different ages, sizes, and abilities.",
-                  "We do not tell anyone what they \"should\" or \"should not\" do. We offer options, techniques, and a way of analyzing situations.",
+                  'We do not tell anyone what they "should" or "should not" do. We offer options, techniques, and a way of analyzing situations.',
                 ],
               },
             ],
@@ -142,7 +141,10 @@ function ArticleCallout({ heading, article }: ArticleCalloutProps) {
               <p className="p2 text-grey">{article.author}</p>
             </div>
 
-            <a href={article.href} className="p2 text-secondary underline underline-offset-2">
+            <a
+              href={article.href}
+              className="p2 text-secondary underline underline-offset-2"
+            >
               {article.linkText}
             </a>
           </div>

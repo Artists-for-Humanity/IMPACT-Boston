@@ -12,8 +12,7 @@ export default function WorkplacePrograms() {
       <Hero2
         title="Team Building with a Purpose"
         description="IMPACT offers fun, interactive, and practical self-defense and effective communication workshops that help employees increase their confidence and awareness. Employees can learn practical strategies to set boundaries, have challenging conversations, de-escalate potentially dangerous situations, and resist attempted violence. Whether you are addressing a specific concern or looking for an addition to your organization’s employee training program, IMPACT’s workplace programs can help."
-        imageSrc="/images/workplacePrograms/placeholder.png"
-        imageAlt="Group Pictures"
+        showMediaPlaceholder
       />
       <SideTabs
         tabs={[

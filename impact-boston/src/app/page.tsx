@@ -17,9 +17,10 @@ import SideTabs, { type SideTab } from "@/components/TabsPanel/SideTabs";
 import HighlightsSection, {
   type HighlightSlide,
 } from "@/components/HighlightsSection";
-import TestimonialsSection, {
+import TestimonialsCarousel, {
   type Testimonial,
 } from "@/components/Highlights/Testimonials/Carousel";
+import ParticipantSpotlight from "@/components/Highlights/Testimonials/ParticipantSpotlight";
 import { client } from "@/sanity/client";
 import { LANDING_PAGE_QUERY } from "@/sanity/queries";
 import { ROUTES } from "@/routes";
@@ -174,11 +175,13 @@ type TestimonialsBlock = PageBlockBase & {
   _type:
     | "testimonialsBlock"
     | "testimonialsCarouselBlock"
-    | "testimonialsSpotlightBlock"
-    | "testimonialsGridBlock";
+    | "testimonialsSpotlightBlock";
   variant?: string | null;
   heading?: string | null;
   subtext?: string | null;
+  spotlightQuote?: string | null;
+  spotlightAuthor?: string | null;
+  spotlightAuthorTitle?: string | null;
   testimonials?: Testimonial[] | null;
 };
 
@@ -352,6 +355,53 @@ function HomeHero({ section }: { section: HeroBlock }) {
   );
 }
 
+function TestimonialsBlockRenderer({
+  section,
+}: {
+  section: TestimonialsBlock;
+}) {
+  const isSpotlight =
+    section._type === "testimonialsSpotlightBlock" ||
+    section.variant === "spotlight";
+  const featuredTestimonial = section.testimonials?.find((testimonial) =>
+    Boolean(testimonial.quote),
+  );
+  const spotlightQuote =
+    section.spotlightQuote ?? featuredTestimonial?.quote ?? null;
+  const spotlightAuthor =
+    section.spotlightAuthor ?? featuredTestimonial?.author ?? null;
+  const spotlightAuthorTitle =
+    section.spotlightAuthorTitle ?? featuredTestimonial?.authorTitle ?? null;
+
+  if (isSpotlight) {
+    if (!spotlightQuote) {
+      return null;
+    }
+
+    return (
+      <ParticipantSpotlight
+        backgroundColor="bg-complementary-light"
+        heading={section.heading ?? "Participant Spotlight"}
+        subheading={section.subtext ?? undefined}
+        quote={spotlightQuote}
+        author={spotlightAuthor ?? undefined}
+        authorTitle={spotlightAuthorTitle ?? undefined}
+        cardClassName="mx-auto max-w-[850px] gap-8 px-6 py-8 md:px-10 lg:px-12 lg:py-9"
+        contentClassName="lg:gap-10"
+        quoteClassName="p2 text-black"
+      />
+    );
+  }
+
+  return (
+    <TestimonialsCarousel
+      heading={section.heading ?? undefined}
+      subheading={section.subtext ?? undefined}
+      testimonials={section.testimonials ?? undefined}
+    />
+  );
+}
+
 function PageBlock({ section }: { section: LandingPageBlock }) {
   switch (section._type) {
     case "heroBlock":
@@ -389,14 +439,7 @@ function PageBlock({ section }: { section: LandingPageBlock }) {
     case "testimonialsBlock":
     case "testimonialsCarouselBlock":
     case "testimonialsSpotlightBlock":
-    case "testimonialsGridBlock":
-      return (
-        <TestimonialsSection
-          heading={section.heading ?? undefined}
-          subheading={section.subtext ?? undefined}
-          testimonials={section.testimonials ?? undefined}
-        />
-      );
+      return <TestimonialsBlockRenderer section={section} />;
 
     default:
       return null;

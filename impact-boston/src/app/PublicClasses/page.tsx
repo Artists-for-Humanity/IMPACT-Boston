@@ -11,8 +11,7 @@ export default function PublicClasses() {
         title="Self Defense for Everyone"
         description="IMPACT classes teach self-defense strategies that are effective regardless of size, age, or fitness level. Our training programs give people the tools to stay calm and focused in unsafe situations. Instructors are trained to recreate common assault scenarios. In response most students feel fear. The training process helps you manage your body’s natural stress response so you can defend yourself effectively.
 IMPACT instructors use special protective gear that allows students to safely practice physical techniques by striking with the amount of physical force needed to incapacitate an attacker.  You learn to swim by getting in the water. Similarly, the most effective way to learn to defend yourself by actually doing it."
-        imageSrc="/images/publicClasses/placeholder.png"
-        imageAlt="Placeholder"
+        showMediaPlaceholder
       />
       <SideTabs
         tabs={[
@@ -153,10 +152,7 @@ IMPACT instructors use special protective gear that allows students to safely pr
         ]}
       />
 
-      <CenterImage
-        imageSrc="/images/publicClasses/placeholder.png"
-        imageAlt="Placeholder"
-      />
+      <CenterImage showImagePlaceholder />
 
       <Highlight2
         title="Scholarship Opportunities"

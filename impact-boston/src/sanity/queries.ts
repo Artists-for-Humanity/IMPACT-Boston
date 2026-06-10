@@ -55,9 +55,13 @@ export const LANDING_PAGE_QUERY = defineQuery(`
         imageAlt
       },
       heading,
+      spotlightQuote,
+      spotlightAuthor,
+      spotlightAuthorTitle,
       testimonials[] {
         quote,
         author,
+        authorTitle,
         readMoreLink
       }
     },
@@ -102,6 +106,7 @@ export const LANDING_PAGE_QUERY = defineQuery(`
     testimonials[] {
       quote,
       author,
+      authorTitle,
       readMoreLink
     }
   }

@@ -1,7 +1,7 @@
-import Hero2 from '@/components/Hero/Hero2';
-import SideTabs from '@/components/TabsPanel/SideTabs';
-import SingleContent from '@/components/Content/Single';
-import TestimonialsSection from '@/components/Highlights/Testimonials/Carousel';
+import Hero2 from "@/components/Hero/Hero2";
+import SideTabs from "@/components/TabsPanel/SideTabs";
+import SingleContent from "@/components/Content/Single";
+import TestimonialsCarousel from "@/components/Highlights/Testimonials/Carousel";
 
 const survivorTestimonials = [
   {
@@ -34,13 +34,15 @@ const presentationItems = [
     icon: "external" as const,
   },
   {
-    title: "Weaving the Knots: AAPI, Asian & Asian-American Women for Empowered Safety",
+    title:
+      "Weaving the Knots: AAPI, Asian & Asian-American Women for Empowered Safety",
     detail: "Aug 19, 2022",
     href: "#",
     icon: "external" as const,
   },
   {
-    title: "Assertiveness and Boundary Setting Workshop for Boston University QAC",
+    title:
+      "Assertiveness and Boundary Setting Workshop for Boston University QAC",
     detail: "Mar 25, 2022",
     href: "#",
     icon: "external" as const,
@@ -52,7 +54,8 @@ const presentationItems = [
     icon: "external" as const,
   },
   {
-    title: "Bystander Intervention: Building Skills to Create Safer Communities",
+    title:
+      "Bystander Intervention: Building Skills to Create Safer Communities",
     detail: "Dec 8, 2021",
     href: "#",
     icon: "external" as const,
@@ -182,11 +185,7 @@ const supportServiceItems = [
 export default function Resources() {
   return (
     <>
-      <Hero2
-        title="Resources"
-        imageSrc="/images/resources/placeholder.png"
-        imageAlt=""
-      />
+      <Hero2 title="Resources" showMediaPlaceholder />
 
       <SideTabs
         tabs={[
@@ -244,15 +243,14 @@ export default function Resources() {
             text: "All IMPACT classes are taught with an awareness of the lasting effects of abuse and trauma. Survivors regularly participate in all our women's, men's, LGBTQ, and youth classes. Some survivors prefer IMPACT classes that are specifically designed for people who have experienced abuse. Survivor classes have a deeper focus on the ways in which abuse affects people's experiences of their bodies and their safety.",
           },
         ]}
-        imageSrc="/images/resources/placeholder.png"
-        imageAlt=""
+        showImagePlaceholder
         cta={{
           href: "#",
           text: "Read the Full Survivor Guide",
         }}
       />
 
-      <TestimonialsSection
+      <TestimonialsCarousel
         heading="Hear firsthand from survivors and clinicians."
         subheading=""
         testimonials={survivorTestimonials}

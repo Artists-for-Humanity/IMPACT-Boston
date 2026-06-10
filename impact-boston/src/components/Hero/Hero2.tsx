@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Grid from "../common/Grid";
+import { PLACEHOLDER_IMAGE_SRC } from "../common/placeholderImage";
 
 interface Hero2Props {
   title: string;
@@ -85,9 +86,16 @@ export default function Hero2({
 
       {showMediaPlaceholder ? (
         <div
-          className={`${mediaWrapperClass} bg-image-placeholder`}
-          aria-hidden="true"
-        />
+          className={`${mediaWrapperClass} relative aspect-video overflow-hidden w-full h-75 md:h-100 lg:h-130`}
+        >
+          <Image
+            src={PLACEHOLDER_IMAGE_SRC}
+            alt={imageAlt ?? title}
+            fill
+            sizes="100vw"
+            className="object-cover"
+          />
+        </div>
       ) : youtubeEmbedUrl ? (
         <div
           className={`${mediaWrapperClass} aspect-video overflow-hidden bg-image-placeholder`}

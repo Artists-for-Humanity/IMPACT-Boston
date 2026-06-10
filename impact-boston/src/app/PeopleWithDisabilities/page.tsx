@@ -21,8 +21,7 @@ export default function PeopleWithDisabilities() {
             text: "An empowerment approach to abuse prevention that teaches skills directly to youth and adults with disabilities, enabling them to take control of their safety. Ability:IMPACT tracks include Self-Defense & Self-Advocacy, Healthy Relationships & Healthy Sexuality, and Online Safety.",
           },
         ]}
-        imageSrc="/images/disabilities/placeholder.png"
-        imageAlt="placeholder"
+        showImagePlaceholder
         cta={{
           href: ROUTES.PEOPLE_WITH_DISABILITIES_ABILITY,
           text: "Know More",
@@ -39,8 +38,7 @@ export default function PeopleWithDisabilities() {
           },
         ]}
         reverse
-        imageSrc="/images/disabilities/placeholder.png"
-        imageAlt="placeholder"
+        showImagePlaceholder
         cta={{
           href: ROUTES.PEOPLE_WITH_DISABILITIES_ASAP,
           text: "Know More",
@@ -55,8 +53,7 @@ export default function PeopleWithDisabilities() {
             text: "Abuse Prevention for School & Organization Staff Collaborative trainings that involve creating official policies that protect people who report suspected abuse, provide clear direction for how to respond to abuse reports, and clearly define safe and healthy interactions; staff training that helps teachers and service providers understand abuse, challenge potentially abusive behaviors, support the sexuality of people with disabilities, and provide personal care in a way that respects people’s bodies; and the creation of abuse prevention leadership teams within your community.",
           },
         ]}
-        imageSrc="/images/disabilities/placeholder.png"
-        imageAlt="placeholder"
+        showImagePlaceholder
       />
 
       <Highlight2

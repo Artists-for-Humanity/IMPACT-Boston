@@ -1,12 +1,11 @@
 "use client";
 
-// components/TestimonialsSection.tsx
-// Testimonials section with carousel showcasing client feedback
+// Testimonials carousel showcasing client feedback
 
 import { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import Grid from "@/components/common/Grid";
-import ExpandableQuote from "@/components/Testimonials/ExpandableQuote";
+import ExpandableQuote from "./ExpandableQuote";
 
 export interface Testimonial {
   quote: string;
@@ -15,7 +14,7 @@ export interface Testimonial {
   readMoreLink?: string;
 }
 
-interface TestimonialsSectionProps {
+interface TestimonialsCarouselProps {
   heading?: string;
   subheading?: string;
   testimonials?: Testimonial[];
@@ -57,13 +56,13 @@ const defaultTestimonials: Testimonial[] = [
   },
 ];
 
-export default function TestimonialsSection({
+export default function TestimonialsCarousel({
   heading = "What People are Saying",
   subheading = "Hear from 20 people who've worked with us.",
   testimonials = defaultTestimonials,
   showAuthors = false,
   authorPrefix = "- ",
-}: TestimonialsSectionProps) {
+}: TestimonialsCarouselProps) {
   const testimonialItems =
     testimonials.length > 0 ? testimonials : defaultTestimonials;
   const [currentIndex, setCurrentIndex] = useState(testimonialItems.length);

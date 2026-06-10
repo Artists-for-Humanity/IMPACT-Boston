@@ -4,7 +4,7 @@ interface TestimonialProps {
   heading: string;
   subheading?: string;
   quote: string;
-  author: string;
+  author?: string;
   authorTitle?: string;
   backgroundColor?: string;
   cardClassName?: string;
@@ -51,17 +51,18 @@ export default function Testimonial({
                 </p>
               ))}
             </div>
-            {inlineAuthorTitle ? (
+            {inlineAuthorTitle && (author || authorTitle) ? (
               <p className="p2">
-                <span className="font-bold">{author}</span>
-                {authorTitle ? `, ${authorTitle}` : null}
+                {author ? <span className="font-bold">{author}</span> : null}
+                {author && authorTitle ? ", " : null}
+                {authorTitle}
               </p>
-            ) : (
+            ) : author || authorTitle ? (
               <>
-                <p className="p2 font-bold">{author}</p>
+                {author ? <p className="p2 font-bold">{author}</p> : null}
                 {authorTitle ? <p className="p2">{authorTitle}</p> : null}
               </>
-            )}
+            ) : null}
           </div>
         </div>
       </Grid>

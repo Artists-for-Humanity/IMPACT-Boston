@@ -10,8 +10,7 @@ export default function SchoolAndColleges() {
       <Hero2
         title="De-Escalate with Confidence"
         description="IMPACT De-Escalation Training teaches practical, scenario-based skills for creating and maintaining safety in high-stress situations. Built for frontline workers, educators, and community members, our training prepares you to respond not just react, when someone becomes angry, threatening, or disruptive."
-        imageSrc="/images/de-escalation/placeholder.png"
-        imageAlt="Group Pictures"
+        showMediaPlaceholder
       />
       <SideTabs
         tabs={[
@@ -108,10 +107,7 @@ export default function SchoolAndColleges() {
         ]}
       />
 
-      <CenterImage
-        imageSrc="/images/de-escalation/placeholder.png"
-        imageAlt="Group Pictures"
-      />
+      <CenterImage showImagePlaceholder />
 
       <Highlight2
         title="The right training changes everything."

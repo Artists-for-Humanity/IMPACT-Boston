@@ -9,6 +9,7 @@ import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { ROUTES } from "@/routes";
 import Grid from "./common/Grid";
+import { PLACEHOLDER_IMAGE_SRC } from "./common/placeholderImage";
 
 export interface HighlightSlide {
   heading?: string | null;
@@ -26,7 +27,7 @@ type ResolvedHighlightSlide = {
   ctaText: string;
   ctaLink: string;
   additionalText: string;
-  imageSrc: string;
+  imageSrc?: string | null;
   imageAlt: string;
 };
 
@@ -74,8 +75,8 @@ const FALLBACK_HIGHLIGHT_SLIDES: ResolvedHighlightSlide[] = [
     ctaText: "Learn More",
     ctaLink: ROUTES.PROGRAMS,
     additionalText: "Additional information or context can be added here.",
-    imageSrc: "/images/hero-placeholder.jpg",
-    imageAlt: "Community education program",
+    imageSrc: null,
+    imageAlt: "",
   },
   {
     // TODO: Replace with Sanity CMS content
@@ -84,8 +85,8 @@ const FALLBACK_HIGHLIGHT_SLIDES: ResolvedHighlightSlide[] = [
     ctaText: "Learn More",
     ctaLink: ROUTES.ABOUT,
     additionalText: "Additional information or context can be added here.",
-    imageSrc: "/images/hero-placeholder.jpg",
-    imageAlt: "Safe environment collaboration",
+    imageSrc: null,
+    imageAlt: "",
   },
 ];
 
@@ -266,13 +267,23 @@ export default function HighlightsSection({
                     }`}
                     style={{ backgroundColor: "#311E41" }}
                   >
-                    <Image
-                      src={slide.imageSrc}
-                      alt={slide.imageAlt}
-                      fill
-                      sizes="(min-width: 1024px) 50vw, 100vw"
-                      className="object-cover"
-                    />
+                    {slide.imageSrc ? (
+                      <Image
+                        src={slide.imageSrc}
+                        alt={slide.imageAlt}
+                        fill
+                        sizes="(min-width: 1024px) 50vw, 100vw"
+                        className="object-cover"
+                      />
+                    ) : (
+                      <Image
+                        src={PLACEHOLDER_IMAGE_SRC}
+                        alt={slide.imageAlt || "Placeholder image"}
+                        fill
+                        sizes="(min-width: 1024px) 50vw, 100vw"
+                        className="object-cover"
+                      />
+                    )}
                   </div>
                 ))}
               </div>

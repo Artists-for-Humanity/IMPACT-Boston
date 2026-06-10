@@ -8,7 +8,6 @@ const blockPreviewImageUrls: Record<string, string> = {
   highlightsBlock: '/static/block-previews/highlights.svg',
   testimonialsCarouselBlock: '/static/block-previews/testimonials-carousel.svg',
   testimonialsSpotlightBlock: '/static/block-previews/testimonials-spotlight.svg',
-  testimonialsGridBlock: '/static/block-previews/testimonials-grid.svg',
 }
 
 export const landingPageType = defineType({
@@ -44,21 +43,12 @@ export const landingPageType = defineType({
           name: 'testimonialsCarouselBlock',
           title: 'Testimonials: Carousel',
           description: 'Sliding quote cards for several testimonials.',
-          initialValue: {variant: 'carousel'},
         }),
         defineArrayMember({
           type: 'testimonialsBlock',
           name: 'testimonialsSpotlightBlock',
-          title: 'Testimonials: Spotlight',
-          description: 'One large featured quote with supporting attribution.',
-          initialValue: {variant: 'spotlight'},
-        }),
-        defineArrayMember({
-          type: 'testimonialsBlock',
-          name: 'testimonialsGridBlock',
-          title: 'Testimonials: Grid',
-          description: 'A simple multi-quote grid for quick scanning.',
-          initialValue: {variant: 'grid'},
+          title: 'Testimonials: Participant Spotlight',
+          description: 'One large featured participant quote with supporting attribution.',
         }),
       ],
       options: {
@@ -72,7 +62,7 @@ export const landingPageType = defineType({
               of: ['hero1Block', 'hero2Block'],
             },
             {
-              name:'action', 
+              name: 'action',
               title: 'Action',
               of: ['actionPanelBlock'],
             },
@@ -84,17 +74,13 @@ export const landingPageType = defineType({
             {
               name: 'testimonials',
               title: 'Testimonials',
-              of: [
-                'testimonialsCarouselBlock',
-                'testimonialsSpotlightBlock',
-                'testimonialsGridBlock',
-              ],
+              of: ['testimonialsCarouselBlock', 'testimonialsSpotlightBlock'],
             },
             {
-              name:'highlights',
+              name: 'highlights',
               title: 'Highlights',
               of: ['highlightsBlock'],
-            }
+            },
           ],
           views: [
             {
