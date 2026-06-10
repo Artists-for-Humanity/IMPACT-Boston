@@ -225,7 +225,7 @@ export default function Navigation({
         {/* ── Register button ──────────────────────────────────────── */}
         <Link
           href={ROUTES.REGISTER}
-          className="link flex items-center gap-0.5 px-4 py-1 text-[#FFF] bg-[#000000] hover:bg-brand-primary rounded-[5px] transition-colors duration-150"
+          className="link flex items-center gap-0.5 px-4 py-1 text-[#FFF] bg-[#000000] hover:bg-primary rounded-[5px] transition-colors duration-150"
         >
           Register
         </Link>
@@ -338,7 +338,7 @@ export default function Navigation({
           <div className="flex flex-col gap-2 border-t border-line-divider px-6 py-6 md:flex-row md:px-10">
             <Link
               href={ROUTES.REGISTER}
-              className="link w-full text-center px-5 py-2.5 text-white bg-black hover:bg-brand-primary rounded-[5px] transition-colors duration-150 md:w-auto"
+              className="link w-full text-center px-5 py-2.5 text-white bg-black hover:bg-primary rounded-[5px] transition-colors duration-150 md:w-auto"
               onClick={() => setMobileOpen(false)}
             >
               Register
