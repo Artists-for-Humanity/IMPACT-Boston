@@ -100,7 +100,7 @@ export default function Hero2({
   const youtubeEmbedUrl = youtubeUrl ? getYouTubeEmbedUrl(youtubeUrl) : null;
 
   return (
-      <Grid className="md:gap-12 lg:gap-8">
+      <Grid className="md:gap-12 lg:gap-x-8 lg:gap-y-8">
         {tag && (
           <div className={`sub-2 col-span-full flex justify-center ${tagColorClass}`}>
             <div className={`tag flex items-center gap-2 ${tagBoxClass} ${tagBackgroundClass}`}>
@@ -117,15 +117,19 @@ export default function Hero2({
           </div>
         )}
 
-        <div className="col-span-full lg:col-start-3 lg:col-span-8 flex flex-col gap-6 md:gap-6 lg:gap-6">
-          <h1 className="h1 text-center text-black">
+        <div className="col-span-full grid grid-cols-12 lg:gap-x-8 lg:gap-y-6">
+          <h1 className="col-span-full h1 text-center text-black">
             {title}{' '}
             {highlight ? (
               <span className={highlightClass}>{highlight}</span>
             ) : null}
           </h1>
 
-          {description && <p className="p1 text-center text-grey">{description}</p>}
+          {description && (
+            <div className="col-span-full lg:col-start-3 lg:col-span-8">
+              <p className="p1 text-center text-grey">{description}</p>
+            </div>
+          )}
         </div>
 
         {youtubeEmbedUrl ? (
