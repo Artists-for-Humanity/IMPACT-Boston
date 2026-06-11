@@ -88,7 +88,7 @@ export const actionPanelBlockType = defineType({
   preview: {
     select: {title: 'title'},
     prepare({title}) {
-      return {title: title || 'Action Grid', subtitle: 'Actio Grid'}
+      return {title: title || 'Action Grid', subtitle: 'Action Grid'}
     },
   },
 })
