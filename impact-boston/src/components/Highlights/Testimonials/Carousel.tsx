@@ -22,49 +22,47 @@ interface TestimonialsCarouselProps {
   authorPrefix?: string;
 }
 
-// TODO: Replace with Sanity CMS content
-const defaultTestimonials: Testimonial[] = [
-  {
-    quote:
-      "My therapist introduced me to IMPACT back in 1989 and I went through the course back then. Gratefully, I have never been in a situation where I have had to use the physical skills I learned during that time. (Although I still feel like they are within me). However, the course was as much mental as physical, and I think it gave me my 'voice' which I have confidently used over the years. In the last few decades, I have often thought about taking a refresher course...",
-    author: "Anonymous",
-    readMoreLink: "#",
-  },
-  {
-    quote:
-      "My therapist introduced me to IMPACT back in 1989 and I went through the course back then. The skills I learned have stayed with me throughout my life. The course was as much mental as physical, and I think it gave me my 'voice' which I have confidently used over the years. I cannot recommend this program enough for anyone looking to build confidence and practical safety skills...",
-    author: "Anonymous",
-    readMoreLink: "#",
-  },
-  {
-    quote:
-      "My therapist introduced me to IMPACT back in 1989 and I went through the course back then. Gratefully, I have never been in a situation where I have had to use the physical skills I learned during that time. However, the course was as much mental as physical, and I think it gave me my 'voice' which I have confidently used over the years. The mental preparedness and awareness I gained have been invaluable...",
-    author: "Anonymous",
-    readMoreLink: "#",
-  },
-  {
-    quote:
-      "My therapist introduced me to IMPACT back in 1989 and I went through the course back then. The physical and mental skills I gained have empowered me in countless situations. The course was as much mental as physical, and I think it gave me my 'voice' which I have confidently used over the years. In the last few decades, I have often recommended IMPACT to friends and family...",
-    author: "Anonymous",
-    readMoreLink: "#",
-  },
-  {
-    quote:
-      "My therapist introduced me to IMPACT back in 1989 and I went through the course back then. Gratefully, I have never been in a situation where I have had to use the physical skills I learned during that time. However, the course was as much mental as physical, and I think it gave me my 'voice' which I have confidently used over the years. The confidence and empowerment I feel is immeasurable...",
-    author: "Anonymous",
-    readMoreLink: "#",
-  },
-];
-
 export default function TestimonialsCarousel({
-  heading = "What People are Saying",
-  subheading = "Hear from 20 people who've worked with us.",
-  testimonials = defaultTestimonials,
+  heading,
+  subheading,
+  testimonials = [],
   showAuthors = false,
   authorPrefix = "- ",
 }: TestimonialsCarouselProps) {
-  const testimonialItems =
-    testimonials.length > 0 ? testimonials : defaultTestimonials;
+  const testimonialItems = testimonials.filter(
+    (testimonial) => testimonial.quote,
+  );
+
+  if (!testimonialItems.length) {
+    return null;
+  }
+
+  return (
+    <TestimonialsCarouselTrack
+      authorPrefix={authorPrefix}
+      heading={heading}
+      showAuthors={showAuthors}
+      subheading={subheading}
+      testimonialItems={testimonialItems}
+    />
+  );
+}
+
+type TestimonialsCarouselTrackProps = {
+  authorPrefix: string;
+  heading?: string;
+  showAuthors: boolean;
+  subheading?: string;
+  testimonialItems: Testimonial[];
+};
+
+function TestimonialsCarouselTrack({
+  authorPrefix,
+  heading,
+  showAuthors,
+  subheading,
+  testimonialItems,
+}: TestimonialsCarouselTrackProps) {
   const [currentIndex, setCurrentIndex] = useState(testimonialItems.length);
   const [isTransitioning, setIsTransitioning] = useState(true);
   const [isMobile, setIsMobile] = useState(true);
@@ -140,9 +138,11 @@ export default function TestimonialsCarousel({
           <Grid>
             {/* Left - Heading and Subtext */}
             <div className="col-span-4 md:col-span-8 lg:col-span-6 flex flex-col gap-4 lg:gap-2 md:items-center lg:items-start">
-              <h2 className="h2 text-[#000] text-center md:text-center lg:text-left">
-                {heading}
-              </h2>
+              {heading ? (
+                <h2 className="h2 text-[#000] text-center md:text-center lg:text-left">
+                  {heading}
+                </h2>
+              ) : null}
               {subheading ? (
                 <p className="p2 text-[#333] text-center md:text-center lg:text-left">
                   {subheading}

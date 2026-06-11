@@ -13,11 +13,13 @@ export default function ActionPanelBlock({
   fallback,
   section,
 }: ActionPanelBlockProps) {
+  const cards = section.cards?.length ? section.cards : fallback?.cards;
+
   return (
     <ActionPanel
       title={section.title ?? fallback?.title}
       subtext={section.subtext ?? fallback?.subtext}
-      cards={section.cards ?? fallback?.cards}
+      cards={cards}
     />
   );
 }

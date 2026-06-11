@@ -20,7 +20,9 @@ export default function TestimonialsBlock({
     ...section,
     heading: section.heading ?? fallback?.heading,
     subtext: section.subtext ?? fallback?.subtext,
-    testimonials: section.testimonials ?? fallback?.testimonials,
+    testimonials: section.testimonials?.length
+      ? section.testimonials
+      : fallback?.testimonials,
     spotlightQuote: section.spotlightQuote ?? fallback?.spotlightQuote,
     spotlightAuthor: section.spotlightAuthor ?? fallback?.spotlightAuthor,
     spotlightAuthorTitle:

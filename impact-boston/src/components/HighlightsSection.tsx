@@ -7,7 +7,6 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { ROUTES } from "@/routes";
 import Grid from "./common/Grid";
 import { PLACEHOLDER_IMAGE_SRC } from "./common/placeholderImage";
 
@@ -57,54 +56,15 @@ const renderTextWithEmailLinks = (text: string) => {
   });
 };
 
-const FALLBACK_HIGHLIGHT_SLIDES: ResolvedHighlightSlide[] = [
-  {
-    heading: "Find your courage and make the world safer.",
-    body: "IMPACT has been teaching solutions for safe living since 1971. We provide realistic personal safety training that gives people the skills to respond appropriately to threatening situations in the moment of fear or intimidation. We also collaborate with schools and organizations to create programs that proactively prevent abuse. IMPACT's prevention programs emphasize giving people the tools to manage their stress responses so they can intervene effectively when they observe risky situations. Too often abuse goes unchallenged because people don't feel safe speaking up. IMPACT programs help people increase their ability to safely advocate for themselves and others.",
-    ctaText: "Learn More",
-    ctaLink: ROUTES.ABOUT,
-    additionalText:
-      "FOR MORE INFO: Contact Shay Orent, Training Manager IMPACT Boston, sorent@impactboston.org",
-    imageSrc: "/images/highlights-1.png",
-    imageAlt: "IMPACT Boston training session",
-  },
-  {
-    // TODO: Replace with Sanity CMS content
-    heading: "Empowering communities through education.",
-    body: "Content coming soon. This slide will showcase our community impact and educational programs.",
-    ctaText: "Learn More",
-    ctaLink: ROUTES.PROGRAMS,
-    additionalText: "Additional information or context can be added here.",
-    imageSrc: null,
-    imageAlt: "",
-  },
-  {
-    // TODO: Replace with Sanity CMS content
-    heading: "Building safer environments together.",
-    body: "Content coming soon. This slide will highlight our collaborative approach to creating safer spaces.",
-    ctaText: "Learn More",
-    ctaLink: ROUTES.ABOUT,
-    additionalText: "Additional information or context can be added here.",
-    imageSrc: null,
-    imageAlt: "",
-  },
-];
-
-function resolveSlide(
-  slide: HighlightSlide,
-  index: number,
-): ResolvedHighlightSlide {
-  const fallback =
-    FALLBACK_HIGHLIGHT_SLIDES[index % FALLBACK_HIGHLIGHT_SLIDES.length];
-
+function resolveSlide(slide: HighlightSlide): ResolvedHighlightSlide {
   return {
-    heading: slide.heading || fallback.heading,
-    body: slide.body || fallback.body,
-    ctaText: slide.ctaText || fallback.ctaText,
-    ctaLink: slide.ctaLink || fallback.ctaLink,
-    additionalText: slide.additionalText || fallback.additionalText,
-    imageSrc: slide.imageSrc || fallback.imageSrc,
-    imageAlt: slide.imageAlt || fallback.imageAlt,
+    heading: slide.heading ?? "",
+    body: slide.body ?? "",
+    ctaText: slide.ctaText ?? "",
+    ctaLink: slide.ctaLink ?? "#",
+    additionalText: slide.additionalText ?? "",
+    imageSrc: slide.imageSrc,
+    imageAlt: slide.imageAlt ?? slide.heading ?? "",
   };
 }
 
@@ -112,12 +72,15 @@ export default function HighlightsSection({
   label,
   slides,
 }: HighlightsSectionProps = {}) {
-  const resolvedSlides = slides?.length
-    ? slides.map(resolveSlide)
-    : FALLBACK_HIGHLIGHT_SLIDES;
+  const resolvedSlides =
+    slides?.filter((slide) => slide.heading).map(resolveSlide) ?? [];
 
   const [currentSlide, setCurrentSlide] = useState(0);
   const activeSlide = currentSlide < resolvedSlides.length ? currentSlide : 0;
+
+  if (!resolvedSlides.length) {
+    return null;
+  }
 
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % resolvedSlides.length);
@@ -139,7 +102,7 @@ export default function HighlightsSection({
         {/* Top Row - Label and Navigation */}
         <Grid noPadding>
           <div className="col-span-4 md:col-span-8 lg:col-span-12 flex justify-between items-center">
-            <h5 className="sub-2 text-white">{label || "Highlights"}</h5>
+            <h5 className="sub-2 text-white">{label}</h5>
             <div className="flex gap-4">
               <button
                 onClick={prevSlide}
