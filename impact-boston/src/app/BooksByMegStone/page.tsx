@@ -1,6 +1,3 @@
-import Grid from '@/components/common/Grid';
-import Image from 'next/image';
-
 import Hero2 from '@/components/Hero/Hero2';
 import SingleContent from '@/components/Content/Single';
 import ParticipantSpotlight from '@/components/Highlights/Testimonials/ParticipantSpotlight';

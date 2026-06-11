@@ -1,7 +1,8 @@
-import Hero2 from '@/components/Hero/Hero2';
-import Highlight2 from '@/components/Highlights/Highlight2';
-import SideTabs from '@/components/TabsPanel/SideTabs';
-import Carousel from '@/components/Highlights/Testimonials/Carousel';
+import Hero2 from "@/components/Hero/Hero2";
+import Highlight2 from "@/components/Highlights/Highlight2";
+import SideTabs from "@/components/TabsPanel/SideTabs";
+import TestimonialsCarousel from "@/components/Highlights/Testimonials/Carousel";
+import { ROUTES } from "@/routes";
 
 const educatorTestimonials = [
   {
@@ -15,13 +16,9 @@ export default function HealthyRelationships() {
   return (
     <>
       <Hero2
-        tag="Healthy Relationships and Sex Education"
-        tagColor="secondary"
-        tagBackground="lavender"
         title="Inclusive Sex Education for Every Student"
         description="IMPACT's approach to teaching healthy relationships and sex education focuses on empowerment through education. Our interactive, discussion-based courses help students understand what is healthy and what is not (despite what TikTok says), feel confident in their values, boundaries, and identities, and develop the skills to make safe choices."
-        imageSrc="/images/healthyRelationships/placeholder.png"
-        imageAlt=""
+        showMediaPlaceholder
       />
 
       <section className="bg-bg-lavender">
@@ -88,7 +85,7 @@ export default function HealthyRelationships() {
         />
       </section>
 
-      <Carousel
+      <TestimonialsCarousel
         heading="Real Feedback From Real Educators"
         subheading=""
         testimonials={educatorTestimonials}
@@ -102,7 +99,7 @@ export default function HealthyRelationships() {
           "We have experience collaborating with educators in Physical Education, Health, Wellness, Guidance & Counseling, English, Social Studies. We have experience teaching elective classes, extracurricular programs, or doing guest presentations in regular classes.",
         ]}
         ctaLabel="Get in Touch"
-        ctaHref="mailto:info@impactboston.org"
+        ctaHref={ROUTES.CONTACT}
       />
     </>
   );

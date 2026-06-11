@@ -8,6 +8,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import Grid from "./common/Grid";
+import { PLACEHOLDER_IMAGE_SRC } from "./common/placeholderImage";
 
 export interface HighlightSlide {
   heading?: string | null;
@@ -25,7 +26,7 @@ type ResolvedHighlightSlide = {
   ctaText: string;
   ctaLink: string;
   additionalText: string;
-  imageSrc: string;
+  imageSrc?: string | null;
   imageAlt: string;
 };
 
@@ -55,51 +56,15 @@ const renderTextWithEmailLinks = (text: string) => {
   });
 };
 
-const FALLBACK_HIGHLIGHT_SLIDES: ResolvedHighlightSlide[] = [
-  {
-    heading: "Find your courage and make the world safer.",
-    body: "IMPACT has been teaching solutions for safe living since 1971. We provide realistic personal safety training that gives people the skills to respond appropriately to threatening situations in the moment of fear or intimidation. We also collaborate with schools and organizations to create programs that proactively prevent abuse. IMPACT's prevention programs emphasize giving people the tools to manage their stress responses so they can intervene effectively when they observe risky situations. Too often abuse goes unchallenged because people don't feel safe speaking up. IMPACT programs help people increase their ability to safely advocate for themselves and others.",
-    ctaText: "Learn More",
-    ctaLink: "/about",
-    additionalText:
-      "FOR MORE INFO: Contact Shay Orent, Training Manager IMPACT Boston, sorent@impactboston.org",
-    imageSrc: "/images/highlights-1.png",
-    imageAlt: "IMPACT Boston training session",
-  },
-  {
-    // TODO: Replace with Sanity CMS content
-    heading: "Empowering communities through education.",
-    body: "Content coming soon. This slide will showcase our community impact and educational programs.",
-    ctaText: "Learn More",
-    ctaLink: "/programs",
-    additionalText: "Additional information or context can be added here.",
-    imageSrc: "/images/hero-placeholder.jpg",
-    imageAlt: "Community education program",
-  },
-  {
-    // TODO: Replace with Sanity CMS content
-    heading: "Building safer environments together.",
-    body: "Content coming soon. This slide will highlight our collaborative approach to creating safer spaces.",
-    ctaText: "Learn More",
-    ctaLink: "/about",
-    additionalText: "Additional information or context can be added here.",
-    imageSrc: "/images/hero-placeholder.jpg",
-    imageAlt: "Safe environment collaboration",
-  },
-];
-
-function resolveSlide(slide: HighlightSlide, index: number): ResolvedHighlightSlide {
-  const fallback =
-    FALLBACK_HIGHLIGHT_SLIDES[index % FALLBACK_HIGHLIGHT_SLIDES.length];
-
+function resolveSlide(slide: HighlightSlide): ResolvedHighlightSlide {
   return {
-    heading: slide.heading || fallback.heading,
-    body: slide.body || fallback.body,
-    ctaText: slide.ctaText || fallback.ctaText,
-    ctaLink: slide.ctaLink || fallback.ctaLink,
-    additionalText: slide.additionalText || fallback.additionalText,
-    imageSrc: slide.imageSrc || fallback.imageSrc,
-    imageAlt: slide.imageAlt || fallback.imageAlt,
+    heading: slide.heading ?? "",
+    body: slide.body ?? "",
+    ctaText: slide.ctaText ?? "",
+    ctaLink: slide.ctaLink ?? "#",
+    additionalText: slide.additionalText ?? "",
+    imageSrc: slide.imageSrc,
+    imageAlt: slide.imageAlt ?? slide.heading ?? "",
   };
 }
 
@@ -107,19 +72,24 @@ export default function HighlightsSection({
   label,
   slides,
 }: HighlightsSectionProps = {}) {
-  const resolvedSlides = slides?.length
-    ? slides.map(resolveSlide)
-    : FALLBACK_HIGHLIGHT_SLIDES;
+  const resolvedSlides =
+    slides?.filter((slide) => slide.heading).map(resolveSlide) ?? [];
 
   const [currentSlide, setCurrentSlide] = useState(0);
   const activeSlide = currentSlide < resolvedSlides.length ? currentSlide : 0;
+
+  if (!resolvedSlides.length) {
+    return null;
+  }
 
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % resolvedSlides.length);
   };
 
   const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + resolvedSlides.length) % resolvedSlides.length);
+    setCurrentSlide(
+      (prev) => (prev - 1 + resolvedSlides.length) % resolvedSlides.length,
+    );
   };
 
   const goToSlide = (index: number) => {
@@ -132,9 +102,7 @@ export default function HighlightsSection({
         {/* Top Row - Label and Navigation */}
         <Grid noPadding>
           <div className="col-span-4 md:col-span-8 lg:col-span-12 flex justify-between items-center">
-            <h5 className="sub-2 text-white">
-              {label || "Highlights"}
-            </h5>
+            <h5 className="sub-2 text-white">{label}</h5>
             <div className="flex gap-4">
               <button
                 onClick={prevSlide}
@@ -208,9 +176,7 @@ export default function HighlightsSection({
                       : "opacity-0 pointer-events-none"
                   }`}
                 >
-                  <h3 className="h3 text-white">
-                    {slide.heading}
-                  </h3>
+                  <h3 className="h3 text-white">{slide.heading}</h3>
                 </div>
               ))}
             </div>
@@ -223,7 +189,8 @@ export default function HighlightsSection({
                   onClick={() => goToSlide(index)}
                   className="w-2 h-2 rounded-full transition-all duration-300"
                   style={{
-                    backgroundColor: activeSlide === index ? "#FFFFFF" : "#9F84B5",
+                    backgroundColor:
+                      activeSlide === index ? "#FFFFFF" : "#9F84B5",
                   }}
                   aria-label={`Go to slide ${index + 1}`}
                 />
@@ -263,13 +230,23 @@ export default function HighlightsSection({
                     }`}
                     style={{ backgroundColor: "#311E41" }}
                   >
-                    <Image
-                      src={slide.imageSrc}
-                      alt={slide.imageAlt}
-                      fill
-                      sizes="(min-width: 1024px) 50vw, 100vw"
-                      className="object-cover"
-                    />
+                    {slide.imageSrc ? (
+                      <Image
+                        src={slide.imageSrc}
+                        alt={slide.imageAlt}
+                        fill
+                        sizes="(min-width: 1024px) 50vw, 100vw"
+                        className="object-cover"
+                      />
+                    ) : (
+                      <Image
+                        src={PLACEHOLDER_IMAGE_SRC}
+                        alt={slide.imageAlt || "Placeholder image"}
+                        fill
+                        sizes="(min-width: 1024px) 50vw, 100vw"
+                        className="object-cover"
+                      />
+                    )}
                   </div>
                 ))}
               </div>
@@ -285,9 +262,7 @@ export default function HighlightsSection({
                         : "opacity-0 pointer-events-none hidden lg:block"
                     }`}
                   >
-                    <p className="p1 text-white">
-                      {slide.body}
-                    </p>
+                    <p className="p1 text-white">{slide.body}</p>
                   </div>
                 ))}
               </div>
@@ -298,46 +273,46 @@ export default function HighlightsSection({
               <div className="md:col-span-4 lg:col-auto flex flex-col gap-2">
                 {/* CTA Button - Desktop: all slides in same grid cell with z-index */}
                 <div className="grid">
-                {resolvedSlides.map((slide, index) => (
-                  <div
-                    key={index}
-                    className={`col-start-1 row-start-1 transition-opacity duration-500 ${
-                      activeSlide === index
-                        ? "opacity-100 z-10"
-                        : "opacity-0 pointer-events-none hidden lg:block"
-                    }`}
-                  >
-                    <Link
-                      href={slide.ctaLink}
-                      className="flex bg-white text-black link px-6 py-6 items-center justify-between hover:bg-gray-100 transition-colors lg:w-2/3"
+                  {resolvedSlides.map((slide, index) => (
+                    <div
+                      key={index}
+                      className={`col-start-1 row-start-1 transition-opacity duration-500 ${
+                        activeSlide === index
+                          ? "opacity-100 z-10"
+                          : "opacity-0 pointer-events-none hidden lg:block"
+                      }`}
                     >
-                      <span>{slide.ctaText}</span>
-                      <ChevronRight className="w-5 h-5" strokeWidth={2} />
-                    </Link>
-                  </div>
-                ))}
-              </div>
+                      <Link
+                        href={slide.ctaLink}
+                        className="flex bg-white text-black link px-6 py-6 items-center justify-between hover:bg-gray-100 transition-colors lg:w-2/3"
+                      >
+                        <span>{slide.ctaText}</span>
+                        <ChevronRight className="w-5 h-5" strokeWidth={2} />
+                      </Link>
+                    </div>
+                  ))}
+                </div>
 
-              {/* Additional Text - Desktop: all slides in same grid cell with z-index */}
-              <div className="grid">
-                {resolvedSlides.map((slide, index) => (
-                  <div
-                    key={index}
-                    className={`col-start-1 row-start-1 transition-opacity duration-500 ${
-                      activeSlide === index
-                        ? "opacity-100 z-10"
-                        : "opacity-0 pointer-events-none hidden lg:block"
-                    }`}
-                  >
-                    <p
-                      className="p2"
-                      style={{ color: "rgba(255, 255, 255, 0.60)" }}
+                {/* Additional Text - Desktop: all slides in same grid cell with z-index */}
+                <div className="grid">
+                  {resolvedSlides.map((slide, index) => (
+                    <div
+                      key={index}
+                      className={`col-start-1 row-start-1 transition-opacity duration-500 ${
+                        activeSlide === index
+                          ? "opacity-100 z-10"
+                          : "opacity-0 pointer-events-none hidden lg:block"
+                      }`}
                     >
-                      {renderTextWithEmailLinks(slide.additionalText)}
-                    </p>
-                  </div>
-                ))}
-              </div>
+                      <p
+                        className="p2"
+                        style={{ color: "rgba(255, 255, 255, 0.60)" }}
+                      >
+                        {renderTextWithEmailLinks(slide.additionalText)}
+                      </p>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </div>

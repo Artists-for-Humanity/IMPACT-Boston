@@ -2,6 +2,7 @@
 // Main footer component with contact info, newsletter form, navigation, and social links
 
 import Link from "next/link";
+import { ROUTES } from "@/routes";
 import Grid from "./common/Grid";
 
 export default function Footer() {
@@ -22,9 +23,7 @@ export default function Footer() {
             <div className="space-y-6">
               {/* Address */}
               <div className="pb-6 mb-0">
-                <p className="p2 font-bold text-white">
-                  Address
-                </p>
+                <p className="p2 font-bold text-white">Address</p>
                 <p className="p2 text-[#888]">
                   89 South Street, Suite 600 Boston, MA
                 </p>
@@ -32,9 +31,7 @@ export default function Footer() {
 
               {/* Email */}
               <div className="pb-6 mb-0">
-                <p className="p2 font-bold text-white">
-                  Email
-                </p>
+                <p className="p2 font-bold text-white">Email</p>
                 <a
                   href="mailto:info@impactboston.org"
                   className="p2 text-[#888] hover:text-white transition-colors"
@@ -45,11 +42,9 @@ export default function Footer() {
 
               {/* Call */}
               <div className="pb-0 mb-0">
-                <p className="p2 font-bold text-white">
-                  Call
-                </p>
+                <p className="p2 font-bold text-white">Call</p>
                 <a
-                  href="tel:+1234567890"
+                  href="tel:+16175974945"
                   className="p2 text-[#888] hover:text-white transition-colors"
                 >
                   +1 617-597-4945
@@ -60,9 +55,7 @@ export default function Footer() {
 
           {/* Right Column - Contact Form */}
           <div className="col-span-4 lg:col-start-8 lg:col-span-5 flex flex-col justify-start items-start flex-1 self-stretch pt-10 lg:pt-20">
-            <h3 className="sub-2 text-white">
-              Join Our Newsletter
-            </h3>
+            <h3 className="sub-2 text-white">Join Our Newsletter</h3>
             <p className="p2 text-[#888] pb-5">
               Stay updated on programs, events, and community resources.
             </p>
@@ -101,247 +94,243 @@ export default function Footer() {
 
         {/* Bottom Nav Section */}
         <div className="border-t border-gray-700 pt-6 w-full">
-        <Grid className="w-full">
-          {/* About Column */}
-          <div className="col-span-2 col-start-1 row-start-1 md:col-start-1 md:col-span-4 lg:col-start-1 lg:col-span-4 lg:row-start-auto space-y-4">
-            <h4 className="p2 font-medium text-white pb-3 mb-0">
-              About
-            </h4>
-            <ul className="space-y-0">
-              <li>
-                <Link
-                  href="/about"
-                  className="p2 text-text-grey-light hover:text-white transition-colors"
-                >
-                  About Impact
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/board-staff"
-                  className="p2 text-text-grey-light hover:text-white transition-colors"
-                >
-                  Board and Staff
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/accessibility"
-                  className="p2 text-text-grey-light hover:text-white transition-colors"
-                >
-                  Accessibility
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/blog"
-                  className="p2 text-text-grey-light hover:text-white transition-colors"
-                >
-                  Blog
-                </Link>
-              </li>
-            </ul>
-          </div>
+          <Grid className="w-full">
+            {/* About Column */}
+            <div className="col-span-2 col-start-1 row-start-1 md:col-start-1 md:col-span-4 lg:col-start-1 lg:col-span-4 lg:row-start-auto space-y-4">
+              <h4 className="p2 font-medium text-white pb-3 mb-0">About</h4>
+              <ul className="space-y-0">
+                <li>
+                  <Link
+                    href={ROUTES.ABOUT_IMPACT}
+                    className="p2 text-text-grey-light hover:text-white transition-colors"
+                  >
+                    About Impact
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href={ROUTES.BOARD_AND_STAFF}
+                    className="p2 text-text-grey-light hover:text-white transition-colors"
+                  >
+                    Board and Staff
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href={ROUTES.ACCESSIBILITY}
+                    className="p2 text-text-grey-light hover:text-white transition-colors"
+                  >
+                    Accessibility
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href={ROUTES.BLOG}
+                    className="p2 text-text-grey-light hover:text-white transition-colors"
+                  >
+                    Blog
+                  </Link>
+                </li>
+              </ul>
+            </div>
 
-          {/* Programs Column */}
-          <div className="col-span-4 col-start-1 row-start-2 mt-4 md:mt-0 md:row-start-1 md:col-start-5 md:col-span-4 lg:mt-0 lg:col-start-5 lg:col-span-4 lg:row-start-auto space-y-4">
-            <h4 className="p2 font-medium text-white pb-3 mb-0">
-              Programs
-            </h4>
-            <ul className="space-y-0">
-              <li>
-                <Link
-                  href="/programs/self-defense"
-                  className="p2 text-text-grey-light hover:text-white transition-colors"
-                >
-                  Self-Defense Classes
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/programs/schools-colleges"
-                  className="p2 text-text-grey-light hover:text-white transition-colors"
-                >
-                  Schools & Colleges
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/programs/disabilities"
-                  className="p2 text-text-grey-light hover:text-white transition-colors"
-                >
-                  People With Disabilities
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/programs/de-escalation"
-                  className="p2 text-text-grey-light hover:text-white transition-colors"
-                >
-                  De-escalation
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/programs/community"
-                  className="p2 text-text-grey-light hover:text-white transition-colors"
-                >
-                  Community Organizations
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/programs/workplace"
-                  className="p2 text-text-grey-light hover:text-white transition-colors"
-                >
-                  Workplace
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/programs/activist-safety"
-                  className="p2 text-text-grey-light hover:text-white transition-colors"
-                >
-                  Know Your Rights & Activist Safety
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/programs/customized"
-                  className="p2 text-text-grey-light hover:text-white transition-colors"
-                >
-                  Customized Programs
-                </Link>
-              </li>
-            </ul>
-          </div>
+            {/* Programs Column */}
+            <div className="col-span-4 col-start-1 row-start-2 mt-4 md:mt-0 md:row-start-1 md:col-start-5 md:col-span-4 lg:mt-0 lg:col-start-5 lg:col-span-4 lg:row-start-auto space-y-4">
+              <h4 className="p2 font-medium text-white pb-3 mb-0">Programs</h4>
+              <ul className="space-y-0">
+                <li>
+                  <Link
+                    href={ROUTES.PUBLIC_CLASSES}
+                    className="p2 text-text-grey-light hover:text-white transition-colors"
+                  >
+                    Self-Defense Classes
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href={ROUTES.SCHOOLS_AND_COLLEGES}
+                    className="p2 text-text-grey-light hover:text-white transition-colors"
+                  >
+                    Schools & Colleges
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href={ROUTES.PEOPLE_WITH_DISABILITIES}
+                    className="p2 text-text-grey-light hover:text-white transition-colors"
+                  >
+                    People With Disabilities
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href={ROUTES.DE_ESCALATION}
+                    className="p2 text-text-grey-light hover:text-white transition-colors"
+                  >
+                    De-escalation
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href={ROUTES.COMMUNITY_ORGANIZATIONS}
+                    className="p2 text-text-grey-light hover:text-white transition-colors"
+                  >
+                    Community Organizations
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href={ROUTES.WORKPLACE_PROGRAMS}
+                    className="p2 text-text-grey-light hover:text-white transition-colors"
+                  >
+                    Workplace
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href={ROUTES.KNOW_YOUR_RIGHTS}
+                    className="p2 text-text-grey-light hover:text-white transition-colors"
+                  >
+                    Know Your Rights & Activist Safety
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href={ROUTES.CONTACT}
+                    className="p2 text-text-grey-light hover:text-white transition-colors"
+                  >
+                    Customized Programs
+                  </Link>
+                </li>
+              </ul>
+            </div>
 
-          {/* Learn More Column */}
-          <div className="col-span-2 col-start-3 row-start-1 md:col-start-9 md:col-span-4 lg:col-start-9 lg:col-span-4 lg:row-start-auto space-y-4">
-            <h4 className="p2 font-medium text-white pb-3 mb-0">
-              Learn More
-            </h4>
-            <ul className="space-y-0">
-              <li>
-                <Link
-                  href="/fact-check-fridays"
-                  className="p2 text-text-grey-light hover:text-white transition-colors"
-                >
-                  Fact Check Fridays
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/books"
-                  className="p2 text-text-grey-light hover:text-white transition-colors"
-                >
-                  Books by Meg Stone
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/press"
-                  className="p2 text-text-grey-light hover:text-white transition-colors"
-                >
-                  Press
-                </Link>
-              </li>
-            </ul>
-          </div>
-        </Grid>
+            {/* Learn More Column */}
+            <div className="col-span-2 col-start-3 row-start-1 md:col-start-9 md:col-span-4 lg:col-start-9 lg:col-span-4 lg:row-start-auto space-y-4">
+              <h4 className="p2 font-medium text-white pb-3 mb-0">
+                Learn More
+              </h4>
+              <ul className="space-y-0">
+                <li>
+                  <Link
+                    href={ROUTES.FACT_CHECK_FRIDAY}
+                    className="p2 text-text-grey-light hover:text-white transition-colors"
+                  >
+                    Fact Check Fridays
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href={ROUTES.BOOKS_BY_MEG_STONE}
+                    className="p2 text-text-grey-light hover:text-white transition-colors"
+                  >
+                    Books by Meg Stone
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href={ROUTES.PRESS}
+                    className="p2 text-text-grey-light hover:text-white transition-colors"
+                  >
+                    Press
+                  </Link>
+                </li>
+              </ul>
+            </div>
+          </Grid>
         </div>
 
         {/* Footer Bar - Social & Copyright */}
         <div className="pt-2 md:pt-6 w-full">
           <Grid className="w-full">
-          {/* Social Icons */}
-          <div className="col-span-4 md:col-span-4 lg:col-span-6 flex items-center gap-0 md:gap-4">
-            <a
-              href="https://instagram.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-10 h-10 flex items-center justify-center hover:opacity-70 transition-opacity"
-              aria-label="Instagram"
-            >
-              <svg
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
+            {/* Social Icons */}
+            <div className="col-span-4 md:col-span-4 lg:col-span-6 flex items-center gap-0 md:gap-4">
+              <a
+                href="https://instagram.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 flex items-center justify-center hover:opacity-70 transition-opacity"
+                aria-label="Instagram"
               >
-                <path
-                  d="M12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16Z"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-                <path
-                  d="M3 16V8C3 5.23858 5.23858 3 8 3H16C18.7614 3 21 5.23858 21 8V16C21 18.7614 18.7614 21 16 21H8C5.23858 21 3 18.7614 3 16Z"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                />
-                <path
-                  d="M17.5 6.51L17.51 6.49889"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </a>
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16Z"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                  <path
+                    d="M3 16V8C3 5.23858 5.23858 3 8 3H16C18.7614 3 21 5.23858 21 8V16C21 18.7614 18.7614 21 16 21H8C5.23858 21 3 18.7614 3 16Z"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                  />
+                  <path
+                    d="M17.5 6.51L17.51 6.49889"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </a>
 
-            <a
-              href="https://twitter.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-10 h-10 flex items-center justify-center hover:opacity-70 transition-opacity"
-              aria-label="Twitter/X"
-            >
-              <svg
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
+              <a
+                href="https://twitter.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 flex items-center justify-center hover:opacity-70 transition-opacity"
+                aria-label="Twitter/X"
               >
-                <path
-                  d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"
-                  fill="currentColor"
-                />
-              </svg>
-            </a>
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"
+                    fill="currentColor"
+                  />
+                </svg>
+              </a>
 
-            <a
-              href="https://facebook.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-10 h-10 flex items-center justify-center hover:opacity-70 transition-opacity"
-              aria-label="Facebook"
-            >
-              <svg
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
+              <a
+                href="https://facebook.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 flex items-center justify-center hover:opacity-70 transition-opacity"
+                aria-label="Facebook"
               >
-                <path
-                  d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </a>
-          </div>
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </a>
+            </div>
 
-          {/* Copyright */}
-          <p className="col-span-4 md:col-span-4 lg:col-span-6 p2 text-text-grey-light text-left md:text-right">
-            All rights reserved © IMPACT Inc. {year}
-          </p>
+            {/* Copyright */}
+            <p className="col-span-4 md:col-span-4 lg:col-span-6 p2 text-text-grey-light text-left md:text-right">
+              All rights reserved © IMPACT Inc. {year}
+            </p>
           </Grid>
         </div>
       </div>

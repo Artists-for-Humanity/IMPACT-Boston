@@ -1,28 +1,20 @@
 import Image from "next/image";
+import type { ReactNode } from "react";
 import Grid from "../common/Grid";
-
-//possibly multiple tags
-type TagItem = {
-  text: string;
-  className?: string;
-};
-
-type TagColor = 'primary' | 'secondary' | 'complementary' | 'black' | 'grey';
-type TagBackground = 'primary-light' | 'secondary-light' | 'complementary-light' | 'lavender';
+import { PLACEHOLDER_IMAGE_SRC } from "../common/placeholderImage";
 
 interface Hero2Props {
-  tag?: string | TagItem[];
-  tagColor?: TagColor;
-  tagBackground?: TagBackground;
-  title: string;
+  title: ReactNode;
+  titleText?: string;
   highlight?: string;
-  highlightColor?: 'primary' | 'secondary' | 'complementary';
+  highlightColor?: "primary" | "secondary" | "complementary";
   description?: string;
   imageSrc?: string;
   imageAlt?: string;
   youtubeUrl?: string;
   videoTitle?: string;
   mediaClassName?: string;
+  showMediaPlaceholder?: boolean;
 }
 
 function getYouTubeEmbedUrl(youtubeUrl: string) {
@@ -58,46 +50,29 @@ function getYouTubeEmbedUrl(youtubeUrl: string) {
 }
 
 export default function Hero2({
-  tag,
-  tagColor,
-  tagBackground,
   title,
+  titleText,
   highlight,
-  highlightColor = 'secondary',
+  highlightColor = "secondary",
   description,
   imageSrc,
   imageAlt,
   youtubeUrl,
   videoTitle,
   mediaClassName,
+  showMediaPlaceholder = false,
 }: Hero2Props) {
   const highlightClassMap = {
-    primary: 'text-primary',
-    secondary: 'text-secondary',
-    complementary: 'text-complementary',
-  };
-
-  const tagColorClassMap: Record<TagColor, string> = {
-    primary: 'text-primary',
-    secondary: 'text-secondary',
-    complementary: 'text-complementary',
-    black: 'text-black',
-    grey: 'text-grey',
-  };
-
-  const tagBackgroundClassMap: Record<TagBackground, string> = {
-    'primary-light': 'bg-primary-light',
-    'secondary-light': 'bg-secondary-light',
-    'complementary-light': 'bg-complementary-light',
-    lavender: 'bg-bg-lavender',
+    primary: "text-primary",
+    secondary: "text-secondary",
+    complementary: "text-complementary",
   };
 
   const highlightClass = highlightClassMap[highlightColor];
-  const tagColorClass = tagColor ? tagColorClassMap[tagColor] : '';
-  const tagBackgroundClass = tagBackground ? tagBackgroundClassMap[tagBackground] : '';
-  const tagBoxClass = tagBackground ? 'rounded-xl px-3 py-2 md:px-4' : '';
-  const mediaWrapperClass = mediaClassName ?? 'col-span-full w-full';
+  const mediaWrapperClass = mediaClassName ?? "col-span-full w-full";
   const youtubeEmbedUrl = youtubeUrl ? getYouTubeEmbedUrl(youtubeUrl) : null;
+  const mediaTitle =
+    titleText || (typeof title === "string" ? title : "Hero media");
 
   return (
       <Grid className="md:gap-12 lg:gap-x-8 lg:gap-y-8">
@@ -122,8 +97,9 @@ export default function Hero2({
             {title}{' '}
             {highlight ? (
               <span className={highlightClass}>{highlight}</span>
-            ) : null}
-          </h1>
+            </>
+          ) : null}
+        </h1>
 
           {description && (
             <div className="col-span-full lg:col-start-3 lg:col-span-8">
@@ -132,26 +108,40 @@ export default function Hero2({
           )}
         </div>
 
-        {youtubeEmbedUrl ? (
-          <div className={`${mediaWrapperClass} aspect-video overflow-hidden bg-image-placeholder`}>
-            <iframe
-              src={youtubeEmbedUrl}
-              title={videoTitle ?? title}
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              referrerPolicy="strict-origin-when-cross-origin"
-              allowFullScreen
-              className="h-full w-full"
-            />
-          </div>
-        ) : imageSrc ? (
+      {showMediaPlaceholder ? (
+        <div
+          className={`${mediaWrapperClass} relative aspect-video overflow-hidden w-full h-75 md:h-100 lg:h-130`}
+        >
           <Image
-            src={imageSrc}
-            width={500}
-            height={500}
-            alt={imageAlt ?? ""}
-            className={`${mediaWrapperClass} h-auto`}
+            src={PLACEHOLDER_IMAGE_SRC}
+            alt={imageAlt ?? mediaTitle}
+            fill
+            sizes="100vw"
+            className="object-cover"
           />
-        ) : null}
-      </Grid>
+        </div>
+      ) : youtubeEmbedUrl ? (
+        <div
+          className={`${mediaWrapperClass} aspect-video overflow-hidden bg-image-placeholder`}
+        >
+          <iframe
+            src={youtubeEmbedUrl}
+            title={videoTitle ?? mediaTitle}
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerPolicy="strict-origin-when-cross-origin"
+            allowFullScreen
+            className="h-full w-full"
+          />
+        </div>
+      ) : imageSrc ? (
+        <Image
+          src={imageSrc}
+          width={500}
+          height={500}
+          alt={imageAlt ?? ""}
+          className={`${mediaWrapperClass} h-auto`}
+        />
+      ) : null}
+    </Grid>
   );
 }

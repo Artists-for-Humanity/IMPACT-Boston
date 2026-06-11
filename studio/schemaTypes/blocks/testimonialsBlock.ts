@@ -1,4 +1,15 @@
 import {defineField, defineType} from 'sanity'
+import {blockPreviewMedia} from './blockPreviews'
+
+type TestimonialsBlockParent = {
+  _type?: string
+}
+
+const isParticipantSpotlightBlock = (parent: unknown) => {
+  const typedParent = parent as TestimonialsBlockParent | undefined
+
+  return typedParent?._type === 'testimonialsSpotlightBlock'
+}
 
 export const testimonialsBlockType = defineType({
   name: 'testimonialsBlock',
@@ -15,13 +26,54 @@ export const testimonialsBlockType = defineType({
       name: 'subtext',
       title: 'Subtext',
       type: 'string',
-      validation: (rule) => rule.required(),
+      description: 'Optional supporting text under the heading.',
+    }),
+    defineField({
+      name: 'spotlightQuote',
+      title: 'Spotlight Quote',
+      type: 'text',
+      rows: 8,
+      description: 'The full quote shown in the participant spotlight layout.',
+      hidden: ({parent}) => !isParticipantSpotlightBlock(parent),
+      validation: (rule) =>
+        rule.custom((value, context) => {
+          if (!isParticipantSpotlightBlock(context.parent)) {
+            return true
+          }
+
+          return value ? true : 'Add a quote for the participant spotlight.'
+        }),
+    }),
+    defineField({
+      name: 'spotlightAuthor',
+      title: 'Spotlight Author',
+      type: 'string',
+      description: 'Optional author name shown under the spotlight quote.',
+      hidden: ({parent}) => !isParticipantSpotlightBlock(parent),
+    }),
+    defineField({
+      name: 'spotlightAuthorTitle',
+      title: 'Spotlight Author Title',
+      type: 'string',
+      description: 'Optional attribution detail shown under or next to the author.',
+      hidden: ({parent}) => !isParticipantSpotlightBlock(parent),
     }),
     defineField({
       name: 'testimonials',
-      title: 'Testimonials',
+      title: 'Carousel Testimonials',
       type: 'array',
-      validation: (rule) => rule.required().min(1),
+      description: 'The repeatable quote cards used by the carousel layout.',
+      hidden: ({parent}) => isParticipantSpotlightBlock(parent),
+      validation: (rule) =>
+        rule.custom((value, context) => {
+          if (isParticipantSpotlightBlock(context.parent)) {
+            return true
+          }
+
+          return Array.isArray(value) && value.length > 0
+            ? true
+            : 'Add at least one testimonial for the carousel.'
+        }),
       of: [
         {
           type: 'object',
@@ -37,7 +89,12 @@ export const testimonialsBlockType = defineType({
               name: 'author',
               title: 'Author',
               type: 'string',
-              // validation: (rule) => rule.required(),
+            }),
+            defineField({
+              name: 'authorTitle',
+              title: 'Author Title',
+              type: 'string',
+              description: 'Optional attribution detail shown under or next to the author.',
             }),
             defineField({
               name: 'readMoreLink',
@@ -54,9 +111,26 @@ export const testimonialsBlockType = defineType({
     }),
   ],
   preview: {
-    select: {title: 'heading'},
-    prepare({title}) {
-      return {title: title || 'Testimonials Block', subtitle: 'Testimonials Block'}
+    select: {
+      title: 'heading',
+      type: '_type',
+      spotlightAuthor: 'spotlightAuthor',
+      carouselAuthor: 'testimonials.0.author',
+    },
+    prepare({title, type, spotlightAuthor, carouselAuthor}) {
+      const layoutTitle =
+        type === 'testimonialsSpotlightBlock' ? 'Participant Spotlight' : 'Carousel'
+      const author = type === 'testimonialsSpotlightBlock' ? spotlightAuthor : carouselAuthor
+      const media =
+        type === 'testimonialsSpotlightBlock'
+          ? blockPreviewMedia.testimonialsSpotlightBlock
+          : blockPreviewMedia.testimonialsCarouselBlock
+
+      return {
+        title: title || `Testimonials: ${layoutTitle}`,
+        subtitle: author ? `${layoutTitle}: ${author}` : `Testimonials: ${layoutTitle}`,
+        media,
+      }
     },
   },
 })

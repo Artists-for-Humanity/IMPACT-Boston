@@ -1,5 +1,5 @@
-import Hero2 from '@/components/Hero/Hero2';
-import SideTabs from '@/components/TabsPanel/SideTabs';
+import Hero2 from "@/components/Hero/Hero2";
+import SideTabs from "@/components/TabsPanel/SideTabs";
 
 export default function PeopleWithDisabilities() {
   return (
@@ -7,8 +7,7 @@ export default function PeopleWithDisabilities() {
       <Hero2
         title="Safety Programs for Everybody"
         description="Ability:IMPACT Programs equips people with disabilities with the skills and confidence to navigate the world safely — from recognizing and responding to physical threats, to building healthy relationships, to staying safe online. Through evidence-based, adaptive curricula, participants learn self-defense, self-advocacy, consent, and digital literacy in formats designed specifically for their needs."
-        imageSrc="/images/disabilities/ability/placeholder.png"
-        imageAlt="Ability Image"
+        showMediaPlaceholder
       />
 
       <SideTabs
@@ -117,7 +116,6 @@ export default function PeopleWithDisabilities() {
           },
         ]}
       />
-
     </>
   );
 }

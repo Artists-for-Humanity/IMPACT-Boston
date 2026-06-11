@@ -1,7 +1,7 @@
-import Hero2 from '@/components/Hero/Hero2';
-import SideTabs from '@/components/TabsPanel/SideTabs';
-import Grid from '@/components/common/Grid';
-import ContentDouble from '@/components/Content/Double';
+import Hero2 from "@/components/Hero/Hero2";
+import SideTabs from "@/components/TabsPanel/SideTabs";
+import Grid from "@/components/common/Grid";
+import ContentDouble from "@/components/Content/Double";
 
 const virginiaAsapTrainers = [
   {
@@ -372,16 +372,14 @@ export default function PeopleWithDisabilities() {
       <ContentDouble
         cards={[
           {
-            description: 'IMPACT Challenging Conversations',
+            description: "IMPACT Challenging Conversations",
             showImageGradient: true,
-            imageSrc: '/images/disabilities/asap/placeholder-double.png',
-            imageAlt: 'ASAP Image',
+            showImagePlaceholder: true,
           },
           {
-            description: 'IMPACT Challenging Conversations Follow Up Video',
+            description: "IMPACT Challenging Conversations Follow Up Video",
             showImageGradient: true,
-            imageSrc: '/images/disabilities/asap/placeholder-double.png',
-            imageAlt: 'ASAP Image',
+            showImagePlaceholder: true,
           },
         ]}
       />
@@ -453,7 +451,6 @@ export default function PeopleWithDisabilities() {
           linkText: "Read Full Article here.",
         }}
       />
-
     </>
   );
 }
@@ -485,7 +482,10 @@ function ArticleCallout({ heading, article }: ArticleCalloutProps) {
               <p className="p2 text-grey">{article.author}</p>
             </div>
 
-            <a href={article.href} className="p2 text-secondary underline underline-offset-2">
+            <a
+              href={article.href}
+              className="p2 text-secondary underline underline-offset-2"
+            >
               {article.linkText}
             </a>
           </div>

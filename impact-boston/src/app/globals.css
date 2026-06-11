@@ -22,6 +22,7 @@
   --color-primary: #311e41;
   --color-secondary: #563672;
   --color-complementary: #e86834;
+  --color-brand-gray-light: #f4f5f5;
 
   --color-primary-light: #fcf9ff;
   --color-secondary-light: #fefcff;
@@ -53,6 +54,8 @@
   --color-inactive-tab: rgb(0 0 0 / 30%);
   --color-line-divider-dark: rgb(183 183 183 / 16%);
 
+  /* Legacy spacing tokens previously defined in tailwind.config.ts */
+  --spacing-18: 72px;
 
 }
 

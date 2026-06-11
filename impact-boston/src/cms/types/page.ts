@@ -1,0 +1,44 @@
+import type { SideTab } from "@/components/TabsPanel/SideTabs";
+
+import type {
+  CmsPageBlock,
+  CmsTestimonialsBlock,
+  SanityActionPanelFields,
+  SanityCtaSectionFields,
+  SanityHighlight,
+} from "./blocks";
+
+export type HeroBlockFallback = {
+  headlineParts: { text: string; color: string }[];
+  body: string;
+  ctaText: string;
+  ctaHref: string;
+  imageSrc: string;
+  imageAlt: string;
+};
+
+export type CmsBlockFallbacks = {
+  actionPanel?: SanityActionPanelFields;
+  ctaSection?: SanityCtaSectionFields;
+  hero?: HeroBlockFallback;
+  highlights?: {
+    label?: string | null;
+    slides?: SanityHighlight[] | null;
+  };
+  sideTabs?: SideTab[];
+  testimonials?: Pick<
+    CmsTestimonialsBlock,
+    | "heading"
+    | "subtext"
+    | "spotlightAuthor"
+    | "spotlightAuthorTitle"
+    | "spotlightQuote"
+    | "testimonials"
+  >;
+};
+
+export type CmsPageData = {
+  sections?: CmsPageBlock[] | null;
+};
+
+export type LandingPageData = CmsPageData;

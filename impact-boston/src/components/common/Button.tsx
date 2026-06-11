@@ -40,7 +40,7 @@ export default function Button({
 
   const variants: Record<ButtonVariant, string> = {
     primary: 'text-[#FFF] bg-[#000] hover:bg-[#222]',
-    secondary: 'text-[#FFF] bg-brand-complementary hover:bg-[#A83315]',
+    secondary: 'text-[#FFF] bg-complementary hover:bg-[#A83315]',
     outline: 'text-black border border-[#959595] hover:border-gray-400 hover:text-gray-900',
   }
 
