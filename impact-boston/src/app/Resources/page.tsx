@@ -237,7 +237,7 @@ export default function Resources() {
 
       <SingleContent
         backgroundColor="bg-bg-lavender"
-        gridClassName="!pb-0"
+        // gridClassName="!pb-0"
         titleAs="h2"
         title="Survivors of Abuse & Trauma"
         paragraphs={[
@@ -255,14 +255,13 @@ export default function Resources() {
 
       <Carousel
         backgroundColor="bg-bg-lavender"
-        className="!pt-0"
+        className="!pt-6"
         heading="Hear firsthand from survivors and clinicians."
-        subheading=""
+        subheading="3 perspectives on what IMPACT made possible."
         testimonials={survivorTestimonials}
         showAuthors
         authorPrefix=""
         headingLevel="h3"
-        headingClassName="gap-[88px]"
       />
     </>
   );

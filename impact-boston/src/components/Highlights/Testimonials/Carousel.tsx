@@ -140,8 +140,8 @@ export default function Carousel({
         {/* Top Row - Heading and Navigation */}
         <Grid noPadding>
           {/* Left - Heading and Subtext */}
-          <div className="col-span-4 md:col-span-8 lg:col-span-6 flex flex-col gap-4 lg:gap-2 md:items-center lg:items-start">
-            <HeadingTag className="h2 text-[#000] text-center md:text-center lg:text-left">
+          <div className="col-span-4 md:col-span-8 lg:col-span-7 flex flex-col gap-4 lg:gap-2 md:items-center lg:items-start">
+            <HeadingTag className="h3 text-[#000] text-center md:text-center lg:text-left">
               {heading}
             </HeadingTag>
             {subheading ? (
@@ -152,7 +152,7 @@ export default function Carousel({
           </div>
 
           {/* Right - Arrow Navigation - Desktop Only */}
-          <div className="hidden lg:flex col-span-4 md:col-span-8 lg:col-span-2 lg:col-start-11 gap-4 lg:justify-end self-end">
+          <div className="hidden lg:flex col-span-4 md:col-span-8 lg:col-span-2 lg:col-start-11 gap-2 lg:justify-end self-end">
             <button
               onClick={prevSlide}
               className="w-12 h-12 relative flex items-center justify-center transition-opacity hover:opacity-80"
@@ -200,20 +200,24 @@ export default function Carousel({
                   />
 
                   {/* Card Content */}
-                  <div className="px-4 py-8 lg:p-8">
+                  <div className="p-8 flex flex-col gap-y-8">
                     {/* Quote */}
-                    <p className="p1 whitespace-pre-line text-[#000] lg:text-[#333]">
+                    <p className="p1 whitespace-pre-line text-[#333]">
                       &ldquo;{testimonial.quote}&rdquo;
                     </p>
-                    {showAuthors && testimonial.author ? (
-                      <p className="p2 mt-6 text-[#000] lg:text-[#333]">
-                        {authorPrefix}{testimonial.author}
-                      </p>
-                    ) : null}
-                    {showAuthors && testimonial.authorTitle ? (
-                      <p className="p2 text-text-grey-light">
-                        {testimonial.authorTitle}
-                      </p>
+                    {showAuthors && (testimonial.author || testimonial.authorTitle) ? (
+                      <div className="flex flex-col">
+                        {testimonial.author ? (
+                          <p className="p1-bold text-[#333]">
+                            {authorPrefix}{testimonial.author}
+                          </p>
+                        ) : null}
+                        {testimonial.authorTitle ? (
+                          <p className="p2 text-light-grey-text">
+                            {testimonial.authorTitle}
+                          </p>
+                        ) : null}
+                      </div>
                     ) : null}
                   </div>
                 </div>
@@ -225,7 +229,7 @@ export default function Carousel({
         </div>
 
         {/* Arrow Navigation - Mobile and Tablet, centered at bottom */}
-        <div className="flex lg:hidden gap-4 justify-center">
+        <div className="flex lg:hidden gap-2 justify-center">
           <button
             onClick={prevSlide}
             className="w-12 h-12 relative flex items-center justify-center transition-opacity hover:opacity-80"
