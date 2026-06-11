@@ -17,7 +17,16 @@ export const headlineColorOptions = [
     value: 'complementary',
     hex: '#e86834',
   },
-
+  {
+    title: 'Black',
+    value: 'black',
+    hex: '#000000',
+  },
+  {
+    title: 'White',
+    value: 'white',
+    hex: '#ffffff',
+  },
 ] as const
 
 export function HeadlineColorInput(props: StringInputProps) {
@@ -41,6 +50,7 @@ export function HeadlineColorInput(props: StringInputProps) {
         const background = selected ? '#ffffff' : '#000000'
         const textColor = selected ? '#111111' : '#ffffff'
         const metaColor = selected ? '#666666' : 'rgba(255, 255, 255, 0.82)'
+        const selectedBorderColor = option.value === 'white' ? '#d9d9e0' : option.hex
 
         return (
           <button
@@ -52,7 +62,7 @@ export function HeadlineColorInput(props: StringInputProps) {
             style={{
               alignItems: 'center',
               background,
-              border: selected ? `2px solid ${option.hex}` : '1px solid #000000',
+              border: selected ? `2px solid ${selectedBorderColor}` : '1px solid #000000',
               borderRadius: '6px',
               color: textColor,
               cursor: readOnly ? 'not-allowed' : 'pointer',

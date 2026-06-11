@@ -1,6 +1,7 @@
 import type { SanityImageSource } from "@sanity/image-url";
 
 import type { ActionPanelCard } from "@/components/Action/ActionPanel";
+import type { CtaPanelData } from "@/components/Action/CtaSection";
 import type { HighlightSlide } from "@/components/HighlightsSection";
 import type { Testimonial } from "@/components/Highlights/Testimonials/Carousel";
 import type { SideTab } from "@/components/TabsPanel/SideTabs";
@@ -21,12 +22,18 @@ export type SanityHeroFields = {
   highlight?: string | null;
   highlightColor?: string | null;
   description?: string | null;
+  youtubeUrl?: string | null;
+  videoTitle?: string | null;
 };
 
 export type SanityActionPanelFields = {
   title?: string | null;
   subtext?: string | null;
   cards?: ActionPanelCard[] | null;
+};
+
+export type SanityCtaSectionFields = {
+  panels?: CtaPanelData[] | null;
 };
 
 export type SanitySideTab = {
@@ -59,6 +66,11 @@ export type CmsActionPanelBlock = CmsPageBlockBase &
     _type: "actionPanelBlock";
   };
 
+export type CmsCtaSectionBlock = CmsPageBlockBase &
+  SanityCtaSectionFields & {
+    _type: "ctaSectionBlock";
+  };
+
 export type CmsSideTabsBlock = CmsPageBlockBase & {
   _type: "sideTabsBlock";
   tabs?: SanitySideTab[] | null;
@@ -83,6 +95,7 @@ export type CmsTestimonialsBlock = CmsPageBlockBase & {
 export type CmsPageBlock =
   | CmsHeroBlock
   | CmsActionPanelBlock
+  | CmsCtaSectionBlock
   | CmsSideTabsBlock
   | CmsHighlightsBlock
   | CmsTestimonialsBlock;

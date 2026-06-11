@@ -2,15 +2,15 @@ import {defineType} from 'sanity'
 
 import {definePageBlocksField} from './pageBlocksField'
 
-export const landingPageType = defineType({
-  name: 'landingPage',
-  title: 'Landing Page',
+export const aboutImpactPageType = defineType({
+  name: 'aboutImpactPage',
+  title: 'About Impact Page',
   type: 'document',
   fields: [definePageBlocksField()],
 
   preview: {
     prepare() {
-      return {title: 'Landing Page'}
+      return {title: 'About Impact Page'}
     },
   },
 })

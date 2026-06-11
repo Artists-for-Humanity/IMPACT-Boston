@@ -1,3 +1,4 @@
+// optimizes any images coming from sanity, and provides helper functions (urlFor) for working with them.
 import {
   createImageUrlBuilder,
   type SanityImageSource,

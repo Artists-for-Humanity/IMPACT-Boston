@@ -1,9 +1,11 @@
 import Image from "next/image";
+import type { ReactNode } from "react";
 import Grid from "../common/Grid";
 import { PLACEHOLDER_IMAGE_SRC } from "../common/placeholderImage";
 
 interface Hero2Props {
-  title: string;
+  title: ReactNode;
+  titleText?: string;
   highlight?: string;
   highlightColor?: "primary" | "secondary" | "complementary";
   description?: string;
@@ -49,6 +51,7 @@ function getYouTubeEmbedUrl(youtubeUrl: string) {
 
 export default function Hero2({
   title,
+  titleText,
   highlight,
   highlightColor = "secondary",
   description,
@@ -68,14 +71,19 @@ export default function Hero2({
   const highlightClass = highlightClassMap[highlightColor];
   const mediaWrapperClass = mediaClassName ?? "col-span-full w-full";
   const youtubeEmbedUrl = youtubeUrl ? getYouTubeEmbedUrl(youtubeUrl) : null;
+  const mediaTitle =
+    titleText || (typeof title === "string" ? title : "Hero media");
 
   return (
     <Grid className="md:gap-12 lg:gap-8">
       <div className="col-span-full lg:col-start-3 lg:col-span-8 flex flex-col gap-6 md:gap-6 lg:gap-6">
         <h1 className="h1 text-center text-black">
-          {title}{" "}
+          {title}
           {highlight ? (
-            <span className={highlightClass}>{highlight}</span>
+            <>
+              {" "}
+              <span className={highlightClass}>{highlight}</span>
+            </>
           ) : null}
         </h1>
 
@@ -90,7 +98,7 @@ export default function Hero2({
         >
           <Image
             src={PLACEHOLDER_IMAGE_SRC}
-            alt={imageAlt ?? title}
+            alt={imageAlt ?? mediaTitle}
             fill
             sizes="100vw"
             className="object-cover"
@@ -102,7 +110,7 @@ export default function Hero2({
         >
           <iframe
             src={youtubeEmbedUrl}
-            title={videoTitle ?? title}
+            title={videoTitle ?? mediaTitle}
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             referrerPolicy="strict-origin-when-cross-origin"
             allowFullScreen

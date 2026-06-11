@@ -18,6 +18,10 @@ const mainDocuments = defineDocuments([
     route: '/',
     filter: `_id == "landingPage"`,
   },
+  {
+    route: '/AboutImpact',
+    filter: `_id == "aboutImpactPage"`,
+  },
 ])
 
 export default defineConfig({
@@ -29,7 +33,7 @@ export default defineConfig({
 
   plugins: [
     structureTool({structure}),
-   
+
     presentationTool({
       previewUrl: {
         initial: previewOrigin,
@@ -43,7 +47,7 @@ export default defineConfig({
         mainDocuments,
       },
     }),
-     visionTool(),
+    visionTool(),
   ],
 
   schema: {

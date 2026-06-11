@@ -4,6 +4,7 @@ import type {
   CmsPageBlock,
   CmsTestimonialsBlock,
   SanityActionPanelFields,
+  SanityCtaSectionFields,
   SanityHighlight,
 } from "./blocks";
 
@@ -18,6 +19,7 @@ export type HeroBlockFallback = {
 
 export type CmsBlockFallbacks = {
   actionPanel?: SanityActionPanelFields;
+  ctaSection?: SanityCtaSectionFields;
   hero?: HeroBlockFallback;
   highlights?: {
     label?: string | null;

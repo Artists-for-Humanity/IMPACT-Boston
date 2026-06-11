@@ -2,10 +2,42 @@ import {defineField, defineType} from 'sanity'
 import {HeadlineColorInput, headlineColorOptions} from '../../components/HeadlineColorInput'
 import {blockPreviewMedia} from './blockPreviews'
 
+type HeroBlockParent = {
+  _type?: string
+  image?: unknown
+  youtubeUrl?: string | null
+}
+
 const isHero2 = (parent: unknown) =>
   typeof parent === 'object' && parent !== null && '_type' in parent
     ? (parent as {_type?: string})._type === 'hero2Block'
     : false
+
+const hasYouTubeUrl = (parent: unknown) => {
+  const typedParent = parent as HeroBlockParent | undefined
+
+  return Boolean(typedParent?.youtubeUrl?.trim())
+}
+
+const hasImage = (value: unknown) => Boolean(value)
+
+function isYouTubeUrl(value?: string | null) {
+  if (!value) return true
+
+  try {
+    const url = new URL(value)
+    const hostname = url.hostname.replace(/^www\./, '')
+
+    return (
+      hostname === 'youtube.com' ||
+      hostname === 'm.youtube.com' ||
+      hostname === 'youtube-nocookie.com' ||
+      hostname === 'youtu.be'
+    )
+  } catch {
+    return false
+  }
+}
 
 export const heroBlockType = defineType({
   name: 'heroBlock',
@@ -16,25 +48,21 @@ export const heroBlockType = defineType({
       name: 'title',
       title: 'Title',
       type: 'string',
-      hidden: ({parent}) => !isHero2(parent),
-      validation: (rule) =>
-        rule.custom((value, context) =>
-          isHero2(context.parent) && !value ? 'Title is required for Hero 2.' : true,
-        ),
+      hidden: true,
     }),
     defineField({
       name: 'highlight',
       title: 'Highlighted Title Text',
       type: 'string',
       description: 'Optional colored text appended to the Hero 2 title.',
-      hidden: ({parent}) => !isHero2(parent),
+      hidden: true,
     }),
     defineField({
       name: 'highlightColor',
       title: 'Highlight Color',
       type: 'string',
       initialValue: 'secondary',
-      hidden: ({parent}) => !isHero2(parent),
+      hidden: true,
       options: {
         list: [
           {title: 'Primary', value: 'primary'},
@@ -60,14 +88,12 @@ export const heroBlockType = defineType({
       title: 'Headline Parts',
       description: 'Each word or phrase in the headline with its color.',
       type: 'array',
-      hidden: ({parent}) => isHero2(parent),
       validation: (rule) =>
-        rule.custom((value, context) => {
-          if (isHero2(context.parent)) return true
-          return Array.isArray(value) && value.length > 0
+        rule.custom((value) =>
+          Array.isArray(value) && value.length > 0
             ? true
-            : 'At least one headline part is required for Hero 1.'
-        }),
+            : 'At least one headline part is required.',
+        ),
       of: [
         {
           type: 'object',
@@ -138,17 +164,53 @@ export const heroBlockType = defineType({
         ),
     }),
     defineField({
+      name: 'youtubeUrl',
+      title: 'YouTube URL',
+      type: 'url',
+      description: 'Optional. Paste a YouTube watch, share, shorts, or embed URL.',
+      hidden: ({parent}) => !isHero2(parent),
+      validation: (rule) =>
+        rule.custom((value) => (isYouTubeUrl(value) ? true : 'Use a valid YouTube URL.')),
+    }),
+    defineField({
+      name: 'videoTitle',
+      title: 'Video Title',
+      type: 'string',
+      description: 'Optional accessible title for the embedded YouTube video.',
+      hidden: ({parent}) => !isHero2(parent),
+    }),
+    defineField({
       name: 'image',
       title: 'Hero Image',
       type: 'image',
       options: {hotspot: true},
-      validation: (rule) => rule.required(),
+      validation: (rule) =>
+        rule.custom((value, context) => {
+          if (!isHero2(context.parent) && !hasImage(value)) {
+            return 'Hero image is required for Hero 1.'
+          }
+
+          if (isHero2(context.parent) && !hasImage(value) && !hasYouTubeUrl(context.parent)) {
+            return 'Add a hero image or a YouTube URL.'
+          }
+
+          return true
+        }),
     }),
     defineField({
       name: 'imageAlt',
       title: 'Image Alt Text',
       type: 'string',
-      validation: (rule) => rule.required(),
+      validation: (rule) =>
+        rule.custom((value, context) => {
+          const parent = context.parent as HeroBlockParent | undefined
+
+          if (!isHero2(parent) || hasImage(parent?.image)) {
+            return value ? true : 'Image alt text is required when an image is used.'
+          }
+
+          return true
+        }),
     }),
   ],
   preview: {

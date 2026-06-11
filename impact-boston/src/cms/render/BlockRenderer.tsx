@@ -1,6 +1,7 @@
 import type { CmsPageBlock } from "@/cms/types/blocks";
 import type { CmsBlockFallbacks } from "@/cms/types/page";
 import ActionPanelBlock from "./blocks/ActionPanelBlock";
+import CtaSectionBlock from "./blocks/CtaSectionBlock";
 import HeroBlock from "./blocks/HeroBlock";
 import HighlightsBlock from "./blocks/HighlightsBlock";
 import SideTabsBlock from "./blocks/SideTabsBlock";
@@ -23,6 +24,11 @@ export default function BlockRenderer({
     case "actionPanelBlock":
       return (
         <ActionPanelBlock section={block} fallback={fallbacks?.actionPanel} />
+      );
+
+    case "ctaSectionBlock":
+      return (
+        <CtaSectionBlock section={block} fallback={fallbacks?.ctaSection} />
       );
 
     case "sideTabsBlock":

@@ -1,27 +1,32 @@
 import type {StructureResolver} from 'sanity/structure'
 
-export const singletonTypes = new Set(['landingPage'])
+export const singletonTypes = new Set(['aboutImpactPage', 'landingPage'])
 
 const aboutPages = [
   {
     title: 'About Impact',
-    id: 'aboutImpact',
+    id: 'aboutImpactPage',
+    schemaType: 'aboutImpactPage',
   },
   {
     title: 'Board and Staff',
     id: 'boardAndStaff',
+    schemaType: 'landingPage',
   },
   {
     title: 'Resources',
     id: 'resources',
+    schemaType: 'landingPage',
   },
   {
     title: 'Blog',
     id: 'blog',
+    schemaType: 'landingPage',
   },
   {
     title: 'Accessibility',
     id: 'accessibility',
+    schemaType: 'landingPage',
   },
 ]
 
@@ -47,12 +52,9 @@ export const structure: StructureResolver = (S) =>
                 S.listItem()
                   .title(page.title)
                   .id(page.id)
-                  .schemaType('landingPage')
+                  .schemaType(page.schemaType)
                   .child(
-                    S.document()
-                      .title(page.title)
-                      .schemaType('landingPage')
-                      .documentId(page.id),
+                    S.document().title(page.title).schemaType(page.schemaType).documentId(page.id),
                   ),
               ),
             ),

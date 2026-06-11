@@ -15,13 +15,23 @@ import type { HeroBlockFallback } from "@/cms/types/page";
 
 const HERO_TEXT_COLOR_MAP: Record<
   string,
-  "primary" | "secondary" | "complementary" | "black"
+  "primary" | "secondary" | "complementary" | "black" | "white"
 > = {
   primary: "primary",
   secondary: "secondary",
   custom_purple: "secondary",
   complementary: "complementary",
   black: "black",
+  white: "white",
+};
+
+const HERO_TEXT_CLASS_MAP: Record<string, string> = {
+  primary: "text-primary",
+  secondary: "text-secondary",
+  custom_purple: "text-secondary",
+  complementary: "text-complementary",
+  black: "text-black",
+  white: "text-white",
 };
 
 type HeroBlockProps = {
@@ -34,31 +44,47 @@ export default function HeroBlock({ section, fallback }: HeroBlockProps) {
     section.headlineParts,
     fallback?.headlineParts,
   );
+  const hasSectionHeadlineParts = Boolean(
+    section.headlineParts?.some((part) => part?.text),
+  );
   const imageAlt = section.imageAlt ?? fallback?.imageAlt ?? "";
   const imageSrc = resolveHeroImageSrc(section.image, fallback?.imageSrc);
 
-  if (!imageSrc) {
-    return null;
-  }
-
   if (section._type === "hero2Block") {
+    const legacyTitle = section.title?.trim();
+    const legacyHighlight = section.highlight?.trim();
+    const shouldUseHeadlineParts =
+      hasSectionHeadlineParts || (!legacyTitle && !legacyHighlight);
+    const titleText = shouldUseHeadlineParts
+      ? getPlainHeadlineText(headlineParts)
+      : [legacyTitle, legacyHighlight].filter(Boolean).join(" ") || "Title";
+    const youtubeUrl = section.youtubeUrl?.trim() || undefined;
+
+    if (!imageSrc && !youtubeUrl) {
+      return null;
+    }
+
     return (
       <Hero2
         title={
-          section.title ??
-          (headlineParts
-            .map((part) => part.text.trim())
-            .join(" ")
-            .trim() ||
-            "Title")
+          shouldUseHeadlineParts
+            ? renderHero2HeadlineParts(headlineParts)
+            : legacyTitle || "Title"
         }
-        highlight={section.highlight ?? undefined}
+        titleText={titleText}
+        highlight={shouldUseHeadlineParts ? undefined : legacyHighlight}
         highlightColor={resolveHero2HighlightColor(section.highlightColor)}
         description={section.description ?? section.body ?? fallback?.body}
         imageSrc={imageSrc}
         imageAlt={imageAlt}
+        youtubeUrl={youtubeUrl}
+        videoTitle={section.videoTitle ?? undefined}
       />
     );
+  }
+
+  if (!imageSrc) {
+    return null;
   }
 
   const body = section.body ?? fallback?.body ?? "";
@@ -92,5 +118,39 @@ export default function HeroBlock({ section, fallback }: HeroBlockProps) {
       imageSrc={imageSrc}
       imageAlt={imageAlt}
     />
+  );
+}
+
+function getPlainHeadlineText(
+  headlineParts: Array<{ text: string; color?: string | null }>,
+) {
+  return (
+    headlineParts
+      .map((part) => part.text.trim())
+      .filter(Boolean)
+      .join(" ")
+      .trim() || "Title"
+  );
+}
+
+function renderHero2HeadlineParts(
+  headlineParts: Array<{ text: string; color?: string | null }>,
+) {
+  return (
+    <>
+      {headlineParts.map((part, idx) => {
+        const color = part.color ?? "black";
+        const text = part.text.trim();
+
+        return (
+          <Fragment key={idx}>
+            {idx > 0 ? " " : null}
+            <span className={HERO_TEXT_CLASS_MAP[color] ?? "text-black"}>
+              {text}
+            </span>
+          </Fragment>
+        );
+      })}
+    </>
   );
 }
