@@ -34,7 +34,11 @@ export default function TestimonialsCarousel({
   testimonials = [],
   showAuthors = false,
   authorPrefix = "- ",
-}: TestimonialsCarouselProps) {
+  backgroundColor = '',
+  className = '',
+  headingLevel,
+  headingClassName,
+}: CarouselProps) {
   const testimonialItems = testimonials.filter(
     (testimonial) => testimonial.quote,
   );
@@ -50,6 +54,8 @@ export default function TestimonialsCarousel({
       showAuthors={showAuthors}
       subheading={subheading}
       testimonialItems={testimonialItems}
+      backgroundColor={backgroundColor}
+      className={className}
     />
   );
 }
@@ -60,6 +66,8 @@ type TestimonialsCarouselTrackProps = {
   showAuthors: boolean;
   subheading?: string;
   testimonialItems: Testimonial[];
+  backgroundColor?: string;
+  className?: string;
 };
 
 function TestimonialsCarouselTrack({
@@ -68,6 +76,8 @@ function TestimonialsCarouselTrack({
   showAuthors,
   subheading,
   testimonialItems,
+  backgroundColor = '',
+  className = '',
 }: TestimonialsCarouselTrackProps) {
   const [currentIndex, setCurrentIndex] = useState(testimonialItems.length);
   const [isTransitioning, setIsTransitioning] = useState(true);

@@ -76,29 +76,12 @@ export default function Hero2({
 
   return (
       <Grid className="md:gap-12 lg:gap-x-8 lg:gap-y-8">
-        {tag && (
-          <div className={`sub-2 col-span-full flex justify-center ${tagColorClass}`}>
-            <div className={`tag flex items-center gap-2 ${tagBoxClass} ${tagBackgroundClass}`}>
-              {typeof tag === "string" ? (
-                <span>{tag}</span>
-              ) : (
-                tag.map((item, idx) => (
-                  <span key={idx} className={item.className}>
-                    {item.text}
-                  </span>
-                ))
-              )}
-            </div>
-          </div>
-        )}
-
         <div className="col-span-full grid grid-cols-12 lg:gap-x-8 lg:gap-y-6">
           <h1 className="col-span-full h1 text-center text-black">
             {title}{' '}
             {highlight ? (
               <span className={highlightClass}>{highlight}</span>
-            </>
-          ) : null}
+            ) : null}
         </h1>
 
           {description && (
