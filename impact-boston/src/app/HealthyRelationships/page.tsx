@@ -1,7 +1,7 @@
 import Hero2 from '@/components/Hero/Hero2';
 import Highlight2 from '@/components/Highlights/Highlight2';
 import SideTabs from '@/components/TabsPanel/SideTabs';
-import TestimonialsSection from '@/components/Highlights/Testimonials/Carousel';
+import Carousel from '@/components/Highlights/Testimonials/Carousel';
 
 const educatorTestimonials = [
   {
@@ -88,7 +88,7 @@ export default function HealthyRelationships() {
         />
       </section>
 
-      <TestimonialsSection
+      <Carousel
         heading="Real Feedback From Real Educators"
         subheading=""
         testimonials={educatorTestimonials}

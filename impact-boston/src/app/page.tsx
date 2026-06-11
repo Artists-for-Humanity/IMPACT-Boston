@@ -16,7 +16,7 @@ import SideTabs, { type SideTab } from "@/components/TabsPanel/SideTabs";
 import HighlightsSection, {
   type HighlightSlide,
 } from "@/components/HighlightsSection";
-import TestimonialsSection, {
+import Carousel, {
   type Testimonial,
 } from "@/components/Highlights/Testimonials/Carousel";
 import { client } from "@/sanity/client";
@@ -337,7 +337,7 @@ function PageBlock({ section }: { section: LandingPageBlock }) {
 
     case "testimonialsBlock":
       return (
-        <TestimonialsSection
+        <Carousel
           heading={section.heading ?? undefined}
           subheading={section.subtext ?? undefined}
           testimonials={section.testimonials ?? undefined}

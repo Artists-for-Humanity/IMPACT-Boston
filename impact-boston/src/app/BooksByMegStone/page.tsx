@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 import Hero2 from '@/components/Hero/Hero2';
 import SingleContent from '@/components/Content/Single';
-import Testimonial from '@/components/Highlights/Testimonials/ParticipantSpotlight';
+import ParticipantSpotlight from '@/components/Highlights/Testimonials/ParticipantSpotlight';
 
 
 export default function BooksByMeg() {
@@ -44,7 +44,7 @@ export default function BooksByMeg() {
         }}
       />
 
-      <Testimonial
+      <ParticipantSpotlight
             heading="Participant Spotlight"
             subheading="Hear From One of Our Participants"
             quote="Meg Stone has written a powerful, accessible, and devastatingly acute analysis of the pervasiveness of gender-based violence and why our efforts to prevent it have failed, packed with expert insight drawn from her decades-long career and practical tips to empower women and others who are targeted. The Cost of Fear moved me, enraged me, and educated me. I don’t think I’ll ever stop thinking about it. I wish this book weren’t necessary. But until we live in a better world, get this book."

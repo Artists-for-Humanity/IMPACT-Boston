@@ -1,7 +1,7 @@
 import Hero2 from '@/components/Hero/Hero2';
 import SideTabs from '@/components/TabsPanel/SideTabs';
 import SingleContent from '@/components/Content/Single';
-import TestimonialsSection from '@/components/Highlights/Testimonials/Carousel';
+import Carousel from '@/components/Highlights/Testimonials/Carousel';
 
 const survivorTestimonials = [
   {
@@ -237,6 +237,7 @@ export default function Resources() {
 
       <SingleContent
         backgroundColor="bg-bg-lavender"
+        // gridClassName="!pb-0"
         titleAs="h2"
         title="Survivors of Abuse & Trauma"
         paragraphs={[
@@ -252,12 +253,15 @@ export default function Resources() {
         }}
       />
 
-      <TestimonialsSection
+      <Carousel
+        backgroundColor="bg-bg-lavender"
+        className="!pt-6"
         heading="Hear firsthand from survivors and clinicians."
-        subheading=""
+        subheading="3 perspectives on what IMPACT made possible."
         testimonials={survivorTestimonials}
         showAuthors
         authorPrefix=""
+        headingLevel="h3"
       />
     </>
   );

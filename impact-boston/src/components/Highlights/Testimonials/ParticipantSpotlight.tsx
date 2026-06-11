@@ -1,6 +1,6 @@
 import Grid from '../../../components/common/Grid';
 
-interface TestimonialProps {
+interface ParticipantSpotlightProps {
     heading: string;
     subheading: string;
     quote: string;
@@ -9,14 +9,14 @@ interface TestimonialProps {
     backgroundColor?: string;
 }
 
-export default function Testimonial({
+export default function ParticipantSpotlight({
     heading,
     subheading,
     quote,
     author,
     authorTitle,
     backgroundColor,
-}: TestimonialProps) {
+}: ParticipantSpotlightProps) {
     return (
         <div className={` ${backgroundColor ? backgroundColor : ''}`}>
         <Grid >
