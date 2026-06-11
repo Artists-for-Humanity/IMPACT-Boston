@@ -1,4 +1,5 @@
 import {defineField, defineType} from 'sanity'
+import {blockPreviewMedia} from './blockPreviews'
 
 export const highlightsBlockType = defineType({
   name: 'highlightsBlock',
@@ -26,7 +27,7 @@ export const highlightsBlockType = defineType({
               type: 'string',
               validation: (rule) => rule.required(),
             }),
-               defineField({
+            defineField({
               name: 'image',
               title: 'Image',
               type: 'image',
@@ -59,7 +60,7 @@ export const highlightsBlockType = defineType({
               description: 'For example, contact info shown below the CTA.',
               validation: (rule) => rule.required(),
             }),
-         
+
             defineField({
               name: 'imageAlt',
               title: 'Image Alt Text',
@@ -77,7 +78,11 @@ export const highlightsBlockType = defineType({
   preview: {
     select: {title: 'label'},
     prepare({title}) {
-      return {title: title || 'Highlights Carousel', subtitle: 'Highlights Carousel'}
+      return {
+        title: title || 'Highlights Carousel',
+        subtitle: 'Highlights Carousel',
+        media: blockPreviewMedia.highlightsBlock,
+      }
     },
   },
 })

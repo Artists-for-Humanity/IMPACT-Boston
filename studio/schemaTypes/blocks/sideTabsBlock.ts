@@ -1,5 +1,6 @@
 import {defineField, defineType} from 'sanity'
 
+import {blockPreviewMedia} from './blockPreviews'
 import {sideTabsContentTypes} from './sideTabs/content'
 
 export const sideTabsBlockType = defineType({
@@ -41,7 +42,7 @@ export const sideTabsBlockType = defineType({
   ],
   preview: {
     prepare() {
-      return {title: 'Side Tabs'}
+      return {title: 'Side Tabs', media: blockPreviewMedia.sideTabsBlock}
     },
   },
 })

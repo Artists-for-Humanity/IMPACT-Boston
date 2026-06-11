@@ -1,14 +1,6 @@
 import {defineArrayMember, defineField, defineType} from 'sanity'
 
-const blockPreviewImageUrls: Record<string, string> = {
-  hero1Block: '/static/block-previews/hero-1.svg',
-  hero2Block: '/static/block-previews/hero-2.svg',
-  actionPanelBlock: '/static/block-previews/action-panel.svg',
-  sideTabsBlock: '/static/block-previews/side-tabs.svg',
-  highlightsBlock: '/static/block-previews/highlights.svg',
-  testimonialsCarouselBlock: '/static/block-previews/testimonials-carousel.svg',
-  testimonialsSpotlightBlock: '/static/block-previews/testimonials-spotlight.svg',
-}
+import {blockPreviewImageUrls} from './blocks/blockPreviews'
 
 export const landingPageType = defineType({
   name: 'landingPage',

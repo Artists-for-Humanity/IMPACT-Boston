@@ -1,4 +1,5 @@
 import {defineField, defineType} from 'sanity'
+import {blockPreviewMedia} from './blockPreviews'
 
 type TestimonialsBlockParent = {
   _type?: string
@@ -120,10 +121,15 @@ export const testimonialsBlockType = defineType({
       const layoutTitle =
         type === 'testimonialsSpotlightBlock' ? 'Participant Spotlight' : 'Carousel'
       const author = type === 'testimonialsSpotlightBlock' ? spotlightAuthor : carouselAuthor
+      const media =
+        type === 'testimonialsSpotlightBlock'
+          ? blockPreviewMedia.testimonialsSpotlightBlock
+          : blockPreviewMedia.testimonialsCarouselBlock
 
       return {
         title: title || `Testimonials: ${layoutTitle}`,
         subtitle: author ? `${layoutTitle}: ${author}` : `Testimonials: ${layoutTitle}`,
+        media,
       }
     },
   },

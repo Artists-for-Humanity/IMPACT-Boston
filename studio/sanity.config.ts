@@ -29,7 +29,7 @@ export default defineConfig({
 
   plugins: [
     structureTool({structure}),
-    visionTool(),
+   
     presentationTool({
       previewUrl: {
         initial: previewOrigin,
@@ -43,6 +43,7 @@ export default defineConfig({
         mainDocuments,
       },
     }),
+     visionTool(),
   ],
 
   schema: {

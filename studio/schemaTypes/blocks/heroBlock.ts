@@ -1,5 +1,6 @@
 import {defineField, defineType} from 'sanity'
 import {HeadlineColorInput, headlineColorOptions} from '../../components/HeadlineColorInput'
+import {blockPreviewMedia} from './blockPreviews'
 
 const isHero2 = (parent: unknown) =>
   typeof parent === 'object' && parent !== null && '_type' in parent
@@ -154,8 +155,10 @@ export const heroBlockType = defineType({
     select: {type: '_type'},
     prepare({type}) {
       const title = type === 'hero2Block' ? 'Hero 2' : 'Hero 1'
+      const media =
+        type === 'hero2Block' ? blockPreviewMedia.hero2Block : blockPreviewMedia.hero1Block
 
-      return {title, subtitle: 'Hero Block'}
+      return {title, subtitle: 'Hero Block', media}
     },
   },
 })
