@@ -66,7 +66,7 @@ function CtaPanel({
         </div>
 
         <Button
-          className="col-span-full bg-white flex justify-between cursor-pointer py-4 w-[270px] md:w-full lg:w-[270px] group"
+          className="col-span-full bg-white flex justify-between cursor-pointer w-[270px] md:w-full lg:w-[270px] h-14 md:h-[73px] group"
           href={href}
         >
           <p className="p1-bold text-black group-hover:text-white">{buttonText}</p>

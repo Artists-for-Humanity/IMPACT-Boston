@@ -11,7 +11,7 @@ export default function Accessibility() {
         imageSrc="/images/accessibility/placeholder.png"
         imageAlt="Accessibility Image"
       />
-      <List
+      <List showToggle={false} noPaddingTop
         items={[
           {
             title: "ASL Interpreters",
@@ -75,7 +75,7 @@ export default function Accessibility() {
             buttonText: 'Read Document',
             href: '/',
             iconSrc: '/icons/download.svg',
-            iconWidth: 13.09,
+            iconWidth: 24,
             iconHeight: 24,
           },
         ]}
