@@ -1,0 +1,35 @@
+import type { CmsPageBlock } from "@/cms/types/blocks";
+import type { CmsBlockFallbacks } from "@/cms/types/page";
+import {
+  DEFAULT_ACTION_PANEL_BLOCK,
+  DEFAULT_ACTION_PANEL_BLOCK_FALLBACK,
+} from "./actionPanel";
+import { DEFAULT_HERO_BLOCK, DEFAULT_HERO_BLOCK_FALLBACK } from "./hero";
+import {
+  DEFAULT_HIGHLIGHTS_BLOCK,
+  DEFAULT_HIGHLIGHTS_BLOCK_FALLBACK,
+} from "./highlights";
+import {
+  DEFAULT_SIDE_TABS_BLOCK,
+  DEFAULT_SIDE_TABS_BLOCK_FALLBACK,
+} from "./sideTabs";
+import {
+  DEFAULT_TESTIMONIALS_BLOCK,
+  DEFAULT_TESTIMONIALS_BLOCK_FALLBACK,
+} from "./testimonials";
+
+export const DEFAULT_CMS_BLOCK_FALLBACKS: CmsBlockFallbacks = {
+  actionPanel: DEFAULT_ACTION_PANEL_BLOCK_FALLBACK,
+  hero: DEFAULT_HERO_BLOCK_FALLBACK,
+  highlights: DEFAULT_HIGHLIGHTS_BLOCK_FALLBACK,
+  sideTabs: DEFAULT_SIDE_TABS_BLOCK_FALLBACK,
+  testimonials: DEFAULT_TESTIMONIALS_BLOCK_FALLBACK,
+};
+
+export const DEFAULT_CMS_PAGE_BLOCKS: CmsPageBlock[] = [
+  DEFAULT_HERO_BLOCK,
+  DEFAULT_ACTION_PANEL_BLOCK,
+  DEFAULT_SIDE_TABS_BLOCK,
+  DEFAULT_HIGHLIGHTS_BLOCK,
+  DEFAULT_TESTIMONIALS_BLOCK,
+];

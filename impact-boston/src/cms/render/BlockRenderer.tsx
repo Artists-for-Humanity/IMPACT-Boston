@@ -1,5 +1,5 @@
 import type { CmsPageBlock } from "@/cms/types/blocks";
-import type { CmsPageFallbacks } from "@/cms/types/page";
+import type { CmsBlockFallbacks } from "@/cms/types/page";
 import ActionPanelBlock from "./blocks/ActionPanelBlock";
 import HeroBlock from "./blocks/HeroBlock";
 import HighlightsBlock from "./blocks/HighlightsBlock";
@@ -8,7 +8,7 @@ import TestimonialsBlock from "./blocks/TestimonialsBlock";
 
 type BlockRendererProps = {
   block: CmsPageBlock;
-  fallbacks?: CmsPageFallbacks;
+  fallbacks?: CmsBlockFallbacks;
 };
 
 export default function BlockRenderer({

@@ -5,10 +5,10 @@ import {
   resolveSpotlightTestimonial,
 } from "@/cms/normalize/blocks/testimonials";
 import type { CmsTestimonialsBlock } from "@/cms/types/blocks";
-import type { CmsPageFallbacks } from "@/cms/types/page";
+import type { CmsBlockFallbacks } from "@/cms/types/page";
 
 type TestimonialsBlockProps = {
-  fallback?: CmsPageFallbacks["testimonials"];
+  fallback?: CmsBlockFallbacks["testimonials"];
   section: CmsTestimonialsBlock;
 };
 

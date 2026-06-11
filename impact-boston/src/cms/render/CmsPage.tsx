@@ -1,10 +1,10 @@
 import type { CmsPageBlock } from "@/cms/types/blocks";
-import type { CmsPageFallbacks } from "@/cms/types/page";
+import type { CmsBlockFallbacks } from "@/cms/types/page";
 import BlockRenderer from "./BlockRenderer";
 
 type CmsPageProps = {
   blocks: CmsPageBlock[];
-  fallbacks?: CmsPageFallbacks;
+  fallbacks?: CmsBlockFallbacks;
 };
 
 export function CmsPage({ blocks, fallbacks }: CmsPageProps) {

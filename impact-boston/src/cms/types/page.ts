@@ -7,7 +7,7 @@ import type {
   SanityHighlight,
 } from "./blocks";
 
-export type HeroFallback = {
+export type HeroBlockFallback = {
   headlineParts: { text: string; color: string }[];
   body: string;
   ctaText: string;
@@ -16,9 +16,9 @@ export type HeroFallback = {
   imageAlt: string;
 };
 
-export type CmsPageFallbacks = {
+export type CmsBlockFallbacks = {
   actionPanel?: SanityActionPanelFields;
-  hero?: HeroFallback;
+  hero?: HeroBlockFallback;
   highlights?: {
     label?: string | null;
     slides?: SanityHighlight[] | null;

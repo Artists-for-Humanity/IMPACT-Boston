@@ -11,7 +11,7 @@ import {
   resolveHeroImageSrc,
 } from "@/cms/normalize/blocks/hero";
 import type { CmsHeroBlock } from "@/cms/types/blocks";
-import type { HeroFallback } from "@/cms/types/page";
+import type { HeroBlockFallback } from "@/cms/types/page";
 
 const HERO_TEXT_COLOR_MAP: Record<
   string,
@@ -26,7 +26,7 @@ const HERO_TEXT_COLOR_MAP: Record<
 
 type HeroBlockProps = {
   section: CmsHeroBlock;
-  fallback?: HeroFallback;
+  fallback?: HeroBlockFallback;
 };
 
 export default function HeroBlock({ section, fallback }: HeroBlockProps) {
@@ -46,8 +46,11 @@ export default function HeroBlock({ section, fallback }: HeroBlockProps) {
       <Hero2
         title={
           section.title ??
-          headlineParts.map((part) => part.text.trim()).join(" ") ??
-          "Courage makes us safer"
+          (headlineParts
+            .map((part) => part.text.trim())
+            .join(" ")
+            .trim() ||
+            "Title")
         }
         highlight={section.highlight ?? undefined}
         highlightColor={resolveHero2HighlightColor(section.highlightColor)}

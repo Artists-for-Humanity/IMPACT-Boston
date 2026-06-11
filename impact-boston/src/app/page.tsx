@@ -1,9 +1,9 @@
 import { draftMode } from "next/headers";
 
 import {
-  HOME_PAGE_FALLBACK_BLOCKS,
-  HOME_PAGE_FALLBACKS,
-} from "@/cms/fallbacks/pages/home";
+  DEFAULT_CMS_BLOCK_FALLBACKS,
+  DEFAULT_CMS_PAGE_BLOCKS,
+} from "@/cms/fallbacks/blocks";
 import { getLandingPageBlocks } from "@/cms/normalize/page";
 import { CmsPage } from "@/cms/render/CmsPage";
 import { getLandingPageData } from "@/sanity/landingPageData";
@@ -14,8 +14,8 @@ export default async function IndexPage() {
 
   return (
     <CmsPage
-      blocks={getLandingPageBlocks(data, HOME_PAGE_FALLBACK_BLOCKS)}
-      fallbacks={HOME_PAGE_FALLBACKS}
+      blocks={getLandingPageBlocks(data, DEFAULT_CMS_PAGE_BLOCKS)}
+      fallbacks={DEFAULT_CMS_BLOCK_FALLBACKS}
     />
   );
 }
