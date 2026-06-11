@@ -82,6 +82,19 @@ export type CmsHighlightsBlock = CmsPageBlockBase & {
   slides?: SanityHighlight[] | null;
 };
 
+export type CmsContentBlock = CmsPageBlockBase & {
+  _type: "contentBlock";
+  title?: string | null;
+  subtitle?: string | null;
+  body?: string | null;
+  image?: SanityImageSource | null;
+  imageAlt?: string | null;
+  reverse?: boolean | null;
+  ctaText?: string | null;
+  ctaHref?: string | null;
+  backgroundColor?: string | null;
+};
+
 export type CmsTestimonialsBlock = CmsPageBlockBase & {
   _type: "testimonialsCarouselBlock" | "testimonialsSpotlightBlock";
   heading?: string | null;
@@ -98,6 +111,7 @@ export type CmsPageBlock =
   | CmsCtaSectionBlock
   | CmsSideTabsBlock
   | CmsHighlightsBlock
-  | CmsTestimonialsBlock;
+  | CmsTestimonialsBlock
+  | CmsContentBlock;
 
 export type ResolvedHighlightSlide = HighlightSlide;

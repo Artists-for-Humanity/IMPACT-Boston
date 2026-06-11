@@ -21,6 +21,7 @@ export function definePageBlocksField() {
         title: 'Hero 2',
         description: 'Uses the Hero2 component from components/Hero.',
       }),
+      defineArrayMember({type: 'contentBlock'}),
       defineArrayMember({type: 'actionPanelBlock'}),
       defineArrayMember({type: 'ctaSectionBlock'}),
       defineArrayMember({type: 'sideTabsBlock'}),
@@ -56,7 +57,7 @@ export function definePageBlocksField() {
           {
             name: 'content',
             title: 'Content',
-            of: ['actionPanelBlock', 'sideTabsBlock', 'highlightsBlock'],
+            of: ['contentBlock', 'actionPanelBlock', 'sideTabsBlock', 'highlightsBlock'],
           },
           {
             name: 'testimonials',
