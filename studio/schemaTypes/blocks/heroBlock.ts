@@ -2,8 +2,8 @@ import {defineField, defineType} from 'sanity'
 import {HeadlineColorInput, headlineColorOptions} from '../../components/HeadlineColorInput'
 
 const isHero2 = (parent: unknown) =>
-  typeof parent === 'object' && parent !== null && 'variant' in parent
-    ? (parent as {variant?: string}).variant === 'hero2'
+  typeof parent === 'object' && parent !== null && '_type' in parent
+    ? (parent as {_type?: string})._type === 'hero2Block'
     : false
 
 export const heroBlockType = defineType({
@@ -11,20 +11,6 @@ export const heroBlockType = defineType({
   title: 'Hero Block',
   type: 'object',
   fields: [
-    defineField({
-      name: 'variant',
-      title: 'Hero Component',
-      type: 'string',
-      description: 'Choose which component this block should use.',
-      initialValue: 'hero1',
-      options: {
-        list: [
-          {title: 'Hero 1', value: 'hero1'},
-          {title: 'Hero 2', value: 'hero2'},
-        ],
-        layout: 'radio',
-      },
-    }),
     defineField({
       name: 'title',
       title: 'Title',
@@ -165,9 +151,9 @@ export const heroBlockType = defineType({
     }),
   ],
   preview: {
-    select: {variant: 'variant'},
-    prepare({variant}) {
-      const title = variant === 'hero2' ? 'Hero 2' : 'Hero 1'
+    select: {type: '_type'},
+    prepare({type}) {
+      const title = type === 'hero2Block' ? 'Hero 2' : 'Hero 1'
 
       return {title, subtitle: 'Hero Block'}
     },

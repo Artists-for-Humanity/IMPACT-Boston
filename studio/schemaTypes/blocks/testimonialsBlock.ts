@@ -2,13 +2,12 @@ import {defineField, defineType} from 'sanity'
 
 type TestimonialsBlockParent = {
   _type?: string
-  variant?: string
 }
 
 const isParticipantSpotlightBlock = (parent: unknown) => {
   const typedParent = parent as TestimonialsBlockParent | undefined
 
-  return typedParent?._type === 'testimonialsSpotlightBlock' || typedParent?.variant === 'spotlight'
+  return typedParent?._type === 'testimonialsSpotlightBlock'
 }
 
 export const testimonialsBlockType = defineType({
@@ -118,13 +117,13 @@ export const testimonialsBlockType = defineType({
       carouselAuthor: 'testimonials.0.author',
     },
     prepare({title, type, spotlightAuthor, carouselAuthor}) {
-      const variantTitle =
+      const layoutTitle =
         type === 'testimonialsSpotlightBlock' ? 'Participant Spotlight' : 'Carousel'
       const author = type === 'testimonialsSpotlightBlock' ? spotlightAuthor : carouselAuthor
 
       return {
-        title: title || `Testimonials: ${variantTitle}`,
-        subtitle: author ? `${variantTitle}: ${author}` : `Testimonials: ${variantTitle}`,
+        title: title || `Testimonials: ${layoutTitle}`,
+        subtitle: author ? `${layoutTitle}: ${author}` : `Testimonials: ${layoutTitle}`,
       }
     },
   },
