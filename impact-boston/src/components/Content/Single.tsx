@@ -34,6 +34,7 @@ type Thumbnail = ThumbnailImage | ThumbnailVideo | ThumbnailEmbed;
 
 interface SingleContentProps {
   id?: string;
+  label?: string;
   title: string;
   titleAs?: "h2" | "h3";
   paragraphs: Paragraph[];
@@ -54,6 +55,7 @@ interface SingleContentProps {
 
 export default function SingleContent({
   id,
+  label,
   title,
   titleAs: TitleTag = "h3",
   subtitle,
@@ -144,6 +146,9 @@ export default function SingleContent({
 
         <div className={`${contentCol} flex flex-col gap-6 lg:gap-8`}>
           <div className="flex flex-col gap-2">
+            {label && (
+              <div className="sub-2 text-secondary">{label}</div>
+            )}
             <TitleTag className={TitleTag === "h2" ? "h2" : "h3"}>
               {title}
             </TitleTag>

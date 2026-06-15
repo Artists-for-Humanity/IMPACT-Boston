@@ -6,6 +6,12 @@ export const contentBlockType = defineType({
   type: 'object',
   fields: [
     defineField({
+      name: 'label',
+      title: 'Label',
+      description: 'Small text displayed above the title.',
+      type: 'string',
+    }),
+    defineField({
       name: 'title',
       title: 'Title',
       type: 'string',

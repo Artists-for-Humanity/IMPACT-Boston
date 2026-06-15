@@ -84,6 +84,7 @@ export type CmsHighlightsBlock = CmsPageBlockBase & {
 
 export type CmsContentBlock = CmsPageBlockBase & {
   _type: "contentBlock";
+  label?: string | null;
   title?: string | null;
   subtitle?: string | null;
   body?: string | null;

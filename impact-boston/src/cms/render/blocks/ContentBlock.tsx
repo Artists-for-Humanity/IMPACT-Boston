@@ -17,6 +17,7 @@ export default function ContentBlock({ section }: ContentBlockProps) {
 
   return (
     <SingleContent
+      label={section.label ?? undefined}
       title={section.title ?? ""}
       subtitle={section.subtitle ?? undefined}
       paragraphs={paragraphs}
