@@ -2,10 +2,14 @@ import type { CmsPageBlock } from "@/cms/types/blocks";
 import type { CmsBlockFallbacks } from "@/cms/types/page";
 import ActionPanelBlock from "./blocks/ActionPanelBlock";
 import CtaSectionBlock from "./blocks/CtaSectionBlock";
+import DoubleContentBlock from "./blocks/DoubleContentBlock";
 import HeroBlock from "./blocks/HeroBlock";
 import HighlightsBlock from "./blocks/HighlightsBlock";
+import ListBlock from "./blocks/ListBlock";
 import SideTabsBlock from "./blocks/SideTabsBlock";
+import SingleContentBlock from "./blocks/SingleContentBlock";
 import TestimonialsBlock from "./blocks/TestimonialsBlock";
+import TripleContentBlock from "./blocks/TripleContentBlock";
 
 type BlockRendererProps = {
   block: CmsPageBlock;
@@ -30,6 +34,18 @@ export default function BlockRenderer({
       return (
         <CtaSectionBlock section={block} fallback={fallbacks?.ctaSection} />
       );
+
+    case "singleContentBlock":
+      return <SingleContentBlock section={block} />;
+
+    case "doubleContentBlock":
+      return <DoubleContentBlock section={block} />;
+
+    case "tripleContentBlock":
+      return <TripleContentBlock section={block} />;
+
+    case "listBlock":
+      return <ListBlock section={block} />;
 
     case "sideTabsBlock":
       return (

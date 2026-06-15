@@ -72,17 +72,7 @@ export const heroBlockType = defineType({
         layout: 'radio',
       },
     }),
-    defineField({
-      name: 'description',
-      title: 'Description',
-      type: 'text',
-      rows: 3,
-      hidden: ({parent}) => !isHero2(parent),
-      validation: (rule) =>
-        rule.custom((value, context) =>
-          isHero2(context.parent) && !value ? 'Description is required for Hero 2.' : true,
-        ),
-    }),
+   
     defineField({
       name: 'headlineParts',
       title: 'Headline Parts',
@@ -131,6 +121,17 @@ export const heroBlockType = defineType({
           },
         },
       ],
+    }),
+     defineField({
+      name: 'description',
+      title: 'Description',
+      type: 'text',
+      rows: 3,
+      hidden: ({parent}) => !isHero2(parent),
+      validation: (rule) =>
+        rule.custom((value, context) =>
+          isHero2(context.parent) && !value ? 'Description is required for Hero 2.' : true,
+        ),
     }),
     defineField({
       name: 'body',

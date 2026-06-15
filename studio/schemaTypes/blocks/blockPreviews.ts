@@ -5,6 +5,10 @@ export const blockPreviewImageUrls: Record<string, string> = {
   hero2Block: '/static/block-previews/hero-2.svg',
   actionPanelBlock: '/static/block-previews/action-panel.svg',
   ctaSectionBlock: '/static/block-previews/cta-section.svg',
+  singleContentBlock: '/static/block-previews/single-content.svg',
+  doubleContentBlock: '/static/block-previews/double-content.svg',
+  tripleContentBlock: '/static/block-previews/triple-content.svg',
+  listBlock: '/static/block-previews/list.svg',
   sideTabsBlock: '/static/block-previews/side-tabs.svg',
   highlightsBlock: '/static/block-previews/highlights.svg',
   testimonialsCarouselBlock: '/static/block-previews/testimonials-carousel.svg',
@@ -38,6 +42,19 @@ export const blockPreviewMedia = {
     blockPreviewImageUrls.ctaSectionBlock,
     'CTA panels block preview',
   ),
+  singleContentBlock: createBlockPreviewMedia(
+    blockPreviewImageUrls.singleContentBlock,
+    'Single content block preview',
+  ),
+  doubleContentBlock: createBlockPreviewMedia(
+    blockPreviewImageUrls.doubleContentBlock,
+    'Double content block preview',
+  ),
+  tripleContentBlock: createBlockPreviewMedia(
+    blockPreviewImageUrls.tripleContentBlock,
+    'Triple content block preview',
+  ),
+  listBlock: createBlockPreviewMedia(blockPreviewImageUrls.listBlock, 'List block preview'),
   sideTabsBlock: createBlockPreviewMedia(
     blockPreviewImageUrls.sideTabsBlock,
     'Side tabs block preview',
