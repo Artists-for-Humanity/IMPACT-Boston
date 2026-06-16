@@ -1,8 +1,8 @@
 import Grid from "@/components/common/Grid";
 import Image from "next/image";
 import Link from "next/link";
+import type { ReactNode } from "react";
 import ScriptEmbed from "./ScriptEmbed";
-import Button from "../common/Button";
 import { PLACEHOLDER_IMAGE_SRC } from "../common/placeholderImage";
 
 interface Paragraph {
@@ -34,7 +34,6 @@ type Thumbnail = ThumbnailImage | ThumbnailVideo | ThumbnailEmbed;
 
 interface SingleContentProps {
   id?: string;
-  label?: string;
   title: string;
   titleAs?: "h2" | "h3";
   paragraphs: Paragraph[];
@@ -46,6 +45,7 @@ interface SingleContentProps {
   reverse?: boolean;
   purchaseLink?: { href: string; text: string };
   cta?: { href: string; text: string };
+  bodyContent?: ReactNode;
   className?: string;
   subtitleClassName?: string;
   backgroundColor?: string;
@@ -55,7 +55,6 @@ interface SingleContentProps {
 
 export default function SingleContent({
   id,
-  label,
   title,
   titleAs: TitleTag = "h3",
   subtitle,
@@ -66,6 +65,7 @@ export default function SingleContent({
   reverse = false,
   purchaseLink,
   cta,
+  bodyContent,
   className,
   subtitleClassName,
   backgroundColor,
@@ -100,32 +100,17 @@ export default function SingleContent({
       width={1000}
       height={1000}
       alt={imageAlt ?? ""}
-      className={
-        reverse
-          ? "object-cover w-full h-[400px] lg:flex-1 lg:min-h-0 lg:h-auto"
-          : "object-cover"
-      }
+      className="object-cover w-full h-[400px] lg:h-auto"
       loading="eager"
       priority={true}
-      style={
-        reverse
-          ? { objectFit: "cover" }
-          : {
-              display: "block",
-              width: "100%",
-              height: "400px",
-              objectFit: "cover",
-              borderTopLeftRadius: 0,
-              borderTopRightRadius: 0,
-            }
-      }
+      style={{ objectFit: "cover", display: "block" }}
     />
   ) : null;
 
   return (
     <div
       id={id}
-      className={`${className} ${backgroundColor ? backgroundColor : ""}`}
+      className={`${className ?? ""} ${backgroundColor ?? ""}`.trim()}
     >
       <Grid className={gridClassName}>
         {reverse && (
@@ -146,9 +131,6 @@ export default function SingleContent({
 
         <div className={`${contentCol} flex flex-col gap-6 lg:gap-8`}>
           <div className="flex flex-col gap-2">
-            {label && (
-              <div className="sub-2 text-secondary">{label}</div>
-            )}
             <TitleTag className={TitleTag === "h2" ? "h2" : "h3"}>
               {title}
             </TitleTag>
@@ -159,7 +141,7 @@ export default function SingleContent({
             )}
           </div>
           <div className="flex flex-col gap-6 lg:grid lg:grid-cols-5 lg:gap-y-6">
-            {paragraphs.map((para, idx) => (
+            {bodyContent ?? paragraphs.map((para, idx) => (
               <p
                 className={`p1 lg:col-span-5${para.bold ? " font-bold" : ""}`}
                 key={idx}
@@ -178,14 +160,23 @@ export default function SingleContent({
               </Link>
             )}
             {cta && (
-              <Button
+              <Link
                 href={cta.href}
-                variant="primary"
-                showChevron
-                className="box-border md:box-content h-[8px] md:h-[25px] py-6 w-full md:w-auto md:self-start lg:col-span-5 justify-self-start gap-x-16"
+                className="lg:col-span-5"
+                style={{
+                  color: "var(--Secondary, #563672)",
+                  fontFamily: '"IBM Plex Sans"',
+                  fontSize: "18px",
+                  fontWeight: 500,
+                  textDecorationLine: "underline",
+                  textDecorationStyle: "solid",
+                  textDecorationSkipInk: "auto",
+                  textUnderlineOffset: "auto",
+                  textUnderlinePosition: "from-font",
+                }}
               >
                 {cta.text}
-              </Button>
+              </Link>
             )}
           </div>
         </div>

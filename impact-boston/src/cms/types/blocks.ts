@@ -1,4 +1,5 @@
 import type { SanityImageSource } from "@sanity/image-url";
+import type { PortableTextBlock } from "next-sanity";
 
 import type { ActionPanelCard } from "@/components/Action/ActionPanel";
 import type { CtaPanelData } from "@/components/Action/CtaSection";
@@ -84,10 +85,9 @@ export type CmsHighlightsBlock = CmsPageBlockBase & {
 
 export type CmsContentBlock = CmsPageBlockBase & {
   _type: "contentBlock";
-  label?: string | null;
   title?: string | null;
   subtitle?: string | null;
-  body?: string | null;
+  body?: PortableTextBlock[] | string | null;
   image?: SanityImageSource | null;
   imageAlt?: string | null;
   reverse?: boolean | null;

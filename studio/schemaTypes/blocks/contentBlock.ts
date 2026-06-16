@@ -1,16 +1,10 @@
-import {defineField, defineType} from 'sanity'
+import {defineArrayMember, defineField, defineType} from 'sanity'
 
 export const contentBlockType = defineType({
   name: 'contentBlock',
   title: 'Content Block',
   type: 'object',
   fields: [
-    defineField({
-      name: 'label',
-      title: 'Label',
-      description: 'Small text displayed above the title.',
-      type: 'string',
-    }),
     defineField({
       name: 'title',
       title: 'Title',
@@ -25,8 +19,21 @@ export const contentBlockType = defineType({
     defineField({
       name: 'body',
       title: 'Body Text',
-      type: 'text',
-      rows: 5,
+      type: 'array',
+      of: [
+        defineArrayMember({
+          type: 'block',
+          styles: [{title: 'Normal', value: 'normal'}],
+          lists: [],
+          marks: {
+            decorators: [
+              {title: 'Bold', value: 'strong'},
+              {title: 'Italic', value: 'em'},
+            ],
+            annotations: [],
+          },
+        }),
+      ],
     }),
     defineField({
       name: 'image',
@@ -67,8 +74,18 @@ export const contentBlockType = defineType({
     defineField({
       name: 'backgroundColor',
       title: 'Background Color',
-      description: 'Tailwind CSS class for the section background (e.g. bg-bg-lavender).',
       type: 'string',
+      options: {
+        list: [
+          {title: 'None (White)', value: ''},
+          {title: 'Lavender', value: 'bg-bg-lavender'},
+          {title: 'Primary Light', value: 'bg-primary-light'},
+          {title: 'Secondary Light', value: 'bg-secondary-light'},
+          {title: 'Complementary Light', value: 'bg-complementary-light'},
+        ],
+        layout: 'radio',
+      },
+      initialValue: '',
     }),
   ],
   preview: {
