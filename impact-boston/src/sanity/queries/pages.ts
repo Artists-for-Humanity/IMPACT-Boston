@@ -37,8 +37,6 @@ const PAGE_SECTIONS_PROJECTION = `
       subtitle,
       subtext,
       variant,
-      linkText,
-      linkHref,
       paragraphs[] {
         text,
         bold
@@ -66,7 +64,6 @@ const PAGE_SECTIONS_PROJECTION = `
       listItems[] {
         title,
         description,
-        href,
         showInfoIcon,
         accordionContent,
         defaultOpen

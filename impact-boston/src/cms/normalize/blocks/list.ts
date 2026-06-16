@@ -17,12 +17,10 @@ const DEFAULT_LIST_ITEMS: ListItem[] = [
   {
     title: "Static List Item",
     description: DEFAULT_DESCRIPTION,
-    href: "#",
   },
   {
     title: "Accordion - Collapsed",
     description: DEFAULT_DESCRIPTION,
-    href: "#",
     accordionContent: DEFAULT_ACCORDION_BODY,
   },
   {
@@ -34,20 +32,17 @@ const DEFAULT_LIST_ITEMS: ListItem[] = [
   {
     title: "List with Information Icon",
     description: DEFAULT_DESCRIPTION,
-    href: "#",
     showInfoIcon: true,
   },
   {
     title: "Accordion with Information Icon",
     description: DEFAULT_DESCRIPTION,
-    href: "#",
     showInfoIcon: true,
     accordionContent: DEFAULT_ACCORDION_BODY,
   },
   ...Array.from({ length: 8 }, () => ({
     title: "Item",
     description: DEFAULT_DESCRIPTION,
-    href: "#",
   })),
 ];
 
@@ -85,18 +80,16 @@ export function resolveListBlock(section: CmsListBlock): ListProps {
 
   return {
     variant,
-    title: cleanText(section.title) || "List Component",
-    description: cleanText(section.description) || DEFAULT_DESCRIPTION,
-    linkText: cleanText(section.linkText) || "See all 14 services",
-    linkHref: cleanText(section.linkHref) || "#",
+    title: displayText(section.title) || "List Component",
+    description: displayText(section.description) || DEFAULT_DESCRIPTION,
     items: listItems?.length ? listItems : DEFAULT_LIST_ITEMS,
     detailItems: detailItems?.length ? detailItems : DEFAULT_DETAIL_ITEMS,
   };
 }
 
 function resolveListItem(item: ListItem): ListItem | null {
-  const title = cleanText(item.title);
-  const description = cleanText(item.description);
+  const title = displayText(item.title);
+  const description = displayText(item.description);
 
   if (!title || !description) {
     return null;
@@ -105,11 +98,10 @@ function resolveListItem(item: ListItem): ListItem | null {
   return {
     title,
     description,
-    href: cleanText(item.href) || undefined,
     showInfoIcon: Boolean(item.showInfoIcon),
     accordionContent:
-      cleanText(item.accordionContent) ||
-      cleanText(item.paragraph) ||
+      displayText(item.accordionContent) ||
+      displayText(item.paragraph) ||
       undefined,
     defaultOpen: Boolean(item.defaultOpen),
   };
@@ -118,12 +110,12 @@ function resolveListItem(item: ListItem): ListItem | null {
 function resolveDetailItem(item: ListDetailItem): ListDetailItem | null {
   const fields = item.fields
     ?.map((field) => ({
-      label: cleanText(field.label),
-      value: cleanText(field.value),
-      href: cleanText(field.href) || undefined,
+      label: displayText(field.label),
+      value: displayText(field.value),
+      href: controlText(field.href) || undefined,
     }))
-    .filter((field) => field.label && field.value);
-  const description = cleanText(item.description);
+    .filter((field) => hasText(field.label) && hasText(field.value));
+  const description = displayText(item.description);
 
   if (!fields?.length || !description) {
     return null;
@@ -131,11 +123,19 @@ function resolveDetailItem(item: ListDetailItem): ListDetailItem | null {
 
   return {
     fields,
-    descriptionTitle: cleanText(item.descriptionTitle) || "Description",
+    descriptionTitle: displayText(item.descriptionTitle) || "Description",
     description,
   };
 }
 
-function cleanText(value?: string | null) {
+function displayText(value?: string | null) {
+  return hasText(value) ? (value?.trim() ?? "") : "";
+}
+
+function controlText(value?: string | null) {
   return stegaClean(value)?.trim() ?? "";
+}
+
+function hasText(value?: string | null) {
+  return Boolean(stegaClean(value)?.trim());
 }

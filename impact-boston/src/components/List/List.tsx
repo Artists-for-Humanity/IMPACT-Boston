@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { ChevronDown, ChevronRight, ChevronUp, CircleHelp } from "lucide-react";
-import { useState } from "react";
+import { ChevronDown, ChevronUp, CircleHelp } from "lucide-react";
+import { useId, useState } from "react";
 
 import Grid from "../common/Grid";
 
@@ -12,7 +12,6 @@ export type ListItem = {
   title: string;
   description: string;
   paragraph?: string;
-  href?: string;
   showInfoIcon?: boolean;
   accordionContent?: string;
   defaultOpen?: boolean;
@@ -36,8 +35,6 @@ export type ListProps = {
   items?: ListItem[];
   detailItems?: ListDetailItem[];
   variant?: ListVariant;
-  linkText?: string;
-  linkHref?: string;
   showToggle?: boolean;
   noPaddingTop?: boolean;
 };
@@ -48,8 +45,6 @@ export default function List({
   items = [],
   detailItems = [],
   variant = "accordion",
-  linkText,
-  linkHref,
   showToggle = true,
   noPaddingTop = false,
 }: ListProps) {
@@ -63,17 +58,15 @@ export default function List({
   );
   const [allOpen, setAllOpen] = useState(false);
   const visibleItems = variant === "details" ? detailItems : items;
+  const serviceCount = visibleItems.length;
+  const serviceLabel = serviceCount === 1 ? "service" : "services";
   const allOpenLabel = allOpen
-    ? "Close all services"
-    : `See all ${visibleItems.length} services`;
+    ? `Close all ${serviceCount} ${serviceLabel}`
+    : `Show all ${serviceCount} ${serviceLabel}`;
 
   const toggleItem = (index: number) => {
-    if (allOpen) {
-      return;
-    }
-
     setOpenIndexes((current) => {
-      const next = new Set(current);
+      const next = allOpen ? getAccordionIndexes(items) : new Set(current);
 
       if (next.has(index)) {
         next.delete(index);
@@ -83,6 +76,7 @@ export default function List({
 
       return next;
     });
+    setAllOpen(false);
   };
 
   const toggleAll = () => {
@@ -90,9 +84,7 @@ export default function List({
     setOpenIndexes(new Set());
   };
 
-  const headerAction = linkText ? (
-    <ListActionLink href={linkHref}>{linkText}</ListActionLink>
-  ) : showToggle && variant === "accordion" ? (
+  const headerAction = showToggle && variant === "accordion" && serviceCount ? (
     <button
       className="link text-secondary underline transition hover:text-primary"
       onClick={toggleAll}
@@ -149,17 +141,39 @@ function AccordionList({
   openIndexes: Set<number>;
   onToggleItem: (index: number) => void;
 }) {
+  const listId = useId();
+
   return (
     <div>
       {items.map((item, index) => {
         const accordionContent = item.accordionContent ?? item.paragraph;
         const hasAccordion = Boolean(accordionContent);
         const isOpen = allOpen || openIndexes.has(index);
+        const contentId = `${listId}-accordion-${index}`;
 
         return (
           <article
-            className="border-b border-line-divider py-5 md:py-6 lg:py-7"
+            aria-controls={hasAccordion ? contentId : undefined}
+            aria-expanded={hasAccordion ? isOpen : undefined}
+            className={`border-b border-line-divider py-5 md:py-6 lg:py-7 ${
+              hasAccordion
+                ? "cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-secondary"
+                : ""
+            }`}
             key={`${item.title}-${index}`}
+            onClick={hasAccordion ? () => onToggleItem(index) : undefined}
+            onKeyDown={
+              hasAccordion
+                ? (event) => {
+                    if (event.key === "Enter" || event.key === " ") {
+                      event.preventDefault();
+                      onToggleItem(index);
+                    }
+                  }
+                : undefined
+            }
+            role={hasAccordion ? "button" : undefined}
+            tabIndex={hasAccordion ? 0 : undefined}
           >
             <div className="grid grid-cols-[1fr_auto] gap-x-4 gap-y-4">
               <div className="min-w-0">
@@ -181,35 +195,22 @@ function AccordionList({
               </div>
 
               <div className="flex items-start gap-5 pt-0.5">
-                {item.href ? (
-                  <Link
-                    aria-label={item.title}
-                    className="text-black transition hover:text-secondary"
-                    href={item.href}
-                  >
-                    <ChevronRight className="size-5" strokeWidth={1.8} />
-                  </Link>
-                ) : null}
-
                 {hasAccordion ? (
-                  <button
-                    aria-expanded={isOpen}
-                    aria-label={`${isOpen ? "Collapse" : "Expand"} ${item.title}`}
-                    className="text-black transition hover:text-secondary"
-                    onClick={() => onToggleItem(index)}
-                    type="button"
-                  >
+                  <span aria-hidden="true" className="text-black">
                     {isOpen ? (
                       <ChevronUp className="size-5" strokeWidth={1.8} />
                     ) : (
                       <ChevronDown className="size-5" strokeWidth={1.8} />
                     )}
-                  </button>
+                  </span>
                 ) : null}
               </div>
 
               {hasAccordion && isOpen ? (
-                <p className="p2 col-span-full max-w-[920px] whitespace-pre-line text-black">
+                <p
+                  className="p2 col-span-full max-w-[920px] whitespace-pre-line text-black"
+                  id={contentId}
+                >
                   {accordionContent}
                 </p>
               ) : null}
@@ -263,20 +264,12 @@ function DetailList({ items }: { items: ListDetailItem[] }) {
   );
 }
 
-function ListActionLink({
-  children,
-  href,
-}: {
-  children: string;
-  href?: string;
-}) {
-  if (!href) {
-    return <span className="link text-secondary underline">{children}</span>;
-  }
-
-  return (
-    <Link className="link text-secondary underline" href={href}>
-      {children}
-    </Link>
+function getAccordionIndexes(items: ListItem[]) {
+  return new Set(
+    items
+      .map((item, index) =>
+        item.accordionContent || item.paragraph ? index : null,
+      )
+      .filter((index): index is number => index !== null),
   );
 }

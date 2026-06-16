@@ -11,12 +11,10 @@ const defaultListItems = [
   {
     title: 'Static List Item',
     description: defaultDescription,
-    href: '#',
   },
   {
     title: 'Accordion - Collapsed',
     description: defaultDescription,
-    href: '#',
     accordionContent: defaultAccordionBody,
   },
   {
@@ -28,20 +26,17 @@ const defaultListItems = [
   {
     title: 'List with Information Icon',
     description: defaultDescription,
-    href: '#',
     showInfoIcon: true,
   },
   {
     title: 'Accordion with Information Icon',
     description: defaultDescription,
-    href: '#',
     showInfoIcon: true,
     accordionContent: defaultAccordionBody,
   },
   ...Array.from({length: 8}, () => ({
     title: 'Item',
     description: defaultDescription,
-    href: '#',
   })),
 ]
 
@@ -99,23 +94,6 @@ export const listBlockType = defineType({
       rows: 2,
     }),
     defineField({
-      name: 'linkText',
-      title: 'Link Text',
-      type: 'string',
-    }),
-    defineField({
-      name: 'linkHref',
-      title: 'Link URL',
-      type: 'string',
-      hidden: ({parent}) => !parent?.linkText,
-      validation: (rule) =>
-        rule.custom((value, context) =>
-          value || !(context.parent as {linkText?: string} | undefined)?.linkText
-            ? true
-            : 'Link URL is required when link text is set.',
-        ),
-    }),
-    defineField({
       name: 'listItems',
       title: 'List Items',
       type: 'array',
@@ -142,11 +120,6 @@ export const listBlockType = defineType({
               type: 'text',
               rows: 2,
               validation: (rule) => rule.required(),
-            }),
-            defineField({
-              name: 'href',
-              title: 'Row Link',
-              type: 'string',
             }),
             defineField({
               name: 'showInfoIcon',
@@ -248,8 +221,6 @@ export const listBlockType = defineType({
     variant: 'accordion',
     title: 'List Component',
     description: defaultDescription,
-    linkText: 'See all 14 services',
-    linkHref: '#',
     listItems: defaultListItems,
     detailItems: defaultDetailItems,
   },
