@@ -97,7 +97,7 @@ export const imageGridBlockType = defineType({
       return {
         title: title || 'Image Grid',
         subtitle,
-        media: blockPreviewMedia.tripleContentBlock,
+        media: blockPreviewMedia.imageGridBlock,
       }
     },
   },

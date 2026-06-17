@@ -3,8 +3,15 @@ import ImageGrid from "@/components/Content/ImageGrid";
 import { urlFor } from "@/sanity/image";
 import type { CmsImageGridBlock } from "@/cms/types/blocks";
 import { PLACEHOLDER_IMAGE_SRC } from "@/components/common/placeholderImage";
+import type { CmsDataAttribute, CmsFieldPath } from "@/cms/visualEditing";
 
-export default function ImageGridBlock({ section }: { section: CmsImageGridBlock }) {
+type ImageGridBlockProps = {
+  blockPath: CmsFieldPath;
+  dataAttribute?: CmsDataAttribute;
+  section: CmsImageGridBlock;
+};
+
+export default function ImageGridBlock({ section }: ImageGridBlockProps) {
   const members = (section.members ?? [])
     .filter((m) => m.name && m.role && m.bio)
     .map((m) => ({
