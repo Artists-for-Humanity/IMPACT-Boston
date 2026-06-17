@@ -10,7 +10,7 @@ export function DisableDraftMode() {
     startTransition(() => disableDraftMode());
 
   return (
-    <div className="fixed left-4 top-4 z-[2147483647]">
+    <div className="fixed left-4 top-25 z-[2147483647]">
       <button
         type="button"
         onClick={disable}
