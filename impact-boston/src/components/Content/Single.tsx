@@ -47,6 +47,7 @@ export interface SingleContentProps {
   eyebrow?: string;
   title: string;
   titleAs?: "h2" | "h3";
+  subtitleFirst?: boolean;
   paragraphs?: SingleContentParagraph[];
   subtitle?: string;
   secondaryParagraph?: string;
@@ -81,6 +82,7 @@ export default function SingleContent({
   eyebrow,
   title,
   titleAs: TitleTag = "h3",
+  subtitleFirst = false,
   subtitle,
   paragraphs,
   imageSrc,
@@ -172,6 +174,14 @@ export default function SingleContent({
                   {eyebrow}
                 </p>
               ) : null}
+              {subtitleFirst && subtitle && (
+                <div
+                  className={`sub-2 ${subtitleClassName ?? "text-secondary"}`}
+                  data-sanity={dataAttributes?.subtitle}
+                >
+                  {subtitle}
+                </div>
+              )}
               {title ? (
                 <TitleTag
                   className={TitleTag === "h2" ? "h2" : "h3"}
@@ -180,7 +190,7 @@ export default function SingleContent({
                   {title}
                 </TitleTag>
               ) : null}
-              {subtitle && (
+              {!subtitleFirst && subtitle && (
                 <div
                   className={`sub-2 ${subtitleClassName ?? "text-secondary"}`}
                   data-sanity={dataAttributes?.subtitle}
