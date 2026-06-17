@@ -1,42 +1,47 @@
 import Grid from "@/components/common/Grid";
 import Image from "next/image";
 import Link from "next/link";
+import type { ReactNode } from "react";
 import ScriptEmbed from "./ScriptEmbed";
 import Button from "../common/Button";
 import { PLACEHOLDER_IMAGE_SRC } from "../common/placeholderImage";
 
-interface Paragraph {
+export type SingleContentParagraph = {
   text: string;
   bold?: boolean;
-}
+};
 
-interface ThumbnailImage {
+export type SingleContentThumbnailImage = {
   type: "image";
   label: string;
   imageSrc: string;
   imageAlt: string;
-}
+};
 
-interface ThumbnailVideo {
+export type SingleContentThumbnailVideo = {
   type: "video";
   label: string;
   videoSrc: string;
   title: string;
-}
+};
 
-interface ThumbnailEmbed {
+export type SingleContentThumbnailEmbed = {
   type: "embed";
   label: string;
   scriptSrc: string;
-}
+};
 
-type Thumbnail = ThumbnailImage | ThumbnailVideo | ThumbnailEmbed;
+export type SingleContentThumbnail =
+  | SingleContentThumbnailImage
+  | SingleContentThumbnailVideo
+  | SingleContentThumbnailEmbed;
 
-interface SingleContentProps {
+export type SingleContentProps = {
   id?: string;
-  title: string;
+  eyebrow?: string;
+  title?: string;
   titleAs?: "h2" | "h3";
-  paragraphs: Paragraph[];
+  paragraphs?: SingleContentParagraph[];
   subtitle?: string;
   secondaryParagraph?: string;
   imageSrc?: string;
@@ -49,11 +54,13 @@ interface SingleContentProps {
   subtitleClassName?: string;
   backgroundColor?: string;
   gridClassName?: string;
-  thumbnails?: Thumbnail[];
-}
+  thumbnails?: SingleContentThumbnail[];
+  children?: ReactNode;
+};
 
 export default function SingleContent({
   id,
+  eyebrow,
   title,
   titleAs: TitleTag = "h3",
   subtitle,
@@ -69,6 +76,7 @@ export default function SingleContent({
   backgroundColor,
   gridClassName,
   thumbnails,
+  children,
 }: SingleContentProps) {
   const imageCol = reverse
     ? "col-span-full lg:col-span-6 lg:col-start-1"
@@ -78,13 +86,17 @@ export default function SingleContent({
     ? "col-span-full lg:col-span-5 lg:col-start-8"
     : "col-span-full not-last:lg:col-span-5";
 
+  const fallbackImageAlt = title
+    ? `${title} placeholder image`
+    : "Single content image";
+
   const media = showImagePlaceholder ? (
     <div
       className="relative h-[400px] w-full overflow-hidden lg:flex-1 lg:min-h-0"
     >
       <Image
         src={PLACEHOLDER_IMAGE_SRC}
-        alt={imageAlt ?? `${title} placeholder image`}
+        alt={imageAlt ?? fallbackImageAlt}
         fill
         sizes="(min-width: 1024px) 50vw, 100vw"
         className="object-cover"
@@ -123,7 +135,7 @@ export default function SingleContent({
   return (
     <div
       id={id}
-      className={`${className} ${backgroundColor ? backgroundColor : ""}`}
+      className={[className, backgroundColor].filter(Boolean).join(" ")}
     >
       <Grid className={gridClassName}>
         {reverse && (
@@ -143,46 +155,61 @@ export default function SingleContent({
         )}
 
         <div className={`${contentCol} flex flex-col gap-6 lg:gap-8`}>
-          <div className="flex flex-col gap-2">
-            <TitleTag className={TitleTag === "h2" ? "h2" : "h3"}>
-              {title}
-            </TitleTag>
-            {subtitle && (
-              <div className={`sub-2 ${subtitleClassName ?? "text-secondary"}`}>
-                {subtitle}
+          {children ? (
+            <div className="flex flex-col gap-6 lg:grid lg:grid-cols-5 lg:gap-y-6">
+              {children}
+            </div>
+          ) : (
+            <>
+              <div className="flex flex-col gap-2">
+                {eyebrow && (
+                  <p className="medium-label text-secondary">{eyebrow}</p>
+                )}
+                {title && (
+                  <TitleTag className={TitleTag === "h2" ? "h2" : "h3"}>
+                    {title}
+                  </TitleTag>
+                )}
+                {subtitle && (
+                  <div
+                    className={`sub-2 ${subtitleClassName ?? "text-secondary"}`}
+                  >
+                    {subtitle}
+                  </div>
+                )}
               </div>
-            )}
-          </div>
-          <div className="flex flex-col gap-6 lg:grid lg:grid-cols-5 lg:gap-y-6">
-            {paragraphs.map((para, idx) => (
-              <p
-                className={`p1 lg:col-span-5${para.bold ? " font-bold" : ""}`}
-                key={idx}
-              >
-                {para.text}
-              </p>
-            ))}
-            {purchaseLink && (
-              <Link
-                href={purchaseLink.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p1-bold underline lg:col-span-5"
-              >
-                {purchaseLink.text}
-              </Link>
-            )}
-            {cta && (
-              <Button
-                href={cta.href}
-                variant="primary"
-                showChevron
-                className="box-border md:box-content h-[8px] md:h-[25px] py-6 w-full md:w-auto md:self-start lg:col-span-5 justify-self-start gap-x-16"
-              >
-                {cta.text}
-              </Button>
-            )}
-          </div>
+              <div className="flex flex-col gap-6 lg:grid lg:grid-cols-5 lg:gap-y-6">
+                {(paragraphs ?? []).map((para, idx) => (
+                  <p
+                    className={`p1 lg:col-span-5${para.bold ? " font-bold" : ""}`}
+                    key={idx}
+                  >
+                    {para.text}
+                  </p>
+                ))}
+                {cta && (
+                  <Button
+                    href={cta.href}
+                    variant="primary"
+                    showChevron
+                    className="box-border md:box-content h-[8px] md:h-[25px] py-6 w-full md:w-auto md:self-start lg:col-span-5 justify-self-start gap-x-16"
+                  >
+                    {cta.text}
+                  </Button>
+                )}
+                {purchaseLink && (
+                  <Link
+                    href={purchaseLink.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p1-bold underline lg:col-span-5"
+                  >
+                    {purchaseLink.text}
+                  </Link>
+                )}
+              </div>
+            </>
+          )}
         </div>
 
         {!reverse && (

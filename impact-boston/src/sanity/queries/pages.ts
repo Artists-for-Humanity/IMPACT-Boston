@@ -15,19 +15,67 @@ const PAGE_SECTIONS_PROJECTION = `
       ctaHref,
       image,
       imageAlt,
+      showImagePlaceholder,
       highlight,
       highlightColor,
       description,
       youtubeUrl,
       videoTitle,
+      content[] {
+        ...,
+        markDefs[] {
+          ...,
+          href
+        },
+        children[] {
+          ...
+        }
+      },
+      eyebrow,
       title,
+      titleAs,
+      subtitle,
       subtext,
+      variant,
+      paragraphs[] {
+        text,
+        bold
+      },
+      reverse,
+      purchaseLinkText,
+      purchaseLinkHref,
+      backgroundColor,
+      intro,
       cards[] {
         title,
+        titleLine2,
         body,
         href,
         bgColor,
-        icon
+        icon,
+        description,
+        tags,
+        backgroundColor,
+        image,
+        imageAlt,
+        showImagePlaceholder,
+        showImageGradient
+      },
+      listItems[] {
+        title,
+        description,
+        showInfoIcon,
+        accordionContent,
+        defaultOpen
+      },
+      detailItems[] {
+        fields[] {
+          label,
+          value,
+          href
+        },
+        descriptionTitle,
+        description
       },
       panels[] {
         title,

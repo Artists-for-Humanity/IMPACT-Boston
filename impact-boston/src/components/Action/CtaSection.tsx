@@ -1,5 +1,6 @@
 import Button from "../common/Button";
 import Image from "next/image";
+import { stegaClean } from "next-sanity";
 import * as LucideIcons from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
@@ -25,6 +26,30 @@ const LUCIDE_ICON_COMPONENTS = LucideIcons as unknown as Record<
 const DEFAULT_PANEL_COLORS = ["#e86834", "#311e41"];
 const DEFAULT_PANEL_CLASS =
   "md:w-1/2 py-14 px-10 md:p-10 lg:py-[118px] lg:px-[144px]";
+const BRAND_PANEL_COLORS: Record<string, string> = {
+  primary: "#311e41",
+  secondary: "#563672",
+  complementary: "#e86834",
+  "bg-primary": "#311e41",
+  "bg-secondary": "#563672",
+  "bg-complementary": "#e86834",
+};
+
+function getPanelBackgroundColor(
+  bgColor: string | null | undefined,
+  index: number,
+  shouldUseDefault: boolean,
+) {
+  const cleanColor = stegaClean(bgColor)?.trim();
+
+  if (cleanColor) {
+    return BRAND_PANEL_COLORS[cleanColor.toLowerCase()] ?? cleanColor;
+  }
+
+  return shouldUseDefault
+    ? DEFAULT_PANEL_COLORS[index] ?? DEFAULT_PANEL_COLORS[0]
+    : undefined;
+}
 
 function toKebabIconName(icon: string) {
   return icon
@@ -97,12 +122,12 @@ function CtaPanel({
 } & CtaPanelData) {
   const Icon = getLucideIcon(icon);
   const panelClassName = wrapperClassName ?? DEFAULT_PANEL_CLASS;
-  const panelStyle = wrapperClassName
-    ? undefined
-    : {
-        backgroundColor:
-          bgColor ?? DEFAULT_PANEL_COLORS[index] ?? DEFAULT_PANEL_COLORS[0],
-      };
+  const backgroundColor = getPanelBackgroundColor(
+    bgColor,
+    index,
+    !wrapperClassName,
+  );
+  const panelStyle = backgroundColor ? { backgroundColor } : undefined;
 
   function renderButtonIcon() {
     if (Icon) {

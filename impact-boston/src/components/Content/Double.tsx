@@ -2,7 +2,7 @@ import Grid from "@/components/common/Grid";
 import Image from "next/image";
 import { PLACEHOLDER_IMAGE_SRC } from "@/components/common/placeholderImage";
 
-type DoubleCard = {
+export type DoubleCard = {
   title?: string;
   description: string;
   imageSrc?: string;

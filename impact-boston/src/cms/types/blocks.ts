@@ -1,8 +1,20 @@
 import type { SanityImageSource } from "@sanity/image-url";
+import type { PortableTextBlock } from "next-sanity";
 
 import type { ActionPanelCard } from "@/components/Action/ActionPanel";
 import type { CtaPanelData } from "@/components/Action/CtaSection";
+import type { DoubleCard } from "@/components/Content/Double";
+import type {
+  SingleContentParagraph,
+  SingleContentProps,
+} from "@/components/Content/Single";
+import type { TripleProps } from "@/components/Content/Triple";
 import type { HighlightSlide } from "@/components/HighlightsSection";
+import type {
+  ListDetailItem,
+  ListItem,
+  ListVariant,
+} from "@/components/List/List";
 import type { Testimonial } from "@/components/Highlights/Testimonials/Carousel";
 import type { SideTab } from "@/components/TabsPanel/SideTabs";
 
@@ -34,6 +46,84 @@ export type SanityActionPanelFields = {
 
 export type SanityCtaSectionFields = {
   panels?: CtaPanelData[] | null;
+};
+
+export type SanitySingleContentParagraph = {
+  text?: SingleContentParagraph["text"] | null;
+  bold?: SingleContentParagraph["bold"] | null;
+};
+
+export type SanitySingleContentFields = {
+  content?: SanitySingleContentContentBlock[] | null;
+  eyebrow?: string | null;
+  title?: string | null;
+  titleAs?: SingleContentProps["titleAs"] | null;
+  subtitle?: string | null;
+  body?: string | null;
+  paragraphs?: SanitySingleContentParagraph[] | null;
+  image?: SanityImageSource | null;
+  imageSrc?: string | null;
+  imageAlt?: string | null;
+  showImagePlaceholder?: boolean | null;
+  reverse?: boolean | null;
+  ctaText?: string | null;
+  ctaHref?: string | null;
+  purchaseLinkText?: string | null;
+  purchaseLinkHref?: string | null;
+  backgroundColor?: string | null;
+};
+
+export type SanitySingleContentCtaBlock = {
+  _key?: string;
+  _type: "singleContentCta";
+  text?: string | null;
+  href?: string | null;
+};
+
+export type SanitySingleContentSupportingLinkBlock = {
+  _key?: string;
+  _type: "singleContentSupportingLink";
+  text?: string | null;
+  href?: string | null;
+  color?: string | null;
+};
+
+export type SanitySingleContentContentBlock =
+  | PortableTextBlock
+  | SanitySingleContentCtaBlock
+  | SanitySingleContentSupportingLinkBlock;
+
+export type SanityDoubleContentCard = {
+  title?: DoubleCard["title"] | null;
+  description?: string | null;
+  image?: SanityImageSource | null;
+  imageSrc?: string | null;
+  imageAlt?: string | null;
+  showImagePlaceholder?: boolean | null;
+  showImageGradient?: boolean | null;
+};
+
+export type SanityTripleContentCard = {
+  title?: string | null;
+  titleLine2?: string | null;
+  description?: string | null;
+  tags?: string[] | null;
+  backgroundColor?: string | null;
+};
+
+export type SanityTripleContentFields = {
+  title?: TripleProps["title"] | null;
+  subtitle?: TripleProps["subtitle"] | null;
+  intro?: TripleProps["intro"] | null;
+  cards?: SanityTripleContentCard[] | null;
+};
+
+export type SanityListFields = {
+  variant?: ListVariant | null;
+  title?: string | null;
+  description?: string | null;
+  listItems?: ListItem[] | null;
+  detailItems?: ListDetailItem[] | null;
 };
 
 export type SanitySideTab = {
@@ -71,6 +161,26 @@ export type CmsCtaSectionBlock = CmsPageBlockBase &
     _type: "ctaSectionBlock";
   };
 
+export type CmsSingleContentBlock = CmsPageBlockBase &
+  SanitySingleContentFields & {
+    _type: "singleContentBlock";
+  };
+
+export type CmsDoubleContentBlock = CmsPageBlockBase & {
+  _type: "doubleContentBlock";
+  cards?: SanityDoubleContentCard[] | null;
+};
+
+export type CmsTripleContentBlock = CmsPageBlockBase &
+  SanityTripleContentFields & {
+    _type: "tripleContentBlock";
+  };
+
+export type CmsListBlock = CmsPageBlockBase &
+  SanityListFields & {
+    _type: "listBlock";
+  };
+
 export type CmsSideTabsBlock = CmsPageBlockBase & {
   _type: "sideTabsBlock";
   tabs?: SanitySideTab[] | null;
@@ -96,6 +206,10 @@ export type CmsPageBlock =
   | CmsHeroBlock
   | CmsActionPanelBlock
   | CmsCtaSectionBlock
+  | CmsSingleContentBlock
+  | CmsDoubleContentBlock
+  | CmsTripleContentBlock
+  | CmsListBlock
   | CmsSideTabsBlock
   | CmsHighlightsBlock
   | CmsTestimonialsBlock;
