@@ -31,6 +31,7 @@ export type SanityHeroFields = {
   ctaHref?: string | null;
   image?: SanityImageSource | null;
   imageAlt?: string | null;
+  showImagePlaceholder?: boolean | null;
   title?: string | null;
   highlight?: string | null;
   highlightColor?: string | null;
@@ -126,6 +127,8 @@ export type SanityListFields = {
   variant?: ListVariant | null;
   title?: string | null;
   description?: string | null;
+  showToggle?: boolean | null;
+  noPaddingTop?: boolean | null;
   listItems?: ListItem[] | null;
   detailItems?: ListDetailItem[] | null;
 };

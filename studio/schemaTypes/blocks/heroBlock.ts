@@ -5,6 +5,7 @@ import {blockPreviewMedia} from './blockPreviews'
 type HeroBlockParent = {
   _type?: string
   image?: unknown
+  showImagePlaceholder?: boolean | null
   youtubeUrl?: string | null
 }
 
@@ -20,6 +21,12 @@ const hasYouTubeUrl = (parent: unknown) => {
 }
 
 const hasImage = (value: unknown) => Boolean(value)
+
+const usesImagePlaceholder = (parent: unknown) => {
+  const typedParent = parent as HeroBlockParent | undefined
+
+  return Boolean(typedParent?.showImagePlaceholder)
+}
 
 function isYouTubeUrl(value?: string | null) {
   if (!value) return true
@@ -181,6 +188,14 @@ export const heroBlockType = defineType({
       hidden: ({parent}) => !isHero2(parent),
     }),
     defineField({
+      name: 'showImagePlaceholder',
+      title: 'Use Placeholder Image',
+      type: 'boolean',
+      description: 'Shows the site placeholder image when no image or video is selected.',
+      initialValue: false,
+      hidden: ({parent}) => !isHero2(parent),
+    }),
+    defineField({
       name: 'image',
       title: 'Hero Image',
       type: 'image',
@@ -191,8 +206,13 @@ export const heroBlockType = defineType({
             return 'Hero image is required for Hero 1.'
           }
 
-          if (isHero2(context.parent) && !hasImage(value) && !hasYouTubeUrl(context.parent)) {
-            return 'Add a hero image or a YouTube URL.'
+          if (
+            isHero2(context.parent) &&
+            !hasImage(value) &&
+            !hasYouTubeUrl(context.parent) &&
+            !usesImagePlaceholder(context.parent)
+          ) {
+            return 'Add a hero image, a YouTube URL, or use the placeholder image.'
           }
 
           return true

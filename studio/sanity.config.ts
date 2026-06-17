@@ -35,8 +35,8 @@ const mainDocuments = defineDocuments([
     filter: `_id == "blog"`,
   },
   {
-    route: '/Accessibility',
-    filter: `_id == "accessibility"`,
+    route: ['/Accessibility', '/accessibility'],
+    filter: `_id == "accessibility" && _type == "landingPage"`,
   },
 ])
 

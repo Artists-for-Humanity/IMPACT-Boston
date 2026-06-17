@@ -72,10 +72,7 @@ export default function HeroBlock({
       ? getPlainHeadlineText(headlineParts)
       : [legacyTitle, legacyHighlight].filter(Boolean).join(" ") || "Title";
     const youtubeUrl = section.youtubeUrl?.trim() || undefined;
-
-    if (!imageSrc && !youtubeUrl) {
-      return null;
-    }
+    const showMediaPlaceholder = Boolean(section.showImagePlaceholder);
 
     return (
       <Hero2
@@ -97,13 +94,20 @@ export default function HeroBlock({
             dataAttribute,
             extendPath(blockPath, section.description ? "description" : "body"),
           ),
-          image: getFieldDataAttribute(dataAttribute, extendPath(blockPath, "image")),
+          image: getFieldDataAttribute(
+            dataAttribute,
+            extendPath(
+              blockPath,
+              showMediaPlaceholder ? "showImagePlaceholder" : "image",
+            ),
+          ),
           title: shouldUseHeadlineParts
             ? undefined
             : getFieldDataAttribute(dataAttribute, extendPath(blockPath, "title")),
         }}
         imageSrc={imageSrc}
         imageAlt={imageAlt}
+        showMediaPlaceholder={showMediaPlaceholder}
         youtubeUrl={youtubeUrl}
         videoTitle={section.videoTitle ?? undefined}
       />

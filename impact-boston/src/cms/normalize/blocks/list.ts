@@ -77,11 +77,22 @@ export function resolveListBlock(section: CmsListBlock): ListProps {
   const detailItems = section.detailItems
     ?.map(resolveDetailItem)
     .filter((item): item is ListDetailItem => Boolean(item));
+  const hasRawContent =
+    variant === "details"
+      ? Boolean(section.detailItems?.length)
+      : Boolean(section.listItems?.length);
+  const hasResolvedContent =
+    variant === "details" ? Boolean(detailItems?.length) : Boolean(listItems?.length);
+  const shouldUseDemoCopy = !hasRawContent && !hasResolvedContent;
 
   return {
     variant,
-    title: displayText(section.title) || "List Component",
-    description: displayText(section.description) || DEFAULT_DESCRIPTION,
+    title: displayText(section.title) || (shouldUseDemoCopy ? "List Component" : undefined),
+    description:
+      displayText(section.description) ||
+      (shouldUseDemoCopy ? DEFAULT_DESCRIPTION : undefined),
+    showToggle: section.showToggle ?? true,
+    noPaddingTop: Boolean(section.noPaddingTop),
     items: listItems?.length ? listItems : DEFAULT_LIST_ITEMS,
     detailItems: detailItems?.length ? detailItems : DEFAULT_DETAIL_ITEMS,
   };

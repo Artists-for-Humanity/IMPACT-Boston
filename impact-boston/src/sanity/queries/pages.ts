@@ -53,6 +53,8 @@ const PAGE_SECTIONS_PROJECTION = `
       supportingTextColor,
       textColor,
       variant,
+      showToggle,
+      noPaddingTop,
       paragraphs[] {
         _key,
         text,

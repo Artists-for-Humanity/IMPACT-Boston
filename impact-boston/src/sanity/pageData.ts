@@ -7,6 +7,8 @@ export async function getCmsPageData(
   pageId: string,
   isDraftModeEnabled: boolean,
 ): Promise<CmsPageData | null> {
+  const isDevelopment = process.env.NODE_ENV === "development";
+
   try {
     return await client.fetch<CmsPageData | null>(
       CMS_PAGE_QUERY,
@@ -18,7 +20,12 @@ export async function getCmsPageData(
             stega: true,
             cache: "no-store",
           }
-        : { next: { revalidate: 60 } },
+        : isDevelopment
+          ? {
+              useCdn: false,
+              cache: "no-store",
+            }
+          : { next: { revalidate: 60 } },
     );
   } catch (error) {
     console.error(`Failed to fetch CMS page content for ${pageId}.`, error);
