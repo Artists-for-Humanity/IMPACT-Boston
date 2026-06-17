@@ -9,6 +9,7 @@ import HighlightBannerBlock from "./blocks/HighlightBannerBlock";
 import HeroBlock from "./blocks/HeroBlock";
 import HighlightsBlock from "./blocks/HighlightsBlock";
 import ImageGridBlock from "./blocks/ImageGridBlock";
+import MediaGridBlock from "./blocks/MediaGridBlock";
 import ListBlock from "./blocks/ListBlock";
 import SideTabsBlock from "./blocks/SideTabsBlock";
 import SingleContentBlock from "./blocks/SingleContentBlock";
@@ -148,6 +149,15 @@ export default function BlockRenderer({
     case "imageGridBlock":
       return (
         <ImageGridBlock
+          blockPath={blockPath}
+          dataAttribute={dataAttribute}
+          section={block}
+        />
+      );
+
+    case "mediaGridBlock":
+      return (
+        <MediaGridBlock
           blockPath={blockPath}
           dataAttribute={dataAttribute}
           section={block}

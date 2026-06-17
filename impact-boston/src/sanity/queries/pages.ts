@@ -143,6 +143,15 @@ const PAGE_SECTIONS_PROJECTION = `
         bio,
         image,
         imageAlt
+      },
+      subheader,
+      items[] {
+        _key,
+        title,
+        description,
+        subtext,
+        href,
+        linkText
       }
     }
 `;

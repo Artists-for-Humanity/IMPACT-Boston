@@ -7,6 +7,7 @@ import {ctaSectionBlockType} from './blocks/ctaSectionBlock'
 import {doubleContentBlockType} from './blocks/doubleContentBlock'
 import {heroBlockType} from './blocks/heroBlock'
 import {imageGridBlockType} from './blocks/imageGridBlock'
+import {mediaGridBlockType} from './blocks/mediaGridBlock'
 import {highlightBannerBlockType} from './blocks/highlightBannerBlock'
 import {highlightsBlockType} from './blocks/highlightsBlock'
 import {listBlockType} from './blocks/listBlock'
@@ -31,5 +32,6 @@ export const schemaTypes = [
   highlightBannerBlockType,
   highlightsBlockType,
   imageGridBlockType,
+  mediaGridBlockType,
   testimonialsBlockType,
 ]
