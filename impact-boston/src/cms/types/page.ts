@@ -30,6 +30,7 @@ export type CmsBlockFallbacks = {
     CmsTestimonialsBlock,
     | "heading"
     | "authorPrefix"
+    | "backgroundColor"
     | "showAuthors"
     | "subtext"
     | "spotlightAuthor"

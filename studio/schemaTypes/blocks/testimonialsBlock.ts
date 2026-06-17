@@ -1,4 +1,5 @@
 import {defineField, defineType} from 'sanity'
+import {BackgroundColorInput} from '../../components/BackgroundColorInput'
 import {blockPreviewMedia} from './blockPreviews'
 
 type TestimonialsBlockParent = {
@@ -28,6 +29,26 @@ export const testimonialsBlockType = defineType({
       title: 'Subtext',
       type: 'string',
       description: 'Optional supporting text under the heading.',
+    }),
+    defineField({
+      name: 'backgroundColor',
+      title: 'Background Color',
+      type: 'string',
+      description: 'Choose a brand color or enter a custom hex value.',
+      components: {
+        input: BackgroundColorInput,
+      },
+      hidden: ({parent}) => isParticipantSpotlightBlock(parent),
+      validation: (rule) =>
+        rule.custom((value, context) => {
+          if (isParticipantSpotlightBlock(context.parent) || !value) {
+            return true
+          }
+
+          return /^#([0-9a-f]{3}|[0-9a-f]{6})$/i.test(value)
+            ? true
+            : 'Use a valid hex color, like #faf6fd.'
+        }),
     }),
     defineField({
       name: 'showAuthors',
