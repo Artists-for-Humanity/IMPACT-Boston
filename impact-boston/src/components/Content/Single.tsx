@@ -5,7 +5,7 @@ import type { ReactNode } from "react";
 import ScriptEmbed from "./ScriptEmbed";
 import { PLACEHOLDER_IMAGE_SRC } from "../common/placeholderImage";
 
-interface Paragraph {
+export interface SingleContentParagraph {
   text: string;
   bold?: boolean;
 }
@@ -32,11 +32,12 @@ interface ThumbnailEmbed {
 
 type Thumbnail = ThumbnailImage | ThumbnailVideo | ThumbnailEmbed;
 
-interface SingleContentProps {
+export interface SingleContentProps {
   id?: string;
+  eyebrow?: string;
   title: string;
   titleAs?: "h2" | "h3";
-  paragraphs: Paragraph[];
+  paragraphs: SingleContentParagraph[];
   subtitle?: string;
   secondaryParagraph?: string;
   imageSrc?: string;
@@ -55,6 +56,7 @@ interface SingleContentProps {
 
 export default function SingleContent({
   id,
+  eyebrow,
   title,
   titleAs: TitleTag = "h3",
   subtitle,
@@ -106,6 +108,7 @@ export default function SingleContent({
       style={{ objectFit: "cover", display: "block" }}
     />
   ) : null;
+  const hasHeading = Boolean(eyebrow || title || subtitle);
 
   return (
     <div
@@ -130,16 +133,25 @@ export default function SingleContent({
         )}
 
         <div className={`${contentCol} flex flex-col gap-6 lg:gap-8`}>
-          <div className="flex flex-col gap-2">
-            <TitleTag className={TitleTag === "h2" ? "h2" : "h3"}>
-              {title}
-            </TitleTag>
-            {subtitle && (
-              <div className={`sub-2 ${subtitleClassName ?? "text-secondary"}`}>
-                {subtitle}
-              </div>
-            )}
-          </div>
+          {hasHeading ? (
+            <div className="flex flex-col gap-2">
+              {eyebrow ? (
+                <p className="medium-label text-secondary">{eyebrow}</p>
+              ) : null}
+              {title ? (
+                <TitleTag className={TitleTag === "h2" ? "h2" : "h3"}>
+                  {title}
+                </TitleTag>
+              ) : null}
+              {subtitle && (
+                <div
+                  className={`sub-2 ${subtitleClassName ?? "text-secondary"}`}
+                >
+                  {subtitle}
+                </div>
+              )}
+            </div>
+          ) : null}
           <div className="flex flex-col gap-6 lg:grid lg:grid-cols-5 lg:gap-y-6">
             {bodyContent ?? paragraphs.map((para, idx) => (
               <p

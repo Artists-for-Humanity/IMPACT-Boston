@@ -207,7 +207,9 @@ export type CmsContentBlock = CmsPageBlockBase & {
 
 export type CmsTestimonialsBlock = CmsPageBlockBase & {
   _type: "testimonialsCarouselBlock" | "testimonialsSpotlightBlock";
+  authorPrefix?: string | null;
   heading?: string | null;
+  showAuthors?: boolean | null;
   subtext?: string | null;
   spotlightQuote?: string | null;
   spotlightAuthor?: string | null;

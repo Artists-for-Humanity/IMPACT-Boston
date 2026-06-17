@@ -29,6 +29,8 @@ export type CmsBlockFallbacks = {
   testimonials?: Pick<
     CmsTestimonialsBlock,
     | "heading"
+    | "authorPrefix"
+    | "showAuthors"
     | "subtext"
     | "spotlightAuthor"
     | "spotlightAuthorTitle"

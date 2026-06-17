@@ -11,16 +11,13 @@ export default function SingleContentBlock({
   section,
 }: SingleContentBlockProps) {
   const props = resolveSingleContentBlock(section);
+  const bodyContent = section.content?.length ? (
+    <SingleContentRichContent content={section.content} />
+  ) : undefined;
 
   if (!props) {
     return null;
   }
 
-  return (
-    <SingleContent {...props}>
-      {section.content?.length ? (
-        <SingleContentRichContent content={section.content} />
-      ) : null}
-    </SingleContent>
-  );
+  return <SingleContent {...props} bodyContent={bodyContent} />;
 }

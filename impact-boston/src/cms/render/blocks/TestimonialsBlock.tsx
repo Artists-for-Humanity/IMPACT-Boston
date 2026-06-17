@@ -18,7 +18,9 @@ export default function TestimonialsBlock({
 }: TestimonialsBlockProps) {
   const resolvedSection = {
     ...section,
+    authorPrefix: section.authorPrefix ?? fallback?.authorPrefix,
     heading: section.heading ?? fallback?.heading,
+    showAuthors: section.showAuthors ?? fallback?.showAuthors,
     subtext: section.subtext ?? fallback?.subtext,
     testimonials: section.testimonials?.length
       ? section.testimonials
@@ -56,6 +58,8 @@ export default function TestimonialsBlock({
       heading={resolvedSection.heading ?? undefined}
       subheading={resolvedSection.subtext ?? undefined}
       testimonials={resolvedSection.testimonials ?? undefined}
+      showAuthors={Boolean(resolvedSection.showAuthors)}
+      authorPrefix={resolvedSection.authorPrefix ?? undefined}
     />
   );
 }

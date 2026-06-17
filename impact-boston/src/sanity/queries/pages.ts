@@ -104,6 +104,8 @@ const PAGE_SECTIONS_PROJECTION = `
         imageAlt
       },
       heading,
+      authorPrefix,
+      showAuthors,
       spotlightQuote,
       spotlightAuthor,
       spotlightAuthorTitle,

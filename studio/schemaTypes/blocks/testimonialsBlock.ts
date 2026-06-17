@@ -3,6 +3,7 @@ import {blockPreviewMedia} from './blockPreviews'
 
 type TestimonialsBlockParent = {
   _type?: string
+  showAuthors?: boolean | null
 }
 
 const isParticipantSpotlightBlock = (parent: unknown) => {
@@ -27,6 +28,25 @@ export const testimonialsBlockType = defineType({
       title: 'Subtext',
       type: 'string',
       description: 'Optional supporting text under the heading.',
+    }),
+    defineField({
+      name: 'showAuthors',
+      title: 'Show Authors',
+      type: 'boolean',
+      initialValue: false,
+      hidden: ({parent}) => isParticipantSpotlightBlock(parent),
+    }),
+    defineField({
+      name: 'authorPrefix',
+      title: 'Author Prefix',
+      description: 'Optional text shown before carousel author names.',
+      type: 'string',
+      initialValue: '- ',
+      hidden: ({parent}) => {
+        const typedParent = parent as TestimonialsBlockParent | undefined
+
+        return isParticipantSpotlightBlock(parent) || !typedParent?.showAuthors
+      },
     }),
     defineField({
       name: 'spotlightQuote',
