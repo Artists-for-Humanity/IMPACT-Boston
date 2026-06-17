@@ -14,6 +14,9 @@ const PAGE_SECTIONS_PROJECTION = `
         color
       },
       body,
+      buttonColor,
+      buttonLink,
+      buttonText,
       ctaText,
       ctaHref,
       image,

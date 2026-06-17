@@ -3,8 +3,16 @@ import { PortableText, type PortableTextBlock, type PortableTextComponents } fro
 import SingleContent from "@/components/Content/Single";
 import { urlFor } from "@/sanity/image";
 import type { CmsContentBlock } from "@/cms/types/blocks";
+import {
+  extendPath,
+  getFieldDataAttribute,
+  type CmsDataAttribute,
+  type CmsFieldPath,
+} from "@/cms/visualEditing";
 
 type ContentBlockProps = {
+  blockPath: CmsFieldPath;
+  dataAttribute?: CmsDataAttribute;
   section: CmsContentBlock;
 };
 
@@ -18,10 +26,17 @@ const bodyComponents: PortableTextComponents = {
   },
 };
 
-export default function ContentBlock({ section }: ContentBlockProps) {
+export default function ContentBlock({
+  blockPath,
+  dataAttribute,
+  section,
+}: ContentBlockProps) {
   const imageSrc = section.image
     ? (urlFor(section.image)?.width(1000).fit("max").url() ?? undefined)
     : undefined;
+  const buttonText = stegaClean(section.buttonText)?.trim();
+  const buttonLink = stegaClean(section.buttonLink)?.trim();
+  const buttonColor = getHexColor(section.buttonColor);
 
   const bodyContent =
     Array.isArray(section.body) && section.body.length > 0 ? (
@@ -47,7 +62,31 @@ export default function ContentBlock({ section }: ContentBlockProps) {
           ? { text: section.ctaText, href: section.ctaHref }
           : undefined
       }
+      button={
+        buttonText && buttonLink
+          ? { text: buttonText, href: buttonLink, backgroundColor: buttonColor }
+          : undefined
+      }
       backgroundColor={stegaClean(section.backgroundColor) ?? undefined}
+      dataAttributes={{
+        body: getFieldDataAttribute(dataAttribute, extendPath(blockPath, "body")),
+        buttonText: getFieldDataAttribute(
+          dataAttribute,
+          extendPath(blockPath, "buttonText"),
+        ),
+        ctaText: getFieldDataAttribute(dataAttribute, extendPath(blockPath, "ctaText")),
+        image: getFieldDataAttribute(dataAttribute, extendPath(blockPath, "image")),
+        subtitle: getFieldDataAttribute(dataAttribute, extendPath(blockPath, "subtitle")),
+        title: getFieldDataAttribute(dataAttribute, extendPath(blockPath, "title")),
+      }}
     />
   );
+}
+
+function getHexColor(value?: string | null) {
+  const color = stegaClean(value)?.trim();
+
+  return color && /^#([0-9a-f]{3}|[0-9a-f]{6})$/i.test(color)
+    ? color
+    : undefined;
 }

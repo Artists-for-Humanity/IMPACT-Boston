@@ -31,7 +31,7 @@ export default function SingleContentBlock({
   }
 
   const paragraphDataAttributes = section.body
-    ? props.paragraphs.map(() => ({
+    ? (props.paragraphs ?? []).map(() => ({
         text: getFieldDataAttribute(dataAttribute, extendPath(blockPath, "body")),
       }))
     : section.paragraphs

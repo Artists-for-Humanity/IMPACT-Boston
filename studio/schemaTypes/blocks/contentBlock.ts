@@ -1,4 +1,5 @@
 import {defineArrayMember, defineField, defineType} from 'sanity'
+import {BackgroundColorInput} from '../../components/BackgroundColorInput'
 
 export const contentBlockType = defineType({
   name: 'contentBlock',
@@ -70,6 +71,39 @@ export const contentBlockType = defineType({
       name: 'ctaHref',
       title: 'Link URL',
       type: 'string',
+    }),
+    defineField({
+      name: 'buttonText',
+      title: 'Button Text',
+      type: 'string',
+    }),
+    defineField({
+      name: 'buttonLink',
+      title: 'Button Link',
+      type: 'string',
+    }),
+    defineField({
+      name: 'buttonColor',
+      title: 'Button Color',
+      type: 'string',
+      description: 'Choose a brand color or enter a custom hex value.',
+      components: {
+        input: BackgroundColorInput,
+      },
+      hidden: ({parent}) => !parent?.buttonText && !parent?.buttonLink,
+      validation: (rule) =>
+        rule.custom((value, context) => {
+          const parent = context.parent as {buttonText?: string; buttonLink?: string} | undefined
+          const hasButton = Boolean(parent?.buttonText || parent?.buttonLink)
+
+          if (!hasButton || !value) {
+            return true
+          }
+
+          return /^#([0-9a-f]{3}|[0-9a-f]{6})$/i.test(value)
+            ? true
+            : 'Use a valid hex color, like #311e41.'
+        }),
     }),
     defineField({
       name: 'backgroundColor',

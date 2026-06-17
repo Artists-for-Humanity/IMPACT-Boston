@@ -204,6 +204,9 @@ export type CmsContentBlock = CmsPageBlockBase & {
   title?: string | null;
   subtitle?: string | null;
   body?: PortableTextBlock[] | string | null;
+  buttonColor?: string | null;
+  buttonLink?: string | null;
+  buttonText?: string | null;
   image?: SanityImageSource | null;
   imageAlt?: string | null;
   reverse?: boolean | null;
