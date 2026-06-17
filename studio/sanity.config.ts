@@ -26,6 +26,18 @@ const mainDocuments = defineDocuments([
     route: ['/Resources', '/resources'],
     filter: `_id == "resources" && _type == "resourcesPage"`,
   },
+  {
+    route: '/BoardAndStaff',
+    filter: `_id == "boardAndStaff"`,
+  },
+  {
+    route: '/Blog',
+    filter: `_id == "blog"`,
+  },
+  {
+    route: '/Accessibility',
+    filter: `_id == "accessibility"`,
+  },
 ])
 
 export default defineConfig({

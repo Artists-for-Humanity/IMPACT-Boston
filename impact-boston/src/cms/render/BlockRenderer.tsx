@@ -136,7 +136,13 @@ export default function BlockRenderer({
       );
 
     case "imageGridBlock":
-      return <ImageGridBlock section={block} />;
+      return (
+        <ImageGridBlock
+          blockPath={blockPath}
+          dataAttribute={dataAttribute}
+          section={block}
+        />
+      );
 
     default:
       return null;

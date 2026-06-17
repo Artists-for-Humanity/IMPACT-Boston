@@ -6,6 +6,7 @@ export const blockPreviewImageUrls: Record<string, string> = {
   actionPanelBlock: '/static/block-previews/action-grid.svg',
   ctaSectionBlock: '/static/block-previews/cta-section.svg',
   contentBlock: '/static/block-previews/content-block.svg',
+  imageGridBlock: '/static/block-previews/image-grid.svg',
   doubleContentBlock: '/static/block-previews/double-content.svg',
   tripleContentBlock: '/static/block-previews/triple-content.svg',
   listBlock: '/static/block-previews/list.svg',
@@ -70,5 +71,9 @@ export const blockPreviewMedia = {
   testimonialsSpotlightBlock: createBlockPreviewMedia(
     blockPreviewImageUrls.testimonialsSpotlightBlock,
     'Testimonials spotlight block preview',
+  ),
+  imageGridBlock: createBlockPreviewMedia(
+    blockPreviewImageUrls.imageGridBlock,
+    'Image grid block preview',
   ),
 } as const
