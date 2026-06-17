@@ -1,3 +1,4 @@
+import { stegaClean } from "@sanity/client/stega";
 import { PortableText, type PortableTextBlock, type PortableTextComponents } from "next-sanity";
 import SingleContent from "@/components/Content/Single";
 import { urlFor } from "@/sanity/image";
@@ -46,7 +47,7 @@ export default function ContentBlock({ section }: ContentBlockProps) {
           ? { text: section.ctaText, href: section.ctaHref }
           : undefined
       }
-      backgroundColor={section.backgroundColor ?? undefined}
+      backgroundColor={stegaClean(section.backgroundColor) ?? undefined}
     />
   );
 }

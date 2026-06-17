@@ -3,9 +3,9 @@ import {createElement, type CSSProperties, type ReactNode} from 'react'
 export const blockPreviewImageUrls: Record<string, string> = {
   hero1Block: '/static/block-previews/hero-1.svg',
   hero2Block: '/static/block-previews/hero-2.svg',
-  actionPanelBlock: '/static/block-previews/action-panel.svg',
+  actionPanelBlock: '/static/block-previews/action-grid.svg',
   ctaSectionBlock: '/static/block-previews/cta-section.svg',
-  singleContentBlock: '/static/block-previews/single-content.svg',
+  contentBlock: '/static/block-previews/content-block.svg',
   doubleContentBlock: '/static/block-previews/double-content.svg',
   tripleContentBlock: '/static/block-previews/triple-content.svg',
   listBlock: '/static/block-previews/list.svg',

@@ -1,3 +1,4 @@
+import { stegaClean } from "@sanity/client/stega";
 import type {
   SingleContentParagraph,
   SingleContentProps,
@@ -6,11 +7,15 @@ import type { CmsSingleContentBlock } from "@/cms/types/blocks";
 import { urlFor } from "@/sanity/image";
 
 const BACKGROUND_COLOR_CLASS_MAP: Record<string, string> = {
-  white: "bg-white",
   lavender: "bg-bg-lavender",
   primaryLight: "bg-primary-light",
   secondaryLight: "bg-secondary-light",
   complementaryLight: "bg-complementary-light",
+  // direct class fallbacks
+  "bg-bg-lavender": "bg-bg-lavender",
+  "bg-primary-light": "bg-primary-light",
+  "bg-secondary-light": "bg-secondary-light",
+  "bg-complementary-light": "bg-complementary-light",
 };
 
 export function resolveSingleContentBlock(
@@ -54,7 +59,7 @@ export function resolveSingleContentBlock(
 
   return {
     eyebrow: section.eyebrow?.trim() || undefined,
-    title: title || undefined,
+    title: title || '',
     titleAs: section.titleAs === "h2" ? "h2" : "h3",
     subtitle: section.subtitle?.trim() || undefined,
     paragraphs,
@@ -70,7 +75,7 @@ export function resolveSingleContentBlock(
         ? { text: purchaseLinkText, href: purchaseLinkHref }
         : undefined,
     backgroundColor: section.backgroundColor
-      ? BACKGROUND_COLOR_CLASS_MAP[section.backgroundColor]
+      ? BACKGROUND_COLOR_CLASS_MAP[stegaClean(section.backgroundColor) ?? ""]
       : undefined,
   };
 }

@@ -112,6 +112,13 @@ const PAGE_SECTIONS_PROJECTION = `
         author,
         authorTitle,
         readMoreLink
+      },
+      members[] {
+        name,
+        role,
+        bio,
+        image,
+        imageAlt
       }
     }
 `;

@@ -26,14 +26,14 @@ export default function MemberCard({ imageSrc, imageAlt, name, role, bio }: Memb
           height={5000}
           alt={imageAlt}
           priority
-          className="object-cover w-full h-auto aspect-square md:aspect-auto md:w-[184px] md:h-[160px] lg:w-[368px] lg:h-[328px] bg-text-grey-light"
+          className="object-cover w-full h-auto aspect-square md:aspect-auto md:h-[160px] lg:h-[328px] bg-text-grey-light"
         />
       </div>
 
       <div className="col-span-6 lg:col-span-3 flex flex-col gap-3 justify-between">
         <div>
           <p className="p1-bold">{name}</p>
-          <p className="p2">{role}</p>
+          <p className="p2" style={{ color: 'var(--color-black-60)' }}>{role}</p>
         </div>
         <p className="p2">{bio}</p>
       </div>

@@ -5,7 +5,7 @@ import type { ReactNode } from "react";
 import ScriptEmbed from "./ScriptEmbed";
 import { PLACEHOLDER_IMAGE_SRC } from "../common/placeholderImage";
 
-interface Paragraph {
+export interface SingleContentParagraph {
   text: string;
   bold?: boolean;
 }
@@ -32,11 +32,12 @@ interface ThumbnailEmbed {
 
 type Thumbnail = ThumbnailImage | ThumbnailVideo | ThumbnailEmbed;
 
-interface SingleContentProps {
+export interface SingleContentProps {
   id?: string;
+  eyebrow?: string;
   title: string;
   titleAs?: "h2" | "h3";
-  paragraphs: Paragraph[];
+  paragraphs?: SingleContentParagraph[];
   subtitle?: string;
   secondaryParagraph?: string;
   imageSrc?: string;
@@ -141,7 +142,7 @@ export default function SingleContent({
             )}
           </div>
           <div className="flex flex-col gap-6 lg:grid lg:grid-cols-5 lg:gap-y-6">
-            {bodyContent ?? paragraphs.map((para, idx) => (
+            {bodyContent ?? (paragraphs ?? []).map((para, idx) => (
               <p
                 className={`p1 lg:col-span-5${para.bold ? " font-bold" : ""}`}
                 key={idx}
