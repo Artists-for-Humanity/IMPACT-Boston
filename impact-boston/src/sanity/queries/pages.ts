@@ -29,6 +29,7 @@ const PAGE_SECTIONS_PROJECTION = `
       highlightColor,
       description,
       subtitle,
+      subtitleFirst,
       reverse,
       backgroundColor,
       youtubeUrl,

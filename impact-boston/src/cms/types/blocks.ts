@@ -217,6 +217,7 @@ export type CmsContentBlock = CmsPageBlockBase & {
   _type: "contentBlock";
   title?: string | null;
   subtitle?: string | null;
+  subtitleFirst?: boolean | null;
   body?: PortableTextBlock[] | string | null;
   buttonColor?: string | null;
   buttonLink?: string | null;

@@ -52,6 +52,7 @@ export default function ContentBlock({
     <SingleContent
       title={section.title ?? ""}
       subtitle={section.subtitle ?? undefined}
+      subtitleFirst={section.subtitleFirst ?? false}
       paragraphs={[]}
       bodyContent={bodyContent}
       imageSrc={imageSrc}

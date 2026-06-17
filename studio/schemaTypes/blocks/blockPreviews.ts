@@ -44,6 +44,10 @@ export const blockPreviewMedia = {
     blockPreviewImageUrls.ctaSectionBlock,
     'CTA panels block preview',
   ),
+  contentBlock: createBlockPreviewMedia(
+    blockPreviewImageUrls.contentBlock,
+    'Content block preview',
+  ),
   singleContentBlock: createBlockPreviewMedia(
     blockPreviewImageUrls.singleContentBlock,
     'Single content block preview',

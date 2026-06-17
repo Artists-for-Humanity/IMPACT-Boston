@@ -1,5 +1,6 @@
 import {defineArrayMember, defineField, defineType} from 'sanity'
 import {BackgroundColorInput} from '../../components/BackgroundColorInput'
+import {blockPreviewMedia} from './blockPreviews'
 
 export const contentBlockType = defineType({
   name: 'contentBlock',
@@ -54,6 +55,13 @@ export const contentBlockType = defineType({
           }
           return true
         }),
+    }),
+    defineField({
+      name: 'subtitleFirst',
+      title: 'Show Subtitle Above Title',
+      description: 'Display the subtitle before the title.',
+      type: 'boolean',
+      initialValue: false,
     }),
     defineField({
       name: 'reverse',
@@ -125,7 +133,7 @@ export const contentBlockType = defineType({
       return {
         title: title ?? 'Content Block',
         subtitle: subtitle ?? 'Content Block',
-        media,
+        media: media ?? blockPreviewMedia.contentBlock,
       }
     },
   },
