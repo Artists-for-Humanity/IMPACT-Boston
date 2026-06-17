@@ -15,6 +15,7 @@ export default async function IndexPage() {
   return (
     <CmsPage
       blocks={getCmsPageBlocks(data, DEFAULT_CMS_PAGE_BLOCKS)}
+      data={data}
       fallbacks={DEFAULT_CMS_BLOCK_FALLBACKS}
     />
   );

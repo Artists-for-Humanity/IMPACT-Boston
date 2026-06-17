@@ -10,6 +10,7 @@ export function resolveHighlights(
   }
 
   return highlights.map((highlight) => ({
+    _key: highlight._key,
     heading: highlight.heading,
     body: highlight.body,
     ctaText: highlight.ctaText,
@@ -20,5 +21,6 @@ export function resolveHighlights(
       : highlight.imageSrc,
     imageAlt:
       highlight.imageAlt || highlight.heading || "IMPACT Boston highlight",
+    dataAttributes: highlight.dataAttributes,
   }));
 }

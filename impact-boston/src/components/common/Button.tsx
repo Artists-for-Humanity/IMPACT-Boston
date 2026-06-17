@@ -14,6 +14,7 @@ interface ButtonProps {
   type?: 'button' | 'submit' | 'reset'
   disabled?: boolean
   style?: React.CSSProperties // <-- Add this line
+  'data-sanity'?: string
 }
 
 function ChevronIcon() {
@@ -35,6 +36,7 @@ export default function Button({
   type = 'button',
   disabled = false,
   style, // <-- Add this line
+  'data-sanity': dataSanity,
 }: ButtonProps) {
   const base = 'link flex items-center justify-between transition-colors duration-150'
 
@@ -54,7 +56,7 @@ export default function Button({
 
   if (href) {
     return (
-      <a href={href} className={classes} style={style}>
+      <a href={href} className={classes} data-sanity={dataSanity} style={style}>
         {children}
         {(showChevron || size === 'lg') && <ChevronIcon />}
       </a>
@@ -67,6 +69,7 @@ export default function Button({
       onClick={onClick}
       disabled={disabled}
       className={classes}
+      data-sanity={dataSanity}
       style={style}
     >
       {children}

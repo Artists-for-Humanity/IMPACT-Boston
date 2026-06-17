@@ -91,18 +91,31 @@ export default function TrainerList({
                 className="border-b border-line-divider py-4 last:border-b-0"
                 key={`${item.state}-${item.name}`}
               >
-                <p className="p2 text-black">{item.name}</p>
-                <p className="p2 text-text-grey-light">{item.organization}</p>
+                <p className="p2 text-black" data-sanity={item.dataAttributes?.name}>
+                  {item.name}
+                </p>
+                <p
+                  className="p2 text-text-grey-light"
+                  data-sanity={item.dataAttributes?.organization}
+                >
+                  {item.organization}
+                </p>
                 {item.contact && contactHref ? (
                   <a
                     className="p2 text-secondary underline underline-offset-2"
+                    data-sanity={item.dataAttributes?.contact}
                     href={contactHref}
                   >
                     {item.contact}
                   </a>
                 ) : null}
                 {item.contact && !contactHref ? (
-                  <p className="p2 text-secondary">{item.contact}</p>
+                  <p
+                    className="p2 text-secondary"
+                    data-sanity={item.dataAttributes?.contact}
+                  >
+                    {item.contact}
+                  </p>
                 ) : null}
               </li>
             );

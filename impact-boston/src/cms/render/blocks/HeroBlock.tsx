@@ -12,6 +12,12 @@ import {
 } from "@/cms/normalize/blocks/hero";
 import type { CmsHeroBlock } from "@/cms/types/blocks";
 import type { HeroBlockFallback } from "@/cms/types/page";
+import {
+  extendPath,
+  getFieldDataAttribute,
+  type CmsDataAttribute,
+  type CmsFieldPath,
+} from "@/cms/visualEditing";
 
 const HERO_TEXT_COLOR_MAP: Record<
   string,
@@ -35,11 +41,18 @@ const HERO_TEXT_CLASS_MAP: Record<string, string> = {
 };
 
 type HeroBlockProps = {
+  blockPath: CmsFieldPath;
+  dataAttribute?: CmsDataAttribute;
   section: CmsHeroBlock;
   fallback?: HeroBlockFallback;
 };
 
-export default function HeroBlock({ section, fallback }: HeroBlockProps) {
+export default function HeroBlock({
+  blockPath,
+  dataAttribute,
+  section,
+  fallback,
+}: HeroBlockProps) {
   const headlineParts = resolveHeadlineParts(
     section.headlineParts,
     fallback?.headlineParts,
@@ -68,13 +81,27 @@ export default function HeroBlock({ section, fallback }: HeroBlockProps) {
       <Hero2
         title={
           shouldUseHeadlineParts
-            ? renderHero2HeadlineParts(headlineParts)
+            ? renderHero2HeadlineParts(
+                headlineParts,
+                blockPath,
+                dataAttribute,
+              )
             : legacyTitle || "Title"
         }
         titleText={titleText}
         highlight={shouldUseHeadlineParts ? undefined : legacyHighlight}
         highlightColor={resolveHero2HighlightColor(section.highlightColor)}
         description={section.description ?? section.body ?? fallback?.body}
+        dataAttributes={{
+          description: getFieldDataAttribute(
+            dataAttribute,
+            extendPath(blockPath, section.description ? "description" : "body"),
+          ),
+          image: getFieldDataAttribute(dataAttribute, extendPath(blockPath, "image")),
+          title: shouldUseHeadlineParts
+            ? undefined
+            : getFieldDataAttribute(dataAttribute, extendPath(blockPath, "title")),
+        }}
         imageSrc={imageSrc}
         imageAlt={imageAlt}
         youtubeUrl={youtubeUrl}
@@ -100,7 +127,18 @@ export default function HeroBlock({ section, fallback }: HeroBlockProps) {
         return (
           <Fragment key={idx}>
             {idx > 0 ? " " : null}
-            <Hero1HeadlinePart color={HERO_TEXT_COLOR_MAP[color] ?? "black"}>
+            <Hero1HeadlinePart
+              color={HERO_TEXT_COLOR_MAP[color] ?? "black"}
+              dataSanity={getFieldDataAttribute(
+                dataAttribute,
+                extendPath(
+                  blockPath,
+                  "headlineParts",
+                  part._key ? { _key: part._key } : idx,
+                  "text",
+                ),
+              )}
+            >
               {text}
             </Hero1HeadlinePart>
           </Fragment>
@@ -115,6 +153,14 @@ export default function HeroBlock({ section, fallback }: HeroBlockProps) {
       body={body}
       ctaText={ctaText}
       ctaHref={ctaHref}
+      dataAttributes={{
+        body: getFieldDataAttribute(dataAttribute, extendPath(blockPath, "body")),
+        ctaText: getFieldDataAttribute(
+          dataAttribute,
+          extendPath(blockPath, "ctaText"),
+        ),
+        image: getFieldDataAttribute(dataAttribute, extendPath(blockPath, "image")),
+      }}
       imageSrc={imageSrc}
       imageAlt={imageAlt}
     />
@@ -134,7 +180,9 @@ function getPlainHeadlineText(
 }
 
 function renderHero2HeadlineParts(
-  headlineParts: Array<{ text: string; color?: string | null }>,
+  headlineParts: Array<{ _key?: string | null; text: string; color?: string | null }>,
+  blockPath: CmsFieldPath,
+  dataAttribute?: CmsDataAttribute,
 ) {
   return (
     <>
@@ -145,7 +193,18 @@ function renderHero2HeadlineParts(
         return (
           <Fragment key={idx}>
             {idx > 0 ? " " : null}
-            <span className={HERO_TEXT_CLASS_MAP[color] ?? "text-black"}>
+            <span
+              className={HERO_TEXT_CLASS_MAP[color] ?? "text-black"}
+              data-sanity={getFieldDataAttribute(
+                dataAttribute,
+                extendPath(
+                  blockPath,
+                  "headlineParts",
+                  "_key" in part && part._key ? { _key: part._key } : idx,
+                  "text",
+                ),
+              )}
+            >
               {text}
             </span>
           </Fragment>

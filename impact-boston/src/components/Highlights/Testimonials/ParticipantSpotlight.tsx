@@ -11,6 +11,13 @@ interface TestimonialProps {
   contentClassName?: string;
   inlineAuthorTitle?: boolean;
   quoteClassName?: string;
+  dataAttributes?: {
+    author?: string;
+    authorTitle?: string;
+    heading?: string;
+    quote?: string;
+    subheading?: string;
+  };
 }
 
 export default function Testimonial({
@@ -24,6 +31,7 @@ export default function Testimonial({
   contentClassName,
   inlineAuthorTitle = false,
   quoteClassName = "p1",
+  dataAttributes,
 }: TestimonialProps) {
   const quoteParagraphs = quote
     .split(/\n{2,}/)
@@ -37,8 +45,14 @@ export default function Testimonial({
           className={`col-span-full text-center flex flex-col space-evenly gap-8 ${contentClassName ? contentClassName : ""}`}
         >
           <div>
-            <h3 className="h3">{heading}</h3>
-            {subheading ? <p className="p2">{subheading}</p> : null}
+            <h3 className="h3" data-sanity={dataAttributes?.heading}>
+              {heading}
+            </h3>
+            {subheading ? (
+              <p className="p2" data-sanity={dataAttributes?.subheading}>
+                {subheading}
+              </p>
+            ) : null}
           </div>
 
           <div
@@ -46,21 +60,47 @@ export default function Testimonial({
           >
             <div className="flex flex-col gap-6">
               {quoteParagraphs.map((paragraph) => (
-                <p className={quoteClassName} key={paragraph}>
+                <p
+                  className={quoteClassName}
+                  data-sanity={dataAttributes?.quote}
+                  key={paragraph}
+                >
                   {paragraph}
                 </p>
               ))}
             </div>
             {inlineAuthorTitle && (author || authorTitle) ? (
               <p className="p2">
-                {author ? <span className="font-bold">{author}</span> : null}
+                {author ? (
+                  <span
+                    className="font-bold"
+                    data-sanity={dataAttributes?.author}
+                  >
+                    {author}
+                  </span>
+                ) : null}
                 {author && authorTitle ? ", " : null}
-                {authorTitle}
+                {authorTitle ? (
+                  <span data-sanity={dataAttributes?.authorTitle}>
+                    {authorTitle}
+                  </span>
+                ) : null}
               </p>
             ) : author || authorTitle ? (
               <>
-                {author ? <p className="p2 font-bold">{author}</p> : null}
-                {authorTitle ? <p className="p2">{authorTitle}</p> : null}
+                {author ? (
+                  <p
+                    className="p2 font-bold"
+                    data-sanity={dataAttributes?.author}
+                  >
+                    {author}
+                  </p>
+                ) : null}
+                {authorTitle ? (
+                  <p className="p2" data-sanity={dataAttributes?.authorTitle}>
+                    {authorTitle}
+                  </p>
+                ) : null}
               </>
             ) : null}
           </div>

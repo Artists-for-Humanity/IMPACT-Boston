@@ -5,6 +5,7 @@ import * as LucideIcons from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
 export type CtaPanelData = {
+  _key?: string | null;
   wrapperClassName?: string | null;
   bgColor?: string | null;
   title?: string | null;
@@ -16,6 +17,13 @@ export type CtaPanelData = {
   iconSrc?: string | null;
   iconWidth?: number | null;
   iconHeight?: number | null;
+  dataAttributes?: {
+    buttonText?: string;
+    description?: string;
+    href?: string;
+    title?: string;
+    titleLine2?: string;
+  };
 };
 
 const LUCIDE_ICON_COMPONENTS = LucideIcons as unknown as Record<
@@ -117,6 +125,7 @@ function CtaPanel({
   iconSrc,
   iconWidth,
   iconHeight,
+  dataAttributes,
 }: {
   index: number;
 } & CtaPanelData) {
@@ -159,24 +168,33 @@ function CtaPanel({
   }
 
   return (
-    <div className={panelClassName} style={panelStyle}>
+    <div
+      className={panelClassName}
+      data-sanity={dataAttributes?.href}
+      style={panelStyle}
+    >
       <div className="flex flex-col gap-8 h-full justify-between">
         <div className="flex flex-col gap-2">
-          <h3 className="h3 text-white">
-            {title}
+          <h3 className="h3 text-white" data-sanity={dataAttributes?.title}>
+            <span>{title}</span>
             {titleLine2 ? (
               <>
                 <br />
-                {titleLine2}
+                <span data-sanity={dataAttributes?.titleLine2}>
+                  {titleLine2}
+                </span>
               </>
             ) : null}
           </h3>
 
-          <p className="p1 text-white">{description}</p>
+          <p className="p1 text-white" data-sanity={dataAttributes?.description}>
+            {description}
+          </p>
         </div>
 
         <Button
           className="col-span-full bg-white flex justify-between cursor-pointer w-[270px] md:w-full lg:w-[270px] h-14 md:h-[73px] group"
+          data-sanity={dataAttributes?.buttonText}
           href={href}
         >
           <p className="p1-bold text-black group-hover:text-white">

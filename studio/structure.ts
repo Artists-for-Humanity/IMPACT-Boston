@@ -1,6 +1,6 @@
 import type {StructureResolver} from 'sanity/structure'
 
-export const singletonTypes = new Set(['aboutImpactPage', 'landingPage'])
+export const singletonTypes = new Set(['aboutImpactPage', 'landingPage', 'resourcesPage'])
 
 const aboutPages = [
   {
@@ -16,7 +16,7 @@ const aboutPages = [
   {
     title: 'Resources',
     id: 'resources',
-    schemaType: 'landingPage',
+    schemaType: 'resourcesPage',
   },
   {
     title: 'Blog',

@@ -54,10 +54,10 @@ export function resolveSingleContentBlock(
 
   return {
     eyebrow: section.eyebrow?.trim() || undefined,
-    title: title || undefined,
+    title: title || "",
     titleAs: section.titleAs === "h2" ? "h2" : "h3",
     subtitle: section.subtitle?.trim() || undefined,
-    paragraphs,
+    paragraphs: paragraphs ?? [],
     imageSrc: section.image
       ? urlFor(section.image)?.width(1200).height(800).fit("crop").url()
       : section.imageSrc ?? undefined,

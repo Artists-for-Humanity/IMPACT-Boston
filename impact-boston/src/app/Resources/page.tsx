@@ -1,7 +1,12 @@
-import Hero2 from "@/components/Hero/Hero2";
-import SideTabs from "@/components/TabsPanel/SideTabs";
-import SingleContent from "@/components/Content/Single";
-import TestimonialsCarousel from "@/components/Highlights/Testimonials/Carousel";
+import { draftMode } from "next/headers";
+
+import { DEFAULT_CMS_BLOCK_FALLBACKS } from "@/cms/fallbacks/blocks";
+import { getCmsPageBlocks } from "@/cms/normalize/page";
+import { CmsPage } from "@/cms/render/CmsPage";
+import type { CmsPageBlock } from "@/cms/types/blocks";
+import { getCmsPageData } from "@/sanity/pageData";
+
+const RESOURCES_PAGE_ID = "resources";
 
 const survivorTestimonials = [
   {
@@ -182,83 +187,97 @@ const supportServiceItems = [
   },
 ];
 
-export default function Resources() {
+const RESOURCE_PAGE_FALLBACK_BLOCKS: CmsPageBlock[] = [
+  {
+    _key: "resources-hero",
+    _type: "hero2Block",
+    headlineParts: [{ text: "Resources", color: "black" }],
+    description: "",
+  },
+  {
+    _key: "resources-tabs",
+    _type: "sideTabsBlock",
+    tabs: [
+      {
+        label: "Presentations",
+        content: [
+          {
+            type: "heading",
+            text: "Most Recent Presentations & Talks",
+          },
+          {
+            type: "resourceList",
+            eyebrow: "Latest First",
+            items: presentationItems,
+          },
+        ],
+      },
+      {
+        label: "IMPACT Organizations",
+        content: [
+          {
+            type: "heading",
+            text: "Other IMPACT Organizations",
+          },
+          {
+            type: "resourceList",
+            eyebrow: "Alphabetically by state",
+            items: impactOrganizationItems,
+          },
+        ],
+      },
+      {
+        label: "Support Services",
+        content: [
+          {
+            type: "heading",
+            text: "Support Services",
+          },
+          {
+            type: "resourceList",
+            eyebrow: "Alphabetically by organization name",
+            items: supportServiceItems,
+          },
+        ],
+      },
+    ],
+  },
+  {
+    _key: "resources-survivors",
+    _type: "singleContentBlock",
+    backgroundColor: "lavender",
+    ctaHref: "#",
+    ctaText: "Read the Full Survivor Guide",
+    imageAlt: "Survivors of Abuse and Trauma",
+    paragraphs: [
+      {
+        text: "All IMPACT classes are taught with an awareness of the lasting effects of abuse and trauma. Survivors regularly participate in all our women's, men's, LGBTQ, and youth classes. Some survivors prefer IMPACT classes that are specifically designed for people who have experienced abuse. Survivor classes have a deeper focus on the ways in which abuse affects people's experiences of their bodies and their safety.",
+      },
+    ],
+    showImagePlaceholder: true,
+    title: "Survivors of Abuse & Trauma",
+    titleAs: "h2",
+  },
+  {
+    _key: "resources-survivor-testimonials",
+    _type: "testimonialsCarouselBlock",
+    authorPrefix: "",
+    heading: "Hear firsthand from survivors and clinicians.",
+    showAuthors: true,
+    subtext: "3 perspectives on what IMPACT made possible.",
+    testimonials: survivorTestimonials,
+  },
+];
+
+export default async function Resources() {
+  const { isEnabled } = await draftMode();
+  const data = await getCmsPageData(RESOURCES_PAGE_ID, isEnabled);
+
   return (
-    <>
-      <Hero2 title="Resources" showMediaPlaceholder />
-
-      <SideTabs
-        tabs={[
-          {
-            label: "Presentations",
-            content: [
-              {
-                type: "heading",
-                text: "Most Recent Presentations & Talks",
-              },
-              {
-                type: "resourceList",
-                eyebrow: "Latest First",
-                items: presentationItems,
-              },
-            ],
-          },
-          {
-            label: "IMPACT Organizations",
-            content: [
-              {
-                type: "heading",
-                text: "Other IMPACT Organizations",
-              },
-              {
-                type: "resourceList",
-                eyebrow: "Alphabetically by state",
-                items: impactOrganizationItems,
-              },
-            ],
-          },
-          {
-            label: "Support Services",
-            content: [
-              {
-                type: "heading",
-                text: "Support Services",
-              },
-              {
-                type: "resourceList",
-                eyebrow: "Alphabetically by organization name",
-                items: supportServiceItems,
-              },
-            ],
-          },
-        ]}
-      />
-
-      <SingleContent
-        backgroundColor="bg-bg-lavender"
-        // gridClassName="!pb-0"
-        titleAs="h2"
-        title="Survivors of Abuse & Trauma"
-        paragraphs={[
-          {
-            text: "All IMPACT classes are taught with an awareness of the lasting effects of abuse and trauma. Survivors regularly participate in all our women's, men's, LGBTQ, and youth classes. Some survivors prefer IMPACT classes that are specifically designed for people who have experienced abuse. Survivor classes have a deeper focus on the ways in which abuse affects people's experiences of their bodies and their safety.",
-          },
-        ]}
-        showImagePlaceholder
-        cta={{
-          href: "#",
-          text: "Read the Full Survivor Guide",
-        }}
-      />
-
-      <TestimonialsCarousel
-        heading="Hear firsthand from survivors and clinicians."
-        subheading="3 perspectives on what IMPACT made possible."
-        testimonials={survivorTestimonials}
-        showAuthors
-        authorPrefix=""
-        headingLevel="h3"
-      />
-    </>
+    <CmsPage
+      blocks={getCmsPageBlocks(data, RESOURCE_PAGE_FALLBACK_BLOCKS)}
+      data={data}
+      fallbacks={DEFAULT_CMS_BLOCK_FALLBACKS}
+    />
   );
 }

@@ -15,6 +15,11 @@ interface Hero2Props {
   videoTitle?: string;
   mediaClassName?: string;
   showMediaPlaceholder?: boolean;
+  dataAttributes?: {
+    description?: string;
+    image?: string;
+    title?: string;
+  };
 }
 
 function getYouTubeEmbedUrl(youtubeUrl: string) {
@@ -61,6 +66,7 @@ export default function Hero2({
   videoTitle,
   mediaClassName,
   showMediaPlaceholder = false,
+  dataAttributes,
 }: Hero2Props) {
   const highlightClassMap = {
     primary: "text-primary",
@@ -77,7 +83,10 @@ export default function Hero2({
   return (
       <Grid className="md:gap-12 lg:gap-x-8 lg:gap-y-8">
         <div className="col-span-full grid grid-cols-12 lg:gap-x-8 lg:gap-y-6">
-          <h1 className="col-span-full h1 text-center text-black">
+          <h1
+            className="col-span-full h1 text-center text-black"
+            data-sanity={dataAttributes?.title}
+          >
             {title}{' '}
             {highlight ? (
               <span className={highlightClass}>{highlight}</span>
@@ -86,7 +95,12 @@ export default function Hero2({
 
           {description && (
             <div className="col-span-full lg:col-start-3 lg:col-span-8">
-              <p className="p1 text-center text-grey">{description}</p>
+              <p
+                className="p1 text-center text-grey"
+                data-sanity={dataAttributes?.description}
+              >
+                {description}
+              </p>
             </div>
           )}
         </div>
@@ -98,6 +112,7 @@ export default function Hero2({
           <Image
             src={PLACEHOLDER_IMAGE_SRC}
             alt={imageAlt ?? mediaTitle}
+            data-sanity={dataAttributes?.image}
             fill
             sizes="100vw"
             className="object-cover"
@@ -122,6 +137,7 @@ export default function Hero2({
           width={1400}
           height={1050}
           alt={imageAlt ?? ""}
+          data-sanity={dataAttributes?.image}
           className={`${mediaWrapperClass} h-auto w-full`}
         />
       ) : null}

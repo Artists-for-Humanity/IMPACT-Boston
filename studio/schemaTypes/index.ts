@@ -1,5 +1,6 @@
 import {aboutImpactPageType} from './aboutImpactPageType'
 import {landingPageType} from './landingPageType'
+import {resourcesPageType} from './resourcesPageType'
 import {actionPanelBlockType} from './blocks/actionPanelBlock'
 import {contentBlockType} from './blocks/contentBlock'
 import {ctaSectionBlockType} from './blocks/ctaSectionBlock'
@@ -15,6 +16,7 @@ import {tripleContentBlockType} from './blocks/tripleContentBlock'
 export const schemaTypes = [
   aboutImpactPageType,
   landingPageType,
+  resourcesPageType,
   heroBlockType,
   contentBlockType,
   actionPanelBlockType,

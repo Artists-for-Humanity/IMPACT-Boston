@@ -11,6 +11,7 @@ import Grid from "./common/Grid";
 import { PLACEHOLDER_IMAGE_SRC } from "./common/placeholderImage";
 
 export interface HighlightSlide {
+  _key?: string | null;
   heading?: string | null;
   body?: string | null;
   ctaText?: string | null;
@@ -18,6 +19,13 @@ export interface HighlightSlide {
   additionalText?: string | null;
   imageSrc?: string | null;
   imageAlt?: string | null;
+  dataAttributes?: {
+    additionalText?: string;
+    body?: string;
+    ctaText?: string;
+    heading?: string;
+    image?: string;
+  };
 }
 
 type ResolvedHighlightSlide = {
@@ -28,9 +36,13 @@ type ResolvedHighlightSlide = {
   additionalText: string;
   imageSrc?: string | null;
   imageAlt: string;
+  dataAttributes?: HighlightSlide["dataAttributes"];
 };
 
 type HighlightsSectionProps = {
+  dataAttributes?: {
+    label?: string;
+  };
   label?: string | null;
   slides?: HighlightSlide[] | null;
 };
@@ -65,10 +77,12 @@ function resolveSlide(slide: HighlightSlide): ResolvedHighlightSlide {
     additionalText: slide.additionalText ?? "",
     imageSrc: slide.imageSrc,
     imageAlt: slide.imageAlt ?? slide.heading ?? "",
+    dataAttributes: slide.dataAttributes,
   };
 }
 
 export default function HighlightsSection({
+  dataAttributes,
   label,
   slides,
 }: HighlightsSectionProps = {}) {
@@ -102,7 +116,9 @@ export default function HighlightsSection({
         {/* Top Row - Label and Navigation */}
         <Grid noPadding>
           <div className="col-span-4 md:col-span-8 lg:col-span-12 flex justify-between items-center">
-            <h5 className="sub-2 text-white">{label}</h5>
+            <h5 className="sub-2 text-white" data-sanity={dataAttributes?.label}>
+              {label}
+            </h5>
             <div className="flex gap-4">
               <button
                 onClick={prevSlide}
@@ -176,7 +192,12 @@ export default function HighlightsSection({
                       : "opacity-0 pointer-events-none"
                   }`}
                 >
-                  <h3 className="h3 text-white">{slide.heading}</h3>
+                  <h3
+                    className="h3 text-white"
+                    data-sanity={slide.dataAttributes?.heading}
+                  >
+                    {slide.heading}
+                  </h3>
                 </div>
               ))}
             </div>
@@ -228,6 +249,7 @@ export default function HighlightsSection({
                         ? "opacity-100 z-10"
                         : "opacity-0 pointer-events-none hidden lg:block"
                     }`}
+                    data-sanity={slide.dataAttributes?.image}
                     style={{ backgroundColor: "#311E41" }}
                   >
                     {slide.imageSrc ? (
@@ -262,7 +284,12 @@ export default function HighlightsSection({
                         : "opacity-0 pointer-events-none hidden lg:block"
                     }`}
                   >
-                    <p className="p1 text-white">{slide.body}</p>
+                    <p
+                      className="p1 text-white"
+                      data-sanity={slide.dataAttributes?.body}
+                    >
+                      {slide.body}
+                    </p>
                   </div>
                 ))}
               </div>
@@ -285,6 +312,7 @@ export default function HighlightsSection({
                       <Link
                         href={slide.ctaLink}
                         className="flex bg-white text-black link px-6 py-6 items-center justify-between hover:bg-gray-100 transition-colors lg:w-2/3"
+                        data-sanity={slide.dataAttributes?.ctaText}
                       >
                         <span>{slide.ctaText}</span>
                         <ChevronRight className="w-5 h-5" strokeWidth={2} />
@@ -306,6 +334,7 @@ export default function HighlightsSection({
                     >
                       <p
                         className="p2"
+                        data-sanity={slide.dataAttributes?.additionalText}
                         style={{ color: "rgba(255, 255, 255, 0.60)" }}
                       >
                         {renderTextWithEmailLinks(slide.additionalText)}

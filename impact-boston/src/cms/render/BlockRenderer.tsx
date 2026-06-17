@@ -1,5 +1,6 @@
 import type { CmsPageBlock } from "@/cms/types/blocks";
 import type { CmsBlockFallbacks } from "@/cms/types/page";
+import type { CmsDataAttribute, CmsFieldPath } from "@/cms/visualEditing";
 import ActionPanelBlock from "./blocks/ActionPanelBlock";
 import ContentBlock from "./blocks/ContentBlock";
 import CtaSectionBlock from "./blocks/CtaSectionBlock";
@@ -14,58 +15,124 @@ import TripleContentBlock from "./blocks/TripleContentBlock";
 
 type BlockRendererProps = {
   block: CmsPageBlock;
+  blockPath: CmsFieldPath;
+  dataAttribute?: CmsDataAttribute;
   fallbacks?: CmsBlockFallbacks;
 };
 
 export default function BlockRenderer({
   block,
+  blockPath,
+  dataAttribute,
   fallbacks,
 }: BlockRendererProps) {
   switch (block._type) {
     case "hero1Block":
     case "hero2Block":
-      return <HeroBlock section={block} fallback={fallbacks?.hero} />;
+      return (
+        <HeroBlock
+          blockPath={blockPath}
+          dataAttribute={dataAttribute}
+          section={block}
+          fallback={fallbacks?.hero}
+        />
+      );
 
     case "actionPanelBlock":
       return (
-        <ActionPanelBlock section={block} fallback={fallbacks?.actionPanel} />
+        <ActionPanelBlock
+          blockPath={blockPath}
+          dataAttribute={dataAttribute}
+          section={block}
+          fallback={fallbacks?.actionPanel}
+        />
       );
 
     case "ctaSectionBlock":
       return (
-        <CtaSectionBlock section={block} fallback={fallbacks?.ctaSection} />
+        <CtaSectionBlock
+          blockPath={blockPath}
+          dataAttribute={dataAttribute}
+          section={block}
+          fallback={fallbacks?.ctaSection}
+        />
       );
 
     case "singleContentBlock":
-      return <SingleContentBlock section={block} />;
+      return (
+        <SingleContentBlock
+          blockPath={blockPath}
+          dataAttribute={dataAttribute}
+          section={block}
+        />
+      );
 
     case "doubleContentBlock":
-      return <DoubleContentBlock section={block} />;
+      return (
+        <DoubleContentBlock
+          blockPath={blockPath}
+          dataAttribute={dataAttribute}
+          section={block}
+        />
+      );
 
     case "tripleContentBlock":
-      return <TripleContentBlock section={block} />;
+      return (
+        <TripleContentBlock
+          blockPath={blockPath}
+          dataAttribute={dataAttribute}
+          section={block}
+        />
+      );
 
     case "listBlock":
-      return <ListBlock section={block} />;
+      return (
+        <ListBlock
+          blockPath={blockPath}
+          dataAttribute={dataAttribute}
+          section={block}
+        />
+      );
 
     case "sideTabsBlock":
       return (
-        <SideTabsBlock section={block} fallbackTabs={fallbacks?.sideTabs} />
+        <SideTabsBlock
+          blockPath={blockPath}
+          dataAttribute={dataAttribute}
+          section={block}
+          fallbackTabs={fallbacks?.sideTabs}
+        />
       );
 
     case "highlightsBlock":
       return (
-        <HighlightsBlock section={block} fallback={fallbacks?.highlights} />
+        <HighlightsBlock
+          blockPath={blockPath}
+          dataAttribute={dataAttribute}
+          section={block}
+          fallback={fallbacks?.highlights}
+        />
       );
 
     case "testimonialsCarouselBlock":
     case "testimonialsSpotlightBlock":
       return (
-        <TestimonialsBlock section={block} fallback={fallbacks?.testimonials} />
+        <TestimonialsBlock
+          blockPath={blockPath}
+          dataAttribute={dataAttribute}
+          section={block}
+          fallback={fallbacks?.testimonials}
+        />
       );
 
     case "contentBlock":
-      return <ContentBlock section={block} />;
+      return (
+        <ContentBlock
+          blockPath={blockPath}
+          dataAttribute={dataAttribute}
+          section={block}
+        />
+      );
 
     default:
       return null;

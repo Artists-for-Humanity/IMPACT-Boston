@@ -3,10 +3,13 @@ import { defineQuery } from "next-sanity";
 import { SIDE_TABS_CONTENT_PROJECTION } from "./fragments/sideTabs";
 
 const PAGE_SECTIONS_PROJECTION = `
+    _id,
+    _type,
     sections[]{
       _key,
       _type,
       headlineParts[] {
+        _key,
         text,
         color
       },
@@ -41,6 +44,7 @@ const PAGE_SECTIONS_PROJECTION = `
       subtext,
       variant,
       paragraphs[] {
+        _key,
         text,
         bold
       },
@@ -50,6 +54,7 @@ const PAGE_SECTIONS_PROJECTION = `
       backgroundColor,
       intro,
       cards[] {
+        _key,
         title,
         titleLine2,
         body,
@@ -65,6 +70,7 @@ const PAGE_SECTIONS_PROJECTION = `
         showImageGradient
       },
       listItems[] {
+        _key,
         title,
         description,
         showInfoIcon,
@@ -72,7 +78,9 @@ const PAGE_SECTIONS_PROJECTION = `
         defaultOpen
       },
       detailItems[] {
+        _key,
         fields[] {
+          _key,
           label,
           value,
           href
@@ -81,6 +89,7 @@ const PAGE_SECTIONS_PROJECTION = `
         description
       },
       panels[] {
+        _key,
         title,
         titleLine2,
         description,
@@ -90,11 +99,13 @@ const PAGE_SECTIONS_PROJECTION = `
         icon
       },
       tabs[] {
+        _key,
         label,
         ${SIDE_TABS_CONTENT_PROJECTION}
       },
       label,
       slides[] {
+        _key,
         heading,
         body,
         ctaText,
@@ -104,10 +115,13 @@ const PAGE_SECTIONS_PROJECTION = `
         imageAlt
       },
       heading,
+      authorPrefix,
+      showAuthors,
       spotlightQuote,
       spotlightAuthor,
       spotlightAuthorTitle,
       testimonials[] {
+        _key,
         quote,
         author,
         authorTitle,

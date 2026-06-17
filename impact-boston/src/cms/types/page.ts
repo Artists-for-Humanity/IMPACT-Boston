@@ -29,6 +29,8 @@ export type CmsBlockFallbacks = {
   testimonials?: Pick<
     CmsTestimonialsBlock,
     | "heading"
+    | "authorPrefix"
+    | "showAuthors"
     | "subtext"
     | "spotlightAuthor"
     | "spotlightAuthorTitle"
@@ -38,6 +40,8 @@ export type CmsBlockFallbacks = {
 };
 
 export type CmsPageData = {
+  _id?: string | null;
+  _type?: string | null;
   sections?: CmsPageBlock[] | null;
 };
 

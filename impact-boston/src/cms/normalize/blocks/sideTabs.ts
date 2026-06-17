@@ -6,10 +6,17 @@ export function resolveSideTabs(
   fallbackTabs: SideTab[] = [],
 ): SideTab[] {
   const normalizedTabs = sideTabs
-    ?.filter((tab): tab is { label: string; content: SideTab["content"] } =>
-      Boolean(tab?.label && Array.isArray(tab.content)),
+    ?.filter(
+      (
+        tab,
+      ): tab is {
+        _key?: string | null;
+        label: string;
+        content: SideTab["content"];
+      } => Boolean(tab?.label && Array.isArray(tab.content)),
     )
     .map((tab) => ({
+      _key: tab._key,
       label: tab.label,
       content: tab.content,
     }));
