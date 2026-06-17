@@ -276,10 +276,9 @@ export const singleContentBlockType = defineType({
       name: 'backgroundColor',
       title: 'Background Color',
       type: 'string',
-      initialValue: 'white',
       options: {
         list: [
-          {title: 'White', value: 'white'},
+          {title: 'None (White)', value: ''},
           {title: 'Lavender', value: 'lavender'},
           {title: 'Primary Light', value: 'primaryLight'},
           {title: 'Secondary Light', value: 'secondaryLight'},

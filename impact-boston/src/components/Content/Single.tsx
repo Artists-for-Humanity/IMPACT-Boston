@@ -8,9 +8,6 @@ import { PLACEHOLDER_IMAGE_SRC } from "../common/placeholderImage";
 export interface SingleContentParagraph {
   text: string;
   bold?: boolean;
-  dataAttributes?: {
-    text?: string;
-  };
 }
 
 interface ThumbnailImage {
@@ -40,7 +37,7 @@ export interface SingleContentProps {
   eyebrow?: string;
   title: string;
   titleAs?: "h2" | "h3";
-  paragraphs: SingleContentParagraph[];
+  paragraphs?: SingleContentParagraph[];
   subtitle?: string;
   secondaryParagraph?: string;
   imageSrc?: string;
@@ -55,21 +52,10 @@ export interface SingleContentProps {
   backgroundColor?: string;
   gridClassName?: string;
   thumbnails?: Thumbnail[];
-  dataAttributes?: {
-    body?: string;
-    ctaText?: string;
-    eyebrow?: string;
-    image?: string;
-    paragraphs?: Array<{ text?: string } | undefined>;
-    purchaseLinkText?: string;
-    subtitle?: string;
-    title?: string;
-  };
 }
 
 export default function SingleContent({
   id,
-  eyebrow,
   title,
   titleAs: TitleTag = "h3",
   subtitle,
@@ -86,7 +72,6 @@ export default function SingleContent({
   backgroundColor,
   gridClassName,
   thumbnails,
-  dataAttributes,
 }: SingleContentProps) {
   const imageCol = reverse
     ? "col-span-full lg:col-span-6 lg:col-start-1"
@@ -103,7 +88,6 @@ export default function SingleContent({
       <Image
         src={PLACEHOLDER_IMAGE_SRC}
         alt={imageAlt ?? `${title} placeholder image`}
-        data-sanity={dataAttributes?.image}
         fill
         sizes="(min-width: 1024px) 50vw, 100vw"
         className="object-cover"
@@ -117,14 +101,12 @@ export default function SingleContent({
       width={1000}
       height={1000}
       alt={imageAlt ?? ""}
-      data-sanity={dataAttributes?.image}
       className="object-cover w-full h-[400px] lg:h-auto"
       loading="eager"
       priority={true}
       style={{ objectFit: "cover", display: "block" }}
     />
   ) : null;
-  const hasHeading = Boolean(eyebrow || title || subtitle);
 
   return (
     <div
@@ -149,60 +131,31 @@ export default function SingleContent({
         )}
 
         <div className={`${contentCol} flex flex-col gap-6 lg:gap-8`}>
-          {hasHeading ? (
-            <div className="flex flex-col gap-2">
-              {eyebrow ? (
-                <p
-                  className="medium-label text-secondary"
-                  data-sanity={dataAttributes?.eyebrow}
-                >
-                  {eyebrow}
-                </p>
-              ) : null}
-              {title ? (
-                <TitleTag
-                  className={TitleTag === "h2" ? "h2" : "h3"}
-                  data-sanity={dataAttributes?.title}
-                >
-                  {title}
-                </TitleTag>
-              ) : null}
-              {subtitle && (
-                <div
-                  className={`sub-2 ${subtitleClassName ?? "text-secondary"}`}
-                  data-sanity={dataAttributes?.subtitle}
-                >
-                  {subtitle}
-                </div>
-              )}
-            </div>
-          ) : null}
-          <div className="flex flex-col gap-6 lg:grid lg:grid-cols-5 lg:gap-y-6">
-            {bodyContent ? (
-              <div className="contents" data-sanity={dataAttributes?.body}>
-                {bodyContent}
+          <div className="flex flex-col gap-2">
+            <TitleTag className={TitleTag === "h2" ? "h2" : "h3"}>
+              {title}
+            </TitleTag>
+            {subtitle && (
+              <div className={`sub-2 ${subtitleClassName ?? "text-secondary"}`}>
+                {subtitle}
               </div>
-            ) : (
-              paragraphs.map((para, idx) => (
-                <p
-                  className={`p1 lg:col-span-5${para.bold ? " font-bold" : ""}`}
-                  data-sanity={
-                    para.dataAttributes?.text ??
-                    dataAttributes?.paragraphs?.[idx]?.text
-                  }
-                  key={idx}
-                >
-                  {para.text}
-                </p>
-              ))
             )}
+          </div>
+          <div className="flex flex-col gap-6 lg:grid lg:grid-cols-5 lg:gap-y-6">
+            {bodyContent ?? (paragraphs ?? []).map((para, idx) => (
+              <p
+                className={`p1 lg:col-span-5${para.bold ? " font-bold" : ""}`}
+                key={idx}
+              >
+                {para.text}
+              </p>
+            ))}
             {purchaseLink && (
               <Link
                 href={purchaseLink.href}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p1-bold underline lg:col-span-5"
-                data-sanity={dataAttributes?.purchaseLinkText}
               >
                 {purchaseLink.text}
               </Link>
@@ -211,7 +164,6 @@ export default function SingleContent({
               <Link
                 href={cta.href}
                 className="lg:col-span-5"
-                data-sanity={dataAttributes?.ctaText}
                 style={{
                   color: "var(--Secondary, #563672)",
                   fontFamily: '"IBM Plex Sans"',

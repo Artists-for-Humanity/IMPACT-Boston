@@ -1,6 +1,7 @@
 <svg width="640" height="360" viewBox="0 0 640 360" fill="none" xmlns="http://www.w3.org/2000/svg">
   <rect width="640" height="360" fill="#FFFFFF"/>
   <rect x="44" y="48" width="552" height="264" fill="#FAF6FD" stroke="#D8D0DE" stroke-width="2"/>
+  <!-- Left: text content -->
   <rect x="72" y="78" width="74" height="10" rx="3" fill="#563672"/>
   <rect x="72" y="112" width="188" height="18" rx="3" fill="#311E41"/>
   <rect x="72" y="140" width="160" height="18" rx="3" fill="#311E41"/>
@@ -8,8 +9,14 @@
   <rect x="72" y="204" width="168" height="9" rx="3" fill="#7B7281"/>
   <rect x="72" y="224" width="186" height="9" rx="3" fill="#7B7281"/>
   <rect x="72" y="266" width="114" height="30" fill="#311E41"/>
-  <rect x="332" y="80" width="220" height="180" fill="#EDE7F0"/>
+  <!-- Right: image placeholder -->
+  <rect x="332" y="80" width="220" height="180" fill="#e9e9e9"/>
+  <!-- Gradient stripe -->
   <rect x="332" y="80" width="48" height="8" fill="#E36A38"/>
   <rect x="380" y="80" width="146" height="8" fill="#874E9F"/>
   <rect x="526" y="80" width="26" height="8" fill="#462458"/>
+  <!-- Image detail: person circle + body + landscape -->
+  <circle cx="415" cy="158" r="28" fill="#c9c9c9"/>
+  <rect x="453" y="108" width="42" height="108" rx="21" fill="#b9b9b9"/>
+  <path d="M332 252L380 212L418 234L466 196L552 252Z" fill="#d5d5d5"/>
 </svg>

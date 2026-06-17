@@ -63,12 +63,12 @@ export const contentBlockType = defineType({
     }),
     defineField({
       name: 'ctaText',
-      title: 'CTA Button Text',
+      title: 'Link Text',
       type: 'string',
     }),
     defineField({
       name: 'ctaHref',
-      title: 'CTA Button Link',
+      title: 'Link URL',
       type: 'string',
     }),
     defineField({
@@ -79,9 +79,6 @@ export const contentBlockType = defineType({
         list: [
           {title: 'None (White)', value: ''},
           {title: 'Lavender', value: 'bg-bg-lavender'},
-          {title: 'Primary Light', value: 'bg-primary-light'},
-          {title: 'Secondary Light', value: 'bg-secondary-light'},
-          {title: 'Complementary Light', value: 'bg-complementary-light'},
         ],
         layout: 'radio',
       },

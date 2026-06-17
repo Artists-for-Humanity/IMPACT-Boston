@@ -1,17 +1,10 @@
+import { stegaClean } from "@sanity/client/stega";
 import { PortableText, type PortableTextBlock, type PortableTextComponents } from "next-sanity";
 import SingleContent from "@/components/Content/Single";
 import { urlFor } from "@/sanity/image";
 import type { CmsContentBlock } from "@/cms/types/blocks";
-import {
-  extendPath,
-  getFieldDataAttribute,
-  type CmsDataAttribute,
-  type CmsFieldPath,
-} from "@/cms/visualEditing";
 
 type ContentBlockProps = {
-  blockPath: CmsFieldPath;
-  dataAttribute?: CmsDataAttribute;
   section: CmsContentBlock;
 };
 
@@ -25,11 +18,7 @@ const bodyComponents: PortableTextComponents = {
   },
 };
 
-export default function ContentBlock({
-  blockPath,
-  dataAttribute,
-  section,
-}: ContentBlockProps) {
+export default function ContentBlock({ section }: ContentBlockProps) {
   const imageSrc = section.image
     ? (urlFor(section.image)?.width(1000).fit("max").url() ?? undefined)
     : undefined;
@@ -58,14 +47,7 @@ export default function ContentBlock({
           ? { text: section.ctaText, href: section.ctaHref }
           : undefined
       }
-      backgroundColor={section.backgroundColor ?? undefined}
-      dataAttributes={{
-        body: getFieldDataAttribute(dataAttribute, extendPath(blockPath, "body")),
-        ctaText: getFieldDataAttribute(dataAttribute, extendPath(blockPath, "ctaText")),
-        image: getFieldDataAttribute(dataAttribute, extendPath(blockPath, "image")),
-        subtitle: getFieldDataAttribute(dataAttribute, extendPath(blockPath, "subtitle")),
-        title: getFieldDataAttribute(dataAttribute, extendPath(blockPath, "title")),
-      }}
+      backgroundColor={stegaClean(section.backgroundColor) ?? undefined}
     />
   );
 }

@@ -7,6 +7,7 @@ import CtaSectionBlock from "./blocks/CtaSectionBlock";
 import DoubleContentBlock from "./blocks/DoubleContentBlock";
 import HeroBlock from "./blocks/HeroBlock";
 import HighlightsBlock from "./blocks/HighlightsBlock";
+import ImageGridBlock from "./blocks/ImageGridBlock";
 import ListBlock from "./blocks/ListBlock";
 import SideTabsBlock from "./blocks/SideTabsBlock";
 import SingleContentBlock from "./blocks/SingleContentBlock";
@@ -133,6 +134,9 @@ export default function BlockRenderer({
           section={block}
         />
       );
+
+    case "imageGridBlock":
+      return <ImageGridBlock section={block} />;
 
     default:
       return null;

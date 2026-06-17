@@ -129,6 +129,7 @@ body {
            md:text-[14px]
            lg:text-[16px];
     font-family: var(--font-ibm-plex-sans), sans-serif;
+    color: var(--color-black);
   }
 
   .medium-label {
