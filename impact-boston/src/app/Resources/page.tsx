@@ -276,6 +276,7 @@ export default async function Resources() {
   return (
     <CmsPage
       blocks={getCmsPageBlocks(data, RESOURCE_PAGE_FALLBACK_BLOCKS)}
+      data={data}
       fallbacks={DEFAULT_CMS_BLOCK_FALLBACKS}
     />
   );

@@ -111,6 +111,7 @@ function resolveTripleContentCard(card: SanityTripleContentCard): TripleCard {
   }
 
   return {
+    _key: card._key,
     bgClass: resolveTripleCardBackgroundClass(card.backgroundColor),
     bgStyle: resolveTripleCardBackgroundStyle(card.backgroundColor),
     content,

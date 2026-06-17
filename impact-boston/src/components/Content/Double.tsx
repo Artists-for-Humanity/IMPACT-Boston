@@ -3,12 +3,18 @@ import Image from "next/image";
 import { PLACEHOLDER_IMAGE_SRC } from "@/components/common/placeholderImage";
 
 export type DoubleCard = {
+  _key?: string | null;
   title?: string;
   description: string;
   imageSrc?: string;
   imageAlt?: string;
   showImagePlaceholder?: boolean;
   showImageGradient?: boolean;
+  dataAttributes?: {
+    description?: string;
+    image?: string;
+    title?: string;
+  };
 };
 
 type DoubleProps = {
@@ -27,6 +33,7 @@ export default function ContentDouble({ cards }: DoubleProps) {
           imageAlt={card.imageAlt ?? card.title ?? ""}
           showImagePlaceholder={card.showImagePlaceholder}
           showImageGradient={card.showImageGradient}
+          dataAttributes={card.dataAttributes}
           className="col-span-full flex flex-col gap-y-8 justify-between lg:col-span-6"
         />
       ))}
@@ -45,6 +52,7 @@ function DoubleCard({
   showImagePlaceholder = false,
   showImageGradient = false,
   className = "",
+  dataAttributes,
 }: {
   title?: string;
   description: string;
@@ -53,15 +61,22 @@ function DoubleCard({
   showImagePlaceholder?: boolean;
   showImageGradient?: boolean;
   className?: string;
+  dataAttributes?: DoubleCard["dataAttributes"];
 }) {
   return (
     <div className={className}>
       <div className="flex flex-col gap-y-2 lg:gap-y-4">
-        {title && <h3 className="h3 text-black">{title}</h3>}
-        <p className="p2">{description}</p>
+        {title && (
+          <h3 className="h3 text-black" data-sanity={dataAttributes?.title}>
+            {title}
+          </h3>
+        )}
+        <p className="p2" data-sanity={dataAttributes?.description}>
+          {description}
+        </p>
       </div>
 
-      <div className="relative w-full aspect-[6/3]">
+      <div className="relative w-full aspect-[6/3]" data-sanity={dataAttributes?.image}>
         {showImageGradient && (
           <div
             className="absolute left-0 right-0 top-0 z-10 h-2"

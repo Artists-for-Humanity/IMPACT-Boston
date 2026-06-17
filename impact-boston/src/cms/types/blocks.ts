@@ -19,6 +19,7 @@ import type { Testimonial } from "@/components/Highlights/Testimonials/Carousel"
 import type { SideTab } from "@/components/TabsPanel/SideTabs";
 
 export type SanityHeroHeadlinePart = {
+  _key?: string | null;
   text?: string | null;
   color?: string | null;
 };
@@ -49,6 +50,7 @@ export type SanityCtaSectionFields = {
 };
 
 export type SanitySingleContentParagraph = {
+  _key?: string | null;
   text?: SingleContentParagraph["text"] | null;
   bold?: SingleContentParagraph["bold"] | null;
 };
@@ -94,6 +96,7 @@ export type SanitySingleContentContentBlock =
   | SanitySingleContentSupportingLinkBlock;
 
 export type SanityDoubleContentCard = {
+  _key?: string | null;
   title?: DoubleCard["title"] | null;
   description?: string | null;
   image?: SanityImageSource | null;
@@ -104,6 +107,7 @@ export type SanityDoubleContentCard = {
 };
 
 export type SanityTripleContentCard = {
+  _key?: string | null;
   title?: string | null;
   titleLine2?: string | null;
   description?: string | null;
@@ -127,11 +131,13 @@ export type SanityListFields = {
 };
 
 export type SanitySideTab = {
+  _key?: string | null;
   label?: string | null;
   content?: SideTab["content"] | null;
 };
 
 export type SanityHighlight = {
+  _key?: string | null;
   heading?: string | null;
   body?: string | null;
   ctaText?: string | null;
@@ -140,6 +146,7 @@ export type SanityHighlight = {
   image?: SanityImageSource | null;
   imageSrc?: string | null;
   imageAlt?: string | null;
+  dataAttributes?: HighlightSlide["dataAttributes"];
 };
 
 export type CmsPageBlockBase = {

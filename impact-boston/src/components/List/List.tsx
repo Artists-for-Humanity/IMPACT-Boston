@@ -9,24 +9,40 @@ import Grid from "../common/Grid";
 export type ListVariant = "accordion" | "details";
 
 export type ListItem = {
+  _key?: string | null;
   title: string;
   description: string;
   paragraph?: string;
   showInfoIcon?: boolean;
   accordionContent?: string;
   defaultOpen?: boolean;
+  dataAttributes?: {
+    accordionContent?: string;
+    description?: string;
+    title?: string;
+  };
 };
 
 export type ListDetailField = {
+  _key?: string | null;
   label: string;
   value: string;
   href?: string;
+  dataAttributes?: {
+    label?: string;
+    value?: string;
+  };
 };
 
 export type ListDetailItem = {
+  _key?: string | null;
   fields: ListDetailField[];
   descriptionTitle?: string;
   description: string;
+  dataAttributes?: {
+    description?: string;
+    descriptionTitle?: string;
+  };
 };
 
 export type ListProps = {
@@ -37,6 +53,10 @@ export type ListProps = {
   variant?: ListVariant;
   showToggle?: boolean;
   noPaddingTop?: boolean;
+  dataAttributes?: {
+    description?: string;
+    title?: string;
+  };
 };
 
 export default function List({
@@ -47,6 +67,7 @@ export default function List({
   variant = "accordion",
   showToggle = true,
   noPaddingTop = false,
+  dataAttributes,
 }: ListProps) {
   const [openIndexes, setOpenIndexes] = useState<Set<number>>(
     () =>
@@ -101,9 +122,18 @@ export default function List({
         {hasHeader ? (
           <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
             <div className="flex max-w-[760px] flex-col gap-3">
-              {title ? <h2 className="h3 text-[#071526]">{title}</h2> : null}
+              {title ? (
+                <h2
+                  className="h3 text-[#071526]"
+                  data-sanity={dataAttributes?.title}
+                >
+                  {title}
+                </h2>
+              ) : null}
               {description ? (
-                <p className="p2 text-grey">{description}</p>
+                <p className="p2 text-grey" data-sanity={dataAttributes?.description}>
+                  {description}
+                </p>
               ) : null}
             </div>
 
@@ -178,7 +208,10 @@ function AccordionList({
             <div className="grid grid-cols-[1fr_auto] gap-x-4 gap-y-4">
               <div className="min-w-0">
                 <div className="flex items-center gap-2">
-                  <h3 className="sub-1 truncate text-black md:whitespace-normal">
+                  <h3
+                    className="sub-1 truncate text-black md:whitespace-normal"
+                    data-sanity={item.dataAttributes?.title}
+                  >
                     {item.title}
                   </h3>
                   {item.showInfoIcon ? (
@@ -189,7 +222,10 @@ function AccordionList({
                     />
                   ) : null}
                 </div>
-                <p className="p2 mt-2 max-w-[760px] text-black">
+                <p
+                  className="p2 mt-2 max-w-[760px] text-black"
+                  data-sanity={item.dataAttributes?.description}
+                >
                   {item.description}
                 </p>
               </div>
@@ -209,6 +245,7 @@ function AccordionList({
               {hasAccordion && isOpen ? (
                 <p
                   className="p2 col-span-full max-w-[920px] whitespace-pre-line text-black"
+                  data-sanity={item.dataAttributes?.accordionContent}
                   id={contentId}
                 >
                   {accordionContent}
@@ -233,17 +270,25 @@ function DetailList({ items }: { items: ListDetailItem[] }) {
           <dl className="grid gap-x-6 gap-y-4 md:grid-cols-[160px_1fr] lg:grid-cols-[160px_1fr]">
             {item.fields.map((field) => (
               <div className="contents" key={`${field.label}-${field.value}`}>
-                <dt className="p1-bold text-black">{field.label}</dt>
+                <dt
+                  className="p1-bold text-black"
+                  data-sanity={field.dataAttributes?.label}
+                >
+                  {field.label}
+                </dt>
                 <dd className="p1 text-black">
                   {field.href ? (
                     <Link
                       className="text-secondary underline"
+                      data-sanity={field.dataAttributes?.value}
                       href={field.href}
                     >
                       {field.value}
                     </Link>
                   ) : (
-                    field.value
+                    <span data-sanity={field.dataAttributes?.value}>
+                      {field.value}
+                    </span>
                   )}
                 </dd>
               </div>
@@ -251,10 +296,16 @@ function DetailList({ items }: { items: ListDetailItem[] }) {
           </dl>
 
           <div>
-            <h3 className="p1-bold text-black">
+            <h3
+              className="p1-bold text-black"
+              data-sanity={item.dataAttributes?.descriptionTitle}
+            >
               {item.descriptionTitle || "Description"}
             </h3>
-            <p className="p1 mt-4 whitespace-pre-line text-black">
+            <p
+              className="p1 mt-4 whitespace-pre-line text-black"
+              data-sanity={item.dataAttributes?.description}
+            >
               {item.description}
             </p>
           </div>

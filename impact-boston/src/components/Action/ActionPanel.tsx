@@ -10,17 +10,27 @@ import Grid from "../common/Grid";
 export type ActionPanelIcon = string;
 
 export type ActionPanelCard = {
+  _key?: string | null;
   title?: string | null;
   body?: string | null;
   href?: string | null;
   bgColor?: string | null;
   icon?: ActionPanelIcon | null;
+  dataAttributes?: {
+    body?: string;
+    href?: string;
+    title?: string;
+  };
 };
 
 type ActionPanelProps = {
   title?: string | null;
   subtext?: string | null;
   cards?: ActionPanelCard[] | null;
+  dataAttributes?: {
+    subtext?: string;
+    title?: string;
+  };
 };
 
 const LEGACY_ACTION_ICON_ALIASES: Record<string, string> = {
@@ -99,6 +109,7 @@ export default function ActionPanel({
   title,
   subtext,
   cards,
+  dataAttributes,
 }: ActionPanelProps = {}) {
   const visibleCards = cards?.filter((card) => card.href).slice(0, 3) ?? [];
 
@@ -112,7 +123,10 @@ export default function ActionPanel({
         {/* Header Row */}
         <Grid noPadding className="gap-y-4">
           {/* Title */}
-          <h2 className="col-span-4 md:col-span-7 lg:col-span-6 h2 text-black text-left">
+          <h2
+            className="col-span-4 md:col-span-7 lg:col-span-6 h2 text-black text-left"
+            data-sanity={dataAttributes?.title}
+          >
             {title}
           </h2>
 
@@ -120,7 +134,10 @@ export default function ActionPanel({
           <div className="hidden lg:block lg:col-span-3" />
 
           {/* Subtext */}
-          <p className="col-span-4 md:col-span-4 lg:col-span-3 lg:col-start-10 p2 text-gray-600 md:text-left lg:text-right self-end lg:self-center">
+          <p
+            className="col-span-4 md:col-span-4 lg:col-span-3 lg:col-start-10 p2 text-gray-600 md:text-left lg:text-right self-end lg:self-center"
+            data-sanity={dataAttributes?.subtext}
+          >
             {subtext}
           </p>
         </Grid>
@@ -136,6 +153,7 @@ export default function ActionPanel({
                 key={`${card.href}-${index}`}
                 href={card.href ?? "#"}
                 className={`col-span-4 md:col-span-8 lg:col-span-4 flex flex-col items-start gap-14 md:gap-0 md:justify-between ${CARD_HEIGHT_CLASSES[index] ?? CARD_HEIGHT_CLASSES[0]} lg:h-[325px] p-6 lg:p-8 hover:opacity-90 transition-opacity`}
+                data-sanity={card.dataAttributes?.href}
                 style={{ backgroundColor: bgColor }}
               >
                 {/* Top - Icon and Chevron */}
@@ -150,9 +168,19 @@ export default function ActionPanel({
                 {/* Bottom - Title and Body */}
                 <div className="flex flex-col gap-2 mt-auto md:mt-0">
                   {card.title ? (
-                    <h4 className="sub-1 text-white">{card.title}</h4>
+                    <h4
+                      className="sub-1 text-white"
+                      data-sanity={card.dataAttributes?.title}
+                    >
+                      {card.title}
+                    </h4>
                   ) : null}
-                  <p className="p2 text-white/87 max-w-[100%]">{card.body}</p>
+                  <p
+                    className="p2 text-white/87 max-w-[100%]"
+                    data-sanity={card.dataAttributes?.body}
+                  >
+                    {card.body}
+                  </p>
                 </div>
               </Link>
             );

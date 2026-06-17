@@ -8,10 +8,16 @@ import Grid from "@/components/common/Grid";
 import ExpandableQuote from "./ExpandableQuote";
 
 export interface Testimonial {
+  _key?: string | null;
   quote: string;
   author?: string;
   authorTitle?: string;
   readMoreLink?: string;
+  dataAttributes?: {
+    author?: string;
+    authorTitle?: string;
+    quote?: string;
+  };
 }
 
 type HeadingTag = 'h2' | 'h3';
@@ -26,6 +32,10 @@ interface CarouselProps {
   className?: string;
   headingLevel?: HeadingTag;
   headingClassName?: string;
+  dataAttributes?: {
+    heading?: string;
+    subheading?: string;
+  };
 }
 
 export default function TestimonialsCarousel({
@@ -38,6 +48,7 @@ export default function TestimonialsCarousel({
   className = '',
   headingLevel,
   headingClassName,
+  dataAttributes,
 }: CarouselProps) {
   const testimonialItems = testimonials.filter(
     (testimonial) => testimonial.quote,
@@ -51,6 +62,7 @@ export default function TestimonialsCarousel({
     <TestimonialsCarouselTrack
       authorPrefix={authorPrefix}
       heading={heading}
+      dataAttributes={dataAttributes}
       showAuthors={showAuthors}
       subheading={subheading}
       testimonialItems={testimonialItems}
@@ -68,6 +80,10 @@ type TestimonialsCarouselTrackProps = {
   testimonialItems: Testimonial[];
   backgroundColor?: string;
   className?: string;
+  dataAttributes?: {
+    heading?: string;
+    subheading?: string;
+  };
 };
 
 function TestimonialsCarouselTrack({
@@ -78,6 +94,7 @@ function TestimonialsCarouselTrack({
   testimonialItems,
   backgroundColor = '',
   className = '',
+  dataAttributes,
 }: TestimonialsCarouselTrackProps) {
   const [currentIndex, setCurrentIndex] = useState(testimonialItems.length);
   const [isTransitioning, setIsTransitioning] = useState(true);
@@ -155,12 +172,18 @@ function TestimonialsCarouselTrack({
             {/* Left - Heading and Subtext */}
             <div className="col-span-4 md:col-span-8 lg:col-span-6 flex flex-col gap-4 lg:gap-2 md:items-center lg:items-start">
               {heading ? (
-                <h2 className="h2 text-[#000] text-center md:text-center lg:text-left">
+                <h2
+                  className="h2 text-[#000] text-center md:text-center lg:text-left"
+                  data-sanity={dataAttributes?.heading}
+                >
                   {heading}
                 </h2>
               ) : null}
               {subheading ? (
-                <p className="p2 text-[#333] text-center md:text-center lg:text-left">
+                <p
+                  className="p2 text-[#333] text-center md:text-center lg:text-left"
+                  data-sanity={dataAttributes?.subheading}
+                >
                   {subheading}
                 </p>
               ) : null}
@@ -253,16 +276,23 @@ function TestimonialsCarouselTrack({
                       <ExpandableQuote
                         quote={testimonial.quote}
                         className="p1 whitespace-pre-line text-[#000] lg:text-[#333]"
+                        dataSanity={testimonial.dataAttributes?.quote}
                         withQuotationMarks
                       />
                       {showAuthors && testimonial.author ? (
-                        <p className="p2 mt-6 text-[#000] lg:text-[#333]">
+                        <p
+                          className="p2 mt-6 text-[#000] lg:text-[#333]"
+                          data-sanity={testimonial.dataAttributes?.author}
+                        >
                           {authorPrefix}
                           {testimonial.author}
                         </p>
                       ) : null}
                       {showAuthors && testimonial.authorTitle ? (
-                        <p className="p2 text-text-grey-light">
+                        <p
+                          className="p2 text-text-grey-light"
+                          data-sanity={testimonial.dataAttributes?.authorTitle}
+                        >
                           {testimonial.authorTitle}
                         </p>
                       ) : null}

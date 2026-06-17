@@ -104,6 +104,12 @@ function getStructuredBlockKey(
   return "_key" in block && block._key ? block._key : index;
 }
 
+function getBlockDataAttributes(
+  block: TabContentBlock | SanityTabContentBlock,
+) {
+  return "dataAttributes" in block ? block.dataAttributes : undefined;
+}
+
 function getColumns(block: TabContentBlock | SanityTabContentBlock) {
   if ("type" in block && block.type === "columns") {
     return block.items;
@@ -130,18 +136,23 @@ function renderStructuredContentBlock(
   key: Key,
 ) {
   const blockType = getStructuredBlockType(block);
+  const dataAttributes = getBlockDataAttributes(block);
 
   switch (blockType) {
     case "heading":
       return (
-        <h2 className="h2 pb-10" key={key}>
+        <h2 className="h2 pb-10" data-sanity={dataAttributes?.text} key={key}>
           {"text" in block ? block.text : ""}
         </h2>
       );
 
     case "subheading":
       return (
-        <h3 className="text-lg font-bold" key={key}>
+        <h3
+          className="text-lg font-bold"
+          data-sanity={dataAttributes?.text}
+          key={key}
+        >
           {"text" in block ? block.text : ""}
         </h3>
       );
@@ -150,6 +161,7 @@ function renderStructuredContentBlock(
       return (
         <p
           className={`p1${"bold" in block && block.bold ? " font-bold" : ""}`}
+          data-sanity={dataAttributes?.text}
           key={key}
         >
           {"text" in block ? block.text : ""}
@@ -165,7 +177,11 @@ function renderStructuredContentBlock(
       const listItems = block.items as string[];
 
       return (
-        <ul className="list-disc space-y-6 pl-6" key={key}>
+        <ul
+          className="list-disc space-y-6 pl-6"
+          data-sanity={dataAttributes?.text}
+          key={key}
+        >
           {listItems.map((item, j) => (
             <li
               key={j}
@@ -185,7 +201,11 @@ function renderStructuredContentBlock(
       const numberedListItems = block.items as string[];
 
       return (
-        <ol className="list-decimal space-y-4 pl-6" key={key}>
+        <ol
+          className="list-decimal space-y-4 pl-6"
+          data-sanity={dataAttributes?.text}
+          key={key}
+        >
           {numberedListItems.map((item, j) => (
             <li key={j} className="p1">
               {item}
@@ -232,7 +252,14 @@ function renderStructuredContentBlock(
       return (
         <ResourceList
           eyebrow={"eyebrow" in block && block.eyebrow ? block.eyebrow : ""}
-          items={items}
+          eyebrowDataSanity={dataAttributes?.eyebrow}
+          items={items.map((item, index) => ({
+            ...item,
+            dataAttributes: {
+              ...item.dataAttributes,
+              ...dataAttributes?.items?.[index],
+            },
+          }))}
           key={key}
           previewCount={
             "previewCount" in block ? block.previewCount : undefined
@@ -253,7 +280,13 @@ function renderStructuredContentBlock(
 
       return (
         <TrainerList
-          items={items}
+          items={items.map((item, index) => ({
+            ...item,
+            dataAttributes: {
+              ...item.dataAttributes,
+              ...dataAttributes?.items?.[index],
+            },
+          }))}
           key={key}
           previewCount={
             "previewCount" in block ? block.previewCount : undefined
@@ -284,6 +317,7 @@ function renderStructuredContentBlock(
           key={key}
           href={href}
           className="link inline-block text-primary underline transition hover:text-secondary"
+          data-sanity={dataAttributes?.text}
           target="_blank"
           rel="noopener noreferrer"
         >

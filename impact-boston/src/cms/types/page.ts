@@ -40,6 +40,8 @@ export type CmsBlockFallbacks = {
 };
 
 export type CmsPageData = {
+  _id?: string | null;
+  _type?: string | null;
   sections?: CmsPageBlock[] | null;
 };
 

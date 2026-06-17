@@ -7,10 +7,12 @@ import type { ResourceListItem } from "./types";
 
 export default function ResourceList({
   eyebrow,
+  eyebrowDataSanity,
   items,
   previewCount = 5,
 }: {
   eyebrow: string;
+  eyebrowDataSanity?: string;
   items: ResourceListItem[];
   previewCount?: number;
 }) {
@@ -31,7 +33,9 @@ export default function ResourceList({
   return (
     <div className="flex flex-col">
       <div className="flex items-center justify-between border-b border-line-divider pb-3">
-        <p className="p1 text-dusty-purple">{eyebrow}</p>
+        <p className="p1 text-dusty-purple" data-sanity={eyebrowDataSanity}>
+          {eyebrow}
+        </p>
         {hasToggle ? (
           <button
             className="p1 cursor-pointer text-secondary underline underline-offset-2"
@@ -118,11 +122,15 @@ function ResourceListItemContent({
         <a
           href={item.href}
           className="p1-bold block cursor-pointer text-black hover:text-secondary hover:underline"
+          data-sanity={item.dataAttributes?.title ?? item.dataAttributes?.href}
         >
           {item.title}
         </a>
       ) : (
-        <p className="p1-bold text-black group-hover:text-secondary">
+        <p
+          className="p1-bold text-black group-hover:text-secondary"
+          data-sanity={item.dataAttributes?.title}
+        >
           {item.title}
         </p>
       )}
@@ -131,6 +139,7 @@ function ResourceListItemContent({
         <a
           href={item.detailHref}
           className="p1 block cursor-pointer text-secondary hover:underline"
+          data-sanity={item.dataAttributes?.detail}
           rel="noopener noreferrer"
           target="_blank"
         >
@@ -138,10 +147,22 @@ function ResourceListItemContent({
         </a>
       ) : null}
       {item.detail && !item.detailHref ? (
-        <p className="p1 text-secondary">{item.detail}</p>
+        <p className="p1 text-secondary" data-sanity={item.dataAttributes?.detail}>
+          {item.detail}
+        </p>
       ) : null}
       {description ? (
-        <p className="p1 text-text-grey-light">{description}</p>
+        <p
+          className="p1 text-text-grey-light"
+          data-sanity={
+            expanded
+              ? item.dataAttributes?.expandedDescription ??
+                item.dataAttributes?.description
+              : item.dataAttributes?.description
+          }
+        >
+          {description}
+        </p>
       ) : null}
       {item.meta?.map((metaLine) => (
         <p className="p1 text-text-grey-light" key={metaLine}>

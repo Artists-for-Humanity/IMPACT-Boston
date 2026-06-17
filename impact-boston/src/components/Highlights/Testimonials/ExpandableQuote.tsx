@@ -7,6 +7,7 @@ const DEFAULT_MAX_QUOTE_LENGTH = 260;
 type ExpandableQuoteProps = {
   quote: string;
   className?: string;
+  dataSanity?: string;
   maxLength?: number;
   withQuotationMarks?: boolean;
 };
@@ -25,6 +26,7 @@ function getQuotePreview(quote: string, maxLength: number) {
 export default function ExpandableQuote({
   quote,
   className,
+  dataSanity,
   maxLength = DEFAULT_MAX_QUOTE_LENGTH,
   withQuotationMarks = false,
 }: ExpandableQuoteProps) {
@@ -37,7 +39,7 @@ export default function ExpandableQuote({
       : getQuotePreview(cleanQuote, maxLength);
 
   return (
-    <p className={className}>
+    <p className={className} data-sanity={dataSanity}>
       {withQuotationMarks ? "\u201c" : ""}
       {visibleQuote}
       {!isExpanded && shouldTruncate ? "..." : ""}

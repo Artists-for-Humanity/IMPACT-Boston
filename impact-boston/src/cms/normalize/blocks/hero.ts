@@ -5,6 +5,7 @@ import type { HeroBlockFallback } from "@/cms/types/page";
 import type { SanityHeroHeadlinePart } from "@/cms/types/blocks";
 
 type ResolvedHeroHeadlinePart = {
+  _key?: string | null;
   text: string;
   color?: string | null;
 };

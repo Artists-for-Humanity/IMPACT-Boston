@@ -12,6 +12,7 @@ export function resolveDoubleContentCards(
       }
 
       return {
+        _key: card._key,
         title: card.title ?? undefined,
         description: card.description,
         imageSrc: card.image

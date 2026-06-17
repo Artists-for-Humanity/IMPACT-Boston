@@ -6,15 +6,18 @@ import Button from "../common/Button";
 interface Hero1HeadlineProps {
   children: React.ReactNode;
   className?: string;
+  dataSanity?: string;
 }
 
 export function Hero1Headline({
   children,
   className = "",
+  dataSanity,
 }: Hero1HeadlineProps) {
   return (
     <h1
       className={`h1 text-center lg:text-left ${className}`}
+      data-sanity={dataSanity}
       style={{ color: "#061629" }}
     >
       {children}
@@ -26,12 +29,14 @@ interface Hero1HeadlinePartProps {
   children: React.ReactNode;
   color?: "primary" | "secondary" | "complementary" | "black" | "white";
   customColor?: string;
+  dataSanity?: string;
 }
 
 export function Hero1HeadlinePart({
   children,
   color = "black",
   customColor,
+  dataSanity,
 }: Hero1HeadlinePartProps) {
   const colorMap = {
     primary: "text-primary",
@@ -42,10 +47,18 @@ export function Hero1HeadlinePart({
   };
 
   if (customColor) {
-    return <span style={{ color: customColor }}>{children}</span>;
+    return (
+      <span data-sanity={dataSanity} style={{ color: customColor }}>
+        {children}
+      </span>
+    );
   }
 
-  return <span className={colorMap[color]}>{children}</span>;
+  return (
+    <span className={colorMap[color]} data-sanity={dataSanity}>
+      {children}
+    </span>
+  );
 }
 
 interface Hero1Props {
@@ -56,6 +69,11 @@ interface Hero1Props {
   imageSrc: string;
   imageAlt: string;
   className?: string;
+  dataAttributes?: {
+    body?: string;
+    ctaText?: string;
+    image?: string;
+  };
 }
 
 export default function Hero1({
@@ -66,6 +84,7 @@ export default function Hero1({
   imageSrc,
   imageAlt,
   className = "",
+  dataAttributes,
 }: Hero1Props) {
   return (
     <section
@@ -87,6 +106,7 @@ export default function Hero1({
               </div>
               <p
                 className="p1 max-w-lg lg:max-w-none lg:w-4/5 text-center lg:text-left"
+                data-sanity={dataAttributes?.body}
                 style={{ color: "#333" }}
               >
                 {body}
@@ -99,6 +119,7 @@ export default function Hero1({
                   variant="primary"
                   size="lg"
                   className="w-full col-start-2 col-span-4 md:col-start-2 md:col-span-4 md:w-full lg:w-auto lg:col-start-auto lg:col-span-3"
+                  data-sanity={dataAttributes?.ctaText}
                 >
                   {ctaText}
                 </Button>
@@ -122,6 +143,7 @@ export default function Hero1({
             <Image
               src={imageSrc}
               alt={imageAlt}
+              data-sanity={dataAttributes?.image}
               fill
               sizes="(min-width: 1024px) 58vw, 100vw"
               className="object-cover"

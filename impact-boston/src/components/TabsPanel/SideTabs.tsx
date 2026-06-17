@@ -101,7 +101,7 @@ export default function SideTabs({ tabs }: { tabs: SideTab[] }) {
               type="button"
             >
               <span aria-hidden="true" />
-              <span>{tab.label}</span>
+              <span data-sanity={tab.dataAttributes?.label}>{tab.label}</span>
               <span aria-hidden="true" className="lg:hidden" />
             </button>
           ))}

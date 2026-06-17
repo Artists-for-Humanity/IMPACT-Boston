@@ -96,6 +96,7 @@ function resolveListItem(item: ListItem): ListItem | null {
   }
 
   return {
+    _key: item._key,
     title,
     description,
     showInfoIcon: Boolean(item.showInfoIcon),
@@ -110,6 +111,7 @@ function resolveListItem(item: ListItem): ListItem | null {
 function resolveDetailItem(item: ListDetailItem): ListDetailItem | null {
   const fields = item.fields
     ?.map((field) => ({
+      _key: field._key,
       label: displayText(field.label),
       value: displayText(field.value),
       href: controlText(field.href) || undefined,
@@ -122,6 +124,7 @@ function resolveDetailItem(item: ListDetailItem): ListDetailItem | null {
   }
 
   return {
+    _key: item._key,
     fields,
     descriptionTitle: displayText(item.descriptionTitle) || "Description",
     description,
