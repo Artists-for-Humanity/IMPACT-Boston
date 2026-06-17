@@ -119,10 +119,10 @@ export default function Hero2({
       ) : imageSrc ? (
         <Image
           src={imageSrc}
-          width={500}
-          height={500}
+          width={1400}
+          height={1050}
           alt={imageAlt ?? ""}
-          className={`${mediaWrapperClass} h-auto`}
+          className={`${mediaWrapperClass} h-auto w-full`}
         />
       ) : null}
     </Grid>

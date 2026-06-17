@@ -27,7 +27,7 @@ export function resolveHeroImageSrc(
   fallbackImageSrc?: string,
 ) {
   return image
-    ? (urlFor(image)?.width(1400).height(1088).fit("crop").url() ??
+    ? (urlFor(image)?.width(1400).fit("max").url() ??
         fallbackImageSrc)
     : fallbackImageSrc;
 }
