@@ -11,8 +11,8 @@ export const blockPreviewImageUrls: Record<string, string> = {
   tripleContentBlock: '/static/block-previews/triple-content.svg',
   listBlock: '/static/block-previews/list.svg',
   sideTabsBlock: '/static/block-previews/side-tabs.svg',
-  highlightBannerBlock: '/static/block-previews/highlights.svg',
-  highlightsBlock: '/static/block-previews/highlights.svg',
+  highlightBannerBlock: '/static/block-previews/highlight-banner.svg',
+  highlightsBlock: '/static/block-previews/highlights-carousel.svg',
   testimonialsCarouselBlock: '/static/block-previews/testimonials-carousel.svg',
   testimonialsSpotlightBlock: '/static/block-previews/testimonials-spotlight.svg',
 }
