@@ -27,6 +27,7 @@ export function definePageBlocksField() {
       defineArrayMember({type: 'sideTabsBlock'}),
       defineArrayMember({type: 'tripleContentBlock'}),
       defineArrayMember({type: 'imageGridBlock'}),
+      defineArrayMember({type: 'highlightBannerBlock'}),
       defineArrayMember({type: 'highlightsBlock'}),
       defineArrayMember({
         type: 'testimonialsBlock',
@@ -59,7 +60,7 @@ export function definePageBlocksField() {
           {
             name: 'content',
             title: 'Content',
-            of: ['contentBlock', 'actionPanelBlock', 'sideTabsBlock', 'highlightsBlock', 'tripleContentBlock', 'imageGridBlock'],
+            of: ['contentBlock', 'actionPanelBlock', 'sideTabsBlock', 'tripleContentBlock', 'imageGridBlock'],
           },
           {
             name: 'testimonials',
@@ -69,7 +70,7 @@ export function definePageBlocksField() {
           {
             name: 'highlights',
             title: 'Highlights',
-            of: ['highlightsBlock'],
+            of: ['highlightBannerBlock', 'highlightsBlock'],
           },
         ],
         views: [

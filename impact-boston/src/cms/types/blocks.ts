@@ -199,6 +199,20 @@ export type CmsHighlightsBlock = CmsPageBlockBase & {
   slides?: SanityHighlight[] | null;
 };
 
+export type CmsHighlightBannerBlock = CmsPageBlockBase & {
+  _type: "highlightBannerBlock";
+  backgroundColor?: string | null;
+  body?: string[] | string | null;
+  buttonBgColor?: string | null;
+  buttonTextColor?: string | null;
+  ctaHref?: string | null;
+  ctaLabel?: string | null;
+  supportingText?: string | null;
+  supportingTextColor?: string | null;
+  textColor?: string | null;
+  title?: string | null;
+};
+
 export type CmsContentBlock = CmsPageBlockBase & {
   _type: "contentBlock";
   title?: string | null;
@@ -234,6 +248,7 @@ export type CmsImageGridBlock = CmsPageBlockBase & {
 export type CmsTestimonialsBlock = CmsPageBlockBase & {
   _type: "testimonialsCarouselBlock" | "testimonialsSpotlightBlock";
   authorPrefix?: string | null;
+  backgroundColor?: string | null;
   heading?: string | null;
   showAuthors?: boolean | null;
   subtext?: string | null;
@@ -252,6 +267,7 @@ export type CmsPageBlock =
   | CmsTripleContentBlock
   | CmsListBlock
   | CmsSideTabsBlock
+  | CmsHighlightBannerBlock
   | CmsHighlightsBlock
   | CmsTestimonialsBlock
   | CmsContentBlock

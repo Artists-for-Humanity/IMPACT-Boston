@@ -1,3 +1,5 @@
+import { stegaClean } from "@sanity/client/stega";
+
 import TestimonialsCarousel from "@/components/Highlights/Testimonials/Carousel";
 import ParticipantSpotlight from "@/components/Highlights/Testimonials/ParticipantSpotlight";
 import {
@@ -30,6 +32,7 @@ export default function TestimonialsBlock({
   const resolvedSection = {
     ...section,
     authorPrefix: section.authorPrefix ?? fallback?.authorPrefix,
+    backgroundColor: section.backgroundColor ?? fallback?.backgroundColor,
     heading: section.heading ?? fallback?.heading,
     showAuthors: section.showAuthors ?? fallback?.showAuthors,
     subtext: section.subtext ?? fallback?.subtext,
@@ -140,6 +143,7 @@ export default function TestimonialsBlock({
       })}
       showAuthors={Boolean(resolvedSection.showAuthors)}
       authorPrefix={resolvedSection.authorPrefix ?? undefined}
+      backgroundColor={getBackgroundColor(resolvedSection.backgroundColor)}
       dataAttributes={{
         heading: getFieldDataAttribute(dataAttribute, extendPath(blockPath, "heading")),
         subheading: getFieldDataAttribute(
@@ -149,4 +153,8 @@ export default function TestimonialsBlock({
       }}
     />
   );
+}
+
+function getBackgroundColor(value?: string | null) {
+  return stegaClean(value)?.trim() || undefined;
 }

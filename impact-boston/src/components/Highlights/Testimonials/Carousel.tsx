@@ -2,7 +2,7 @@
 
 // Testimonials carousel showcasing client feedback
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, type CSSProperties } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import Grid from "@/components/common/Grid";
 import ExpandableQuote from "./ExpandableQuote";
@@ -108,6 +108,10 @@ function TestimonialsCarouselTrack({
     ...testimonialItems,
   ];
   const startIndex = testimonialItems.length;
+  const backgroundStyle: CSSProperties | undefined = isHexColor(backgroundColor)
+    ? { backgroundColor }
+    : undefined;
+  const backgroundClassName = backgroundStyle ? "" : backgroundColor;
 
   // Detect screen size
   useEffect(() => {
@@ -164,7 +168,10 @@ function TestimonialsCarouselTrack({
   };
 
   return (
-    <section className={`w-full overflow-hidden py-8 md:py-10 lg:py-18 ${backgroundColor} ${className}`}>
+    <section
+      className={`w-full overflow-hidden py-8 md:py-10 lg:py-18 ${backgroundClassName} ${className}`}
+      style={backgroundStyle}
+    >
       <div className="flex flex-col gap-8 md:gap-6 lg:gap-8">
         <div className="flex flex-col gap-8">
           {/* Top Row - Heading and Navigation */}
@@ -350,4 +357,8 @@ function TestimonialsCarouselTrack({
       </div>
     </section>
   );
+}
+
+function isHexColor(value?: string) {
+  return Boolean(value && /^#([0-9a-f]{3}|[0-9a-f]{6})$/i.test(value.trim()));
 }

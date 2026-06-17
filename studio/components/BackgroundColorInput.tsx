@@ -13,6 +13,30 @@ const brandBackgroundColorOptions = [
     title: 'Complementary',
     hex: '#e86834',
   },
+  {
+    title: 'White',
+    hex: '#ffffff',
+  },
+  {
+    title: 'Lavender',
+    hex: '#faf6fd',
+  },
+  {
+    title: 'Primary Light',
+    hex: '#fcf9ff',
+  },
+  {
+    title: 'Secondary Light',
+    hex: '#fefcff',
+  },
+  {
+    title: 'Complementary Light',
+    hex: '#fffaf7',
+  },
+  {
+    title: 'Gray Light',
+    hex: '#f4f5f5',
+  },
 ] as const
 
 function normalizeHex(value?: string) {

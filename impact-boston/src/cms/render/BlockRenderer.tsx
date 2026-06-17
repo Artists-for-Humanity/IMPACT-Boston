@@ -5,6 +5,7 @@ import ActionPanelBlock from "./blocks/ActionPanelBlock";
 import ContentBlock from "./blocks/ContentBlock";
 import CtaSectionBlock from "./blocks/CtaSectionBlock";
 import DoubleContentBlock from "./blocks/DoubleContentBlock";
+import HighlightBannerBlock from "./blocks/HighlightBannerBlock";
 import HeroBlock from "./blocks/HeroBlock";
 import HighlightsBlock from "./blocks/HighlightsBlock";
 import ImageGridBlock from "./blocks/ImageGridBlock";
@@ -102,6 +103,15 @@ export default function BlockRenderer({
           dataAttribute={dataAttribute}
           section={block}
           fallbackTabs={fallbacks?.sideTabs}
+        />
+      );
+
+    case "highlightBannerBlock":
+      return (
+        <HighlightBannerBlock
+          blockPath={blockPath}
+          dataAttribute={dataAttribute}
+          section={block}
         />
       );
 
