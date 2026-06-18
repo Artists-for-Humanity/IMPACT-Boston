@@ -1,3 +1,4 @@
+import {LinkIcon} from 'lucide-react'
 import {defineArrayMember, defineField, defineType} from 'sanity'
 import {BackgroundColorInput} from '../../components/BackgroundColorInput'
 import {blockPreviewMedia} from './blockPreviews'
@@ -36,7 +37,23 @@ export const contentBlockType = defineType({
               {title: 'Bold', value: 'strong'},
               {title: 'Italic', value: 'em'},
             ],
-            annotations: [],
+            annotations: [
+              {
+                name: 'link',
+                title: 'Link',
+                type: 'object',
+                icon: LinkIcon,
+                fields: [
+                  defineLinkTargetField({required: true}),
+                  defineField({
+                    name: 'href',
+                    title: 'Link URL',
+                    type: 'string',
+                    hidden: true,
+                  }),
+                ],
+              },
+            ],
           },
         }),
       ],

@@ -29,6 +29,21 @@ const PAGE_SECTIONS_PROJECTION = `
         color
       },
       body,
+      _type == "contentBlock" => {
+        body[] {
+          ...,
+          markDefs[] {
+            ...,
+            href,
+            linkTarget {
+              ${LINK_TARGET_PROJECTION}
+            }
+          },
+          children[] {
+            ...
+          }
+        }
+      },
       buttonColor,
       buttonLink,
       buttonLinkTarget {

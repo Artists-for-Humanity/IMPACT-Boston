@@ -3,7 +3,7 @@ import { PortableText, type PortableTextBlock, type PortableTextComponents } fro
 import SingleContent from "@/components/Content/Single";
 import { urlFor } from "@/sanity/image";
 import type { CmsContentBlock } from "@/cms/types/blocks";
-import { resolveCmsLink } from "@/cms/links";
+import { resolveCmsLink, type CmsLinkTarget } from "@/cms/links";
 import {
   extendPath,
   getFieldDataAttribute,
@@ -36,6 +36,28 @@ const bodyComponents: PortableTextComponents = {
   marks: {
     strong: ({ children }) => <strong className="font-bold">{children}</strong>,
     em: ({ children }) => <em>{children}</em>,
+    link: ({ children, value }) => {
+      const link = resolveCmsLink(
+        getObjectField(value, "linkTarget"),
+        getStringField(value, "href"),
+      );
+      const href = link.href;
+
+      if (!href) {
+        return <>{children}</>;
+      }
+
+      return (
+        <a
+          href={href}
+          className="link text-secondary underline underline-offset-2 hover:text-primary hover:no-underline"
+          target={link.openInNewTab ? "_blank" : undefined}
+          rel={link.openInNewTab ? "noopener noreferrer" : undefined}
+        >
+          {children}
+        </a>
+      );
+    },
   },
 };
 
@@ -112,5 +134,27 @@ function getHexColor(value?: string | null) {
 
   return color && /^#([0-9a-f]{3}|[0-9a-f]{6})$/i.test(color)
     ? color
+    : undefined;
+}
+
+function getStringField(value: unknown, field: string) {
+  if (typeof value !== "object" || value === null || !(field in value)) {
+    return "";
+  }
+
+  const fieldValue = (value as Record<string, unknown>)[field];
+
+  return typeof fieldValue === "string" ? fieldValue.trim() : "";
+}
+
+function getObjectField(value: unknown, field: string): CmsLinkTarget | undefined {
+  if (typeof value !== "object" || value === null || !(field in value)) {
+    return undefined;
+  }
+
+  const fieldValue = (value as Record<string, unknown>)[field];
+
+  return typeof fieldValue === "object" && fieldValue !== null
+    ? (fieldValue as CmsLinkTarget)
     : undefined;
 }
