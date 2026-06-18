@@ -149,9 +149,9 @@ const PAGE_SECTIONS_PROJECTION = `
         _key,
         title,
         description,
-        subtext,
-        href,
-        linkText
+        date,
+        author,
+        href
       }
     }
 `;

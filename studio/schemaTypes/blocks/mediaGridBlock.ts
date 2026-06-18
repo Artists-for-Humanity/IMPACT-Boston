@@ -43,9 +43,14 @@ export const mediaGridBlockType = defineType({
               validation: (rule) => rule.required(),
             }),
             defineField({
-              name: 'subtext',
-              title: 'Subtext',
-              description: 'Optional secondary line, e.g. date or author.',
+              name: 'date',
+              title: 'Date',
+              type: 'date',
+              options: {dateFormat: 'MMM D, YYYY'},
+            }),
+            defineField({
+              name: 'author',
+              title: 'Author',
               type: 'string',
             }),
             defineField({
@@ -53,12 +58,6 @@ export const mediaGridBlockType = defineType({
               title: 'Link URL',
               type: 'string',
               validation: (rule) => rule.required(),
-            }),
-            defineField({
-              name: 'linkText',
-              title: 'Link Text',
-              type: 'string',
-              initialValue: 'Read more',
             }),
           ],
           preview: {
@@ -69,22 +68,6 @@ export const mediaGridBlockType = defineType({
           },
         },
       ],
-    }),
-    defineField({
-      name: 'backgroundColor',
-      title: 'Background Color',
-      type: 'string',
-      options: {
-        list: [
-          {title: 'None (White)', value: ''},
-          {title: 'Lavender', value: 'bg-bg-lavender'},
-          {title: 'Primary Light', value: 'bg-primary-light'},
-          {title: 'Secondary Light', value: 'bg-secondary-light'},
-          {title: 'Complementary Light', value: 'bg-complementary-light'},
-        ],
-        layout: 'radio',
-      },
-      initialValue: '',
     }),
   ],
   preview: {

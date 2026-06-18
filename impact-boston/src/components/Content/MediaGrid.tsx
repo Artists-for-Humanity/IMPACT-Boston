@@ -8,19 +8,27 @@ import Link from "next/link";
 export interface MediaGridItem {
   title: string;
   description: string;
-  subtext?: string;
+  date?: string;
+  author?: string;
   href: string;
-  linkText?: string;
 }
 
 export interface MediaGridProps {
   title: string;
   subheader?: string;
   items: MediaGridItem[];
-  backgroundColor?: string;
 }
 
-const PAGE_SIZE = 6;
+const PAGE_SIZE = 9;
+
+function formatDate(dateStr: string) {
+  const [year, month, day] = dateStr.split("-").map(Number);
+  return new Date(year, month - 1, day).toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+  });
+}
 
 const SORT_OPTIONS = [
   { label: "Newest First", value: "newest" },
@@ -31,7 +39,6 @@ export default function MediaGrid({
   title,
   subheader,
   items,
-  backgroundColor,
 }: MediaGridProps) {
   const [featured, ...allRest] = items;
   const [page, setPage] = useState(0);
@@ -45,7 +52,7 @@ export default function MediaGrid({
   const rangeEnd = Math.min(page * PAGE_SIZE + PAGE_SIZE, sorted.length);
 
   return (
-    <div className={backgroundColor ?? ""}>
+    <div>
       <Grid className="gap-y-8 md:gap-y-10 lg:gap-y-16">
         {/* Header row */}
         <div className="col-span-full grid grid-cols-4 gap-4 md:grid-cols-8 lg:grid-cols-12 lg:items-end">
@@ -81,8 +88,10 @@ export default function MediaGrid({
               }}>Most Recent</span>
               <p className="sub-1">{featured.title}</p>
               <p className="p2">{featured.description}</p>
-              {featured.subtext && (
-                <p className="p2" style={{ color: "var(--color-black-60)" }}>{featured.subtext}</p>
+              {(featured.date || featured.author) && (
+                <p className="p2" style={{ color: "var(--color-black-60)" }}>
+                  {[featured.date ? formatDate(featured.date) : null, featured.author].filter(Boolean).join("  •  ")}
+                </p>
               )}
               <Link
                 href={featured.href}
@@ -90,7 +99,7 @@ export default function MediaGrid({
                 rel="noopener noreferrer"
                 className="p2 underline"
               >
-                {featured.linkText ?? "Read Full Article"}
+                Read Full Article
               </Link>
             </div>
           )}
@@ -100,9 +109,6 @@ export default function MediaGrid({
         <div className="col-span-full flex items-center justify-between">
           <h3 className="h3">All Blogs</h3>
           <div className="flex items-center gap-4">
-            <span className="p2" style={{ color: "var(--color-black-60)" }}>
-              {sorted.length > 0 ? `${rangeStart}–${rangeEnd} of ${sorted.length}` : "0 articles"}
-            </span>
             <select
               value={sort}
               onChange={(e) => { setSort(e.target.value); setPage(0); }}
@@ -113,6 +119,9 @@ export default function MediaGrid({
                 <option key={opt.value} value={opt.value}>{opt.label}</option>
               ))}
             </select>
+            <span className="p2" style={{ color: "var(--color-black-60)" }}>
+              {sorted.length > 0 ? `${rangeStart}–${rangeEnd} of ${sorted.length}` : "0 articles"}
+            </span>
             <div className="flex gap-2">
               <button
                 onClick={() => setPage((p) => Math.max(0, p - 1))}
@@ -148,9 +157,13 @@ export default function MediaGrid({
             style={{ border: "1px solid var(--Line-Divider, #DDD)" }}
           >
             <div className="flex flex-col gap-3">
-              <p className="sub-1">{item.title}</p>
+              <p className="p1-bold">{item.title}</p>
               <p className="p2">{item.description}</p>
-              {item.subtext && <p className="p2" style={{ color: "var(--color-black-60)" }}>{item.subtext}</p>}
+              {(item.date || item.author) && (
+                <p className="p2" style={{ color: "var(--color-black-60)" }}>
+                  {[item.date ? formatDate(item.date) : null, item.author].filter(Boolean).join("  •  ")}
+                </p>
+              )}
             </div>
             <Link
               href={item.href}
@@ -158,7 +171,7 @@ export default function MediaGrid({
               rel="noopener noreferrer"
               className="p2 underline"
             >
-              {item.linkText ?? "Read more"}
+              Read Full Article
             </Link>
           </div>
         ))}

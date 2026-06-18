@@ -251,9 +251,9 @@ export type CmsMediaGridItem = {
   _key?: string | null;
   title?: string | null;
   description?: string | null;
-  subtext?: string | null;
+  date?: string | null;
+  author?: string | null;
   href?: string | null;
-  linkText?: string | null;
 };
 
 export type CmsMediaGridBlock = CmsPageBlockBase & {
@@ -261,7 +261,6 @@ export type CmsMediaGridBlock = CmsPageBlockBase & {
   title?: string | null;
   subheader?: string | null;
   items?: CmsMediaGridItem[] | null;
-  backgroundColor?: string | null;
 };
 
 export type CmsTestimonialsBlock = CmsPageBlockBase & {
