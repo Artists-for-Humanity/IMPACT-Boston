@@ -105,6 +105,8 @@ export default function TrainerList({
                     className="p2 text-secondary underline underline-offset-2"
                     data-sanity={item.dataAttributes?.contact}
                     href={contactHref}
+                    rel={item.contactOpenInNewTab ? "noopener noreferrer" : undefined}
+                    target={item.contactOpenInNewTab ? "_blank" : undefined}
                   >
                     {item.contact}
                   </a>

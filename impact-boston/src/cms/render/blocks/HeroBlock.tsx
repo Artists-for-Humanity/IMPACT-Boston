@@ -10,6 +10,7 @@ import {
   resolveHero2HighlightColor,
   resolveHeroImageSrc,
 } from "@/cms/normalize/blocks/hero";
+import { resolveCmsLink } from "@/cms/links";
 import type { CmsHeroBlock } from "@/cms/types/blocks";
 import type { HeroBlockFallback } from "@/cms/types/page";
 import {
@@ -121,7 +122,10 @@ export default function HeroBlock({
 
   const body = section.body ?? fallback?.body ?? "";
   const ctaText = section.ctaText ?? fallback?.ctaText ?? "";
-  const ctaHref = section.ctaHref ?? fallback?.ctaHref ?? "#";
+  const ctaLink = resolveCmsLink(
+    section.ctaLinkTarget,
+    section.ctaHref ?? fallback?.ctaHref ?? "#",
+  );
 
   const headline = (
     <Hero1Headline>
@@ -157,7 +161,8 @@ export default function HeroBlock({
       headline={headline}
       body={body}
       ctaText={ctaText}
-      ctaHref={ctaHref}
+      ctaHref={ctaLink.href ?? "#"}
+      ctaOpenInNewTab={ctaLink.openInNewTab}
       dataAttributes={{
         body: getFieldDataAttribute(dataAttribute, extendPath(blockPath, "body")),
         ctaText: getFieldDataAttribute(

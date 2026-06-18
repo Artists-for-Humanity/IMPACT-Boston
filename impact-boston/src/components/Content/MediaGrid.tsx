@@ -11,6 +11,7 @@ export interface MediaGridItem {
   date?: string;
   author?: string;
   href: string;
+  openInNewTab?: boolean;
 }
 
 export interface MediaGridProps {
@@ -95,8 +96,8 @@ export default function MediaGrid({
               )}
               <Link
                 href={featured.href}
-                target="_blank"
-                rel="noopener noreferrer"
+                target={featured.openInNewTab ? "_blank" : undefined}
+                rel={featured.openInNewTab ? "noopener noreferrer" : undefined}
                 className="p2 underline"
               >
                 Read Full Article
@@ -167,8 +168,8 @@ export default function MediaGrid({
             </div>
             <Link
               href={item.href}
-              target="_blank"
-              rel="noopener noreferrer"
+              target={item.openInNewTab ? "_blank" : undefined}
+              rel={item.openInNewTab ? "noopener noreferrer" : undefined}
               className="p2 underline"
             >
               Read Full Article

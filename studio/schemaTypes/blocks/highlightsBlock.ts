@@ -1,5 +1,6 @@
 import {defineField, defineType} from 'sanity'
 import {blockPreviewMedia} from './blockPreviews'
+import {defineLinkTargetField} from '../linkTarget'
 
 export const highlightsBlockType = defineType({
   name: 'highlightsBlock',
@@ -51,8 +52,9 @@ export const highlightsBlockType = defineType({
               name: 'ctaLink',
               title: 'CTA Link',
               type: 'string',
-              validation: (rule) => rule.required(),
+              hidden: true,
             }),
+            defineLinkTargetField({name: 'ctaLinkTarget', title: 'CTA Link', required: true}),
             defineField({
               name: 'additionalText',
               title: 'Additional Text',

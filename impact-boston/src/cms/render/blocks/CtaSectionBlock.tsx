@@ -3,6 +3,7 @@ import type {
   CmsCtaSectionBlock,
   SanityCtaSectionFields,
 } from "@/cms/types/blocks";
+import { resolveCmsLink } from "@/cms/links";
 import {
   extendPath,
   getArrayItemPath,
@@ -27,9 +28,12 @@ export default function CtaSectionBlock({
   const panels = section.panels?.length ? section.panels : fallback?.panels;
   const panelsWithDataAttributes = panels?.map((panel, index) => {
     const panelPath = getArrayItemPath(blockPath, "panels", panel, index);
+    const link = resolveCmsLink(panel.linkTarget, panel.href);
 
     return {
       ...panel,
+      href: link.href,
+      openInNewTab: link.openInNewTab,
       dataAttributes: {
         buttonText: getFieldDataAttribute(
           dataAttribute,

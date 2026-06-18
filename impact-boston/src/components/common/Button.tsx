@@ -6,6 +6,7 @@ type ButtonSize = 'sm' | 'md' | 'lg'
 interface ButtonProps {
   children: React.ReactNode
   href?: string
+  openInNewTab?: boolean
   onClick?: () => void
   variant?: ButtonVariant
   size?: ButtonSize
@@ -28,6 +29,7 @@ function ChevronIcon() {
 export default function Button({
   children,
   href,
+  openInNewTab = false,
   onClick,
   variant = 'primary',
   size = 'md',
@@ -56,7 +58,14 @@ export default function Button({
 
   if (href) {
     return (
-      <a href={href} className={classes} data-sanity={dataSanity} style={style}>
+      <a
+        href={href}
+        className={classes}
+        data-sanity={dataSanity}
+        rel={openInNewTab ? 'noopener noreferrer' : undefined}
+        style={style}
+        target={openInNewTab ? '_blank' : undefined}
+      >
         {children}
         {(showChevron || size === 'lg') && <ChevronIcon />}
       </a>

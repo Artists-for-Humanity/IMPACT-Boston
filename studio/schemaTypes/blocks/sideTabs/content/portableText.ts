@@ -1,5 +1,6 @@
 import {LinkIcon} from 'lucide-react'
 import {defineArrayMember, defineField} from 'sanity'
+import {defineLinkTargetField} from '../../../linkTarget'
 
 import {
   createTextStylePreview,
@@ -148,11 +149,12 @@ export const portableTextContent = defineArrayMember({
         type: 'object',
         icon: LinkIcon,
         fields: [
+          defineLinkTargetField({required: true}),
           defineField({
             name: 'href',
             title: 'Link URL',
             type: 'string',
-            validation: (rule) => rule.required(),
+            hidden: true,
           }),
         ],
       },

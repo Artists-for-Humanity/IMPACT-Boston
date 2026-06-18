@@ -1,4 +1,5 @@
 import {defineArrayMember, defineField} from 'sanity'
+import {defineLinkTargetField} from '../../../linkTarget'
 
 export const sideTabsLinkContent = defineArrayMember({
   name: 'sideTabsLink',
@@ -15,8 +16,9 @@ export const sideTabsLinkContent = defineArrayMember({
       name: 'href',
       title: 'URL or Path',
       type: 'string',
-      validation: (rule) => rule.required(),
+      hidden: true,
     }),
+    defineLinkTargetField({required: true}),
   ],
   preview: {
     select: {title: 'text', subtitle: 'href'},

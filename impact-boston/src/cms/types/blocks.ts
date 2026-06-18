@@ -17,6 +17,7 @@ import type {
 } from "@/components/List/List";
 import type { Testimonial } from "@/components/Highlights/Testimonials/Carousel";
 import type { SideTab } from "@/components/TabsPanel/SideTabs";
+import type { CmsLinkTarget } from "@/cms/links";
 
 export type SanityHeroHeadlinePart = {
   _key?: string | null;
@@ -29,6 +30,7 @@ export type SanityHeroFields = {
   body?: string | null;
   ctaText?: string | null;
   ctaHref?: string | null;
+  ctaLinkTarget?: CmsLinkTarget | null;
   image?: SanityImageSource | null;
   imageAlt?: string | null;
   title?: string | null;
@@ -71,8 +73,10 @@ export type SanitySingleContentFields = {
   reverse?: boolean | null;
   ctaText?: string | null;
   ctaHref?: string | null;
+  ctaLinkTarget?: CmsLinkTarget | null;
   purchaseLinkText?: string | null;
   purchaseLinkHref?: string | null;
+  purchaseLinkTarget?: CmsLinkTarget | null;
   backgroundColor?: string | null;
 };
 
@@ -81,6 +85,7 @@ export type SanitySingleContentCtaBlock = {
   _type: "singleContentCta";
   text?: string | null;
   href?: string | null;
+  linkTarget?: CmsLinkTarget | null;
 };
 
 export type SanitySingleContentSupportingLinkBlock = {
@@ -88,6 +93,7 @@ export type SanitySingleContentSupportingLinkBlock = {
   _type: "singleContentSupportingLink";
   text?: string | null;
   href?: string | null;
+  linkTarget?: CmsLinkTarget | null;
   color?: string | null;
 };
 
@@ -143,6 +149,7 @@ export type SanityHighlight = {
   body?: string | null;
   ctaText?: string | null;
   ctaLink?: string | null;
+  ctaLinkTarget?: CmsLinkTarget | null;
   additionalText?: string | null;
   image?: SanityImageSource | null;
   imageSrc?: string | null;
@@ -207,6 +214,7 @@ export type CmsHighlightBannerBlock = CmsPageBlockBase & {
   buttonBgColor?: string | null;
   buttonTextColor?: string | null;
   ctaHref?: string | null;
+  ctaLinkTarget?: CmsLinkTarget | null;
   ctaLabel?: string | null;
   supportingText?: string | null;
   supportingTextColor?: string | null;
@@ -222,12 +230,14 @@ export type CmsContentBlock = CmsPageBlockBase & {
   body?: PortableTextBlock[] | string | null;
   buttonColor?: string | null;
   buttonLink?: string | null;
+  buttonLinkTarget?: CmsLinkTarget | null;
   buttonText?: string | null;
   image?: SanityImageSource | null;
   imageAlt?: string | null;
   reverse?: boolean | null;
   ctaText?: string | null;
   ctaHref?: string | null;
+  ctaLinkTarget?: CmsLinkTarget | null;
   backgroundColor?: string | null;
 };
 
@@ -254,6 +264,7 @@ export type CmsMediaGridItem = {
   date?: string | null;
   author?: string | null;
   href?: string | null;
+  linkTarget?: CmsLinkTarget | null;
 };
 
 export type CmsMediaGridBlock = CmsPageBlockBase & {

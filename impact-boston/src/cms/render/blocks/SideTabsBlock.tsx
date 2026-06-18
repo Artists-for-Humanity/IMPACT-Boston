@@ -1,5 +1,6 @@
 import SideTabs, { type SideTab } from "@/components/TabsPanel/SideTabs";
 import type { SideTabContentBlock } from "@/components/TabsPanel/types";
+import { resolveCmsLink } from "@/cms/links";
 import { resolveSideTabs } from "@/cms/normalize/blocks/sideTabs";
 import type { CmsSideTabsBlock } from "@/cms/types/blocks";
 import {
@@ -78,6 +79,18 @@ function withContentDataAttributes(
   if (isResourceListContentBlock(block)) {
     return {
       ...block,
+      items: block.items?.map((item) => {
+        const titleLink = resolveCmsLink(item.titleLinkTarget, item.href);
+        const detailLink = resolveCmsLink(item.detailLinkTarget, item.detailHref);
+
+        return {
+          ...item,
+          href: titleLink.href,
+          openInNewTab: titleLink.openInNewTab,
+          detailHref: detailLink.href,
+          detailOpenInNewTab: detailLink.openInNewTab,
+        };
+      }),
       dataAttributes: {
         eyebrow: getFieldDataAttribute(
           dataAttribute,
@@ -110,6 +123,15 @@ function withContentDataAttributes(
   if (isTrainerListContentBlock(block)) {
     return {
       ...block,
+      items: block.items?.map((item) => {
+        const contactLink = resolveCmsLink(item.contactLinkTarget, item.contactHref);
+
+        return {
+          ...item,
+          contactHref: contactLink.href,
+          contactOpenInNewTab: contactLink.openInNewTab,
+        };
+      }),
       dataAttributes: {
         items: block.items?.map((item, index) => {
           const itemPath = getArrayItemPath(blockPath, "items", item, index);
@@ -132,8 +154,12 @@ function withContentDataAttributes(
   }
 
   if (isSideTabsLinkContentBlock(block)) {
+    const link = resolveCmsLink(block.linkTarget, block.href);
+
     return {
       ...block,
+      href: link.href,
+      openInNewTab: link.openInNewTab,
       dataAttributes: {
         href: getFieldDataAttribute(dataAttribute, extendPath(blockPath, "href")),
         text: getFieldDataAttribute(dataAttribute, extendPath(blockPath, "text")),

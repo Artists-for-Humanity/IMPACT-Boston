@@ -3,6 +3,7 @@ import Image from "next/image";
 import { stegaClean } from "next-sanity";
 import * as LucideIcons from "lucide-react";
 import type { LucideIcon } from "lucide-react";
+import type { CmsLinkTarget } from "@/cms/links";
 
 export type CtaPanelData = {
   _key?: string | null;
@@ -13,6 +14,8 @@ export type CtaPanelData = {
   description?: string | null;
   buttonText?: string | null;
   href?: string | null;
+  linkTarget?: CmsLinkTarget | null;
+  openInNewTab?: boolean | null;
   icon?: string | null;
   iconSrc?: string | null;
   iconWidth?: number | null;
@@ -121,6 +124,7 @@ function CtaPanel({
   description,
   buttonText,
   href,
+  openInNewTab,
   icon,
   iconSrc,
   iconWidth,
@@ -196,6 +200,7 @@ function CtaPanel({
           className="col-span-full bg-white flex justify-between cursor-pointer w-[270px] md:w-full lg:w-[270px] h-14 md:h-[73px] group"
           data-sanity={dataAttributes?.buttonText}
           href={href}
+          openInNewTab={Boolean(openInNewTab)}
         >
           <p className="p1-bold text-black group-hover:text-white">
             {buttonText}

@@ -6,6 +6,7 @@ import type {
   ListProps,
 } from "@/components/List/List";
 import type { CmsListBlock } from "@/cms/types/blocks";
+import { resolveCmsLink } from "@/cms/links";
 
 export function resolveListBlock(section: CmsListBlock): ListProps {
   const variant = section.variant === "details" ? "details" : "accordion";
@@ -49,12 +50,17 @@ function resolveListItem(item: ListItem): ListItem | null {
 
 function resolveDetailItem(item: ListDetailItem): ListDetailItem | null {
   const fields = item.fields
-    ?.map((field) => ({
-      _key: field._key,
-      label: displayText(field.label),
-      value: displayText(field.value),
-      href: controlText(field.href) || undefined,
-    }))
+    ?.map((field) => {
+      const link = resolveCmsLink(field.linkTarget, field.href);
+
+      return {
+        _key: field._key,
+        label: displayText(field.label),
+        value: displayText(field.value),
+        href: link.href,
+        openInNewTab: link.openInNewTab,
+      };
+    })
     .filter((field) => hasText(field.label) && hasText(field.value));
   const description = displayText(item.description);
 

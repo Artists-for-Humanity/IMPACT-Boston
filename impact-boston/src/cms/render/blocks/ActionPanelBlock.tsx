@@ -3,6 +3,7 @@ import type {
   CmsActionPanelBlock,
   SanityActionPanelFields,
 } from "@/cms/types/blocks";
+import { resolveCmsLink } from "@/cms/links";
 import {
   extendPath,
   getArrayItemPath,
@@ -27,9 +28,12 @@ export default function ActionPanelBlock({
   const cards = section.cards?.length ? section.cards : fallback?.cards;
   const cardsWithDataAttributes = cards?.map((card, index) => {
     const cardPath = getArrayItemPath(blockPath, "cards", card, index);
+    const link = resolveCmsLink(card.linkTarget, card.href);
 
     return {
       ...card,
+      href: link.href,
+      openInNewTab: link.openInNewTab,
       dataAttributes: {
         body: getFieldDataAttribute(dataAttribute, extendPath(cardPath, "body")),
         href: getFieldDataAttribute(dataAttribute, extendPath(cardPath, "href")),

@@ -40,6 +40,7 @@ type SingleContentButton = {
   href: string;
   text: string;
   backgroundColor?: string;
+  openInNewTab?: boolean;
 };
 
 export interface SingleContentProps {
@@ -55,8 +56,8 @@ export interface SingleContentProps {
   imageAlt?: string;
   showImagePlaceholder?: boolean;
   reverse?: boolean;
-  purchaseLink?: { href: string; text: string };
-  cta?: { href: string; text: string };
+  purchaseLink?: { href: string; text: string; openInNewTab?: boolean };
+  cta?: { href: string; text: string; openInNewTab?: boolean };
   button?: SingleContentButton;
   bodyContent?: ReactNode;
   className?: string;
@@ -222,8 +223,8 @@ export default function SingleContent({
             {purchaseLink && (
               <Link
                 href={purchaseLink.href}
-                target="_blank"
-                rel="noopener noreferrer"
+                target={purchaseLink.openInNewTab ? "_blank" : undefined}
+                rel={purchaseLink.openInNewTab ? "noopener noreferrer" : undefined}
                 className="p1-bold underline lg:col-span-5"
                 data-sanity={dataAttributes?.purchaseLinkText}
               >
@@ -233,6 +234,8 @@ export default function SingleContent({
             {cta && (
               <Link
                 href={cta.href}
+                target={cta.openInNewTab ? "_blank" : undefined}
+                rel={cta.openInNewTab ? "noopener noreferrer" : undefined}
                 className="lg:col-span-5"
                 data-sanity={dataAttributes?.ctaText}
                 style={{
@@ -255,6 +258,7 @@ export default function SingleContent({
                 className="w-full md:w-auto md:min-w-[270px] lg:col-span-3 lg:justify-self-start"
                 data-sanity={dataAttributes?.buttonText}
                 href={button.href}
+                openInNewTab={button.openInNewTab}
                 size="lg"
                 style={buttonStyle}
                 variant="primary"

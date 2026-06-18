@@ -5,6 +5,7 @@ import { ChevronDown, ChevronUp, CircleHelp } from "lucide-react";
 import { useId, useState } from "react";
 
 import Grid from "../common/Grid";
+import type { CmsLinkTarget } from "@/cms/links";
 
 export type ListVariant = "accordion" | "details";
 
@@ -28,6 +29,8 @@ export type ListDetailField = {
   label: string;
   value: string;
   href?: string;
+  linkTarget?: CmsLinkTarget | null;
+  openInNewTab?: boolean | null;
   dataAttributes?: {
     label?: string;
     value?: string;
@@ -289,6 +292,8 @@ function DetailList({ items }: { items: ListDetailItem[] }) {
                       className="text-secondary underline"
                       data-sanity={field.dataAttributes?.value}
                       href={field.href}
+                      rel={field.openInNewTab ? "noopener noreferrer" : undefined}
+                      target={field.openInNewTab ? "_blank" : undefined}
                     >
                       {field.value}
                     </Link>

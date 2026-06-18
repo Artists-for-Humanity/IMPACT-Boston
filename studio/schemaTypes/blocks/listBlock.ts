@@ -1,5 +1,6 @@
 import {defineField, defineType} from 'sanity'
 import {blockPreviewMedia} from './blockPreviews'
+import {defineLinkTargetField} from '../linkTarget'
 
 const isDetailsVariant = (parent: unknown) =>
   typeof parent === 'object' &&
@@ -140,7 +141,9 @@ export const listBlockType = defineType({
                       name: 'href',
                       title: 'Optional Link URL',
                       type: 'string',
+                      hidden: true,
                     }),
+                    defineLinkTargetField({title: 'Optional Link'}),
                   ],
                   preview: {
                     select: {title: 'label', subtitle: 'value'},

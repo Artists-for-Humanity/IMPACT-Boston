@@ -1,5 +1,6 @@
 import {defineArrayMember, defineField} from 'sanity'
 
+import {defineLinkTargetField} from '../../../linkTarget'
 import {trainerSortOptions, usStateOptions} from '../options'
 
 export const trainerListContent = defineArrayMember({
@@ -69,7 +70,9 @@ export const trainerListContent = defineArrayMember({
               name: 'contactHref',
               title: 'Contact Link',
               type: 'string',
+              hidden: true,
             }),
+            defineLinkTargetField({name: 'contactLinkTarget', title: 'Contact Link'}),
           ],
           preview: {
             select: {title: 'name', subtitle: 'organization'},

@@ -5,6 +5,7 @@ import {
 } from "next-sanity";
 
 import Button from "@/components/common/Button";
+import { resolveCmsLink, type CmsLinkTarget } from "@/cms/links";
 import type { SanitySingleContentContentBlock } from "@/cms/types/blocks";
 
 const fullWidth = "lg:col-span-5";
@@ -72,20 +73,19 @@ const portableTextComponents: PortableTextComponents = {
     strong: ({ children }) => <strong className="p1-bold">{children}</strong>,
     em: ({ children }) => <em>{children}</em>,
     link: ({ children, value }) => {
-      const href = getStringField(value, "href");
+      const link = resolveCmsLink(getObjectField(value, "linkTarget"), getStringField(value, "href"));
+      const href = link.href;
 
       if (!href) {
         return <>{children}</>;
       }
 
-      const isExternal = /^https?:\/\//.test(href);
-
       return (
         <a
           href={href}
           className="link text-secondary underline underline-offset-2 hover:text-primary hover:no-underline"
-          target={isExternal ? "_blank" : undefined}
-          rel={isExternal ? "noopener noreferrer" : undefined}
+          target={link.openInNewTab ? "_blank" : undefined}
+          rel={link.openInNewTab ? "noopener noreferrer" : undefined}
         >
           {children}
         </a>
@@ -95,7 +95,8 @@ const portableTextComponents: PortableTextComponents = {
   types: {
     singleContentCta: ({ value }) => {
       const text = getStringField(value, "text");
-      const href = getStringField(value, "href");
+      const link = resolveCmsLink(getObjectField(value, "linkTarget"), getStringField(value, "href"));
+      const href = link.href;
 
       if (!text || !href) {
         return null;
@@ -104,6 +105,7 @@ const portableTextComponents: PortableTextComponents = {
       return (
         <Button
           href={href}
+          openInNewTab={link.openInNewTab}
           variant="primary"
           showChevron
           className={`box-border md:box-content h-[8px] md:h-[25px] py-6 w-full md:w-auto md:self-start ${fullWidth} justify-self-start gap-x-16`}
@@ -114,7 +116,8 @@ const portableTextComponents: PortableTextComponents = {
     },
     singleContentSupportingLink: ({ value }) => {
       const text = getStringField(value, "text");
-      const href = getStringField(value, "href");
+      const link = resolveCmsLink(getObjectField(value, "linkTarget"), getStringField(value, "href"));
+      const href = link.href;
       const color = getStringField(value, "color") || "secondary";
       const colorClass =
         TEXT_COLOR_CLASS_MAP[color] ?? TEXT_COLOR_CLASS_MAP.secondary;
@@ -123,13 +126,11 @@ const portableTextComponents: PortableTextComponents = {
         return null;
       }
 
-      const isExternal = /^https?:\/\//.test(href);
-
       return (
         <Link
           href={href}
-          target={isExternal ? "_blank" : undefined}
-          rel={isExternal ? "noopener noreferrer" : undefined}
+          target={link.openInNewTab ? "_blank" : undefined}
+          rel={link.openInNewTab ? "noopener noreferrer" : undefined}
           className={`p1-bold underline ${colorClass} ${fullWidth}`}
         >
           {text}
@@ -157,4 +158,16 @@ function getStringField(value: unknown, field: string) {
   const fieldValue = (value as Record<string, unknown>)[field];
 
   return typeof fieldValue === "string" ? fieldValue.trim() : "";
+}
+
+function getObjectField(value: unknown, field: string): CmsLinkTarget | undefined {
+  if (typeof value !== "object" || value === null || !(field in value)) {
+    return undefined;
+  }
+
+  const fieldValue = (value as Record<string, unknown>)[field];
+
+  return typeof fieldValue === "object" && fieldValue !== null
+    ? (fieldValue as CmsLinkTarget)
+    : undefined;
 }

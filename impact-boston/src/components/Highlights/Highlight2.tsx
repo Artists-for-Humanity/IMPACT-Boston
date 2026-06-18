@@ -7,6 +7,7 @@ interface Highlight2Props {
     body: string[];
     ctaLabel: string;
     ctaHref: string;
+    ctaOpenInNewTab?: boolean;
     supportingText?: string;
     backgroundColor?: string;
     textColor?: string;
@@ -26,6 +27,7 @@ export default function Highlight2({
     body,
     ctaLabel,
     ctaHref,
+    ctaOpenInNewTab = false,
     supportingText,
     backgroundColor,
     textColor,
@@ -62,6 +64,7 @@ export default function Highlight2({
                 ))}
                 <Button
                     href={ctaHref}
+                    openInNewTab={ctaOpenInNewTab}
                     variant="primary"
                     size="lg"
                     className="w-full col-start-1 col-span-4 md:col-start-1 md:col-span-4 md:w-full lg:w-auto lg:col-start-auto lg:col-span-3"

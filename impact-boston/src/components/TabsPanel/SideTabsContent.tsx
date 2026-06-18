@@ -9,6 +9,7 @@ import {
 
 import ResourceList from "./ResourceList";
 import TrainerList from "./TrainerList";
+import { resolveCmsLink } from "@/cms/links";
 import type {
   ResourceListItem,
   SideTab,
@@ -54,20 +55,22 @@ const portableTextComponents: PortableTextComponents = {
     strong: ({ children }) => <strong className="p1-bold">{children}</strong>,
     em: ({ children }) => <em>{children}</em>,
     link: ({ children, value }) => {
-      const href = typeof value?.href === "string" ? value.href : "";
+      const link = resolveCmsLink(
+        typeof value?.linkTarget === "object" ? value.linkTarget : undefined,
+        typeof value?.href === "string" ? value.href : "",
+      );
+      const href = link.href;
 
       if (!href) {
         return <>{children}</>;
       }
 
-      const isExternal = /^https?:\/\//.test(href);
-
       return (
         <a
           href={href}
           className="link text-secondary underline underline-offset-2 hover:text-primary hover:no-underline"
-          target={isExternal ? "_blank" : undefined}
-          rel={isExternal ? "noopener noreferrer" : undefined}
+          target={link.openInNewTab ? "_blank" : undefined}
+          rel={link.openInNewTab ? "noopener noreferrer" : undefined}
         >
           {children}
         </a>
@@ -306,7 +309,11 @@ function renderStructuredContentBlock(
     case "link":
     case "sideTabsLink": {
       const text = "text" in block ? block.text : "";
-      const href = "href" in block ? block.href : "";
+      const link = resolveCmsLink(
+        "linkTarget" in block ? block.linkTarget : undefined,
+        "href" in block ? block.href : "",
+      );
+      const href = link.href;
 
       if (!text || !href) {
         return null;
@@ -318,8 +325,8 @@ function renderStructuredContentBlock(
           href={href}
           className="link inline-block text-primary underline transition hover:text-secondary"
           data-sanity={dataAttributes?.text}
-          target="_blank"
-          rel="noopener noreferrer"
+          target={link.openInNewTab ? "_blank" : undefined}
+          rel={link.openInNewTab ? "noopener noreferrer" : undefined}
         >
           {text}
         </a>

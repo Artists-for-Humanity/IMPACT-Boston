@@ -1,6 +1,7 @@
 import {defineField, defineType} from 'sanity'
 import {BackgroundColorInput} from '../../components/BackgroundColorInput'
 import {blockPreviewMedia} from './blockPreviews'
+import {defineLinkTargetField} from '../linkTarget'
 
 export const highlightBannerBlockType = defineType({
   name: 'highlightBannerBlock',
@@ -55,8 +56,9 @@ export const highlightBannerBlockType = defineType({
       name: 'ctaHref',
       title: 'Button Link',
       type: 'string',
-      validation: (rule) => rule.required(),
+      hidden: true,
     }),
+    defineLinkTargetField({name: 'ctaLinkTarget', title: 'Button Link', required: true}),
 
 
     defineField({

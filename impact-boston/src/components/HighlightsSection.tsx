@@ -16,6 +16,7 @@ export interface HighlightSlide {
   body?: string | null;
   ctaText?: string | null;
   ctaLink?: string | null;
+  ctaOpenInNewTab?: boolean | null;
   additionalText?: string | null;
   imageSrc?: string | null;
   imageAlt?: string | null;
@@ -33,6 +34,7 @@ type ResolvedHighlightSlide = {
   body: string;
   ctaText: string;
   ctaLink: string;
+  ctaOpenInNewTab?: boolean | null;
   additionalText: string;
   imageSrc?: string | null;
   imageAlt: string;
@@ -74,6 +76,7 @@ function resolveSlide(slide: HighlightSlide): ResolvedHighlightSlide {
     body: slide.body ?? "",
     ctaText: slide.ctaText ?? "",
     ctaLink: slide.ctaLink ?? "#",
+    ctaOpenInNewTab: slide.ctaOpenInNewTab,
     additionalText: slide.additionalText ?? "",
     imageSrc: slide.imageSrc,
     imageAlt: slide.imageAlt ?? slide.heading ?? "",
@@ -313,6 +316,12 @@ export default function HighlightsSection({
                         href={slide.ctaLink}
                         className="flex bg-white text-black link px-6 py-6 items-center justify-between hover:bg-gray-100 transition-colors lg:w-2/3"
                         data-sanity={slide.dataAttributes?.ctaText}
+                        target={slide.ctaOpenInNewTab ? "_blank" : undefined}
+                        rel={
+                          slide.ctaOpenInNewTab
+                            ? "noopener noreferrer"
+                            : undefined
+                        }
                       >
                         <span>{slide.ctaText}</span>
                         <ChevronRight className="w-5 h-5" strokeWidth={2} />

@@ -1,6 +1,7 @@
 import {defineField, defineType} from 'sanity'
 import {HeadlineColorInput, headlineColorOptions} from '../../components/HeadlineColorInput'
 import {blockPreviewMedia} from './blockPreviews'
+import {defineLinkTargetField} from '../linkTarget'
 
 type HeroBlockParent = {
   _type?: string
@@ -166,11 +167,13 @@ export const heroBlockType = defineType({
       name: 'ctaHref',
       title: 'CTA Button Link',
       type: 'string',
+      hidden: true,
+    }),
+    defineLinkTargetField({
+      name: 'ctaLinkTarget',
+      title: 'CTA Button Link',
       hidden: ({parent}) => isHero2(parent),
-      validation: (rule) =>
-        rule.custom((value, context) =>
-          isHero2(context.parent) || value ? true : 'CTA button link is required for Hero 1.',
-        ),
+      required: true,
     }),
     defineField({
       name: 'youtubeUrl',

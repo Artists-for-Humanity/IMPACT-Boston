@@ -3,6 +3,7 @@ import { PortableText, type PortableTextBlock, type PortableTextComponents } fro
 import SingleContent from "@/components/Content/Single";
 import { urlFor } from "@/sanity/image";
 import type { CmsContentBlock } from "@/cms/types/blocks";
+import { resolveCmsLink } from "@/cms/links";
 import {
   extendPath,
   getFieldDataAttribute,
@@ -35,7 +36,8 @@ export default function ContentBlock({
     ? (urlFor(section.image)?.width(1000).fit("max").url() ?? undefined)
     : undefined;
   const buttonText = stegaClean(section.buttonText)?.trim();
-  const buttonLink = stegaClean(section.buttonLink)?.trim();
+  const buttonLink = resolveCmsLink(section.buttonLinkTarget, section.buttonLink);
+  const ctaLink = resolveCmsLink(section.ctaLinkTarget, section.ctaHref);
   const buttonColor = getHexColor(section.buttonColor);
 
   const bodyContent =
@@ -59,13 +61,22 @@ export default function ContentBlock({
       imageAlt={section.imageAlt ?? ""}
       reverse={section.reverse ?? false}
       cta={
-        section.ctaText && section.ctaHref
-          ? { text: section.ctaText, href: section.ctaHref }
+        section.ctaText && ctaLink.href
+          ? {
+              text: section.ctaText,
+              href: ctaLink.href,
+              openInNewTab: ctaLink.openInNewTab,
+            }
           : undefined
       }
       button={
-        buttonText && buttonLink
-          ? { text: buttonText, href: buttonLink, backgroundColor: buttonColor }
+        buttonText && buttonLink.href
+          ? {
+              text: buttonText,
+              href: buttonLink.href,
+              backgroundColor: buttonColor,
+              openInNewTab: buttonLink.openInNewTab,
+            }
           : undefined
       }
       backgroundColor={stegaClean(section.backgroundColor) ?? undefined}

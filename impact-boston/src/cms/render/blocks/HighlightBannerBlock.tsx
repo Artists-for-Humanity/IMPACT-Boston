@@ -1,6 +1,7 @@
 import { stegaClean } from "@sanity/client/stega";
 
 import Highlight2 from "@/components/Highlights/Highlight2";
+import { resolveCmsLink } from "@/cms/links";
 import type { CmsHighlightBannerBlock } from "@/cms/types/blocks";
 import {
   extendPath,
@@ -22,10 +23,10 @@ export default function HighlightBannerBlock({
 }: HighlightBannerBlockProps) {
   const title = stegaClean(section.title)?.trim();
   const ctaLabel = stegaClean(section.ctaLabel)?.trim();
-  const ctaHref = stegaClean(section.ctaHref)?.trim();
+  const ctaLink = resolveCmsLink(section.ctaLinkTarget, section.ctaHref);
   const body = getBodyParagraphs(section.body);
 
-  if (!title || !body.length || !ctaLabel || !ctaHref) {
+  if (!title || !body.length || !ctaLabel || !ctaLink.href) {
     return null;
   }
 
@@ -34,7 +35,8 @@ export default function HighlightBannerBlock({
       title={title}
       body={body}
       ctaLabel={ctaLabel}
-      ctaHref={ctaHref}
+      ctaHref={ctaLink.href}
+      ctaOpenInNewTab={ctaLink.openInNewTab}
       supportingText={stegaClean(section.supportingText)?.trim() || undefined}
       backgroundColor={getHexColor(section.backgroundColor) ?? "#311e41"}
       textColor={getHexColor(section.textColor) ?? "#ffffff"}

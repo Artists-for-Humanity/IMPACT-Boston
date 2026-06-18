@@ -123,6 +123,8 @@ function ResourceListItemContent({
           href={item.href}
           className="p1-bold block cursor-pointer text-black hover:text-secondary hover:underline"
           data-sanity={item.dataAttributes?.title ?? item.dataAttributes?.href}
+          rel={item.openInNewTab ? "noopener noreferrer" : undefined}
+          target={item.openInNewTab ? "_blank" : undefined}
         >
           {item.title}
         </a>
@@ -140,8 +142,8 @@ function ResourceListItemContent({
           href={item.detailHref}
           className="p1 block cursor-pointer text-secondary hover:underline"
           data-sanity={item.dataAttributes?.detail}
-          rel="noopener noreferrer"
-          target="_blank"
+          rel={item.detailOpenInNewTab ? "noopener noreferrer" : undefined}
+          target={item.detailOpenInNewTab ? "_blank" : undefined}
         >
           {item.detail}
         </a>

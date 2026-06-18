@@ -2,6 +2,7 @@ import {defineArrayMember, defineField, defineType} from 'sanity'
 import {HeadlineColorInput, headlineColorOptions} from '../../components/HeadlineColorInput'
 import {blockPreviewMedia} from './blockPreviews'
 import {portableTextContent} from './sideTabs/content/portableText'
+import {defineLinkTargetField} from '../linkTarget'
 
 type SingleContentParent = {
   body?: string | null
@@ -53,8 +54,9 @@ const singleContentCtaContent = defineArrayMember({
       name: 'href',
       title: 'Button Link',
       type: 'string',
-      validation: (rule) => rule.required(),
+      hidden: true,
     }),
+    defineLinkTargetField({required: true}),
   ],
   preview: {
     select: {title: 'text', subtitle: 'href'},
@@ -82,8 +84,9 @@ const singleContentSupportingLinkContent = defineArrayMember({
       name: 'href',
       title: 'Link URL',
       type: 'string',
-      validation: (rule) => rule.required(),
+      hidden: true,
     }),
+    defineLinkTargetField({required: true}),
     defineField({
       name: 'color',
       title: 'Link Color',
@@ -260,6 +263,11 @@ export const singleContentBlockType = defineType({
       type: 'string',
       hidden: true,
     }),
+    defineLinkTargetField({
+      name: 'ctaLinkTarget',
+      title: 'CTA Button Link',
+      hidden: true,
+    }),
     defineField({
       name: 'purchaseLinkText',
       title: 'Text Link Text',
@@ -270,6 +278,11 @@ export const singleContentBlockType = defineType({
       name: 'purchaseLinkHref',
       title: 'Text Link URL',
       type: 'string',
+      hidden: true,
+    }),
+    defineLinkTargetField({
+      name: 'purchaseLinkTarget',
+      title: 'Text Link',
       hidden: true,
     }),
     defineField({
@@ -324,7 +337,12 @@ export const singleContentBlockType = defineType({
       {
         _type: 'singleContentSupportingLink',
         text: 'Purchase from Bookshop.org. IMPACT receives 10% of all proceeds.',
-        href: '#',
+        linkTarget: {
+          _type: 'linkTarget',
+          type: 'url',
+          url: 'https://bookshop.org',
+          openInNewTab: true,
+        },
         color: 'secondary',
       },
     ],

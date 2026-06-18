@@ -1,11 +1,16 @@
 import type { PortableTextBlock } from "next-sanity";
+import type { CmsLinkTarget } from "@/cms/links";
 
 export type ResourceListItem = {
   _key?: string | null;
   title: string;
   href?: string;
+  titleLinkTarget?: CmsLinkTarget | null;
+  openInNewTab?: boolean | null;
   detail?: string;
   detailHref?: string;
+  detailLinkTarget?: CmsLinkTarget | null;
+  detailOpenInNewTab?: boolean | null;
   description?: string;
   expandedDescription?: string;
   meta?: string[];
@@ -26,6 +31,8 @@ export type TrainerListItem = {
   state: string;
   contact?: string;
   contactHref?: string;
+  contactLinkTarget?: CmsLinkTarget | null;
+  contactOpenInNewTab?: boolean | null;
   dataAttributes?: {
     contact?: string;
     name?: string;
@@ -101,6 +108,8 @@ export type TabContentBlock =
       type: "link";
       text: string;
       href: string;
+      linkTarget?: CmsLinkTarget | null;
+      openInNewTab?: boolean | null;
       dataAttributes?: ContentBlockDataAttributes;
     };
 
@@ -133,6 +142,8 @@ export type SanityTabContentBlock =
       _type: "sideTabsLink";
       text?: string;
       href?: string;
+      linkTarget?: CmsLinkTarget | null;
+      openInNewTab?: boolean | null;
       dataAttributes?: ContentBlockDataAttributes;
     };
 

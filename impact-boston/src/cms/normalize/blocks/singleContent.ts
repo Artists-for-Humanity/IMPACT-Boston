@@ -5,6 +5,7 @@ import type {
 } from "@/components/Content/Single";
 import type { CmsSingleContentBlock } from "@/cms/types/blocks";
 import { urlFor } from "@/sanity/image";
+import { resolveCmsLink } from "@/cms/links";
 
 const BACKGROUND_COLOR_CLASS_MAP: Record<string, string> = {
   lavender: "bg-bg-lavender",
@@ -53,9 +54,12 @@ export function resolveSingleContentBlock(
   }
 
   const ctaText = section.ctaText?.trim();
-  const ctaHref = section.ctaHref?.trim();
+  const ctaLink = resolveCmsLink(section.ctaLinkTarget, section.ctaHref);
   const purchaseLinkText = section.purchaseLinkText?.trim();
-  const purchaseLinkHref = section.purchaseLinkHref?.trim();
+  const purchaseLink = resolveCmsLink(
+    section.purchaseLinkTarget,
+    section.purchaseLinkHref,
+  );
 
   return {
     eyebrow: section.eyebrow?.trim() || undefined,
@@ -69,10 +73,17 @@ export function resolveSingleContentBlock(
     imageAlt: section.imageAlt ?? title,
     showImagePlaceholder: Boolean(section.showImagePlaceholder),
     reverse: Boolean(section.reverse),
-    cta: ctaText && ctaHref ? { text: ctaText, href: ctaHref } : undefined,
+    cta:
+      ctaText && ctaLink.href
+        ? { text: ctaText, href: ctaLink.href, openInNewTab: ctaLink.openInNewTab }
+        : undefined,
     purchaseLink:
-      purchaseLinkText && purchaseLinkHref
-        ? { text: purchaseLinkText, href: purchaseLinkHref }
+      purchaseLinkText && purchaseLink.href
+        ? {
+            text: purchaseLinkText,
+            href: purchaseLink.href,
+            openInNewTab: purchaseLink.openInNewTab,
+          }
         : undefined,
     backgroundColor: section.backgroundColor
       ? BACKGROUND_COLOR_CLASS_MAP[stegaClean(section.backgroundColor) ?? ""]

@@ -1,6 +1,7 @@
 import {defineField, defineType} from 'sanity'
 import {BackgroundColorInput} from '../../components/BackgroundColorInput'
 import {blockPreviewMedia} from './blockPreviews'
+import {defineLinkTargetField} from '../linkTarget'
 
 type TestimonialsBlockParent = {
   _type?: string
@@ -142,7 +143,9 @@ export const testimonialsBlockType = defineType({
               title: 'Read More Link',
               type: 'string',
               description: 'Optional.',
+              hidden: true,
             }),
+            defineLinkTargetField({name: 'readMoreLinkTarget', title: 'Read More Link'}),
           ],
           preview: {
             select: {title: 'author', subtitle: 'quote'},

@@ -6,6 +6,7 @@ import { stegaClean } from "next-sanity";
 import * as LucideIcons from "lucide-react";
 import { ChevronRight, type LucideIcon } from "lucide-react";
 import Grid from "../common/Grid";
+import type { CmsLinkTarget } from "@/cms/links";
 
 export type ActionPanelIcon = string;
 
@@ -14,6 +15,8 @@ export type ActionPanelCard = {
   title?: string | null;
   body?: string | null;
   href?: string | null;
+  linkTarget?: CmsLinkTarget | null;
+  openInNewTab?: boolean | null;
   bgColor?: string | null;
   icon?: ActionPanelIcon | null;
   dataAttributes?: {
@@ -154,7 +157,9 @@ export default function ActionPanel({
                 href={card.href ?? "#"}
                 className={`col-span-4 md:col-span-8 lg:col-span-4 flex flex-col items-start gap-14 md:gap-0 md:justify-between ${CARD_HEIGHT_CLASSES[index] ?? CARD_HEIGHT_CLASSES[0]} lg:h-[325px] p-6 lg:p-8 hover:opacity-90 transition-opacity`}
                 data-sanity={card.dataAttributes?.href}
+                rel={card.openInNewTab ? "noopener noreferrer" : undefined}
                 style={{ backgroundColor: bgColor }}
+                target={card.openInNewTab ? "_blank" : undefined}
               >
                 {/* Top - Icon and Chevron */}
                 <div className="flex justify-between items-start w-full">

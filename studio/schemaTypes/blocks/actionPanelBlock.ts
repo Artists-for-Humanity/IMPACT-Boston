@@ -2,6 +2,7 @@ import {defineField, defineType} from 'sanity'
 import {BackgroundColorInput} from '../../components/BackgroundColorInput'
 import {IconInput, isValidIconValue} from '../../components/IconInput'
 import {blockPreviewMedia} from './blockPreviews'
+import {defineLinkTargetField} from '../linkTarget'
 
 export const actionPanelBlockType = defineType({
   name: 'actionPanelBlock',
@@ -46,8 +47,9 @@ export const actionPanelBlockType = defineType({
               name: 'href',
               title: 'Link',
               type: 'string',
-              validation: (rule) => rule.required(),
+              hidden: true,
             }),
+            defineLinkTargetField({required: true}),
             defineField({
               name: 'icon',
               title: 'Icon',

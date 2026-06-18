@@ -66,6 +66,7 @@ interface Hero1Props {
   body: string;
   ctaText: string;
   ctaHref: string;
+  ctaOpenInNewTab?: boolean;
   imageSrc: string;
   imageAlt: string;
   className?: string;
@@ -81,6 +82,7 @@ export default function Hero1({
   body,
   ctaText,
   ctaHref,
+  ctaOpenInNewTab = false,
   imageSrc,
   imageAlt,
   className = "",
@@ -116,6 +118,7 @@ export default function Hero1({
               <div className="grid grid-cols-6 md:grid-cols-6 lg:grid-cols-5 gap-6 w-full">
                 <Button
                   href={ctaHref}
+                  openInNewTab={ctaOpenInNewTab}
                   variant="primary"
                   size="lg"
                   className="w-full col-start-2 col-span-4 md:col-start-2 md:col-span-4 md:w-full lg:w-auto lg:col-start-auto lg:col-span-3"

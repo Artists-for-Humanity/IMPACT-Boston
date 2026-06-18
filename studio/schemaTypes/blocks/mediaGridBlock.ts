@@ -1,5 +1,6 @@
 import {defineField, defineType} from 'sanity'
 import {blockPreviewMedia} from './blockPreviews'
+import {defineLinkTargetField} from '../linkTarget'
 
 
 export const mediaGridBlockType = defineType({
@@ -57,8 +58,9 @@ export const mediaGridBlockType = defineType({
               name: 'href',
               title: 'Link URL',
               type: 'string',
-              validation: (rule) => rule.required(),
+              hidden: true,
             }),
+            defineLinkTargetField({required: true}),
           ],
           preview: {
             select: {title: 'title', subtitle: 'description'},

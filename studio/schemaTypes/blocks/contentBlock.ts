@@ -1,6 +1,7 @@
 import {defineArrayMember, defineField, defineType} from 'sanity'
 import {BackgroundColorInput} from '../../components/BackgroundColorInput'
 import {blockPreviewMedia} from './blockPreviews'
+import {defineLinkTargetField} from '../linkTarget'
 
 export const contentBlockType = defineType({
   name: 'contentBlock',
@@ -79,6 +80,12 @@ export const contentBlockType = defineType({
       name: 'ctaHref',
       title: 'Link URL',
       type: 'string',
+      hidden: true,
+    }),
+    defineLinkTargetField({
+      name: 'ctaLinkTarget',
+      title: 'Link',
+      hidden: ({parent}) => !parent?.ctaText && !parent?.ctaHref,
     }),
     defineField({
       name: 'buttonText',
@@ -89,6 +96,12 @@ export const contentBlockType = defineType({
       name: 'buttonLink',
       title: 'Button Link',
       type: 'string',
+      hidden: true,
+    }),
+    defineLinkTargetField({
+      name: 'buttonLinkTarget',
+      title: 'Button Link',
+      hidden: ({parent}) => !parent?.buttonText && !parent?.buttonLink,
     }),
     defineField({
       name: 'buttonColor',

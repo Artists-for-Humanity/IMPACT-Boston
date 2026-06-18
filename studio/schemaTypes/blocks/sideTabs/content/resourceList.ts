@@ -1,4 +1,5 @@
 import {defineArrayMember, defineField} from 'sanity'
+import {defineLinkTargetField} from '../../../linkTarget'
 
 export const resourceListContent = defineArrayMember({
   name: 'resourceList',
@@ -39,7 +40,9 @@ export const resourceListContent = defineArrayMember({
               name: 'href',
               title: 'Title Link',
               type: 'string',
+              hidden: true,
             }),
+            defineLinkTargetField({name: 'titleLinkTarget', title: 'Title Link'}),
             defineField({
               name: 'detail',
               title: 'Detail',
@@ -49,7 +52,9 @@ export const resourceListContent = defineArrayMember({
               name: 'detailHref',
               title: 'Detail Link',
               type: 'string',
+              hidden: true,
             }),
+            defineLinkTargetField({name: 'detailLinkTarget', title: 'Detail Link'}),
             defineField({
               name: 'description',
               title: 'Description',

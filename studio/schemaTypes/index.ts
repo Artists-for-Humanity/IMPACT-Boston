@@ -2,6 +2,7 @@ import {aboutImpactPageType} from './aboutImpactPageType'
 import {abuseSurvivorsPageType} from './abuseSurvivorsPageType'
 import {landingPageType} from './landingPageType'
 import {resourcesPageType} from './resourcesPageType'
+import {linkTargetType} from './linkTarget'
 import {actionPanelBlockType} from './blocks/actionPanelBlock'
 import {contentBlockType} from './blocks/contentBlock'
 import {ctaSectionBlockType} from './blocks/ctaSectionBlock'
@@ -23,6 +24,7 @@ export const schemaTypes = [
   aboutImpactPageType,
   landingPageType,
   resourcesPageType,
+  linkTargetType,
   heroBlockType,
   contentBlockType,
   actionPanelBlockType,

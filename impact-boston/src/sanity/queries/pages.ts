@@ -2,6 +2,21 @@ import { defineQuery } from "next-sanity";
 
 import { SIDE_TABS_CONTENT_PROJECTION } from "./fragments/sideTabs";
 
+const LINK_TARGET_PROJECTION = `
+  _type,
+  type,
+  url,
+  internalPath,
+  email,
+  openInNewTab,
+  file {
+    asset->{
+      url,
+      originalFilename
+    }
+  }
+`;
+
 const PAGE_SECTIONS_PROJECTION = `
     _id,
     _type,
@@ -16,12 +31,18 @@ const PAGE_SECTIONS_PROJECTION = `
       body,
       buttonColor,
       buttonLink,
+      buttonLinkTarget {
+        ${LINK_TARGET_PROJECTION}
+      },
       buttonText,
       buttonBgColor,
       buttonTextColor,
       ctaLabel,
       ctaText,
       ctaHref,
+      ctaLinkTarget {
+        ${LINK_TARGET_PROJECTION}
+      },
       image,
       imageAlt,
       showImagePlaceholder,
@@ -36,9 +57,15 @@ const PAGE_SECTIONS_PROJECTION = `
       videoTitle,
       content[] {
         ...,
+        linkTarget {
+          ${LINK_TARGET_PROJECTION}
+        },
         markDefs[] {
           ...,
-          href
+          href,
+          linkTarget {
+            ${LINK_TARGET_PROJECTION}
+          }
         },
         children[] {
           ...
@@ -61,6 +88,9 @@ const PAGE_SECTIONS_PROJECTION = `
       reverse,
       purchaseLinkText,
       purchaseLinkHref,
+      purchaseLinkTarget {
+        ${LINK_TARGET_PROJECTION}
+      },
       backgroundColor,
       intro,
       cards[] {
@@ -69,6 +99,9 @@ const PAGE_SECTIONS_PROJECTION = `
         titleLine2,
         body,
         href,
+        linkTarget {
+          ${LINK_TARGET_PROJECTION}
+        },
         bgColor,
         icon,
         description,
@@ -93,7 +126,10 @@ const PAGE_SECTIONS_PROJECTION = `
           _key,
           label,
           value,
-          href
+          href,
+          linkTarget {
+            ${LINK_TARGET_PROJECTION}
+          }
         },
         descriptionTitle,
         description
@@ -105,6 +141,9 @@ const PAGE_SECTIONS_PROJECTION = `
         description,
         buttonText,
         href,
+        linkTarget {
+          ${LINK_TARGET_PROJECTION}
+        },
         bgColor,
         icon
       },
@@ -120,6 +159,9 @@ const PAGE_SECTIONS_PROJECTION = `
         body,
         ctaText,
         ctaLink,
+        ctaLinkTarget {
+          ${LINK_TARGET_PROJECTION}
+        },
         additionalText,
         image,
         imageAlt
@@ -135,7 +177,10 @@ const PAGE_SECTIONS_PROJECTION = `
         quote,
         author,
         authorTitle,
-        readMoreLink
+        readMoreLink,
+        readMoreLinkTarget {
+          ${LINK_TARGET_PROJECTION}
+        }
       },
       members[] {
         name,
@@ -151,7 +196,10 @@ const PAGE_SECTIONS_PROJECTION = `
         description,
         date,
         author,
-        href
+        href,
+        linkTarget {
+          ${LINK_TARGET_PROJECTION}
+        }
       }
     }
 `;
