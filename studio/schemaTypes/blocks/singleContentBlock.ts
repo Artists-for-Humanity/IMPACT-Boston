@@ -1,5 +1,6 @@
 import {defineArrayMember, defineField, defineType} from 'sanity'
 import {HeadlineColorInput, headlineColorOptions} from '../../components/HeadlineColorInput'
+import {LightBackgroundColorInput} from '../../components/LightBackgroundColorInput'
 import {blockPreviewMedia} from './blockPreviews'
 import {portableTextContent} from './sideTabs/content/portableText'
 import {defineLinkTargetField} from '../linkTarget'
@@ -289,20 +290,13 @@ export const singleContentBlockType = defineType({
       name: 'backgroundColor',
       title: 'Background Color',
       type: 'string',
-      options: {
-        list: [
-          {title: 'None (White)', value: ''},
-          {title: 'Lavender', value: 'lavender'},
-          {title: 'Primary Light', value: 'primaryLight'},
-          {title: 'Secondary Light', value: 'secondaryLight'},
-          {title: 'Complementary Light', value: 'complementaryLight'},
-        ],
-        layout: 'dropdown',
+      components: {
+        input: LightBackgroundColorInput,
       },
     }),
   ],
   initialValue: {
-    backgroundColor: 'lavender',
+    backgroundColor: 'bg-bg-lavender',
     content: [
       {
         _type: 'block',

@@ -1,6 +1,7 @@
 import {LinkIcon} from 'lucide-react'
 import {defineArrayMember, defineField, defineType} from 'sanity'
 import {BackgroundColorInput} from '../../components/BackgroundColorInput'
+import {LightBackgroundColorInput} from '../../components/LightBackgroundColorInput'
 import {blockPreviewMedia} from './blockPreviews'
 import {defineLinkTargetField} from '../linkTarget'
 
@@ -150,12 +151,8 @@ export const contentBlockType = defineType({
       name: 'backgroundColor',
       title: 'Background Color',
       type: 'string',
-      options: {
-        list: [
-          {title: 'None (White)', value: ''},
-          {title: 'Lavender', value: 'bg-bg-lavender'},
-        ],
-        layout: 'radio',
+      components: {
+        input: LightBackgroundColorInput,
       },
       initialValue: '',
     }),

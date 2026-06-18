@@ -1,4 +1,5 @@
 import {defineField, defineType} from 'sanity'
+import {LightBackgroundColorInput} from '../../components/LightBackgroundColorInput'
 import {blockPreviewMedia} from './blockPreviews'
 
 export const imageGridBlockType = defineType({
@@ -78,15 +79,8 @@ export const imageGridBlockType = defineType({
       name: 'backgroundColor',
       title: 'Background Color',
       type: 'string',
-      options: {
-        list: [
-          {title: 'None (White)', value: ''},
-          {title: 'Lavender', value: 'bg-bg-lavender'},
-          {title: 'Primary Light', value: 'bg-primary-light'},
-          {title: 'Secondary Light', value: 'bg-secondary-light'},
-          {title: 'Complementary Light', value: 'bg-complementary-light'},
-        ],
-        layout: 'radio',
+      components: {
+        input: LightBackgroundColorInput,
       },
       initialValue: '',
     }),
