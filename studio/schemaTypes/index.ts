@@ -16,6 +16,8 @@ import {singleContentBlockType} from './blocks/singleContentBlock'
 import {sideTabsBlockType} from './blocks/sideTabsBlock'
 import {testimonialsBlockType} from './blocks/testimonialsBlock'
 import {tripleContentBlockType} from './blocks/tripleContentBlock'
+//program pages
+import {publicClassesPageType} from './publicClassesPageType'
 
 export const schemaTypes = [
   aboutImpactPageType,
@@ -36,4 +38,6 @@ export const schemaTypes = [
   imageGridBlockType,
   mediaGridBlockType,
   testimonialsBlockType,
+  //program pages
+  publicClassesPageType,
 ]
