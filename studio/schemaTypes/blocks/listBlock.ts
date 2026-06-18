@@ -1,61 +1,6 @@
 import {defineField, defineType} from 'sanity'
 import {blockPreviewMedia} from './blockPreviews'
 
-const defaultDescription =
-  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ut lorem porttitor.'
-
-const defaultAccordionBody =
-  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ultrices massa a lacinia. Praesent sit amet ipsum dapibus, eleifend dui vel, fringilla orci. Donec et dui conLorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ultrices massa a lacinia. Praesent sit amet ipsum dapibus, eleifend dui vel, fringilla orci. Donec et dui conLorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ultrices massa a lacinia. Praesent sit amet ipsum dapibus, eleifend dui vel, fringilla orci. Donec et dui con'
-
-const defaultListItems = [
-  {
-    title: 'Static List Item',
-    description: defaultDescription,
-  },
-  {
-    title: 'Accordion - Collapsed',
-    description: defaultDescription,
-    accordionContent: defaultAccordionBody,
-  },
-  {
-    title: 'Accordion - Expanded',
-    description: defaultDescription,
-    accordionContent: defaultAccordionBody,
-    defaultOpen: true,
-  },
-  {
-    title: 'List with Information Icon',
-    description: defaultDescription,
-    showInfoIcon: true,
-  },
-  {
-    title: 'Accordion with Information Icon',
-    description: defaultDescription,
-    showInfoIcon: true,
-    accordionContent: defaultAccordionBody,
-  },
-  ...Array.from({length: 8}, () => ({
-    title: 'Item',
-    description: defaultDescription,
-  })),
-]
-
-const defaultDetailFields = [
-  {label: 'Name', value: 'Middle School Safety'},
-  {label: 'Summary', value: '7-hour class, all genders, ages 10-13'},
-  {label: 'Cost', value: 'Course Fee: $150. Scholarships always available!'},
-  {label: 'Date/Time', value: '6/6/26 10am-5pm'},
-  {label: 'Location', value: 'Brighton, MA'},
-  {label: 'Link', value: 'http://www.sample.org/head', href: 'http://www.sample.org/head'},
-]
-
-const defaultDetailItems = Array.from({length: 5}, () => ({
-  fields: defaultDetailFields,
-  descriptionTitle: 'Description',
-  description:
-    'This course helps students develop the skills to respond to potentially dangerous situations. Students learn to avoid altercations, resist intimidation, assert themselves in the face of peer pressure and escape potential assaults. They are also taught how to report dangerous situations to a safe adult. Scenarios focus on issues relevant to their lives such as bullying, dating situations, and increasing independence, as well as violence perpetrated by strangers.',
-}))
-
 const isDetailsVariant = (parent: unknown) =>
   typeof parent === 'object' &&
   parent !== null &&
@@ -85,7 +30,6 @@ export const listBlockType = defineType({
       name: 'title',
       title: 'Title',
       type: 'string',
-      validation: (rule) => rule.required(),
     }),
     defineField({
       name: 'description',
@@ -112,14 +56,12 @@ export const listBlockType = defineType({
               name: 'title',
               title: 'Title',
               type: 'string',
-              validation: (rule) => rule.required(),
             }),
             defineField({
               name: 'description',
               title: 'Description',
               type: 'text',
               rows: 2,
-              validation: (rule) => rule.required(),
             }),
             defineField({
               name: 'showInfoIcon',
@@ -143,7 +85,17 @@ export const listBlockType = defineType({
             }),
           ],
           preview: {
-            select: {title: 'title', subtitle: 'description'},
+            select: {
+              title: 'title',
+              subtitle: 'description',
+              accordionContent: 'accordionContent',
+            },
+            prepare({title, subtitle, accordionContent}) {
+              return {
+                title: title || subtitle || accordionContent || 'List item',
+                subtitle: title ? subtitle || accordionContent : undefined,
+              }
+            },
           },
         },
       ],
@@ -219,10 +171,6 @@ export const listBlockType = defineType({
   ],
   initialValue: {
     variant: 'accordion',
-    title: 'List Component',
-    description: defaultDescription,
-    listItems: defaultListItems,
-    detailItems: defaultDetailItems,
   },
   preview: {
     select: {title: 'title', subtitle: 'variant'},

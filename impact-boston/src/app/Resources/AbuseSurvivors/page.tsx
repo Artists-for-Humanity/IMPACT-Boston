@@ -115,7 +115,7 @@ const ABUSE_SURVIVORS_PAGE_FALLBACK_BLOCKS: CmsPageBlock[] = [
     description:
       "Even though all our classes are trauma-informed and instructors have significant experience working with survivors, the nature of the material in a self-defense class can be triggering. This is not something that should necessarily scare you away, but something we think it is important that you understand when you are making the decision to take an IMPACT class. Being triggered does not feel great. But if in the moment of being triggered, you can stay present, confront, and work through that trigger, it has less power over you. In fact, one of the greatest things that some survivors take from this class is the bravery to confront something that has scared them, create a new ending, and thus be able to live in less fear.",
     imageAlt: "Guide for Abuse Survivors",
-    showImagePlaceholder: true,
+    // showImagePlaceholder: true,
     supportingText:
       "Take a moment to read our class descriptions and then take some time to ask yourself the questions below about what you are looking for in a class.",
   },
@@ -129,8 +129,8 @@ const ABUSE_SURVIVORS_PAGE_FALLBACK_BLOCKS: CmsPageBlock[] = [
     _type: "listBlock",
     title: "FAQS",
     variant: "accordion",
-    showToggle: false,
-    noPaddingTop: true,
+    // showToggle: false,
+    // noPaddingTop: true,
     listItems: faqItems,
   },
 ];

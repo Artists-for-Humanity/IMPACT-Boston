@@ -27,6 +27,10 @@ const mainDocuments = defineDocuments([
     filter: `_id == "resources" && _type == "resourcesPage"`,
   },
   {
+    route: '/Resources/AbuseSurvivors',
+    filter: `_id == "abuseSurvivorsPage" && _type == "abuseSurvivorsPage"`,
+  },
+  {
     route: '/BoardAndStaff',
     filter: `_id == "boardAndStaff"`,
   },

@@ -9,6 +9,7 @@ interface Hero2Props {
   highlight?: string;
   highlightColor?: "primary" | "secondary" | "complementary";
   description?: string;
+  supportingText?: string;
   imageSrc?: string;
   imageAlt?: string;
   youtubeUrl?: string;
@@ -18,6 +19,7 @@ interface Hero2Props {
   dataAttributes?: {
     description?: string;
     image?: string;
+    supportingText?: string;
     title?: string;
   };
 }
@@ -60,6 +62,7 @@ export default function Hero2({
   highlight,
   highlightColor = "secondary",
   description,
+  supportingText,
   imageSrc,
   imageAlt,
   youtubeUrl,
@@ -104,6 +107,17 @@ export default function Hero2({
             </div>
           )}
         </div>
+
+        {supportingText ? (
+          <div className="col-span-full lg:col-start-3 lg:col-span-8">
+            <p
+              className="p2 text-center italic text-grey"
+              data-sanity={dataAttributes?.supportingText}
+            >
+              {supportingText}
+            </p>
+          </div>
+        ) : null}
 
       {showMediaPlaceholder ? (
         <div

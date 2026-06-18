@@ -92,6 +92,7 @@ export default function HeroBlock({
         highlight={shouldUseHeadlineParts ? undefined : legacyHighlight}
         highlightColor={resolveHero2HighlightColor(section.highlightColor)}
         description={section.description ?? section.body ?? fallback?.body}
+        supportingText={section.supportingText ?? undefined}
         dataAttributes={{
           description: getFieldDataAttribute(
             dataAttribute,
@@ -101,6 +102,10 @@ export default function HeroBlock({
           title: shouldUseHeadlineParts
             ? undefined
             : getFieldDataAttribute(dataAttribute, extendPath(blockPath, "title")),
+          supportingText: getFieldDataAttribute(
+            dataAttribute,
+            extendPath(blockPath, "supportingText"),
+          ),
         }}
         imageSrc={imageSrc}
         imageAlt={imageAlt}

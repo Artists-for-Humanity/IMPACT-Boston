@@ -1,4 +1,5 @@
 import {aboutImpactPageType} from './aboutImpactPageType'
+import {abuseSurvivorsPageType} from './abuseSurvivorsPageType'
 import {landingPageType} from './landingPageType'
 import {resourcesPageType} from './resourcesPageType'
 import {actionPanelBlockType} from './blocks/actionPanelBlock'
@@ -29,6 +30,7 @@ export const schemaTypes = [
   tripleContentBlockType,
   listBlockType,
   sideTabsBlockType,
+  abuseSurvivorsPageType,
   highlightBannerBlockType,
   highlightsBlockType,
   imageGridBlockType,

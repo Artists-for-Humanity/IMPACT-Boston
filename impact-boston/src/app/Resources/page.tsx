@@ -4,6 +4,7 @@ import { DEFAULT_CMS_BLOCK_FALLBACKS } from "@/cms/fallbacks/blocks";
 import { getCmsPageBlocks } from "@/cms/normalize/page";
 import { CmsPage } from "@/cms/render/CmsPage";
 import type { CmsPageBlock } from "@/cms/types/blocks";
+import { ROUTES } from "@/routes";
 import { getCmsPageData } from "@/sanity/pageData";
 
 const RESOURCES_PAGE_ID = "resources";
@@ -246,7 +247,7 @@ const RESOURCE_PAGE_FALLBACK_BLOCKS: CmsPageBlock[] = [
     _key: "resources-survivors",
     _type: "singleContentBlock",
     backgroundColor: "lavender",
-    ctaHref: "#",
+    ctaHref: ROUTES.ABUSE_SURVIVORS,
     ctaText: "Read the Full Survivor Guide",
     imageAlt: "Survivors of Abuse and Trauma",
     paragraphs: [

@@ -10,8 +10,8 @@ export type ListVariant = "accordion" | "details";
 
 export type ListItem = {
   _key?: string | null;
-  title: string;
-  description: string;
+  title?: string;
+  description?: string;
   paragraph?: string;
   showInfoIcon?: boolean;
   accordionContent?: string;
@@ -181,6 +181,9 @@ function AccordionList({
         const isOpen = allOpen || openIndexes.has(index);
         const contentId = `${listId}-accordion-${index}`;
 
+        const rowLabel =
+          item.title || item.description || accordionContent || `List item ${index + 1}`;
+
         return (
           <article
             aria-controls={hasAccordion ? contentId : undefined}
@@ -190,7 +193,7 @@ function AccordionList({
                 ? "cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-secondary"
                 : ""
             }`}
-            key={`${item.title}-${index}`}
+            key={`${rowLabel}-${index}`}
             onClick={hasAccordion ? () => onToggleItem(index) : undefined}
             onKeyDown={
               hasAccordion
@@ -208,26 +211,30 @@ function AccordionList({
             <div className="grid grid-cols-[1fr_auto] gap-x-4 gap-y-4">
               <div className="min-w-0">
                 <div className="flex items-center gap-2">
-                  <h3
-                    className="sub-1 truncate text-black md:whitespace-normal"
-                    data-sanity={item.dataAttributes?.title}
-                  >
-                    {item.title}
-                  </h3>
+                  {item.title ? (
+                    <h3
+                      className="sub-1 truncate text-black md:whitespace-normal"
+                      data-sanity={item.dataAttributes?.title}
+                    >
+                      {item.title}
+                    </h3>
+                  ) : null}
                   {item.showInfoIcon ? (
                     <CircleHelp
-                      aria-label={`${item.title} information`}
+                      aria-label={`${rowLabel} information`}
                       className="size-4 shrink-0 text-grey"
                       strokeWidth={1.8}
                     />
                   ) : null}
                 </div>
-                <p
-                  className="p2 mt-2 max-w-[760px] text-black"
-                  data-sanity={item.dataAttributes?.description}
-                >
-                  {item.description}
-                </p>
+                {item.description ? (
+                  <p
+                    className="p2 mt-2 max-w-[760px] text-black"
+                    data-sanity={item.dataAttributes?.description}
+                  >
+                    {item.description}
+                  </p>
+                ) : null}
               </div>
 
               <div className="flex items-start gap-5 pt-0.5">

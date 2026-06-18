@@ -122,7 +122,7 @@ export const heroBlockType = defineType({
         },
       ],
     }),
-     defineField({
+    defineField({
       name: 'description',
       title: 'Description',
       type: 'text',
@@ -132,6 +132,14 @@ export const heroBlockType = defineType({
         rule.custom((value, context) =>
           isHero2(context.parent) && !value ? 'Description is required for Hero 2.' : true,
         ),
+    }),
+    defineField({
+      name: 'supportingText',
+      title: 'Supporting Text',
+      type: 'text',
+      rows: 2,
+      description: 'Optional centered text shown below the Hero 2 description and above the media.',
+      hidden: ({parent}) => !isHero2(parent),
     }),
     defineField({
       name: 'body',

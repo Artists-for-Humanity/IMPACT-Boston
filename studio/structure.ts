@@ -1,6 +1,11 @@
 import type {StructureResolver} from 'sanity/structure'
 
-export const singletonTypes = new Set(['aboutImpactPage', 'landingPage', 'resourcesPage'])
+export const singletonTypes = new Set([
+  'aboutImpactPage',
+  'abuseSurvivorsPage',
+  'landingPage',
+  'resourcesPage',
+])
 
 const aboutPages = [
   {
@@ -17,6 +22,11 @@ const aboutPages = [
     title: 'Resources',
     id: 'resources',
     schemaType: 'resourcesPage',
+  },
+  {
+    title: 'Abuse Survivors',
+    id: 'abuseSurvivorsPage',
+    schemaType: 'abuseSurvivorsPage',
   },
   {
     title: 'Blog',
