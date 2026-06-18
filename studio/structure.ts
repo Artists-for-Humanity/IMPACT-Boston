@@ -4,6 +4,7 @@ export const singletonTypes = new Set([
   'aboutImpactPage',
   'abuseSurvivorsPage',
   'landingPage',
+  'publicClassesPage',
   'resourcesPage',
 ])
 
@@ -40,6 +41,14 @@ const aboutPages = [
   },
 ]
 
+const programsPages = [
+  {
+    title: 'Public Classes',
+    id: 'publicClassesPage',
+    schemaType: 'publicClassesPage',
+  },
+] 
+
 export const structure: StructureResolver = (S) =>
   S.list()
     .title('Content')
@@ -59,6 +68,24 @@ export const structure: StructureResolver = (S) =>
             .title('About Pages')
             .items(
               aboutPages.map((page) =>
+                S.listItem()
+                  .title(page.title)
+                  .id(page.id)
+                  .schemaType(page.schemaType)
+                  .child(
+                    S.document().title(page.title).schemaType(page.schemaType).documentId(page.id),
+                  ),
+              ),
+            ),
+        ),
+        S.listItem()
+        .title('Programs Pages')
+        .id('programPages')
+        .child(
+          S.list()
+            .title('Programs Pages')
+            .items(
+              programsPages.map((page) =>
                 S.listItem()
                   .title(page.title)
                   .id(page.id)
