@@ -46,6 +46,12 @@ export default function IndexPage() {
         <p className='sub-1 ml-[1160px] mt-[-330px] max-w-[350]'>Rebuilding Safety & Confidence</p>
         <p className='p2 ml-[1160px] mt-[120] max-w-[350px]'>We understand that trauma can have a profound impact on an individual's sense of safety and confidence. Our self-defense programs are designed to help participants rebuild their sense of safety and confidence, empowering them to take control of their lives and feel secure in their bodies.</p>
          {/* */}
+         <h4 className="h3 font-bold mt-[90px] ml-[260px]">Success Stories</h4>
+         <h4 className="p2 mt-[20px] ml-[260px] max-w-[500px] max-w-[800px]">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ut lorem porttitor.</h4>
+         <h4 className="p1 font-bold mt-[90px] ml-[260px]">Take Your Power: A Graduate’s Story</h4>
+          <h4 className="p2 mt-[20px] ml-[260px] max-w-[500px] max-w-[800px]">I was on a 4th date with a charming grad student I met at a lecture. We were sipping wine in his ...</h4>
+          <hr className='max-w-[1300px] ml-[260px] mt-[20px]'></hr>
+         {/* */}
         
           <div className='ml-[900px] max-w-[750px] mt-[30px]'> 
           <h2 className="h3 font-bold ml-[250px] mt-[150] font-thin">Empowerment through Education</h2>
@@ -121,3 +127,5 @@ export default function IndexPage() {
     </main>
   );
 }
+
+
