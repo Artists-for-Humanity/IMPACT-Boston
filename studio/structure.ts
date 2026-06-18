@@ -6,6 +6,7 @@ export const singletonTypes = new Set([
   'landingPage',
   'publicClassesPage',
   'resourcesPage',
+  'schoolsAndCollegesPage',
 ])
 
 const aboutPages = [
@@ -46,6 +47,11 @@ const programsPages = [
     title: 'Public Classes',
     id: 'publicClassesPage',
     schemaType: 'publicClassesPage',
+  },
+  {
+    title: 'Schools & Colleges',
+    id: 'schoolsAndCollegesPage',
+    schemaType: 'schoolsAndCollegesPage',
   },
 ] 
 

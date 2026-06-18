@@ -19,6 +19,7 @@ import {testimonialsBlockType} from './blocks/testimonialsBlock'
 import {tripleContentBlockType} from './blocks/tripleContentBlock'
 //program pages
 import {publicClassesPageType} from './publicClassesPageType'
+import {schoolsAndCollegesPageType} from './schoolsAndCollegesPageType'
 
 export const schemaTypes = [
   aboutImpactPageType,
@@ -42,4 +43,5 @@ export const schemaTypes = [
   testimonialsBlockType,
   //program pages
   publicClassesPageType,
+  schoolsAndCollegesPageType,
 ]

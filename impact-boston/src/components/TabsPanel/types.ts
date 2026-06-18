@@ -111,7 +111,8 @@ export type TabContentBlock =
       linkTarget?: CmsLinkTarget | null;
       openInNewTab?: boolean | null;
       dataAttributes?: ContentBlockDataAttributes;
-    };
+    }
+  | { type: "quote"; quote: string; attribution?: string };
 
 export type SanityColumn = {
   items?: string[];
@@ -120,6 +121,7 @@ export type SanityColumn = {
 export type SanityTabContentBlock =
   | { _key?: string; _type: "columns"; items?: Array<SanityColumn | string[]> }
   | { _key?: string; _type: "divider" }
+  | { _key?: string; _type: "quote"; quote?: string; attribution?: string }
   | {
       _key?: string;
       _type: "resourceList";

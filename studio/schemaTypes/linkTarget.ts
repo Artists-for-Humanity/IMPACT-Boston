@@ -8,6 +8,7 @@ type LinkTargetFieldOptions = {
   name?: string
   required?: boolean
   title?: string
+  validation?: FieldDefinition<'object'>['validation']
 }
 
 const isType = (parent: unknown, type: string) =>
@@ -40,10 +41,6 @@ export const linkTargetType = defineType({
       title: 'URL',
       type: 'url',
       hidden: ({parent}) => !isType(parent, 'url'),
-      validation: (rule) =>
-        rule.custom((value, context) =>
-          isType(context.parent, 'url') && !value ? 'Enter a URL.' : true,
-        ),
     }),
     defineField({
       name: 'internalPath',
@@ -54,10 +51,6 @@ export const linkTargetType = defineType({
         list: internalPageOptions,
         layout: 'dropdown',
       },
-      validation: (rule) =>
-        rule.custom((value, context) =>
-          isType(context.parent, 'internal') && !value ? 'Choose an internal page.' : true,
-        ),
     }),
     defineField({
       name: 'email',
@@ -66,9 +59,7 @@ export const linkTargetType = defineType({
       hidden: ({parent}) => !isType(parent, 'email'),
       validation: (rule) =>
         rule.custom((value, context) => {
-          if (!isType(context.parent, 'email')) return true
-          if (!value) return 'Enter an email address.'
-
+          if (!isType(context.parent, 'email') || !value) return true
           return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value) ? true : 'Enter a valid email address.'
         }),
     }),
@@ -81,10 +72,6 @@ export const linkTargetType = defineType({
       options: {
         accept: '.pdf,.doc,.docx,.ppt,.pptx,.xls,.xlsx,.csv,.zip',
       },
-      validation: (rule) =>
-        rule.custom((value, context) =>
-          isType(context.parent, 'asset') && !value ? 'Choose or upload an asset.' : true,
-        ),
     }),
     defineField({
       name: 'openInNewTab',
@@ -130,6 +117,7 @@ export function defineLinkTargetField({
   name = 'linkTarget',
   required = false,
   title = 'Link',
+  validation,
 }: LinkTargetFieldOptions = {}) {
   return defineField({
     name,
@@ -137,6 +125,6 @@ export function defineLinkTargetField({
     type: 'linkTarget',
     description,
     hidden,
-    validation: required ? (rule) => rule.required() : undefined,
+    validation: validation ?? (required ? (rule) => rule.required() : undefined),
   })
 }

@@ -46,6 +46,10 @@ const mainDocuments = defineDocuments([
     route: '/PublicClasses',
     filter: `_id == "publicClassesPage" && _type == "publicClassesPage"`,
   },
+  {
+    route: '/SchoolsAndColleges',
+    filter: `_id == "schoolsAndCollegesPage" && _type == "schoolsAndCollegesPage"`,
+  },
 ])
 
 export default defineConfig({
