@@ -11,6 +11,7 @@ export const blockPreviewImageUrls: Record<string, string> = {
   doubleContentBlock: '/static/block-previews/double-content.svg',
   tripleContentBlock: '/static/block-previews/triple-content.svg',
   listBlock: '/static/block-previews/list.svg',
+  classDescriptionsBlock: '/static/block-previews/list.svg',
   sideTabsBlock: '/static/block-previews/side-tabs.svg',
   highlightBannerBlock: '/static/block-previews/highlight-banner.svg',
   highlightsBlock: '/static/block-previews/highlights-carousel.svg',
@@ -62,6 +63,10 @@ export const blockPreviewMedia = {
     'Triple content block preview',
   ),
   listBlock: createBlockPreviewMedia(blockPreviewImageUrls.listBlock, 'List block preview'),
+  classDescriptionsBlock: createBlockPreviewMedia(
+    blockPreviewImageUrls.classDescriptionsBlock,
+    'Class descriptions block preview',
+  ),
   sideTabsBlock: createBlockPreviewMedia(
     blockPreviewImageUrls.sideTabsBlock,
     'Side tabs block preview',

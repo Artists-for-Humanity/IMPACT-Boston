@@ -134,6 +134,25 @@ const PAGE_SECTIONS_PROJECTION = `
         descriptionTitle,
         description
       },
+      seeAllLinkText,
+      seeAllHref,
+      seeAllLinkTarget {
+        ${LINK_TARGET_PROJECTION}
+      },
+      classItems[] {
+        _key,
+        name,
+        summary,
+        cost,
+        dateTime,
+        location,
+        linkText,
+        href,
+        linkTarget {
+          ${LINK_TARGET_PROJECTION}
+        },
+        description
+      },
       panels[] {
         _key,
         title,

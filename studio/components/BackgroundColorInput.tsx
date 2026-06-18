@@ -17,10 +17,10 @@ const brandBackgroundColorOptions = [
     title: 'White',
     hex: '#ffffff',
   },
-  {
-    title: 'Lavender',
-    hex: '#faf6fd',
-  },
+  // {
+  //   title: 'Lavender',
+  //   hex: '#faf6fd',
+  // },
   // {
   //   title: 'Primary Light',
   //   hex: '#fcf9ff',

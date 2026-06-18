@@ -1,0 +1,125 @@
+import {defineField, defineType} from 'sanity'
+import {blockPreviewMedia} from './blockPreviews'
+import {defineLinkTargetField} from '../linkTarget'
+
+export const classDescriptionsBlockType = defineType({
+  name: 'classDescriptionsBlock',
+  title: 'Class Descriptions',
+  type: 'object',
+  fields: [
+    defineField({
+      name: 'title',
+      title: 'Title',
+      type: 'string',
+    }),
+    defineField({
+      name: 'description',
+      title: 'Description',
+      type: 'text',
+      rows: 2,
+    }),
+    defineField({
+      name: 'seeAllLinkText',
+      title: 'See All Link Text',
+      type: 'string',
+      description: 'Optional link shown in the header on desktop and below the list on mobile.',
+    }),
+    defineField({
+      name: 'seeAllHref',
+      title: 'See All Link URL',
+      type: 'string',
+      hidden: true,
+    }),
+    defineLinkTargetField({
+      name: 'seeAllLinkTarget',
+      title: 'See All Link',
+    }),
+    defineField({
+      name: 'classItems',
+      title: 'Classes / Services',
+      type: 'array',
+      validation: (rule) => rule.required().min(1),
+      of: [
+        {
+          type: 'object',
+          fields: [
+            defineField({
+              name: 'name',
+              title: 'Name',
+              type: 'string',
+              validation: (rule) => rule.required(),
+            }),
+            defineField({
+              name: 'summary',
+              title: 'Summary',
+              type: 'string',
+            }),
+            defineField({
+              name: 'cost',
+              title: 'Cost',
+              type: 'text',
+              rows: 2,
+            }),
+            defineField({
+              name: 'dateTime',
+              title: 'Date/Time',
+              type: 'text',
+            }),
+            defineField({
+              name: 'location',
+              title: 'Location',
+              type: 'text',
+            }),
+            defineField({
+              name: 'linkText',
+              title: 'Link Text',
+              type: 'string',
+            }),
+            defineField({
+              name: 'href',
+              title: 'Link URL',
+              type: 'string',
+              hidden: true,
+            }),
+            defineLinkTargetField(),
+            defineField({
+              name: 'description',
+              title: 'Description',
+              type: 'text',
+              rows: 5,
+              validation: (rule) => rule.required(),
+            }),
+          ],
+          preview: {
+            select: {
+              title: 'name',
+              subtitle: 'summary',
+            },
+            prepare({title, subtitle}) {
+              return {
+                title: title || 'Class / Service',
+                subtitle,
+              }
+            },
+          },
+        },
+      ],
+    }),
+  ],
+  preview: {
+    select: {
+      classItems: 'classItems',
+      title: 'title',
+    },
+    prepare({classItems, title}) {
+      const itemCount = Array.isArray(classItems) ? classItems.length : 0
+      const itemLabel = itemCount === 1 ? 'class/service' : 'classes/services'
+
+      return {
+        title: title || 'Class Descriptions',
+        subtitle: itemCount ? `${itemCount} ${itemLabel}` : 'Class Descriptions',
+        media: blockPreviewMedia.classDescriptionsBlock,
+      }
+    },
+  },
+})

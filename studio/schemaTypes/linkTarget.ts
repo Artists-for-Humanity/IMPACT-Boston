@@ -10,6 +10,21 @@ type LinkTargetFieldOptions = {
   title?: string
 }
 
+type LinkTargetValue = {
+  _type?: string | null
+  email?: string | null
+  file?: {
+    asset?: {
+      _ref?: string | null
+      url?: string | null
+    } | null
+  } | null
+  internalPath?: string | null
+  openInNewTab?: boolean | null
+  type?: string | null
+  url?: string | null
+}
+
 const isType = (parent: unknown, type: string) =>
   typeof parent === 'object' &&
   parent !== null &&
@@ -33,7 +48,6 @@ export const linkTargetType = defineType({
         list: [...linkTypeOptions],
         layout: 'dropdown',
       },
-      validation: (rule) => rule.required(),
     }),
     defineField({
       name: 'url',
@@ -42,7 +56,7 @@ export const linkTargetType = defineType({
       hidden: ({parent}) => !isType(parent, 'url'),
       validation: (rule) =>
         rule.custom((value, context) =>
-          isType(context.parent, 'url') && !value ? 'Enter a URL.' : true,
+          isType(context.parent, 'url') && value && !isUrl(value) ? 'Enter a valid URL.' : true,
         ),
     }),
     defineField({
@@ -55,9 +69,7 @@ export const linkTargetType = defineType({
         layout: 'dropdown',
       },
       validation: (rule) =>
-        rule.custom((value, context) =>
-          isType(context.parent, 'internal') && !value ? 'Choose an internal page.' : true,
-        ),
+        rule.custom(() => true),
     }),
     defineField({
       name: 'email',
@@ -67,7 +79,7 @@ export const linkTargetType = defineType({
       validation: (rule) =>
         rule.custom((value, context) => {
           if (!isType(context.parent, 'email')) return true
-          if (!value) return 'Enter an email address.'
+          if (!value) return true
 
           return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value) ? true : 'Enter a valid email address.'
         }),
@@ -82,9 +94,7 @@ export const linkTargetType = defineType({
         accept: '.pdf,.doc,.docx,.ppt,.pptx,.xls,.xlsx,.csv,.zip',
       },
       validation: (rule) =>
-        rule.custom((value, context) =>
-          isType(context.parent, 'asset') && !value ? 'Choose or upload an asset.' : true,
-        ),
+        rule.custom(() => true),
     }),
     defineField({
       name: 'openInNewTab',
@@ -137,6 +147,129 @@ export function defineLinkTargetField({
     type: 'linkTarget',
     description,
     hidden,
-    validation: required ? (rule) => rule.required() : undefined,
+    validation: (rule) =>
+      rule.custom((value, context) => {
+        if (isHidden(hidden, context)) {
+          return true
+        }
+
+        return validateLinkTarget(value, required, context.parent, name)
+      }),
   })
+}
+
+function validateLinkTarget(
+  value: unknown,
+  required: boolean,
+  parent: unknown,
+  fieldName: string,
+) {
+  const link = toLinkTargetValue(value)
+  const fallbackHref = getFallbackHref(parent, fieldName)
+
+  if (!link || isBlankLinkTarget(link)) {
+    return required && !fallbackHref ? 'Choose a link.' : true
+  }
+
+  if (!link.type) {
+    return required ? 'Choose a link type.' : true
+  }
+
+  if (link.type === 'url') {
+    if (!link.url) {
+      return required && !fallbackHref ? 'Enter a URL.' : true
+    }
+
+    return isUrl(link.url) ? true : 'Enter a valid URL.'
+  }
+
+  if (link.type === 'internal') {
+    return link.internalPath || !required ? true : 'Choose an internal page.'
+  }
+
+  if (link.type === 'email') {
+    if (!link.email) {
+      return required ? 'Enter an email address.' : true
+    }
+
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(link.email)
+      ? true
+      : 'Enter a valid email address.'
+  }
+
+  if (link.type === 'asset') {
+    return hasFileAsset(link.file) || !required ? true : 'Choose or upload an asset.'
+  }
+
+  return true
+}
+
+function isBlankLinkTarget(value: LinkTargetValue) {
+  return (
+    !value.url?.trim() &&
+    !value.internalPath?.trim() &&
+    !value.email?.trim() &&
+    !hasFileAsset(value.file)
+  )
+}
+
+function hasFileAsset(file: LinkTargetValue['file']) {
+  return Boolean(file?.asset?._ref || file?.asset?.url)
+}
+
+function toLinkTargetValue(value: unknown): LinkTargetValue | null {
+  return typeof value === 'object' && value !== null ? (value as LinkTargetValue) : null
+}
+
+function isUrl(value: string) {
+  try {
+    const url = new URL(value)
+
+    return url.protocol === 'http:' || url.protocol === 'https:'
+  } catch {
+    return false
+  }
+}
+
+function getFallbackHref(parent: unknown, fieldName: string) {
+  if (typeof parent !== 'object' || parent === null) {
+    return ''
+  }
+
+  const parentRecord = parent as Record<string, unknown>
+  const candidateFields = [
+    fieldName.replace(/LinkTarget$/, 'Href'),
+    fieldName.replace(/Target$/, ''),
+    'href',
+    'ctaHref',
+    'ctaLink',
+    'buttonLink',
+    'readMoreLink',
+  ]
+
+  for (const candidateField of candidateFields) {
+    const value = parentRecord[candidateField]
+
+    if (typeof value === 'string' && value.trim()) {
+      return value.trim()
+    }
+  }
+
+  return ''
+}
+
+function isHidden(hidden: LinkTargetFieldOptions['hidden'], context: unknown) {
+  if (!hidden) {
+    return false
+  }
+
+  if (typeof hidden === 'boolean') {
+    return hidden
+  }
+
+  try {
+    return Boolean(hidden(context as never))
+  } catch {
+    return false
+  }
 }

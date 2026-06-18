@@ -21,6 +21,18 @@ const bodyComponents: PortableTextComponents = {
   block: {
     normal: ({ children }) => <p className="p1 lg:col-span-5">{children}</p>,
   },
+  list: {
+    bullet: ({ children }) => (
+      <ul className="list-disc space-y-6 pl-6 lg:col-span-5">{children}</ul>
+    ),
+    number: ({ children }) => (
+      <ol className="list-decimal space-y-4 pl-6 lg:col-span-5">{children}</ol>
+    ),
+  },
+  listItem: {
+    bullet: ({ children }) => <li className="p1">{children}</li>,
+    number: ({ children }) => <li className="p1">{children}</li>,
+  },
   marks: {
     strong: ({ children }) => <strong className="font-bold">{children}</strong>,
     em: ({ children }) => <em>{children}</em>,

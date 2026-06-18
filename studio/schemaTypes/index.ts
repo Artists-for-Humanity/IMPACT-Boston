@@ -4,6 +4,7 @@ import {landingPageType} from './landingPageType'
 import {resourcesPageType} from './resourcesPageType'
 import {linkTargetType} from './linkTarget'
 import {actionPanelBlockType} from './blocks/actionPanelBlock'
+import {classDescriptionsBlockType} from './blocks/classDescriptionsBlock'
 import {contentBlockType} from './blocks/contentBlock'
 import {ctaSectionBlockType} from './blocks/ctaSectionBlock'
 import {doubleContentBlockType} from './blocks/doubleContentBlock'
@@ -33,6 +34,7 @@ export const schemaTypes = [
   doubleContentBlockType,
   tripleContentBlockType,
   listBlockType,
+  classDescriptionsBlockType,
   sideTabsBlockType,
   abuseSurvivorsPageType,
   highlightBannerBlockType,

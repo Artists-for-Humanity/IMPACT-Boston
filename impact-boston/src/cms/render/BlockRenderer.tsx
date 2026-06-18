@@ -2,6 +2,7 @@ import type { CmsPageBlock } from "@/cms/types/blocks";
 import type { CmsBlockFallbacks } from "@/cms/types/page";
 import type { CmsDataAttribute, CmsFieldPath } from "@/cms/visualEditing";
 import ActionPanelBlock from "./blocks/ActionPanelBlock";
+import ClassDescriptionsBlock from "./blocks/ClassDescriptionsBlock";
 import ContentBlock from "./blocks/ContentBlock";
 import CtaSectionBlock from "./blocks/CtaSectionBlock";
 import DoubleContentBlock from "./blocks/DoubleContentBlock";
@@ -91,6 +92,15 @@ export default function BlockRenderer({
     case "listBlock":
       return (
         <ListBlock
+          blockPath={blockPath}
+          dataAttribute={dataAttribute}
+          section={block}
+        />
+      );
+
+    case "classDescriptionsBlock":
+      return (
+        <ClassDescriptionsBlock
           blockPath={blockPath}
           dataAttribute={dataAttribute}
           section={block}

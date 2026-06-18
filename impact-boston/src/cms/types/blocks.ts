@@ -2,6 +2,7 @@ import type { SanityImageSource } from "@sanity/image-url";
 import type { PortableTextBlock } from "next-sanity";
 
 import type { ActionPanelCard } from "@/components/Action/ActionPanel";
+import type { ClassDescriptionItem } from "@/components/ClassDescriptions/ClassDescriptions";
 import type { CtaPanelData } from "@/components/Action/CtaSection";
 import type { DoubleCard } from "@/components/Content/Double";
 import type {
@@ -137,6 +138,15 @@ export type SanityListFields = {
   detailItems?: ListDetailItem[] | null;
 };
 
+export type SanityClassDescriptionsFields = {
+  title?: string | null;
+  description?: string | null;
+  seeAllLinkText?: string | null;
+  seeAllHref?: string | null;
+  seeAllLinkTarget?: CmsLinkTarget | null;
+  classItems?: ClassDescriptionItem[] | null;
+};
+
 export type SanitySideTab = {
   _key?: string | null;
   label?: string | null;
@@ -194,6 +204,11 @@ export type CmsTripleContentBlock = CmsPageBlockBase &
 export type CmsListBlock = CmsPageBlockBase &
   SanityListFields & {
     _type: "listBlock";
+  };
+
+export type CmsClassDescriptionsBlock = CmsPageBlockBase &
+  SanityClassDescriptionsFields & {
+    _type: "classDescriptionsBlock";
   };
 
 export type CmsSideTabsBlock = CmsPageBlockBase & {
@@ -295,6 +310,7 @@ export type CmsPageBlock =
   | CmsDoubleContentBlock
   | CmsTripleContentBlock
   | CmsListBlock
+  | CmsClassDescriptionsBlock
   | CmsSideTabsBlock
   | CmsHighlightBannerBlock
   | CmsHighlightsBlock
