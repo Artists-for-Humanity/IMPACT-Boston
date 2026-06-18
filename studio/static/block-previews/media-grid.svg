@@ -1,0 +1,31 @@
+<svg width="640" height="360" viewBox="0 0 640 360" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="640" height="360" fill="#FFFFFF"/>
+  <!-- Section title -->
+  <rect x="44" y="40" width="200" height="18" rx="3" fill="#311E41"/>
+  <!-- Section description lines -->
+  <rect x="44" y="74" width="260" height="8" rx="3" fill="#7B7281"/>
+  <rect x="44" y="90" width="220" height="8" rx="3" fill="#7B7281"/>
+  <!-- Card 1 -->
+  <rect x="44" y="126" width="168" height="196" rx="4" fill="#FCF9FF" stroke="#E5DDEC"/>
+  <rect x="60" y="142" width="120" height="14" rx="3" fill="#311E41"/>
+  <rect x="60" y="166" width="132" height="8" rx="3" fill="#7B7281"/>
+  <rect x="60" y="182" width="112" height="8" rx="3" fill="#7B7281"/>
+  <rect x="60" y="198" width="124" height="8" rx="3" fill="#7B7281"/>
+  <rect x="60" y="222" width="80" height="8" rx="3" fill="#7B7281"/>
+  <rect x="60" y="290" width="72" height="8" rx="3" fill="#563672"/>
+  <!-- Card 2 -->
+  <rect x="236" y="126" width="168" height="196" rx="4" fill="#FCF9FF" stroke="#E5DDEC"/>
+  <rect x="252" y="142" width="136" height="14" rx="3" fill="#311E41"/>
+  <rect x="252" y="166" width="132" height="8" rx="3" fill="#7B7281"/>
+  <rect x="252" y="182" width="108" height="8" rx="3" fill="#7B7281"/>
+  <rect x="252" y="198" width="128" height="8" rx="3" fill="#7B7281"/>
+  <rect x="252" y="214" width="96" height="8" rx="3" fill="#7B7281"/>
+  <rect x="252" y="290" width="72" height="8" rx="3" fill="#563672"/>
+  <!-- Card 3 -->
+  <rect x="428" y="126" width="168" height="196" rx="4" fill="#FCF9FF" stroke="#E5DDEC"/>
+  <rect x="444" y="142" width="110" height="14" rx="3" fill="#311E41"/>
+  <rect x="444" y="166" width="132" height="8" rx="3" fill="#7B7281"/>
+  <rect x="444" y="182" width="116" height="8" rx="3" fill="#7B7281"/>
+  <rect x="444" y="198" width="104" height="8" rx="3" fill="#7B7281"/>
+  <rect x="444" y="290" width="72" height="8" rx="3" fill="#563672"/>
+</svg>

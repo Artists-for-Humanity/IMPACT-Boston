@@ -246,6 +246,23 @@ export type CmsImageGridBlock = CmsPageBlockBase & {
   backgroundColor?: string | null;
 };
 
+export type CmsMediaGridItem = {
+  _key?: string | null;
+  title?: string | null;
+  description?: string | null;
+  subtext?: string | null;
+  href?: string | null;
+  linkText?: string | null;
+};
+
+export type CmsMediaGridBlock = CmsPageBlockBase & {
+  _type: "mediaGridBlock";
+  title?: string | null;
+  subheader?: string | null;
+  items?: CmsMediaGridItem[] | null;
+  backgroundColor?: string | null;
+};
+
 export type CmsTestimonialsBlock = CmsPageBlockBase & {
   _type: "testimonialsCarouselBlock" | "testimonialsSpotlightBlock";
   authorPrefix?: string | null;
@@ -272,6 +289,7 @@ export type CmsPageBlock =
   | CmsHighlightsBlock
   | CmsTestimonialsBlock
   | CmsContentBlock
-  | CmsImageGridBlock;
+  | CmsImageGridBlock
+  | CmsMediaGridBlock;
 
 export type ResolvedHighlightSlide = HighlightSlide;
