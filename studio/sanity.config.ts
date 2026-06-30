@@ -55,6 +55,10 @@ const mainDocuments = defineDocuments([
     route: '/PeopleWithDisabilities',
     filter: cmsPageFilter('disabilitiesPage'),
   },
+  {
+    route: '/Ability',
+    filter: cmsPageFilter('abilityPage'),
+  }
 ])
 
 export default defineConfig({
