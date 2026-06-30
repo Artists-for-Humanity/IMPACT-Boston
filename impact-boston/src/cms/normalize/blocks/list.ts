@@ -21,6 +21,8 @@ export function resolveListBlock(section: CmsListBlock): ListProps {
     variant,
     title: displayText(section.title) || undefined,
     description: displayText(section.description) || undefined,
+    showToggle: section.showToggle ?? undefined,
+    noPaddingTop: section.noPaddingTop ?? undefined,
     items: listItems?.length ? listItems : undefined,
     detailItems: detailItems?.length ? detailItems : undefined,
   };
@@ -78,10 +80,6 @@ function resolveDetailItem(item: ListDetailItem): ListDetailItem | null {
 
 function displayText(value?: string | null) {
   return hasText(value) ? (value?.trim() ?? "") : "";
-}
-
-function controlText(value?: string | null) {
-  return stegaClean(value)?.trim() ?? "";
 }
 
 function hasText(value?: string | null) {

@@ -134,6 +134,8 @@ export type SanityListFields = {
   variant?: ListVariant | null;
   title?: string | null;
   description?: string | null;
+  showToggle?: boolean | null;
+  noPaddingTop?: boolean | null;
   listItems?: ListItem[] | null;
   detailItems?: ListDetailItem[] | null;
 };

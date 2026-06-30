@@ -1,53 +1,63 @@
 import type {StructureResolver} from 'sanity/structure'
 
-export const singletonTypes = new Set([
-  'aboutImpactPage',
-  'abuseSurvivorsPage',
-  'landingPage',
-  'publicClassesPage',
-  'resourcesPage',
-])
+import {CMS_PAGE_SCHEMA_TYPE_NAMES, CMS_PAGE_TYPE_NAME} from './schemaTypes/cmsPageType'
 
-const aboutPages = [
+type CmsPageListItem = {
+  id: string
+  title: string
+}
+
+export const singletonTypes = new Set(CMS_PAGE_SCHEMA_TYPE_NAMES)
+
+const aboutPages: CmsPageListItem[] = [
   {
     title: 'About Impact',
     id: 'aboutImpactPage',
-    schemaType: 'aboutImpactPage',
   },
   {
     title: 'Board and Staff',
     id: 'boardAndStaff',
-    schemaType: 'landingPage',
   },
   {
     title: 'Resources',
     id: 'resources',
-    schemaType: 'resourcesPage',
   },
   {
     title: 'Abuse Survivors',
     id: 'abuseSurvivorsPage',
-    schemaType: 'abuseSurvivorsPage',
   },
   {
     title: 'Blog',
     id: 'blog',
-    schemaType: 'landingPage',
   },
   {
     title: 'Accessibility',
     id: 'accessibility',
-    schemaType: 'landingPage',
   },
 ]
 
-const programsPages = [
+const programsPages: CmsPageListItem[] = [
   {
     title: 'Public Classes',
     id: 'publicClassesPage',
-    schemaType: 'publicClassesPage',
   },
-] 
+]
+
+function cmsPageListItem(
+  S: Parameters<StructureResolver>[0],
+  page: CmsPageListItem,
+) {
+  return S.listItem()
+    .title(page.title)
+    .id(page.id)
+    .schemaType(CMS_PAGE_TYPE_NAME)
+    .child(
+      S.document()
+        .title(page.title)
+        .schemaType(CMS_PAGE_TYPE_NAME)
+        .documentId(page.id),
+    )
+}
 
 export const structure: StructureResolver = (S) =>
   S.list()
@@ -56,9 +66,12 @@ export const structure: StructureResolver = (S) =>
       S.listItem()
         .title('Landing Page')
         .id('landingPage')
-        .schemaType('landingPage')
+        .schemaType(CMS_PAGE_TYPE_NAME)
         .child(
-          S.document().title('Landing Page').schemaType('landingPage').documentId('landingPage'),
+          S.document()
+            .title('Landing Page')
+            .schemaType(CMS_PAGE_TYPE_NAME)
+            .documentId('landingPage'),
         ),
       S.listItem()
         .title('About Pages')
@@ -66,35 +79,15 @@ export const structure: StructureResolver = (S) =>
         .child(
           S.list()
             .title('About Pages')
-            .items(
-              aboutPages.map((page) =>
-                S.listItem()
-                  .title(page.title)
-                  .id(page.id)
-                  .schemaType(page.schemaType)
-                  .child(
-                    S.document().title(page.title).schemaType(page.schemaType).documentId(page.id),
-                  ),
-              ),
-            ),
+            .items(aboutPages.map((page) => cmsPageListItem(S, page))),
         ),
-        S.listItem()
+      S.listItem()
         .title('Programs Pages')
         .id('programPages')
         .child(
           S.list()
             .title('Programs Pages')
-            .items(
-              programsPages.map((page) =>
-                S.listItem()
-                  .title(page.title)
-                  .id(page.id)
-                  .schemaType(page.schemaType)
-                  .child(
-                    S.document().title(page.title).schemaType(page.schemaType).documentId(page.id),
-                  ),
-              ),
-            ),
+            .items(programsPages.map((page) => cmsPageListItem(S, page))),
         ),
       S.divider(),
       ...S.documentTypeListItems().filter(

@@ -4,6 +4,7 @@ import {visionTool} from '@sanity/vision'
 import {schemaTypes} from './schemaTypes'
 import {defineDocuments, presentationTool} from 'sanity/presentation'
 import {singletonTypes, structure} from './structure'
+import {CMS_PAGE_SCHEMA_TYPE_NAMES} from './schemaTypes/cmsPageType'
 
 declare const process: {
   env: {
@@ -13,38 +14,42 @@ declare const process: {
 
 const previewOrigin = process.env.SANITY_STUDIO_PREVIEW_ORIGIN || 'http://localhost:3000'
 const allowOrigins = Array.from(new Set(['http://localhost:*', previewOrigin]))
+const cmsPageTypeFilter = `[
+  ${CMS_PAGE_SCHEMA_TYPE_NAMES.map((type) => `"${type}"`).join(', ')}
+]`
+const cmsPageFilter = (id: string) => `_id == "${id}" && _type in ${cmsPageTypeFilter}`
 const mainDocuments = defineDocuments([
   {
     route: '/',
-    filter: `_id == "landingPage"`,
+    filter: cmsPageFilter('landingPage'),
   },
   {
     route: '/AboutImpact',
-    filter: `_id == "aboutImpactPage"`,
+    filter: cmsPageFilter('aboutImpactPage'),
   },
   {
     route: ['/Resources', '/resources'],
-    filter: `_id == "resources" && _type == "resourcesPage"`,
+    filter: cmsPageFilter('resources'),
   },
   {
     route: '/Resources/AbuseSurvivors',
-    filter: `_id == "abuseSurvivorsPage" && _type == "abuseSurvivorsPage"`,
+    filter: cmsPageFilter('abuseSurvivorsPage'),
   },
   {
     route: '/BoardAndStaff',
-    filter: `_id == "boardAndStaff"`,
+    filter: cmsPageFilter('boardAndStaff'),
   },
   {
     route: '/Blog',
-    filter: `_id == "blog"`,
+    filter: cmsPageFilter('blog'),
   },
   {
     route: '/Accessibility',
-    filter: `_id == "accessibility"`,
+    filter: cmsPageFilter('accessibility'),
   },
   {
     route: '/PublicClasses',
-    filter: `_id == "publicClassesPage" && _type == "publicClassesPage"`,
+    filter: cmsPageFilter('publicClassesPage'),
   },
 ])
 

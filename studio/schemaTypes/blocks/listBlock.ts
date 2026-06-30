@@ -28,6 +28,21 @@ export const listBlockType = defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
+      name: 'showToggle',
+      title: 'Show Expand/Collapse Control',
+      type: 'boolean',
+      description: 'Shows the "Show all" control for accordion lists.',
+      hidden: ({parent}) => isDetailsVariant(parent),
+      initialValue: true,
+    }),
+    defineField({
+      name: 'noPaddingTop',
+      title: 'Remove Top Padding',
+      type: 'boolean',
+      description: 'Use when the list should sit closer to the block above it.',
+      initialValue: false,
+    }),
+    defineField({
       name: 'title',
       title: 'Title',
       type: 'string',
