@@ -68,6 +68,7 @@ const PAGE_SECTIONS_PROJECTION = `
       subtitleFirst,
       reverse,
       backgroundColor,
+      hideMedia,
       youtubeUrl,
       videoTitle,
       content[] {

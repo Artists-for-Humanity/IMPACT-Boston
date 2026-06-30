@@ -58,6 +58,10 @@ const mainDocuments = defineDocuments([
   {
     route: '/Ability',
     filter: cmsPageFilter('abilityPage'),
+  },
+  {
+    route: '/ASAP',
+    filter: cmsPageFilter('ASAPPage'),
   }
 ])
 

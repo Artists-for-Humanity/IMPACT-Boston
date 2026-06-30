@@ -38,6 +38,7 @@ export type SanityHeroFields = {
   highlight?: string | null;
   highlightColor?: string | null;
   description?: string | null;
+  hideMedia?: boolean | null;
   supportingText?: string | null;
   youtubeUrl?: string | null;
   videoTitle?: string | null;

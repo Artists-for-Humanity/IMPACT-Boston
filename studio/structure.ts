@@ -49,6 +49,10 @@ const programsPages: CmsPageListItem[] = [
     title: 'Ability',
     id: 'abilityPage',
   },
+  {
+    title: 'ASAP',
+    id: 'ASAPPage',
+  }
 ]
 
 function cmsPageListItem(
