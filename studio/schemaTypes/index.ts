@@ -6,6 +6,7 @@ import {cmsPageType, legacyCmsPageTypes} from './cmsPageType'
 
 // blocks
 import {actionPanelBlockType} from './blocks/actionPanelBlock'
+import {articleCalloutBlockType} from './blocks/articleCalloutBlock'
 import {classDescriptionsBlockType} from './blocks/classDescriptionsBlock'
 import {contentBlockType} from './blocks/contentBlock'
 import {ctaSectionBlockType} from './blocks/ctaSectionBlock'
@@ -32,6 +33,7 @@ export const schemaTypes = [
 
   // blocks
   heroBlockType,
+  articleCalloutBlockType,
   contentBlockType,
   actionPanelBlockType,
   ctaSectionBlockType,

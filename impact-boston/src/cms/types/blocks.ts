@@ -2,6 +2,7 @@ import type { SanityImageSource } from "@sanity/image-url";
 import type { PortableTextBlock } from "next-sanity";
 
 import type { ActionPanelCard } from "@/components/Action/ActionPanel";
+import type { ArticleCalloutProps } from "@/components/Content/ArticleCallout";
 import type { ClassDescriptionItem } from "@/components/ClassDescriptions/ClassDescriptions";
 import type { CtaPanelData } from "@/components/Action/CtaSection";
 import type { DoubleCard } from "@/components/Content/Double";
@@ -48,6 +49,16 @@ export type SanityActionPanelFields = {
   title?: string | null;
   subtext?: string | null;
   cards?: ActionPanelCard[] | null;
+};
+
+export type SanityArticleCalloutFields = {
+  articleAuthor?: ArticleCalloutProps["article"]["author"] | null;
+  articleDescription?: ArticleCalloutProps["article"]["description"] | null;
+  articleTitle?: ArticleCalloutProps["article"]["title"] | null;
+  calloutText?: ArticleCalloutProps["calloutText"] | null;
+  href?: string | null;
+  linkText?: ArticleCalloutProps["article"]["linkText"] | null;
+  linkTarget?: CmsLinkTarget | null;
 };
 
 export type SanityCtaSectionFields = {
@@ -188,6 +199,11 @@ export type CmsActionPanelBlock = CmsPageBlockBase &
     _type: "actionPanelBlock";
   };
 
+export type CmsArticleCalloutBlock = CmsPageBlockBase &
+  SanityArticleCalloutFields & {
+    _type: "articleCalloutBlock";
+  };
+
 export type CmsCtaSectionBlock = CmsPageBlockBase &
   SanityCtaSectionFields & {
     _type: "ctaSectionBlock";
@@ -312,6 +328,7 @@ export type CmsTestimonialsBlock = CmsPageBlockBase & {
 export type CmsPageBlock =
   | CmsHeroBlock
   | CmsActionPanelBlock
+  | CmsArticleCalloutBlock
   | CmsCtaSectionBlock
   | CmsSingleContentBlock
   | CmsDoubleContentBlock

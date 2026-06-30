@@ -21,6 +21,7 @@ export function definePageBlocksField() {
         title: 'Hero 2',
         description: 'Uses the Hero2 component from components/Hero.',
       }),
+      defineArrayMember({type: 'articleCalloutBlock'}),
       defineArrayMember({type: 'contentBlock'}),
       defineArrayMember({type: 'doubleContentBlock'}),
       defineArrayMember({type: 'actionPanelBlock'}),
@@ -64,7 +65,7 @@ export function definePageBlocksField() {
           {
             name: 'content',
             title: 'Content',
-            of: ['contentBlock', 'doubleContentBlock', 'actionPanelBlock', 'sideTabsBlock', 'tripleContentBlock', 'imageGridBlock', 'mediaGridBlock'],
+            of: [ 'contentBlock', 'doubleContentBlock', 'actionPanelBlock', 'sideTabsBlock', 'tripleContentBlock', 'imageGridBlock', 'mediaGridBlock'],
           },
           {
             name: 'list',
@@ -79,7 +80,7 @@ export function definePageBlocksField() {
           {
             name: 'highlights',
             title: 'Highlights',
-            of: ['highlightBannerBlock', 'highlightsBlock'],
+            of: ['highlightBannerBlock', 'highlightsBlock','articleCalloutBlock'],
           },
         ],
         views: [

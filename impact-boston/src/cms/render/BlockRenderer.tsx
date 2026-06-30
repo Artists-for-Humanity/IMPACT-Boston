@@ -2,6 +2,7 @@ import type { CmsPageBlock } from "@/cms/types/blocks";
 import type { CmsBlockFallbacks } from "@/cms/types/page";
 import type { CmsDataAttribute, CmsFieldPath } from "@/cms/visualEditing";
 import ActionPanelBlock from "./blocks/ActionPanelBlock";
+import ArticleCalloutBlock from "./blocks/ArticleCalloutBlock";
 import ClassDescriptionsBlock from "./blocks/ClassDescriptionsBlock";
 import ContentBlock from "./blocks/ContentBlock";
 import CtaSectionBlock from "./blocks/CtaSectionBlock";
@@ -49,6 +50,15 @@ export default function BlockRenderer({
           dataAttribute={dataAttribute}
           section={block}
           fallback={fallbacks?.actionPanel}
+        />
+      );
+
+    case "articleCalloutBlock":
+      return (
+        <ArticleCalloutBlock
+          blockPath={blockPath}
+          dataAttribute={dataAttribute}
+          section={block}
         />
       );
 

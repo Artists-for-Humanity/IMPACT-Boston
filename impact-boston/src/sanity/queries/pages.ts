@@ -52,6 +52,15 @@ const PAGE_SECTIONS_PROJECTION = `
       buttonText,
       buttonBgColor,
       buttonTextColor,
+      calloutText,
+      articleTitle,
+      articleDescription,
+      articleAuthor,
+      href,
+      linkText,
+      linkTarget {
+        ${LINK_TARGET_PROJECTION}
+      },
       ctaLabel,
       ctaText,
       ctaHref,

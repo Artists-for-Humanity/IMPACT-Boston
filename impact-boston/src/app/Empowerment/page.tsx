@@ -1,4 +1,4 @@
-import Grid from "@/components/common/Grid";
+import ArticleCallout from "@/components/Content/ArticleCallout";
 import Hero2 from "@/components/Hero/Hero2";
 import SingleContent from "@/components/Content/Single";
 import SideTabs from "@/components/TabsPanel/SideTabs";
@@ -100,7 +100,7 @@ export default function Empowerment() {
       />
 
       <ArticleCallout
-        heading="For more on what differentiates empowerment self-defense from other approaches, read this blog post from Martha Thompson at IMPACT Chicago."
+        calloutText="For more on what differentiates empowerment self-defense from other approaches, read this blog post from Martha Thompson at IMPACT Chicago."
         article={{
           title: "Is it Empowerment Self-Defense?",
           description:
@@ -111,45 +111,5 @@ export default function Empowerment() {
         }}
       />
     </>
-  );
-}
-
-type ArticleCalloutProps = {
-  heading: string;
-  article: {
-    title: string;
-    description: string;
-    author: string;
-    href: string;
-    linkText: string;
-  };
-};
-
-function ArticleCallout({ heading, article }: ArticleCalloutProps) {
-  return (
-    <section className="bg-bg-lavender">
-      <Grid>
-        <div className="col-span-full lg:col-span-6">
-          <h2 className="h3">{heading}</h2>
-        </div>
-
-        <article className="col-span-full border border-line-divider bg-white p-6 md:p-8 lg:col-start-8 lg:col-span-5">
-          <div className="flex min-h-72 flex-col justify-between gap-8">
-            <div className="flex flex-col gap-5">
-              <h3 className="sub-1">{article.title}</h3>
-              <p className="p2 text-grey">{article.description}</p>
-              <p className="p2 text-grey">{article.author}</p>
-            </div>
-
-            <a
-              href={article.href}
-              className="p2 text-secondary underline underline-offset-2"
-            >
-              {article.linkText}
-            </a>
-          </div>
-        </article>
-      </Grid>
-    </section>
   );
 }
