@@ -1,10 +1,24 @@
 import Grid from "../common/Grid";
 import type { CSSProperties } from "react";
 
+export type TripleVariant = "filledCards" | "outlinedLinkCards";
+
 export type TripleCardContent =
-  | { type: "title"; value: string; line2?: string; dataSanity?: string; line2DataSanity?: string }
+  | {
+      type: "title";
+      value: string;
+      line2?: string;
+      dataSanity?: string;
+      line2DataSanity?: string;
+    }
   | { type: "description"; value: string; dataSanity?: string }
   | { type: "tags"; value: string[]; dataSanity?: string };
+
+export type TripleCardLink = {
+  href: string;
+  openInNewTab?: boolean | null;
+  text: string;
+};
 
 export type TripleCard = {
   _key?: string | null;
@@ -12,12 +26,15 @@ export type TripleCard = {
   bgStyle?: CSSProperties;
   className?: string;
   content: TripleCardContent[];
+  link?: TripleCardLink;
   dataAttributes?: {
     backgroundColor?: string;
+    linkText?: string;
   };
 };
 
 export type TripleProps = {
+  variant?: TripleVariant;
   title?: string;
   subtitle?: string;
   intro?: string;
@@ -30,6 +47,7 @@ export type TripleProps = {
 };
 
 export default function Triple({
+  variant = "filledCards",
   title,
   subtitle,
   intro,
@@ -62,14 +80,28 @@ export default function Triple({
 
       <div className="col-span-full grid  gap-y-5 md:gap-y-6  lg:grid-cols-3 lg:gap-x-6">
         {cards.map((card, index) => (
-          <TripleCardRenderer key={index} card={card} />
+          <TripleCardRenderer key={index} card={card} variant={variant} />
         ))}
       </div>
     </Grid>
   );
 }
 
-function TripleCardRenderer({ card }: { card: TripleCard }) {
+function TripleCardRenderer({
+  card,
+  variant,
+}: {
+  card: TripleCard;
+  variant: TripleVariant;
+}) {
+  if (variant === "outlinedLinkCards") {
+    return <OutlinedTripleCard card={card} />;
+  }
+
+  return <FilledTripleCard card={card} />;
+}
+
+function FilledTripleCard({ card }: { card: TripleCard }) {
   const variableBackgroundClass = card.bgStyle
     ? "bg-[var(--triple-card-bg)]"
     : "";
@@ -124,6 +156,68 @@ function TripleCardRenderer({ card }: { card: TripleCard }) {
             return null;
         }
       })}
+    </div>
+  );
+}
+
+function OutlinedTripleCard({ card }: { card: TripleCard }) {
+  return (
+    <div className="flex min-h-[320px] flex-col gap-6 border border-line-divider bg-white p-8 md:min-h-[340px] lg:min-h-[386px]">
+      {card.content.map((item, index) => {
+        switch (item.type) {
+          case "title":
+            return (
+              <p className="sub-1" key={`${item.type}-${index}`}>
+                <span data-sanity={item.dataSanity}>{item.value}</span>
+                {item.line2 ? (
+                  <>
+                    <br />
+                    <span data-sanity={item.line2DataSanity}>
+                      {item.line2}
+                    </span>
+                  </>
+                ) : null}
+              </p>
+            );
+
+          case "description":
+            return (
+              <p
+                className="p2"
+                data-sanity={item.dataSanity}
+                key={`${item.type}-${index}`}
+              >
+                {item.value}
+              </p>
+            );
+
+          case "tags":
+            return item.value.map((tag) => (
+              <p
+                key={tag}
+                className="p2 self-start border border-line-divider px-1.5 lg:p-2"
+                data-sanity={item.dataSanity}
+              >
+                {tag}
+              </p>
+            ));
+
+          default:
+            return null;
+        }
+      })}
+
+      {card.link ? (
+        <a
+          className="link mt-auto self-start text-secondary underline transition hover:text-primary"
+          data-sanity={card.dataAttributes?.linkText}
+          href={card.link.href}
+          rel={card.link.openInNewTab ? "noopener noreferrer" : undefined}
+          target={card.link.openInNewTab ? "_blank" : undefined}
+        >
+          {card.link.text}
+        </a>
+      ) : null}
     </div>
   );
 }

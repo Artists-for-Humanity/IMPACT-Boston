@@ -1,6 +1,7 @@
 import {defineField, defineType} from 'sanity'
 import {TripleCardBackgroundColorInput} from '../../components/TripleCardBackgroundColorInput'
 import {blockPreviewMedia} from './blockPreviews'
+import {defineLinkTargetField} from '../linkTarget'
 
 const defaultCards = [
   {
@@ -30,6 +31,20 @@ export const tripleContentBlockType = defineType({
   title: 'Triple Content',
   type: 'object',
   fields: [
+    defineField({
+      name: 'variant',
+      title: 'Card Style',
+      type: 'string',
+      initialValue: 'filledCards',
+      options: {
+        list: [
+          {title: 'Filled Cards', value: 'filledCards'},
+          {title: 'Outlined Link Cards', value: 'outlinedLinkCards'},
+        ],
+        layout: 'radio',
+      },
+      validation: (rule) => rule.required(),
+    }),
     defineField({
       name: 'title',
       title: 'Title',
@@ -82,8 +97,25 @@ export const tripleContentBlockType = defineType({
               of: [{type: 'string'}],
             }),
             defineField({
+              name: 'linkText',
+              title: 'Link Text',
+              description: 'Shown on outlined link cards when a card link is set.',
+              type: 'string',
+            }),
+            defineField({
+              name: 'href',
+              title: 'Legacy Link URL',
+              type: 'string',
+              hidden: true,
+            }),
+            defineLinkTargetField({
+              title: 'Card Link',
+              description: 'Optional link shown by the Outlined Link Cards style.',
+            }),
+            defineField({
               name: 'backgroundColor',
               title: 'Background Color',
+              description: 'Used by the Filled Cards style.',
               type: 'string',
               initialValue: 'primaryLight',
               components: {
@@ -103,6 +135,7 @@ export const tripleContentBlockType = defineType({
     }),
   ],
   initialValue: {
+    variant: 'filledCards',
     title: 'Our Approach to Self-Defense',
     subtitle: 'Realistic Scenarios, De-escalation Skills & Rebuilding Safety and Confidence',
     cards: defaultCards,

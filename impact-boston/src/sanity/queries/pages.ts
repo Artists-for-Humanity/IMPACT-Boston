@@ -116,6 +116,7 @@ const PAGE_SECTIONS_PROJECTION = `
         titleLine2,
         body,
         href,
+        linkText,
         linkTarget {
           ${LINK_TARGET_PROJECTION}
         },

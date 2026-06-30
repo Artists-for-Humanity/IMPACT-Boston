@@ -120,10 +120,14 @@ export type SanityTripleContentCard = {
   titleLine2?: string | null;
   description?: string | null;
   tags?: string[] | null;
+  href?: string | null;
+  linkText?: string | null;
+  linkTarget?: CmsLinkTarget | null;
   backgroundColor?: string | null;
 };
 
 export type SanityTripleContentFields = {
+  variant?: TripleProps["variant"] | null;
   title?: TripleProps["title"] | null;
   subtitle?: TripleProps["subtitle"] | null;
   intro?: TripleProps["intro"] | null;

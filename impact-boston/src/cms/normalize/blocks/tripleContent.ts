@@ -4,7 +4,9 @@ import type {
   TripleCard,
   TripleCardContent,
   TripleProps,
+  TripleVariant,
 } from "@/components/Content/Triple";
+import { resolveCmsLink } from "@/cms/links";
 import type {
   CmsTripleContentBlock,
   SanityTripleContentCard,
@@ -66,32 +68,46 @@ const DEFAULT_TRIPLE_CONTENT_CARDS: SanityTripleContentCard[] = [
 ];
 
 export const DEFAULT_TRIPLE_CONTENT_BLOCK_FIELDS: TripleProps = {
+  variant: "filledCards",
   title: "Our Approach to Self-Defense",
   subtitle:
     "Realistic Scenarios, De-escalation Skills & Rebuilding Safety and Confidence",
-  cards: DEFAULT_TRIPLE_CONTENT_CARDS.map(resolveTripleContentCard),
+  cards: DEFAULT_TRIPLE_CONTENT_CARDS.map((card) =>
+    resolveTripleContentCard(card, "filledCards"),
+  ),
 };
 
 export function resolveTripleContentBlock(
   section: CmsTripleContentBlock,
 ): TripleProps {
+  const variant = resolveTripleContentVariant(section.variant);
   const cards = section.cards
-    ?.map(resolveTripleContentCard)
+    ?.map((card) => resolveTripleContentCard(card, variant))
     .filter((card): card is TripleCard => card.content.length > 0);
+  const resolvedCards = cards?.length
+    ? cards
+    : DEFAULT_TRIPLE_CONTENT_BLOCK_FIELDS.cards;
 
   return {
+    variant,
     title: section.title?.trim() || DEFAULT_TRIPLE_CONTENT_BLOCK_FIELDS.title,
     subtitle:
-      section.subtitle?.trim() || DEFAULT_TRIPLE_CONTENT_BLOCK_FIELDS.subtitle,
+      section.subtitle?.trim() ||
+      (cards?.length ? undefined : DEFAULT_TRIPLE_CONTENT_BLOCK_FIELDS.subtitle),
     intro: section.intro?.trim() || undefined,
-    cards: cards?.length ? cards : DEFAULT_TRIPLE_CONTENT_BLOCK_FIELDS.cards,
+    cards: resolvedCards,
   };
 }
 
-function resolveTripleContentCard(card: SanityTripleContentCard): TripleCard {
+function resolveTripleContentCard(
+  card: SanityTripleContentCard,
+  variant: TripleVariant,
+): TripleCard {
   const title = card.title?.trim();
   const titleLine2 = card.titleLine2?.trim();
   const description = card.description?.trim();
+  const linkText = card.linkText?.trim();
+  const link = resolveCmsLink(card.linkTarget, card.href);
   const tags =
     card.tags
       ?.map((tag) => tag?.trim())
@@ -112,10 +128,30 @@ function resolveTripleContentCard(card: SanityTripleContentCard): TripleCard {
 
   return {
     _key: card._key,
-    bgClass: resolveTripleCardBackgroundClass(card.backgroundColor),
-    bgStyle: resolveTripleCardBackgroundStyle(card.backgroundColor),
+    bgClass:
+      variant === "filledCards"
+        ? resolveTripleCardBackgroundClass(card.backgroundColor)
+        : undefined,
+    bgStyle:
+      variant === "filledCards"
+        ? resolveTripleCardBackgroundStyle(card.backgroundColor)
+        : undefined,
     content,
+    link:
+      linkText && link.href
+        ? {
+            href: link.href,
+            openInNewTab: link.openInNewTab,
+            text: linkText,
+          }
+        : undefined,
   };
+}
+
+function resolveTripleContentVariant(
+  variant?: string | null,
+): TripleVariant {
+  return variant === "outlinedLinkCards" ? "outlinedLinkCards" : "filledCards";
 }
 
 function resolveTripleCardBackgroundClass(value?: string | null) {
