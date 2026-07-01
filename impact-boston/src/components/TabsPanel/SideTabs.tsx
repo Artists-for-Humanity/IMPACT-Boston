@@ -107,7 +107,7 @@ export default function SideTabs({ tabs }: { tabs: SideTab[] }) {
           ))}
         </div>
 
-        <div className="col-span-full flex flex-col gap-6 lg:col-span-7 lg:gap-16">
+        <div className="col-span-full flex flex-col gap-6 lg:col-span-7">
           <SideTabsContent content={activeContent} />
         </div>
       </Grid>

@@ -67,6 +67,10 @@ const mainDocuments = defineDocuments([
     route: '/PeopleWithDisabilities/AbusePrevention',
     filter: cmsPageFilter('AbusePreventionPage'),
   },
+  {
+    route: '/SchoolsAndColleges',
+    filter: `_id == "schoolsAndCollegesPage" && _type == "schoolsAndCollegesPage"`,
+  },
 ])
 
 export default defineConfig({

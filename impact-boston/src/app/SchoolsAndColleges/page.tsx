@@ -8,9 +8,9 @@ import { getCmsPageBlocks } from "@/cms/normalize/page";
 import { CmsPage } from "@/cms/render/CmsPage";
 import { getCmsPageData } from "@/sanity/pageData";
 
-const SCHOOLS_AND_COLLEGES_PAGE_ID = "schoolsAndColleges";
+const SCHOOLS_AND_COLLEGES_PAGE_ID = "schoolsAndCollegesPage";
 
-export default async function SchoolsAndColleges() {
+export default async function SchoolAndColleges() {
   const { isEnabled } = await draftMode();
   const data = await getCmsPageData(SCHOOLS_AND_COLLEGES_PAGE_ID, isEnabled);
 

@@ -107,7 +107,9 @@ export const heroBlockType = defineType({
               title: 'Color',
               type: 'string',
               options: {
-                list: headlineColorOptions.map(({title, value}) => ({title, value})),
+                list: headlineColorOptions
+                  .filter(({value}) => value === 'secondary' || value === 'black')
+                  .map(({title, value}) => ({title, value})),
                 layout: 'radio',
               },
               components: {
@@ -180,7 +182,10 @@ export const heroBlockType = defineType({
       name: 'ctaLinkTarget',
       title: 'CTA Button Link',
       hidden: ({parent}) => isHero2(parent),
-      required: true,
+      validation: (rule) =>
+        rule.custom((value, context) =>
+          isHero2(context.parent) || value ? true : 'CTA button link is required for Hero 1.',
+        ),
     }),
     defineField({
       name: 'hideMedia',

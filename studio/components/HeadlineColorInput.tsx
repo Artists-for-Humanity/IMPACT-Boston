@@ -30,7 +30,14 @@ export const headlineColorOptions = [
 ] as const
 
 export function HeadlineColorInput(props: StringInputProps) {
-  const {onChange, readOnly, value} = props
+  const {onChange, readOnly, value, schemaType} = props
+
+  const allowedValues = (schemaType.options as {list?: {value: string}[]} | undefined)?.list?.map(
+    (item) => item.value,
+  )
+  const visibleOptions = allowedValues
+    ? headlineColorOptions.filter((option) => allowedValues.includes(option.value))
+    : headlineColorOptions
 
   return (
     <div
@@ -42,7 +49,7 @@ export function HeadlineColorInput(props: StringInputProps) {
         gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
       }}
     >
-      {headlineColorOptions.map((option) => {
+      {visibleOptions.map((option) => {
         const selected =
           value === option.value ||
           ('legacyValues' in option &&

@@ -7,10 +7,12 @@ import {
   type PortableTextComponents,
 } from "next-sanity";
 
+import Directory from "./Directory";
 import ResourceList from "./ResourceList";
 import TrainerList from "./TrainerList";
 import { resolveCmsLink } from "@/cms/links";
 import type {
+  DirectoryItem,
   ResourceListItem,
   SideTab,
   SideTabContentBlock,
@@ -41,7 +43,7 @@ const portableTextComponents: PortableTextComponents = {
   },
   list: {
     bullet: ({ children }) => (
-      <ul className="list-disc space-y-6 pl-6">{children}</ul>
+      <ul className="list-disc pl-6">{children}</ul>
     ),
     number: ({ children }) => (
       <ol className="list-decimal space-y-4 pl-6">{children}</ol>
@@ -181,7 +183,7 @@ function renderStructuredContentBlock(
 
       return (
         <ul
-          className="list-disc space-y-6 pl-6"
+          className="list-disc"
           data-sanity={dataAttributes?.text}
           key={key}
         >
@@ -301,6 +303,79 @@ function renderStructuredContentBlock(
           }
           state={
             "state" in block && block.state ? block.state : "Massachusetts"
+          }
+        />
+      );
+    }
+
+    case "quote": {
+      const quoteText = "quote" in block ? block.quote : "";
+      const attribution = "attribution" in block ? block.attribution : undefined;
+
+      if (!quoteText) return null;
+
+      return (
+        <div
+          key={key}
+          style={{
+            display: "flex",
+            padding: "16px",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            gap: "8px",
+            alignSelf: "stretch",
+            background: "var(--BG-lavender, #FAF6FD)",
+          }}
+        >
+          <p
+            style={{
+              color: "#000",
+              fontFamily: '"IBM Plex Sans"',
+              fontSize: "16px",
+              fontStyle: "italic",
+              fontWeight: 400,
+              lineHeight: "normal",
+            }}
+          >
+            {quoteText}
+          </p>
+          {attribution && (
+            <p
+              style={{
+                color: "var(--Light-Grey-Text, #888)",
+                fontFamily: '"IBM Plex Sans"',
+                fontSize: "16px",
+                fontStyle: "normal",
+                fontWeight: 400,
+                lineHeight: "normal",
+                alignSelf: "flex-start",
+              }}
+            >
+              {attribution}
+            </p>
+          )}
+        </div>
+      );
+    }
+
+    case "directory": {
+      const items =
+        "items" in block && Array.isArray(block.items)
+          ? (block.items as DirectoryItem[])
+          : [];
+
+      if (!items.length) {
+        return null;
+      }
+
+      return (
+        <Directory
+          key={key}
+          title={"title" in block ? block.title : undefined}
+          items={items}
+          previewCount={
+            "previewCount" in block ? block.previewCount : undefined
           }
         />
       );
