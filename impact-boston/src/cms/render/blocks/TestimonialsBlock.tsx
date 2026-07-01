@@ -1,4 +1,5 @@
 import { stegaClean } from "@sanity/client/stega";
+import type { PortableTextBlock } from "next-sanity";
 
 import TestimonialsCarousel from "@/components/Highlights/Testimonials/Carousel";
 import ParticipantSpotlight from "@/components/Highlights/Testimonials/ParticipantSpotlight";
@@ -57,7 +58,7 @@ export default function TestimonialsBlock({
     const spotlightAuthorTitlePortableText = isPortableTextArray(
       section.spotlightAuthorTitle,
     )
-      ? section.spotlightAuthorTitle
+      ? (section.spotlightAuthorTitle as PortableTextBlock[])
       : undefined;
     const spotlightAuthorTitleText =
       typeof section.spotlightAuthorTitle === "string"
