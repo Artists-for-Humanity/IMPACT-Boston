@@ -2,6 +2,7 @@ import {defineField, defineType} from 'sanity'
 import {BackgroundColorInput} from '../../components/BackgroundColorInput'
 import {IconInput, isValidIconValue} from '../../components/IconInput'
 import {blockPreviewMedia} from './blockPreviews'
+import {defaultInternalLinkTarget} from './blockDefaults'
 import {defineLinkTargetField} from '../linkTarget'
 
 export const ctaSectionBlockType = defineType({
@@ -98,6 +99,7 @@ export const ctaSectionBlockType = defineType({
         titleLine2: 'Title',
         description: 'Here you put your subtitle.',
         buttonText: 'Call to Action',
+        linkTarget: {...defaultInternalLinkTarget},
         bgColor: '#e86834',
         icon: 'file-text',
       },
@@ -106,6 +108,7 @@ export const ctaSectionBlockType = defineType({
         titleLine2: 'Title',
         description: 'Here you put your subtitle.',
         buttonText: 'Call to Action',
+        linkTarget: {...defaultInternalLinkTarget},
         bgColor: '#311e41',
         icon: 'dollar-sign',
       },

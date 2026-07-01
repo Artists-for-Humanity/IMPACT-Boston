@@ -1,6 +1,7 @@
 import {defineField, defineType} from 'sanity'
 
 import {defineLinkTargetField} from '../linkTarget'
+import {defaultInternalLinkTarget} from './blockDefaults'
 import {blockPreviewMedia} from './blockPreviews'
 
 export const articleCalloutBlockType = defineType({
@@ -60,6 +61,7 @@ export const articleCalloutBlockType = defineType({
       'A checklist comparing non-empowerment self-defense programs to true empowerment self-defense (ESD) programs across three areas, philosophy, teaching approach, and methodology. Showing what genuine ESD looks like versus programs that fall short.',
     articleAuthor: 'Martha Thompson',
     linkText: 'Read Full Article here.',
+    linkTarget: {...defaultInternalLinkTarget},
   },
   preview: {
     select: {title: 'articleTitle', subtitle: 'calloutText'},

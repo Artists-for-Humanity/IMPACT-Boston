@@ -1,5 +1,6 @@
 import {defineField, defineType} from 'sanity'
 import {blockPreviewMedia} from './blockPreviews'
+import {BLOCK_DEFAULT_COPY, defaultInternalLinkTarget} from './blockDefaults'
 import {defineLinkTargetField} from '../linkTarget'
 
 const isDetailsVariant = (parent: unknown) =>
@@ -189,6 +190,32 @@ export const listBlockType = defineType({
   ],
   initialValue: {
     variant: 'accordion',
+    showToggle: true,
+    noPaddingTop: false,
+    title: BLOCK_DEFAULT_COPY.title,
+    description: BLOCK_DEFAULT_COPY.subtitle,
+    listItems: [
+      {
+        title: BLOCK_DEFAULT_COPY.title,
+        description: BLOCK_DEFAULT_COPY.subtitle,
+        showInfoIcon: false,
+        accordionContent: BLOCK_DEFAULT_COPY.body,
+        defaultOpen: false,
+      },
+    ],
+    detailItems: [
+      {
+        fields: [
+          {
+            label: BLOCK_DEFAULT_COPY.label,
+            value: BLOCK_DEFAULT_COPY.title,
+            linkTarget: {...defaultInternalLinkTarget},
+          },
+        ],
+        descriptionTitle: 'Description',
+        description: BLOCK_DEFAULT_COPY.body,
+      },
+    ],
   },
   preview: {
     select: {title: 'title', subtitle: 'variant'},

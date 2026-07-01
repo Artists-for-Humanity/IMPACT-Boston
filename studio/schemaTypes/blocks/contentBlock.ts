@@ -3,6 +3,7 @@ import {defineArrayMember, defineField, defineType} from 'sanity'
 import {BackgroundColorInput} from '../../components/BackgroundColorInput'
 import {LightBackgroundColorInput} from '../../components/LightBackgroundColorInput'
 import {blockPreviewMedia} from './blockPreviews'
+import {BLOCK_DEFAULT_COPY, defaultPortableTextBlock} from './blockDefaults'
 import {defineLinkTargetField} from '../linkTarget'
 
 export const contentBlockType = defineType({
@@ -157,6 +158,15 @@ export const contentBlockType = defineType({
       initialValue: '',
     }),
   ],
+  initialValue: {
+    title: BLOCK_DEFAULT_COPY.title,
+    subtitle: BLOCK_DEFAULT_COPY.subtitle,
+    body: [defaultPortableTextBlock('normal', BLOCK_DEFAULT_COPY.body)],
+    imageAlt: BLOCK_DEFAULT_COPY.imageAlt,
+    subtitleFirst: false,
+    reverse: false,
+    backgroundColor: '',
+  },
   preview: {
     select: {title: 'title', subtitle: 'subtitle', media: 'image'},
     prepare({title, subtitle, media}) {

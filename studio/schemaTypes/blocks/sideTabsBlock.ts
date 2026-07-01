@@ -1,6 +1,7 @@
 import {defineField, defineType} from 'sanity'
 
 import {blockPreviewMedia} from './blockPreviews'
+import {BLOCK_DEFAULT_COPY, defaultPortableTextBlock} from './blockDefaults'
 import {sideTabsContentTypes} from './sideTabs/content'
 
 export const sideTabsBlockType = defineType({
@@ -40,6 +41,24 @@ export const sideTabsBlockType = defineType({
       ],
     }),
   ],
+  initialValue: {
+    tabs: [
+      {
+        label: 'Tab One',
+        content: [
+          defaultPortableTextBlock('h3', BLOCK_DEFAULT_COPY.title),
+          defaultPortableTextBlock('normal', BLOCK_DEFAULT_COPY.body),
+        ],
+      },
+      {
+        label: 'Tab Two',
+        content: [
+          defaultPortableTextBlock('h3', BLOCK_DEFAULT_COPY.title),
+          defaultPortableTextBlock('normal', BLOCK_DEFAULT_COPY.body),
+        ],
+      },
+    ],
+  },
   preview: {
     prepare() {
       return {title: 'Side Tabs', media: blockPreviewMedia.sideTabsBlock}

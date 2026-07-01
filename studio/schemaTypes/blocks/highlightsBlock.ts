@@ -1,5 +1,6 @@
 import {defineField, defineType} from 'sanity'
 import {blockPreviewMedia} from './blockPreviews'
+import {BLOCK_DEFAULT_COPY, defaultInternalLinkTarget} from './blockDefaults'
 import {defineLinkTargetField} from '../linkTarget'
 
 export const highlightsBlockType = defineType({
@@ -77,6 +78,19 @@ export const highlightsBlockType = defineType({
       ],
     }),
   ],
+  initialValue: {
+    label: BLOCK_DEFAULT_COPY.label,
+    slides: [
+      {
+        heading: BLOCK_DEFAULT_COPY.title,
+        body: BLOCK_DEFAULT_COPY.body,
+        ctaText: BLOCK_DEFAULT_COPY.ctaText,
+        ctaLinkTarget: {...defaultInternalLinkTarget},
+        additionalText: BLOCK_DEFAULT_COPY.subtitle,
+        imageAlt: BLOCK_DEFAULT_COPY.imageAlt,
+      },
+    ],
+  },
   preview: {
     select: {title: 'label'},
     prepare({title}) {
