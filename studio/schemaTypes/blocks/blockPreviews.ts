@@ -8,6 +8,8 @@ export const blockPreviewImageUrls: Record<string, string> = {
   actionPanelBlock: '/static/block-previews/action-grid.svg',
   ctaSectionBlock: '/static/block-previews/cta-section.svg',
   contentBlock: '/static/block-previews/content-block.svg',
+  singleContentBlock: '/static/block-previews/content-block.svg',
+  singleContentMediaBlock: '/static/block-previews/single-content-media.svg',
   imageGridBlock: '/static/block-previews/image-grid.svg',
   mediaGridBlock: '/static/block-previews/media-grid.svg',
   doubleContentBlock: '/static/block-previews/double-content.svg',
@@ -60,6 +62,10 @@ export const blockPreviewMedia = {
   singleContentBlock: createBlockPreviewMedia(
     blockPreviewImageUrls.singleContentBlock,
     'Single content block preview',
+  ),
+  singleContentMediaBlock: createBlockPreviewMedia(
+    blockPreviewImageUrls.singleContentMediaBlock,
+    'Single content with media row block preview',
   ),
   doubleContentBlock: createBlockPreviewMedia(
     blockPreviewImageUrls.doubleContentBlock,

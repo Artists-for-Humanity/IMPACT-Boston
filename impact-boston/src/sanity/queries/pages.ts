@@ -123,6 +123,22 @@ const PAGE_SECTIONS_PROJECTION = `
         text,
         bold
       },
+      mediaCards[] {
+        _key,
+        title,
+        outlet,
+        mediaType,
+        image,
+        imageSrc,
+        imageAlt,
+        videoSrc,
+        videoTitle,
+        scriptSrc,
+        href,
+        linkTarget {
+          ${LINK_TARGET_PROJECTION}
+        }
+      },
       reverse,
       purchaseLinkText,
       purchaseLinkHref,

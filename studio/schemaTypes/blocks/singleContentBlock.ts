@@ -18,6 +18,11 @@ type SingleContentParent = {
   title?: string | null
 }
 
+type SingleContentMediaCardParent = {
+  image?: unknown
+  mediaType?: string | null
+}
+
 const hasImage = (parent: unknown) => {
   const typedParent = parent as SingleContentParent | undefined
 
@@ -38,6 +43,30 @@ const hasLegacyContent = (parent: unknown) => {
   return Boolean(
     hasText(typedParent?.title) || hasText(typedParent?.body) || typedParent?.paragraphs?.length,
   )
+}
+
+const isMediaCardImage = (parent: unknown) => {
+  const typedParent = parent as SingleContentMediaCardParent | undefined
+
+  return !typedParent?.mediaType || typedParent.mediaType === 'image'
+}
+
+const isMediaCardVideo = (parent: unknown) => {
+  const typedParent = parent as SingleContentMediaCardParent | undefined
+
+  return typedParent?.mediaType === 'video'
+}
+
+const isMediaCardEmbed = (parent: unknown) => {
+  const typedParent = parent as SingleContentMediaCardParent | undefined
+
+  return typedParent?.mediaType === 'embed'
+}
+
+const hasMediaCardImage = (parent: unknown) => {
+  const typedParent = parent as SingleContentMediaCardParent | undefined
+
+  return Boolean(typedParent?.image)
 }
 
 const singleContentCtaContent = defineArrayMember({
@@ -293,6 +322,118 @@ export const singleContentBlockType = defineType({
       components: {
         input: LightBackgroundColorInput,
       },
+    }),
+    defineField({
+      name: 'mediaCards',
+      title: 'Bottom Media Cards',
+      description: 'Optional three-card media row shown below the text and image.',
+      type: 'array',
+      validation: (rule) => rule.max(3),
+      of: [
+        {
+          type: 'object',
+          fields: [
+            defineField({
+              name: 'title',
+              title: 'Title',
+              type: 'string',
+              validation: (rule) => rule.required(),
+            }),
+            defineField({
+              name: 'outlet',
+              title: 'Outlet / Source',
+              type: 'string',
+            }),
+            defineField({
+              name: 'mediaType',
+              title: 'Media Type',
+              type: 'string',
+              initialValue: 'image',
+              options: {
+                list: [
+                  {title: 'Image', value: 'image'},
+                  {title: 'Video Embed', value: 'video'},
+                  {title: 'Script Embed', value: 'embed'},
+                ],
+                layout: 'radio',
+              },
+              validation: (rule) => rule.required(),
+            }),
+            defineField({
+              name: 'image',
+              title: 'Thumbnail Image',
+              type: 'image',
+              options: {hotspot: true},
+              hidden: ({parent}) => !isMediaCardImage(parent),
+            }),
+            defineField({
+              name: 'imageSrc',
+              title: 'Legacy Thumbnail Image URL',
+              type: 'string',
+              hidden: true,
+            }),
+            defineField({
+              name: 'imageAlt',
+              title: 'Thumbnail Alt Text',
+              type: 'string',
+              hidden: ({parent}) => !isMediaCardImage(parent) || !hasMediaCardImage(parent),
+              validation: (rule) =>
+                rule.custom((value, context) =>
+                  isMediaCardImage(context.parent) && hasMediaCardImage(context.parent) && !value
+                    ? 'Image alt text is required when an image is used.'
+                    : true,
+                ),
+            }),
+            defineField({
+              name: 'videoSrc',
+              title: 'Video Embed URL',
+              type: 'url',
+              description: 'Use a YouTube, Vimeo, or other embeddable iframe URL.',
+              hidden: ({parent}) => !isMediaCardVideo(parent),
+              validation: (rule) =>
+                rule.custom((value, context) =>
+                  isMediaCardVideo(context.parent) && !value ? 'Add a video embed URL.' : true,
+                ),
+            }),
+            defineField({
+              name: 'videoTitle',
+              title: 'Video Title',
+              type: 'string',
+              hidden: ({parent}) => !isMediaCardVideo(parent),
+            }),
+            defineField({
+              name: 'scriptSrc',
+              title: 'Script Embed URL',
+              type: 'url',
+              hidden: ({parent}) => !isMediaCardEmbed(parent),
+              validation: (rule) =>
+                rule.custom((value, context) =>
+                  isMediaCardEmbed(context.parent) && !value ? 'Add a script embed URL.' : true,
+                ),
+            }),
+            defineField({
+              name: 'href',
+              title: 'Legacy Link URL',
+              type: 'string',
+              hidden: true,
+            }),
+            defineLinkTargetField({
+              title: 'Card Link',
+              description: 'Optional. Used when the card should link to the source.',
+            }),
+          ],
+          preview: {
+            select: {title: 'title', subtitle: 'outlet', media: 'image'},
+            prepare({title, subtitle, media}) {
+              return {
+                title: title || 'Media Card',
+                subtitle,
+                media,
+              }
+            },
+          },
+        },
+      ],
     }),
   ],
   initialValue: {

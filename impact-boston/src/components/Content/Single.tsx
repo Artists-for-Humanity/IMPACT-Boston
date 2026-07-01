@@ -14,27 +14,41 @@ export interface SingleContentParagraph {
   };
 }
 
-interface ThumbnailImage {
+type ThumbnailDataAttributes = {
+  image?: string;
+  outlet?: string;
+  title?: string;
+};
+
+type ThumbnailBase = {
+  href?: string;
+  openInNewTab?: boolean;
+  outlet?: string;
+  title: string;
+  dataAttributes?: ThumbnailDataAttributes;
+};
+
+interface ThumbnailImage extends ThumbnailBase {
   type: "image";
-  label: string;
   imageSrc: string;
   imageAlt: string;
 }
 
-interface ThumbnailVideo {
+interface ThumbnailVideo extends ThumbnailBase {
   type: "video";
-  label: string;
   videoSrc: string;
-  title: string;
+  videoTitle?: string;
 }
 
-interface ThumbnailEmbed {
+interface ThumbnailEmbed extends ThumbnailBase {
   type: "embed";
-  label: string;
   scriptSrc: string;
 }
 
-type Thumbnail = ThumbnailImage | ThumbnailVideo | ThumbnailEmbed;
+export type SingleContentThumbnail =
+  | ThumbnailImage
+  | ThumbnailVideo
+  | ThumbnailEmbed;
 
 type SingleContentButton = {
   href: string;
@@ -64,7 +78,7 @@ export interface SingleContentProps {
   subtitleClassName?: string;
   backgroundColor?: string;
   gridClassName?: string;
-  thumbnails?: Thumbnail[];
+  thumbnails?: SingleContentThumbnail[];
   dataAttributes?: {
     body?: string;
     buttonText?: string;
@@ -74,6 +88,7 @@ export interface SingleContentProps {
     paragraphs?: Array<{ text?: string } | undefined>;
     purchaseLinkText?: string;
     subtitle?: string;
+    thumbnails?: Array<ThumbnailDataAttributes | undefined>;
     title?: string;
   };
 }
@@ -110,9 +125,7 @@ export default function SingleContent({
     : "col-span-full not-last:lg:col-span-5";
 
   const media = showImagePlaceholder ? (
-    <div
-      className="relative h-[400px] w-full overflow-hidden lg:flex-1 lg:min-h-0"
-    >
+    <div className="relative h-[400px] w-full overflow-hidden lg:flex-1 lg:min-h-0">
       <Image
         src={PLACEHOLDER_IMAGE_SRC}
         alt={imageAlt ?? `${title} placeholder image`}
@@ -224,7 +237,9 @@ export default function SingleContent({
               <Link
                 href={purchaseLink.href}
                 target={purchaseLink.openInNewTab ? "_blank" : undefined}
-                rel={purchaseLink.openInNewTab ? "noopener noreferrer" : undefined}
+                rel={
+                  purchaseLink.openInNewTab ? "noopener noreferrer" : undefined
+                }
                 className="p1-bold underline lg:col-span-5"
                 data-sanity={dataAttributes?.purchaseLinkText}
               >
@@ -285,38 +300,112 @@ export default function SingleContent({
           </div>
         )}
 
-        {thumbnails &&
-          thumbnails.map((thumb, idx) => (
-            <div key={idx} className="col-span-4 flex flex-col gap-2">
-              <p className="p1-bold text-left text-grey">{thumb.label}</p>
-              {thumb.type === "image" ? (
-                <Image
-                  src={thumb.imageSrc}
-                  width={1000}
-                  height={1000}
-                  alt={thumb.imageAlt}
-                  className="w-full object-cover"
-                  style={{ height: "210px", objectFit: "cover" }}
-                />
-              ) : thumb.type === "embed" ? (
-                <div className="relative w-full" style={{ height: "210px" }}>
-                  <ScriptEmbed scriptSrc={thumb.scriptSrc} />
-                </div>
-              ) : (
-                <div className="relative w-full" style={{ height: "210px" }}>
-                  <iframe
-                    src={thumb.videoSrc}
-                    title={thumb.title}
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen; clipboard-write; web-share"
-                    referrerPolicy="strict-origin-when-cross-origin"
-                    allowFullScreen
-                    className="absolute inset-0 w-full h-full"
-                  />
-                </div>
-              )}
+        {thumbnails?.map((thumb, idx) => {
+          const resolvedThumb = {
+            ...thumb,
+            dataAttributes:
+              thumb.dataAttributes ?? dataAttributes?.thumbnails?.[idx],
+          };
+
+          return (
+            <div
+              key={idx}
+              className="col-span-full flex h-full flex-col gap-2 self-stretch md:col-span-4 lg:col-span-4"
+            >
+              <ThumbnailHeading thumb={resolvedThumb} />
+              <ThumbnailMedia thumb={resolvedThumb} />
             </div>
-          ))}
+          );
+        })}
       </Grid>
     </div>
+  );
+}
+
+function ThumbnailHeading({ thumb }: { thumb: SingleContentThumbnail }) {
+  const heading = (
+    <div>
+      <p
+        className="p1-bold text-left text-black"
+        data-sanity={thumb.dataAttributes?.title}
+      >
+        {thumb.title}
+      </p>
+      {thumb.outlet ? (
+        <p
+          className="p1-bold text-left text-light-grey-text"
+          data-sanity={thumb.dataAttributes?.outlet}
+        >
+          {thumb.outlet}
+        </p>
+      ) : null}
+    </div>
+  );
+
+  if (!thumb.href) {
+    return heading;
+  }
+
+  return (
+    <Link
+      href={thumb.href}
+      target={thumb.openInNewTab ? "_blank" : undefined}
+      rel={thumb.openInNewTab ? "noopener noreferrer" : undefined}
+      className="transition hover:opacity-80"
+    >
+      {heading}
+    </Link>
+  );
+}
+
+function ThumbnailMedia({ thumb }: { thumb: SingleContentThumbnail }) {
+  if (thumb.type === "embed") {
+    return (
+      <div className="relative mt-auto w-full" style={{ height: "210px" }}>
+        <ScriptEmbed scriptSrc={thumb.scriptSrc} />
+      </div>
+    );
+  }
+
+  if (thumb.type === "video") {
+    return (
+      <div className="relative mt-auto w-full" style={{ height: "210px" }}>
+        <iframe
+          src={thumb.videoSrc}
+          title={thumb.videoTitle ?? thumb.title}
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen; clipboard-write; web-share"
+          referrerPolicy="strict-origin-when-cross-origin"
+          allowFullScreen
+          className="absolute inset-0 h-full w-full"
+        />
+      </div>
+    );
+  }
+
+  const image = (
+    <Image
+      src={thumb.imageSrc}
+      width={1000}
+      height={1000}
+      alt={thumb.imageAlt}
+      data-sanity={thumb.dataAttributes?.image}
+      className="w-full object-cover"
+      style={{ height: "210px", objectFit: "cover" }}
+    />
+  );
+
+  if (!thumb.href) {
+    return <div className="mt-auto">{image}</div>;
+  }
+
+  return (
+    <Link
+      href={thumb.href}
+      target={thumb.openInNewTab ? "_blank" : undefined}
+      rel={thumb.openInNewTab ? "noopener noreferrer" : undefined}
+      className="mt-auto block transition hover:opacity-80"
+    >
+      {image}
+    </Link>
   );
 }
