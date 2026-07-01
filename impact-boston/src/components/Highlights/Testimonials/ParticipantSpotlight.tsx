@@ -1,3 +1,5 @@
+import type { PortableTextBlock } from "next-sanity";
+import { PortableText, type PortableTextComponents } from "next-sanity";
 import Grid from "../../../components/common/Grid";
 
 interface TestimonialProps {
@@ -6,6 +8,7 @@ interface TestimonialProps {
   quote: string;
   author?: string;
   authorTitle?: string;
+  authorTitlePortableText?: PortableTextBlock[];
   backgroundColor?: string;
   cardClassName?: string;
   contentClassName?: string;
@@ -26,6 +29,7 @@ export default function Testimonial({
   quote,
   author,
   authorTitle,
+  authorTitlePortableText,
   backgroundColor,
   cardClassName,
   contentClassName,
@@ -96,7 +100,14 @@ export default function Testimonial({
                     {author}
                   </p>
                 ) : null}
-                {authorTitle ? (
+                {authorTitlePortableText?.length ? (
+                  <div className="p2" data-sanity={dataAttributes?.authorTitle}>
+                    <PortableText
+                      value={authorTitlePortableText}
+                      components={authorTitleComponents}
+                    />
+                  </div>
+                ) : authorTitle ? (
                   <p className="p2" data-sanity={dataAttributes?.authorTitle}>
                     {authorTitle}
                   </p>
@@ -109,3 +120,13 @@ export default function Testimonial({
     </div>
   );
 }
+
+const authorTitleComponents: PortableTextComponents = {
+  block: {
+    normal: ({ children }) => <p className="p2">{children}</p>,
+  },
+  marks: {
+    strong: ({ children }) => <strong className="font-bold">{children}</strong>,
+    em: ({ children }) => <em>{children}</em>,
+  },
+};

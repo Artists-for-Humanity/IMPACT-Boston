@@ -3,12 +3,22 @@ import {defineField, defineType} from 'sanity'
 import {blockPreviewMedia} from './blockPreviews'
 import {BLOCK_DEFAULT_COPY, defaultPortableTextBlock} from './blockDefaults'
 import {sideTabsContentTypes} from './sideTabs/content'
+import {LightBackgroundColorInput} from '../../components/LightBackgroundColorInput'
 
 export const sideTabsBlockType = defineType({
   name: 'sideTabsBlock',
   title: 'Side Tabs',
   type: 'object',
   fields: [
+    defineField({
+      name: 'backgroundColor',
+      title: 'Background Color',
+      type: 'string',
+      components: {
+        input: LightBackgroundColorInput,
+      },
+      initialValue: '',
+    }),
     defineField({
       name: 'tabs',
       title: 'Tabs',

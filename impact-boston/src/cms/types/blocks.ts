@@ -236,6 +236,7 @@ export type CmsClassDescriptionsBlock = CmsPageBlockBase &
 
 export type CmsSideTabsBlock = CmsPageBlockBase & {
   _type: "sideTabsBlock";
+  backgroundColor?: string | null;
   tabs?: SanitySideTab[] | null;
 };
 
@@ -321,7 +322,7 @@ export type CmsTestimonialsBlock = CmsPageBlockBase & {
   subtext?: string | null;
   spotlightQuote?: string | null;
   spotlightAuthor?: string | null;
-  spotlightAuthorTitle?: string | null;
+  spotlightAuthorTitle?: PortableTextBlock[] | string | null;
   testimonials?: Testimonial[] | null;
 };
 
