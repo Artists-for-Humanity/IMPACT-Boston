@@ -15,6 +15,7 @@ export const ROUTES = {
   PEOPLE_WITH_DISABILITIES: "/PeopleWithDisabilities",
   PEOPLE_WITH_DISABILITIES_ABILITY: "/PeopleWithDisabilities/Ability",
   PEOPLE_WITH_DISABILITIES_ASAP: "/PeopleWithDisabilities/ASAP",
+  PEOPLE_WITH_DISABILITIES_ABUSE_PREVENTION: "/PeopleWithDisabilities/AbusePrevention",
   DE_ESCALATION: "/De-escalation",
   COMMUNITY_ORGANIZATIONS: "/CommunityOrganizations",
   WORKPLACE_PROGRAMS: "/WorkplacePrograms",
