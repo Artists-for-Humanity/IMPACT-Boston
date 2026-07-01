@@ -1,4 +1,5 @@
 import {columnsContent} from './columns'
+import {directoryContent} from './directory'
 import {dividerContent} from './divider'
 import {sideTabsLinkContent} from './link'
 import {portableTextContent} from './portableText'
@@ -9,6 +10,7 @@ import {trainerListContent} from './trainerList'
 export const sideTabsContentTypes = [
   portableTextContent,
   columnsContent,
+  directoryContent,
   dividerContent,
   quoteContent,
   resourceListContent,

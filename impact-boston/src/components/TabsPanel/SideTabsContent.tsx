@@ -7,10 +7,12 @@ import {
   type PortableTextComponents,
 } from "next-sanity";
 
+import Directory from "./Directory";
 import ResourceList from "./ResourceList";
 import TrainerList from "./TrainerList";
 import { resolveCmsLink } from "@/cms/links";
 import type {
+  DirectoryItem,
   ResourceListItem,
   SideTab,
   SideTabContentBlock,
@@ -354,6 +356,28 @@ function renderStructuredContentBlock(
             </p>
           )}
         </div>
+      );
+    }
+
+    case "directory": {
+      const items =
+        "items" in block && Array.isArray(block.items)
+          ? (block.items as DirectoryItem[])
+          : [];
+
+      if (!items.length) {
+        return null;
+      }
+
+      return (
+        <Directory
+          key={key}
+          title={"title" in block ? block.title : undefined}
+          items={items}
+          previewCount={
+            "previewCount" in block ? block.previewCount : undefined
+          }
+        />
       );
     }
 
