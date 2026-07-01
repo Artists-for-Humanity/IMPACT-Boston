@@ -5,6 +5,7 @@ import {defineLinkTargetField} from '../linkTarget'
 
 type HeroBlockParent = {
   _type?: string
+  hideMedia?: boolean | null
   image?: unknown
   youtubeUrl?: string | null
 }
@@ -21,6 +22,12 @@ const hasYouTubeUrl = (parent: unknown) => {
 }
 
 const hasImage = (value: unknown) => Boolean(value)
+
+const hidesMedia = (parent: unknown) => {
+  const typedParent = parent as HeroBlockParent | undefined
+
+  return Boolean(typedParent?.hideMedia)
+}
 
 function isYouTubeUrl(value?: string | null) {
   if (!value) return true
@@ -176,11 +183,19 @@ export const heroBlockType = defineType({
       required: true,
     }),
     defineField({
+      name: 'hideMedia',
+      title: 'No Hero Image or Video',
+      type: 'boolean',
+      description: 'Use Hero 2 without a media area.',
+      hidden: ({parent}) => !isHero2(parent),
+      initialValue: false,
+    }),
+    defineField({
       name: 'youtubeUrl',
       title: 'YouTube URL',
       type: 'url',
       description: 'Optional. Paste a YouTube watch, share, shorts, or embed URL.',
-      hidden: ({parent}) => !isHero2(parent),
+      hidden: ({parent}) => !isHero2(parent) || hidesMedia(parent),
       validation: (rule) =>
         rule.custom((value) => (isYouTubeUrl(value) ? true : 'Use a valid YouTube URL.')),
     }),
@@ -189,21 +204,27 @@ export const heroBlockType = defineType({
       title: 'Video Title',
       type: 'string',
       description: 'Optional accessible title for the embedded YouTube video.',
-      hidden: ({parent}) => !isHero2(parent),
+      hidden: ({parent}) => !isHero2(parent) || hidesMedia(parent),
     }),
     defineField({
       name: 'image',
       title: 'Hero Image',
       type: 'image',
       options: {hotspot: true},
+      hidden: ({parent}) => isHero2(parent) && hidesMedia(parent),
       validation: (rule) =>
         rule.custom((value, context) => {
           if (!isHero2(context.parent) && !hasImage(value)) {
             return 'Hero image is required for Hero 1.'
           }
 
-          if (isHero2(context.parent) && !hasImage(value) && !hasYouTubeUrl(context.parent)) {
-            return 'Add a hero image or a YouTube URL.'
+          if (
+            isHero2(context.parent) &&
+            !hidesMedia(context.parent) &&
+            !hasImage(value) &&
+            !hasYouTubeUrl(context.parent)
+          ) {
+            return 'Add a hero image, a YouTube URL, or choose "No Hero Image or Video."'
           }
 
           return true
@@ -213,9 +234,14 @@ export const heroBlockType = defineType({
       name: 'imageAlt',
       title: 'Image Alt Text',
       type: 'string',
+      hidden: ({parent}) => isHero2(parent) && (hidesMedia(parent) || !hasImage(parent?.image)),
       validation: (rule) =>
         rule.custom((value, context) => {
           const parent = context.parent as HeroBlockParent | undefined
+
+          if (isHero2(parent) && hidesMedia(parent)) {
+            return true
+          }
 
           if (!isHero2(parent) || hasImage(parent?.image)) {
             return value ? true : 'Image alt text is required when an image is used.'

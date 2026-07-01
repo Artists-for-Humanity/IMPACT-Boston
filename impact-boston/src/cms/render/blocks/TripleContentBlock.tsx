@@ -68,6 +68,10 @@ export default function TripleContentBlock({
               dataAttribute,
               extendPath(cardPath, "backgroundColor"),
             ),
+            linkText: getFieldDataAttribute(
+              dataAttribute,
+              extendPath(cardPath, "linkText"),
+            ),
           },
         };
       })}

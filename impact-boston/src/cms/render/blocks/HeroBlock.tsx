@@ -65,6 +65,7 @@ export default function HeroBlock({
   const imageSrc = resolveHeroImageSrc(section.image, fallback?.imageSrc);
 
   if (section._type === "hero2Block") {
+    const hideMedia = Boolean(section.hideMedia);
     const legacyTitle = section.title?.trim();
     const legacyHighlight = section.highlight?.trim();
     const shouldUseHeadlineParts =
@@ -72,9 +73,12 @@ export default function HeroBlock({
     const titleText = shouldUseHeadlineParts
       ? getPlainHeadlineText(headlineParts)
       : [legacyTitle, legacyHighlight].filter(Boolean).join(" ") || "Title";
-    const youtubeUrl = section.youtubeUrl?.trim() || undefined;
+    const youtubeUrl = hideMedia
+      ? undefined
+      : section.youtubeUrl?.trim() || undefined;
+    const hero2ImageSrc = hideMedia ? undefined : imageSrc;
 
-    if (!imageSrc && !youtubeUrl) {
+    if (!hideMedia && !hero2ImageSrc && !youtubeUrl) {
       return null;
     }
 
@@ -108,7 +112,7 @@ export default function HeroBlock({
             extendPath(blockPath, "supportingText"),
           ),
         }}
-        imageSrc={imageSrc}
+        imageSrc={hero2ImageSrc}
         imageAlt={imageAlt}
         youtubeUrl={youtubeUrl}
         videoTitle={section.videoTitle ?? undefined}

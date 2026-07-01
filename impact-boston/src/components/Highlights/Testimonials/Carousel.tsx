@@ -46,8 +46,8 @@ export default function TestimonialsCarousel({
   authorPrefix = "- ",
   backgroundColor = '',
   className = '',
-  headingLevel,
-  headingClassName,
+  headingLevel = 'h2',
+  headingClassName = "h2 text-[#000] text-center md:text-center lg:text-left",
   dataAttributes,
 }: CarouselProps) {
   const testimonialItems = testimonials.filter(
@@ -68,6 +68,8 @@ export default function TestimonialsCarousel({
       testimonialItems={testimonialItems}
       backgroundColor={backgroundColor}
       className={className}
+      headingLevel={headingLevel}
+      headingClassName={headingClassName}
     />
   );
 }
@@ -80,6 +82,8 @@ type TestimonialsCarouselTrackProps = {
   testimonialItems: Testimonial[];
   backgroundColor?: string;
   className?: string;
+  headingLevel: HeadingTag;
+  headingClassName: string;
   dataAttributes?: {
     heading?: string;
     subheading?: string;
@@ -94,6 +98,8 @@ function TestimonialsCarouselTrack({
   testimonialItems,
   backgroundColor = '',
   className = '',
+  headingLevel,
+  headingClassName,
   dataAttributes,
 }: TestimonialsCarouselTrackProps) {
   const [currentIndex, setCurrentIndex] = useState(testimonialItems.length);
@@ -112,6 +118,7 @@ function TestimonialsCarouselTrack({
     ? { backgroundColor }
     : undefined;
   const backgroundClassName = backgroundStyle ? "" : backgroundColor;
+  const Heading = headingLevel;
 
   // Detect screen size
   useEffect(() => {
@@ -179,12 +186,12 @@ function TestimonialsCarouselTrack({
             {/* Left - Heading and Subtext */}
             <div className="col-span-4 md:col-span-8 lg:col-span-6 flex flex-col gap-4 lg:gap-2 md:items-center lg:items-start">
               {heading ? (
-                <h2
-                  className="h2 text-[#000] text-center md:text-center lg:text-left"
+                <Heading
+                  className={headingClassName}
                   data-sanity={dataAttributes?.heading}
                 >
                   {heading}
-                </h2>
+                </Heading>
               ) : null}
               {subheading ? (
                 <p

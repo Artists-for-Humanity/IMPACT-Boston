@@ -2,6 +2,7 @@ import {defineField, defineType} from 'sanity'
 import {BackgroundColorInput} from '../../components/BackgroundColorInput'
 import {IconInput, isValidIconValue} from '../../components/IconInput'
 import {blockPreviewMedia} from './blockPreviews'
+import {BLOCK_DEFAULT_COPY, defaultInternalLinkTarget} from './blockDefaults'
 import {defineLinkTargetField} from '../linkTarget'
 
 export const actionPanelBlockType = defineType({
@@ -88,6 +89,33 @@ export const actionPanelBlockType = defineType({
       ],
     }),
   ],
+  initialValue: {
+    title: BLOCK_DEFAULT_COPY.title,
+    subtext: BLOCK_DEFAULT_COPY.subtitle,
+    cards: [
+      {
+        title: BLOCK_DEFAULT_COPY.title,
+        body: BLOCK_DEFAULT_COPY.cardBody,
+        linkTarget: {...defaultInternalLinkTarget},
+        bgColor: '#e86834',
+        icon: 'handshake',
+      },
+      {
+        title: BLOCK_DEFAULT_COPY.title,
+        body: BLOCK_DEFAULT_COPY.cardBody,
+        linkTarget: {...defaultInternalLinkTarget},
+        bgColor: '#563672',
+        icon: 'user',
+      },
+      {
+        title: BLOCK_DEFAULT_COPY.title,
+        body: BLOCK_DEFAULT_COPY.cardBody,
+        linkTarget: {...defaultInternalLinkTarget},
+        bgColor: '#311e41',
+        icon: 'dollar-sign',
+      },
+    ],
+  },
   preview: {
     select: {title: 'title'},
     prepare({title}) {

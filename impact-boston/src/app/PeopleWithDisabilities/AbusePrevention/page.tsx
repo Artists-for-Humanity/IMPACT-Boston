@@ -8,11 +8,11 @@ import { getCmsPageBlocks } from "@/cms/normalize/page";
 import { CmsPage } from "@/cms/render/CmsPage";
 import { getCmsPageData } from "@/sanity/pageData";
 
-const DE_ESCALATION_PAGE_ID = "deEscalation";
+const ABUSE_PREVENTION_PAGE_ID = "AbusePreventionPage";
 
-export default async function DeEscalation() {
+export default async function AbusePrevention() {
   const { isEnabled } = await draftMode();
-  const data = await getCmsPageData(DE_ESCALATION_PAGE_ID, isEnabled);
+  const data = await getCmsPageData(ABUSE_PREVENTION_PAGE_ID, isEnabled);
 
   return (
     <CmsPage

@@ -1,5 +1,6 @@
 import {defineField, defineType} from 'sanity'
 import {blockPreviewMedia} from './blockPreviews'
+import {BLOCK_DEFAULT_COPY, defaultInternalLinkTarget} from './blockDefaults'
 import {defineLinkTargetField} from '../linkTarget'
 
 export const classDescriptionsBlockType = defineType({
@@ -106,6 +107,24 @@ export const classDescriptionsBlockType = defineType({
       ],
     }),
   ],
+  initialValue: {
+    title: BLOCK_DEFAULT_COPY.title,
+    description: BLOCK_DEFAULT_COPY.subtitle,
+    seeAllLinkText: BLOCK_DEFAULT_COPY.ctaText,
+    seeAllLinkTarget: {...defaultInternalLinkTarget},
+    classItems: [
+      {
+        name: BLOCK_DEFAULT_COPY.title,
+        summary: BLOCK_DEFAULT_COPY.subtitle,
+        cost: BLOCK_DEFAULT_COPY.subtitle,
+        dateTime: BLOCK_DEFAULT_COPY.subtitle,
+        location: BLOCK_DEFAULT_COPY.subtitle,
+        linkText: BLOCK_DEFAULT_COPY.ctaText,
+        linkTarget: {...defaultInternalLinkTarget},
+        description: BLOCK_DEFAULT_COPY.body,
+      },
+    ],
+  },
   preview: {
     select: {
       classItems: 'classItems',

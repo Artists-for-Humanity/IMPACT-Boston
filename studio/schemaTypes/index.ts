@@ -1,32 +1,41 @@
-import {aboutImpactPageType} from './aboutImpactPageType'
-import {abuseSurvivorsPageType} from './abuseSurvivorsPageType'
-import {landingPageType} from './landingPageType'
-import {resourcesPageType} from './resourcesPageType'
+// shared schema objects
 import {linkTargetType} from './linkTarget'
+
+// page schemas
+import {cmsPageType, legacyCmsPageTypes} from './cmsPageType'
+
+// blocks
 import {actionPanelBlockType} from './blocks/actionPanelBlock'
+import {articleCalloutBlockType} from './blocks/articleCalloutBlock'
 import {classDescriptionsBlockType} from './blocks/classDescriptionsBlock'
 import {contentBlockType} from './blocks/contentBlock'
 import {ctaSectionBlockType} from './blocks/ctaSectionBlock'
 import {doubleContentBlockType} from './blocks/doubleContentBlock'
 import {heroBlockType} from './blocks/heroBlock'
-import {imageGridBlockType} from './blocks/imageGridBlock'
-import {mediaGridBlockType} from './blocks/mediaGridBlock'
+import {hero3BlockType} from './blocks/hero3Block'
 import {highlightBannerBlockType} from './blocks/highlightBannerBlock'
 import {highlightsBlockType} from './blocks/highlightsBlock'
+import {imageGridBlockType} from './blocks/imageGridBlock'
 import {listBlockType} from './blocks/listBlock'
-import {singleContentBlockType} from './blocks/singleContentBlock'
+import {mediaGridBlockType} from './blocks/mediaGridBlock'
 import {sideTabsBlockType} from './blocks/sideTabsBlock'
+import {singleContentBlockType} from './blocks/singleContentBlock'
 import {testimonialsBlockType} from './blocks/testimonialsBlock'
 import {tripleContentBlockType} from './blocks/tripleContentBlock'
-//program pages
-import {publicClassesPageType} from './publicClassesPageType'
 
 export const schemaTypes = [
-  aboutImpactPageType,
-  landingPageType,
-  resourcesPageType,
+  // shared schema objects
   linkTargetType,
+
+  // page schemas
+  cmsPageType,
+  // Legacy aliases keep existing Sanity documents editable while content migrates to cmsPage.
+  ...legacyCmsPageTypes,
+
+  // blocks
   heroBlockType,
+  hero3BlockType,
+  articleCalloutBlockType,
   contentBlockType,
   actionPanelBlockType,
   ctaSectionBlockType,
@@ -36,12 +45,9 @@ export const schemaTypes = [
   listBlockType,
   classDescriptionsBlockType,
   sideTabsBlockType,
-  abuseSurvivorsPageType,
   highlightBannerBlockType,
   highlightsBlockType,
   imageGridBlockType,
   mediaGridBlockType,
   testimonialsBlockType,
-  //program pages
-  publicClassesPageType,
 ]

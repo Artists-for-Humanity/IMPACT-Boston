@@ -11,8 +11,7 @@ export function resolveSpotlightTestimonial(section: CmsTestimonialsBlock) {
 
   return {
     quote: section.spotlightQuote ?? featuredTestimonial?.quote ?? null,
-    author: section.spotlightAuthor ?? featuredTestimonial?.author ?? null,
-    authorTitle:
-      section.spotlightAuthorTitle ?? featuredTestimonial?.authorTitle ?? null,
+    author: section.spotlightAuthor ?? null,
+    authorTitle: section.spotlightAuthorTitle ?? null,
   };
 }

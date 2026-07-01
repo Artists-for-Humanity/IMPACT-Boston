@@ -23,6 +23,7 @@ const PAGE_SECTIONS_PROJECTION = `
     sections[]{
       _key,
       _type,
+      headline,
       headlineParts[] {
         _key,
         text,
@@ -52,6 +53,15 @@ const PAGE_SECTIONS_PROJECTION = `
       buttonText,
       buttonBgColor,
       buttonTextColor,
+      calloutText,
+      articleTitle,
+      articleDescription,
+      articleAuthor,
+      href,
+      linkText,
+      linkTarget {
+        ${LINK_TARGET_PROJECTION}
+      },
       ctaLabel,
       ctaText,
       ctaHref,
@@ -60,6 +70,16 @@ const PAGE_SECTIONS_PROJECTION = `
       },
       image,
       imageAlt,
+      featuredLabel,
+      featuredTitle,
+      featuredDescription,
+      featuredDate,
+      featuredAuthor,
+      featuredLinkText,
+      featuredHref,
+      featuredLinkTarget {
+        ${LINK_TARGET_PROJECTION}
+      },
       showImagePlaceholder,
       highlight,
       highlightColor,
@@ -68,6 +88,7 @@ const PAGE_SECTIONS_PROJECTION = `
       subtitleFirst,
       reverse,
       backgroundColor,
+      hideMedia,
       youtubeUrl,
       videoTitle,
       content[] {
@@ -95,10 +116,28 @@ const PAGE_SECTIONS_PROJECTION = `
       supportingTextColor,
       textColor,
       variant,
+      showToggle,
+      noPaddingTop,
       paragraphs[] {
         _key,
         text,
         bold
+      },
+      mediaCards[] {
+        _key,
+        title,
+        outlet,
+        mediaType,
+        image,
+        imageSrc,
+        imageAlt,
+        videoSrc,
+        videoTitle,
+        scriptSrc,
+        href,
+        linkTarget {
+          ${LINK_TARGET_PROJECTION}
+        }
       },
       reverse,
       purchaseLinkText,
@@ -114,6 +153,7 @@ const PAGE_SECTIONS_PROJECTION = `
         titleLine2,
         body,
         href,
+        linkText,
         linkTarget {
           ${LINK_TARGET_PROJECTION}
         },

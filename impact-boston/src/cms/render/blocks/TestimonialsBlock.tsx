@@ -40,9 +40,8 @@ export default function TestimonialsBlock({
       ? section.testimonials
       : fallback?.testimonials,
     spotlightQuote: section.spotlightQuote ?? fallback?.spotlightQuote,
-    spotlightAuthor: section.spotlightAuthor ?? fallback?.spotlightAuthor,
-    spotlightAuthorTitle:
-      section.spotlightAuthorTitle ?? fallback?.spotlightAuthorTitle,
+    spotlightAuthor: section.spotlightAuthor,
+    spotlightAuthorTitle: section.spotlightAuthorTitle,
   };
 
   if (isSpotlightTestimonialsBlock(resolvedSection)) {
@@ -54,6 +53,15 @@ export default function TestimonialsBlock({
     const featuredTestimonial =
       featuredTestimonialIndex >= 0
         ? resolvedSection.testimonials?.[featuredTestimonialIndex]
+        : undefined;
+    const spotlightAuthorTitlePortableText = isPortableTextArray(
+      section.spotlightAuthorTitle,
+    )
+      ? section.spotlightAuthorTitle
+      : undefined;
+    const spotlightAuthorTitleText =
+      typeof section.spotlightAuthorTitle === "string"
+        ? section.spotlightAuthorTitle
         : undefined;
     const featuredTestimonialPath = featuredTestimonial
       ? getArrayItemPath(
@@ -75,19 +83,16 @@ export default function TestimonialsBlock({
         subheading={resolvedSection.subtext ?? undefined}
         quote={spotlight.quote}
         author={spotlight.author ?? undefined}
-        authorTitle={spotlight.authorTitle ?? undefined}
+        authorTitle={spotlightAuthorTitleText ?? undefined}
+        authorTitlePortableText={spotlightAuthorTitlePortableText}
         dataAttributes={{
           author: getFieldDataAttribute(
             dataAttribute,
-            section.spotlightAuthor
-              ? extendPath(blockPath, "spotlightAuthor")
-              : extendPath(featuredTestimonialPath ?? blockPath, "author"),
+            extendPath(blockPath, "spotlightAuthor"),
           ),
           authorTitle: getFieldDataAttribute(
             dataAttribute,
-            section.spotlightAuthorTitle
-              ? extendPath(blockPath, "spotlightAuthorTitle")
-              : extendPath(featuredTestimonialPath ?? blockPath, "authorTitle"),
+            extendPath(blockPath, "spotlightAuthorTitle"),
           ),
           heading: getFieldDataAttribute(
             dataAttribute,
@@ -157,4 +162,10 @@ export default function TestimonialsBlock({
 
 function getBackgroundColor(value?: string | null) {
   return stegaClean(value)?.trim() || undefined;
+}
+
+function isPortableTextArray(
+  value: unknown,
+): value is Array<{ _type: "block"; [key: string]: unknown }> {
+  return Array.isArray(value) && value.every((item) => item?._type === "block");
 }

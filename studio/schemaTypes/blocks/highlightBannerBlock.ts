@@ -1,6 +1,7 @@
 import {defineField, defineType} from 'sanity'
 import {BackgroundColorInput} from '../../components/BackgroundColorInput'
 import {blockPreviewMedia} from './blockPreviews'
+import {BLOCK_DEFAULT_COPY, defaultInternalLinkTarget} from './blockDefaults'
 import {defineLinkTargetField} from '../linkTarget'
 
 export const highlightBannerBlockType = defineType({
@@ -24,7 +25,7 @@ export const highlightBannerBlockType = defineType({
       type: 'string',
       validation: (rule) => rule.required(),
     }),
-     defineField({
+    defineField({
       name: 'textColor',
       title: 'Text Color',
       type: 'string',
@@ -59,7 +60,6 @@ export const highlightBannerBlockType = defineType({
       hidden: true,
     }),
     defineLinkTargetField({name: 'ctaLinkTarget', title: 'Button Link', required: true}),
-
 
     defineField({
       name: 'buttonBgColor',
@@ -110,8 +110,19 @@ export const highlightBannerBlockType = defineType({
             : 'Use a valid hex color, like #b8a6c8.'
         }),
     }),
-
   ],
+  initialValue: {
+    backgroundColor: '#311e41',
+    title: BLOCK_DEFAULT_COPY.title,
+    textColor: '#ffffff',
+    body: [BLOCK_DEFAULT_COPY.body],
+    ctaLabel: BLOCK_DEFAULT_COPY.ctaText,
+    ctaLinkTarget: {...defaultInternalLinkTarget},
+    buttonBgColor: '#ffffff',
+    buttonTextColor: '#000000',
+    supportingText: BLOCK_DEFAULT_COPY.subtitle,
+    supportingTextColor: '#b8a6c8',
+  },
   preview: {
     select: {title: 'title', subtitle: 'ctaLabel'},
     prepare({title, subtitle}) {

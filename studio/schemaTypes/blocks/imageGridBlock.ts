@@ -1,6 +1,7 @@
 import {defineField, defineType} from 'sanity'
 import {LightBackgroundColorInput} from '../../components/LightBackgroundColorInput'
 import {blockPreviewMedia} from './blockPreviews'
+import {BLOCK_DEFAULT_COPY} from './blockDefaults'
 
 export const imageGridBlockType = defineType({
   name: 'imageGridBlock',
@@ -85,6 +86,19 @@ export const imageGridBlockType = defineType({
       initialValue: '',
     }),
   ],
+  initialValue: {
+    title: BLOCK_DEFAULT_COPY.title,
+    description: [BLOCK_DEFAULT_COPY.subtitle],
+    members: [
+      {
+        name: BLOCK_DEFAULT_COPY.author,
+        role: BLOCK_DEFAULT_COPY.authorTitle,
+        bio: BLOCK_DEFAULT_COPY.body,
+        imageAlt: BLOCK_DEFAULT_COPY.imageAlt,
+      },
+    ],
+    backgroundColor: '',
+  },
   preview: {
     select: {title: 'title', subtitle: 'subtitle'},
     prepare({title, subtitle}) {

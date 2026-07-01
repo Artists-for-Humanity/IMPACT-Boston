@@ -2,12 +2,14 @@ import type { SanityImageSource } from "@sanity/image-url";
 import type { PortableTextBlock } from "next-sanity";
 
 import type { ActionPanelCard } from "@/components/Action/ActionPanel";
+import type { ArticleCalloutProps } from "@/components/Content/ArticleCallout";
 import type { ClassDescriptionItem } from "@/components/ClassDescriptions/ClassDescriptions";
 import type { CtaPanelData } from "@/components/Action/CtaSection";
 import type { DoubleCard } from "@/components/Content/Double";
 import type {
   SingleContentParagraph,
   SingleContentProps,
+  SingleContentThumbnail,
 } from "@/components/Content/Single";
 import type { TripleProps } from "@/components/Content/Triple";
 import type { HighlightSlide } from "@/components/HighlightsSection";
@@ -38,15 +40,39 @@ export type SanityHeroFields = {
   highlight?: string | null;
   highlightColor?: string | null;
   description?: string | null;
+  hideMedia?: boolean | null;
   supportingText?: string | null;
   youtubeUrl?: string | null;
   videoTitle?: string | null;
+};
+
+export type SanityHero3Fields = {
+  featuredAuthor?: string | null;
+  featuredDate?: string | null;
+  featuredDescription?: string | null;
+  featuredHref?: string | null;
+  featuredLabel?: string | null;
+  featuredLinkTarget?: CmsLinkTarget | null;
+  featuredLinkText?: string | null;
+  featuredTitle?: string | null;
+  headline?: string | null;
+  description?: string | null;
 };
 
 export type SanityActionPanelFields = {
   title?: string | null;
   subtext?: string | null;
   cards?: ActionPanelCard[] | null;
+};
+
+export type SanityArticleCalloutFields = {
+  articleAuthor?: ArticleCalloutProps["article"]["author"] | null;
+  articleDescription?: ArticleCalloutProps["article"]["description"] | null;
+  articleTitle?: ArticleCalloutProps["article"]["title"] | null;
+  calloutText?: ArticleCalloutProps["calloutText"] | null;
+  href?: string | null;
+  linkText?: ArticleCalloutProps["article"]["linkText"] | null;
+  linkTarget?: CmsLinkTarget | null;
 };
 
 export type SanityCtaSectionFields = {
@@ -57,6 +83,21 @@ export type SanitySingleContentParagraph = {
   _key?: string | null;
   text?: SingleContentParagraph["text"] | null;
   bold?: SingleContentParagraph["bold"] | null;
+};
+
+export type SanitySingleContentMediaCard = {
+  _key?: string | null;
+  href?: string | null;
+  image?: SanityImageSource | null;
+  imageAlt?: string | null;
+  imageSrc?: string | null;
+  linkTarget?: CmsLinkTarget | null;
+  mediaType?: SingleContentThumbnail["type"] | null;
+  outlet?: string | null;
+  scriptSrc?: string | null;
+  title?: string | null;
+  videoSrc?: string | null;
+  videoTitle?: string | null;
 };
 
 export type SanitySingleContentFields = {
@@ -79,6 +120,7 @@ export type SanitySingleContentFields = {
   purchaseLinkHref?: string | null;
   purchaseLinkTarget?: CmsLinkTarget | null;
   backgroundColor?: string | null;
+  mediaCards?: SanitySingleContentMediaCard[] | null;
 };
 
 export type SanitySingleContentCtaBlock = {
@@ -120,10 +162,14 @@ export type SanityTripleContentCard = {
   titleLine2?: string | null;
   description?: string | null;
   tags?: string[] | null;
+  href?: string | null;
+  linkText?: string | null;
+  linkTarget?: CmsLinkTarget | null;
   backgroundColor?: string | null;
 };
 
 export type SanityTripleContentFields = {
+  variant?: TripleProps["variant"] | null;
   title?: TripleProps["title"] | null;
   subtitle?: TripleProps["subtitle"] | null;
   intro?: TripleProps["intro"] | null;
@@ -134,6 +180,8 @@ export type SanityListFields = {
   variant?: ListVariant | null;
   title?: string | null;
   description?: string | null;
+  showToggle?: boolean | null;
+  noPaddingTop?: boolean | null;
   listItems?: ListItem[] | null;
   detailItems?: ListDetailItem[] | null;
 };
@@ -176,9 +224,19 @@ export type CmsHeroBlock = CmsPageBlockBase &
     _type: "hero1Block" | "hero2Block";
   };
 
+export type CmsHero3Block = CmsPageBlockBase &
+  SanityHero3Fields & {
+    _type: "hero3Block";
+  };
+
 export type CmsActionPanelBlock = CmsPageBlockBase &
   SanityActionPanelFields & {
     _type: "actionPanelBlock";
+  };
+
+export type CmsArticleCalloutBlock = CmsPageBlockBase &
+  SanityArticleCalloutFields & {
+    _type: "articleCalloutBlock";
   };
 
 export type CmsCtaSectionBlock = CmsPageBlockBase &
@@ -188,7 +246,7 @@ export type CmsCtaSectionBlock = CmsPageBlockBase &
 
 export type CmsSingleContentBlock = CmsPageBlockBase &
   SanitySingleContentFields & {
-    _type: "singleContentBlock";
+    _type: "singleContentBlock" | "singleContentMediaBlock";
   };
 
 export type CmsDoubleContentBlock = CmsPageBlockBase & {
@@ -213,6 +271,7 @@ export type CmsClassDescriptionsBlock = CmsPageBlockBase &
 
 export type CmsSideTabsBlock = CmsPageBlockBase & {
   _type: "sideTabsBlock";
+  backgroundColor?: string | null;
   tabs?: SanitySideTab[] | null;
 };
 
@@ -298,13 +357,15 @@ export type CmsTestimonialsBlock = CmsPageBlockBase & {
   subtext?: string | null;
   spotlightQuote?: string | null;
   spotlightAuthor?: string | null;
-  spotlightAuthorTitle?: string | null;
+  spotlightAuthorTitle?: PortableTextBlock[] | string | null;
   testimonials?: Testimonial[] | null;
 };
 
 export type CmsPageBlock =
   | CmsHeroBlock
+  | CmsHero3Block
   | CmsActionPanelBlock
+  | CmsArticleCalloutBlock
   | CmsCtaSectionBlock
   | CmsSingleContentBlock
   | CmsDoubleContentBlock

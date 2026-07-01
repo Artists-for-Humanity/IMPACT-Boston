@@ -1,4 +1,4 @@
-import {defineField, defineType} from 'sanity'
+import {defineArrayMember, defineField, defineType} from 'sanity'
 import {BackgroundColorInput} from '../../components/BackgroundColorInput'
 import {blockPreviewMedia} from './blockPreviews'
 import {defineLinkTargetField} from '../linkTarget'
@@ -96,8 +96,22 @@ export const testimonialsBlockType = defineType({
     defineField({
       name: 'spotlightAuthorTitle',
       title: 'Spotlight Author Title',
-      type: 'string',
-      description: 'Optional attribution detail shown under or next to the author.',
+      type: 'array',
+      description: 'Optional attribution detail shown under or next to the author. Supports bold.',
+      of: [
+        defineArrayMember({
+          type: 'block',
+          styles: [{title: 'Normal', value: 'normal'}],
+          lists: [],
+          marks: {
+            decorators: [
+              {title: 'Bold', value: 'strong'},
+              {title: 'Italic', value: 'em'},
+            ],
+            annotations: [],
+          },
+        }),
+      ],
       hidden: ({parent}) => !isParticipantSpotlightBlock(parent),
     }),
     defineField({

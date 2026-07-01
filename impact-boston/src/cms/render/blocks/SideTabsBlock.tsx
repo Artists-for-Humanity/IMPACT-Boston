@@ -1,3 +1,4 @@
+import { stegaClean } from "@sanity/client/stega";
 import SideTabs, { type SideTab } from "@/components/TabsPanel/SideTabs";
 import type { SideTabContentBlock } from "@/components/TabsPanel/types";
 import { resolveCmsLink } from "@/cms/links";
@@ -37,6 +38,9 @@ export default function SideTabsBlock({
   section,
   fallbackTabs,
 }: SideTabsBlockProps) {
+  const { backgroundClassName, backgroundStyle } = getBackgroundPresentation(
+    section.backgroundColor,
+  );
   const tabs = resolveSideTabs(section.tabs, fallbackTabs);
   const tabsWithDataAttributes = tabs.map((tab, index) => {
     const tabPath = getArrayItemPath(blockPath, "tabs", tab, index);
@@ -61,10 +65,40 @@ export default function SideTabsBlock({
   }
 
   return (
-    <section className="w-full bg-white">
+    <section
+      className={`w-full ${backgroundClassName}`.trim()}
+      data-sanity={getFieldDataAttribute(
+        dataAttribute,
+        extendPath(blockPath, "backgroundColor"),
+      )}
+      style={backgroundStyle}
+    >
       <SideTabs tabs={tabsWithDataAttributes} />
     </section>
   );
+}
+
+function getBackgroundPresentation(value?: string | null) {
+  const cleanedValue = stegaClean(value)?.trim();
+
+  if (!cleanedValue) {
+    return {
+      backgroundClassName: "bg-white",
+      backgroundStyle: undefined,
+    };
+  }
+
+  if (/^#([0-9a-f]{3}|[0-9a-f]{6})$/i.test(cleanedValue)) {
+    return {
+      backgroundClassName: "",
+      backgroundStyle: { backgroundColor: cleanedValue },
+    };
+  }
+
+  return {
+    backgroundClassName: cleanedValue,
+    backgroundStyle: undefined,
+  };
 }
 
 function withContentDataAttributes(

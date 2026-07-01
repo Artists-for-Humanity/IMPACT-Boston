@@ -1,7 +1,7 @@
 import {defineField, defineType} from 'sanity'
 import {blockPreviewMedia} from './blockPreviews'
+import {BLOCK_DEFAULT_COPY, defaultInternalLinkTarget} from './blockDefaults'
 import {defineLinkTargetField} from '../linkTarget'
-
 
 export const mediaGridBlockType = defineType({
   name: 'mediaGridBlock',
@@ -72,6 +72,18 @@ export const mediaGridBlockType = defineType({
       ],
     }),
   ],
+  initialValue: {
+    title: BLOCK_DEFAULT_COPY.title,
+    subheader: BLOCK_DEFAULT_COPY.subtitle,
+    items: [
+      {
+        title: BLOCK_DEFAULT_COPY.title,
+        description: BLOCK_DEFAULT_COPY.body,
+        author: BLOCK_DEFAULT_COPY.author,
+        linkTarget: {...defaultInternalLinkTarget},
+      },
+    ],
+  },
   preview: {
     select: {title: 'title'},
     prepare({title}) {

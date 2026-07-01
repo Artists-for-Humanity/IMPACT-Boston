@@ -32,7 +32,10 @@ export default function SingleContentBlock({
 
   const paragraphDataAttributes = section.body
     ? (props.paragraphs ?? []).map(() => ({
-        text: getFieldDataAttribute(dataAttribute, extendPath(blockPath, "body")),
+        text: getFieldDataAttribute(
+          dataAttribute,
+          extendPath(blockPath, "body"),
+        ),
       }))
     : section.paragraphs
         ?.filter((paragraph) => Boolean(paragraph?.text?.trim()))
@@ -51,17 +54,60 @@ export default function SingleContentBlock({
       {...props}
       bodyContent={bodyContent}
       dataAttributes={{
-        body: getFieldDataAttribute(dataAttribute, extendPath(blockPath, "content")),
-        ctaText: getFieldDataAttribute(dataAttribute, extendPath(blockPath, "ctaText")),
-        eyebrow: getFieldDataAttribute(dataAttribute, extendPath(blockPath, "eyebrow")),
-        image: getFieldDataAttribute(dataAttribute, extendPath(blockPath, "image")),
+        body: getFieldDataAttribute(
+          dataAttribute,
+          extendPath(blockPath, "content"),
+        ),
+        ctaText: getFieldDataAttribute(
+          dataAttribute,
+          extendPath(blockPath, "ctaText"),
+        ),
+        eyebrow: getFieldDataAttribute(
+          dataAttribute,
+          extendPath(blockPath, "eyebrow"),
+        ),
+        image: getFieldDataAttribute(
+          dataAttribute,
+          extendPath(blockPath, "image"),
+        ),
         paragraphs: paragraphDataAttributes,
         purchaseLinkText: getFieldDataAttribute(
           dataAttribute,
           extendPath(blockPath, "purchaseLinkText"),
         ),
-        subtitle: getFieldDataAttribute(dataAttribute, extendPath(blockPath, "subtitle")),
-        title: getFieldDataAttribute(dataAttribute, extendPath(blockPath, "title")),
+        thumbnails: section.mediaCards
+          ?.filter((card) => Boolean(card?.title?.trim()))
+          .map((card, index) => {
+            const cardPath = getArrayItemPath(
+              blockPath,
+              "mediaCards",
+              card,
+              index,
+            );
+
+            return {
+              image: getFieldDataAttribute(
+                dataAttribute,
+                extendPath(cardPath, "image"),
+              ),
+              outlet: getFieldDataAttribute(
+                dataAttribute,
+                extendPath(cardPath, "outlet"),
+              ),
+              title: getFieldDataAttribute(
+                dataAttribute,
+                extendPath(cardPath, "title"),
+              ),
+            };
+          }),
+        subtitle: getFieldDataAttribute(
+          dataAttribute,
+          extendPath(blockPath, "subtitle"),
+        ),
+        title: getFieldDataAttribute(
+          dataAttribute,
+          extendPath(blockPath, "title"),
+        ),
       }}
     />
   );

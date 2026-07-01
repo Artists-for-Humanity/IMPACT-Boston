@@ -1,100 +1,156 @@
 import type {StructureResolver} from 'sanity/structure'
 
-export const singletonTypes = new Set([
-  'aboutImpactPage',
-  'abuseSurvivorsPage',
-  'landingPage',
-  'publicClassesPage',
-  'resourcesPage',
-])
+import {
+  CMS_PAGE_SCHEMA_TYPE_NAMES,
+  CMS_PAGE_TYPE_NAME,
+  getCmsPageTitle,
+} from './schemaTypes/cmsPageType'
 
-const aboutPages = [
+type CmsPageListItem = {
+  id: string
+  title: string
+}
+
+export const singletonTypes = new Set(CMS_PAGE_SCHEMA_TYPE_NAMES)
+
+const aboutPages: CmsPageListItem[] = [
   {
-    title: 'About Impact',
+    title: getCmsPageTitle('aboutImpactPage'),
     id: 'aboutImpactPage',
-    schemaType: 'aboutImpactPage',
   },
   {
-    title: 'Board and Staff',
+    title: getCmsPageTitle('boardAndStaff'),
     id: 'boardAndStaff',
-    schemaType: 'landingPage',
   },
   {
-    title: 'Resources',
+    title: getCmsPageTitle('resources'),
     id: 'resources',
-    schemaType: 'resourcesPage',
   },
   {
-    title: 'Abuse Survivors',
+    title: getCmsPageTitle('abuseSurvivorsPage'),
     id: 'abuseSurvivorsPage',
-    schemaType: 'abuseSurvivorsPage',
   },
   {
-    title: 'Blog',
+    title: getCmsPageTitle('blog'),
     id: 'blog',
-    schemaType: 'landingPage',
   },
   {
-    title: 'Accessibility',
+    title: getCmsPageTitle('accessibility'),
     id: 'accessibility',
-    schemaType: 'landingPage',
   },
 ]
 
-const programsPages = [
+const programsPages: CmsPageListItem[] = [
   {
-    title: 'Public Classes',
+    title: getCmsPageTitle('publicClassesPage'),
     id: 'publicClassesPage',
-    schemaType: 'publicClassesPage',
   },
-] 
+  {
+    title: getCmsPageTitle('schoolsAndColleges'),
+    id: 'schoolsAndColleges',
+  },
+  {
+    title: getCmsPageTitle('disabilitiesPage'),
+    id: 'disabilitiesPage',
+  },
+  {
+    title: getCmsPageTitle('abilityPage'),
+    id: 'abilityPage',
+  },
+  {
+    title: getCmsPageTitle('ASAPPage'),
+    id: 'ASAPPage',
+  },
+  {
+    title: getCmsPageTitle('AbusePreventionPage'),
+    id: 'AbusePreventionPage',
+  },
+  {
+    title: getCmsPageTitle('deEscalation'),
+    id: 'deEscalation',
+  },
+  {
+    title: getCmsPageTitle('communityOrganizations'),
+    id: 'communityOrganizations',
+  },
+  {
+    title: getCmsPageTitle('workplacePrograms'),
+    id: 'workplacePrograms',
+  },
+  {
+    title: getCmsPageTitle('knowYourRights'),
+    id: 'knowYourRights',
+  },
+  {
+    title: getCmsPageTitle('healthyRelationships'),
+    id: 'healthyRelationships',
+  },
+]
+
+const learnMorePages: CmsPageListItem[] = [
+  {
+    title: getCmsPageTitle('factCheckFriday'),
+    id: 'factCheckFriday',
+  },
+  {
+    title: getCmsPageTitle('booksByMegStone'),
+    id: 'booksByMegStone',
+  },
+  {
+    title: getCmsPageTitle('press'),
+    id: 'press',
+  },
+  {
+    title: getCmsPageTitle('empowerment'),
+    id: 'empowerment',
+  },
+]
+
+function cmsPageListItem(S: Parameters<StructureResolver>[0], page: CmsPageListItem) {
+  return S.listItem()
+    .title(page.title)
+    .id(page.id)
+    .schemaType(CMS_PAGE_TYPE_NAME)
+    .child(S.document().title(page.title).schemaType(CMS_PAGE_TYPE_NAME).documentId(page.id))
+}
 
 export const structure: StructureResolver = (S) =>
   S.list()
     .title('Content')
     .items([
       S.listItem()
-        .title('Landing Page')
+        .title(getCmsPageTitle('landingPage'))
         .id('landingPage')
-        .schemaType('landingPage')
+        .schemaType(CMS_PAGE_TYPE_NAME)
         .child(
-          S.document().title('Landing Page').schemaType('landingPage').documentId('landingPage'),
+          S.document()
+            .title(getCmsPageTitle('landingPage'))
+            .schemaType(CMS_PAGE_TYPE_NAME)
+            .documentId('landingPage'),
         ),
       S.listItem()
-        .title('About Pages')
+        .title('About')
         .id('aboutPages')
         .child(
           S.list()
-            .title('About Pages')
-            .items(
-              aboutPages.map((page) =>
-                S.listItem()
-                  .title(page.title)
-                  .id(page.id)
-                  .schemaType(page.schemaType)
-                  .child(
-                    S.document().title(page.title).schemaType(page.schemaType).documentId(page.id),
-                  ),
-              ),
-            ),
+            .title('About')
+            .items(aboutPages.map((page) => cmsPageListItem(S, page))),
         ),
-        S.listItem()
-        .title('Programs Pages')
+      S.listItem()
+        .title('Programs')
         .id('programPages')
         .child(
           S.list()
-            .title('Programs Pages')
-            .items(
-              programsPages.map((page) =>
-                S.listItem()
-                  .title(page.title)
-                  .id(page.id)
-                  .schemaType(page.schemaType)
-                  .child(
-                    S.document().title(page.title).schemaType(page.schemaType).documentId(page.id),
-                  ),
-              ),
-            ),
+            .title('Programs')
+            .items(programsPages.map((page) => cmsPageListItem(S, page))),
+        ),
+      S.listItem()
+        .title('Learn More')
+        .id('learnMorePages')
+        .child(
+          S.list()
+            .title('Learn More')
+            .items(learnMorePages.map((page) => cmsPageListItem(S, page))),
         ),
       S.divider(),
       ...S.documentTypeListItems().filter(

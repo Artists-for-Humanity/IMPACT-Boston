@@ -1,5 +1,6 @@
 import {defineField, defineType} from 'sanity'
 import {blockPreviewMedia} from './blockPreviews'
+import {BLOCK_DEFAULT_COPY, defaultInternalLinkTarget} from './blockDefaults'
 import {defineLinkTargetField} from '../linkTarget'
 
 const isDetailsVariant = (parent: unknown) =>
@@ -26,6 +27,21 @@ export const listBlockType = defineType({
         layout: 'radio',
       },
       validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: 'showToggle',
+      title: 'Show Expand/Collapse Control',
+      type: 'boolean',
+      description: 'Shows the "Show all" control for accordion lists.',
+      hidden: ({parent}) => isDetailsVariant(parent),
+      initialValue: true,
+    }),
+    defineField({
+      name: 'noPaddingTop',
+      title: 'Remove Top Padding',
+      type: 'boolean',
+      description: 'Use when the list should sit closer to the block above it.',
+      initialValue: false,
     }),
     defineField({
       name: 'title',
@@ -174,6 +190,32 @@ export const listBlockType = defineType({
   ],
   initialValue: {
     variant: 'accordion',
+    showToggle: true,
+    noPaddingTop: false,
+    title: BLOCK_DEFAULT_COPY.title,
+    description: BLOCK_DEFAULT_COPY.subtitle,
+    listItems: [
+      {
+        title: BLOCK_DEFAULT_COPY.title,
+        description: BLOCK_DEFAULT_COPY.subtitle,
+        showInfoIcon: false,
+        accordionContent: BLOCK_DEFAULT_COPY.body,
+        defaultOpen: false,
+      },
+    ],
+    detailItems: [
+      {
+        fields: [
+          {
+            label: BLOCK_DEFAULT_COPY.label,
+            value: BLOCK_DEFAULT_COPY.title,
+            linkTarget: {...defaultInternalLinkTarget},
+          },
+        ],
+        descriptionTitle: 'Description',
+        description: BLOCK_DEFAULT_COPY.body,
+      },
+    ],
   },
   preview: {
     select: {title: 'title', subtitle: 'variant'},
