@@ -3,6 +3,7 @@ import {createElement, type CSSProperties, type ReactNode} from 'react'
 export const blockPreviewImageUrls: Record<string, string> = {
   hero1Block: '/static/block-previews/hero-1.svg',
   hero2Block: '/static/block-previews/hero-2.svg',
+  hero3Block: '/static/block-previews/hero-3.svg',
   articleCalloutBlock: '/static/block-previews/article-callout.svg',
   actionPanelBlock: '/static/block-previews/action-grid.svg',
   ctaSectionBlock: '/static/block-previews/cta-section.svg',
@@ -39,6 +40,7 @@ function createBlockPreviewMedia(src: string, alt: string): ReactNode {
 export const blockPreviewMedia = {
   hero1Block: createBlockPreviewMedia(blockPreviewImageUrls.hero1Block, 'Hero 1 block preview'),
   hero2Block: createBlockPreviewMedia(blockPreviewImageUrls.hero2Block, 'Hero 2 block preview'),
+  hero3Block: createBlockPreviewMedia(blockPreviewImageUrls.hero3Block, 'Hero 3 block preview'),
   articleCalloutBlock: createBlockPreviewMedia(
     blockPreviewImageUrls.articleCalloutBlock,
     'Article callout block preview',

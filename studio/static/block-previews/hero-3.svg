@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360" viewBox="0 0 640 360" role="img" aria-label="Hero 3 preview">
+  <rect width="640" height="360" fill="#ffffff"/>
+  <rect x="56" y="68" width="184" height="40" rx="4" fill="#000000"/>
+  <rect x="56" y="118" width="210" height="40" rx="4" fill="#000000"/>
+  <rect x="56" y="168" width="188" height="40" rx="4" fill="#000000"/>
+  <rect x="56" y="246" width="260" height="12" rx="6" fill="#333333"/>
+  <rect x="56" y="268" width="222" height="12" rx="6" fill="#333333"/>
+  <rect x="358" y="62" width="226" height="236" fill="#fffaf7" stroke="#dddddd"/>
+  <rect x="382" y="90" width="88" height="22" rx="7" fill="#ffffff" stroke="#e86834"/>
+  <rect x="392" y="97" width="68" height="8" rx="4" fill="#e86834"/>
+  <rect x="382" y="132" width="112" height="16" rx="3" fill="#000000"/>
+  <rect x="382" y="174" width="160" height="10" rx="5" fill="#333333"/>
+  <rect x="382" y="192" width="176" height="10" rx="5" fill="#333333"/>
+  <rect x="382" y="210" width="144" height="10" rx="5" fill="#333333"/>
+  <rect x="382" y="246" width="92" height="10" rx="5" fill="#888888"/>
+  <rect x="488" y="246" width="70" height="10" rx="5" fill="#888888"/>
+  <rect x="382" y="274" width="94" height="10" rx="5" fill="#563672"/>
+</svg>

@@ -9,6 +9,7 @@ import type { DoubleCard } from "@/components/Content/Double";
 import type {
   SingleContentParagraph,
   SingleContentProps,
+  SingleContentThumbnail,
 } from "@/components/Content/Single";
 import type { TripleProps } from "@/components/Content/Triple";
 import type { HighlightSlide } from "@/components/HighlightsSection";
@@ -45,6 +46,19 @@ export type SanityHeroFields = {
   videoTitle?: string | null;
 };
 
+export type SanityHero3Fields = {
+  featuredAuthor?: string | null;
+  featuredDate?: string | null;
+  featuredDescription?: string | null;
+  featuredHref?: string | null;
+  featuredLabel?: string | null;
+  featuredLinkTarget?: CmsLinkTarget | null;
+  featuredLinkText?: string | null;
+  featuredTitle?: string | null;
+  headline?: string | null;
+  description?: string | null;
+};
+
 export type SanityActionPanelFields = {
   title?: string | null;
   subtext?: string | null;
@@ -71,6 +85,21 @@ export type SanitySingleContentParagraph = {
   bold?: SingleContentParagraph["bold"] | null;
 };
 
+export type SanitySingleContentMediaCard = {
+  _key?: string | null;
+  href?: string | null;
+  image?: SanityImageSource | null;
+  imageAlt?: string | null;
+  imageSrc?: string | null;
+  linkTarget?: CmsLinkTarget | null;
+  mediaType?: SingleContentThumbnail["type"] | null;
+  outlet?: string | null;
+  scriptSrc?: string | null;
+  title?: string | null;
+  videoSrc?: string | null;
+  videoTitle?: string | null;
+};
+
 export type SanitySingleContentFields = {
   content?: SanitySingleContentContentBlock[] | null;
   eyebrow?: string | null;
@@ -91,6 +120,7 @@ export type SanitySingleContentFields = {
   purchaseLinkHref?: string | null;
   purchaseLinkTarget?: CmsLinkTarget | null;
   backgroundColor?: string | null;
+  mediaCards?: SanitySingleContentMediaCard[] | null;
 };
 
 export type SanitySingleContentCtaBlock = {
@@ -194,6 +224,11 @@ export type CmsHeroBlock = CmsPageBlockBase &
     _type: "hero1Block" | "hero2Block";
   };
 
+export type CmsHero3Block = CmsPageBlockBase &
+  SanityHero3Fields & {
+    _type: "hero3Block";
+  };
+
 export type CmsActionPanelBlock = CmsPageBlockBase &
   SanityActionPanelFields & {
     _type: "actionPanelBlock";
@@ -211,7 +246,7 @@ export type CmsCtaSectionBlock = CmsPageBlockBase &
 
 export type CmsSingleContentBlock = CmsPageBlockBase &
   SanitySingleContentFields & {
-    _type: "singleContentBlock";
+    _type: "singleContentBlock" | "singleContentMediaBlock";
   };
 
 export type CmsDoubleContentBlock = CmsPageBlockBase & {
@@ -328,6 +363,7 @@ export type CmsTestimonialsBlock = CmsPageBlockBase & {
 
 export type CmsPageBlock =
   | CmsHeroBlock
+  | CmsHero3Block
   | CmsActionPanelBlock
   | CmsArticleCalloutBlock
   | CmsCtaSectionBlock

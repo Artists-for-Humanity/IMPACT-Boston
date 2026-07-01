@@ -23,6 +23,7 @@ const PAGE_SECTIONS_PROJECTION = `
     sections[]{
       _key,
       _type,
+      headline,
       headlineParts[] {
         _key,
         text,
@@ -69,6 +70,16 @@ const PAGE_SECTIONS_PROJECTION = `
       },
       image,
       imageAlt,
+      featuredLabel,
+      featuredTitle,
+      featuredDescription,
+      featuredDate,
+      featuredAuthor,
+      featuredLinkText,
+      featuredHref,
+      featuredLinkTarget {
+        ${LINK_TARGET_PROJECTION}
+      },
       showImagePlaceholder,
       highlight,
       highlightColor,

@@ -35,6 +35,7 @@ export function definePageBlocksField() {
           hideMedia: true,
         },
       }),
+      defineArrayMember({type: 'hero3Block'}),
       defineArrayMember({type: 'articleCalloutBlock'}),
       defineArrayMember({type: 'contentBlock'}),
       defineArrayMember({type: 'doubleContentBlock'}),
@@ -100,7 +101,7 @@ export function definePageBlocksField() {
           {
             name: 'heroes',
             title: 'Hero',
-            of: ['hero1Block', 'hero2Block'],
+            of: ['hero1Block', 'hero2Block', 'hero3Block'],
           },
           {
             name: 'action',

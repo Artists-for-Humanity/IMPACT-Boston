@@ -9,6 +9,7 @@ import CtaSectionBlock from "./blocks/CtaSectionBlock";
 import DoubleContentBlock from "./blocks/DoubleContentBlock";
 import HighlightBannerBlock from "./blocks/HighlightBannerBlock";
 import HeroBlock from "./blocks/HeroBlock";
+import Hero3Block from "./blocks/Hero3Block";
 import HighlightsBlock from "./blocks/HighlightsBlock";
 import ImageGridBlock from "./blocks/ImageGridBlock";
 import MediaGridBlock from "./blocks/MediaGridBlock";
@@ -43,6 +44,15 @@ export default function BlockRenderer({
         />
       );
 
+    case "hero3Block":
+      return (
+        <Hero3Block
+          blockPath={blockPath}
+          dataAttribute={dataAttribute}
+          section={block}
+        />
+      );
+
     case "actionPanelBlock":
       return (
         <ActionPanelBlock
@@ -73,6 +83,7 @@ export default function BlockRenderer({
       );
 
     case "singleContentBlock":
+    case "singleContentMediaBlock":
       return (
         <SingleContentBlock
           blockPath={blockPath}

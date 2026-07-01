@@ -12,6 +12,7 @@ import {contentBlockType} from './blocks/contentBlock'
 import {ctaSectionBlockType} from './blocks/ctaSectionBlock'
 import {doubleContentBlockType} from './blocks/doubleContentBlock'
 import {heroBlockType} from './blocks/heroBlock'
+import {hero3BlockType} from './blocks/hero3Block'
 import {highlightBannerBlockType} from './blocks/highlightBannerBlock'
 import {highlightsBlockType} from './blocks/highlightsBlock'
 import {imageGridBlockType} from './blocks/imageGridBlock'
@@ -33,6 +34,7 @@ export const schemaTypes = [
 
   // blocks
   heroBlockType,
+  hero3BlockType,
   articleCalloutBlockType,
   contentBlockType,
   actionPanelBlockType,
