@@ -10,19 +10,19 @@ export default function ScriptEmbed({ scriptSrc }: ScriptEmbedProps) {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!containerRef.current) return;
+    const container = containerRef.current;
+
+    if (!container) return;
 
     const script = document.createElement('script');
     script.src = scriptSrc;
     script.type = 'text/javascript';
     script.charset = 'UTF-8';
     script.async = true;
-    containerRef.current.appendChild(script);
+    container.appendChild(script);
 
     return () => {
-      if (containerRef.current) {
-        containerRef.current.innerHTML = '';
-      }
+      container.innerHTML = '';
     };
   }, [scriptSrc]);
 

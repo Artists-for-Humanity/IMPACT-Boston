@@ -12,24 +12,12 @@ type CardProps = {
   backgroundColor?: string;
 };
 
-type CardsProps = {
-  cards: CardProps[];
-};
-
 type BlockWithCardsProps = {
   title: string;
   subtitle?: string;
   description?: string;
   backgroundColor?: string;
   cards: CardProps[];
-};
-
-
-const getColSpan = (count: number) => {
-  if (count === 2) return "col-span-6 md:col-span-12 sm:col-span-12";
-  if (count === 3) return "col-span-4 md:col-span-12 sm:col-span-12";
-  if (count === 4) return "col-span-3 md:col-span-12 sm:col-span-12";
-  return "col-span-12";
 };
 
 const Card: React.FC<CardProps> = ({ title, contentBlocks, backgroundColor }) => (
@@ -61,21 +49,6 @@ const Card: React.FC<CardProps> = ({ title, contentBlocks, backgroundColor }) =>
         })}
   </div>
 );
-
-const Cards: React.FC<CardsProps> = ({ cards }) => {
-  const colSpanClass = getColSpan(cards.length);
-
-  return (
-    <Grid className="grid grid-cols-12 gap-4">
-      {cards.map((card, idx) => (
-        <div key={idx} className={colSpanClass}>
-          <Card {...card} />
-        </div>
-      ))}
-    </Grid>
-  );
-};
-
 
 const BlockWithCards: React.FC<BlockWithCardsProps> = ({
   title,

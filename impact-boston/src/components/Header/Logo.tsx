@@ -19,8 +19,8 @@ export default function Logo({ src, alt = 'IMPACT Boston', href = '/' }: LogoPro
       aria-label="IMPACT Boston — go to homepage"
     >
       <Image
-        src="/images/logos/logo-full-color.png"
-        alt="IMPACT Boston"
+        src={src ?? "/images/logos/logo-full-color.png"}
+        alt={alt}
         height={24}
         width={108}
         className="h-6 w-[108px] object-contain"
