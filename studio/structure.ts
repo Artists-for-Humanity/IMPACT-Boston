@@ -9,9 +9,10 @@ import {
 type CmsPageListItem = {
   id: string
   title: string
+  schemaType?: string
 }
 
-export const singletonTypes = new Set(CMS_PAGE_SCHEMA_TYPE_NAMES)
+export const singletonTypes = new Set([...CMS_PAGE_SCHEMA_TYPE_NAMES, 'schoolsAndCollegesPage'])
 
 const aboutPages: CmsPageListItem[] = [
   {
@@ -47,23 +48,8 @@ const programsPages: CmsPageListItem[] = [
   },
   {
     title: getCmsPageTitle('schoolsAndColleges'),
-    id: 'schoolsAndColleges',
-  },
-  {
-    title: getCmsPageTitle('disabilitiesPage'),
-    id: 'disabilitiesPage',
-  },
-  {
-    title: getCmsPageTitle('abilityPage'),
-    id: 'abilityPage',
-  },
-  {
-    title: getCmsPageTitle('ASAPPage'),
-    id: 'ASAPPage',
-  },
-  {
-    title: getCmsPageTitle('AbusePreventionPage'),
-    id: 'AbusePreventionPage',
+    id: 'schoolsAndCollegesPage',
+    schemaType: 'schoolsAndCollegesPage',
   },
   {
     title: getCmsPageTitle('deEscalation'),
@@ -87,6 +73,25 @@ const programsPages: CmsPageListItem[] = [
   },
 ]
 
+const disabilitiesSubPages: CmsPageListItem[] = [
+  {
+    title: getCmsPageTitle('disabilitiesPage'),
+    id: 'disabilitiesPage',
+  },
+  {
+    title: getCmsPageTitle('abilityPage'),
+    id: 'abilityPage',
+  },
+  {
+    title: getCmsPageTitle('ASAPPage'),
+    id: 'ASAPPage',
+  },
+  {
+    title: getCmsPageTitle('AbusePreventionPage'),
+    id: 'AbusePreventionPage',
+  },
+]
+
 const learnMorePages: CmsPageListItem[] = [
   {
     title: getCmsPageTitle('factCheckFriday'),
@@ -107,11 +112,12 @@ const learnMorePages: CmsPageListItem[] = [
 ]
 
 function cmsPageListItem(S: Parameters<StructureResolver>[0], page: CmsPageListItem) {
+  const schemaType = page.schemaType ?? CMS_PAGE_TYPE_NAME
   return S.listItem()
     .title(page.title)
     .id(page.id)
-    .schemaType(CMS_PAGE_TYPE_NAME)
-    .child(S.document().title(page.title).schemaType(CMS_PAGE_TYPE_NAME).documentId(page.id))
+    .schemaType(schemaType)
+    .child(S.document().title(page.title).schemaType(schemaType).documentId(page.id))
 }
 
 export const structure: StructureResolver = (S) =>
@@ -142,7 +148,17 @@ export const structure: StructureResolver = (S) =>
         .child(
           S.list()
             .title('Programs')
-            .items(programsPages.map((page) => cmsPageListItem(S, page))),
+            .items([
+              ...programsPages.map((page) => cmsPageListItem(S, page)),
+              S.listItem()
+                .title('People with Disabilities')
+                .id('disabilitiesFolder')
+                .child(
+                  S.list()
+                    .title('People with Disabilities')
+                    .items(disabilitiesSubPages.map((page) => cmsPageListItem(S, page))),
+                ),
+            ]),
         ),
       S.listItem()
         .title('Learn More')
