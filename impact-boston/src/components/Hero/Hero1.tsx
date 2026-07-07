@@ -95,11 +95,14 @@ function buildYouTubeEmbedUrl(url: string): string {
   const params = new URLSearchParams({
     autoplay: "1",
     mute: "1",
-    controls: "0",
-    rel: "0",
+    controls: "0",       // hide all player controls
+    rel: "0",            // no related videos at end
     loop: "1",
-    playlist: videoId, // required for loop
-    modestbranding: "1",
+    playlist: videoId,   // required for loop
+    modestbranding: "1", // minimal branding
+    iv_load_policy: "3", // hide annotations/info cards
+    disablekb: "1",      // disable keyboard shortcuts
+    fs: "0",             // hide fullscreen button
     enablejsapi: "1",
   });
   return `https://www.youtube.com/embed/${videoId}?${params.toString()}`;
@@ -150,7 +153,7 @@ export default function Hero1({
   }, [muted]);
   return (
     <section
-      className={`bg-brand-gray-light py-8 md:py-10 lg:py-18 ${className}`}
+      className={`bg-white ${className}`}
     >
       <Grid className="gap-y-10 md:gap-y-10 lg:gap-y-0">
         <div className="col-span-4 md:col-span-6 md:col-start-2 lg:col-span-5 lg:col-start-1">
@@ -214,12 +217,19 @@ export default function Hero1({
                   className="absolute inset-0 h-full w-full"
                   style={{ zIndex: 1 }}
                 />
+                {/* Transparent overlay blocks mouse events from reaching the iframe,
+                    preventing YouTube's hover UI (title, share, logo, watch later) */}
+                <div
+                  className="absolute inset-0"
+                  style={{ zIndex: 2 }}
+                  aria-hidden="true"
+                />
                 <button
                   type="button"
                   onClick={toggleMute}
                   aria-label={muted ? "Unmute video" : "Mute video"}
                   className="absolute bottom-4 right-4 flex items-center justify-center rounded-full bg-black/50 p-2 text-white backdrop-blur-sm transition hover:bg-black/70"
-                  style={{ zIndex: 2 }}
+                  style={{ zIndex: 3 }}
                 >
                   {muted ? (
                     <VolumeX className="size-5" aria-hidden="true" />

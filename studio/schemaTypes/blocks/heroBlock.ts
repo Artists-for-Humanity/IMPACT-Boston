@@ -2,6 +2,7 @@ import {defineField, defineType} from 'sanity'
 import {HeadlineColorInput, headlineColorOptions} from '../../components/HeadlineColorInput'
 import {HeadlinePartsInput} from '../../components/HeadlinePartsInput'
 import {HeadlinePartTextInput} from '../../components/HeadlinePartTextInput'
+import {LimitedTextInput} from '../../components/LimitedTextInput'
 import {blockPreviewMedia} from './blockPreviews'
 import {defineLinkTargetField} from '../linkTarget'
 
@@ -181,9 +182,15 @@ export const heroBlockType = defineType({
       rows: 3,
       hidden: ({parent}) => isHero2(parent),
       validation: (rule) =>
-        rule.custom((value, context) =>
-          isHero2(context.parent) || value ? true : 'Body text is required for Hero 1.',
-        ),
+        rule.custom((value, context) => {
+          if (!isHero2(context.parent) && !value) return 'Body text is required for Hero 1.'
+          if (!isHero2(context.parent) && typeof value === 'string' && value.length > 200)
+            return `Body text must be 200 characters or fewer (currently ${value.length}).`
+          return true
+        }),
+      components: {
+        input: (props) => LimitedTextInput({...props, limit: 200}),
+      },
     }),
     defineField({
       name: 'ctaText',
