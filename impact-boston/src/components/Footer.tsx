@@ -3,25 +3,23 @@
 
 import Link from "next/link";
 import { ROUTES } from "@/routes";
-import Grid from "./common/Grid";
 
 export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
     <footer className="w-full bg-black text-white">
-      <div className=" ">
-        {/* Top Section - Contact Info & Form */}
-        <Grid className="w-full">
+      <div className="max-w-[1440px] mx-auto px-4 md:px-8 lg:px-[7.5rem] py-8 md:py-10 lg:py-[5.5rem] flex flex-col gap-12">
+
+        {/* Top Section - Contact Info & Newsletter */}
+        <div className="grid grid-cols-4 gap-10 md:grid-cols-8 md:gap-4 lg:grid-cols-12 lg:gap-6">
           {/* Left Column - IMPACT Wordmark & Contact Info */}
           <div className="col-span-4 lg:col-start-1 lg:col-span-5 space-y-8">
             <h2 className="h2 text-white pb-8 md:pb-12 lg:pb-12 mb-0">
               IMPACT
             </h2>
 
-            {/* Contact Info Blocks */}
             <div className="space-y-6">
-              {/* Address */}
               <div className="pb-6 mb-0">
                 <p className="p2 font-bold text-white">Address</p>
                 <p className="p2 text-[#888]">
@@ -29,7 +27,6 @@ export default function Footer() {
                 </p>
               </div>
 
-              {/* Email */}
               <div className="pb-6 mb-0">
                 <p className="p2 font-bold text-white">Email</p>
                 <a
@@ -40,7 +37,6 @@ export default function Footer() {
                 </a>
               </div>
 
-              {/* Call */}
               <div className="pb-0 mb-0">
                 <p className="p2 font-bold text-white">Call</p>
                 <a
@@ -53,12 +49,14 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Right Column - Contact Form */}
-          <div className="col-span-4 lg:col-start-8 lg:col-span-5 flex flex-col justify-start items-start flex-1 self-stretch pt-10 lg:pt-20">
-            <h3 className="sub-2 text-white">Join Our Newsletter</h3>
-            <p className="p2 text-[#888] pb-5">
-              Stay updated on programs, events, and community resources.
-            </p>
+          {/* Right Column - Newsletter Form */}
+          <div className="col-span-4 lg:col-start-8 lg:col-span-5 flex flex-col justify-start items-start flex-1 self-stretch lg:gap-5">
+            <div>
+              <h3 className="sub-2 text-white">Join Our Newsletter</h3>
+              <p className="p2 text-[#888]">
+                Stay updated on programs, events, and community resources.
+              </p>
+            </div>
 
             <form className="space-y-2 md:space-y-4 lg:space-y-4 w-full">
               <input
@@ -90,44 +88,32 @@ export default function Footer() {
               </button>
             </form>
           </div>
-        </Grid>
+        </div>
 
-        {/* Bottom Nav Section */}
-        <div className="border-t border-gray-700 pt-6 w-full">
-          <Grid className="w-full">
+        {/* Nav Section */}
+        <div className="border-t border-gray-700 pt-6">
+          <div className="grid grid-cols-4 gap-10 md:grid-cols-8 md:gap-4 lg:grid-cols-12 lg:gap-6">
             {/* About Column */}
             <div className="col-span-2 col-start-1 row-start-1 md:col-start-1 md:col-span-4 lg:col-start-1 lg:col-span-4 lg:row-start-auto space-y-4">
               <h4 className="p2 font-medium text-white pb-3 mb-0">About</h4>
               <ul className="space-y-0">
                 <li>
-                  <Link
-                    href={ROUTES.ABOUT_IMPACT}
-                    className="p2 text-text-grey-light hover:text-white transition-colors"
-                  >
+                  <Link href={ROUTES.ABOUT_IMPACT} className="p2 text-text-grey-light hover:text-white transition-colors">
                     About Impact
                   </Link>
                 </li>
                 <li>
-                  <Link
-                    href={ROUTES.BOARD_AND_STAFF}
-                    className="p2 text-text-grey-light hover:text-white transition-colors"
-                  >
+                  <Link href={ROUTES.BOARD_AND_STAFF} className="p2 text-text-grey-light hover:text-white transition-colors">
                     Board and Staff
                   </Link>
                 </li>
                 <li>
-                  <Link
-                    href={ROUTES.ACCESSIBILITY}
-                    className="p2 text-text-grey-light hover:text-white transition-colors"
-                  >
+                  <Link href={ROUTES.ACCESSIBILITY} className="p2 text-text-grey-light hover:text-white transition-colors">
                     Accessibility
                   </Link>
                 </li>
                 <li>
-                  <Link
-                    href={ROUTES.BLOG}
-                    className="p2 text-text-grey-light hover:text-white transition-colors"
-                  >
+                  <Link href={ROUTES.BLOG} className="p2 text-text-grey-light hover:text-white transition-colors">
                     Blog
                   </Link>
                 </li>
@@ -139,66 +125,42 @@ export default function Footer() {
               <h4 className="p2 font-medium text-white pb-3 mb-0">Programs</h4>
               <ul className="space-y-0">
                 <li>
-                  <Link
-                    href={ROUTES.PUBLIC_CLASSES}
-                    className="p2 text-text-grey-light hover:text-white transition-colors"
-                  >
+                  <Link href={ROUTES.PUBLIC_CLASSES} className="p2 text-text-grey-light hover:text-white transition-colors">
                     Self-Defense Classes
                   </Link>
                 </li>
                 <li>
-                  <Link
-                    href={ROUTES.SCHOOLS_AND_COLLEGES}
-                    className="p2 text-text-grey-light hover:text-white transition-colors"
-                  >
+                  <Link href={ROUTES.SCHOOLS_AND_COLLEGES} className="p2 text-text-grey-light hover:text-white transition-colors">
                     Schools & Colleges
                   </Link>
                 </li>
                 <li>
-                  <Link
-                    href={ROUTES.PEOPLE_WITH_DISABILITIES}
-                    className="p2 text-text-grey-light hover:text-white transition-colors"
-                  >
+                  <Link href={ROUTES.PEOPLE_WITH_DISABILITIES} className="p2 text-text-grey-light hover:text-white transition-colors">
                     People With Disabilities
                   </Link>
                 </li>
                 <li>
-                  <Link
-                    href={ROUTES.DE_ESCALATION}
-                    className="p2 text-text-grey-light hover:text-white transition-colors"
-                  >
+                  <Link href={ROUTES.DE_ESCALATION} className="p2 text-text-grey-light hover:text-white transition-colors">
                     De-escalation
                   </Link>
                 </li>
                 <li>
-                  <Link
-                    href={ROUTES.COMMUNITY_ORGANIZATIONS}
-                    className="p2 text-text-grey-light hover:text-white transition-colors"
-                  >
+                  <Link href={ROUTES.COMMUNITY_ORGANIZATIONS} className="p2 text-text-grey-light hover:text-white transition-colors">
                     Community Organizations
                   </Link>
                 </li>
                 <li>
-                  <Link
-                    href={ROUTES.WORKPLACE_PROGRAMS}
-                    className="p2 text-text-grey-light hover:text-white transition-colors"
-                  >
+                  <Link href={ROUTES.WORKPLACE_PROGRAMS} className="p2 text-text-grey-light hover:text-white transition-colors">
                     Workplace
                   </Link>
                 </li>
                 <li>
-                  <Link
-                    href={ROUTES.KNOW_YOUR_RIGHTS}
-                    className="p2 text-text-grey-light hover:text-white transition-colors"
-                  >
+                  <Link href={ROUTES.KNOW_YOUR_RIGHTS} className="p2 text-text-grey-light hover:text-white transition-colors">
                     Know Your Rights & Activist Safety
                   </Link>
                 </li>
                 <li>
-                  <Link
-                    href={ROUTES.CONTACT}
-                    className="p2 text-text-grey-light hover:text-white transition-colors"
-                  >
+                  <Link href={ROUTES.CONTACT} className="p2 text-text-grey-light hover:text-white transition-colors">
                     Customized Programs
                   </Link>
                 </li>
@@ -207,42 +169,31 @@ export default function Footer() {
 
             {/* Learn More Column */}
             <div className="col-span-2 col-start-3 row-start-1 md:col-start-9 md:col-span-4 lg:col-start-9 lg:col-span-4 lg:row-start-auto space-y-4">
-              <h4 className="p2 font-medium text-white pb-3 mb-0">
-                Learn More
-              </h4>
+              <h4 className="p2 font-medium text-white pb-3 mb-0">Learn More</h4>
               <ul className="space-y-0">
                 <li>
-                  <Link
-                    href={ROUTES.FACT_CHECK_FRIDAY}
-                    className="p2 text-text-grey-light hover:text-white transition-colors"
-                  >
+                  <Link href={ROUTES.FACT_CHECK_FRIDAY} className="p2 text-text-grey-light hover:text-white transition-colors">
                     Fact Check Fridays
                   </Link>
                 </li>
                 <li>
-                  <Link
-                    href={ROUTES.BOOKS_BY_MEG_STONE}
-                    className="p2 text-text-grey-light hover:text-white transition-colors"
-                  >
+                  <Link href={ROUTES.BOOKS_BY_MEG_STONE} className="p2 text-text-grey-light hover:text-white transition-colors">
                     Books by Meg Stone
                   </Link>
                 </li>
                 <li>
-                  <Link
-                    href={ROUTES.PRESS}
-                    className="p2 text-text-grey-light hover:text-white transition-colors"
-                  >
+                  <Link href={ROUTES.PRESS} className="p2 text-text-grey-light hover:text-white transition-colors">
                     Press
                   </Link>
                 </li>
               </ul>
             </div>
-          </Grid>
+          </div>
         </div>
 
         {/* Footer Bar - Social & Copyright */}
-        <div className="pt-2 md:pt-6 w-full">
-          <Grid className="w-full">
+        <div>
+          <div className="grid grid-cols-4 gap-10 md:grid-cols-8 md:gap-4 lg:grid-cols-12 lg:gap-6">
             {/* Social Icons */}
             <div className="col-span-4 md:col-span-4 lg:col-span-6 flex items-center gap-0 md:gap-4">
               <a
@@ -252,32 +203,10 @@ export default function Footer() {
                 className="w-10 h-10 flex items-center justify-center hover:opacity-70 transition-opacity"
                 aria-label="Instagram"
               >
-                <svg
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16Z"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                  <path
-                    d="M3 16V8C3 5.23858 5.23858 3 8 3H16C18.7614 3 21 5.23858 21 8V16C21 18.7614 18.7614 21 16 21H8C5.23858 21 3 18.7614 3 16Z"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                  />
-                  <path
-                    d="M17.5 6.51L17.51 6.49889"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  <path d="M3 16V8C3 5.23858 5.23858 3 8 3H16C18.7614 3 21 5.23858 21 8V16C21 18.7614 18.7614 21 16 21H8C5.23858 21 3 18.7614 3 16Z" stroke="currentColor" strokeWidth="2" />
+                  <path d="M17.5 6.51L17.51 6.49889" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </a>
 
@@ -288,17 +217,8 @@ export default function Footer() {
                 className="w-10 h-10 flex items-center justify-center hover:opacity-70 transition-opacity"
                 aria-label="Twitter/X"
               >
-                <svg
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"
-                    fill="currentColor"
-                  />
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" fill="currentColor" />
                 </svg>
               </a>
 
@@ -309,20 +229,8 @@ export default function Footer() {
                 className="w-10 h-10 flex items-center justify-center hover:opacity-70 transition-opacity"
                 aria-label="Facebook"
               >
-                <svg
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </a>
             </div>
@@ -331,8 +239,9 @@ export default function Footer() {
             <p className="col-span-4 md:col-span-4 lg:col-span-6 p2 text-text-grey-light text-left md:text-right">
               All rights reserved © IMPACT Inc. {year}
             </p>
-          </Grid>
+          </div>
         </div>
+
       </div>
     </footer>
   );
