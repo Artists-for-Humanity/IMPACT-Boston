@@ -24,14 +24,39 @@ import type {
 const portableTextComponents: PortableTextComponents = {
   block: {
     h1: ({ children }) => <h1 className="h1 pb-6">{children}</h1>,
-    h2: ({ children }) => <h2 className="h2 pb-6">{children}</h2>,
+    h2: ({ children }) => <h2 className="h2">{children}</h2>,
     h3: ({ children }) => <h3 className="h3">{children}</h3>,
     h4: ({ children }) => <h3 className="text-lg font-bold">{children}</h3>,
     sub1: ({ children }) => <p className="sub-1">{children}</p>,
     sub2: ({ children }) => <p className="sub-2">{children}</p>,
-    normal: ({ children }) => <p className="p1">{children}</p>,
+    normal: ({ children, value }) => {
+      const allStrong =
+        Array.isArray(value.children) &&
+        value.children.length > 0 &&
+        value.children.every(
+          (child: { _type?: string; marks?: string[] }) =>
+            child._type === "span" &&
+            Array.isArray(child.marks) &&
+            child.marks.includes("strong"),
+        );
+      return <p className={`p1${allStrong ? " pt-4 lg:-mb-14" : ""}`}>{children}</p>;
+    },
     p1: ({ children }) => <p className="p1">{children}</p>,
-    p1Bold: ({ children }) => <p className="p1-bold">{children}</p>,
+    p1Bold: ({ children, value }) => {
+      const hasStrongMark =
+        Array.isArray(value.children) &&
+        value.children.some(
+          (child: { _type?: string; marks?: string[] }) =>
+            child._type === "span" &&
+            Array.isArray(child.marks) &&
+            child.marks.includes("strong"),
+        );
+      return (
+        <p className={`p1-bold pt-4${hasStrongMark ? " lg:-mb-14" : ""}`}>
+          {children}
+        </p>
+      );
+    },
     p2: ({ children }) => <p className="p2">{children}</p>,
     mediumLabel: ({ children }) => <p className="medium-label">{children}</p>,
     link: ({ children }) => <p className="link">{children}</p>,
@@ -43,7 +68,7 @@ const portableTextComponents: PortableTextComponents = {
   },
   list: {
     bullet: ({ children }) => (
-      <ul className="list-disc pl-6">{children}</ul>
+      <ul className="list-disc pl-6 flex flex-col gap-6">{children}</ul>
     ),
     number: ({ children }) => (
       <ol className="list-decimal space-y-4 pl-6">{children}</ol>
@@ -146,7 +171,7 @@ function renderStructuredContentBlock(
   switch (blockType) {
     case "heading":
       return (
-        <h2 className="h2 pb-10" data-sanity={dataAttributes?.text} key={key}>
+        <h2 className="h2" data-sanity={dataAttributes?.text} key={key}>
           {"text" in block ? block.text : ""}
         </h2>
       );
@@ -165,7 +190,7 @@ function renderStructuredContentBlock(
     case "paragraph":
       return (
         <p
-          className={`p1${"bold" in block && block.bold ? " font-bold" : ""}`}
+          className={`p1${"bold" in block && block.bold ? " font-bold pt-4" : ""}`}
           data-sanity={dataAttributes?.text}
           key={key}
         >
@@ -242,7 +267,7 @@ function renderStructuredContentBlock(
     }
 
     case "divider":
-      return <hr className="border-line-divider" key={key} />;
+      return <hr className="border-line-divider -mb-6 lg:-mb-16" key={key} />;
 
     case "resourceList": {
       const items =
