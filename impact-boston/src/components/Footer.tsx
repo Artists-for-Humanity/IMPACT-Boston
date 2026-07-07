@@ -62,12 +62,6 @@ export default function Footer() {
             </p>
 
             <form className="space-y-2 md:space-y-4 lg:space-y-4 w-full">
-              {/* <input
-                type="email"
-                placeholder="Enter your email"
-                className="w-full flex h-16 px-[8px] py-5 justify-between items-center self-stretch bg-[#1F2122] focus:border-gray-400 focus:outline-none text-white placeholder:text-[rgba(255,255,255,0.40)] placeholder:font-[Poppins] placeholder:text-[14px] placeholder:font-medium md:placeholder:font-[IBM_Plex_Sans] lg:placeholder:font-[IBM_Plex_Sans] font-[IBM_Plex_Sans]"
-                aria-label="Email address"
-              /> */}
               <Button
                 href="https://impactboston.app.neoncrm.com/np/clients/impactboston/subscribe.jsp"
                 openInNewTab
