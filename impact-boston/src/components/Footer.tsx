@@ -9,48 +9,40 @@ export default function Footer() {
 
   return (
     <footer className="w-full bg-black text-white">
-      <div className="max-w-[1440px] mx-auto px-4 md:px-8 lg:px-[7.5rem] py-8 md:py-10 lg:py-[5.5rem] flex flex-col gap-12">
+      <div className="max-w-[1440px] mx-auto px-4 md:px-8 lg:px-[7.5rem] py-8 md:py-10 lg:py-[5.5rem] flex flex-col gap-y-14 lg:gap-12">
 
         {/* Top Section - Contact Info & Newsletter */}
-        <div className="grid grid-cols-4 gap-10 md:grid-cols-8 md:gap-4 lg:grid-cols-12 lg:gap-6">
-          {/* Left Column - IMPACT Wordmark & Contact Info */}
-          <div className="col-span-4 lg:col-start-1 lg:col-span-5 space-y-8">
-            <h2 className="h2 text-white pb-8 md:pb-12 lg:pb-12 mb-0">
-              IMPACT
-            </h2>
+        <div className="grid grid-cols-4 gap-x-10 gap-y-14 md:grid-cols-8 md:gap-x-4 md:gap-y-14 lg:grid-cols-12 lg:gap-6">
 
-            <div className="space-y-6">
-              <div className="pb-6 mb-0">
+          {/* IMPACT h2 - left on tablet, top-left on desktop */}
+          <h2 className="col-span-4 md:col-span-4 md:col-start-1 md:row-start-1 lg:col-start-1 lg:col-span-5 lg:row-start-1 h2 text-white">
+            IMPACT
+          </h2>
+
+          {/* Contact Info - full width row 2 on tablet, bottom-left on desktop */}
+          <div className="col-span-4 md:col-span-8 md:col-start-1 md:row-start-2 lg:col-start-1 lg:col-span-5 lg:row-start-2">
+            <div className="flex flex-col gap-6 md:flex-row md:gap-12 lg:flex-col lg:gap-6">
+              <div>
                 <p className="p2 font-bold text-white">Address</p>
-                <p className="p2 text-[#888]">
-                  89 South Street, Suite 600 Boston, MA
-                </p>
+                <p className="p2 text-[#888]">89 South Street, Suite 600 Boston, MA</p>
               </div>
-
-              <div className="pb-6 mb-0">
+              <div>
                 <p className="p2 font-bold text-white">Email</p>
-                <a
-                  href="mailto:info@impactboston.org"
-                  className="p2 text-[#888] hover:text-white transition-colors"
-                >
+                <a href="mailto:info@impactboston.org" className="p2 text-[#888] hover:text-white transition-colors">
                   info@impactboston.org
                 </a>
               </div>
-
-              <div className="pb-0 mb-0">
+              <div>
                 <p className="p2 font-bold text-white">Call</p>
-                <a
-                  href="tel:+16175974945"
-                  className="p2 text-[#888] hover:text-white transition-colors"
-                >
+                <a href="tel:+16175974945" className="p2 text-[#888] hover:text-white transition-colors">
                   +1 617-597-4945
                 </a>
               </div>
             </div>
           </div>
 
-          {/* Right Column - Newsletter Form */}
-          <div className="col-span-4 lg:col-start-8 lg:col-span-5 flex flex-col justify-start items-start flex-1 self-stretch lg:gap-5">
+          {/* Newsletter - cols 1-4 row 3 on tablet, right col on desktop */}
+          <div className="col-span-4 md:col-span-4 md:col-start-1 md:row-start-3 lg:col-start-8 lg:col-span-5 lg:row-start-1 lg:row-span-2 flex flex-col justify-start items-start gap-5">
             <div>
               <h3 className="sub-2 text-white">Join Our Newsletter</h3>
               <p className="p2 text-[#888]">
@@ -70,29 +62,18 @@ export default function Footer() {
                 className="w-full flex h-16 px-[19px] py-5 justify-between items-center self-stretch bg-[#1F2122] hover:bg-[#2a2c2d] transition-colors text-white text-center p2 md:font-medium lg:font-medium"
               >
                 <span>Join</span>
-                <svg
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M5 12H19M19 12L12 5M19 12L12 19"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </button>
             </form>
           </div>
+
         </div>
 
         {/* Nav Section */}
-        <div className="border-t border-gray-700 pt-6">
-          <div className="grid grid-cols-4 gap-10 md:grid-cols-8 md:gap-4 lg:grid-cols-12 lg:gap-6">
+        <div className="border-t border-gray-700 pt-6 md:pt-8">
+          <div className="grid grid-cols-4 gap-x-10 gap-y-8 md:grid-cols-8 md:gap-4 lg:grid-cols-12 lg:gap-6">
             {/* About Column */}
             <div className="col-span-2 col-start-1 row-start-1 md:col-start-1 md:col-span-4 lg:col-start-1 lg:col-span-4 lg:row-start-auto space-y-4">
               <h4 className="p2 font-medium text-white pb-3 mb-0">About</h4>
@@ -121,7 +102,7 @@ export default function Footer() {
             </div>
 
             {/* Programs Column */}
-            <div className="col-span-4 col-start-1 row-start-2 mt-4 md:mt-0 md:row-start-1 md:col-start-5 md:col-span-4 lg:mt-0 lg:col-start-5 lg:col-span-4 lg:row-start-auto space-y-4">
+            <div className="col-span-4 col-start-1 row-start-2 md:row-start-1 md:col-start-5 md:col-span-4 lg:col-start-5 lg:col-span-4 lg:row-start-auto space-y-4">
               <h4 className="p2 font-medium text-white pb-3 mb-0">Programs</h4>
               <ul className="space-y-0">
                 <li>
@@ -151,7 +132,7 @@ export default function Footer() {
                 </li>
                 <li>
                   <Link href={ROUTES.WORKPLACE_PROGRAMS} className="p2 text-text-grey-light hover:text-white transition-colors">
-                    Workplace
+                    Workplace Programs
                   </Link>
                 </li>
                 <li>
@@ -161,7 +142,7 @@ export default function Footer() {
                 </li>
                 <li>
                   <Link href={ROUTES.CONTACT} className="p2 text-text-grey-light hover:text-white transition-colors">
-                    Customized Programs
+                    Healthy Relationships & Sex Educations
                   </Link>
                 </li>
               </ul>
@@ -186,6 +167,11 @@ export default function Footer() {
                     Press
                   </Link>
                 </li>
+                <li>
+                  <Link href={ROUTES.PRESS} className="p2 text-text-grey-light hover:text-white transition-colors">
+                    What is Empowerment Self-Defense
+                  </Link>
+                </li>
               </ul>
             </div>
           </div>
@@ -193,7 +179,7 @@ export default function Footer() {
 
         {/* Footer Bar - Social & Copyright */}
         <div>
-          <div className="grid grid-cols-4 gap-10 md:grid-cols-8 md:gap-4 lg:grid-cols-12 lg:gap-6">
+          <div className="grid grid-cols-4 gap-x-10 gap-y-8 md:grid-cols-8 md:gap-4 lg:grid-cols-12 lg:gap-6">
             {/* Social Icons */}
             <div className="col-span-4 md:col-span-4 lg:col-span-6 flex items-center gap-0 md:gap-4">
               <a
