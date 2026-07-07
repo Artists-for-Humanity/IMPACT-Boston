@@ -1,5 +1,8 @@
 import {defineField, defineType} from 'sanity'
 import {HeadlineColorInput, headlineColorOptions} from '../../components/HeadlineColorInput'
+import {HeadlinePartsInput} from '../../components/HeadlinePartsInput'
+import {HeadlinePartTextInput} from '../../components/HeadlinePartTextInput'
+import {LimitedTextInput} from '../../components/LimitedTextInput'
 import {blockPreviewMedia} from './blockPreviews'
 import {defineLinkTargetField} from '../linkTarget'
 
@@ -84,14 +87,32 @@ export const heroBlockType = defineType({
     defineField({
       name: 'headlineParts',
       title: 'Headline Parts',
-      description: 'Each word or phrase in the headline with its color.',
+      description:
+        'Each word or phrase in the headline with its color. Hero 1 limit: 60 characters total (keeps headline within the image height).',
       type: 'array',
       validation: (rule) =>
-        rule.custom((value) =>
-          Array.isArray(value) && value.length > 0
-            ? true
-            : 'At least one headline part is required.',
-        ),
+        rule.custom((value, context) => {
+          if (!Array.isArray(value) || value.length === 0) {
+            return 'At least one headline part is required.'
+          }
+
+          if (!isHero2(context.parent)) {
+            const total = value.reduce((sum, part) => {
+              const text = typeof part?.text === 'string' ? part.text.trim() : ''
+              return sum + text.length
+            }, 0)
+            const spaces = Math.max(0, value.filter((p) => p?.text?.trim()).length - 1)
+
+            if (total + spaces > 60) {
+              return `Hero 1 headline is ${total + spaces} characters — keep it under 60 to prevent overflowing the image.`
+            }
+          }
+
+          return true
+        }),
+      components: {
+        input: HeadlinePartsInput,
+      },
       of: [
         {
           type: 'object',
@@ -101,6 +122,9 @@ export const heroBlockType = defineType({
               title: 'Text',
               type: 'string',
               validation: (rule) => rule.required(),
+              components: {
+                input: HeadlinePartTextInput,
+              },
             }),
             defineField({
               name: 'color',
@@ -158,9 +182,15 @@ export const heroBlockType = defineType({
       rows: 3,
       hidden: ({parent}) => isHero2(parent),
       validation: (rule) =>
-        rule.custom((value, context) =>
-          isHero2(context.parent) || value ? true : 'Body text is required for Hero 1.',
-        ),
+        rule.custom((value, context) => {
+          if (!isHero2(context.parent) && !value) return 'Body text is required for Hero 1.'
+          if (!isHero2(context.parent) && typeof value === 'string' && value.length > 200)
+            return `Body text must be 200 characters or fewer (currently ${value.length}).`
+          return true
+        }),
+      components: {
+        input: (props) => LimitedTextInput({...props, limit: 200}),
+      },
     }),
     defineField({
       name: 'ctaText',
@@ -199,8 +229,8 @@ export const heroBlockType = defineType({
       name: 'youtubeUrl',
       title: 'YouTube URL',
       type: 'url',
-      description: 'Optional. Paste a YouTube watch, share, shorts, or embed URL.',
-      hidden: ({parent}) => !isHero2(parent) || hidesMedia(parent),
+      description: 'Optional. Paste a YouTube watch, share, shorts, or embed URL. When provided, replaces the image.',
+      hidden: ({parent}) => hidesMedia(parent as HeroBlockParent),
       validation: (rule) =>
         rule.custom((value) => (isYouTubeUrl(value) ? true : 'Use a valid YouTube URL.')),
     }),
@@ -209,7 +239,7 @@ export const heroBlockType = defineType({
       title: 'Video Title',
       type: 'string',
       description: 'Optional accessible title for the embedded YouTube video.',
-      hidden: ({parent}) => !isHero2(parent) || hidesMedia(parent),
+      hidden: ({parent}) => hidesMedia(parent as HeroBlockParent) || !hasYouTubeUrl(parent),
     }),
     defineField({
       name: 'image',
@@ -219,8 +249,12 @@ export const heroBlockType = defineType({
       hidden: ({parent}) => isHero2(parent) && hidesMedia(parent),
       validation: (rule) =>
         rule.custom((value, context) => {
-          if (!isHero2(context.parent) && !hasImage(value)) {
-            return 'Hero image is required for Hero 1.'
+          if (
+            !isHero2(context.parent) &&
+            !hasImage(value) &&
+            !hasYouTubeUrl(context.parent)
+          ) {
+            return 'Add a hero image or a YouTube URL for Hero 1.'
           }
 
           if (

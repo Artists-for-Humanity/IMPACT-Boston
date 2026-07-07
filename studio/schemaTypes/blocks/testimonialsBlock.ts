@@ -1,5 +1,6 @@
 import {defineArrayMember, defineField, defineType} from 'sanity'
 import {BackgroundColorInput} from '../../components/BackgroundColorInput'
+import {LimitedTextInput} from '../../components/LimitedTextInput'
 import {blockPreviewMedia} from './blockPreviews'
 import {defineLinkTargetField} from '../linkTarget'
 
@@ -139,7 +140,16 @@ export const testimonialsBlockType = defineType({
               title: 'Quote',
               type: 'text',
               rows: 4,
-              validation: (rule) => rule.required(),
+              validation: (rule) =>
+                rule.custom((value) => {
+                  if (!value) return 'Quote is required.'
+                  if (typeof value === 'string' && value.length > 425)
+                    return `Quote must be 425 characters or fewer (currently ${value.length}).`
+                  return true
+                }),
+              components: {
+                input: (props) => LimitedTextInput({...props, limit: 425}),
+              },
             }),
             defineField({
               name: 'author',

@@ -138,7 +138,7 @@ export default function ActionPanel({
 
           {/* Subtext */}
           <p
-            className="col-span-4 md:col-span-4 lg:col-span-3 lg:col-start-10 p2 text-gray-600 md:text-left lg:text-right self-end lg:self-center"
+            className="col-span-4 md:col-span-5 lg:col-span-3 lg:col-start-10 p2 text-gray-600 md:text-left lg:text-right self-end lg:self-center"
             data-sanity={dataAttributes?.subtext}
           >
             {subtext}
