@@ -2,7 +2,7 @@
 
 // Testimonials carousel showcasing client feedback
 
-import { useState, useEffect, type CSSProperties } from "react";
+import { useState, useEffect, useRef, type CSSProperties } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import Grid from "@/components/common/Grid";
 import ExpandableQuote from "./ExpandableQuote";
@@ -102,75 +102,83 @@ function TestimonialsCarouselTrack({
   headingClassName,
   dataAttributes,
 }: TestimonialsCarouselTrackProps) {
-  const [currentIndex, setCurrentIndex] = useState(testimonialItems.length);
-  const [isTransitioning, setIsTransitioning] = useState(true);
+  const n = testimonialItems.length;
+
+  // activeIndex: which testimonial is centered (0 to n-1)
+  // slidePos: position in the 3-card render (0=prev, 1=center, 2=next)
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [slidePos, setSlidePos] = useState(1);
+  const [isTransitioning, setIsTransitioning] = useState(false);
   const [isMobile, setIsMobile] = useState(true);
   const [isTablet, setIsTablet] = useState(false);
+  const [isLargeDesktop, setIsLargeDesktop] = useState(false);
+  const pendingUpdate = useRef<null | { nextActive: number }>(null);
 
-  // Duplicate testimonials for infinite loop
-  const duplicatedTestimonials = [
-    ...testimonialItems,
-    ...testimonialItems,
-    ...testimonialItems,
-  ];
-  const startIndex = testimonialItems.length;
   const backgroundStyle: CSSProperties | undefined = isHexColor(backgroundColor)
     ? { backgroundColor }
     : undefined;
   const backgroundClassName = backgroundStyle ? "" : backgroundColor;
   const Heading = headingLevel;
 
-  // Detect screen size
+  const prevIndex = (activeIndex - 1 + n) % n;
+  const nextIndex = (activeIndex + 1) % n;
+
+  // The 3 rendered cards: [prev, active, next]
+  const visibleCards = [
+    testimonialItems[prevIndex],
+    testimonialItems[activeIndex],
+    testimonialItems[nextIndex],
+  ];
+
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth < 744);
       setIsTablet(window.innerWidth >= 744 && window.innerWidth < 1024);
+      setIsLargeDesktop(window.innerWidth >= 1296);
     };
-
     handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   const nextSlide = () => {
+    if (isTransitioning) return;
+    pendingUpdate.current = { nextActive: nextIndex };
     setIsTransitioning(true);
-    setCurrentIndex((prev) => prev + 1);
+    setSlidePos(2);
   };
 
   const prevSlide = () => {
+    if (isTransitioning) return;
+    pendingUpdate.current = { nextActive: prevIndex };
     setIsTransitioning(true);
-    setCurrentIndex((prev) => prev - 1);
+    setSlidePos(0);
   };
 
   const handleTransitionEnd = () => {
-    if (currentIndex >= startIndex + testimonialItems.length) {
-      setIsTransitioning(false);
-      setCurrentIndex(startIndex);
-    } else if (currentIndex < startIndex) {
-      setIsTransitioning(false);
-      setCurrentIndex(startIndex + testimonialItems.length - 1);
-    }
+    if (!isTransitioning || !pendingUpdate.current) return;
+    const { nextActive } = pendingUpdate.current;
+    pendingUpdate.current = null;
+    // Disable transition, update active card, and snap back to center position
+    setIsTransitioning(false);
+    setActiveIndex(nextActive);
+    setSlidePos(1);
   };
 
-  // Reset transitioning state after jump
-  useEffect(() => {
-    if (!isTransitioning) {
-      setTimeout(() => setIsTransitioning(true), 50);
-    }
-  }, [isTransitioning]);
-
-  // Calculate transform based on screen size
+  // Calculate transform to center the card at slidePos
   const getTransform = () => {
     if (isMobile) {
-      // Mobile: 288px cards + 16px gap
-      // Center the active card: 50% viewport - (card width / 2) - (index * (card + gap))
-      return `translateX(calc(50% - 144px - ${currentIndex * 304}px))`;
+      // 288px cards + 16px gap, step = 304px
+      return `translateX(calc(50% - 144px - ${slidePos * 304}px))`;
     } else if (isTablet) {
-      return `translateX(calc(-${currentIndex * 50}% - ${currentIndex * 16}px + 25%))`;
+      // cards = 50% wide, gap = 16px
+      return `translateX(calc(-${slidePos * 50}% - ${slidePos * 16}px + 25%))`;
+    } else if (isLargeDesktop) {
+      // cards capped at 588px, gap = 24px, step = 612px
+      return `translateX(calc(50% - 294px - ${slidePos * 612}px))`;
     } else {
-      // Desktop: card width is calc(50% - 60px), gap is 24px
-      // Total shift per card = 50% - 60px + 24px = 50% - 36px
-      return `translateX(calc(-${currentIndex * 50}% + ${currentIndex * 36}px + 25%))`;
+      // cards = calc(50% - 60px), gap = 24px, step = 50% - 36px
+      return `translateX(calc(-${slidePos * 50}% + ${slidePos * 36}px + 25%))`;
     }
   };
 
@@ -210,70 +218,36 @@ function TestimonialsCarouselTrack({
                 className="w-12 h-12 relative flex items-center justify-center transition-opacity hover:opacity-80"
                 aria-label="Previous testimonial"
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="46"
-                  height="46"
-                  viewBox="0 0 46 46"
-                  fill="none"
-                  className="absolute"
-                >
-                  <circle
-                    cx="23"
-                    cy="23"
-                    r="22.5"
-                    stroke="#dddddd"
-                    fill="white"
-                  />
+                <svg xmlns="http://www.w3.org/2000/svg" width="46" height="46" viewBox="0 0 46 46" fill="none" className="absolute">
+                  <circle cx="23" cy="23" r="22.5" stroke="#dddddd" fill="white" />
                 </svg>
-                <ChevronLeft
-                  className="w-6 h-6 text-black relative z-10"
-                  strokeWidth={2}
-                />
+                <ChevronLeft className="w-6 h-6 text-black relative z-10" strokeWidth={2} />
               </button>
               <button
                 onClick={nextSlide}
                 className="w-12 h-12 relative flex items-center justify-center transition-opacity hover:opacity-80"
                 aria-label="Next testimonial"
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="46"
-                  height="46"
-                  viewBox="0 0 46 46"
-                  fill="none"
-                  className="absolute"
-                >
-                  <circle
-                    cx="23"
-                    cy="23"
-                    r="22.5"
-                    stroke="#dddddd"
-                    fill="white"
-                  />
+                <svg xmlns="http://www.w3.org/2000/svg" width="46" height="46" viewBox="0 0 46 46" fill="none" className="absolute">
+                  <circle cx="23" cy="23" r="22.5" stroke="#dddddd" fill="white" />
                 </svg>
-                <ChevronRight
-                  className="w-6 h-6 text-black relative z-10"
-                  strokeWidth={2}
-                />
+                <ChevronRight className="w-6 h-6 text-black relative z-10" strokeWidth={2} />
               </button>
             </div>
           </Grid>
 
           {/* Cards Carousel */}
-          <div className="relative md:ml-0 lg:ml-0">
-            <div className="overflow-visible md:overflow-visible lg:overflow-visible md:pl-0 lg:pl-0">
+          <div className="relative">
+            <div className="overflow-visible">
               <div
-                className={`flex gap-4 md:gap-4 lg:gap-6 ${isTransitioning ? "transition-transform duration-500 ease-in-out" : ""}`}
-                style={{
-                  transform: getTransform(),
-                }}
+                className={`flex gap-4 lg:gap-6 ${isTransitioning ? "transition-transform duration-500 ease-in-out" : ""}`}
+                style={{ transform: getTransform() }}
                 onTransitionEnd={handleTransitionEnd}
               >
-                {duplicatedTestimonials.map((testimonial, index) => (
+                {visibleCards.map((testimonial, index) => (
                   <div
-                    key={index}
-                    className="shrink-0 w-[288px] md:w-[50%] lg:w-[calc(50%-60px)] bg-white flex flex-col"
+                    key={`${activeIndex}-${index}`}
+                    className="shrink-0 w-[288px] md:w-[50%] lg:w-[min(calc(50%-60px),588px)] bg-white flex flex-col"
                   >
                     {/* Colored Top Border */}
                     <div
@@ -286,7 +260,6 @@ function TestimonialsCarouselTrack({
 
                     {/* Card Content */}
                     <div className="px-4 py-8 lg:p-8">
-                      {/* Quote */}
                       <ExpandableQuote
                         quote={testimonial.quote}
                         className="p1 whitespace-pre-line text-[#000] lg:text-[#333]"
@@ -318,47 +291,27 @@ function TestimonialsCarouselTrack({
           </div>
         </div>
 
-        {/* Arrow Navigation - Mobile and Tablet, centered at bottom */}
+        {/* Arrow Navigation - Mobile and Tablet */}
         <div className="flex lg:hidden gap-2 justify-center">
           <button
             onClick={prevSlide}
             className="w-12 h-12 relative flex items-center justify-center transition-opacity hover:opacity-80"
             aria-label="Previous testimonial"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="46"
-              height="46"
-              viewBox="0 0 46 46"
-              fill="none"
-              className="absolute"
-            >
+            <svg xmlns="http://www.w3.org/2000/svg" width="46" height="46" viewBox="0 0 46 46" fill="none" className="absolute">
               <circle cx="23" cy="23" r="22.5" stroke="#dddddd" fill="white" />
             </svg>
-            <ChevronLeft
-              className="w-6 h-6 text-black relative z-10"
-              strokeWidth={2}
-            />
+            <ChevronLeft className="w-6 h-6 text-black relative z-10" strokeWidth={2} />
           </button>
           <button
             onClick={nextSlide}
             className="w-12 h-12 relative flex items-center justify-center transition-opacity hover:opacity-80"
             aria-label="Next testimonial"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="46"
-              height="46"
-              viewBox="0 0 46 46"
-              fill="none"
-              className="absolute"
-            >
+            <svg xmlns="http://www.w3.org/2000/svg" width="46" height="46" viewBox="0 0 46 46" fill="none" className="absolute">
               <circle cx="23" cy="23" r="22.5" stroke="#dddddd" fill="white" />
             </svg>
-            <ChevronRight
-              className="w-6 h-6 text-black relative z-10"
-              strokeWidth={2}
-            />
+            <ChevronRight className="w-6 h-6 text-black relative z-10" strokeWidth={2} />
           </button>
         </div>
       </div>
