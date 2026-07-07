@@ -4,6 +4,7 @@
 import Link from "next/link";
 import { ROUTES } from "@/routes";
 import Grid from "./common/Grid";
+import Button from "./common/Button";
 
 export default function Footer() {
   const year = new Date().getFullYear();
@@ -61,33 +62,16 @@ export default function Footer() {
             </p>
 
             <form className="space-y-2 md:space-y-4 lg:space-y-4 w-full">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="w-full flex h-16 px-[8px] py-5 justify-between items-center self-stretch bg-[#1F2122] focus:border-gray-400 focus:outline-none text-white placeholder:text-[rgba(255,255,255,0.40)] placeholder:font-[Poppins] placeholder:text-[14px] placeholder:font-medium md:placeholder:font-[IBM_Plex_Sans] lg:placeholder:font-[IBM_Plex_Sans] font-[IBM_Plex_Sans]"
-                aria-label="Email address"
-              />
-              <button
-                type="submit"
-                className="w-full flex h-16 px-[19px] py-5 justify-between items-center self-stretch bg-[#1F2122] hover:bg-[#2a2c2d] transition-colors text-white text-center p2 md:font-medium lg:font-medium"
+              <Button
+                href="https://impactboston.app.neoncrm.com/np/clients/impactboston/subscribe.jsp"
+                openInNewTab
+                variant="primary"
+                size="lg"
+                className="w-full h-16 px-[19px] py-5 bg-[#1F2122] hover:bg-[#2a2c2d] text-white p2 md:font-medium lg:font-medium"
+                data-sanity="Join Newsletter"
               >
-                <span>Join</span>
-                <svg
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M5 12H19M19 12L12 5M19 12L12 19"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </button>
+                Join
+              </Button>
             </form>
           </div>
         </Grid>
