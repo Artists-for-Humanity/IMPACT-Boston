@@ -5,7 +5,6 @@
 import { useState, useEffect, useRef, type CSSProperties } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import Grid from "@/components/common/Grid";
-import ExpandableQuote from "./ExpandableQuote";
 
 export interface Testimonial {
   _key?: string | null;
@@ -105,9 +104,9 @@ function TestimonialsCarouselTrack({
   const n = testimonialItems.length;
 
   // activeIndex: which testimonial is centered (0 to n-1)
-  // slidePos: position in the 3-card render (0=prev, 1=center, 2=next)
+  // slidePos: position in the 5-card render (0..4, center=2)
   const [activeIndex, setActiveIndex] = useState(0);
-  const [slidePos, setSlidePos] = useState(1);
+  const [slidePos, setSlidePos] = useState(2);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [isMobile, setIsMobile] = useState(true);
   const [isTablet, setIsTablet] = useState(false);
@@ -123,11 +122,13 @@ function TestimonialsCarouselTrack({
   const prevIndex = (activeIndex - 1 + n) % n;
   const nextIndex = (activeIndex + 1) % n;
 
-  // The 3 rendered cards: [prev, active, next]
+  // 5 rendered cards: [pp, prev, active, next, nn]
   const visibleCards = [
-    testimonialItems[prevIndex],
+    testimonialItems[(activeIndex - 2 + n) % n],
+    testimonialItems[(activeIndex - 1 + n) % n],
     testimonialItems[activeIndex],
-    testimonialItems[nextIndex],
+    testimonialItems[(activeIndex + 1) % n],
+    testimonialItems[(activeIndex + 2) % n],
   ];
 
   useEffect(() => {
@@ -145,24 +146,24 @@ function TestimonialsCarouselTrack({
     if (isTransitioning) return;
     pendingUpdate.current = { nextActive: nextIndex };
     setIsTransitioning(true);
-    setSlidePos(2);
+    setSlidePos(3);
   };
 
   const prevSlide = () => {
     if (isTransitioning) return;
     pendingUpdate.current = { nextActive: prevIndex };
     setIsTransitioning(true);
-    setSlidePos(0);
+    setSlidePos(1);
   };
 
   const handleTransitionEnd = () => {
     if (!isTransitioning || !pendingUpdate.current) return;
     const { nextActive } = pendingUpdate.current;
     pendingUpdate.current = null;
-    // Disable transition, update active card, and snap back to center position
+    // Disable transition, update active card, snap back to center position (2)
     setIsTransitioning(false);
     setActiveIndex(nextActive);
-    setSlidePos(1);
+    setSlidePos(2);
   };
 
   // Calculate transform to center the card at slidePos
@@ -190,7 +191,7 @@ function TestimonialsCarouselTrack({
       <div className="flex flex-col gap-8 md:gap-6 lg:gap-8">
         <div className="flex flex-col gap-8">
           {/* Top Row - Heading and Navigation */}
-          <Grid>
+          <Grid noPadding>
             {/* Left - Heading and Subtext */}
             <div className="col-span-4 md:col-span-8 lg:col-span-6 flex flex-col gap-4 lg:gap-2 md:items-center lg:items-start">
               {heading ? (
@@ -260,12 +261,12 @@ function TestimonialsCarouselTrack({
 
                     {/* Card Content */}
                     <div className="px-4 py-8 lg:p-8">
-                      <ExpandableQuote
-                        quote={testimonial.quote}
+                      <p
                         className="p1 whitespace-pre-line text-[#000] lg:text-[#333]"
-                        dataSanity={testimonial.dataAttributes?.quote}
-                        withQuotationMarks
-                      />
+                        data-sanity={testimonial.dataAttributes?.quote}
+                      >
+                        {"\u201c"}{testimonial.quote.trim()}{"\u201d"}
+                      </p>
                       {showAuthors && testimonial.author ? (
                         <p
                           className="p2 mt-6 text-[#000] lg:text-[#333]"
