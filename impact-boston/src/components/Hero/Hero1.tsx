@@ -196,8 +196,7 @@ export default function Hero1({
 
         <div className="col-span-4 md:col-span-8 lg:col-span-7 h-[544px]">
           <div
-            className="relative w-full h-full overflow-hidden"
-            style={{ backgroundColor: "#311E41" }}
+            className="relative w-full h-full overflow-hidden bg-black"
           >
             <div
               className="absolute top-0 left-0 right-0 h-[7px] z-10"
