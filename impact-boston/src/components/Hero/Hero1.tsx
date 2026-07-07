@@ -1,5 +1,8 @@
+"use client";
+
 import Image from "next/image";
-import React from "react";
+import React, { useCallback, useRef, useState } from "react";
+import { Volume2, VolumeX } from "lucide-react";
 import Grid from "../common/Grid";
 import Button from "../common/Button";
 
@@ -16,7 +19,7 @@ export function Hero1Headline({
 }: Hero1HeadlineProps) {
   return (
     <h1
-      className={`h1 text-center lg:text-left ${className}`}
+      className={`h1 text-center lg:text-left hyphens-auto ${className}`}
       data-sanity={dataSanity}
       style={{ color: "#061629" }}
     >
@@ -61,14 +64,57 @@ export function Hero1HeadlinePart({
   );
 }
 
+function getYouTubeVideoId(url: string): string {
+  try {
+    const parsed = new URL(url);
+    const hostname = parsed.hostname.replace(/^www\./, "");
+    if (
+      (hostname === "youtube.com" || hostname === "youtube-nocookie.com") &&
+      parsed.pathname.startsWith("/embed/")
+    ) {
+      return parsed.pathname.split("/").filter(Boolean)[1] ?? "";
+    }
+    if (hostname === "youtu.be") {
+      return parsed.pathname.split("/").filter(Boolean)[0] ?? "";
+    }
+    if (hostname === "youtube.com" || hostname === "m.youtube.com") {
+      if (parsed.pathname.startsWith("/shorts/")) {
+        return parsed.pathname.split("/").filter(Boolean)[1] ?? "";
+      }
+      return parsed.searchParams.get("v") ?? "";
+    }
+  } catch {
+    // ignore
+  }
+  return "";
+}
+
+function buildYouTubeEmbedUrl(url: string): string {
+  const videoId = getYouTubeVideoId(url);
+  if (!videoId) return url;
+  const params = new URLSearchParams({
+    autoplay: "1",
+    mute: "1",
+    controls: "0",
+    rel: "0",
+    loop: "1",
+    playlist: videoId, // required for loop
+    modestbranding: "1",
+    enablejsapi: "1",
+  });
+  return `https://www.youtube.com/embed/${videoId}?${params.toString()}`;
+}
+
 interface Hero1Props {
   headline: React.ReactNode;
   body: string;
   ctaText: string;
   ctaHref: string;
   ctaOpenInNewTab?: boolean;
-  imageSrc: string;
-  imageAlt: string;
+  imageSrc?: string;
+  imageAlt?: string;
+  youtubeUrl?: string;
+  videoTitle?: string;
   className?: string;
   dataAttributes?: {
     body?: string;
@@ -85,9 +131,23 @@ export default function Hero1({
   ctaOpenInNewTab = false,
   imageSrc,
   imageAlt,
+  youtubeUrl,
+  videoTitle,
   className = "",
   dataAttributes,
 }: Hero1Props) {
+  const youtubeEmbedUrl = youtubeUrl ? buildYouTubeEmbedUrl(youtubeUrl) : null;
+  const iframeRef = useRef<HTMLIFrameElement>(null);
+  const [muted, setMuted] = useState(true);
+
+  const toggleMute = useCallback(() => {
+    const func = muted ? "unMute" : "mute";
+    iframeRef.current?.contentWindow?.postMessage(
+      JSON.stringify({ event: "command", func, args: [] }),
+      "*",
+    );
+    setMuted((prev) => !prev);
+  }, [muted]);
   return (
     <section
       className={`bg-brand-gray-light py-8 md:py-10 lg:py-18 ${className}`}
@@ -97,7 +157,7 @@ export default function Hero1({
           <div className="flex flex-col h-full items-center lg:items-start gap-8 lg:gap-0">
             <div className="flex flex-col gap-y-6 lg:gap-y-[32px] items-center lg:items-start w-full">
               <div className="lg:grid lg:grid-cols-5 lg:gap-6 w-full">
-                <div className="lg:col-span-4">
+                <div className="lg:col-span-4 min-w-0">
                   {headline &&
                     (typeof headline === "string" ? (
                       <Hero1Headline>{headline}</Hero1Headline>
@@ -133,7 +193,7 @@ export default function Hero1({
 
         <div className="col-span-4 md:col-span-8 lg:col-span-7 h-[544px]">
           <div
-            className="relative w-full h-full"
+            className="relative w-full h-full overflow-hidden"
             style={{ backgroundColor: "#311E41" }}
           >
             <div
@@ -143,15 +203,42 @@ export default function Hero1({
                   "linear-gradient(to right, #E36A38 0%, #E36A38 22%, #874E9F 22%, #874E9F 86%, #462458 86%, #462458 100%)",
               }}
             />
-            <Image
-              src={imageSrc}
-              alt={imageAlt}
-              data-sanity={dataAttributes?.image}
-              fill
-              sizes="(min-width: 1024px) 58vw, 100vw"
-              className="object-cover"
-              priority
-            />
+            {youtubeEmbedUrl ? (
+              <>
+                <iframe
+                  ref={iframeRef}
+                  src={youtubeEmbedUrl}
+                  title={videoTitle ?? (typeof headline === "string" ? headline : "Hero video")}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerPolicy="strict-origin-when-cross-origin"
+                  className="absolute inset-0 h-full w-full"
+                  style={{ zIndex: 1 }}
+                />
+                <button
+                  type="button"
+                  onClick={toggleMute}
+                  aria-label={muted ? "Unmute video" : "Mute video"}
+                  className="absolute bottom-4 right-4 flex items-center justify-center rounded-full bg-black/50 p-2 text-white backdrop-blur-sm transition hover:bg-black/70"
+                  style={{ zIndex: 2 }}
+                >
+                  {muted ? (
+                    <VolumeX className="size-5" aria-hidden="true" />
+                  ) : (
+                    <Volume2 className="size-5" aria-hidden="true" />
+                  )}
+                </button>
+              </>
+            ) : imageSrc ? (
+              <Image
+                src={imageSrc}
+                alt={imageAlt ?? ""}
+                data-sanity={dataAttributes?.image}
+                fill
+                sizes="(min-width: 1024px) 58vw, 100vw"
+                className="object-cover"
+                priority
+              />
+            ) : null}
           </div>
         </div>
       </Grid>

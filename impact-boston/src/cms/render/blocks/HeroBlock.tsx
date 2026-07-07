@@ -120,7 +120,9 @@ export default function HeroBlock({
     );
   }
 
-  if (!imageSrc) {
+  const hero1YouTubeUrl = section.youtubeUrl?.trim() || undefined;
+
+  if (!imageSrc && !hero1YouTubeUrl) {
     return null;
   }
 
@@ -177,6 +179,8 @@ export default function HeroBlock({
       }}
       imageSrc={imageSrc}
       imageAlt={imageAlt}
+      youtubeUrl={hero1YouTubeUrl}
+      videoTitle={section.videoTitle ?? undefined}
     />
   );
 }
