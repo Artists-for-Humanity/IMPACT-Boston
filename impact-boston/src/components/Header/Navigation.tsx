@@ -194,7 +194,7 @@ export default function Navigation({
                         >
                           <a
                             href={sub.link}
-                            className="link block p-4 text-gray-600 hover:text-gray-900 hover:bg-gray-50 transition-colors duration-150 rounded-lg"
+                            className="link block p-4 text-gray-600 hover:text-gray-900 hover:bg-bg-lavender transition-colors duration-150 rounded-lg"
                           >
                             <p className="p1-bold text-secondary">
                               {sub.label}
@@ -320,10 +320,10 @@ export default function Navigation({
                       <li key={sub.label}>
                         <Link
                           href={sub.link}
-                          className="group block"
+                          className="group block rounded-lg p-2 -mx-2 hover:bg-bg-lavender transition-colors duration-150"
                           onClick={() => setMobileOpen(false)}
                         >
-                          <p className="p1-bold text-secondary group-hover:underline group-hover:underline-offset-2">
+                          <p className="p1-bold text-secondary">
                             {sub.label}
                           </p>
                           <p className="p2 mt-1 text-grey">{sub.description}</p>
