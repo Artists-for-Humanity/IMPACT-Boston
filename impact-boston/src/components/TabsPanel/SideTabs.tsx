@@ -73,12 +73,8 @@ export default function SideTabs({ tabs }: { tabs: SideTab[] }) {
   return (
     <div>
       <Grid className="gap-y-12 md:gap-y-12">
-        <div className="scrollbar-hide relative col-span-full flex overflow-x-auto overflow-y-hidden lg:col-span-5 lg:flex-col lg:gap-y-4 lg:self-start">
+        <div className="scrollbar-hide relative col-span-full flex overflow-x-auto overflow-y-hidden shadow-[inset_0_-4px_0_0_#d1d5db] lg:shadow-none lg:col-span-5 lg:flex-col lg:gap-y-4 lg:self-start lg:sticky lg:top-[120px] lg:max-h-[calc(100vh-120px)] lg:overflow-y-auto">
           <div className="hidden lg:absolute lg:left-0 lg:top-0 lg:block lg:h-full lg:w-[4px] lg:bg-gray-300" />
-          <div
-            className="absolute bottom-0 left-0 h-[4px] w-full bg-gray-300 lg:hidden"
-            aria-hidden="true"
-          />
           <div
             className="absolute z-10 rounded bg-complementary"
             style={indicatorStyle}
@@ -90,7 +86,7 @@ export default function SideTabs({ tabs }: { tabs: SideTab[] }) {
               ref={(el) => {
                 tabRefs.current[idx] = el;
               }}
-              className={`h3 flex cursor-pointer items-center gap-x-8 whitespace-nowrap transition-colors duration-150 md:gap-x-16 lg:gap-x-2 lg:whitespace-normal lg:text-left ${
+              className={`h3 flex cursor-pointer items-center gap-x-4 whitespace-nowrap transition-colors duration-150 md:gap-x-8 lg:gap-x-2 lg:whitespace-normal lg:text-left ${
                 tabs.length <= 3 ? "flex-1 lg:flex-none" : ""
               } ${
                 active === idx
