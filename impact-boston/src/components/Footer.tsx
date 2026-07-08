@@ -1,11 +1,16 @@
+"use client";
+
 // components/Footer.tsx
 // Main footer component with contact info, newsletter form, navigation, and social links
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { ROUTES } from "@/routes";
 
 export default function Footer() {
   const year = new Date().getFullYear();
+  const pathname = usePathname();
+  const isHome = pathname === ROUTES.HOME;
 
   return (
     <footer className="w-full bg-black text-white">
@@ -15,9 +20,15 @@ export default function Footer() {
         <div className="grid grid-cols-4 gap-x-10 gap-y-14 md:grid-cols-8 md:gap-x-4 md:gap-y-14 lg:grid-cols-12 lg:gap-6">
 
           {/* IMPACT h2 - left on tablet, top-left on desktop */}
-          <h2 className="col-span-4 md:col-span-4 md:col-start-1 md:row-start-1 lg:col-start-1 lg:col-span-5 lg:row-start-1 h2 text-white">
-            IMPACT
-          </h2>
+          {isHome ? (
+            <h2 className="col-span-4 md:col-span-4 md:col-start-1 md:row-start-1 lg:col-start-1 lg:col-span-5 lg:row-start-1 h2 text-white">
+              IMPACT
+            </h2>
+          ) : (
+            <Link href={ROUTES.HOME} className="col-span-4 md:col-span-4 md:col-start-1 md:row-start-1 lg:col-start-1 lg:col-span-5 lg:row-start-1 h2 text-white hover:opacity-80 transition-opacity">
+              IMPACT
+            </Link>
+          )}
 
           {/* Contact Info - full width row 2 on tablet, bottom-left on desktop */}
           <div className="col-span-4 md:col-span-8 md:col-start-1 md:row-start-2 lg:col-start-1 lg:col-span-5 lg:row-start-2">
@@ -50,17 +61,17 @@ export default function Footer() {
               </p>
             </div>
 
-            <form className="space-y-2 md:space-y-4 lg:space-y-4 w-full">
-              <button
-                type="submit"
-                className="w-full flex h-16 px-[19px] py-5 justify-between items-center self-stretch bg-[#1F2122] hover:bg-[#2a2c2d] transition-colors text-white text-center p2 md:font-medium lg:font-medium"
-              >
-                <span>Join</span>
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </button>
-            </form>
+            <a
+              href="https://impactboston.app.neoncrm.com/np/clients/impactboston/subscribe.jsp"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full flex h-16 px-[19px] py-5 justify-between items-center self-stretch bg-[#1F2122] hover:bg-[#2a2c2d] transition-colors text-white text-center p2 md:font-medium lg:font-medium"
+            >
+              <span>Join</span>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </a>
           </div>
 
         </div>
@@ -135,7 +146,7 @@ export default function Footer() {
                   </Link>
                 </li>
                 <li>
-                  <Link href={ROUTES.CONTACT} className="p2 text-text-grey-light hover:text-white transition-colors">
+                  <Link href={ROUTES.HEALTHY_RELATIONSHIPS} className="p2 text-text-grey-light hover:text-white transition-colors">
                     Healthy Relationships & Sex Educations
                   </Link>
                 </li>
@@ -162,7 +173,7 @@ export default function Footer() {
                   </Link>
                 </li>
                 <li>
-                  <Link href={ROUTES.PRESS} className="p2 text-text-grey-light hover:text-white transition-colors">
+                  <Link href={ROUTES.EMPOWERMENT} className="p2 text-text-grey-light hover:text-white transition-colors">
                     What is Empowerment Self-Defense
                   </Link>
                 </li>
