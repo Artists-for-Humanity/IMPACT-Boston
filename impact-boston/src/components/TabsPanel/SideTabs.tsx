@@ -73,7 +73,7 @@ export default function SideTabs({ tabs }: { tabs: SideTab[] }) {
   return (
     <div>
       <Grid className="gap-y-12 md:gap-y-12">
-        <div className="scrollbar-hide relative col-span-full flex overflow-x-auto overflow-y-hidden lg:col-span-5 lg:flex-col lg:gap-y-4 lg:self-start">
+        <div className="scrollbar-hide relative col-span-full flex overflow-x-auto overflow-y-hidden lg:col-span-5 lg:flex-col lg:gap-y-4 lg:self-start lg:sticky lg:top-[96px] lg:max-h-[calc(100vh-96px)] lg:overflow-y-auto">
           <div className="hidden lg:absolute lg:left-0 lg:top-0 lg:block lg:h-full lg:w-[4px] lg:bg-gray-300" />
           <div
             className="absolute bottom-0 left-0 h-[4px] w-full bg-gray-300 lg:hidden"
