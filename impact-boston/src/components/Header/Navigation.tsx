@@ -175,7 +175,7 @@ export default function Navigation({
                     aria-hidden
                     className="absolute top-2 left-1/2 z-0 h-4 w-4 -translate-x-1/2 rotate-45 border-l border-t border-gray-100 bg-white shadow-sm"
                   />
-                  <ul className="relative z-10 min-w-xl bg-white border border-gray-100 px-8 py-4 rounded-2xl grid grid-cols-2 gap-x-6">
+                  <ul className="relative z-10 min-w-xl bg-white border border-gray-100 px-8 py-6 rounded-2xl grid grid-cols-2 gap-x-6">
                     {item.subItems.map((sub, subIdx) => {
                       // desktop dropdown uses 2 columns; compute which items are in the last row
                       const cols = 2;
@@ -296,19 +296,12 @@ export default function Navigation({
       {/* ── Mobile panel ─────────────────────────────────────────── */}
       {mobileOpen && (
         <div className="lg:hidden absolute top-full left-0 z-50 max-h-[calc(100vh-73px)] w-full overflow-y-auto bg-white border-t border-line-divider shadow-lg">
-          <ul className="px-6 py-8 md:px-10 md:py-10">
+          <ul className="px-6 py-10 md:px-6 md:py-10 flex flex-col gap-8">
             {items.map((item, itemIdx) => (
-              <li
-                key={item.label}
-                className={`${
-                  itemIdx === items.length - 1
-                    ? ""
-                    : "mb-8 border-b border-line-divider pb-8 md:mb-9 md:pb-9"
-                }`}
-              >
+              <li key={item.label} className="flex flex-col gap-8">
                 <Link
                   href={item.link}
-                  className="sub-1 mb-7 block text-black hover:text-secondary transition-colors duration-150"
+                  className="sub-1 block text-black hover:text-secondary transition-colors duration-150"
                   onClick={() => setMobileOpen(false)}
                 >
                   {item.label}
@@ -331,6 +324,10 @@ export default function Navigation({
                       </li>
                     ))}
                   </ul>
+                )}
+
+                {itemIdx !== items.length - 1 && (
+                  <div className="border-b border-line-divider -mx-6" aria-hidden="true" />
                 )}
               </li>
             ))}
