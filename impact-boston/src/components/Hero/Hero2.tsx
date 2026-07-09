@@ -1,5 +1,9 @@
+"use client";
+
 import Image from "next/image";
 import type { ReactNode } from "react";
+import { useCallback, useRef, useState } from "react";
+import { Volume2, VolumeX } from "lucide-react";
 import Grid from "../common/Grid";
 import { PLACEHOLDER_IMAGE_SRC } from "../common/placeholderImage";
 
@@ -13,6 +17,7 @@ interface Hero2Props {
   imageSrc?: string;
   imageAlt?: string;
   youtubeUrl?: string;
+  vimeoUrl?: string;
   videoTitle?: string;
   mediaClassName?: string;
   showMediaPlaceholder?: boolean;
@@ -22,6 +27,44 @@ interface Hero2Props {
     supportingText?: string;
     title?: string;
   };
+}
+
+function getVimeoEmbedUrl(input: string): string {
+  // Handle iframe embed code — extract src attribute
+  const iframeSrcMatch = input.match(/src=["']([^"']+)["']/);
+  if (iframeSrcMatch) {
+    return getVimeoEmbedUrl(iframeSrcMatch[1]);
+  }
+
+  try {
+    const url = new URL(input);
+    const hostname = url.hostname.replace(/^www\./, "");
+
+    let videoId = "";
+
+    if (hostname === "player.vimeo.com" && url.pathname.startsWith("/video/")) {
+      videoId = url.pathname.split("/").filter(Boolean)[1] ?? "";
+    } else if (hostname === "vimeo.com") {
+      videoId = url.pathname.split("/").filter(Boolean)[0] ?? "";
+    }
+
+    if (videoId) {
+      const params = new URLSearchParams({
+        autoplay: "1",
+        muted: "1",
+        controls: "0",
+        loop: "1",
+        title: "0",
+        byline: "0",
+        portrait: "0",
+      });
+      return `https://player.vimeo.com/video/${videoId}?${params.toString()}`;
+    }
+  } catch {
+    // not a URL — return as-is
+  }
+
+  return input;
 }
 
 function getYouTubeEmbedUrl(youtubeUrl: string) {
@@ -66,6 +109,7 @@ export default function Hero2({
   imageSrc,
   imageAlt,
   youtubeUrl,
+  vimeoUrl,
   videoTitle,
   mediaClassName,
   showMediaPlaceholder = false,
@@ -80,8 +124,21 @@ export default function Hero2({
   const highlightClass = highlightClassMap[highlightColor];
   const mediaWrapperClass = mediaClassName ?? "col-span-full w-full";
   const youtubeEmbedUrl = youtubeUrl ? getYouTubeEmbedUrl(youtubeUrl) : null;
+  const vimeoEmbedUrl = vimeoUrl ? getVimeoEmbedUrl(vimeoUrl) : null;
   const mediaTitle =
     titleText || (typeof title === "string" ? title : "Hero media");
+
+  const vimeoRef = useRef<HTMLIFrameElement>(null);
+  const [muted, setMuted] = useState(true);
+
+  const toggleVimeoMute = useCallback(() => {
+    const newMuted = !muted;
+    vimeoRef.current?.contentWindow?.postMessage(
+      JSON.stringify({ method: "setVolume", value: newMuted ? 0 : 1 }),
+      "*",
+    );
+    setMuted(newMuted);
+  }, [muted]);
 
   return (
       <Grid className="md:gap-12 lg:gap-x-8 lg:gap-y-8">
@@ -134,26 +191,77 @@ export default function Hero2({
         </div>
       ) : youtubeEmbedUrl ? (
         <div
-          className={`${mediaWrapperClass} aspect-video overflow-hidden bg-image-placeholder`}
+          className={`${mediaWrapperClass} relative aspect-video overflow-hidden bg-image-placeholder`}
         >
+          <div
+            className="absolute top-0 left-0 right-0 h-[7px] z-10"
+            style={{ background: "linear-gradient(to right, #E36A38 0%, #E36A38 22%, #874E9F 22%, #874E9F 86%, #462458 86%, #462458 100%)" }}
+            aria-hidden="true"
+          />
           <iframe
             src={youtubeEmbedUrl}
             title={videoTitle ?? mediaTitle}
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             referrerPolicy="strict-origin-when-cross-origin"
             allowFullScreen
-            className="h-full w-full"
+            className="absolute inset-0 h-full w-full"
           />
         </div>
+      ) : vimeoEmbedUrl ? (
+        <div
+          className={`${mediaWrapperClass} relative aspect-video overflow-hidden bg-black`}
+        >
+          <div
+            className="absolute top-0 left-0 right-0 h-[7px] z-10"
+            style={{ background: "linear-gradient(to right, #E36A38 0%, #E36A38 22%, #874E9F 22%, #874E9F 86%, #462458 86%, #462458 100%)" }}
+            aria-hidden="true"
+          />
+          <iframe
+            ref={vimeoRef}
+            src={vimeoEmbedUrl}
+            title={videoTitle ?? mediaTitle}
+            allow="autoplay; fullscreen; picture-in-picture"
+            referrerPolicy="strict-origin-when-cross-origin"
+            allowFullScreen
+            className="absolute inset-0 h-full w-full"
+            style={{ zIndex: 1 }}
+          />
+          {/* Transparent overlay blocks mouse events, hiding Vimeo hover UI */}
+          <div
+            className="absolute inset-0"
+            style={{ zIndex: 2 }}
+            aria-hidden="true"
+          />
+          <button
+            type="button"
+            onClick={toggleVimeoMute}
+            aria-label={muted ? "Unmute video" : "Mute video"}
+            className="absolute bottom-4 right-4 flex items-center justify-center rounded-full bg-black/50 p-2 text-white backdrop-blur-sm transition hover:bg-black/70"
+            style={{ zIndex: 3 }}
+          >
+            {muted ? (
+              <VolumeX className="size-5" aria-hidden="true" />
+            ) : (
+              <Volume2 className="size-5" aria-hidden="true" />
+            )}
+          </button>
+        </div>
       ) : imageSrc ? (
-        <Image
-          src={imageSrc}
-          width={1400}
-          height={1050}
-          alt={imageAlt ?? ""}
-          data-sanity={dataAttributes?.image}
-          className={`${mediaWrapperClass} h-auto w-full`}
-        />
+        <div className={`${mediaWrapperClass} relative`}>
+          <div
+            className="absolute top-0 left-0 right-0 h-[7px] z-10"
+            style={{ background: "linear-gradient(to right, #E36A38 0%, #E36A38 22%, #874E9F 22%, #874E9F 86%, #462458 86%, #462458 100%)" }}
+            aria-hidden="true"
+          />
+          <Image
+            src={imageSrc}
+            width={1400}
+            height={1050}
+            alt={imageAlt ?? ""}
+            data-sanity={dataAttributes?.image}
+            className="h-auto w-full"
+          />
+        </div>
       ) : null}
     </Grid>
   );

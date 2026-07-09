@@ -112,7 +112,7 @@ export default function Footer() {
               <ul className="space-y-0">
                 <li>
                   <Link href={ROUTES.PUBLIC_CLASSES} className="p2 text-text-grey-light hover:text-white transition-colors">
-                    Self-Defense Classes
+                    Public Classes
                   </Link>
                 </li>
                 <li>

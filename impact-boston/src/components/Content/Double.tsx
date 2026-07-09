@@ -9,7 +9,6 @@ export type DoubleCard = {
   imageSrc?: string;
   imageAlt?: string;
   showImagePlaceholder?: boolean;
-  showImageGradient?: boolean;
   dataAttributes?: {
     description?: string;
     image?: string;
@@ -32,7 +31,6 @@ export default function ContentDouble({ cards }: DoubleProps) {
           imageSrc={card.imageSrc}
           imageAlt={card.imageAlt ?? card.title ?? ""}
           showImagePlaceholder={card.showImagePlaceholder}
-          showImageGradient={card.showImageGradient}
           dataAttributes={card.dataAttributes}
           className="col-span-full flex flex-col gap-y-8 justify-between lg:col-span-6"
         />
@@ -50,7 +48,6 @@ function DoubleCard({
   imageSrc,
   imageAlt,
   showImagePlaceholder = false,
-  showImageGradient = false,
   className = "",
   dataAttributes,
 }: {
@@ -59,7 +56,6 @@ function DoubleCard({
   imageSrc?: string;
   imageAlt: string;
   showImagePlaceholder?: boolean;
-  showImageGradient?: boolean;
   className?: string;
   dataAttributes?: DoubleCard["dataAttributes"];
 }) {
@@ -76,30 +72,31 @@ function DoubleCard({
         </p>
       </div>
 
-      <div className="relative w-full aspect-[6/3]" data-sanity={dataAttributes?.image}>
-        {showImageGradient && (
-          <div
-            className="absolute left-0 right-0 top-0 z-10 h-2"
-            style={{ background: imageTopGradient }}
-          />
-        )}
-        {showImagePlaceholder ? (
-          <Image
-            src={PLACEHOLDER_IMAGE_SRC}
-            alt={imageAlt}
-            fill
-            sizes="(min-width: 1024px) 50vw, 100vw"
-            className="object-cover"
-          />
-        ) : imageSrc ? (
-          <Image
-            src={imageSrc}
-            alt={imageAlt}
-            fill
-            sizes="(min-width: 1024px) 50vw, 100vw"
-            className="object-cover"
-          />
-        ) : null}
+      <div data-sanity={dataAttributes?.image}>
+        <div
+          className="h-[7px]"
+          style={{ background: imageTopGradient }}
+          aria-hidden="true"
+        />
+        <div className="relative w-full aspect-[6/3] lg:aspect-auto lg:h-[348px] overflow-hidden">
+          {showImagePlaceholder ? (
+            <Image
+              src={PLACEHOLDER_IMAGE_SRC}
+              alt={imageAlt}
+              fill
+              sizes="(min-width: 1024px) 50vw, 100vw"
+              className="object-cover"
+            />
+          ) : imageSrc ? (
+            <Image
+              src={imageSrc}
+              alt={imageAlt}
+              fill
+              sizes="(min-width: 1024px) 50vw, 100vw"
+              className="object-cover"
+            />
+          ) : null}
+        </div>
       </div>
     </div>
   );

@@ -77,12 +77,6 @@ export const doubleContentBlockType = defineType({
                     : true,
                 ),
             }),
-            defineField({
-              name: 'showImageGradient',
-              title: 'Show Image Gradient',
-              type: 'boolean',
-              initialValue: true,
-            }),
           ],
           preview: {
             select: {
@@ -108,13 +102,11 @@ export const doubleContentBlockType = defineType({
         description: 'First card description',
         showImagePlaceholder: true,
         imageAlt: 'Placeholder image',
-        showImageGradient: true,
       },
       {
         description: 'Second card description',
         showImagePlaceholder: true,
         imageAlt: 'Placeholder image',
-        showImageGradient: true,
       },
     ],
   },

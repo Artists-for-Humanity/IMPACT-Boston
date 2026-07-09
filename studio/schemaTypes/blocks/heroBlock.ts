@@ -11,6 +11,7 @@ type HeroBlockParent = {
   hideMedia?: boolean | null
   image?: unknown
   youtubeUrl?: string | null
+  vimeoUrl?: string | null
 }
 
 const isHero2 = (parent: unknown) =>
@@ -22,6 +23,32 @@ const hasYouTubeUrl = (parent: unknown) => {
   const typedParent = parent as HeroBlockParent | undefined
 
   return Boolean(typedParent?.youtubeUrl?.trim())
+}
+
+const hasVimeoUrl = (parent: unknown) => {
+  const typedParent = parent as HeroBlockParent | undefined
+
+  return Boolean(typedParent?.vimeoUrl?.trim())
+}
+
+function isVimeoUrlOrEmbed(value?: string | null) {
+  if (!value) return true
+
+  // Accept iframe embed code
+  if (value.trim().startsWith('<iframe')) {
+    return value.includes('player.vimeo.com') || value.includes('vimeo.com')
+      ? true
+      : false
+  }
+
+  try {
+    const url = new URL(value)
+    const hostname = url.hostname.replace(/^www\./, '')
+
+    return hostname === 'vimeo.com' || hostname === 'player.vimeo.com'
+  } catch {
+    return false
+  }
 }
 
 const hasImage = (value: unknown) => Boolean(value)
@@ -235,11 +262,28 @@ export const heroBlockType = defineType({
         rule.custom((value) => (isYouTubeUrl(value) ? true : 'Use a valid YouTube URL.')),
     }),
     defineField({
+      name: 'vimeoUrl',
+      title: 'Vimeo URL or Embed',
+      type: 'text',
+      rows: 3,
+      description:
+        'Optional. Paste a Vimeo URL (e.g. https://vimeo.com/143549128) or the full iframe embed code. When provided, replaces the image. YouTube URL takes priority if both are set.',
+      hidden: ({parent}) => hidesMedia(parent as HeroBlockParent) || hasYouTubeUrl(parent),
+      validation: (rule) =>
+        rule.custom((value) =>
+          isVimeoUrlOrEmbed(value as string | null | undefined)
+            ? true
+            : 'Use a valid Vimeo URL or iframe embed code.',
+        ),
+    }),
+    defineField({
       name: 'videoTitle',
       title: 'Video Title',
       type: 'string',
-      description: 'Optional accessible title for the embedded YouTube video.',
-      hidden: ({parent}) => hidesMedia(parent as HeroBlockParent) || !hasYouTubeUrl(parent),
+      description: 'Optional accessible title for the embedded video.',
+      hidden: ({parent}) =>
+        hidesMedia(parent as HeroBlockParent) ||
+        (!hasYouTubeUrl(parent) && !hasVimeoUrl(parent)),
     }),
     defineField({
       name: 'image',
@@ -261,9 +305,10 @@ export const heroBlockType = defineType({
             isHero2(context.parent) &&
             !hidesMedia(context.parent) &&
             !hasImage(value) &&
-            !hasYouTubeUrl(context.parent)
+            !hasYouTubeUrl(context.parent) &&
+            !hasVimeoUrl(context.parent)
           ) {
-            return 'Add a hero image, a YouTube URL, or choose "No Hero Image or Video."'
+            return 'Add a hero image, a YouTube URL, a Vimeo URL, or choose "No Hero Image or Video."'
           }
 
           return true

@@ -55,6 +55,11 @@ export default function Split({
         <div className="col-span-full mt-8 lg:col-span-7 lg:mt-0 lg:h-full">
           <div className="flex flex-col gap-2 md:gap-3 lg:h-full">
             <div className="relative w-full min-h-[220px] md:min-h-[280px] lg:flex-1">
+              <div
+                className="absolute top-0 left-0 right-0 h-[7px] z-10"
+                style={{ background: "linear-gradient(to right, #E36A38 0%, #E36A38 22%, #874E9F 22%, #874E9F 86%, #462458 86%, #462458 100%)" }}
+                aria-hidden="true"
+              />
               <Image
                 src={topImageSrc}
                 alt={topImageAlt}
@@ -65,6 +70,11 @@ export default function Split({
             </div>
 
             <div className="relative w-full min-h-[220px] md:min-h-[280px] lg:flex-1">
+              <div
+                className="absolute top-0 left-0 right-0 h-[7px] z-10"
+                style={{ background: "linear-gradient(to right, #E36A38 0%, #E36A38 22%, #874E9F 22%, #874E9F 86%, #462458 86%, #462458 100%)" }}
+                aria-hidden="true"
+              />
               <Image
                 src={bottomImageSrc}
                 alt={bottomImageAlt}

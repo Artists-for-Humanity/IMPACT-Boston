@@ -367,9 +367,18 @@ function ThumbnailMedia({ thumb }: { thumb: SingleContentThumbnail }) {
     );
   }
 
+  const gradientBar = (
+    <div
+      className="absolute top-0 left-0 right-0 h-[7px] z-10"
+      style={{ background: "linear-gradient(to right, #E36A38 0%, #E36A38 22%, #874E9F 22%, #874E9F 86%, #462458 86%, #462458 100%)" }}
+      aria-hidden="true"
+    />
+  );
+
   if (thumb.type === "video") {
     return (
       <div className="relative mt-auto w-full" style={{ height: "210px" }}>
+        {gradientBar}
         <iframe
           src={thumb.videoSrc}
           title={thumb.videoTitle ?? thumb.title}
@@ -395,7 +404,7 @@ function ThumbnailMedia({ thumb }: { thumb: SingleContentThumbnail }) {
   );
 
   if (!thumb.href) {
-    return <div className="mt-auto">{image}</div>;
+    return <div className="relative mt-auto">{gradientBar}{image}</div>;
   }
 
   return (
@@ -403,8 +412,9 @@ function ThumbnailMedia({ thumb }: { thumb: SingleContentThumbnail }) {
       href={thumb.href}
       target={thumb.openInNewTab ? "_blank" : undefined}
       rel={thumb.openInNewTab ? "noopener noreferrer" : undefined}
-      className="mt-auto block transition hover:opacity-80"
+      className="relative mt-auto block transition hover:opacity-80"
     >
+      {gradientBar}
       {image}
     </Link>
   );

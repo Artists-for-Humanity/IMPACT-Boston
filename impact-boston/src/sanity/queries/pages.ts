@@ -90,6 +90,7 @@ const PAGE_SECTIONS_PROJECTION = `
       backgroundColor,
       hideMedia,
       youtubeUrl,
+      vimeoUrl,
       videoTitle,
       content[] {
         ...,
@@ -164,8 +165,7 @@ const PAGE_SECTIONS_PROJECTION = `
         backgroundColor,
         image,
         imageAlt,
-        showImagePlaceholder,
-        showImageGradient
+        showImagePlaceholder
       },
       listItems[] {
         _key,

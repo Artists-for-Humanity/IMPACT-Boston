@@ -255,6 +255,11 @@ export default function HighlightsSection({
                     data-sanity={slide.dataAttributes?.image}
                     style={{ backgroundColor: "#311E41" }}
                   >
+                    <div
+                      className="absolute top-0 left-0 right-0 h-[7px] z-10"
+                      style={{ background: "linear-gradient(to right, #E36A38 0%, #E36A38 22%, #874E9F 22%, #874E9F 86%, #462458 86%, #462458 100%)" }}
+                      aria-hidden="true"
+                    />
                     {slide.imageSrc ? (
                       <Image
                         src={slide.imageSrc}

@@ -76,9 +76,12 @@ export default function HeroBlock({
     const youtubeUrl = hideMedia
       ? undefined
       : section.youtubeUrl?.trim() || undefined;
+    const vimeoUrl = hideMedia
+      ? undefined
+      : section.vimeoUrl?.trim() || undefined;
     const hero2ImageSrc = hideMedia ? undefined : imageSrc;
 
-    if (!hideMedia && !hero2ImageSrc && !youtubeUrl) {
+    if (!hideMedia && !hero2ImageSrc && !youtubeUrl && !vimeoUrl) {
       return null;
     }
 
@@ -115,6 +118,7 @@ export default function HeroBlock({
         imageSrc={hero2ImageSrc}
         imageAlt={imageAlt}
         youtubeUrl={youtubeUrl}
+        vimeoUrl={vimeoUrl}
         videoTitle={section.videoTitle ?? undefined}
       />
     );

@@ -20,7 +20,6 @@ export function resolveDoubleContentCards(
           : card.imageSrc ?? undefined,
         imageAlt: card.imageAlt ?? card.title ?? "",
         showImagePlaceholder: Boolean(card.showImagePlaceholder),
-        showImageGradient: Boolean(card.showImageGradient),
       };
     })
     .filter((card): card is DoubleCard => Boolean(card));

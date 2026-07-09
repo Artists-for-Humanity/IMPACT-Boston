@@ -1,5 +1,6 @@
 import {defineField, defineType} from 'sanity'
 import {TripleCardBackgroundColorInput} from '../../components/TripleCardBackgroundColorInput'
+import {LimitedTextInput} from '../../components/LimitedTextInput'
 import {blockPreviewMedia} from './blockPreviews'
 import {defineLinkTargetField} from '../linkTarget'
 
@@ -88,7 +89,16 @@ export const tripleContentBlockType = defineType({
               title: 'Card Description',
               type: 'text',
               rows: 5,
-              validation: (rule) => rule.required(),
+              validation: (rule) =>
+                rule.custom((value) => {
+                  if (!value) return 'Card description is required.'
+                  if (typeof value === 'string' && value.length > 400)
+                    return `Description must be 400 characters or fewer (currently ${value.length}).`
+                  return true
+                }),
+              components: {
+                input: (props) => LimitedTextInput({...props, limit: 400}),
+              },
             }),
             defineField({
               name: 'tags',

@@ -43,6 +43,7 @@ export type SanityHeroFields = {
   hideMedia?: boolean | null;
   supportingText?: string | null;
   youtubeUrl?: string | null;
+  vimeoUrl?: string | null;
   videoTitle?: string | null;
 };
 
@@ -153,7 +154,6 @@ export type SanityDoubleContentCard = {
   imageSrc?: string | null;
   imageAlt?: string | null;
   showImagePlaceholder?: boolean | null;
-  showImageGradient?: boolean | null;
 };
 
 export type SanityTripleContentCard = {
