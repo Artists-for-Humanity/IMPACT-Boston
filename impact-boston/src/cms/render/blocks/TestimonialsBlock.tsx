@@ -117,9 +117,14 @@ export default function TestimonialsBlock({
     );
   }
 
+  const headingLevel = resolvedSection.headingLevel ?? "h2";
+  const headingClassName = `${headingLevel} text-[#000] text-center md:text-center lg:text-left`;
+
   return (
     <TestimonialsCarousel
       heading={resolvedSection.heading ?? undefined}
+      headingLevel={headingLevel}
+      headingClassName={headingClassName}
       subheading={resolvedSection.subtext ?? undefined}
       testimonials={resolvedSection.testimonials?.map((testimonial, index) => {
         const testimonialPath = getArrayItemPath(

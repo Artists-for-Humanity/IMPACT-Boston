@@ -18,6 +18,7 @@ export type ResourceListItem = {
   detailLinkTarget?: CmsLinkTarget | null;
   detailOpenInNewTab?: boolean | null;
   description?: string;
+  phoneNumber?: string;
   expandedDescription?: string;
   meta?: string[];
   icon?: "external" | "chevron";

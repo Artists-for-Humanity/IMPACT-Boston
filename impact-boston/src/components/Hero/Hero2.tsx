@@ -259,7 +259,7 @@ export default function Hero2({
             height={1050}
             alt={imageAlt ?? ""}
             data-sanity={dataAttributes?.image}
-            className="h-auto w-full"
+            className="w-full h-[554px] object-cover"
           />
         </div>
       ) : null}

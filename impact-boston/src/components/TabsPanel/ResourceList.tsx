@@ -20,7 +20,6 @@ export default function ResourceList({
   const [expandedItems, setExpandedItems] = useState<Record<string, boolean>>(
     {},
   );
-  const hasToggle = items.length > previewCount;
   const visibleItems = expanded ? items : items.slice(0, previewCount);
 
   const toggleItem = (title: string) => {
@@ -36,15 +35,13 @@ export default function ResourceList({
         <p className="p1 text-dusty-purple" data-sanity={eyebrowDataSanity}>
           {eyebrow}
         </p>
-        {hasToggle ? (
-          <button
-            className="p1 cursor-pointer text-secondary underline underline-offset-2"
-            onClick={() => setExpanded((current) => !current)}
-            type="button"
-          >
-            {expanded ? "Close" : `See all ${items.length}`}
-          </button>
-        ) : null}
+        <button
+          className="p1 cursor-pointer text-secondary underline underline-offset-2"
+          onClick={() => setExpanded((current) => !current)}
+          type="button"
+        >
+          {expanded ? "Close" : `See all ${items.length}`}
+        </button>
       </div>
 
       <ul>
@@ -149,7 +146,7 @@ function ResourceListItemContent({
         </a>
       ) : null}
       {item.detail && !item.detailHref ? (
-        <p className="p1 text-secondary" data-sanity={item.dataAttributes?.detail}>
+        <p className="p1 text-light-grey-text" data-sanity={item.dataAttributes?.detail}>
           {item.detail}
         </p>
       ) : null}
@@ -165,6 +162,9 @@ function ResourceListItemContent({
         >
           {description}
         </p>
+      ) : null}
+      {item.phoneNumber ? (
+        <p className="p1 text-text-grey-light">{item.phoneNumber}</p>
       ) : null}
       {item.meta?.map((metaLine) => (
         <p className="p1 text-text-grey-light" key={metaLine}>

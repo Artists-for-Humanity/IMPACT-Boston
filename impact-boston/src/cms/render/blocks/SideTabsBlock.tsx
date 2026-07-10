@@ -73,7 +73,7 @@ export default function SideTabsBlock({
       )}
       style={backgroundStyle}
     >
-      <SideTabs tabs={tabsWithDataAttributes} />
+      <SideTabs tabs={tabsWithDataAttributes} noPaddingTop={section.noPaddingTop} />
     </section>
   );
 }

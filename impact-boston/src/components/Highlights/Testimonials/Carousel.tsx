@@ -213,7 +213,7 @@ function TestimonialsCarouselTrack({
             </div>
 
             {/* Right - Arrow Navigation - Desktop Only */}
-            <div className="hidden lg:flex col-span-4 md:col-span-8 lg:col-span-2 lg:col-start-11 gap-4 lg:justify-end self-end">
+            <div className="hidden lg:flex col-span-4 md:col-span-8 lg:col-span-2 lg:col-start-11 gap-4 lg:justify-end self-center">
               <button
                 onClick={prevSlide}
                 className="w-12 h-12 relative flex items-center justify-center transition-opacity hover:opacity-80"

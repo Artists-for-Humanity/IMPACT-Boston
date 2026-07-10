@@ -15,7 +15,7 @@ export type {
   TrainerListItem,
 } from "./types";
 
-export default function SideTabs({ tabs }: { tabs: SideTab[] }) {
+export default function SideTabs({ tabs, noPaddingTop }: { tabs: SideTab[]; noPaddingTop?: boolean }) {
   const [active, setActive] = useState(0);
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const [indicatorStyle, setIndicatorStyle] = useState<CSSProperties>({});
@@ -72,7 +72,7 @@ export default function SideTabs({ tabs }: { tabs: SideTab[] }) {
 
   return (
     <div>
-      <Grid className="gap-y-12 md:gap-y-12">
+      <Grid noPaddingTop={noPaddingTop} className="gap-y-12 md:gap-y-12">
         <div className="scrollbar-hide relative col-span-full flex overflow-x-auto overflow-y-hidden shadow-[inset_0_-4px_0_0_#d1d5db] lg:shadow-none lg:col-span-5 lg:flex-col lg:gap-y-4 lg:self-start lg:sticky lg:top-[120px] lg:max-h-[calc(100vh-120px)] lg:overflow-y-auto">
           <div className="hidden lg:absolute lg:left-0 lg:top-0 lg:block lg:h-full lg:w-[4px] lg:bg-gray-300" />
           <div

@@ -52,36 +52,40 @@ export default function Highlight2({
                     {title}
                 </h2>
             </div>
-            <div className="col-span-full lg:col-span-6 grid grid-cols-subgrid gap-y-4">
-                {body.map((paragraph, index) => (
-                    <p
-                        key={index}
-                        className="p1 col-span-full"
-                        data-sanity={dataAttributes?.body}
+            <div className="col-span-full lg:col-span-6 flex flex-col gap-y-4 lg:gap-y-12">
+                <div className="flex flex-col gap-y-4">
+                    {body.map((paragraph, index) => (
+                        <p
+                            key={index}
+                            className="p1"
+                            data-sanity={dataAttributes?.body}
+                        >
+                            {paragraph}
+                        </p>
+                    ))}
+                </div>
+                <div className="flex flex-col gap-y-3">
+                    <Button
+                        href={ctaHref}
+                        openInNewTab={ctaOpenInNewTab}
+                        variant="primary"
+                        size="lg"
+                        className="self-start gap-x-22"
+                        data-sanity={dataAttributes?.ctaLabel}
+                        style={{ ...(buttonBgColor ? { backgroundColor: buttonBgColor } : {}), ...(buttonTextColor ? { color: buttonTextColor } : {}) }}
                     >
-                        {paragraph}
-                    </p>
-                ))}
-                <Button
-                    href={ctaHref}
-                    openInNewTab={ctaOpenInNewTab}
-                    variant="primary"
-                    size="lg"
-                    className="w-full col-start-1 col-span-4 md:col-start-1 md:col-span-4 md:w-full lg:w-auto lg:col-start-auto lg:col-span-3"
-                    data-sanity={dataAttributes?.ctaLabel}
-                    style={{ ...(buttonBgColor ? { backgroundColor: buttonBgColor } : {}), ...(buttonTextColor ? { color: buttonTextColor } : {}) }}
-                >
-                    {ctaLabel}
-                </Button>
-                {supportingText ? (
-                    <p
-                        className="p2 col-span-full"
-                        data-sanity={dataAttributes?.supportingText}
-                        style={supportingTextColor ? { color: supportingTextColor } : undefined}
-                    >
-                        {supportingText}
-                    </p>
-                ) : null}
+                        {ctaLabel}
+                    </Button>
+                    {supportingText ? (
+                        <p
+                            className="p2"
+                            data-sanity={dataAttributes?.supportingText}
+                            style={supportingTextColor ? { color: supportingTextColor } : undefined}
+                        >
+                            {supportingText}
+                        </p>
+                    ) : null}
+                </div>
             </div>      
         </Grid>
         </div>

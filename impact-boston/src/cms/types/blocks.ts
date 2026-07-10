@@ -272,6 +272,7 @@ export type CmsClassDescriptionsBlock = CmsPageBlockBase &
 export type CmsSideTabsBlock = CmsPageBlockBase & {
   _type: "sideTabsBlock";
   backgroundColor?: string | null;
+  noPaddingTop?: boolean;
   tabs?: SanitySideTab[] | null;
 };
 
@@ -353,6 +354,7 @@ export type CmsTestimonialsBlock = CmsPageBlockBase & {
   authorPrefix?: string | null;
   backgroundColor?: string | null;
   heading?: string | null;
+  headingLevel?: "h2" | "h3" | null;
   showAuthors?: boolean | null;
   subtext?: string | null;
   spotlightQuote?: string | null;

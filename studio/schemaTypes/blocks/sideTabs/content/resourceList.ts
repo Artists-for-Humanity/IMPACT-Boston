@@ -62,6 +62,11 @@ export const resourceListContent = defineArrayMember({
               rows: 3,
             }),
             defineField({
+              name: 'phoneNumber',
+              title: 'Phone Number',
+              type: 'string',
+            }),
+            defineField({
               name: 'expandedDescription',
               title: 'Expanded Description',
               type: 'text',

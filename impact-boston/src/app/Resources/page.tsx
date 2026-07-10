@@ -198,6 +198,7 @@ const RESOURCE_PAGE_FALLBACK_BLOCKS: CmsPageBlock[] = [
   {
     _key: "resources-tabs",
     _type: "sideTabsBlock",
+    noPaddingTop: true,
     tabs: [
       {
         label: "Presentations",
@@ -274,9 +275,15 @@ export default async function Resources() {
   const { isEnabled } = await draftMode();
   const data = await getCmsPageData(RESOURCES_PAGE_ID, isEnabled);
 
+  const blocks = getCmsPageBlocks(data, RESOURCE_PAGE_FALLBACK_BLOCKS).map((block) =>
+    block._type === "testimonialsCarouselBlock" || block._type === "testimonialsSpotlightBlock"
+      ? { ...block, headingLevel: "h3" as const }
+      : block,
+  );
+
   return (
     <CmsPage
-      blocks={getCmsPageBlocks(data, RESOURCE_PAGE_FALLBACK_BLOCKS)}
+      blocks={blocks}
       data={data}
       fallbacks={DEFAULT_CMS_BLOCK_FALLBACKS}
     />
