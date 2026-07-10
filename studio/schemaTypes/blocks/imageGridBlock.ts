@@ -1,5 +1,6 @@
 import {defineField, defineType} from 'sanity'
 import {LightBackgroundColorInput} from '../../components/LightBackgroundColorInput'
+import {LimitedTextInput} from '../../components/LimitedTextInput'
 import {blockPreviewMedia} from './blockPreviews'
 import {BLOCK_DEFAULT_COPY} from './blockDefaults'
 
@@ -47,7 +48,15 @@ export const imageGridBlockType = defineType({
               title: 'Bio',
               type: 'text',
               rows: 4,
-              validation: (rule) => rule.required(),
+              components: {
+                input: (props) => LimitedTextInput({...props, limit: 525}),
+              },
+              validation: (rule) =>
+                rule.required().custom((value) =>
+                  !value || value.length <= 525
+                    ? true
+                    : `Bio must be 525 characters or fewer (currently ${value.length}).`,
+                ),
             }),
             defineField({
               name: 'image',

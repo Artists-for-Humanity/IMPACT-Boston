@@ -251,19 +251,8 @@ export default function SingleContent({
                 href={cta.href}
                 target={cta.openInNewTab ? "_blank" : undefined}
                 rel={cta.openInNewTab ? "noopener noreferrer" : undefined}
-                className="lg:col-span-5"
+                className="p1-bold underline text-secondary lg:col-span-5"
                 data-sanity={dataAttributes?.ctaText}
-                style={{
-                  color: "var(--Secondary, #563672)",
-                  fontFamily: '"IBM Plex Sans"',
-                  fontSize: "18px",
-                  fontWeight: 500,
-                  textDecorationLine: "underline",
-                  textDecorationStyle: "solid",
-                  textDecorationSkipInk: "auto",
-                  textUnderlineOffset: "auto",
-                  textUnderlinePosition: "from-font",
-                }}
               >
                 {cta.text}
               </Link>
