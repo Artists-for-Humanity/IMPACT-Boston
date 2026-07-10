@@ -22,7 +22,7 @@ type DoubleProps = {
 
 export default function ContentDouble({ cards }: DoubleProps) {
   return (
-    <Grid className="gap-y-8 md:gap-10 lg:gap-x-12">
+    <Grid noPadding className="py-8 md:py-10 lg:py-6 gap-y-8 md:gap-10 lg:gap-x-12">
       {cards.map((card, index) => (
         <DoubleCard
           key={card.title ?? card.imageSrc ?? index}

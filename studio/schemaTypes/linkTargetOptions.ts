@@ -56,7 +56,7 @@ export const linkTypeOptions = [
   {title: 'URL', value: 'url'},
   {title: 'Internal link', value: 'internal'},
   {title: 'Email', value: 'email'},
-  {title: 'Asset', value: 'asset'},
+  {title: 'File', value: 'asset'},
 ] as const
 
 export type LinkTargetType = (typeof linkTypeOptions)[number]['value']
