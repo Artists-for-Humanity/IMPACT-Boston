@@ -14,9 +14,6 @@ export type ResourceListItem = {
   titleLinkTarget?: CmsLinkTarget | null;
   openInNewTab?: boolean | null;
   detail?: string;
-  detailHref?: string;
-  detailLinkTarget?: CmsLinkTarget | null;
-  detailOpenInNewTab?: boolean | null;
   description?: string;
   phoneNumber?: string;
   expandedDescription?: string;

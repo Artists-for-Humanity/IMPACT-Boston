@@ -143,12 +143,12 @@ export const testimonialsBlockType = defineType({
               validation: (rule) =>
                 rule.custom((value) => {
                   if (!value) return 'Quote is required.'
-                  if (typeof value === 'string' && value.length > 425)
-                    return `Quote must be 425 characters or fewer (currently ${value.length}).`
+                  if (typeof value === 'string' && value.length > 700)
+                    return `Quote must be 700 characters or fewer (currently ${value.length}).`
                   return true
                 }),
               components: {
-                input: (props) => LimitedTextInput({...props, limit: 425}),
+                input: (props) => LimitedTextInput({...props, limit: 700}),
               },
             }),
             defineField({

@@ -115,14 +115,11 @@ function withContentDataAttributes(
       ...block,
       items: block.items?.map((item) => {
         const titleLink = resolveCmsLink(item.titleLinkTarget, item.href);
-        const detailLink = resolveCmsLink(item.detailLinkTarget, item.detailHref);
 
         return {
           ...item,
           href: titleLink.href,
           openInNewTab: titleLink.openInNewTab,
-          detailHref: detailLink.href,
-          detailOpenInNewTab: detailLink.openInNewTab,
         };
       }),
       dataAttributes: {
