@@ -38,23 +38,16 @@ export const resourceListContent = defineArrayMember({
             }),
             defineField({
               name: 'href',
-              title: 'Title Link',
+              title: 'Link',
               type: 'string',
               hidden: true,
             }),
-            defineLinkTargetField({name: 'titleLinkTarget', title: 'Title Link'}),
+            defineLinkTargetField({name: 'titleLinkTarget', title: 'Link'}),
             defineField({
               name: 'detail',
               title: 'Detail',
               type: 'string',
             }),
-            defineField({
-              name: 'detailHref',
-              title: 'Detail Link',
-              type: 'string',
-              hidden: true,
-            }),
-            defineLinkTargetField({name: 'detailLinkTarget', title: 'Detail Link'}),
             defineField({
               name: 'description',
               title: 'Description',

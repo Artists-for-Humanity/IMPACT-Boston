@@ -73,10 +73,30 @@ export default function ResourceList({
                     aria-hidden="true"
                   />
                 </button>
+              ) : item.href ? (
+                <a
+                  href={item.href}
+                  className="group flex gap-4"
+                  rel={item.openInNewTab ? "noopener noreferrer" : undefined}
+                  target={item.openInNewTab ? "_blank" : undefined}
+                >
+                  <ResourceListItemContent item={item} titleAsText />
+                  {item.icon === "external" ? (
+                    <ExternalLink
+                      className="mt-1 size-5 shrink-0 text-grey group-hover:text-secondary"
+                      aria-hidden="true"
+                    />
+                  ) : null}
+                  {item.icon === "chevron" ? (
+                    <ChevronRight
+                      className="mt-1 size-5 shrink-0 text-grey group-hover:text-secondary"
+                      aria-hidden="true"
+                    />
+                  ) : null}
+                </a>
               ) : (
                 <div className="flex gap-4">
                   <ResourceListItemContent item={item} />
-
                   {item.icon === "external" ? (
                     <ExternalLink
                       className="mt-1 size-5 shrink-0 text-grey"
@@ -127,29 +147,19 @@ function ResourceListItemContent({
         </a>
       ) : (
         <p
-          className="p1-bold text-black group-hover:text-secondary"
+          className="p1-bold text-black group-hover:text-secondary group-hover:underline"
           data-sanity={item.dataAttributes?.title}
         >
           {item.title}
         </p>
       )}
 
-      {item.detail && item.detailHref ? (
-        <a
-          href={item.detailHref}
-          className="p1 block cursor-pointer text-secondary hover:underline"
-          data-sanity={item.dataAttributes?.detail}
-          rel={item.detailOpenInNewTab ? "noopener noreferrer" : undefined}
-          target={item.detailOpenInNewTab ? "_blank" : undefined}
-        >
-          {item.detail}
-        </a>
-      ) : null}
-      {item.detail && !item.detailHref ? (
+      {item.detail ? (
         <p className="p1 text-light-grey-text" data-sanity={item.dataAttributes?.detail}>
           {item.detail}
         </p>
       ) : null}
+
       {description ? (
         <p
           className="p1 text-text-grey-light"
