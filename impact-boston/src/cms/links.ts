@@ -2,9 +2,13 @@ import { stegaClean } from "next-sanity";
 
 export type CmsLinkTarget = {
   _type?: "linkTarget" | string | null;
-  type?: "asset" | "email" | "internal" | "url" | string | null;
+  type?: "asset" | "blogPost" | "email" | "internal" | "url" | string | null;
   url?: string | null;
   internalPath?: string | null;
+  blogPost?: {
+    title?: string | null;
+    slug?: string | null;
+  } | null;
   email?: string | null;
   file?: {
     asset?: {
@@ -51,6 +55,12 @@ export function resolveCmsLink(
 
   if (type === "internal") {
     return { href: clean(target.internalPath) || fallback };
+  }
+
+  if (type === "blogPost") {
+    const slug = clean(target.blogPost?.slug);
+
+    return { href: slug ? `/Blog/${slug}` : fallback };
   }
 
   if (type === "url") {

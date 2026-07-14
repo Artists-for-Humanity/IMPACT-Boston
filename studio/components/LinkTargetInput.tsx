@@ -11,7 +11,7 @@ import {
   Text,
   TextInput,
 } from '@sanity/ui'
-import {AtSign, Check, ChevronDown, Folder, Globe, Image, Link, Search} from 'lucide-react'
+import {AtSign, Check, ChevronDown, FileText, Folder, Globe, Image, Link, Search} from 'lucide-react'
 import {ObjectInputMembers, set, setIfMissing, unset, type ObjectInputProps} from 'sanity'
 
 import {
@@ -23,6 +23,9 @@ import {
 
 type LinkTargetValue = {
   _type?: 'linkTarget'
+  blogPost?: {
+    _ref?: string
+  }
   email?: string
   internalPath?: string
   openInNewTab?: boolean
@@ -35,13 +38,18 @@ const linkTypeIcons: Record<
   ComponentType<{size?: number; strokeWidth?: number}>
 > = {
   asset: Image,
+  blogPost: FileText,
   email: AtSign,
   internal: Link,
   url: Globe,
 }
 
-const fieldByType: Record<LinkTargetType, 'email' | 'file' | 'internalPath' | 'url'> = {
+const fieldByType: Record<
+  LinkTargetType,
+  'blogPost' | 'email' | 'file' | 'internalPath' | 'url'
+> = {
   asset: 'file',
+  blogPost: 'blogPost',
   email: 'email',
   internal: 'internalPath',
   url: 'url',
@@ -77,6 +85,7 @@ export function LinkTargetInput(props: ObjectInputProps<LinkTargetValue>) {
     (member) => member.kind === 'field' && member.name === fieldByType[activeType],
   )
   const fileMembers = activeType === 'asset' && activeMember ? [activeMember] : []
+  const blogPostMembers = activeType === 'blogPost' && activeMember ? [activeMember] : []
   const errorMembers = members.filter((member) => member.kind === 'error')
   const validationMessages = validation
     .filter((marker) => marker.level === 'error' || marker.level === 'warning')
@@ -265,6 +274,14 @@ export function LinkTargetInput(props: ObjectInputProps<LinkTargetValue>) {
                 </Text>
               </Flex>
             ) : null}
+
+            {activeType === 'blogPost' ? (
+              <Flex align="center" padding={3} style={{minHeight: 42}}>
+                <Text muted size={1}>
+                  Blog post
+                </Text>
+              </Flex>
+            ) : null}
           </Box>
         </Flex>
       </Card>
@@ -355,6 +372,19 @@ export function LinkTargetInput(props: ObjectInputProps<LinkTargetValue>) {
       {fileMembers.length ? (
         <ObjectInputMembers
           members={fileMembers}
+          renderAnnotation={renderAnnotation}
+          renderBlock={renderBlock}
+          renderField={renderField}
+          renderInlineBlock={renderInlineBlock}
+          renderInput={renderInput}
+          renderItem={renderItem}
+          renderPreview={renderPreview}
+        />
+      ) : null}
+
+      {blogPostMembers.length ? (
+        <ObjectInputMembers
+          members={blogPostMembers}
           renderAnnotation={renderAnnotation}
           renderBlock={renderBlock}
           renderField={renderField}

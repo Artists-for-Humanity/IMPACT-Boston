@@ -2,6 +2,7 @@
 import {linkTargetType} from './linkTarget'
 
 // page schemas
+import {blogPostType} from './blogPostType'
 import {cmsPageType, legacyCmsPageTypes} from './cmsPageType'
 import {schoolsAndCollegesPageType} from './schoolsAndCollegesPageType'
 
@@ -30,6 +31,7 @@ export const schemaTypes = [
 
   // page schemas
   cmsPageType,
+  blogPostType,
   // Legacy aliases keep existing Sanity documents editable while content migrates to cmsPage.
   ...legacyCmsPageTypes,
   schoolsAndCollegesPageType,

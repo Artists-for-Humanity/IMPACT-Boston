@@ -5,6 +5,7 @@ import {schemaTypes} from './schemaTypes'
 import {defineDocuments, presentationTool} from 'sanity/presentation'
 import {singletonTypes, structure} from './structure'
 import {CMS_PAGE_SCHEMA_TYPE_NAMES} from './schemaTypes/cmsPageType'
+import {BLOG_POST_TYPE_NAME} from './schemaTypes/blogPostType'
 
 declare const process: {
   env: {
@@ -42,6 +43,13 @@ const mainDocuments = defineDocuments([
   {
     route: '/Blog',
     filter: cmsPageFilter('blog'),
+  },
+  {
+    route: '/Blog/:slug',
+    resolve: ({params}) => ({
+      filter: `_type == "${BLOG_POST_TYPE_NAME}" && slug.current == $slug`,
+      params: {slug: params.slug},
+    }),
   },
   {
     route: '/Accessibility',
@@ -94,6 +102,25 @@ export default defineConfig({
       allowOrigins,
       resolve: {
         mainDocuments,
+        locations: {
+          [BLOG_POST_TYPE_NAME]: {
+            select: {
+              title: 'title',
+              slug: 'slug.current',
+            },
+            resolve: (value) =>
+              value?.slug
+                ? {
+                    locations: [
+                      {
+                        title: value.title || 'Blog Post',
+                        href: `/Blog/${value.slug}`,
+                      },
+                    ],
+                  }
+                : null,
+          },
+        },
       },
     }),
     visionTool(),

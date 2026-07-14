@@ -1,6 +1,7 @@
 import {defineField, defineType, type FieldDefinition} from 'sanity'
 import {LinkTargetInput} from '../components/LinkTargetInput'
 import {internalPageOptions, linkTypeOptions} from './linkTargetOptions'
+import {BLOG_POST_TYPE_NAME} from './blogPostType'
 
 type LinkTargetFieldOptions = {
   description?: string
@@ -21,6 +22,9 @@ type LinkTargetValue = {
   } | null
   internalPath?: string | null
   openInNewTab?: boolean | null
+  blogPost?: {
+    _ref?: string | null
+  } | null
   type?: string | null
   url?: string | null
 }
@@ -85,6 +89,17 @@ export const linkTargetType = defineType({
         }),
     }),
     defineField({
+      name: 'blogPost',
+      title: 'Blog Post',
+      type: 'reference',
+      to: [{type: BLOG_POST_TYPE_NAME}],
+      hidden: ({parent}) => !isType(parent, 'blogPost'),
+      validation: (rule) =>
+        rule.custom((value, context) =>
+          isType(context.parent, 'blogPost') && !value ? 'Choose a blog post.' : true,
+        ),
+    }),
+    defineField({
       name: 'file',
       title: 'Asset',
       type: 'file',
@@ -101,7 +116,8 @@ export const linkTargetType = defineType({
       title: 'Open in New Tab',
       type: 'boolean',
       initialValue: true,
-      hidden: ({parent}) => isType(parent, 'internal') || isType(parent, 'email'),
+      hidden: ({parent}) =>
+        isType(parent, 'internal') || isType(parent, 'blogPost') || isType(parent, 'email'),
     }),
   ],
   initialValue: {
@@ -114,12 +130,16 @@ export const linkTargetType = defineType({
       url: 'url',
       internalPath: 'internalPath',
       email: 'email',
+      blogPostTitle: 'blogPost.title',
+      blogPostSlug: 'blogPost.slug.current',
       fileName: 'file.asset.originalFilename',
     },
-    prepare({type, url, internalPath, email, fileName}) {
+    prepare({type, url, internalPath, email, blogPostTitle, blogPostSlug, fileName}) {
       const subtitle =
         type === 'internal'
           ? internalPath
+          : type === 'blogPost'
+            ? blogPostSlug
           : type === 'email'
             ? email
             : type === 'asset'
@@ -128,7 +148,7 @@ export const linkTargetType = defineType({
 
       return {
         title: linkTypeOptions.find((option) => option.value === type)?.title || 'Link',
-        subtitle,
+        subtitle: type === 'blogPost' ? blogPostTitle || subtitle : subtitle,
       }
     },
   },
@@ -187,6 +207,10 @@ function validateLinkTarget(
     return link.internalPath || !required ? true : 'Choose an internal page.'
   }
 
+  if (link.type === 'blogPost') {
+    return link.blogPost?._ref || !required ? true : 'Choose a blog post.'
+  }
+
   if (link.type === 'email') {
     if (!link.email) {
       return required ? 'Enter an email address.' : true
@@ -208,6 +232,7 @@ function isBlankLinkTarget(value: LinkTargetValue) {
   return (
     !value.url?.trim() &&
     !value.internalPath?.trim() &&
+    !value.blogPost?._ref &&
     !value.email?.trim() &&
     !hasFileAsset(value.file)
   )

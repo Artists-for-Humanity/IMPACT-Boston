@@ -5,6 +5,7 @@ import {
   CMS_PAGE_TYPE_NAME,
   getCmsPageTitle,
 } from './schemaTypes/cmsPageType'
+import {BLOG_POST_TYPE_NAME} from './schemaTypes/blogPostType'
 
 type CmsPageListItem = {
   id: string
@@ -13,6 +14,7 @@ type CmsPageListItem = {
 }
 
 export const singletonTypes = new Set([...CMS_PAGE_SCHEMA_TYPE_NAMES, 'schoolsAndCollegesPage'])
+const hiddenDocumentTypes = new Set([...singletonTypes, BLOG_POST_TYPE_NAME])
 
 const aboutPages: CmsPageListItem[] = [
   {
@@ -30,10 +32,6 @@ const aboutPages: CmsPageListItem[] = [
   {
     title: getCmsPageTitle('abuseSurvivorsPage'),
     id: 'abuseSurvivorsPage',
-  },
-  {
-    title: getCmsPageTitle('blog'),
-    id: 'blog',
   },
   {
     title: getCmsPageTitle('accessibility'),
@@ -120,6 +118,31 @@ function cmsPageListItem(S: Parameters<StructureResolver>[0], page: CmsPageListI
     .child(S.document().title(page.title).schemaType(schemaType).documentId(page.id))
 }
 
+function blogFolderListItem(S: Parameters<StructureResolver>[0]) {
+  return S.listItem()
+    .title('Blog')
+    .id('blogFolder')
+    .child(
+      S.list()
+        .title('Blog')
+        .items([
+          cmsPageListItem(S, {
+            title: 'Landing Page',
+            id: 'blog',
+          }),
+          S.listItem()
+            .title('Blog Posts')
+            .id('blogPosts')
+            .schemaType(BLOG_POST_TYPE_NAME)
+            .child(
+              S.documentTypeList(BLOG_POST_TYPE_NAME)
+                .title('Blog Posts')
+                .defaultOrdering([{field: 'publishedAt', direction: 'desc'}]),
+            ),
+        ]),
+    )
+}
+
 export const structure: StructureResolver = (S) =>
   S.list()
     .title('Content')
@@ -140,7 +163,11 @@ export const structure: StructureResolver = (S) =>
         .child(
           S.list()
             .title('About')
-            .items(aboutPages.map((page) => cmsPageListItem(S, page))),
+            .items([
+              ...aboutPages.slice(0, 4).map((page) => cmsPageListItem(S, page)),
+              blogFolderListItem(S),
+              ...aboutPages.slice(4).map((page) => cmsPageListItem(S, page)),
+            ]),
         ),
       S.listItem()
         .title('Programs')
@@ -170,6 +197,6 @@ export const structure: StructureResolver = (S) =>
         ),
       S.divider(),
       ...S.documentTypeListItems().filter(
-        (listItem) => !singletonTypes.has(listItem.getId() ?? ''),
+        (listItem) => !hiddenDocumentTypes.has(listItem.getId() ?? ''),
       ),
     ])

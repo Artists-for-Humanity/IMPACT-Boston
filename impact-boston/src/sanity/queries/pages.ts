@@ -7,6 +7,10 @@ const LINK_TARGET_PROJECTION = `
   type,
   url,
   internalPath,
+  blogPost->{
+    title,
+    "slug": slug.current
+  },
   email,
   openInNewTab,
   file {

@@ -55,6 +55,7 @@ export const internalPageOptions = internalPageGroups.flatMap((group) =>
 export const linkTypeOptions = [
   {title: 'URL', value: 'url'},
   {title: 'Internal link', value: 'internal'},
+  {title: 'Blog post', value: 'blogPost'},
   {title: 'Email', value: 'email'},
   {title: 'File', value: 'asset'},
 ] as const
