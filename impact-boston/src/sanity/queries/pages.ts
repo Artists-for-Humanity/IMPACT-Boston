@@ -7,6 +7,7 @@ const LINK_TARGET_PROJECTION = `
   type,
   url,
   internalPath,
+  anchor,
   email,
   openInNewTab,
   file {
@@ -23,6 +24,7 @@ const PAGE_SECTIONS_PROJECTION = `
     sections[]{
       _key,
       _type,
+      sectionId,
       headline,
       headlineParts[] {
         _key,

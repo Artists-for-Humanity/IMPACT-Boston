@@ -14,15 +14,31 @@ export function CmsPage({ blocks, data, fallbacks }: CmsPageProps) {
 
   return (
     <main>
-      {blocks.map((block, index) => (
-        <BlockRenderer
-          block={block}
-          blockPath={getBlockPath(block, index)}
-          dataAttribute={dataAttribute}
-          fallbacks={fallbacks}
-          key={block._key || `${block._type}-${index}`}
-        />
-      ))}
+      {blocks.map((block, index) => {
+        const key = block._key || `${block._type}-${index}`;
+        const renderer = (
+          <BlockRenderer
+            block={block}
+            blockPath={getBlockPath(block, index)}
+            dataAttribute={dataAttribute}
+            fallbacks={fallbacks}
+          />
+        );
+
+        return block.sectionId ? (
+          <div id={block.sectionId} key={key}>
+            {renderer}
+          </div>
+        ) : (
+          <BlockRenderer
+            key={key}
+            block={block}
+            blockPath={getBlockPath(block, index)}
+            dataAttribute={dataAttribute}
+            fallbacks={fallbacks}
+          />
+        );
+      })}
     </main>
   );
 }

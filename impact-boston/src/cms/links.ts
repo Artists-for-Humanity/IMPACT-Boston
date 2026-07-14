@@ -5,6 +5,7 @@ export type CmsLinkTarget = {
   type?: "asset" | "email" | "internal" | "url" | string | null;
   url?: string | null;
   internalPath?: string | null;
+  anchor?: string | null;
   email?: string | null;
   file?: {
     asset?: {
@@ -39,7 +40,7 @@ export function resolveCmsLink(
 
     return {
       href: href || fallback,
-      openInNewTab: target.openInNewTab ?? true,
+      openInNewTab: true,
     };
   }
 
@@ -50,13 +51,15 @@ export function resolveCmsLink(
   }
 
   if (type === "internal") {
-    return { href: clean(target.internalPath) || fallback };
+    const basePath = clean(target.internalPath) || fallback;
+    const anchor = clean(target.anchor);
+    return { href: basePath && anchor ? `${basePath}#${anchor}` : basePath };
   }
 
   if (type === "url") {
     return {
       href: clean(target.url) || fallback,
-      openInNewTab: target.openInNewTab ?? true,
+      openInNewTab: true,
     };
   }
 

@@ -3,6 +3,7 @@ const LINK_TARGET_PROJECTION = `
   type,
   url,
   internalPath,
+  anchor,
   email,
   openInNewTab,
   file {

@@ -12,6 +12,7 @@ type LinkTargetFieldOptions = {
 
 type LinkTargetValue = {
   _type?: string | null
+  anchor?: string | null
   email?: string | null
   file?: {
     asset?: {
@@ -97,16 +98,15 @@ export const linkTargetType = defineType({
         rule.custom(() => true),
     }),
     defineField({
-      name: 'openInNewTab',
-      title: 'Open in New Tab',
-      type: 'boolean',
-      initialValue: true,
-      hidden: ({parent}) => isType(parent, 'internal') || isType(parent, 'email'),
+      name: 'anchor',
+      title: 'Page Section (anchor)',
+      type: 'string',
+      description: 'Optional. Links to a specific section on the page, e.g. program-collaborators.',
+      hidden: ({parent}) => !isType(parent, 'internal'),
     }),
   ],
   initialValue: {
     type: 'url',
-    openInNewTab: true,
   },
   preview: {
     select: {

@@ -217,6 +217,7 @@ export type SanityHighlight = {
 
 export type CmsPageBlockBase = {
   _key?: string | null;
+  sectionId?: string | null;
 };
 
 export type CmsHeroBlock = CmsPageBlockBase &

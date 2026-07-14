@@ -1,5 +1,6 @@
 import {defineField, defineType} from 'sanity'
 import {blockPreviewMedia} from './blockPreviews'
+import {SectionIdInput} from '../../components/SectionIdInput'
 
 type DoubleContentCardParent = {
   image?: unknown
@@ -94,6 +95,15 @@ export const doubleContentBlockType = defineType({
           },
         },
       ],
+    }),
+    defineField({
+      name: 'sectionId',
+      title: 'Section ID',
+      type: 'string',
+      description: 'Optional. Makes this block an anchor target for on-page links (e.g. "program-collaborators"). Auto-populated from the block title.',
+      components: {
+        input: SectionIdInput,
+      },
     }),
   ],
   initialValue: {

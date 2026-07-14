@@ -1,4 +1,4 @@
-import {useId, useMemo, useState, type ChangeEvent, type ComponentType} from 'react'
+import {useId, useMemo, useState, type ComponentType} from 'react'
 import {
   Box,
   Button,
@@ -23,6 +23,7 @@ import {
 
 type LinkTargetValue = {
   _type?: 'linkTarget'
+  anchor?: string
   email?: string
   internalPath?: string
   openInNewTab?: boolean
@@ -105,9 +106,6 @@ export function LinkTargetInput(props: ObjectInputProps<LinkTargetValue>) {
     onChange([
       setIfMissing({_type: 'linkTarget'}),
       set(nextType, ['type']),
-      nextType === 'asset' || nextType === 'url'
-        ? set(value?.openInNewTab ?? true, ['openInNewTab'])
-        : unset(['openInNewTab']),
     ])
   }
 
@@ -118,7 +116,7 @@ export function LinkTargetInput(props: ObjectInputProps<LinkTargetValue>) {
   }
 
   const handleStringChange =
-    (fieldName: 'email' | 'internalPath' | 'url') => (nextValue: string) => {
+    (fieldName: 'anchor' | 'email' | 'internalPath' | 'url') => (nextValue: string) => {
       const trimmedValue = nextValue.trim()
 
       onChange([
@@ -128,13 +126,6 @@ export function LinkTargetInput(props: ObjectInputProps<LinkTargetValue>) {
       ])
     }
 
-  const handleOpenInNewTabChange = (event: ChangeEvent<HTMLInputElement>) => {
-    onChange([
-      setIfMissing({_type: 'linkTarget'}),
-      set(activeType, ['type']),
-      set(event.currentTarget.checked, ['openInNewTab']),
-    ])
-  }
   const showInternalPicker =
     activeType === 'internal' && (!selectedInternalPage || internalPickerOpen)
 
@@ -352,6 +343,16 @@ export function LinkTargetInput(props: ObjectInputProps<LinkTargetValue>) {
         </Card>
       ) : null}
 
+      {activeType === 'internal' && !showInternalPicker ? (
+        <TextInput
+          disabled={readOnly}
+          onChange={(event) => handleStringChange('anchor')(event.currentTarget.value)}
+          padding={3}
+          placeholder="Page section anchor (optional, e.g. program-collaborators)"
+          value={value?.anchor ?? ''}
+        />
+      ) : null}
+
       {fileMembers.length ? (
         <ObjectInputMembers
           members={fileMembers}
@@ -363,18 +364,6 @@ export function LinkTargetInput(props: ObjectInputProps<LinkTargetValue>) {
           renderItem={renderItem}
           renderPreview={renderPreview}
         />
-      ) : null}
-
-      {activeType === 'asset' || activeType === 'url' ? (
-        <label style={{alignItems: 'center', display: 'flex', gap: 8}}>
-          <input
-            checked={value?.openInNewTab ?? true}
-            disabled={readOnly}
-            onChange={handleOpenInNewTabChange}
-            type="checkbox"
-          />
-          <Text size={1}>Open in new tab</Text>
-        </label>
       ) : null}
 
       {errorMembers.length ? (

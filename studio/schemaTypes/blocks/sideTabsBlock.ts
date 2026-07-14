@@ -4,6 +4,7 @@ import {blockPreviewMedia} from './blockPreviews'
 import {BLOCK_DEFAULT_COPY, defaultPortableTextBlock} from './blockDefaults'
 import {sideTabsContentTypes} from './sideTabs/content'
 import {LightBackgroundColorInput} from '../../components/LightBackgroundColorInput'
+import {SectionIdInput} from '../../components/SectionIdInput'
 
 export const sideTabsBlockType = defineType({
   name: 'sideTabsBlock',
@@ -49,6 +50,15 @@ export const sideTabsBlockType = defineType({
           },
         },
       ],
+    }),
+    defineField({
+      name: 'sectionId',
+      title: 'Section ID',
+      type: 'string',
+      description: 'Optional. Makes this block an anchor target for on-page links (e.g. "program-collaborators"). Auto-populated from the block title.',
+      components: {
+        input: SectionIdInput,
+      },
     }),
   ],
   initialValue: {

@@ -15,7 +15,6 @@ export const defaultInternalLinkTarget = {
   _type: 'linkTarget',
   type: 'internal',
   internalPath: '/',
-  openInNewTab: false,
 }
 
 export function defaultPortableTextBlock(style: string, text: string) {
