@@ -84,10 +84,9 @@ export const blogPostType = defineType({
       name: 'content',
       title: 'Post Content',
       description:
-        'Add headings, paragraphs, lists, links, and images in the order they should appear.',
+        'Optional. Add headings, paragraphs, lists, links, and images when this post should have a full article page.',
       type: 'array',
       of: [portableTextContent, blogPostImageContent],
-      validation: (rule) => rule.required().min(1),
     }),
   ],
   orderings: [
