@@ -23,9 +23,6 @@ export const SIDE_TABS_CONTENT_PROJECTION = `
     titleLinkTarget {
       ${LINK_TARGET_PROJECTION}
     },
-    detailLinkTarget {
-      ${LINK_TARGET_PROJECTION}
-    },
     markDefs[]{
       ...,
       linkTarget {
@@ -41,9 +38,6 @@ export const SIDE_TABS_CONTENT_PROJECTION = `
         ${LINK_TARGET_PROJECTION}
       },
       titleLinkTarget {
-        ${LINK_TARGET_PROJECTION}
-      },
-      detailLinkTarget {
         ${LINK_TARGET_PROJECTION}
       },
       items[],
