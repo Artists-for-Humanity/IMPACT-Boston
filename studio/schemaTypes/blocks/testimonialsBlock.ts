@@ -3,7 +3,6 @@ import {BackgroundColorInput} from '../../components/BackgroundColorInput'
 import {LimitedTextInput} from '../../components/LimitedTextInput'
 import {blockPreviewMedia} from './blockPreviews'
 import {defineLinkTargetField} from '../linkTarget'
-import {SectionIdInput} from '../../components/SectionIdInput'
 
 type TestimonialsBlockParent = {
   _type?: string
@@ -177,15 +176,6 @@ export const testimonialsBlockType = defineType({
           },
         },
       ],
-    }),
-    defineField({
-      name: 'sectionId',
-      title: 'Section ID',
-      type: 'string',
-      description: 'Optional. Makes this block an anchor target for on-page links (e.g. "program-collaborators"). Auto-populated from the block title.',
-      components: {
-        input: SectionIdInput,
-      },
     }),
   ],
   preview: {

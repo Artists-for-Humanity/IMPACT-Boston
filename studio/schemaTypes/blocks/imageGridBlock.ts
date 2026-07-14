@@ -3,7 +3,6 @@ import {LightBackgroundColorInput} from '../../components/LightBackgroundColorIn
 import {LimitedTextInput} from '../../components/LimitedTextInput'
 import {blockPreviewMedia} from './blockPreviews'
 import {BLOCK_DEFAULT_COPY} from './blockDefaults'
-import {SectionIdInput} from '../../components/SectionIdInput'
 
 export const imageGridBlockType = defineType({
   name: 'imageGridBlock',
@@ -94,15 +93,6 @@ export const imageGridBlockType = defineType({
         input: LightBackgroundColorInput,
       },
       initialValue: '',
-    }),
-    defineField({
-      name: 'sectionId',
-      title: 'Section ID',
-      type: 'string',
-      description: 'Optional. Makes this block an anchor target for on-page links (e.g. "program-collaborators"). Auto-populated from the block title.',
-      components: {
-        input: SectionIdInput,
-      },
     }),
   ],
   initialValue: {

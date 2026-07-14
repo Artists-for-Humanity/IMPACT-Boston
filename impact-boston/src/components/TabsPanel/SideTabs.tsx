@@ -15,6 +15,19 @@ export type {
   TrainerListItem,
 } from "./types";
 
+function slugify(text: string): string {
+  return text
+    .toLowerCase()
+    .trim()
+    .replace(/[^\w\s-]/g, "")
+    .replace(/[\s_-]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+function tabId(tab: { sectionId?: string | null; label: string }): string {
+  return tab.sectionId || slugify(tab.label);
+}
+
 export default function SideTabs({ tabs, noPaddingTop }: { tabs: SideTab[]; noPaddingTop?: boolean }) {
   const [active, setActive] = useState(0);
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
@@ -52,11 +65,24 @@ export default function SideTabs({ tabs, noPaddingTop }: { tabs: SideTab[]; noPa
   };
 
   useEffect(() => {
-    const hash = window.location.hash.slice(1);
-    if (hash) {
-      const idx = tabs.findIndex((t) => t.sectionId === hash);
+    const activate = () => {
+      const hash = window.location.hash.slice(1);
+      if (!hash) return;
+      const idx = tabs.findIndex((t) => tabId(t) === hash);
       if (idx !== -1) setActive(idx);
-    }
+    };
+
+    // Run immediately for direct URL loads, and after one tick for Next.js
+    // client-side navigation where the hash is set slightly after mount.
+    activate();
+    const timer = setTimeout(activate, 0);
+    // Handle same-page anchor clicks that change the hash without a full navigation.
+    window.addEventListener("hashchange", activate);
+
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener("hashchange", activate);
+    };
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
@@ -79,7 +105,24 @@ export default function SideTabs({ tabs, noPaddingTop }: { tabs: SideTab[]; noPa
   };
 
   return (
-    <div>
+    <div className="relative">
+      {/*
+        Invisible zero-height anchor elements — one per tab — all positioned at
+        the very top of this section. The browser scrolls here when following a
+        hash link; JS (above) reads the hash and activates the matching tab.
+        Placing anchors here (rather than on the tab buttons) means the viewport
+        always lands at the start of the section, not inside the sticky sidebar.
+      */}
+      {tabs.map((tab) => (
+        <span
+          key={`anchor-${tabId(tab)}`}
+          id={tabId(tab) || undefined}
+          aria-hidden="true"
+          className="absolute top-0 block scroll-mt-[120px]"
+          style={{ height: 0, overflow: "hidden" }}
+        />
+      ))}
+
       <Grid noPaddingTop={noPaddingTop} className="gap-y-12 md:gap-y-12">
         <div className="scrollbar-hide relative col-span-full flex overflow-x-auto overflow-y-hidden shadow-[inset_0_-4px_0_0_#d1d5db] lg:shadow-none lg:col-span-5 lg:flex-col lg:gap-y-4 lg:self-start lg:sticky lg:top-[120px] lg:max-h-[calc(100vh-120px)] lg:overflow-y-auto">
           <div className="hidden lg:absolute lg:left-0 lg:top-0 lg:block lg:h-full lg:w-[4px] lg:bg-gray-300" />
@@ -91,7 +134,6 @@ export default function SideTabs({ tabs, noPaddingTop }: { tabs: SideTab[]; noPa
           {tabs.map((tab, idx) => (
             <button
               key={tab.label}
-              id={tab.sectionId ?? undefined}
               ref={(el) => {
                 tabRefs.current[idx] = el;
               }}

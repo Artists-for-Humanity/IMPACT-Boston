@@ -3,7 +3,6 @@ import {TripleCardBackgroundColorInput} from '../../components/TripleCardBackgro
 import {LimitedTextInput} from '../../components/LimitedTextInput'
 import {blockPreviewMedia} from './blockPreviews'
 import {defineLinkTargetField} from '../linkTarget'
-import {SectionIdInput} from '../../components/SectionIdInput'
 
 const defaultCards = [
   {
@@ -143,15 +142,6 @@ export const tripleContentBlockType = defineType({
           },
         },
       ],
-    }),
-    defineField({
-      name: 'sectionId',
-      title: 'Section ID',
-      type: 'string',
-      description: 'Optional. Makes this block an anchor target for on-page links (e.g. "program-collaborators"). Auto-populated from the block title.',
-      components: {
-        input: SectionIdInput,
-      },
     }),
   ],
   initialValue: {

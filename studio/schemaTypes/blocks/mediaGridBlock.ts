@@ -2,7 +2,6 @@ import {defineField, defineType} from 'sanity'
 import {blockPreviewMedia} from './blockPreviews'
 import {BLOCK_DEFAULT_COPY, defaultInternalLinkTarget} from './blockDefaults'
 import {defineLinkTargetField} from '../linkTarget'
-import {SectionIdInput} from '../../components/SectionIdInput'
 
 export const mediaGridBlockType = defineType({
   name: 'mediaGridBlock',
@@ -71,15 +70,6 @@ export const mediaGridBlockType = defineType({
           },
         },
       ],
-    }),
-    defineField({
-      name: 'sectionId',
-      title: 'Section ID',
-      type: 'string',
-      description: 'Optional. Makes this block an anchor target for on-page links (e.g. "program-collaborators"). Auto-populated from the block title.',
-      components: {
-        input: SectionIdInput,
-      },
     }),
   ],
   initialValue: {

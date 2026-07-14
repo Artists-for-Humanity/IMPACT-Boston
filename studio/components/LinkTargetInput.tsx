@@ -1,4 +1,13 @@
-import {useId, useMemo, useState, type ComponentType} from 'react'
+import {useEffect, useId, useMemo, useState, type ComponentType} from 'react'
+
+function slugify(text: string): string {
+  return text
+    .toLowerCase()
+    .trim()
+    .replace(/[^\w\s-]/g, '')
+    .replace(/[\s_-]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+}
 import {
   Box,
   Button,
@@ -12,12 +21,13 @@ import {
   TextInput,
 } from '@sanity/ui'
 import {AtSign, Check, ChevronDown, Folder, Globe, Image, Link, Search} from 'lucide-react'
-import {ObjectInputMembers, set, setIfMissing, unset, type ObjectInputProps} from 'sanity'
+import {ObjectInputMembers, set, setIfMissing, unset, useClient, useFormValue, type ObjectInputProps} from 'sanity'
 
 import {
   internalPageGroups,
   internalPageOptions,
   linkTypeOptions,
+  pagePathToDocId,
   type LinkTargetType,
 } from '../schemaTypes/linkTargetOptions'
 
@@ -68,6 +78,148 @@ export function LinkTargetInput(props: ObjectInputProps<LinkTargetValue>) {
   const menuId = `${elementProps.id ?? generatedId}-type-menu`
   const [internalQuery, setInternalQuery] = useState('')
   const [internalPickerOpen, setInternalPickerOpen] = useState(false)
+  type FlatOption = {label: string; value: string}
+  type GroupedOption = {group: string; options: FlatOption[]}
+  type AnchorEntry = FlatOption | GroupedOption
+
+  const [anchorEntries, setAnchorEntries] = useState<AnchorEntry[]>([])
+  const client = useClient({apiVersion: '2024-01-01'})
+
+  // Determine the current page so self-referencing anchors can be excluded.
+  const rawDocId = useFormValue(['_id']) as string | undefined
+  const currentDocId = rawDocId?.replace(/^drafts\./, '') ?? ''
+  const currentPagePath = useMemo(
+    () => Object.entries(pagePathToDocId).find(([, id]) => id === currentDocId)?.[0] ?? null,
+    [currentDocId],
+  )
+
+  // Extract which section (and optional tab) this input lives inside by
+  // reading the Sanity path supplied to this ObjectInput.
+  const sectionKeyFromPath = useMemo(() => {
+    const idx = props.path.indexOf('sections')
+    if (idx === -1) return null
+    const seg = props.path[idx + 1]
+    return seg && typeof seg === 'object' && '_key' in seg ? (seg as {_key: string})._key : null
+  }, [props.path])
+
+  const tabKeyFromPath = useMemo(() => {
+    const idx = props.path.indexOf('tabs')
+    if (idx === -1) return null
+    const seg = props.path[idx + 1]
+    return seg && typeof seg === 'object' && '_key' in seg ? (seg as {_key: string})._key : null
+  }, [props.path])
+
+  const totalAnchorCount = anchorEntries.reduce(
+    (n, e) => n + ('options' in e ? e.options.length : 1),
+    0,
+  )
+
+  useEffect(() => {
+    const internalPath = value?.internalPath
+    if (!internalPath) {
+      setAnchorEntries([])
+      return
+    }
+    const docId = pagePathToDocId[internalPath]
+    if (!docId) {
+      setAnchorEntries([])
+      return
+    }
+
+    // Capture path-derived values at effect time so the closure stays stable.
+    const capturedCurrentPagePath = currentPagePath
+    const capturedSectionKey = sectionKeyFromPath
+    const capturedTabKey = tabKeyFromPath
+
+    client
+      .fetch<{
+        sections?: Array<{
+          _key?: string | null
+          _type?: string | null
+          name?: string | null
+          tabs?: Array<{_key?: string | null; label?: string | null}>
+        }>
+      }>(
+        `*[_id in [$docId, "drafts." + $docId]] | order(_updatedAt desc)[0]{
+          "sections": sections[]{
+            _key,
+            _type,
+            "name": coalesce(title, heading, label, articleTitle, panels[0].title, cards[0].title),
+            "tabs": tabs[]{_key, label}
+          }
+        }`,
+        {docId},
+      )
+      .then((doc) => {
+        if (!doc) {
+          setAnchorEntries([])
+          return
+        }
+
+        // Compute IDs that belong to the section/tab this button is already
+        // inside. Only applies when the selected page is the current document.
+        const selfIds = new Set<string>()
+        if (capturedCurrentPagePath && internalPath === capturedCurrentPagePath) {
+          const currentSection = (doc.sections ?? []).find(
+            (s) => s._key === capturedSectionKey,
+          )
+          if (currentSection) {
+            const sId = slugify(currentSection.name ?? '')
+            if (sId) selfIds.add(sId)
+
+            if (capturedTabKey) {
+              const currentTab = (currentSection.tabs ?? []).find(
+                (t) => t._key === capturedTabKey,
+              )
+              if (currentTab) {
+                const tId = slugify(currentTab.label ?? '')
+                if (tId) selfIds.add(tId)
+              }
+            }
+          }
+        }
+
+        // Build entries in page order, excluding self-referencing IDs.
+        const entries: AnchorEntry[] = []
+        const seenFlat = new Set<string>()
+
+        for (const section of doc.sections ?? []) {
+          const tabs = section.tabs ?? []
+
+          if (section._type === 'sideTabsBlock' && tabs.length > 0) {
+            const tabLabels = tabs.map((t) => t.label).filter(Boolean)
+            const preview = tabLabels.slice(0, 3).join(', ') + (tabLabels.length > 3 ? '…' : '')
+            const groupLabel = `Tab Section — ${preview}`
+
+            const options: FlatOption[] = tabs
+              .map((tab) => {
+                const id = slugify(tab.label ?? '')
+                return id && !selfIds.has(id) ? {label: tab.label ?? id, value: id} : null
+              })
+              .filter((o): o is FlatOption => o !== null)
+
+            if (options.length > 0) {
+              entries.push({group: groupLabel, options})
+            }
+          } else {
+            const id = slugify(section.name ?? '')
+            if (id && !seenFlat.has(id) && !selfIds.has(id)) {
+              seenFlat.add(id)
+              entries.push({
+                label: section.name ? `${section.name} (${id})` : id,
+                value: id,
+              })
+            }
+          }
+        }
+
+        setAnchorEntries(entries)
+      })
+      .catch((err) => {
+        console.error('[LinkTargetInput] Failed to fetch anchor sections:', err)
+        setAnchorEntries([])
+      })
+  }, [value?.internalPath]) // eslint-disable-line react-hooks/exhaustive-deps
   const activeType = isLinkTargetType(value?.type) ? value.type : 'url'
   const Icon = linkTypeIcons[activeType]
   const activeOption = linkTypeOptions.find((option) => option.value === activeType)
@@ -344,13 +496,41 @@ export function LinkTargetInput(props: ObjectInputProps<LinkTargetValue>) {
       ) : null}
 
       {activeType === 'internal' && !showInternalPicker ? (
-        <TextInput
+        <select
           disabled={readOnly}
           onChange={(event) => handleStringChange('anchor')(event.currentTarget.value)}
-          padding={3}
-          placeholder="Page section anchor (optional, e.g. program-collaborators)"
           value={value?.anchor ?? ''}
-        />
+          style={{
+            appearance: 'auto',
+            background: 'var(--card-bg-color)',
+            border: '1px solid var(--card-border-color)',
+            borderRadius: 4,
+            color: 'inherit',
+            font: 'inherit',
+            fontSize: 13,
+            padding: '9px 10px',
+            width: '100%',
+          }}
+        >
+          <option value="">
+            {totalAnchorCount === 0 ? 'No page sections available' : 'None — links to top of page'}
+          </option>
+          {anchorEntries.map((entry) =>
+            'options' in entry ? (
+              <optgroup key={entry.group} label={entry.group}>
+                {entry.options.map((opt) => (
+                  <option key={opt.value} value={opt.value}>
+                    {opt.label}
+                  </option>
+                ))}
+              </optgroup>
+            ) : (
+              <option key={entry.value} value={entry.value}>
+                {entry.label}
+              </option>
+            ),
+          )}
+        </select>
       ) : null}
 
       {fileMembers.length ? (
