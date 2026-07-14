@@ -52,6 +52,14 @@ export default function SideTabs({ tabs, noPaddingTop }: { tabs: SideTab[]; noPa
   };
 
   useEffect(() => {
+    const hash = window.location.hash.slice(1);
+    if (hash) {
+      const idx = tabs.findIndex((t) => t.sectionId === hash);
+      if (idx !== -1) setActive(idx);
+    }
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
     updateIndicator(active);
 
     const onResize = () => updateIndicator(active);
@@ -83,6 +91,7 @@ export default function SideTabs({ tabs, noPaddingTop }: { tabs: SideTab[]; noPa
           {tabs.map((tab, idx) => (
             <button
               key={tab.label}
+              id={tab.sectionId ?? undefined}
               ref={(el) => {
                 tabRefs.current[idx] = el;
               }}

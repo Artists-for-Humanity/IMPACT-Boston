@@ -36,6 +36,15 @@ export const sideTabsBlockType = defineType({
               validation: (rule) => rule.required(),
             }),
             defineField({
+              name: 'sectionId',
+              title: 'Section ID',
+              type: 'string',
+              description: 'Optional. Makes this tab an anchor target for on-page links. Auto-populated from the tab label.',
+              components: {
+                input: SectionIdInput,
+              },
+            }),
+            defineField({
               name: 'content',
               title: 'Content',
               type: 'array',

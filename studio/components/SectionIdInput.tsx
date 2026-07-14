@@ -29,18 +29,23 @@ export function SectionIdInput(props: StringInputProps) {
   const cardTitle = useFormValue([...parentPath, 'cards', 0, 'title']) as string | undefined
   // sideTabsBlock → tabs[0].label
   const tabLabel = useFormValue([...parentPath, 'tabs', 0, 'label']) as string | undefined
-  // singleContentBlock (content[]) → first span text in first block
-  const contentText = useFormValue([
-    ...parentPath,
-    'content',
-    0,
-    'children',
-    0,
-    'text',
-  ]) as string | undefined
+  // singleContentBlock → scan content[] for first heading block (h2/h3/h4)
+  const content0Style = useFormValue([...parentPath, 'content', 0, 'style']) as string | undefined
+  const content0Text = useFormValue([...parentPath, 'content', 0, 'children', 0, 'text']) as string | undefined
+  const content1Style = useFormValue([...parentPath, 'content', 1, 'style']) as string | undefined
+  const content1Text = useFormValue([...parentPath, 'content', 1, 'children', 0, 'text']) as string | undefined
+  const content2Style = useFormValue([...parentPath, 'content', 2, 'style']) as string | undefined
+  const content2Text = useFormValue([...parentPath, 'content', 2, 'children', 0, 'text']) as string | undefined
+
+  const HEADING_STYLES = new Set(['h1', 'h2', 'h3', 'h4'])
+  const contentHeading =
+    (HEADING_STYLES.has(content0Style ?? '') && content0Text) ||
+    (HEADING_STYLES.has(content1Style ?? '') && content1Text) ||
+    (HEADING_STYLES.has(content2Style ?? '') && content2Text) ||
+    undefined
 
   const sourceText =
-    title || heading || label || articleTitle || panelTitle || cardTitle || tabLabel || contentText || ''
+    title || heading || label || articleTitle || panelTitle || cardTitle || tabLabel || contentHeading || ''
   const autoId = slugify(sourceText)
 
   useEffect(() => {

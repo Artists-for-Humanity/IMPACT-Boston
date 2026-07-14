@@ -226,6 +226,7 @@ const PAGE_SECTIONS_PROJECTION = `
       tabs[] {
         _key,
         label,
+        sectionId,
         ${SIDE_TABS_CONTENT_PROJECTION}
       },
       label,

@@ -174,6 +174,7 @@ export type SideTabContentBlock =
 export type SideTab = {
   _key?: string | null;
   label: string;
+  sectionId?: string | null;
   content: SideTabContentBlock[];
   dataAttributes?: {
     label?: string;
