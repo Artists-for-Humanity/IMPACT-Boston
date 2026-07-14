@@ -31,7 +31,7 @@ export async function generateMetadata({
 
   return {
     title: `${post.title ?? "Blog Post"} | IMPACT Boston`,
-    description: post.excerpt ?? undefined,
+    description: post.description ?? undefined,
   };
 }
 

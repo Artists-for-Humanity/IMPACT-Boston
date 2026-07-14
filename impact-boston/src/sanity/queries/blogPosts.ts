@@ -62,13 +62,9 @@ export const BLOG_POST_BY_SLUG_QUERY = defineQuery(`
     _type,
     title,
     "slug": slug.current,
-    excerpt,
+    "description": coalesce(description, excerpt),
     publishedAt,
     author,
-    heroImage {
-      ${IMAGE_METADATA_PROJECTION}
-    },
-    heroImageAlt,
     ${BLOG_POST_CONTENT_PROJECTION}
   }
 `);
@@ -84,7 +80,7 @@ export const BLOG_POST_SUMMARIES_QUERY = defineQuery(`
     _id,
     title,
     "slug": slug.current,
-    excerpt,
+    "description": coalesce(description, excerpt),
     publishedAt,
     author
   }

@@ -30,9 +30,7 @@ export type BlogPost = {
   _type?: "blogPost" | string | null;
   author?: string | null;
   content?: BlogPostContentBlock[] | null;
-  excerpt?: string | null;
-  heroImage?: SanityImageWithMetadata | null;
-  heroImageAlt?: string | null;
+  description?: string | null;
   publishedAt?: string | null;
   slug?: string | null;
   title?: string | null;
@@ -41,7 +39,7 @@ export type BlogPost = {
 export type BlogPostSummary = {
   _id?: string | null;
   author?: string | null;
-  excerpt?: string | null;
+  description?: string | null;
   publishedAt?: string | null;
   slug?: string | null;
   title?: string | null;

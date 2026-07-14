@@ -93,8 +93,6 @@ export default function BlogPost({ post }: BlogPostProps) {
     post.publishedAt ? formatDisplayDate(post.publishedAt) : null,
     post.author,
   ].filter(Boolean);
-  const heroImageUrl = getImageUrl(post.heroImage, 1200);
-  const heroImageDimensions = getImageDimensions(post.heroImage, 1200);
 
   return (
     <main className="bg-white">
@@ -114,17 +112,6 @@ export default function BlogPost({ post }: BlogPostProps) {
               <p className="p2 text-light-grey-text">{meta.join("  •  ")}</p>
             ) : null}
           </header>
-
-          {heroImageUrl ? (
-            <Image
-              src={heroImageUrl}
-              alt={post.heroImageAlt?.trim() || ""}
-              width={heroImageDimensions.width}
-              height={heroImageDimensions.height}
-              className="mb-12 h-auto w-full bg-image-placeholder object-cover md:mb-14 lg:mb-18"
-              priority
-            />
-          ) : null}
 
           {post.content?.length ? (
             <div className="flex flex-col gap-8 md:gap-10">

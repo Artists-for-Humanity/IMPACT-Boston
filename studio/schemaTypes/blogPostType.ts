@@ -3,16 +3,6 @@ import {portableTextContent} from './blocks/sideTabs/content/portableText'
 
 export const BLOG_POST_TYPE_NAME = 'blogPost'
 
-type BlogPostParent = {
-  heroImage?: unknown
-}
-
-const hasHeroImage = (parent: unknown) => {
-  const typedParent = parent as BlogPostParent | undefined
-
-  return Boolean(typedParent?.heroImage)
-}
-
 const blogPostImageContent = defineArrayMember({
   name: 'blogPostImage',
   title: 'Image',
@@ -70,12 +60,12 @@ export const blogPostType = defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
-      name: 'excerpt',
-      title: 'Excerpt',
-      description: 'Short summary used on the blog landing page.',
+      name: 'description',
+      title: 'Description',
+      description: 'Shown on the blog landing page card and used for the post metadata.',
       type: 'text',
       rows: 3,
-      validation: (rule) => rule.required().max(240),
+      validation: (rule) => rule.required(),
     }),
     defineField({
       name: 'publishedAt',
@@ -89,24 +79,6 @@ export const blogPostType = defineType({
       name: 'author',
       title: 'Author',
       type: 'string',
-    }),
-    defineField({
-      name: 'heroImage',
-      title: 'Header Image',
-      type: 'image',
-      options: {hotspot: true},
-    }),
-    defineField({
-      name: 'heroImageAlt',
-      title: 'Header Image Alt Text',
-      type: 'string',
-      hidden: ({parent}) => !hasHeroImage(parent),
-      validation: (rule) =>
-        rule.custom((value, context) =>
-          hasHeroImage(context.parent) && !value
-            ? 'Header image alt text is required when an image is shown.'
-            : true,
-        ),
     }),
     defineField({
       name: 'content',
@@ -130,13 +102,11 @@ export const blogPostType = defineType({
       title: 'title',
       publishedAt: 'publishedAt',
       author: 'author',
-      media: 'heroImage',
     },
-    prepare({title, publishedAt, author, media}) {
+    prepare({title, publishedAt, author}) {
       return {
         title: title || 'Blog Post',
         subtitle: [publishedAt, author].filter(Boolean).join(' / '),
-        media,
       }
     },
   },

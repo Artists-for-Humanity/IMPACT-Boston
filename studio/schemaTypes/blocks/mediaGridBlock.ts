@@ -3,6 +3,16 @@ import {blockPreviewMedia} from './blockPreviews'
 import {BLOCK_DEFAULT_COPY, defaultInternalLinkTarget} from './blockDefaults'
 import {defineLinkTargetField} from '../linkTarget'
 
+function isBlogLandingDocument(context: unknown) {
+  if (typeof context !== 'object' || context === null || !('document' in context)) {
+    return false
+  }
+
+  const document = (context as {document?: {_id?: string | null}}).document
+
+  return document?._id?.replace(/^drafts\./, '') === 'blog'
+}
+
 export const mediaGridBlockType = defineType({
   name: 'mediaGridBlock',
   title: 'Media Grid',
@@ -23,8 +33,16 @@ export const mediaGridBlockType = defineType({
     defineField({
       name: 'items',
       title: 'Items',
+      description:
+        'Manual items for generic media grids. On the Blog landing page, items come from Blog Post documents.',
       type: 'array',
-      validation: (rule) => rule.required().min(1),
+      hidden: (context) => isBlogLandingDocument(context),
+      validation: (rule) =>
+        rule.custom((value, context) =>
+          isBlogLandingDocument(context) || (Array.isArray(value) && value.length > 0)
+            ? true
+            : 'At least one item is required.',
+        ),
       of: [
         {
           type: 'object',
