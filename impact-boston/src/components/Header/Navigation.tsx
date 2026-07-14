@@ -533,6 +533,8 @@ export default function Navigation({
         <Link
           href={ROUTES.DONATE}
           className="link flex items-center gap-0.5 px-4 py-1 text-black border border-[#959595] rounded-[5px] hover:border-gray-400 hover:text-gray-900 transition-colors duration-150"
+          target="_blank"
+          rel="noopener noreferrer"
         >
           Donate
         </Link>
@@ -650,6 +652,8 @@ export default function Navigation({
               href={ROUTES.DONATE}
               className="link w-full text-center px-5 py-2.5 text-black border border-[#959595] rounded-[5px] hover:border-gray-400 hover:text-gray-900 transition-colors duration-150 md:w-auto"
               onClick={() => setMobileOpen(false)}
+              target="_blank"
+              rel="noopener noreferrer"
             >
               Donate
             </Link>
