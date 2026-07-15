@@ -172,8 +172,8 @@ function TestimonialsCarouselTrack({
       // 288px cards + 16px gap, step = 304px
       return `translateX(calc(50% - 144px - ${slidePos * 304}px))`;
     } else if (isTablet) {
-      // cards = 50% wide, gap = 16px
-      return `translateX(calc(-${slidePos * 50}% - ${slidePos * 16}px + 25%))`;
+      // cards = 506px fixed, gap = 16px, step = 522px, center offset = 253px
+      return `translateX(calc(50% - 253px - ${slidePos * 522}px))`;
     } else if (isLargeDesktop) {
       // cards capped at 588px, gap = 24px, step = 612px
       return `translateX(calc(50% - 294px - ${slidePos * 612}px))`;
@@ -248,7 +248,7 @@ function TestimonialsCarouselTrack({
                 {visibleCards.map((testimonial, index) => (
                   <div
                     key={`${activeIndex}-${index}`}
-                    className="shrink-0 w-[288px] md:w-[50%] lg:w-[min(calc(50%-60px),588px)] bg-white flex flex-col"
+                    className="shrink-0 w-[288px] md:w-[506px] lg:w-[min(calc(50%-60px),588px)] bg-white flex flex-col"
                   >
                     {/* Colored Top Border */}
                     <div

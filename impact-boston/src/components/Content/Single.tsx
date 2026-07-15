@@ -214,7 +214,7 @@ export default function SingleContent({
               )}
             </div>
           ) : null}
-          <div className="flex flex-col gap-6 lg:grid lg:grid-cols-5 lg:gap-y-6">
+          <div className="flex flex-col gap-6 md:flex-row md:flex-wrap md:items-start md:gap-x-[88px] lg:grid lg:grid-cols-5 lg:gap-y-6">
             {bodyContent ? (
               <div className="contents" data-sanity={dataAttributes?.body}>
                 {bodyContent}
