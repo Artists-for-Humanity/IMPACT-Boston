@@ -61,3 +61,29 @@ export const linkTypeOptions = [
 ] as const
 
 export type LinkTargetType = (typeof linkTypeOptions)[number]['value']
+
+/** Maps each internal page route to its Sanity document _id */
+export const pagePathToDocId: Record<string, string> = {
+  '/': 'landingPage',
+  '/AboutImpact': 'aboutImpactPage',
+  '/Accessibility': 'accessibility',
+  '/Blog': 'blog',
+  '/BoardAndStaff': 'boardAndStaff',
+  '/BooksByMegStone': 'booksByMegStone',
+  '/CommunityOrganizations': 'communityOrganizations',
+  '/De-escalation': 'deEscalation',
+  '/Empowerment': 'empowerment',
+  '/FactCheckFriday': 'factCheckFriday',
+  '/HealthyRelationships': 'healthyRelationships',
+  '/KnowYourRights': 'knowYourRights',
+  '/PeopleWithDisabilities': 'disabilitiesPage',
+  '/PeopleWithDisabilities/Ability': 'abilityPage',
+  '/PeopleWithDisabilities/AbusePrevention': 'AbusePreventionPage',
+  '/PeopleWithDisabilities/ASAP': 'ASAPPage',
+  '/Press': 'press',
+  '/PublicClasses': 'publicClassesPage',
+  '/Resources': 'resources',
+  '/Resources/AbuseSurvivors': 'abuseSurvivorsPage',
+  '/SchoolsAndColleges': 'schoolsAndCollegesPage',
+  '/WorkplacePrograms': 'workplacePrograms',
+}

@@ -282,21 +282,21 @@ export default function HighlightsSection({
               </div>
 
               {/* Body Text - Desktop: all slides in same grid cell with z-index */}
-              <div className="grid">
+              <div className="relative">
                 {resolvedSlides.map((slide, index) => (
                   <div
                     key={index}
-                    className={`col-start-1 row-start-1 transition-opacity duration-500 ${
+                    className={`transition-opacity duration-500 ${
                       activeSlide === index
                         ? "opacity-100 z-10"
-                        : "opacity-0 pointer-events-none hidden lg:block"
+                        : "opacity-0 pointer-events-none hidden lg:block lg:absolute lg:inset-0"
                     }`}
                   >
                     <p
-                      className="p1 text-white"
+                      className="p1 text-white whitespace-pre-line"
                       data-sanity={slide.dataAttributes?.body}
                     >
-                      {slide.body}
+                      {slide.body.trim()}
                     </p>
                   </div>
                 ))}

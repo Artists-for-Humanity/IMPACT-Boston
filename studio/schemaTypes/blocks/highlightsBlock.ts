@@ -2,6 +2,7 @@ import {defineField, defineType} from 'sanity'
 import {blockPreviewMedia} from './blockPreviews'
 import {BLOCK_DEFAULT_COPY, defaultInternalLinkTarget} from './blockDefaults'
 import {defineLinkTargetField} from '../linkTarget'
+import {LimitedTextInput} from '../../components/LimitedTextInput'
 
 export const highlightsBlockType = defineType({
   name: 'highlightsBlock',
@@ -41,7 +42,16 @@ export const highlightsBlockType = defineType({
               title: 'Body Text',
               type: 'text',
               rows: 4,
-              validation: (rule) => rule.required(),
+              validation: (rule) =>
+                rule.custom((value) => {
+                  if (!value) return 'Body text is required.'
+                  if (typeof value === 'string' && value.length > 300)
+                    return `Body text must be 300 characters or fewer (currently ${value.length}).`
+                  return true
+                }),
+              components: {
+                input: (props) => LimitedTextInput({...props, limit: 300}),
+              },
             }),
             defineField({
               name: 'ctaText',

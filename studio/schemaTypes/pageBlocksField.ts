@@ -65,7 +65,6 @@ export function definePageBlocksField() {
                 _type: 'linkTarget',
                 type: 'url',
                 url: 'https://bookshop.org',
-                openInNewTab: true,
               },
               color: 'secondary',
             },
@@ -83,7 +82,6 @@ export function definePageBlocksField() {
                 _type: 'linkTarget',
                 type: 'url',
                 url: 'https://www.pbs.org/newshour/',
-                openInNewTab: true,
               },
             },
             {
@@ -96,7 +94,6 @@ export function definePageBlocksField() {
                 _type: 'linkTarget',
                 type: 'url',
                 url: 'https://www.boston.com/',
-                openInNewTab: true,
               },
             },
             {
@@ -109,7 +106,6 @@ export function definePageBlocksField() {
                 _type: 'linkTarget',
                 type: 'url',
                 url: 'https://www.nbcnews.com/',
-                openInNewTab: true,
               },
             },
           ],

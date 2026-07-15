@@ -476,7 +476,6 @@ export const singleContentBlockType = defineType({
           _type: 'linkTarget',
           type: 'url',
           url: 'https://bookshop.org',
-          openInNewTab: true,
         },
         color: 'secondary',
       },
