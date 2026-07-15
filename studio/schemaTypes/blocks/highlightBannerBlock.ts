@@ -88,28 +88,6 @@ export const highlightBannerBlockType = defineType({
       type: 'string',
       description: 'Optional small text shown below the button.',
     }),
-    defineField({
-      name: 'supportingTextColor',
-      title: 'Supporting Text Color',
-      type: 'string',
-      initialValue: '#b8a6c8',
-      components: {
-        input: BackgroundColorInput,
-      },
-      hidden: ({parent}) => !parent?.supportingText,
-      validation: (rule) =>
-        rule.custom((value, context) => {
-          const parent = context.parent as {supportingText?: string} | undefined
-
-          if (!parent?.supportingText || !value) {
-            return true
-          }
-
-          return /^#([0-9a-f]{3}|[0-9a-f]{6})$/i.test(value)
-            ? true
-            : 'Use a valid hex color, like #b8a6c8.'
-        }),
-    }),
   ],
   initialValue: {
     backgroundColor: '#311e41',
@@ -121,7 +99,6 @@ export const highlightBannerBlockType = defineType({
     buttonBgColor: '#ffffff',
     buttonTextColor: '#000000',
     supportingText: BLOCK_DEFAULT_COPY.subtitle,
-    supportingTextColor: '#b8a6c8',
   },
   preview: {
     select: {title: 'title', subtitle: 'ctaLabel'},
