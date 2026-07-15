@@ -40,7 +40,7 @@ export default function Button({
   style, // <-- Add this line
   'data-sanity': dataSanity,
 }: ButtonProps) {
-  const base = 'link flex items-center justify-between transition-colors duration-150'
+  const base = 'link flex items-center gap-x-22 transition-colors duration-150'
 
   const variants: Record<ButtonVariant, string> = {
     primary: 'text-[#FFF] bg-[#000] hover:bg-[#222]',
