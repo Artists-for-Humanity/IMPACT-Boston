@@ -9,10 +9,7 @@
     "start": "sanity start",
     "build": "sanity build",
     "deploy": "sanity deploy",
-    "deploy-graphql": "sanity graphql deploy",
-    "seed:blog-posts": "sanity exec scripts/seed-blog-posts.ts --with-user-token",
-    "seed:blog-posts:dry-run": "BLOG_POST_SEED_DRY_RUN=true sanity exec scripts/seed-blog-posts.ts --with-user-token",
-    "seed:single-content": "node scripts/seed-single-content-default.cjs"
+    "deploy-graphql": "sanity graphql deploy"
   },
   "keywords": [
     "sanity"
