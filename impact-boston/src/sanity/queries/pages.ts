@@ -118,7 +118,6 @@ const PAGE_SECTIONS_PROJECTION = `
       subtitle,
       subtext,
       supportingText,
-      supportingTextColor,
       textColor,
       variant,
       showToggle,

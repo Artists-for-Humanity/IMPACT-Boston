@@ -13,7 +13,6 @@ interface Highlight2Props {
     textColor?: string;
     buttonBgColor?: string;
     buttonTextColor?: string;
-    supportingTextColor?: string;
     dataAttributes?: {
         body?: string;
         ctaLabel?: string;
@@ -33,7 +32,6 @@ export default function Highlight2({
     textColor,
     buttonBgColor,
     buttonTextColor,
-    supportingTextColor,
     dataAttributes,
 }: Highlight2Props) {
     const containerStyles: CSSProperties = {
@@ -80,7 +78,7 @@ export default function Highlight2({
                         <p
                             className="p2"
                             data-sanity={dataAttributes?.supportingText}
-                            style={supportingTextColor ? { color: supportingTextColor } : undefined}
+                            style={{ color: 'rgba(255, 255, 255, 0.6)' }}
                         >
                             {supportingText}
                         </p>

@@ -42,7 +42,6 @@ export default function HighlightBannerBlock({
       textColor={getHexColor(section.textColor) ?? "#ffffff"}
       buttonBgColor={getHexColor(section.buttonBgColor) ?? "#ffffff"}
       buttonTextColor={getHexColor(section.buttonTextColor) ?? "#000000"}
-      supportingTextColor={getHexColor(section.supportingTextColor)}
       dataAttributes={{
         body: getFieldDataAttribute(dataAttribute, extendPath(blockPath, "body")),
         ctaLabel: getFieldDataAttribute(
