@@ -216,7 +216,7 @@ function AccordionList({
                 <div className="flex items-center gap-2">
                   {item.title ? (
                     <h3
-                      className="sub-1 truncate text-black md:whitespace-normal"
+                      className="sub-1 overflow-hidden whitespace-nowrap text-ellipsis text-black md:overflow-visible md:whitespace-normal md:text-clip"
                       data-sanity={item.dataAttributes?.title}
                     >
                       {item.title}
