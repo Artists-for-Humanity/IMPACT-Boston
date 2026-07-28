@@ -55,6 +55,8 @@ const fieldByType: Record<
   url: 'url',
 }
 
+const childPageIndentPx = 30
+
 export function LinkTargetInput(props: ObjectInputProps<LinkTargetValue>) {
   const {
     elementProps,
@@ -316,6 +318,9 @@ export function LinkTargetInput(props: ObjectInputProps<LinkTargetValue>) {
                   <Stack space={2} style={{paddingLeft: 30}}>
                     {group.pages.map((page) => {
                       const selected = value?.internalPath === page.value
+                      const indentPx = isPeopleWithDisabilitiesChildPage(page.value)
+                        ? childPageIndentPx
+                        : 0
 
                       return (
                         <button
@@ -334,10 +339,11 @@ export function LinkTargetInput(props: ObjectInputProps<LinkTargetValue>) {
                             font: 'inherit',
                             gap: 8,
                             justifyContent: 'space-between',
+                            marginLeft: indentPx,
                             opacity: readOnly ? 0.65 : 1,
                             padding: '9px 10px',
                             textAlign: 'left',
-                            width: '100%',
+                            width: `calc(100% - ${indentPx}px)`,
                           }}
                           type="button"
                         >
@@ -435,4 +441,8 @@ export function LinkTargetInput(props: ObjectInputProps<LinkTargetValue>) {
 
 function isLinkTargetType(value: unknown): value is LinkTargetType {
   return linkTypeOptions.some((option) => option.value === value)
+}
+
+function isPeopleWithDisabilitiesChildPage(value: string) {
+  return value.startsWith('/PeopleWithDisabilities/')
 }
