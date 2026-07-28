@@ -23,6 +23,7 @@ export function resolveListBlock(section: CmsListBlock): ListProps {
     description: displayText(section.description) || undefined,
     showToggle: section.showToggle ?? undefined,
     noPaddingTop: section.noPaddingTop ?? undefined,
+    hideDescriptionWhenOpen: section.hideDescriptionWhenOpen ?? undefined,
     items: listItems?.length ? listItems : undefined,
     detailItems: detailItems?.length ? detailItems : undefined,
   };
