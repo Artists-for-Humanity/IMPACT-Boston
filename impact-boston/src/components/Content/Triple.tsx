@@ -116,7 +116,7 @@ function FilledTripleCard({ card }: { card: TripleCard }) {
         switch (item.type) {
           case "title":
             return (
-              <p className="sub-1" key={`${item.type}-${index}`}>
+              <p className="p1-bold" key={`${item.type}-${index}`}>
                 <span data-sanity={item.dataSanity}>{item.value}</span>
                 {item.line2 ? (
                   <>
@@ -162,54 +162,56 @@ function FilledTripleCard({ card }: { card: TripleCard }) {
 
 function OutlinedTripleCard({ card }: { card: TripleCard }) {
   return (
-    <div className="flex min-h-[320px] flex-col gap-6 border border-line-divider bg-white p-8 md:min-h-[340px] lg:min-h-[386px]">
-      {card.content.map((item, index) => {
-        switch (item.type) {
-          case "title":
-            return (
-              <p className="sub-1" key={`${item.type}-${index}`}>
-                <span data-sanity={item.dataSanity}>{item.value}</span>
-                {item.line2 ? (
-                  <>
-                    <br />
-                    <span data-sanity={item.line2DataSanity}>
-                      {item.line2}
-                    </span>
-                  </>
-                ) : null}
-              </p>
-            );
+    <div className="flex min-h-[320px] flex-col justify-between border border-line-divider bg-white p-8 md:min-h-[340px] lg:min-h-[386px]">
+      <div className="flex flex-col gap-6">
+        {card.content.map((item, index) => {
+          switch (item.type) {
+            case "title":
+              return (
+                <p className="p1-bold" key={`${item.type}-${index}`}>
+                  <span data-sanity={item.dataSanity}>{item.value}</span>
+                  {item.line2 ? (
+                    <>
+                      <br />
+                      <span data-sanity={item.line2DataSanity}>
+                        {item.line2}
+                      </span>
+                    </>
+                  ) : null}
+                </p>
+              );
 
-          case "description":
-            return (
-              <p
-                className="p2"
-                data-sanity={item.dataSanity}
-                key={`${item.type}-${index}`}
-              >
-                {item.value}
-              </p>
-            );
+            case "description":
+              return (
+                <p
+                  className="p2"
+                  data-sanity={item.dataSanity}
+                  key={`${item.type}-${index}`}
+                >
+                  {item.value}
+                </p>
+              );
 
-          case "tags":
-            return item.value.map((tag) => (
-              <p
-                key={tag}
-                className="p2 self-start border border-line-divider px-1.5 lg:p-2"
-                data-sanity={item.dataSanity}
-              >
-                {tag}
-              </p>
-            ));
+            case "tags":
+              return item.value.map((tag) => (
+                <p
+                  key={tag}
+                  className="p2 self-start border border-line-divider px-1.5 lg:p-2"
+                  data-sanity={item.dataSanity}
+                >
+                  {tag}
+                </p>
+              ));
 
-          default:
-            return null;
-        }
-      })}
+            default:
+              return null;
+          }
+        })}
+      </div>
 
       {card.link ? (
         <a
-          className="link mt-auto self-start text-secondary underline transition hover:text-primary"
+          className="link self-start text-secondary underline transition hover:text-primary"
           data-sanity={card.dataAttributes?.linkText}
           href={card.link.href}
           rel={card.link.openInNewTab ? "noopener noreferrer" : undefined}

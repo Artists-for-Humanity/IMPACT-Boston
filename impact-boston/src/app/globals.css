@@ -125,11 +125,12 @@ body {
   }
 
   .p2 {
-    @apply font-normal tracking-[0em] text-[14px] leading-normal
+    @apply font-normal tracking-[0em] text-[14px]
            md:text-[14px]
            lg:text-[16px];
     font-family: var(--font-ibm-plex-sans), sans-serif;
     color: var(--color-black);
+    line-height: normal;
   }
 
   .medium-label {

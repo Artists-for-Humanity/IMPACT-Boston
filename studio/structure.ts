@@ -73,10 +73,6 @@ const programsPages: CmsPageListItem[] = [
 
 const disabilitiesSubPages: CmsPageListItem[] = [
   {
-    title: getCmsPageTitle('disabilitiesPage'),
-    id: 'disabilitiesPage',
-  },
-  {
     title: getCmsPageTitle('abilityPage'),
     id: 'abilityPage',
   },
@@ -183,7 +179,20 @@ export const structure: StructureResolver = (S) =>
                 .child(
                   S.list()
                     .title('People with Disabilities')
-                    .items(disabilitiesSubPages.map((page) => cmsPageListItem(S, page))),
+                    .items([
+                      cmsPageListItem(S, {
+                        title: getCmsPageTitle('disabilitiesPage'),
+                        id: 'disabilitiesPage',
+                      }),
+                      S.listItem()
+                        .title('Sub-Pages')
+                        .id('disabilitiesSubFolder')
+                        .child(
+                          S.list()
+                            .title('Sub-Pages')
+                            .items(disabilitiesSubPages.map((page) => cmsPageListItem(S, page))),
+                        ),
+                    ]),
                 ),
             ]),
         ),

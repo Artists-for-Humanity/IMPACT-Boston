@@ -46,10 +46,13 @@ export const internalPageGroups = [
 ] as const
 
 export const internalPageOptions = internalPageGroups.flatMap((group) =>
-  group.pages.map((page) => ({
-    title: `${group.title} / ${page.title}`,
-    value: page.value,
-  })),
+  group.pages.map((page) => {
+    const isSubPage = page.value.split('/').filter(Boolean).length > 1
+    const title = isSubPage
+      ? `${group.title} / ↳ ${page.title}`
+      : `${group.title} / ${page.title}`
+    return {title, value: page.value}
+  }),
 )
 
 export const linkTypeOptions = [

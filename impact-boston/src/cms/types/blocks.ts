@@ -182,6 +182,7 @@ export type SanityListFields = {
   description?: string | null;
   showToggle?: boolean | null;
   noPaddingTop?: boolean | null;
+  hideDescriptionWhenOpen?: boolean | null;
   listItems?: ListItem[] | null;
   detailItems?: ListDetailItem[] | null;
 };

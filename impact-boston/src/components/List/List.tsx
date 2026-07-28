@@ -56,6 +56,7 @@ export type ListProps = {
   variant?: ListVariant;
   showToggle?: boolean;
   noPaddingTop?: boolean;
+  hideDescriptionWhenOpen?: boolean;
   dataAttributes?: {
     description?: string;
     title?: string;
@@ -70,6 +71,7 @@ export default function List({
   variant = "accordion",
   showToggle = true,
   noPaddingTop = false,
+  hideDescriptionWhenOpen = false,
   dataAttributes,
 }: ListProps) {
   const [openIndexes, setOpenIndexes] = useState<Set<number>>(
@@ -121,7 +123,7 @@ export default function List({
 
   return (
     <Grid noPaddingTop={noPaddingTop}>
-      <section className="col-span-full flex flex-col gap-8 md:gap-12 lg:gap-16">
+      <section className="col-span-full flex flex-col gap-8 py-6 md:gap-12 lg:gap-16">
         {hasHeader ? (
           <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
             <div className="flex max-w-[760px] flex-col gap-3">
@@ -154,6 +156,7 @@ export default function List({
             items={items}
             openIndexes={openIndexes}
             onToggleItem={toggleItem}
+            hideDescriptionWhenOpen={hideDescriptionWhenOpen}
           />
         )}
 
@@ -168,11 +171,13 @@ function AccordionList({
   items,
   openIndexes,
   onToggleItem,
+  hideDescriptionWhenOpen = false,
 }: {
   allOpen: boolean;
   items: ListItem[];
   openIndexes: Set<number>;
   onToggleItem: (index: number) => void;
+  hideDescriptionWhenOpen?: boolean;
 }) {
   const listId = useId();
 
@@ -191,7 +196,7 @@ function AccordionList({
           <article
             aria-controls={hasAccordion ? contentId : undefined}
             aria-expanded={hasAccordion ? isOpen : undefined}
-            className={`border-b border-line-divider py-5 md:py-6 lg:py-7 ${
+            className={`border-b border-line-divider py-4 ${
               hasAccordion
                 ? "cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-secondary"
                 : ""
@@ -212,11 +217,11 @@ function AccordionList({
             tabIndex={hasAccordion ? 0 : undefined}
           >
             <div className="grid grid-cols-[1fr_auto] gap-x-4 gap-y-4">
-              <div className="min-w-0">
+              <div className="min-w-0 flex flex-col gap-2">
                 <div className="flex items-center gap-2">
                   {item.title ? (
                     <h3
-                      className="sub-1 truncate text-black md:whitespace-normal"
+                      className="sub-1 overflow-hidden whitespace-nowrap text-ellipsis text-black md:overflow-visible md:whitespace-normal md:text-clip"
                       data-sanity={item.dataAttributes?.title}
                     >
                       {item.title}
@@ -230,9 +235,9 @@ function AccordionList({
                     />
                   ) : null}
                 </div>
-                {item.description ? (
+                {item.description && (!hideDescriptionWhenOpen || !isOpen) ? (
                   <p
-                    className="p2 mt-2 max-w-[760px] text-black"
+                    className="p2 max-w-[760px] text-black"
                     data-sanity={item.dataAttributes?.description}
                   >
                     {item.description}

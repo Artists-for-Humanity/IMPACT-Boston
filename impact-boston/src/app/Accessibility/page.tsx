@@ -120,9 +120,13 @@ export default async function Accessibility() {
   const { isEnabled } = await draftMode();
   const data = await getCmsPageData(ACCESSIBILITY_PAGE_ID, isEnabled);
 
+  const blocks = getCmsPageBlocks(data, ACCESSIBILITY_PAGE_FALLBACK_BLOCKS).map((block) =>
+    block._type === "listBlock" ? { ...block, noPaddingTop: true, hideDescriptionWhenOpen: true, showToggle: false } : block
+  );
+
   return (
     <CmsPage
-      blocks={getCmsPageBlocks(data, ACCESSIBILITY_PAGE_FALLBACK_BLOCKS)}
+      blocks={blocks}
       data={data}
       fallbacks={DEFAULT_CMS_BLOCK_FALLBACKS}
     />

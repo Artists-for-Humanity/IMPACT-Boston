@@ -23,7 +23,7 @@ const bodyComponents: PortableTextComponents = {
   },
   list: {
     bullet: ({ children }) => (
-      <ul className="list-disc space-y-6 pl-6 lg:col-span-5">{children}</ul>
+      <ul className="list-disc pl-6 lg:col-span-5">{children}</ul>
     ),
     number: ({ children }) => (
       <ol className="list-decimal space-y-4 pl-6 lg:col-span-5">{children}</ol>
