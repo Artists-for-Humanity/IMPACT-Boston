@@ -251,7 +251,7 @@ export default function SingleContent({
                 href={cta.href}
                 target={cta.openInNewTab ? "_blank" : undefined}
                 rel={cta.openInNewTab ? "noopener noreferrer" : undefined}
-                className="p1-bold underline text-secondary lg:col-span-5"
+                className="p1-bold underline text-secondary lg:col-span-5 mt-6"
                 data-sanity={dataAttributes?.ctaText}
               >
                 {cta.text}
