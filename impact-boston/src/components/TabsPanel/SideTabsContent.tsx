@@ -364,6 +364,8 @@ function renderStructuredContentBlock(
             gap: "8px",
             alignSelf: "stretch",
             background: "var(--BG-lavender, #FAF6FD)",
+            minWidth: 0,
+            overflow: "hidden",
           }}
         >
           <p
@@ -374,6 +376,8 @@ function renderStructuredContentBlock(
               fontStyle: "italic",
               fontWeight: 400,
               lineHeight: "normal",
+              width: "100%",
+              overflowWrap: "break-word",
             }}
           >
             {quoteText}
@@ -388,6 +392,7 @@ function renderStructuredContentBlock(
                 fontWeight: 400,
                 lineHeight: "normal",
                 alignSelf: "flex-start",
+                width: "100%",
               }}
             >
               {attribution}
