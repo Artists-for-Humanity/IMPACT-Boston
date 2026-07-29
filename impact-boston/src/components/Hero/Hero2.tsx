@@ -8,6 +8,7 @@ import Grid from "../common/Grid";
 import { PLACEHOLDER_IMAGE_SRC } from "../common/placeholderImage";
 
 interface Hero2Props {
+  as?: "h1" | "h2";
   title: ReactNode;
   titleText?: string;
   highlight?: string;
@@ -100,6 +101,7 @@ function getYouTubeEmbedUrl(youtubeUrl: string) {
 }
 
 export default function Hero2({
+  as: TitleTag = "h1",
   title,
   titleText,
   highlight,
@@ -143,18 +145,18 @@ export default function Hero2({
   return (
       <Grid className="md:gap-12 lg:gap-x-8 lg:gap-y-8">
         <div className="col-span-full grid grid-cols-12 md:gap-y-8 lg:gap-x-8 lg:gap-y-6">
-          <h1
-            className="col-span-full h1 text-center text-black"
+          <TitleTag
+            className={`col-span-full ${TitleTag === "h2" ? "h2" : "h1"} text-center text-black`}
             data-sanity={dataAttributes?.title}
           >
             {title}{' '}
             {highlight ? (
               <span className={highlightClass}>{highlight}</span>
             ) : null}
-        </h1>
+          </TitleTag>
 
           {description && (
-            <div className="col-span-full lg:col-start-3 lg:col-span-8">
+            <div className="col-span-full">
               <p
                 className="p1 text-center text-grey"
                 data-sanity={dataAttributes?.description}

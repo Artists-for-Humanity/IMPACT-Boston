@@ -87,6 +87,7 @@ export default function HeroBlock({
 
     return (
       <Hero2
+        as={section.headlineAs ?? "h1"}
         title={
           shouldUseHeadlineParts
             ? renderHero2HeadlineParts(
@@ -138,7 +139,7 @@ export default function HeroBlock({
   );
 
   const headline = (
-    <Hero1Headline>
+    <Hero1Headline as={section.headlineAs ?? "h1"}>
       {headlineParts.map((part, idx) => {
         const color = part.color ?? "black";
         const text = part.text.trim();
