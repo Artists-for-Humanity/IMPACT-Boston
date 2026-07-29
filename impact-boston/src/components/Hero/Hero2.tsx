@@ -146,7 +146,7 @@ export default function Hero2({
 
   return (
       <Grid className="md:gap-12 lg:gap-x-8 lg:gap-y-8">
-        <div className="col-span-full grid grid-cols-12 md:gap-y-8 lg:gap-x-8 lg:gap-y-6">
+        <div className="col-span-full grid grid-cols-12 gap-y-4 lg:gap-x-8 lg:gap-y-6">
           {tag ? (
             <div className="col-span-full flex justify-center">
               <div

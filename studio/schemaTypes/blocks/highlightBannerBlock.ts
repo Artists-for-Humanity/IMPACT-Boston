@@ -1,5 +1,6 @@
 import {defineField, defineType} from 'sanity'
 import {BackgroundColorInput} from '../../components/BackgroundColorInput'
+import {LimitedTextInput} from '../../components/LimitedTextInput'
 import {blockPreviewMedia} from './blockPreviews'
 import {BLOCK_DEFAULT_COPY, defaultInternalLinkTarget} from './blockDefaults'
 import {defineLinkTargetField} from '../linkTarget'
@@ -23,7 +24,16 @@ export const highlightBannerBlockType = defineType({
       name: 'title',
       title: 'Title',
       type: 'string',
-      validation: (rule) => rule.required(),
+      validation: (rule) =>
+        rule.custom((value) => {
+          if (!value) return 'Title is required.'
+          if (typeof value === 'string' && value.length > 40)
+            return `Title must be 40 characters or fewer (currently ${value.length}).`
+          return true
+        }),
+      components: {
+        input: (props) => LimitedTextInput({...props, limit: 40}),
+      },
     }),
     defineField({
       name: 'textColor',
