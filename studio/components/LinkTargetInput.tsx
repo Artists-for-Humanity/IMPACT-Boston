@@ -12,7 +12,7 @@ import {
   TextInput,
 } from '@sanity/ui'
 import {AtSign, Check, ChevronDown, FileText, Folder, Globe, Image, Link, Search} from 'lucide-react'
-import {ObjectInputMembers, set, setIfMissing, unset, type ObjectInputProps} from 'sanity'
+import {ObjectInputMembers, set, setIfMissing, unset, useFormValue, type ObjectInputProps} from 'sanity'
 
 import {
   internalPageGroups,
@@ -23,6 +23,7 @@ import {
 
 type LinkTargetValue = {
   _type?: 'linkTarget'
+  anchor?: string
   blogPost?: {
     _ref?: string
   }
@@ -73,6 +74,7 @@ export function LinkTargetInput(props: ObjectInputProps<LinkTargetValue>) {
     validation,
     value,
   } = props
+  const {path} = props
   const generatedId = useId()
   const menuId = `${elementProps.id ?? generatedId}-type-menu`
   const [internalQuery, setInternalQuery] = useState('')
@@ -92,6 +94,36 @@ export function LinkTargetInput(props: ObjectInputProps<LinkTargetValue>) {
   const validationMessages = validation
     .filter((marker) => marker.level === 'error' || marker.level === 'warning')
     .map((marker) => marker.message)
+  // Derive the key of the sidetab that contains this linkTarget (if any),
+  // so we can exclude it from the anchor options.
+  const currentTabKey = useMemo(() => {
+    const tabsIdx = path.findIndex((seg) => seg === 'tabs')
+    if (tabsIdx === -1) return null
+    const next = path[tabsIdx + 1]
+    return next && typeof next === 'object' && '_key' in next ? (next as {_key: string})._key : null
+  }, [path])
+
+  // Read the current document's sections to derive sidetab anchor options.
+  const sections = useFormValue(['sections']) as
+    | Array<{
+        _type?: string
+        tabs?: Array<{_key?: string; label?: string; sectionId?: string}>
+      }>
+    | undefined
+
+  const anchorOptions = useMemo(() => {
+    if (!sections) return []
+
+    return sections
+      .filter((s) => s._type === 'sideTabsBlock' && Array.isArray(s.tabs))
+      .flatMap((s) => s.tabs ?? [])
+      .filter((tab) => tab.label && !(tab._key && tab._key === currentTabKey))
+      .map((tab) => ({
+        label: tab.label as string,
+        value: tab.sectionId || slugifyAnchor(tab.label as string),
+      }))
+  }, [sections, currentTabKey])
+
   const filteredGroups = useMemo(() => {
     const query = internalQuery.trim().toLowerCase()
 
@@ -129,7 +161,7 @@ export function LinkTargetInput(props: ObjectInputProps<LinkTargetValue>) {
   }
 
   const handleStringChange =
-    (fieldName: 'email' | 'internalPath' | 'url') => (nextValue: string) => {
+    (fieldName: 'anchor' | 'email' | 'internalPath' | 'url') => (nextValue: string) => {
       const trimmedValue = nextValue.trim()
 
       onChange([
@@ -375,6 +407,33 @@ export function LinkTargetInput(props: ObjectInputProps<LinkTargetValue>) {
         </Card>
       ) : null}
 
+      {activeType === 'internal' && !showInternalPicker && anchorOptions.length > 0 ? (
+        <Card border radius={2} tone="inherit" style={{overflow: 'hidden'}}>
+          <select
+            disabled={readOnly}
+            onChange={(event) => handleStringChange('anchor')(event.currentTarget.value)}
+            value={value?.anchor ?? ''}
+            style={{
+              background: 'transparent',
+              border: 0,
+              color: 'inherit',
+              cursor: readOnly ? 'not-allowed' : 'pointer',
+              font: 'inherit',
+              fontSize: '0.8125rem',
+              padding: '0.625rem 0.75rem',
+              width: '100%',
+            }}
+          >
+            <option value="">No section (top of page)</option>
+            {anchorOptions.map((option) => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
+          </select>
+        </Card>
+      ) : null}
+
       {fileMembers.length ? (
         <ObjectInputMembers
           members={fileMembers}
@@ -445,4 +504,13 @@ function isLinkTargetType(value: unknown): value is LinkTargetType {
 
 function isPeopleWithDisabilitiesChildPage(value: string) {
   return value.startsWith('/PeopleWithDisabilities/')
+}
+
+function slugifyAnchor(text: string): string {
+  return text
+    .toLowerCase()
+    .trim()
+    .replace(/[^\w\s-]/g, '')
+    .replace(/[\s_-]+/g, '-')
+    .replace(/^-+|-+$/g, '')
 }

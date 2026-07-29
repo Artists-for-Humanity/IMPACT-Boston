@@ -277,6 +277,7 @@ export type CmsSideTabsBlock = CmsPageBlockBase & {
   _type: "sideTabsBlock";
   backgroundColor?: string | null;
   noPaddingTop?: boolean;
+  textSize?: "p1" | "p2" | null;
   tabs?: SanitySideTab[] | null;
 };
 

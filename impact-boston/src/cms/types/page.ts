@@ -26,6 +26,7 @@ export type CmsBlockFallbacks = {
     slides?: SanityHighlight[] | null;
   };
   sideTabs?: SideTab[];
+  sideTabsTextSize?: "p1" | "p2";
   testimonials?: Pick<
     CmsTestimonialsBlock,
     | "heading"

@@ -29,7 +29,7 @@ export default function Directory({
         </div>
       )}
 
-      <div className="grid grid-cols-1 gap-x-6 gap-y-1 md:grid-cols-2">
+      <div className="grid grid-cols-1 gap-x-6 gap-y-10 md:grid-cols-2">
         <ul className="space-y-1">
           {leftColumn.map((item, i) => (
             <li key={item._key ?? i}>
@@ -54,7 +54,7 @@ export default function Directory({
 
       {hasToggle && (
         <button
-          className="p2 cursor-pointer self-start text-secondary underline underline-offset-2"
+          className="p2 cursor-pointer self-start text-secondary underline underline-offset-2 mt-10"
           onClick={() => setExpanded((c) => !c)}
           type="button"
         >

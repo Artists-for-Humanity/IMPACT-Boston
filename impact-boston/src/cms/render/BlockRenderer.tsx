@@ -135,6 +135,7 @@ export default function BlockRenderer({
           dataAttribute={dataAttribute}
           section={block}
           fallbackTabs={fallbacks?.sideTabs}
+          fallbackTextSize={fallbacks?.sideTabsTextSize}
         />
       );
 
