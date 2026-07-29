@@ -39,7 +39,7 @@ const portableTextComponents: PortableTextComponents = {
             Array.isArray(child.marks) &&
             child.marks.includes("strong"),
         );
-      return <p className={`p1${allStrong ? " pt-4 lg:-mb-14" : ""}`}>{children}</p>;
+      return <p className={`p1${allStrong ? " pb-4 lg:-mb-14" : ""}`}>{children}</p>;
     },
     p1: ({ children }) => <p className="p1">{children}</p>,
     p1Bold: ({ children, value }) => {
@@ -52,7 +52,7 @@ const portableTextComponents: PortableTextComponents = {
             child.marks.includes("strong"),
         );
       return (
-        <p className={`p1-bold pt-4${hasStrongMark ? " lg:-mb-14" : ""}`}>
+        <p className={`p1-bold${hasStrongMark ? " pb-4 lg:-mb-14" : " pt-4"}`}>
           {children}
         </p>
       );
@@ -68,7 +68,7 @@ const portableTextComponents: PortableTextComponents = {
   },
   list: {
     bullet: ({ children }) => (
-      <ul className="list-disc pl-6 flex flex-col gap-6">{children}</ul>
+      <ul className="list-disc pl-6 lg:-mb-12 lg:last:mb-0">{children}</ul>
     ),
     number: ({ children }) => (
       <ol className="list-decimal space-y-4 pl-6">{children}</ol>

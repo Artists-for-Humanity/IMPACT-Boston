@@ -9,7 +9,7 @@ export type EditorPreviewProps = {
 }
 
 const editorFontFamily = 'var(--font-ibm-plex-sans, "IBM Plex Sans", sans-serif)'
-const editorHeadingFontFamily = 'var(--font-poppins, Poppins, sans-serif)'
+const editorHeadingFontFamily = '"Poppins", sans-serif'
 
 export function createTextStylePreview(style: CSSProperties) {
   function TextStylePreview({children}: EditorPreviewProps) {
