@@ -45,8 +45,8 @@ export default function Highlight2({
             style={containerStyles}
         >
         <Grid>
-            <div className="col-span-full lg:col-span-6">
-                <h2 className="h2" data-sanity={dataAttributes?.title}>
+            <div className="col-span-full lg:col-span-6 min-w-0">
+                <h2 className="h2 break-words" data-sanity={dataAttributes?.title}>
                     {title}
                 </h2>
             </div>
