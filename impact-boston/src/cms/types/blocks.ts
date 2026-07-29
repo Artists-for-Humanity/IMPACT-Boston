@@ -31,6 +31,7 @@ export type SanityHeroHeadlinePart = {
 export type SanityHeroFields = {
   headlineParts?: SanityHeroHeadlinePart[] | null;
   headlineAs?: "h1" | "h2" | null;
+  tag?: string | null;
   body?: string | null;
   ctaText?: string | null;
   ctaHref?: string | null;

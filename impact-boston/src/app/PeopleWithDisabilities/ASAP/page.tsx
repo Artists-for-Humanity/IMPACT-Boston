@@ -15,7 +15,9 @@ export default async function ASAP() {
   const data = await getCmsPageData(ASAP_PAGE_ID, isEnabled);
 
   const blocks = getCmsPageBlocks(data, DEFAULT_CMS_PAGE_BLOCKS).map((block) =>
-    block._type === "hero2Block" ? { ...block, headlineAs: "h2" as const } : block,
+    block._type === "hero2Block"
+      ? { ...block, headlineAs: "h2" as const, tag: "People With Disabilities - ASAP" }
+      : block,
   );
 
   return (

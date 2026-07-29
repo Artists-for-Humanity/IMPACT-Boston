@@ -88,6 +88,7 @@ export default function HeroBlock({
     return (
       <Hero2
         as={section.headlineAs ?? "h1"}
+        tag={section.tag ?? undefined}
         title={
           shouldUseHeadlineParts
             ? renderHero2HeadlineParts(
