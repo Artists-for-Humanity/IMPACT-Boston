@@ -1,4 +1,4 @@
-import List from "@/components/List/List";
+import List, { type DescriptionLink } from "@/components/List/List";
 import { resolveListBlock } from "@/cms/normalize/blocks/list";
 import type { CmsListBlock } from "@/cms/types/blocks";
 import {
@@ -22,9 +22,14 @@ export default function ListBlock({
 }: ListBlockProps) {
   const props = resolveListBlock(section);
 
+  const descriptionLinks: DescriptionLink[] = props.description?.toLowerCase().includes("newsletter")
+    ? [{ keyword: "newsletter", href: "https://impactboston.app.neoncrm.com/np/clients/impactboston/subscribe.jsp", openInNewTab: true }]
+    : [];
+
   return (
     <List
       {...props}
+      descriptionLinks={descriptionLinks}
       dataAttributes={{
         description: getFieldDataAttribute(
           dataAttribute,

@@ -22,9 +22,14 @@ export default function ClassDescriptionsBlock({
 }: ClassDescriptionsBlockProps) {
   const props = resolveClassDescriptionsBlock(section);
 
+  const descriptionLinks = props.description?.toLowerCase().includes("newsletter")
+    ? [{ keyword: "Join our newsletter", href: "https://impactboston.app.neoncrm.com/np/clients/impactboston/subscribe.jsp", openInNewTab: true as const }]
+    : [];
+
   return (
     <ClassDescriptions
       {...props}
+      descriptionLinks={descriptionLinks}
       dataAttributes={{
         description: getFieldDataAttribute(
           dataAttribute,

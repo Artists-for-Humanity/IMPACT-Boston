@@ -1,5 +1,7 @@
+"use client";
+
 import Link from "next/link";
-import type { ReactNode } from "react";
+import React, { useState, type ReactNode } from "react";
 
 import type { CmsLinkTarget } from "@/cms/links";
 import Grid from "@/components/common/Grid";
@@ -33,9 +35,34 @@ export type ClassDescriptionsLink = {
   text: string;
 };
 
+export type DescriptionLink = {
+  keyword: string;
+  href: string;
+  openInNewTab?: boolean;
+};
+
+function renderDescription(text: string, links?: DescriptionLink[]) {
+  if (!links?.length) return text;
+  const parts: (string | React.ReactElement)[] = [text];
+  for (const { keyword, href, openInNewTab } of links) {
+    const next: (string | React.ReactElement)[] = [];
+    for (const part of parts) {
+      if (typeof part !== "string") { next.push(part); continue; }
+      const idx = part.toLowerCase().indexOf(keyword.toLowerCase());
+      if (idx === -1) { next.push(part); continue; }
+      next.push(part.slice(0, idx));
+      next.push(<a key={href} href={href} className="underline hover:no-underline" target={openInNewTab ? "_blank" : undefined} rel={openInNewTab ? "noopener noreferrer" : undefined}>{part.slice(idx, idx + keyword.length)}</a>);
+      next.push(part.slice(idx + keyword.length));
+    }
+    parts.splice(0, parts.length, ...next);
+  }
+  return parts;
+}
+
 export type ClassDescriptionsProps = {
   title?: string;
   description?: string;
+  descriptionLinks?: DescriptionLink[];
   items?: ClassDescriptionItem[];
   noPaddingTop?: boolean;
   seeAllLink?: ClassDescriptionsLink;
@@ -46,19 +73,25 @@ export type ClassDescriptionsProps = {
   };
 };
 
+const DEFAULT_VISIBLE = 3;
+
 export default function ClassDescriptions({
   title,
   description,
+  descriptionLinks,
   items = [],
   noPaddingTop = false,
   seeAllLink,
   dataAttributes,
 }: ClassDescriptionsProps) {
+  const [expanded, setExpanded] = useState(false);
+  const hasMore = items.length > DEFAULT_VISIBLE;
+  const visibleItems = hasMore && !expanded ? items.slice(0, DEFAULT_VISIBLE) : items;
   const hasHeader = Boolean(title || description || seeAllLink);
 
   return (
     <Grid noPaddingTop={noPaddingTop}>
-      <section className="col-span-full flex flex-col gap-8 md:gap-12 lg:gap-16">
+      <section className="col-span-full flex flex-col gap-y-8">
         {hasHeader ? (
           <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
             <div className="flex max-w-[760px] flex-col gap-3">
@@ -75,24 +108,27 @@ export default function ClassDescriptions({
                   className="p2 text-grey"
                   data-sanity={dataAttributes?.description}
                 >
-                  {description}
+                  {renderDescription(description, descriptionLinks)}
                 </p>
               ) : null}
             </div>
 
-            {seeAllLink ? (
-              <div className="hidden pt-1 lg:block">
-                <ClassDescriptionsAnchor
-                  dataAttribute={dataAttributes?.seeAllLinkText}
-                  link={seeAllLink}
-                />
+            {hasMore ? (
+              <div className="hidden pt-1 lg:block text-right">
+                <button
+                  className="p2 text-secondary underline underline-offset-auto hover:no-underline transition-colors"
+                  onClick={() => setExpanded((v) => !v)}
+                  type="button"
+                >
+                  {expanded ? "See less" : `See all ${items.length} classes`}
+                </button>
               </div>
             ) : null}
           </div>
         ) : null}
 
         <div>
-          {items.map((item, index) => (
+          {visibleItems.map((item, index) => (
             <ClassDescriptionArticle
               item={item}
               key={item._key ?? `${item.name ?? "class-description"}-${index}`}
@@ -100,12 +136,15 @@ export default function ClassDescriptions({
           ))}
         </div>
 
-        {seeAllLink ? (
+        {hasMore ? (
           <div className="lg:hidden">
-            <ClassDescriptionsAnchor
-              dataAttribute={dataAttributes?.seeAllLinkText}
-              link={seeAllLink}
-            />
+            <button
+              className="p2 text-secondary underline underline-offset-auto hover:no-underline transition-colors"
+              onClick={() => setExpanded((v) => !v)}
+              type="button"
+            >
+              {expanded ? "See less" : "See all"}
+            </button>
           </div>
         ) : null}
       </section>
@@ -115,7 +154,7 @@ export default function ClassDescriptions({
 
 function ClassDescriptionArticle({ item }: { item: ClassDescriptionItem }) {
   return (
-    <article className="grid gap-7 border-b border-line-divider py-8 first:pt-0 md:gap-8 md:py-10 lg:grid-cols-2 lg:gap-12 lg:py-12">
+    <article className="grid gap-7 border-b border-line-divider pt-[16px] pb-8 last:border-b-0 md:gap-8 lg:grid-cols-2 lg:gap-12">
       <dl className="grid grid-cols-[96px_minmax(0,1fr)] gap-x-5 gap-y-4 md:grid-cols-[160px_minmax(0,1fr)]">
         <DetailRow dataAttribute={item.dataAttributes?.name} label="Name">
           {item.name}
@@ -123,11 +162,11 @@ function ClassDescriptionArticle({ item }: { item: ClassDescriptionItem }) {
         <DetailRow dataAttribute={item.dataAttributes?.summary} label="Summary">
           {item.summary}
         </DetailRow>
-        <DetailRow dataAttribute={item.dataAttributes?.cost} label="Cost">
+        <DetailRow dataAttribute={item.dataAttributes?.cost} label="Course Fee">
           {item.cost}
         </DetailRow>
         <DetailRow dataAttribute={item.dataAttributes?.dateTime} label="Date/Time">
-          {item.dateTime}
+          {item.dateTime?.replace(/^- /gm, "• ")}
         </DetailRow>
         <DetailRow dataAttribute={item.dataAttributes?.location} label="Location">
           {item.location}
@@ -154,10 +193,10 @@ function ClassDescriptionArticle({ item }: { item: ClassDescriptionItem }) {
       </dl>
 
       {item.description ? (
-        <div>
+        <div className="flex flex-col gap-y-2">
           <h3 className="p1-bold text-black">Description</h3>
           <p
-            className="p1 mt-4 whitespace-pre-line text-black"
+            className="p2 whitespace-pre-line text-black"
             data-sanity={item.dataAttributes?.description}
           >
             {item.description}
@@ -183,9 +222,9 @@ function DetailRow({
 
   return (
     <>
-      <dt className="p1-bold text-black">{label}</dt>
+      <dt className="sub-2 text-black">{label}</dt>
       <dd
-        className="p1 min-w-0 whitespace-pre-line text-black"
+        className="p2 min-w-0 whitespace-pre-line text-black"
         data-sanity={dataAttribute}
       >
         {children}
@@ -203,7 +242,7 @@ function ClassDescriptionsAnchor({
 }) {
   return (
     <Link
-      className="link text-secondary underline transition hover:text-primary"
+      className="p2 text-secondary underline underline-offset-auto hover:no-underline transition-colors"
       data-sanity={dataAttribute}
       href={link.href}
       rel={link.openInNewTab ? "noopener noreferrer" : undefined}

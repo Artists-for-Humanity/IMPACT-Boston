@@ -214,15 +214,15 @@ export default function SingleContent({
               )}
             </div>
           ) : null}
-          <div className="flex flex-col gap-6 md:flex-row md:flex-wrap md:items-start md:gap-x-[88px] lg:grid lg:grid-cols-5 lg:gap-y-6" style={{ wordBreak: "break-word", overflowWrap: "anywhere" }}>
+          <div className="flex flex-col gap-2 md:flex-row md:flex-wrap md:items-start md:gap-x-[88px] lg:grid lg:grid-cols-5 lg:gap-y-2" style={{ wordBreak: "break-word", overflowWrap: "anywhere" }}>
             {bodyContent ? (
-              <div className="contents" data-sanity={dataAttributes?.body}>
+              <div className="col-span-full flex flex-col gap-2 [&>*:first-child]:[border-bottom:16px_solid_transparent]" data-sanity={dataAttributes?.body}>
                 {bodyContent}
               </div>
             ) : (
               (paragraphs ?? []).map((para, idx) => (
                 <p
-                  className={`p1 lg:col-span-5 min-w-0 break-words${para.bold ? " font-bold" : ""}`}
+                  className={`p1 lg:col-span-5 min-w-0 break-words mb-6${para.bold ? " font-bold" : ""}`}
                   data-sanity={
                     para.dataAttributes?.text ??
                     dataAttributes?.paragraphs?.[idx]?.text

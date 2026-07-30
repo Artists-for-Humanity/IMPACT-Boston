@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { ChevronDown, ChevronUp, CircleHelp } from "lucide-react";
-import { useId, useState } from "react";
+import React, { useId, useState } from "react";
 
 import Grid from "../common/Grid";
 import type { CmsLinkTarget } from "@/cms/links";
@@ -48,9 +48,16 @@ export type ListDetailItem = {
   };
 };
 
+export type DescriptionLink = {
+  keyword: string;
+  href: string;
+  openInNewTab?: boolean;
+};
+
 export type ListProps = {
   title?: string;
   description?: string;
+  descriptionLinks?: DescriptionLink[];
   items?: ListItem[];
   detailItems?: ListDetailItem[];
   variant?: ListVariant;
@@ -63,9 +70,47 @@ export type ListProps = {
   };
 };
 
+function renderDescription(text: string, links?: DescriptionLink[]) {
+  if (!links?.length) return text;
+
+  const parts: (string | React.ReactElement)[] = [text];
+
+  for (const { keyword, href, openInNewTab } of links) {
+    const next: (string | React.ReactElement)[] = [];
+    for (const part of parts) {
+      if (typeof part !== "string") {
+        next.push(part);
+        continue;
+      }
+      const idx = part.toLowerCase().indexOf(keyword.toLowerCase());
+      if (idx === -1) {
+        next.push(part);
+        continue;
+      }
+      next.push(part.slice(0, idx));
+      next.push(
+        <a
+          key={href}
+          href={href}
+          className="underline hover:no-underline"
+          target={openInNewTab ? "_blank" : undefined}
+          rel={openInNewTab ? "noopener noreferrer" : undefined}
+        >
+          {part.slice(idx, idx + keyword.length)}
+        </a>,
+      );
+      next.push(part.slice(idx + keyword.length));
+    }
+    parts.splice(0, parts.length, ...next);
+  }
+
+  return parts;
+}
+
 export default function List({
   title,
   description,
+  descriptionLinks,
   items = [],
   detailItems = [],
   variant = "accordion",
@@ -137,7 +182,7 @@ export default function List({
               ) : null}
               {description ? (
                 <p className="p2 text-grey" data-sanity={dataAttributes?.description}>
-                  {description}
+                  {renderDescription(description, descriptionLinks)}
                 </p>
               ) : null}
             </div>
