@@ -1,5 +1,9 @@
+import {useEditor, type PortableTextTextBlock} from '@portabletext/editor'
+import {defineBehavior, forward, raise} from '@portabletext/editor/behaviors'
+import * as selectors from '@portabletext/editor/selectors'
 import {LinkIcon} from 'lucide-react'
-import {defineArrayMember, defineField} from 'sanity'
+import {useEffect} from 'react'
+import {defineArrayMember, defineField, type PortableTextPluginsProps} from 'sanity'
 import {defineLinkTargetField} from '../../../linkTarget'
 
 import {
@@ -13,6 +17,63 @@ type TextStyleDefinition = {
   title: string
   value: string
   component?: (props: EditorPreviewProps) => React.ReactNode
+}
+
+const DEFAULT_ENTER_STYLE = 'h1'
+
+function createEmptyDefaultBlock(keyGenerator: () => string): PortableTextTextBlock {
+  return {
+    _key: keyGenerator(),
+    _type: 'block',
+    style: DEFAULT_ENTER_STYLE,
+    markDefs: [],
+    children: [{_key: keyGenerator(), _type: 'span', text: '', marks: []}],
+  }
+}
+
+export function RichTextPortableTextPlugins(props: PortableTextPluginsProps) {
+  const editor = useEditor()
+
+  useEffect(() => {
+    return editor.registerBehavior({
+      behavior: defineBehavior({
+        on: 'insert.break',
+        guard: ({snapshot}) => {
+          const focusTextBlock = selectors.getFocusTextBlock(snapshot)
+
+          if (
+            !focusTextBlock ||
+            focusTextBlock.node.listItem ||
+            !selectors.isSelectionCollapsed(snapshot)
+          ) {
+            return false
+          }
+
+          return {
+            atStart: selectors.isAtTheStartOfBlock(focusTextBlock)(snapshot),
+          }
+        },
+        actions: [
+          ({event, snapshot}, {atStart}) => {
+            if (atStart) {
+              return [
+                raise({
+                  type: 'insert.block',
+                  block: createEmptyDefaultBlock(snapshot.context.keyGenerator),
+                  placement: 'before',
+                  select: 'start',
+                }),
+              ]
+            }
+
+            return [forward(event)]
+          },
+        ],
+      }),
+    })
+  }, [editor])
+
+  return props.renderDefault(props)
 }
 
 const textStyles = [
@@ -88,7 +149,7 @@ const textStyles = [
     component: createTextStylePreview({
       fontFamily: sideTabsEditorFonts.body,
       fontSize: '14px',
-      fontWeight: 400,
+      fontWeight: 500,
       letterSpacing: '0em',
       lineHeight: 'normal',
     }),

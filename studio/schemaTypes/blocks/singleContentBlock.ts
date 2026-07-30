@@ -2,7 +2,7 @@ import {defineArrayMember, defineField, defineType} from 'sanity'
 import {HeadlineColorInput, headlineColorOptions} from '../../components/HeadlineColorInput'
 import {LightBackgroundColorInput} from '../../components/LightBackgroundColorInput'
 import {blockPreviewMedia} from './blockPreviews'
-import {portableTextContent} from './sideTabs/content/portableText'
+import {portableTextContent, RichTextPortableTextPlugins} from './sideTabs/content/portableText'
 import {defineLinkTargetField} from '../linkTarget'
 
 type SingleContentParent = {
@@ -161,6 +161,11 @@ export const singleContentBlockType = defineType({
       description:
         'Add heading, subtitle, paragraph, CTA button, and text link blocks in the order they should appear.',
       type: 'array',
+      components: {
+        portableText: {
+          plugins: RichTextPortableTextPlugins,
+        },
+      },
       validation: (rule) =>
         rule.custom((value, context) =>
           Array.isArray(value) && value.length > 0

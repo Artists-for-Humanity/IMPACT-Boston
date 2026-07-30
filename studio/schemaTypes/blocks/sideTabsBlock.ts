@@ -3,6 +3,7 @@ import {defineField, defineType} from 'sanity'
 import {blockPreviewMedia} from './blockPreviews'
 import {BLOCK_DEFAULT_COPY, defaultPortableTextBlock} from './blockDefaults'
 import {sideTabsContentTypes} from './sideTabs/content'
+import {RichTextPortableTextPlugins} from './sideTabs/content/portableText'
 import {LightBackgroundColorInput} from '../../components/LightBackgroundColorInput'
 
 export const sideTabsBlockType = defineType({
@@ -38,6 +39,11 @@ export const sideTabsBlockType = defineType({
               name: 'content',
               title: 'Content',
               type: 'array',
+              components: {
+                portableText: {
+                  plugins: RichTextPortableTextPlugins,
+                },
+              },
               of: sideTabsContentTypes,
               description:
                 'Use the style menu for global typography classes. Insert columns, dividers, resource lists, trainer lists, or standalone links when the side tabs need structured content.',

@@ -20,10 +20,10 @@ type BlogPostProps = {
 
 const portableTextComponents: PortableTextComponents = {
   block: {
-    h1: ({ children }) => <h2 className="h2 text-black">{children}</h2>,
-    h2: ({ children }) => <h2 className="h3 text-black">{children}</h2>,
-    h3: ({ children }) => <h3 className="sub-1 text-black">{children}</h3>,
-    h4: ({ children }) => <h4 className="p1-bold text-black">{children}</h4>,
+    h1: ({ children }) => <h1 className="h1 text-black">{children}</h1>,
+    h2: ({ children }) => <h2 className="h2 text-black">{children}</h2>,
+    h3: ({ children }) => <h3 className="h3 text-black">{children}</h3>,
+    h4: ({ children }) => <h4 className="sub-1 text-black">{children}</h4>,
     sub1: ({ children }) => <p className="sub-1 text-black">{children}</p>,
     sub2: ({ children }) => (
       <p className="sub-2 text-secondary">{children}</p>
@@ -34,6 +34,11 @@ const portableTextComponents: PortableTextComponents = {
     p2: ({ children }) => <p className="p2 text-black">{children}</p>,
     mediumLabel: ({ children }) => (
       <p className="medium-label text-secondary">{children}</p>
+    ),
+    link: ({ children }) => (
+      <p className="link text-secondary underline underline-offset-2">
+        {children}
+      </p>
     ),
     blockquote: ({ children }) => (
       <blockquote className="border-l-4 border-complementary pl-4">

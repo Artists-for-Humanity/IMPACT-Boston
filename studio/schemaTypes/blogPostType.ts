@@ -1,5 +1,8 @@
 import {defineArrayMember, defineField, defineType} from 'sanity'
-import {portableTextContent} from './blocks/sideTabs/content/portableText'
+import {
+  portableTextContent,
+  RichTextPortableTextPlugins,
+} from './blocks/sideTabs/content/portableText'
 
 export const BLOG_POST_TYPE_NAME = 'blogPost'
 
@@ -86,6 +89,11 @@ export const blogPostType = defineType({
       description:
         'Optional. Add headings, paragraphs, lists, links, and images when this post should have a full article page.',
       type: 'array',
+      components: {
+        portableText: {
+          plugins: RichTextPortableTextPlugins,
+        },
+      },
       of: [portableTextContent, blogPostImageContent],
     }),
   ],
