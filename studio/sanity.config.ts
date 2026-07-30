@@ -6,6 +6,7 @@ import {defineDocuments, presentationTool} from 'sanity/presentation'
 import {singletonTypes, structure} from './structure'
 import {CMS_PAGE_SCHEMA_TYPE_NAMES} from './schemaTypes/cmsPageType'
 import {BLOG_POST_TYPE_NAME} from './schemaTypes/blogPostType'
+import {StudioLayout} from './components/StudioLayout'
 
 declare const process: {
   env: {
@@ -87,6 +88,12 @@ export default defineConfig({
 
   projectId: 'ddrwhofx',
   dataset: 'production',
+
+  studio: {
+    components: {
+      layout: StudioLayout,
+    },
+  },
 
   plugins: [
     structureTool({structure}),

@@ -21,6 +21,19 @@ export const sideTabsBlockType = defineType({
       initialValue: '',
     }),
     defineField({
+      name: 'textSize',
+      title: 'Body Text Size',
+      type: 'string',
+      options: {
+        list: [
+          {title: 'Default (p1 — 16/18px)', value: 'p1'},
+          {title: 'Small (p2 — 14/16px)', value: 'p2'},
+        ],
+        layout: 'radio',
+      },
+      initialValue: 'p1',
+    }),
+    defineField({
       name: 'tabs',
       title: 'Tabs',
       type: 'array',

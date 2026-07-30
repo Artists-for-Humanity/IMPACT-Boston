@@ -214,7 +214,7 @@ export default function SingleContent({
               )}
             </div>
           ) : null}
-          <div className="flex flex-col gap-6 md:flex-row md:flex-wrap md:items-start md:gap-x-[88px] lg:grid lg:grid-cols-5 lg:gap-y-6">
+          <div className="flex flex-col md:flex-row md:flex-wrap md:items-start md:gap-x-[88px] lg:grid lg:grid-cols-5">
             {bodyContent ? (
               <div className="contents" data-sanity={dataAttributes?.body}>
                 {bodyContent}
@@ -251,7 +251,7 @@ export default function SingleContent({
                 href={cta.href}
                 target={cta.openInNewTab ? "_blank" : undefined}
                 rel={cta.openInNewTab ? "noopener noreferrer" : undefined}
-                className="p1-bold underline text-secondary lg:col-span-5"
+                className="p1-bold underline text-secondary lg:col-span-5 mt-6"
                 data-sanity={dataAttributes?.ctaText}
               >
                 {cta.text}
