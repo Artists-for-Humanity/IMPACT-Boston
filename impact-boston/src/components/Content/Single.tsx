@@ -177,7 +177,7 @@ export default function SingleContent({
           </div>
         )}
 
-        <div className={`${contentCol} flex flex-col gap-6 lg:gap-8 min-w-0 overflow-hidden`}>
+        <div className={`${contentCol} flex flex-col gap-6 lg:gap-8 min-w-0`}>
           {hasHeading ? (
             <div className="flex flex-col gap-2">
               {eyebrow ? (
@@ -214,7 +214,7 @@ export default function SingleContent({
               )}
             </div>
           ) : null}
-          <div className="flex flex-col gap-6 md:flex-row md:flex-wrap md:items-start md:gap-x-[88px] lg:grid lg:grid-cols-5 lg:gap-y-6">
+          <div className="flex flex-col gap-6 md:flex-row md:flex-wrap md:items-start md:gap-x-[88px] lg:grid lg:grid-cols-5 lg:gap-y-6" style={{ wordBreak: "break-word", overflowWrap: "anywhere" }}>
             {bodyContent ? (
               <div className="contents" data-sanity={dataAttributes?.body}>
                 {bodyContent}
@@ -222,7 +222,7 @@ export default function SingleContent({
             ) : (
               (paragraphs ?? []).map((para, idx) => (
                 <p
-                  className={`p1 lg:col-span-5 break-words${para.bold ? " font-bold" : ""}`}
+                  className={`p1 lg:col-span-5 min-w-0 break-words${para.bold ? " font-bold" : ""}`}
                   data-sanity={
                     para.dataAttributes?.text ??
                     dataAttributes?.paragraphs?.[idx]?.text
