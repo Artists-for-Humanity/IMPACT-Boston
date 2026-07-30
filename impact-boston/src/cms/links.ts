@@ -5,7 +5,6 @@ export type CmsLinkTarget = {
   type?: "asset" | "blogPost" | "email" | "internal" | "url" | string | null;
   url?: string | null;
   internalPath?: string | null;
-  anchor?: string | null;
   blogPost?: {
     title?: string | null;
     slug?: string | null;
@@ -55,9 +54,7 @@ export function resolveCmsLink(
   }
 
   if (type === "internal") {
-    const internalPath = clean(target.internalPath) || fallback;
-    const anchor = clean(target.anchor);
-    return { href: anchor && internalPath ? `${internalPath}#${anchor}` : anchor ? `#${anchor}` : internalPath };
+    return { href: clean(target.internalPath) || fallback };
   }
 
   if (type === "blogPost") {

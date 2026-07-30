@@ -30,8 +30,6 @@ export type SanityHeroHeadlinePart = {
 
 export type SanityHeroFields = {
   headlineParts?: SanityHeroHeadlinePart[] | null;
-  headlineAs?: "h1" | "h2" | null;
-  tag?: string | null;
   body?: string | null;
   ctaText?: string | null;
   ctaHref?: string | null;
@@ -277,7 +275,6 @@ export type CmsSideTabsBlock = CmsPageBlockBase & {
   _type: "sideTabsBlock";
   backgroundColor?: string | null;
   noPaddingTop?: boolean;
-  textSize?: "p1" | "p2" | null;
   tabs?: SanitySideTab[] | null;
 };
 

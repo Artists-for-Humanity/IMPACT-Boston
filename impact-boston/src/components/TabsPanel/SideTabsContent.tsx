@@ -21,9 +21,7 @@ import type {
   TrainerListItem,
 } from "./types";
 
-function makePortableTextComponents(textSize: "p1" | "p2"): PortableTextComponents {
-  const t = textSize;
-  return {
+const portableTextComponents: PortableTextComponents = {
   block: {
     h1: ({ children }) => <h1 className="h1 pb-6">{children}</h1>,
     h2: ({ children }) => <h2 className="h2">{children}</h2>,
@@ -41,9 +39,9 @@ function makePortableTextComponents(textSize: "p1" | "p2"): PortableTextComponen
             Array.isArray(child.marks) &&
             child.marks.includes("strong"),
         );
-      return <p className={`${t}${allStrong ? " pb-4 lg:-mb-14 lg:last:mb-0" : " -mb-2 last:mb-0 lg:-mb-12 lg:last:mb-0"}`}>{children}</p>;
+      return <p className={`p1${allStrong ? " pt-4 lg:-mb-14" : ""}`}>{children}</p>;
     },
-    p1: ({ children }) => <p className={t}>{children}</p>,
+    p1: ({ children }) => <p className="p1">{children}</p>,
     p1Bold: ({ children, value }) => {
       const hasStrongMark =
         Array.isArray(value.children) &&
@@ -53,14 +51,8 @@ function makePortableTextComponents(textSize: "p1" | "p2"): PortableTextComponen
             Array.isArray(child.marks) &&
             child.marks.includes("strong"),
         );
-      const firstText =
-        Array.isArray(value.children) &&
-        value.children[0]?._type === "span"
-          ? (value.children[0]?.text ?? "")
-          : "";
-      const isNumbered = /^\d+\.\s/.test(firstText);
       return (
-        <p className={`p1-bold${hasStrongMark ? " pb-4 lg:-mb-14 lg:last:mb-0" : isNumbered ? " pt-4 -mb-4 last:mb-0 lg:-mb-14 lg:last:mb-0" : " -mb-2 last:mb-0 lg:-mb-12 lg:last:mb-0"}`}>
+        <p className={`p1-bold pt-4${hasStrongMark ? " lg:-mb-14" : ""}`}>
           {children}
         </p>
       );
@@ -70,21 +62,21 @@ function makePortableTextComponents(textSize: "p1" | "p2"): PortableTextComponen
     link: ({ children }) => <p className="link">{children}</p>,
     blockquote: ({ children }) => (
       <blockquote className="border-l-4 border-complementary pl-4">
-        <p className={t}>{children}</p>
+        <p className="p1">{children}</p>
       </blockquote>
     ),
   },
   list: {
     bullet: ({ children }) => (
-      <ul className="list-disc pl-6 -mt-4 lg:-mb-12 lg:last:mb-0">{children}</ul>
+      <ul className="list-disc pl-6 flex flex-col gap-6">{children}</ul>
     ),
     number: ({ children }) => (
       <ol className="list-decimal space-y-4 pl-6">{children}</ol>
     ),
   },
   listItem: {
-    bullet: ({ children }) => <li className={t}>{children}</li>,
-    number: ({ children }) => <li className={t}>{children}</li>,
+    bullet: ({ children }) => <li className="p1">{children}</li>,
+    number: ({ children }) => <li className="p1">{children}</li>,
   },
   marks: {
     strong: ({ children }) => <strong className="p1-bold">{children}</strong>,
@@ -112,8 +104,7 @@ function makePortableTextComponents(textSize: "p1" | "p2"): PortableTextComponen
       );
     },
   },
-  };
-}
+};
 
 function isPortableTextBlock(
   block: SideTabContentBlock,
@@ -173,10 +164,7 @@ function getColumns(block: TabContentBlock | SanityTabContentBlock) {
 function renderStructuredContentBlock(
   block: TabContentBlock | SanityTabContentBlock,
   key: Key,
-  textSize: "p1" | "p2" = "p1",
-  afterH2: boolean = false,
 ) {
-  const t = textSize;
   const blockType = getStructuredBlockType(block);
   const dataAttributes = getBlockDataAttributes(block);
 
@@ -202,7 +190,7 @@ function renderStructuredContentBlock(
     case "paragraph":
       return (
         <p
-          className={`${t}${"bold" in block && block.bold ? " font-bold pt-4" : ""}`}
+          className={`p1${"bold" in block && block.bold ? " font-bold pt-4" : ""}`}
           data-sanity={dataAttributes?.text}
           key={key}
         >
@@ -227,7 +215,7 @@ function renderStructuredContentBlock(
           {listItems.map((item, j) => (
             <li
               key={j}
-              className={`${t}${"bold" in block && block.bold ? " font-bold" : ""}`}
+              className={`p1${"bold" in block && block.bold ? " font-bold" : ""}`}
             >
               {item}
             </li>
@@ -249,7 +237,7 @@ function renderStructuredContentBlock(
           key={key}
         >
           {numberedListItems.map((item, j) => (
-            <li key={j} className={t}>
+            <li key={j} className="p1">
               {item}
             </li>
           ))}
@@ -268,7 +256,7 @@ function renderStructuredContentBlock(
           {columns.map((column, colIdx) => (
             <ul key={colIdx} className="space-y-1">
               {column.map((item, itemIdx) => (
-                <li key={itemIdx} className={t}>
+                <li key={itemIdx} className="p1">
                   {item}
                 </li>
               ))}
@@ -279,7 +267,7 @@ function renderStructuredContentBlock(
     }
 
     case "divider":
-      return <hr className={`border-line-divider${afterH2 ? "" : " mt-16"} -mb-6 last:mb-0 lg:-mb-16 lg:last:mb-0`} key={key} />;
+      return <hr className="border-line-divider -mb-6 lg:-mb-16" key={key} />;
 
     case "resourceList": {
       const items =
@@ -354,7 +342,6 @@ function renderStructuredContentBlock(
       return (
         <div
           key={key}
-          className="-mb-6 last:mb-0 lg:-mb-16 lg:last:mb-0"
           style={{
             display: "flex",
             padding: "16px",
@@ -364,8 +351,6 @@ function renderStructuredContentBlock(
             gap: "8px",
             alignSelf: "stretch",
             background: "var(--BG-lavender, #FAF6FD)",
-            minWidth: 0,
-            overflow: "hidden",
           }}
         >
           <p
@@ -376,8 +361,6 @@ function renderStructuredContentBlock(
               fontStyle: "italic",
               fontWeight: 400,
               lineHeight: "normal",
-              width: "100%",
-              overflowWrap: "break-word",
             }}
           >
             {quoteText}
@@ -392,7 +375,6 @@ function renderStructuredContentBlock(
                 fontWeight: 400,
                 lineHeight: "normal",
                 alignSelf: "flex-start",
-                width: "100%",
               }}
             >
               {attribution}
@@ -456,11 +438,10 @@ function renderStructuredContentBlock(
   }
 }
 
-function renderTabContent(content: SideTab["content"], textSize: "p1" | "p2" = "p1") {
+function renderTabContent(content: SideTab["content"]) {
   const nodes: ReactNode[] = [];
   let portableTextGroup: PortableTextBlock[] = [];
   let portableTextGroupKey: Key | null = null;
-  const components = makePortableTextComponents(textSize);
 
   const flushPortableTextGroup = () => {
     if (!portableTextGroup.length) {
@@ -471,7 +452,7 @@ function renderTabContent(content: SideTab["content"], textSize: "p1" | "p2" = "
       <PortableText
         key={`portable-text-${String(portableTextGroupKey ?? nodes.length)}`}
         value={portableTextGroup}
-        components={components}
+        components={portableTextComponents}
       />,
     );
     portableTextGroup = [];
@@ -485,13 +466,9 @@ function renderTabContent(content: SideTab["content"], textSize: "p1" | "p2" = "
       return;
     }
 
-    const prevGroupEndsWithH2 =
-      portableTextGroup.length > 0 &&
-      (portableTextGroup[portableTextGroup.length - 1] as { style?: string }).style === "h2";
-
     flushPortableTextGroup();
     nodes.push(
-      renderStructuredContentBlock(block, getStructuredBlockKey(block, index), textSize, prevGroupEndsWithH2),
+      renderStructuredContentBlock(block, getStructuredBlockKey(block, index)),
     );
   });
 
@@ -502,10 +479,8 @@ function renderTabContent(content: SideTab["content"], textSize: "p1" | "p2" = "
 
 export default function SideTabsContent({
   content,
-  textSize = "p1",
 }: {
   content: SideTab["content"];
-  textSize?: "p1" | "p2";
 }) {
-  return <>{renderTabContent(content, textSize)}</>;
+  return <>{renderTabContent(content)}</>;
 }

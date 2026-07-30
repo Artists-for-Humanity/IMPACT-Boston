@@ -17,7 +17,6 @@ type SideTabsBlockProps = {
   dataAttribute?: CmsDataAttribute;
   section: CmsSideTabsBlock;
   fallbackTabs?: SideTab[];
-  fallbackTextSize?: "p1" | "p2";
 };
 
 type ResourceListContentBlock = Extract<
@@ -38,7 +37,6 @@ export default function SideTabsBlock({
   dataAttribute,
   section,
   fallbackTabs,
-  fallbackTextSize,
 }: SideTabsBlockProps) {
   const { backgroundClassName, backgroundStyle } = getBackgroundPresentation(
     section.backgroundColor,
@@ -75,7 +73,7 @@ export default function SideTabsBlock({
       )}
       style={backgroundStyle}
     >
-      <SideTabs tabs={tabsWithDataAttributes} noPaddingTop={section.noPaddingTop} textSize={section.textSize ?? fallbackTextSize ?? "p1"} />
+      <SideTabs tabs={tabsWithDataAttributes} noPaddingTop={section.noPaddingTop} />
     </section>
   );
 }

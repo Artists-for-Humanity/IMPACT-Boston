@@ -28,7 +28,7 @@ function tabId(tab: { sectionId?: string | null; label: string }): string {
   return tab.sectionId || slugify(tab.label);
 }
 
-export default function SideTabs({ tabs, noPaddingTop, textSize = "p1" }: { tabs: SideTab[]; noPaddingTop?: boolean; textSize?: "p1" | "p2" }) {
+export default function SideTabs({ tabs, noPaddingTop }: { tabs: SideTab[]; noPaddingTop?: boolean }) {
   const [active, setActive] = useState(0);
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const [indicatorStyle, setIndicatorStyle] = useState<CSSProperties>({});
@@ -155,7 +155,7 @@ export default function SideTabs({ tabs, noPaddingTop, textSize = "p1" }: { tabs
         </div>
 
         <div className="col-span-full flex flex-col gap-6 lg:gap-16 lg:col-span-7">
-          <SideTabsContent content={activeContent} textSize={textSize} />
+          <SideTabsContent content={activeContent} />
         </div>
       </Grid>
     </div>

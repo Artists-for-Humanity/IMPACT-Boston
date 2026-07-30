@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
-import { stegaClean } from "@sanity/client/stega";
 
 import type { TrainerListItem } from "./types";
 
@@ -18,9 +17,9 @@ export default function TrainerList({
   state: string;
 }) {
   const [expanded, setExpanded] = useState(false);
-  const [selectedState, setSelectedState] = useState(stegaClean(state) ?? state);
-  const [sortValue, setSortValue] = useState(getInitialSortValue(stegaClean(sortLabel) ?? sortLabel));
-  const filteredItems = items.filter((item) => stegaClean(item.state) === selectedState);
+  const [selectedState, setSelectedState] = useState(state);
+  const [sortValue, setSortValue] = useState(getInitialSortValue(sortLabel));
+  const filteredItems = items.filter((item) => item.state === selectedState);
   const sortedItems = [...filteredItems].sort((a, b) => {
     if (sortValue === "nameDesc") {
       return b.name.localeCompare(a.name);

@@ -3,7 +3,7 @@ import Image from "next/image";
 import { stegaClean } from "next-sanity";
 import * as LucideIcons from "lucide-react";
 import type { LucideIcon } from "lucide-react";
-import { resolveCmsLink, type CmsLinkTarget } from "@/cms/links";
+import type { CmsLinkTarget } from "@/cms/links";
 
 export type CtaPanelData = {
   _key?: string | null;
@@ -98,7 +98,7 @@ export default function CtaSection({
     panels
       ?.filter(
         (panel) =>
-          panel.title && panel.description && panel.buttonText && (panel.href || panel.linkTarget),
+          panel.title && panel.description && panel.buttonText && panel.href,
       )
       .slice(0, 2) ?? [];
 
@@ -124,7 +124,6 @@ function CtaPanel({
   description,
   buttonText,
   href,
-  linkTarget,
   openInNewTab,
   icon,
   iconSrc,
@@ -134,7 +133,6 @@ function CtaPanel({
 }: {
   index: number;
 } & CtaPanelData) {
-  const resolvedLink = resolveCmsLink(linkTarget, href);
   const Icon = getLucideIcon(icon);
   const panelClassName = wrapperClassName ?? DEFAULT_PANEL_CLASS;
   const backgroundColor = getPanelBackgroundColor(
@@ -148,8 +146,7 @@ function CtaPanel({
     if (Icon) {
       return (
         <Icon
-          className="text-black group-hover:text-white"
-          style={{ width: 24, height: 24, flexShrink: 0 }}
+          className="h-6 w-6 text-black group-hover:text-white"
           strokeWidth={2}
         />
       );
@@ -170,7 +167,7 @@ function CtaPanel({
     return null;
   }
 
-  if (!title || !description || !buttonText || !resolvedLink.href) {
+  if (!title || !description || !buttonText || !href) {
     return null;
   }
 
@@ -200,14 +197,14 @@ function CtaPanel({
         </div>
 
         <Button
-          className="col-span-full bg-white flex justify-between items-center cursor-pointer w-[270px] md:w-full lg:w-[270px] min-h-14 md:min-h-[73px] group gap-4 py-4 px-6"
+          className="col-span-full bg-white flex justify-between cursor-pointer w-[270px] md:w-full lg:w-[270px] h-14 md:h-[73px] group"
           data-sanity={dataAttributes?.buttonText}
-          href={resolvedLink.href}
-          openInNewTab={resolvedLink.openInNewTab ?? Boolean(openInNewTab)}
+          href={href}
+          openInNewTab={Boolean(openInNewTab)}
         >
-          <span className="p1-bold text-black group-hover:text-white">
+          <p className="p1-bold text-black group-hover:text-white">
             {buttonText}
-          </span>
+          </p>
           {renderButtonIcon()}
         </Button>
       </div>

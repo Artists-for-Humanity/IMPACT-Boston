@@ -1,5 +1,5 @@
 import type { PortableTextBlock } from "next-sanity";
-import { PortableText, stegaClean, type PortableTextComponents } from "next-sanity";
+import { PortableText, type PortableTextComponents } from "next-sanity";
 import Grid from "../../../components/common/Grid";
 
 interface TestimonialProps {
@@ -48,11 +48,11 @@ export default function Testimonial({
         <div
           className={`col-span-full text-center flex flex-col space-evenly gap-8 ${contentClassName ? contentClassName : ""}`}
         >
-          <div className="lg:w-1/2 lg:mx-auto">
-            <h3 className="h3 break-words" data-sanity={dataAttributes?.heading}>
+          <div>
+            <h3 className="h3" data-sanity={dataAttributes?.heading}>
               {heading}
             </h3>
-            {stegaClean(subheading)?.trim() ? (
+            {subheading ? (
               <p className="p2" data-sanity={dataAttributes?.subheading}>
                 {subheading}
               </p>
@@ -91,7 +91,7 @@ export default function Testimonial({
                 ) : null}
               </p>
             ) : author || authorTitle ? (
-              <div className="flex flex-col">
+              <>
                 {author ? (
                   <p
                     className="p2 font-bold"
@@ -112,7 +112,7 @@ export default function Testimonial({
                     {authorTitle}
                   </p>
                 ) : null}
-              </div>
+              </>
             ) : null}
           </div>
         </div>

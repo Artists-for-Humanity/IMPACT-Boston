@@ -18,7 +18,7 @@ export default async function SchoolAndColleges() {
     <CmsPage
       blocks={getCmsPageBlocks(data, DEFAULT_CMS_PAGE_BLOCKS)}
       data={data}
-      fallbacks={{ ...DEFAULT_CMS_BLOCK_FALLBACKS, sideTabsTextSize: "p2" }}
+      fallbacks={DEFAULT_CMS_BLOCK_FALLBACKS}
     />
   );
 }

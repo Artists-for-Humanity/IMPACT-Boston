@@ -7,7 +7,6 @@ const LINK_TARGET_PROJECTION = `
   type,
   url,
   internalPath,
-  anchor,
   blogPost->{
     title,
     "slug": slug.current
@@ -123,7 +122,6 @@ const PAGE_SECTIONS_PROJECTION = `
       variant,
       showToggle,
       noPaddingTop,
-      textSize,
       paragraphs[] {
         _key,
         text,

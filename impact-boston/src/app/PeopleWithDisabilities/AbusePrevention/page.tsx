@@ -14,15 +14,9 @@ export default async function AbusePrevention() {
   const { isEnabled } = await draftMode();
   const data = await getCmsPageData(ABUSE_PREVENTION_PAGE_ID, isEnabled);
 
-  const blocks = getCmsPageBlocks(data, DEFAULT_CMS_PAGE_BLOCKS).map((block) =>
-    block._type === "hero2Block"
-      ? { ...block, headlineAs: "h2" as const, tag: "People With Disabilities - Abuse Prevention" }
-      : block,
-  );
-
   return (
     <CmsPage
-      blocks={blocks}
+      blocks={getCmsPageBlocks(data, DEFAULT_CMS_PAGE_BLOCKS)}
       data={data}
       fallbacks={DEFAULT_CMS_BLOCK_FALLBACKS}
     />

@@ -7,26 +7,24 @@ import Grid from "../common/Grid";
 import Button from "../common/Button";
 
 interface Hero1HeadlineProps {
-  as?: "h1" | "h2";
   children: React.ReactNode;
   className?: string;
   dataSanity?: string;
 }
 
 export function Hero1Headline({
-  as: Tag = "h1",
   children,
   className = "",
   dataSanity,
 }: Hero1HeadlineProps) {
   return (
-    <Tag
+    <h1
       className={`h1 text-center lg:text-left hyphens-auto ${className}`}
       data-sanity={dataSanity}
       style={{ color: "#061629" }}
     >
       {children}
-    </Tag>
+    </h1>
   );
 }
 
