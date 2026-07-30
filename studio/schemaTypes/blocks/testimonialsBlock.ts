@@ -27,6 +27,19 @@ export const testimonialsBlockType = defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
+      name: 'headingLevel',
+      title: 'Heading Level',
+      type: 'string',
+      initialValue: 'h2',
+      options: {
+        list: [
+          {title: 'H2', value: 'h2'},
+          {title: 'H3', value: 'h3'},
+        ],
+        layout: 'radio',
+      },
+    }),
+    defineField({
       name: 'subtext',
       title: 'Subtext',
       type: 'string',

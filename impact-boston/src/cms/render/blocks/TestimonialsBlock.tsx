@@ -117,7 +117,7 @@ export default function TestimonialsBlock({
     );
   }
 
-  const headingLevel = resolvedSection.headingLevel ?? "h2";
+  const headingLevel = (stegaClean(resolvedSection.headingLevel) ?? "h2") as "h2" | "h3";
   const headingClassName = `${headingLevel} text-[#000] text-center md:text-center lg:text-left`;
 
   return (

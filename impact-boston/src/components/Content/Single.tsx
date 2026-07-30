@@ -177,7 +177,7 @@ export default function SingleContent({
           </div>
         )}
 
-        <div className={`${contentCol} flex flex-col gap-6 lg:gap-8`}>
+        <div className={`${contentCol} flex flex-col gap-6 lg:gap-8 min-w-0 overflow-hidden`}>
           {hasHeading ? (
             <div className="flex flex-col gap-2">
               {eyebrow ? (
@@ -198,7 +198,7 @@ export default function SingleContent({
               )}
               {title ? (
                 <TitleTag
-                  className={TitleTag === "h2" ? "h2" : "h3"}
+                  className={TitleTag === "h2" ? "h2 break-words" : "h3 break-words"}
                   data-sanity={dataAttributes?.title}
                 >
                   {title}
@@ -222,7 +222,7 @@ export default function SingleContent({
             ) : (
               (paragraphs ?? []).map((para, idx) => (
                 <p
-                  className={`p1 lg:col-span-5${para.bold ? " font-bold" : ""}`}
+                  className={`p1 lg:col-span-5 break-words${para.bold ? " font-bold" : ""}`}
                   data-sanity={
                     para.dataAttributes?.text ??
                     dataAttributes?.paragraphs?.[idx]?.text

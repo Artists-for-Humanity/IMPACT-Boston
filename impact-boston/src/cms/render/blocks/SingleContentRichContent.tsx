@@ -8,7 +8,7 @@ import Button from "@/components/common/Button";
 import { resolveCmsLink, type CmsLinkTarget } from "@/cms/links";
 import type { SanitySingleContentContentBlock } from "@/cms/types/blocks";
 
-const fullWidth = "lg:col-span-5";
+const fullWidth = "lg:col-span-5 break-words";
 
 const TEXT_COLOR_CLASS_MAP: Record<string, string> = {
   primary: "text-primary",
