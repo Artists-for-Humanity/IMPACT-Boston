@@ -58,6 +58,8 @@ function getMediaGridItem(post: BlogPostSummary): CmsMediaGridItem | null {
 
   return {
     _key: post._id ?? slug,
+    _id: post._id ?? undefined,
+    _type: "blogPost",
     title,
     description,
     date: stegaClean(post.publishedAt)?.trim() || undefined,

@@ -62,3 +62,17 @@ export function getFieldDataAttribute(
 ) {
   return dataAttribute ? dataAttribute(path) : undefined;
 }
+
+export function createDocumentDataAttribute(
+  id: string,
+  type: string,
+): CmsDataAttribute {
+  return createDataAttribute({
+    baseUrl: process.env.NEXT_PUBLIC_SANITY_STUDIO_URL || "/studio",
+    dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || "production",
+    id,
+    projectId:
+      process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || "placeholder-project-id",
+    type,
+  });
+}

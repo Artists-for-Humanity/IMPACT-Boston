@@ -336,6 +336,8 @@ export type CmsImageGridBlock = CmsPageBlockBase & {
 
 export type CmsMediaGridItem = {
   _key?: string | null;
+  _id?: string | null;
+  _type?: string | null;
   title?: string | null;
   description?: string | null;
   date?: string | null;

@@ -12,12 +12,22 @@ export interface MediaGridItem {
   author?: string;
   href: string;
   openInNewTab?: boolean;
+  dataAttributes?: {
+    title?: string;
+    description?: string;
+    date?: string;
+    author?: string;
+  };
 }
 
 export interface MediaGridProps {
   title: string;
   subheader?: string;
   items: MediaGridItem[];
+  dataAttributes?: {
+    title?: string;
+    subheader?: string;
+  };
 }
 
 const PAGE_SIZE = 9;
@@ -40,6 +50,7 @@ export default function MediaGrid({
   title,
   subheader,
   items,
+  dataAttributes,
 }: MediaGridProps) {
   const [featured, ...allRest] = items;
   const [page, setPage] = useState(0);
@@ -58,8 +69,8 @@ export default function MediaGrid({
       <Grid className="gap-y-8 md:gap-y-10 lg:gap-y-16">
         <div className="col-span-full grid grid-cols-4 gap-4 md:grid-cols-8 lg:grid-cols-12 lg:items-end">
           <div className="col-span-full lg:col-span-6 flex flex-col gap-12 lg:self-center">
-            <h1 className="h1">{title}</h1>
-            {subheader && <p className="p1 lg:w-2/3">{subheader}</p>}
+            <h1 className="h1 break-words" data-sanity={dataAttributes?.title}>{title}</h1>
+            {subheader && <p className="p1 lg:w-2/3 break-words" data-sanity={dataAttributes?.subheader}>{subheader}</p>}
           </div>
 
           {featured && (
@@ -89,11 +100,13 @@ export default function MediaGrid({
                   lineHeight: "normal",
                 }}>Most Recent</span>
                 <div className="flex flex-col gap-3">
-                  <p className="p1-bold">{featured.title}</p>
-                  <p className="p2">{featured.description}</p>
+                  <p className="p1-bold break-words" data-sanity={featured.dataAttributes?.title}>{featured.title}</p>
+                  <p className="p2 break-all" data-sanity={featured.dataAttributes?.description}>{featured.description}</p>
                   {(featured.date || featured.author) && (
                     <p className="p2" style={{ color: "var(--color-black-60)" }}>
-                      {[featured.date ? formatDate(featured.date) : null, featured.author].filter(Boolean).join("  •  ")}
+                      <span data-sanity={featured.dataAttributes?.date}>{featured.date ? formatDate(featured.date) : null}</span>
+                      {featured.date && featured.author ? "  •  " : null}
+                      <span data-sanity={featured.dataAttributes?.author}>{featured.author}</span>
                     </p>
                   )}
                 </div>
@@ -167,15 +180,17 @@ export default function MediaGrid({
           {pageItems.map((item, idx) => (
             <div
               key={idx}
-              className="flex flex-col gap-8 p-4 md:p-6 lg:p-8 lg:min-h-[371px] lg:items-start lg:[flex:1_0_0] lg:self-stretch lg:justify-between"
+              className="flex flex-col gap-8 p-4 md:p-6 lg:p-8 lg:min-h-[371px] lg:items-start lg:[flex:1_0_0] lg:self-stretch lg:justify-between min-w-0 overflow-hidden"
               style={{ border: "1px solid var(--Line-Divider, #DDD)" }}
             >
               <div className="flex flex-col gap-3">
-                <p className="p1-bold">{item.title}</p>
-                <p className="p2">{item.description}</p>
+                <p className="p1-bold break-words" data-sanity={item.dataAttributes?.title}>{item.title}</p>
+                <p className="p2 break-all" data-sanity={item.dataAttributes?.description}>{item.description}</p>
                 {(item.date || item.author) && (
                   <p className="p2" style={{ color: "var(--color-black-60)" }}>
-                    {[item.date ? formatDate(item.date) : null, item.author].filter(Boolean).join("  •  ")}
+                    <span data-sanity={item.dataAttributes?.date}>{item.date ? formatDate(item.date) : null}</span>
+                    {item.date && item.author ? "  •  " : null}
+                    <span data-sanity={item.dataAttributes?.author}>{item.author}</span>
                   </p>
                 )}
               </div>
