@@ -68,7 +68,7 @@ const portableTextComponents: PortableTextComponents = {
   },
   list: {
     bullet: ({ children }) => (
-      <ul className="list-disc pl-6 flex flex-col gap-6">{children}</ul>
+      <ul className="list-disc pl-6 flex flex-col">{children}</ul>
     ),
     number: ({ children }) => (
       <ol className="list-decimal space-y-4 pl-6">{children}</ol>

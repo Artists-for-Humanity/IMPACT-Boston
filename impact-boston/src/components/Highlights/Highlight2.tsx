@@ -52,7 +52,7 @@ export default function Highlight2({
                     {title}
                 </h2>
             </div>
-            <div className="col-span-full lg:col-span-6 flex flex-col gap-y-4 lg:gap-y-12">
+            <div className="col-span-full lg:col-span-6 flex flex-col gap-y-10 md:gap-y-12 lg:gap-y-12">
                 <div className="flex flex-col gap-y-4">
                     {body.map((paragraph, index) => (
                         <p
