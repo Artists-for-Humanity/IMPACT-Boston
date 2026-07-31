@@ -178,6 +178,7 @@ const PUBLIC_CLASSES_PAGE_FALLBACK_BLOCKS: CmsPageBlock[] = [
     buttonTextColor: "#000000",
     ctaHref: ROUTES.CONTACT,
     ctaLabel: "IMPACT Scholarship Application 2023",
+    downloadHref: "#",
     supportingText:
       "Download the scholarship application and email your completed form to classes@impactboston.org.",
     textColor: "#ffffff",

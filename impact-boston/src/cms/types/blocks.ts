@@ -293,6 +293,7 @@ export type CmsHighlightBannerBlock = CmsPageBlockBase & {
   ctaHref?: string | null;
   ctaLinkTarget?: CmsLinkTarget | null;
   ctaLabel?: string | null;
+  downloadHref?: string | null;
   supportingText?: string | null;
   textColor?: string | null;
   title?: string | null;

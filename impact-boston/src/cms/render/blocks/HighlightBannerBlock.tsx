@@ -25,6 +25,7 @@ export default function HighlightBannerBlock({
   const ctaLabel = stegaClean(section.ctaLabel)?.trim();
   const ctaLink = resolveCmsLink(section.ctaLinkTarget, section.ctaHref);
   const body = getBodyParagraphs(section.body);
+  const downloadHref = stegaClean(section.downloadHref)?.trim() || undefined;
 
   if (!title || !body.length || !ctaLabel || !ctaLink.href) {
     return null;
@@ -37,6 +38,7 @@ export default function HighlightBannerBlock({
       ctaLabel={ctaLabel}
       ctaHref={ctaLink.href}
       ctaOpenInNewTab={ctaLink.openInNewTab}
+      downloadHref={downloadHref}
       supportingText={stegaClean(section.supportingText)?.trim() || undefined}
       backgroundColor={getHexColor(section.backgroundColor) ?? "#311e41"}
       textColor={getHexColor(section.textColor) ?? "#ffffff"}

@@ -8,6 +8,7 @@ interface Highlight2Props {
     ctaLabel: string;
     ctaHref: string;
     ctaOpenInNewTab?: boolean;
+    downloadHref?: string;
     supportingText?: string;
     backgroundColor?: string;
     textColor?: string;
@@ -27,6 +28,7 @@ export default function Highlight2({
     ctaLabel,
     ctaHref,
     ctaOpenInNewTab = false,
+    downloadHref,
     supportingText,
     backgroundColor,
     textColor,
@@ -61,6 +63,20 @@ export default function Highlight2({
                             {paragraph}
                         </p>
                     ))}
+                    {downloadHref ? (
+                        <p className="p1">
+                            Want to submit a scholarship?{" "}
+                            <a
+                                href={downloadHref}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                style={{ textDecoration: "underline" }}
+                            >
+                                Download one here
+                            </a>
+                            .
+                        </p>
+                    ) : null}
                 </div>
                 <div className="flex flex-col gap-y-3">
                     <Button

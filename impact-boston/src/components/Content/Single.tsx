@@ -160,7 +160,7 @@ export default function SingleContent({
       id={id}
       className={`${className ?? ""} ${backgroundColor ?? ""}`.trim()}
     >
-      <Grid className={gridClassName}>
+      <Grid className={`gap-y-6 md:gap-y-10 ${gridClassName ?? ""}`.trim()}>
         {reverse && (
           <div
             className={`${imageCol} w-full md:w-full lg:h-full lg:flex lg:flex-col`}
@@ -216,7 +216,7 @@ export default function SingleContent({
           ) : null}
           <div className="flex flex-col gap-2 md:flex-row md:flex-wrap md:items-start md:gap-x-[88px] lg:grid lg:grid-cols-5 lg:gap-y-2" style={{ wordBreak: "break-word", overflowWrap: "anywhere" }}>
             {bodyContent ? (
-              <div className="col-span-full flex flex-col gap-2 [&>*:first-child]:[border-bottom:16px_solid_transparent]" data-sanity={dataAttributes?.body}>
+              <div className="col-span-full flex flex-col gap-2" data-sanity={dataAttributes?.body}>
                 {bodyContent}
               </div>
             ) : (

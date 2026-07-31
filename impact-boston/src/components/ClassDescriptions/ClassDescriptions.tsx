@@ -155,7 +155,7 @@ export default function ClassDescriptions({
 function ClassDescriptionArticle({ item }: { item: ClassDescriptionItem }) {
   return (
     <article className="grid gap-7 border-b border-line-divider pt-[16px] pb-8 last:border-b-0 md:gap-8 lg:grid-cols-2 lg:gap-12">
-      <dl className="grid grid-cols-[96px_minmax(0,1fr)] gap-x-5 gap-y-4 md:grid-cols-[160px_minmax(0,1fr)]">
+      <dl className="grid grid-cols-4 gap-x-5 gap-y-4 md:grid-cols-[160px_minmax(0,1fr)]">
         <DetailRow dataAttribute={item.dataAttributes?.name} label="Name">
           {item.name}
         </DetailRow>
@@ -222,9 +222,9 @@ function DetailRow({
 
   return (
     <>
-      <dt className="sub-2 text-black">{label}</dt>
+      <dt className="sub-2 text-black col-span-2 md:col-span-1">{label}</dt>
       <dd
-        className="p2 min-w-0 whitespace-pre-line text-black"
+        className="p2 min-w-0 whitespace-pre-line text-black col-start-3 col-span-2 md:col-start-auto md:col-span-1"
         data-sanity={dataAttribute}
       >
         {children}
