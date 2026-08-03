@@ -135,7 +135,7 @@ function resolveMediaCard(
   }
 
   if (mediaType === "video") {
-    const videoSrc = cleanText(card.videoSrc);
+    const videoSrc = toEmbedUrl(cleanText(card.videoSrc));
 
     return videoSrc
       ? {
@@ -163,4 +163,24 @@ function resolveMediaCard(
 
 function cleanText(value?: string | null) {
   return stegaClean(value)?.trim() ?? "";
+}
+
+function toEmbedUrl(url: string): string {
+  if (!url) return url;
+  try {
+    const parsed = new URL(url);
+    // youtube.com/watch?v=ID → youtube.com/embed/ID
+    if (parsed.hostname.includes("youtube.com") && parsed.pathname === "/watch") {
+      const id = parsed.searchParams.get("v");
+      return id ? `https://www.youtube.com/embed/${id}` : url;
+    }
+    // youtu.be/ID → youtube.com/embed/ID
+    if (parsed.hostname === "youtu.be") {
+      const id = parsed.pathname.slice(1);
+      return id ? `https://www.youtube.com/embed/${id}` : url;
+    }
+  } catch {
+    // not a valid URL, return as-is
+  }
+  return url;
 }

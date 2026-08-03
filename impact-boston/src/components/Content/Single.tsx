@@ -160,7 +160,7 @@ export default function SingleContent({
       id={id}
       className={`${className ?? ""} ${backgroundColor ?? ""}`.trim()}
     >
-      <Grid className={`gap-y-6 md:gap-y-10 ${gridClassName ?? ""}`.trim()}>
+      <Grid className={`gap-y-6 md:gap-y-10 lg:gap-y-16 ${gridClassName ?? ""}`.trim()}>
         {reverse && (
           <div
             className={`${imageCol} w-full md:w-full lg:h-full lg:flex lg:flex-col`}
@@ -299,7 +299,7 @@ export default function SingleContent({
           return (
             <div
               key={idx}
-              className="col-span-full flex h-full flex-col gap-2 self-stretch md:col-span-4 lg:col-span-4"
+              className="col-span-full flex h-full flex-col gap-2 self-stretch lg:col-span-4 min-w-0 overflow-hidden"
             >
               <ThumbnailHeading thumb={resolvedThumb} />
               <ThumbnailMedia thumb={resolvedThumb} />
@@ -315,14 +315,14 @@ function ThumbnailHeading({ thumb }: { thumb: SingleContentThumbnail }) {
   const heading = (
     <div>
       <p
-        className="p1-bold text-left text-black"
+        className="p1-bold text-left text-black break-words min-w-0"
         data-sanity={thumb.dataAttributes?.title}
       >
         {thumb.title}
       </p>
       {thumb.outlet ? (
         <p
-          className="p1-bold text-left text-light-grey-text"
+          className="p1-bold text-left text-light-grey-text break-words min-w-0"
           data-sanity={thumb.dataAttributes?.outlet}
         >
           {thumb.outlet}
@@ -350,24 +350,15 @@ function ThumbnailHeading({ thumb }: { thumb: SingleContentThumbnail }) {
 function ThumbnailMedia({ thumb }: { thumb: SingleContentThumbnail }) {
   if (thumb.type === "embed") {
     return (
-      <div className="relative mt-auto w-full" style={{ height: "210px" }}>
+      <div className="relative mt-auto w-full h-[210px] md:h-[376px] lg:h-[210px]">
         <ScriptEmbed scriptSrc={thumb.scriptSrc} />
       </div>
     );
   }
 
-  const gradientBar = (
-    <div
-      className="absolute top-0 left-0 right-0 h-[7px] z-10"
-      style={{ background: "linear-gradient(to right, #E36A38 0%, #E36A38 22%, #874E9F 22%, #874E9F 86%, #462458 86%, #462458 100%)" }}
-      aria-hidden="true"
-    />
-  );
-
   if (thumb.type === "video") {
     return (
-      <div className="relative mt-auto w-full" style={{ height: "210px" }}>
-        {gradientBar}
+      <div className="relative mt-auto w-full h-[210px] md:h-[376px] lg:h-[210px]">
         <iframe
           src={thumb.videoSrc}
           title={thumb.videoTitle ?? thumb.title}
@@ -387,13 +378,13 @@ function ThumbnailMedia({ thumb }: { thumb: SingleContentThumbnail }) {
       height={1000}
       alt={thumb.imageAlt}
       data-sanity={thumb.dataAttributes?.image}
-      className="w-full object-cover"
-      style={{ height: "210px", objectFit: "cover" }}
+      className="w-full object-cover h-[210px] md:h-[376px] lg:h-[210px]"
+      style={{ objectFit: "cover" }}
     />
   );
 
   if (!thumb.href) {
-    return <div className="relative mt-auto">{gradientBar}{image}</div>;
+    return <div className="relative mt-auto">{image}</div>;
   }
 
   return (
@@ -403,7 +394,6 @@ function ThumbnailMedia({ thumb }: { thumb: SingleContentThumbnail }) {
       rel={thumb.openInNewTab ? "noopener noreferrer" : undefined}
       className="relative mt-auto block transition hover:opacity-80"
     >
-      {gradientBar}
       {image}
     </Link>
   );

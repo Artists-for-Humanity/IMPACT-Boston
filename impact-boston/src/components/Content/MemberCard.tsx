@@ -10,16 +10,8 @@ export interface MemberCardProps {
 
 export default function MemberCard({ imageSrc, imageAlt, name, role, bio }: MemberCardProps) {
   return (
-    <div className="col-span-full flex flex-col gap-6 md:grid md:grid-cols-subgrid md:gap-x-6 lg:flex lg:flex-col lg:gap-6 lg:col-span-4">
-      <div className="col-span-2">
-        <div
-          style={{
-            height: '4px',
-            width: '100%',
-            background:
-              'linear-gradient(to right, #E36A38 0%, #E36A38 22%, #874E9F 22%, #874E9F 86%, #462458 86%, #462458 100%)',
-          }}
-        />
+    <div className="col-span-full flex flex-col gap-6 md:grid md:grid-cols-subgrid md:gap-x-6 lg:flex lg:flex-col lg:gap-6 lg:col-span-4 min-w-0 overflow-hidden">
+      <div className="col-span-2 overflow-hidden">
         <Image
           src={imageSrc}
           width={5000}
@@ -30,12 +22,12 @@ export default function MemberCard({ imageSrc, imageAlt, name, role, bio }: Memb
         />
       </div>
 
-      <div className="col-span-6 lg:col-span-3 flex flex-col gap-3 justify-between">
-        <div>
-          <p className="p1-bold">{name}</p>
-          <p className="p2" style={{ color: 'var(--color-black-60)' }}>{role}</p>
+      <div className="col-span-6 lg:col-span-3 flex flex-col gap-3 justify-between min-w-0">
+        <div className="min-w-0">
+          <p className="p1-bold break-words">{name}</p>
+          <p className="p2 break-words" style={{ color: 'var(--color-black-60)' }}>{role}</p>
         </div>
-        <p className="p2">{bio}</p>
+        <p className="p2 break-words">{bio}</p>
       </div>
     </div>
   );
