@@ -60,12 +60,12 @@ export default function Testimonial({
           </div>
 
           <div
-            className={`flex flex-col space-evenly gap-4 p-4  bg-white ${cardClassName ? cardClassName : ""}`}
+            className={`flex flex-col space-evenly gap-4 p-4 bg-white overflow-hidden ${cardClassName ? cardClassName : ""}`}
           >
             <div className="flex flex-col gap-6">
               {quoteParagraphs.map((paragraph) => (
                 <p
-                  className={quoteClassName}
+                  className={`${quoteClassName} break-words`}
                   data-sanity={dataAttributes?.quote}
                   key={paragraph}
                 >
@@ -74,7 +74,7 @@ export default function Testimonial({
               ))}
             </div>
             {inlineAuthorTitle && (author || authorTitle) ? (
-              <p className="p2">
+              <p className="p2 break-words">
                 {author ? (
                   <span
                     className="font-bold"
@@ -94,21 +94,21 @@ export default function Testimonial({
               <div>
                 {author ? (
                   <p
-                    className="p2 font-bold"
+                    className="p2 font-bold break-words"
                     data-sanity={dataAttributes?.author}
                   >
                     {author}
                   </p>
                 ) : null}
                 {authorTitlePortableText?.length ? (
-                  <div className="p2" data-sanity={dataAttributes?.authorTitle}>
+                  <div className="p2 break-words" data-sanity={dataAttributes?.authorTitle}>
                     <PortableText
                       value={authorTitlePortableText}
                       components={authorTitleComponents}
                     />
                   </div>
                 ) : authorTitle ? (
-                  <p className="p2" data-sanity={dataAttributes?.authorTitle}>
+                  <p className="p2 break-words" data-sanity={dataAttributes?.authorTitle}>
                     {authorTitle}
                   </p>
                 ) : null}
@@ -123,7 +123,7 @@ export default function Testimonial({
 
 const authorTitleComponents: PortableTextComponents = {
   block: {
-    normal: ({ children }) => <p className="p2">{children}</p>,
+    normal: ({ children }) => <p className="p2 break-words">{children}</p>,
   },
   marks: {
     strong: ({ children }) => <strong className="font-bold">{children}</strong>,
