@@ -12,11 +12,14 @@ export type ArticleCalloutArticle = {
 export type ArticleCalloutProps = {
   article: ArticleCalloutArticle;
   calloutText: string;
+  calloutTextAs?: "h2" | "h3" | "p";
+  calloutSubtext?: string;
   dataAttributes?: {
     articleAuthor?: string;
     articleDescription?: string;
     articleTitle?: string;
     calloutText?: string;
+    calloutSubtext?: string;
     linkText?: string;
   };
 };
@@ -24,28 +27,41 @@ export type ArticleCalloutProps = {
 export default function ArticleCallout({
   article,
   calloutText,
+  calloutTextAs: CalloutTag = "h2",
+  calloutSubtext,
   dataAttributes,
 }: ArticleCalloutProps) {
   return (
     <section className="bg-bg-lavender">
       <Grid className="items-start gap-y-8 md:gap-y-8 lg:gap-x-8">
-        <h2
-          className="h3 col-span-full text-black lg:col-span-6 lg:pt-2"
-          data-sanity={dataAttributes?.calloutText}
-        >
-          {calloutText}
-        </h2>
+        <div className="col-span-full lg:col-span-6 lg:pt-2 flex flex-col gap-12">
+          <CalloutTag
+            className="h3 text-black break-words"
+            data-sanity={dataAttributes?.calloutText}
+          >
+            {calloutText}
+          </CalloutTag>
 
-        <article className="col-span-full flex min-h-[365px] flex-col border border-line-divider bg-white p-8 md:min-h-[280px] lg:col-span-5 lg:col-start-8 lg:min-h-[412px]">
-          <h3
-            className="sub-1 text-black"
+          {calloutSubtext ? (
+            <p
+              className="p1 text-black break-words"
+              data-sanity={dataAttributes?.calloutSubtext}
+            >
+              {calloutSubtext}
+            </p>
+          ) : null}
+        </div>
+
+        <article className="col-span-full flex min-h-[365px] flex-col gap-6 border border-line-divider bg-white p-8 md:min-h-[280px] lg:col-span-5 lg:col-start-8 lg:min-h-[412px]">
+          <p
+            className="p1-bold text-black break-words"
             data-sanity={dataAttributes?.articleTitle}
           >
             {article.title}
-          </h3>
+          </p>
 
           <p
-            className="p2 mt-8 text-black md:mt-7 lg:mt-8"
+            className="p2 text-black break-words"
             data-sanity={dataAttributes?.articleDescription}
           >
             {article.description}
@@ -53,7 +69,7 @@ export default function ArticleCallout({
 
           {article.author ? (
             <p
-              className="p2 mt-6 text-black"
+              className="p2 text-black break-words"
               data-sanity={dataAttributes?.articleAuthor}
             >
               {article.author}
@@ -61,7 +77,7 @@ export default function ArticleCallout({
           ) : null}
 
           <a
-            className="link mt-auto self-start text-secondary underline transition hover:text-primary"
+            className="link mt-auto self-start text-secondary underline transition hover:text-primary break-words min-w-0 max-w-full"
             data-sanity={dataAttributes?.linkText}
             href={article.href}
             rel={article.openInNewTab ? "noopener noreferrer" : undefined}

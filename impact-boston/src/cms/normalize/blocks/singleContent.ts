@@ -179,6 +179,11 @@ function toEmbedUrl(url: string): string {
       const id = parsed.pathname.slice(1);
       return id ? `https://www.youtube.com/embed/${id}` : url;
     }
+    // vimeo.com/ID → player.vimeo.com/video/ID
+    if (parsed.hostname === "vimeo.com") {
+      const id = parsed.pathname.slice(1).split("/")[0];
+      return id ? `https://player.vimeo.com/video/${id}` : url;
+    }
   } catch {
     // not a valid URL, return as-is
   }

@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { CSSProperties, ReactNode } from "react";
 import ScriptEmbed from "./ScriptEmbed";
+import VideoEmbed from "./VideoEmbed";
 import { PLACEHOLDER_IMAGE_SRC } from "../common/placeholderImage";
 import Button from "../common/Button";
 
@@ -220,18 +221,36 @@ export default function SingleContent({
                 {bodyContent}
               </div>
             ) : (
-              (paragraphs ?? []).map((para, idx) => (
-                <p
-                  className={`p1 lg:col-span-5 min-w-0 break-words mb-6${para.bold ? " font-bold" : ""}`}
-                  data-sanity={
-                    para.dataAttributes?.text ??
-                    dataAttributes?.paragraphs?.[idx]?.text
-                  }
-                  key={idx}
-                >
-                  {para.text}
-                </p>
-              ))
+              (paragraphs ?? []).map((para, idx) => {
+                const dataAttr = para.dataAttributes?.text ?? dataAttributes?.paragraphs?.[idx]?.text;
+                const lines = para.text.split('\n').map(l => l.trim()).filter(Boolean);
+                const bulletLines = lines.filter(l => l.startsWith('•'));
+                if (bulletLines.length > 0 && bulletLines.length === lines.length) {
+                  return (
+                    <ul
+                      key={idx}
+                      className="lg:col-span-5 min-w-0 flex flex-col gap-2"
+                      data-sanity={dataAttr}
+                    >
+                      {lines.map((line, i) => (
+                        <li key={i} className="flex gap-3 items-start">
+                          <span className="p1 shrink-0" aria-hidden="true">•</span>
+                          <span className="p1">{line.slice(1).trim()}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  );
+                }
+                return (
+                  <p
+                    className={`p1 lg:col-span-5 min-w-0 break-words mb-6${para.bold ? " font-bold" : ""}`}
+                    data-sanity={dataAttr}
+                    key={idx}
+                  >
+                    {para.text}
+                  </p>
+                );
+              })
             )}
             {purchaseLink && (
               <Link
@@ -359,13 +378,10 @@ function ThumbnailMedia({ thumb }: { thumb: SingleContentThumbnail }) {
   if (thumb.type === "video") {
     return (
       <div className="relative mt-auto w-full h-[210px] md:h-[376px] lg:h-[210px]">
-        <iframe
+        <VideoEmbed
           src={thumb.videoSrc}
           title={thumb.videoTitle ?? thumb.title}
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen; clipboard-write; web-share"
-          referrerPolicy="strict-origin-when-cross-origin"
-          allowFullScreen
-          className="absolute inset-0 h-full w-full"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen; web-share"
         />
       </div>
     );

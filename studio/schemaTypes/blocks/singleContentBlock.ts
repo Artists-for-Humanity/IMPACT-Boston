@@ -408,13 +408,26 @@ export const singleContentBlockType = defineType({
             }),
             defineField({
               name: 'scriptSrc',
-              title: 'Script Embed URL',
-              type: 'url',
+              title: 'Script Embed URL or Tag',
+              description:
+                'Paste a plain URL, a full <script src="..."> tag, or a full <iframe> tag.',
+              type: 'text',
+              rows: 2,
               hidden: ({parent}) => !isMediaCardEmbed(parent),
               validation: (rule) =>
-                rule.custom((value, context) =>
-                  isMediaCardEmbed(context.parent) && !value ? 'Add a script embed URL.' : true,
-                ),
+                rule.custom((value, context) => {
+                  if (!isMediaCardEmbed(context.parent)) return true
+                  if (!value) return 'Add a script embed URL or tag.'
+                  const trimmed = (value as string).trim()
+                  if (
+                    trimmed.startsWith('<script') ||
+                    trimmed.startsWith('<iframe') ||
+                    /^https?:\/\//i.test(trimmed)
+                  ) {
+                    return true
+                  }
+                  return 'Must be a URL (starting with https://) or a <script> / <iframe> tag.'
+                }),
             }),
             defineField({
               name: 'href',

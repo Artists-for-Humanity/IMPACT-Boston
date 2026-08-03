@@ -71,6 +71,8 @@ export type SanityArticleCalloutFields = {
   articleDescription?: ArticleCalloutProps["article"]["description"] | null;
   articleTitle?: ArticleCalloutProps["article"]["title"] | null;
   calloutText?: ArticleCalloutProps["calloutText"] | null;
+  calloutSubtext?: ArticleCalloutProps["calloutSubtext"] | null;
+  calloutTextAs?: ArticleCalloutProps["calloutTextAs"] | null;
   href?: string | null;
   linkText?: ArticleCalloutProps["article"]["linkText"] | null;
   linkTarget?: CmsLinkTarget | null;

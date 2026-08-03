@@ -45,6 +45,10 @@ export default function ArticleCalloutBlock({
           dataAttribute,
           extendPath(blockPath, "calloutText"),
         ),
+        calloutSubtext: getFieldDataAttribute(
+          dataAttribute,
+          extendPath(blockPath, "calloutSubtext"),
+        ),
         linkText: getFieldDataAttribute(
           dataAttribute,
           extendPath(blockPath, "linkText"),

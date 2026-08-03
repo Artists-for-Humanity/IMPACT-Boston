@@ -58,6 +58,8 @@ const PAGE_SECTIONS_PROJECTION = `
       buttonBgColor,
       buttonTextColor,
       calloutText,
+      calloutTextAs,
+      calloutSubtext,
       articleTitle,
       articleDescription,
       articleAuthor,

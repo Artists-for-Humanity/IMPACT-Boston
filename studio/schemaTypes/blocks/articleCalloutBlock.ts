@@ -18,10 +18,30 @@ export const articleCalloutBlockType = defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
+      name: 'calloutTextAs',
+      title: 'Callout Text Heading Level',
+      type: 'string',
+      initialValue: 'h2',
+      options: {
+        list: [
+          {title: 'H2', value: 'h2'},
+          {title: 'H3', value: 'h3'},
+          {title: 'Paragraph', value: 'p'},
+        ],
+        layout: 'radio',
+      },
+    }),
+    defineField({
       name: 'articleTitle',
       title: 'Article Title',
       type: 'string',
       validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: 'calloutSubtext',
+      title: 'Callout Subtext',
+      description: 'Optional line shown below the callout text.',
+      type: 'string',
     }),
     defineField({
       name: 'articleDescription',

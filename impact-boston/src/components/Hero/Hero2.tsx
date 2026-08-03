@@ -156,7 +156,7 @@ export default function Hero2({
           {description && (
             <div className="col-span-full lg:col-start-3 lg:col-span-8">
               <p
-                className="p1 text-center text-grey"
+                className="p1 text-center text-grey break-words"
                 data-sanity={dataAttributes?.description}
               >
                 {description}
