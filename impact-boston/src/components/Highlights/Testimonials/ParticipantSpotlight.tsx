@@ -91,7 +91,7 @@ export default function Testimonial({
                 ) : null}
               </p>
             ) : author || authorTitle ? (
-              <>
+              <div>
                 {author ? (
                   <p
                     className="p2 font-bold"
@@ -112,7 +112,7 @@ export default function Testimonial({
                     {authorTitle}
                   </p>
                 ) : null}
-              </>
+              </div>
             ) : null}
           </div>
         </div>

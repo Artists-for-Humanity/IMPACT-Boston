@@ -214,7 +214,7 @@ export default function SingleContent({
               )}
             </div>
           ) : null}
-          <div className="flex flex-col gap-2 md:flex-row md:flex-wrap md:items-start md:gap-x-[88px] lg:grid lg:grid-cols-5 lg:gap-y-2" style={{ wordBreak: "break-word", overflowWrap: "anywhere" }}>
+          <div className="flex flex-col gap-8 md:flex-row md:flex-wrap md:items-start md:gap-x-[88px] lg:grid lg:grid-cols-5 lg:gap-y-8" style={{ wordBreak: "break-word", overflowWrap: "anywhere" }}>
             {bodyContent ? (
               <div className="col-span-full flex flex-col gap-2" data-sanity={dataAttributes?.body}>
                 {bodyContent}

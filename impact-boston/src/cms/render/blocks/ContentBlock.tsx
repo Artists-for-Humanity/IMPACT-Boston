@@ -26,7 +26,7 @@ const bodyComponents: PortableTextComponents = {
       <ul className="list-disc pl-6 lg:col-span-5">{children}</ul>
     ),
     number: ({ children }) => (
-      <ol className="list-decimal space-y-4 pl-6 lg:col-span-5">{children}</ol>
+      <ol className="list-decimal pl-6 lg:col-span-5">{children}</ol>
     ),
   },
   listItem: {
@@ -34,7 +34,7 @@ const bodyComponents: PortableTextComponents = {
     number: ({ children }) => <li className="p1">{children}</li>,
   },
   marks: {
-    strong: ({ children }) => <strong className="font-bold">{children}</strong>,
+    strong: ({ children }) => <strong className="p1-bold">{children}</strong>,
     em: ({ children }) => <em>{children}</em>,
     link: ({ children, value }) => {
       const link = resolveCmsLink(
