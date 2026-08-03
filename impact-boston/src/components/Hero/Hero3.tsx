@@ -46,7 +46,7 @@ export default function Hero3({
         <div className="col-span-full flex flex-col gap-8 md:col-span-4 md:gap-10 lg:col-span-5 lg:gap-14">
           <div className="flex flex-col gap-8 lg:gap-14">
             <h1
-              className="text-[48px] font-medium leading-[56px] tracking-[0em] text-black md:text-[64px] md:leading-[64px] lg:text-[80px] lg:leading-[80px]"
+              className="break-words text-[48px] font-medium leading-[56px] tracking-[0em] text-black md:text-[64px] md:leading-[64px] lg:text-[80px] lg:leading-[80px]"
               data-sanity={dataAttributes?.headline}
               style={{
                 fontFamily: "var(--font-poppins), sans-serif",
@@ -56,7 +56,7 @@ export default function Hero3({
               {headline}
             </h1>
             <p
-              className="max-w-[400px] text-[16px] font-normal leading-normal tracking-[0em] text-black lg:text-[18px]"
+              className="max-w-[400px] break-words text-[16px] font-normal leading-normal tracking-[0em] text-black lg:text-[18px]"
               data-sanity={dataAttributes?.description}
             >
               {description}
@@ -76,14 +76,14 @@ export default function Hero3({
             ) : null}
 
             <h2
-              className="text-[18px] font-semibold leading-normal tracking-[0em] text-black"
+              className="break-words text-[18px] font-semibold leading-normal tracking-[0em] text-black"
               data-sanity={dataAttributes?.featuredTitle}
             >
               {featuredArticle.title}
             </h2>
 
             <p
-              className="text-[16px] font-normal leading-normal tracking-[0em] text-black"
+              className="break-words text-[16px] font-normal leading-normal tracking-[0em] text-black"
               data-sanity={dataAttributes?.featuredDescription}
             >
               {featuredArticle.description}

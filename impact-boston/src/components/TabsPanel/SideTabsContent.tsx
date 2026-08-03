@@ -24,7 +24,7 @@ import type {
 const portableTextComponents: PortableTextComponents = {
   block: {
     h1: ({ children }) => <h1 className="h1 pb-6">{children}</h1>,
-    h2: ({ children }) => <h2 className="h2">{children}</h2>,
+    h2: ({ children }) => <h2 className="h2 break-words">{children}</h2>,
     h3: ({ children }) => <h3 className="h3">{children}</h3>,
     h4: ({ children }) => <h3 className="text-lg font-bold">{children}</h3>,
     sub1: ({ children }) => <p className="sub-1">{children}</p>,
@@ -39,9 +39,9 @@ const portableTextComponents: PortableTextComponents = {
             Array.isArray(child.marks) &&
             child.marks.includes("strong"),
         );
-      return <p className={`p1${allStrong ? " pt-4 lg:-mb-14" : ""}`}>{children}</p>;
+      return <p className={`p1 break-words${allStrong ? " pt-4 lg:-mb-14" : ""}`}>{children}</p>;
     },
-    p1: ({ children }) => <p className="p1">{children}</p>,
+    p1: ({ children }) => <p className="p1 break-words">{children}</p>,
     p1Bold: ({ children, value }) => {
       const hasStrongMark =
         Array.isArray(value.children) &&
@@ -171,7 +171,7 @@ function renderStructuredContentBlock(
   switch (blockType) {
     case "heading":
       return (
-        <h2 className="h2" data-sanity={dataAttributes?.text} key={key}>
+        <h2 className="h2 break-words" data-sanity={dataAttributes?.text} key={key}>
           {"text" in block ? block.text : ""}
         </h2>
       );
@@ -190,7 +190,7 @@ function renderStructuredContentBlock(
     case "paragraph":
       return (
         <p
-          className={`p1${"bold" in block && block.bold ? " font-bold pt-4" : ""}`}
+          className={`p1 break-words${"bold" in block && block.bold ? " font-bold pt-4" : ""}`}
           data-sanity={dataAttributes?.text}
           key={key}
         >

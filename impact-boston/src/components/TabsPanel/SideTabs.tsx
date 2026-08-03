@@ -137,7 +137,7 @@ export default function SideTabs({ tabs, noPaddingTop }: { tabs: SideTab[]; noPa
               ref={(el) => {
                 tabRefs.current[idx] = el;
               }}
-              className={`h3 flex cursor-pointer items-center gap-x-4 whitespace-nowrap transition-colors duration-150 md:gap-x-8 lg:gap-x-2 lg:whitespace-normal lg:text-left ${
+              className={`h3 flex cursor-pointer items-center gap-x-4 whitespace-nowrap transition-colors duration-150 md:gap-x-8 lg:gap-x-2 lg:whitespace-normal lg:text-left lg:overflow-hidden ${
                 tabs.length <= 3 ? "flex-1 lg:flex-none" : ""
               } ${
                 active === idx
@@ -148,7 +148,7 @@ export default function SideTabs({ tabs, noPaddingTop }: { tabs: SideTab[]; noPa
               type="button"
             >
               <span aria-hidden="true" />
-              <span data-sanity={tab.dataAttributes?.label}>{tab.label}</span>
+              <span data-sanity={tab.dataAttributes?.label} className="lg:break-words lg:min-w-0">{tab.label}</span>
               <span aria-hidden="true" className="lg:hidden" />
             </button>
           ))}

@@ -1,3 +1,4 @@
+import {Component, type ReactNode} from 'react'
 import {type ArrayOfObjectsInputProps, useFormValue} from 'sanity'
 
 const HERO1_LIMIT = 60
@@ -12,7 +13,24 @@ function getTotalChars(value: unknown): number {
   return total + spaces
 }
 
-export function HeadlinePartsInput(props: ArrayOfObjectsInputProps) {
+class ErrorBoundary extends Component<
+  {children: ReactNode; fallback: ReactNode},
+  {hasError: boolean}
+> {
+  constructor(props: {children: ReactNode; fallback: ReactNode}) {
+    super(props)
+    this.state = {hasError: false}
+  }
+  static getDerivedStateFromError() {
+    return {hasError: true}
+  }
+  render() {
+    if (this.state.hasError) return this.props.fallback
+    return this.props.children
+  }
+}
+
+function HeadlinePartsInputInner(props: ArrayOfObjectsInputProps) {
   const {renderDefault} = props
 
   // Read the parent block to detect Hero 1 vs Hero 2
@@ -66,5 +84,13 @@ export function HeadlinePartsInput(props: ArrayOfObjectsInputProps) {
         </p>
       </div>
     </div>
+  )
+}
+
+export function HeadlinePartsInput(props: ArrayOfObjectsInputProps) {
+  return (
+    <ErrorBoundary fallback={<>{props.renderDefault(props)}</>}>
+      <HeadlinePartsInputInner {...props} />
+    </ErrorBoundary>
   )
 }
