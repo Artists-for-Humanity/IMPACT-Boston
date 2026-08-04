@@ -1,0 +1,27 @@
+<svg width="640" height="360" viewBox="0 0 640 360" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Event list block preview">
+  <rect width="640" height="360" fill="#FFFFFF"/>
+  <rect x="48" y="42" width="152" height="18" rx="4" fill="#311E41"/>
+  <rect x="48" y="78" width="304" height="10" rx="5" fill="#7B7281"/>
+
+  <rect x="48" y="122" width="544" height="88" rx="10" fill="#FFFFFF" stroke="#DDDDDD"/>
+  <rect x="68" y="146" width="70" height="44" rx="8" fill="#FAF6FD"/>
+  <rect x="68" y="146" width="70" height="14" rx="8" fill="#E86834"/>
+  <rect x="84" y="167" width="28" height="12" rx="3" fill="#563672"/>
+  <rect x="114" y="164" width="10" height="8" rx="2" fill="#563672"/>
+  <rect x="162" y="146" width="316" height="17" rx="5" fill="#111111"/>
+  <rect x="162" y="176" width="72" height="10" rx="5" fill="#111111"/>
+  <rect x="244" y="176" width="234" height="10" rx="5" fill="#563672"/>
+  <rect x="244" y="190" width="180" height="2" rx="1" fill="#563672"/>
+  <path d="M548 154L558 164L568 154" stroke="#111111" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <rect x="48" y="228" width="544" height="88" rx="10" fill="#FFFFFF" stroke="#DDDDDD"/>
+  <rect x="68" y="252" width="70" height="44" rx="8" fill="#FAF6FD"/>
+  <rect x="68" y="252" width="70" height="14" rx="8" fill="#E86834"/>
+  <rect x="84" y="273" width="28" height="12" rx="3" fill="#563672"/>
+  <rect x="114" y="270" width="10" height="8" rx="2" fill="#563672"/>
+  <rect x="162" y="252" width="250" height="17" rx="5" fill="#111111"/>
+  <rect x="162" y="282" width="72" height="10" rx="5" fill="#111111"/>
+  <rect x="244" y="282" width="202" height="10" rx="5" fill="#563672"/>
+  <rect x="244" y="296" width="154" height="2" rx="1" fill="#563672"/>
+  <path d="M548 260L558 270L568 260" stroke="#111111" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
