@@ -8,6 +8,8 @@ import {
   DEFAULT_CTA_SECTION_BLOCK,
   DEFAULT_CTA_SECTION_BLOCK_FALLBACK,
 } from "./ctaSection";
+export { DEFAULT_EVENT_LIST_BLOCK } from "./eventList";
+import { DEFAULT_EVENT_LIST_BLOCK_FALLBACK } from "./eventList";
 import { DEFAULT_HERO_BLOCK, DEFAULT_HERO_BLOCK_FALLBACK } from "./hero";
 export { DEFAULT_HERO3_BLOCK } from "./hero3";
 import {
@@ -26,6 +28,7 @@ import {
 export const DEFAULT_CMS_BLOCK_FALLBACKS: CmsBlockFallbacks = {
   actionPanel: DEFAULT_ACTION_PANEL_BLOCK_FALLBACK,
   ctaSection: DEFAULT_CTA_SECTION_BLOCK_FALLBACK,
+  eventList: DEFAULT_EVENT_LIST_BLOCK_FALLBACK,
   hero: DEFAULT_HERO_BLOCK_FALLBACK,
   highlights: DEFAULT_HIGHLIGHTS_BLOCK_FALLBACK,
   sideTabs: DEFAULT_SIDE_TABS_BLOCK_FALLBACK,

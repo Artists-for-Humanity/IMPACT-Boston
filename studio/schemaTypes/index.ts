@@ -13,6 +13,7 @@ import {classDescriptionsBlockType} from './blocks/classDescriptionsBlock'
 import {contentBlockType} from './blocks/contentBlock'
 import {ctaSectionBlockType} from './blocks/ctaSectionBlock'
 import {doubleContentBlockType} from './blocks/doubleContentBlock'
+import {eventListBlockType} from './blocks/eventListBlock'
 import {heroBlockType} from './blocks/heroBlock'
 import {hero3BlockType} from './blocks/hero3Block'
 import {highlightBannerBlockType} from './blocks/highlightBannerBlock'
@@ -46,6 +47,7 @@ export const schemaTypes = [
   singleContentBlockType,
   doubleContentBlockType,
   tripleContentBlockType,
+  eventListBlockType,
   listBlockType,
   classDescriptionsBlockType,
   sideTabsBlockType,

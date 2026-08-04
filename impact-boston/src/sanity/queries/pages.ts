@@ -214,6 +214,20 @@ const PAGE_SECTIONS_PROJECTION = `
         },
         description
       },
+      events[] {
+        _key,
+        dateLabel,
+        title,
+        registerLabel,
+        linkText,
+        href,
+        linkTarget {
+          ${LINK_TARGET_PROJECTION}
+        },
+        details,
+        defaultOpen
+      },
+      showChevrons,
       panels[] {
         _key,
         title,

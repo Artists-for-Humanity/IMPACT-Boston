@@ -1,6 +1,9 @@
 import { draftMode } from "next/headers";
 
-import { DEFAULT_CMS_BLOCK_FALLBACKS } from "@/cms/fallbacks/blocks";
+import {
+  DEFAULT_CMS_BLOCK_FALLBACKS,
+  DEFAULT_EVENT_LIST_BLOCK,
+} from "@/cms/fallbacks/blocks";
 import { getCmsPageBlocks } from "@/cms/normalize/page";
 import { CmsPage } from "@/cms/render/CmsPage";
 import type { CmsPageBlock } from "@/cms/types/blocks";
@@ -161,6 +164,7 @@ const PUBLIC_CLASSES_PAGE_FALLBACK_BLOCKS: CmsPageBlock[] = [
       "IMPACT classes teach self-defense strategies that are effective regardless of size, age, or fitness level. Our training programs give people the tools to stay calm and focused in unsafe situations. Instructors are trained to recreate common assault scenarios. In response most students feel fear. The training process helps you manage your body's natural stress response so you can defend yourself effectively.\nIMPACT instructors use special protective gear that allows students to safely practice physical techniques by striking with the amount of physical force needed to incapacitate an attacker. You learn to swim by getting in the water. Similarly, the most effective way to learn to defend yourself by actually doing it.",
     imageAlt: "Self Defense for Everyone",
   },
+  DEFAULT_EVENT_LIST_BLOCK,
   {
     _key: "public-classes-tabs",
     _type: "sideTabsBlock",
