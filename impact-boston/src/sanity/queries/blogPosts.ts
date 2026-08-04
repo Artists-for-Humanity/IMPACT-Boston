@@ -5,6 +5,7 @@ const LINK_TARGET_PROJECTION = `
   type,
   url,
   internalPath,
+  anchor,
   blogPost->{
     title,
     "slug": slug.current

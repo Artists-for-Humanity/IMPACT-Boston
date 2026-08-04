@@ -3,6 +3,7 @@ import { stegaClean } from "next-sanity";
 export type CmsLinkTarget = {
   _type?: "linkTarget" | string | null;
   type?: "asset" | "blogPost" | "email" | "internal" | "url" | string | null;
+  anchor?: string | null;
   url?: string | null;
   internalPath?: string | null;
   blogPost?: {
@@ -54,7 +55,9 @@ export function resolveCmsLink(
   }
 
   if (type === "internal") {
-    return { href: clean(target.internalPath) || fallback };
+    const base = clean(target.internalPath) || fallback;
+    const anchor = clean(target.anchor);
+    return { href: base && anchor ? `${base}#${anchor}` : base };
   }
 
   if (type === "blogPost") {

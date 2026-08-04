@@ -1,4 +1,4 @@
-import {useId, useMemo, useState, type ChangeEvent, type ComponentType} from 'react'
+import {useEffect, useId, useMemo, useState, type ChangeEvent, type ComponentType} from 'react'
 import {
   Box,
   Button,
@@ -7,22 +7,36 @@ import {
   Menu,
   MenuButton,
   MenuItem,
+  Select,
   Stack,
   Text,
   TextInput,
 } from '@sanity/ui'
 import {AtSign, Check, ChevronDown, FileText, Folder, Globe, Image, Link, Search} from 'lucide-react'
-import {ObjectInputMembers, set, setIfMissing, unset, type ObjectInputProps} from 'sanity'
+import {ObjectInputMembers, set, setIfMissing, unset, useClient, type ObjectInputProps} from 'sanity'
 
 import {
   internalPageGroups,
   internalPageOptions,
   linkTypeOptions,
+  pagePathToDocId,
   type LinkTargetType,
 } from '../schemaTypes/linkTargetOptions'
 
+function slugify(text: string): string {
+  return text
+    .toLowerCase()
+    .trim()
+    .replace(/[^\w\s-]/g, '')
+    .replace(/[\s_-]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+}
+
+type AnchorOption = {label: string; value: string}
+
 type LinkTargetValue = {
   _type?: 'linkTarget'
+  anchor?: string
   blogPost?: {
     _ref?: string
   }
@@ -73,10 +87,12 @@ export function LinkTargetInput(props: ObjectInputProps<LinkTargetValue>) {
     validation,
     value,
   } = props
+  const client = useClient({apiVersion: '2024-01-01'})
   const generatedId = useId()
   const menuId = `${elementProps.id ?? generatedId}-type-menu`
   const [internalQuery, setInternalQuery] = useState('')
   const [internalPickerOpen, setInternalPickerOpen] = useState(false)
+  const [anchorOptions, setAnchorOptions] = useState<AnchorOption[]>([])
   const activeType = isLinkTargetType(value?.type) ? value.type : 'url'
   const Icon = linkTypeIcons[activeType]
   const activeOption = linkTypeOptions.find((option) => option.value === activeType)
@@ -129,7 +145,7 @@ export function LinkTargetInput(props: ObjectInputProps<LinkTargetValue>) {
   }
 
   const handleStringChange =
-    (fieldName: 'email' | 'internalPath' | 'url') => (nextValue: string) => {
+    (fieldName: 'anchor' | 'email' | 'internalPath' | 'url') => (nextValue: string) => {
       const trimmedValue = nextValue.trim()
 
       onChange([
@@ -148,6 +164,39 @@ export function LinkTargetInput(props: ObjectInputProps<LinkTargetValue>) {
   }
   const showInternalPicker =
     activeType === 'internal' && (!selectedInternalPage || internalPickerOpen)
+
+  useEffect(() => {
+    if (activeType !== 'internal' || !selectedInternalPage) {
+      setAnchorOptions([])
+      return
+    }
+    const docId = pagePathToDocId[selectedInternalPage.value]
+    if (!docId) {
+      setAnchorOptions([])
+      return
+    }
+    client
+      .fetch<{tabs?: {label: string; sectionId?: string | null}[]} | null>(
+        `*[_id == $docId || _id == "drafts." + $docId] | order(_updatedAt desc) [0]{
+          "tabs": sections[_type == "sideTabsBlock"][0].tabs[]{label, sectionId}
+        }`,
+        {docId},
+      )
+      .then((result) => {
+        const tabs = result?.tabs
+        if (tabs?.length) {
+          setAnchorOptions(
+            tabs.map((tab) => ({
+              label: tab.label,
+              value: tab.sectionId || slugify(tab.label),
+            })),
+          )
+        } else {
+          setAnchorOptions([])
+        }
+      })
+      .catch(() => setAnchorOptions([]))
+  }, [activeType, selectedInternalPage?.value, client])
 
   return (
     <Stack space={3} {...elementProps}>
@@ -373,6 +422,34 @@ export function LinkTargetInput(props: ObjectInputProps<LinkTargetValue>) {
             </Stack>
           </Stack>
         </Card>
+      ) : null}
+
+      {activeType === 'internal' && selectedInternalPage ? (
+        anchorOptions.length > 0 ? (
+          <Stack space={2}>
+            <Text size={1} weight="semibold">Page Section (anchor)</Text>
+            <Select
+              disabled={readOnly}
+              onChange={(event) => handleStringChange('anchor')(event.currentTarget.value)}
+              value={value?.anchor ?? ''}
+            >
+              <option value="">— No specific section —</option>
+              {anchorOptions.map((opt) => (
+                <option key={opt.value} value={opt.value}>
+                  {opt.label}
+                </option>
+              ))}
+            </Select>
+          </Stack>
+        ) : (
+          <TextInput
+            disabled={readOnly}
+            onChange={(event) => handleStringChange('anchor')(event.currentTarget.value)}
+            placeholder="Page section ID (e.g. asap-trainers)"
+            prefix="#"
+            value={value?.anchor ?? ''}
+          />
+        )
       ) : null}
 
       {fileMembers.length ? (
