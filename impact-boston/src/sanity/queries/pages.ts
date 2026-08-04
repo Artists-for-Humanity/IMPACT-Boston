@@ -76,6 +76,7 @@ const PAGE_SECTIONS_PROJECTION = `
         ${LINK_TARGET_PROJECTION}
       },
       image,
+      imageSrc,
       imageAlt,
       featuredLabel,
       featuredTitle,

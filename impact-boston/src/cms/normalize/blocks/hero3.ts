@@ -1,46 +1,28 @@
-import { resolveCmsLink } from "@/cms/links";
 import type { Hero3Props } from "@/components/Hero/Hero3";
+import { PLACEHOLDER_IMAGE_SRC } from "@/components/common/placeholderImage";
 import type { CmsHero3Block } from "@/cms/types/blocks";
+import { urlFor } from "@/sanity/image";
 
 export const DEFAULT_HERO3_FIELDS: Hero3Props = {
-  headline: "Blogs,\nStories,\n& updates,",
+  headline: "Fact Check Fridays",
   description:
-    "Insights on safety, empowerment, and the people doing the work.",
-  featuredArticle: {
-    label: "Most Recent",
-    title: "Inside the Suit",
-    description:
-      "B Whitney, Program Coordinator, brings decades of experience teaching acting to their work at IMPACT. Their work is essential to helping our suited instructors learn their craft.",
-    date: "2026-01-23",
-    author: "B Whitney",
-    href: "/Blog",
-    linkText: "Read Full Article",
-  },
+    "IMPACT's new webinar series features innovative leaders and brilliant minds to debunk myths about violence and crime and give you actionable information about what actually works to make communities safer.",
+  imageAlt: "Hero illustration",
+  imageSrc: PLACEHOLDER_IMAGE_SRC,
 };
 
 export function resolveHero3Block(section: CmsHero3Block): Hero3Props {
-  const link = resolveCmsLink(section.featuredLinkTarget, section.featuredHref);
+  const imageSrc = section.image
+    ? urlFor(section.image)?.width(1200).fit("max").url()
+    : cleanText(section.imageSrc);
 
   return {
     headline: cleanText(section.headline) || DEFAULT_HERO3_FIELDS.headline,
+    subheader: cleanText(section.subheader) || undefined,
     description:
       cleanText(section.description) || DEFAULT_HERO3_FIELDS.description,
-    featuredArticle: {
-      label: cleanText(section.featuredLabel) || undefined,
-      title:
-        cleanText(section.featuredTitle) ||
-        DEFAULT_HERO3_FIELDS.featuredArticle.title,
-      description:
-        cleanText(section.featuredDescription) ||
-        DEFAULT_HERO3_FIELDS.featuredArticle.description,
-      date: cleanText(section.featuredDate) || undefined,
-      author: cleanText(section.featuredAuthor) || undefined,
-      href: link.href || DEFAULT_HERO3_FIELDS.featuredArticle.href,
-      openInNewTab: link.openInNewTab,
-      linkText:
-        cleanText(section.featuredLinkText) ||
-        DEFAULT_HERO3_FIELDS.featuredArticle.linkText,
-    },
+    imageAlt: cleanText(section.imageAlt) || DEFAULT_HERO3_FIELDS.imageAlt,
+    imageSrc: imageSrc || DEFAULT_HERO3_FIELDS.imageSrc,
   };
 }
 

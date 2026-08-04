@@ -27,33 +27,14 @@ export default function Hero3Block({
           dataAttribute,
           extendPath(blockPath, "description"),
         ),
-        featuredAuthor: getFieldDataAttribute(
-          dataAttribute,
-          extendPath(blockPath, "featuredAuthor"),
-        ),
-        featuredDate: getFieldDataAttribute(
-          dataAttribute,
-          extendPath(blockPath, "featuredDate"),
-        ),
-        featuredDescription: getFieldDataAttribute(
-          dataAttribute,
-          extendPath(blockPath, "featuredDescription"),
-        ),
-        featuredLabel: getFieldDataAttribute(
-          dataAttribute,
-          extendPath(blockPath, "featuredLabel"),
-        ),
-        featuredLinkText: getFieldDataAttribute(
-          dataAttribute,
-          extendPath(blockPath, "featuredLinkText"),
-        ),
-        featuredTitle: getFieldDataAttribute(
-          dataAttribute,
-          extendPath(blockPath, "featuredTitle"),
-        ),
         headline: getFieldDataAttribute(
           dataAttribute,
           extendPath(blockPath, "headline"),
+        ),
+        image: getFieldDataAttribute(dataAttribute, extendPath(blockPath, "image")),
+        subheader: getFieldDataAttribute(
+          dataAttribute,
+          extendPath(blockPath, "subheader"),
         ),
       }}
     />

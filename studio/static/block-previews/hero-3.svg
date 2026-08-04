@@ -1,18 +1,20 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="640" height="360" viewBox="0 0 640 360" role="img" aria-label="Hero 3 preview">
   <rect width="640" height="360" fill="#ffffff"/>
-  <rect x="56" y="68" width="184" height="40" rx="4" fill="#000000"/>
-  <rect x="56" y="118" width="210" height="40" rx="4" fill="#000000"/>
-  <rect x="56" y="168" width="188" height="40" rx="4" fill="#000000"/>
-  <rect x="56" y="246" width="260" height="12" rx="6" fill="#333333"/>
-  <rect x="56" y="268" width="222" height="12" rx="6" fill="#333333"/>
-  <rect x="358" y="62" width="226" height="236" fill="#fffaf7" stroke="#dddddd"/>
-  <rect x="382" y="90" width="88" height="22" rx="7" fill="#ffffff" stroke="#e86834"/>
-  <rect x="392" y="97" width="68" height="8" rx="4" fill="#e86834"/>
-  <rect x="382" y="132" width="112" height="16" rx="3" fill="#000000"/>
-  <rect x="382" y="174" width="160" height="10" rx="5" fill="#333333"/>
-  <rect x="382" y="192" width="176" height="10" rx="5" fill="#333333"/>
-  <rect x="382" y="210" width="144" height="10" rx="5" fill="#333333"/>
-  <rect x="382" y="246" width="92" height="10" rx="5" fill="#888888"/>
-  <rect x="488" y="246" width="70" height="10" rx="5" fill="#888888"/>
-  <rect x="382" y="274" width="94" height="10" rx="5" fill="#563672"/>
+  <rect x="56" y="96" width="230" height="30" rx="4" fill="#000000"/>
+  <rect x="56" y="142" width="174" height="10" rx="5" fill="#563672"/>
+  <rect x="56" y="182" width="260" height="10" rx="5" fill="#333333"/>
+  <rect x="56" y="202" width="246" height="10" rx="5" fill="#333333"/>
+  <rect x="56" y="222" width="210" height="10" rx="5" fill="#333333"/>
+  <rect x="350" y="76" width="238" height="194" fill="#faf6fd"/>
+  <rect x="350" y="76" width="52" height="7" fill="#E36A38"/>
+  <rect x="402" y="76" width="152" height="7" fill="#874E9F"/>
+  <rect x="554" y="76" width="34" height="7" fill="#462458"/>
+  <rect x="350" y="76" width="238" height="194" fill="#ffffff" opacity="0.48"/>
+  <circle cx="432" cy="160" r="50" fill="#563672" opacity="0.9"/>
+  <path d="M394 200L394 236L424 210Z" fill="#563672" opacity="0.9"/>
+  <rect x="452" y="144" width="104" height="62" rx="24" fill="#E86834"/>
+  <path d="M540 198L566 232L562 196Z" fill="#E86834"/>
+  <rect x="400" y="152" width="112" height="12" rx="6" fill="#ffffff"/>
+  <rect x="414" y="172" width="82" height="10" rx="5" fill="#ffffff" opacity="0.9"/>
+  <rect x="476" y="166" width="52" height="10" rx="5" fill="#ffffff"/>
 </svg>

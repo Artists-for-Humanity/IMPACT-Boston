@@ -1,52 +1,36 @@
-import Link from "next/link";
+import Image from "next/image";
 
 import Grid from "../common/Grid";
 
-export type Hero3FeaturedArticle = {
-  author?: string;
-  date?: string;
-  description: string;
-  href: string;
-  label?: string;
-  linkText: string;
-  openInNewTab?: boolean;
-  title: string;
-};
-
 export type Hero3Props = {
   description: string;
-  featuredArticle: Hero3FeaturedArticle;
   headline: string;
+  imageAlt?: string;
+  imageSrc?: string;
+  subheader?: string;
   dataAttributes?: {
     description?: string;
-    featuredAuthor?: string;
-    featuredDate?: string;
-    featuredDescription?: string;
-    featuredLabel?: string;
-    featuredLinkText?: string;
-    featuredTitle?: string;
     headline?: string;
+    image?: string;
+    subheader?: string;
   };
 };
 
 export default function Hero3({
   description,
-  featuredArticle,
   headline,
+  imageAlt,
+  imageSrc,
+  subheader,
   dataAttributes,
 }: Hero3Props) {
-  const meta = [
-    featuredArticle.date ? formatDisplayDate(featuredArticle.date) : null,
-    featuredArticle.author,
-  ].filter(Boolean);
-
   return (
     <section className="bg-white">
       <Grid className="items-start gap-y-10 md:gap-y-0 lg:items-center">
-        <div className="col-span-full flex flex-col gap-8 md:col-span-4 md:gap-10 lg:col-span-5 lg:gap-14">
-          <div className="flex flex-col gap-8 lg:gap-14">
+        <div className="col-span-full flex flex-col md:col-span-4 lg:col-span-6">
+          <div className="flex max-w-[550px] flex-col gap-4">
             <h1
-              className="break-words text-[48px] font-medium leading-[56px] tracking-[0em] text-black md:text-[64px] md:leading-[64px] lg:text-[80px] lg:leading-[80px]"
+              className="break-words text-[44px] font-medium leading-[52px] tracking-[0em] text-black md:text-[56px] md:leading-[60px] lg:text-[56px]"
               data-sanity={dataAttributes?.headline}
               style={{
                 fontFamily: "var(--font-poppins), sans-serif",
@@ -55,8 +39,16 @@ export default function Hero3({
             >
               {headline}
             </h1>
+            {subheader ? (
+              <p
+                className="p1 break-words text-grey"
+                data-sanity={dataAttributes?.subheader}
+              >
+                {subheader}
+              </p>
+            ) : null}
             <p
-              className="max-w-[400px] break-words text-[16px] font-normal leading-normal tracking-[0em] text-black lg:text-[18px]"
+              className="p2 break-words text-black"
               data-sanity={dataAttributes?.description}
             >
               {description}
@@ -64,77 +56,28 @@ export default function Hero3({
           </div>
         </div>
 
-        <article className="col-span-full border border-line-divider bg-complementary-light p-6 md:col-span-4 md:p-6 lg:col-start-7 lg:col-span-6 lg:min-h-[386px] lg:p-8">
-          <div className="flex h-full flex-col gap-5 lg:gap-6">
-            {featuredArticle.label ? (
-              <span
-                className="self-start rounded-[6px] border border-complementary bg-white px-2 py-0.5 text-[14px] leading-normal tracking-[0em] text-complementary lg:text-[16px]"
-                data-sanity={dataAttributes?.featuredLabel}
-              >
-                {featuredArticle.label}
-              </span>
-            ) : null}
-
-            <h2
-              className="break-words text-[18px] font-semibold leading-normal tracking-[0em] text-black"
-              data-sanity={dataAttributes?.featuredTitle}
-            >
-              {featuredArticle.title}
-            </h2>
-
-            <p
-              className="break-words text-[16px] font-normal leading-normal tracking-[0em] text-black"
-              data-sanity={dataAttributes?.featuredDescription}
-            >
-              {featuredArticle.description}
-            </p>
-
-            {meta.length ? (
-              <p className="text-[16px] font-normal leading-normal tracking-[0em] text-light-grey-text">
-                {featuredArticle.date ? (
-                  <span data-sanity={dataAttributes?.featuredDate}>
-                    {formatDisplayDate(featuredArticle.date)}
-                  </span>
-                ) : null}
-                {featuredArticle.date && featuredArticle.author ? (
-                  <span aria-hidden="true"> &bull; </span>
-                ) : null}
-                {featuredArticle.author ? (
-                  <span data-sanity={dataAttributes?.featuredAuthor}>
-                    {featuredArticle.author}
-                  </span>
-                ) : null}
-              </p>
-            ) : null}
-
-            <Link
-              className="link mt-auto self-start text-secondary underline transition hover:text-primary hover:no-underline"
-              data-sanity={dataAttributes?.featuredLinkText}
-              href={featuredArticle.href}
-              rel={
-                featuredArticle.openInNewTab ? "noopener noreferrer" : undefined
-              }
-              target={featuredArticle.openInNewTab ? "_blank" : undefined}
-            >
-              {featuredArticle.linkText}
-            </Link>
+        {imageSrc ? (
+          <div className="relative col-span-full aspect-[16/9] min-h-[220px] overflow-hidden md:col-span-4 md:min-h-[240px] lg:col-start-7 lg:col-span-6 lg:min-h-[320px]">
+            <div
+              aria-hidden="true"
+              className="absolute top-0 left-0 right-0 z-10 h-[7px]"
+              style={{
+                background:
+                  "linear-gradient(to right, #E36A38 0%, #E36A38 22%, #874E9F 22%, #874E9F 86%, #462458 86%, #462458 100%)",
+              }}
+            />
+            <Image
+              alt={imageAlt ?? ""}
+              className="object-contain"
+              data-sanity={dataAttributes?.image}
+              fill
+              priority
+              sizes="(min-width: 1024px) 50vw, (min-width: 744px) 50vw, 100vw"
+              src={imageSrc}
+            />
           </div>
-        </article>
+        ) : null}
       </Grid>
     </section>
   );
-}
-
-function formatDisplayDate(date: string) {
-  const [year, month, day] = date.split("-").map(Number);
-
-  if (!year || !month || !day) {
-    return date;
-  }
-
-  return new Date(year, month - 1, day).toLocaleDateString("en-US", {
-    day: "numeric",
-    month: "short",
-    year: "numeric",
-  });
 }

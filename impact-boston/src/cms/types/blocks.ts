@@ -58,7 +58,11 @@ export type SanityHero3Fields = {
   featuredLinkText?: string | null;
   featuredTitle?: string | null;
   headline?: string | null;
+  subheader?: string | null;
   description?: string | null;
+  image?: SanityImageSource | null;
+  imageAlt?: string | null;
+  imageSrc?: string | null;
 };
 
 export type SanityActionPanelFields = {
