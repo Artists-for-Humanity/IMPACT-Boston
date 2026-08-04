@@ -6,6 +6,7 @@ import type { ArticleCalloutProps } from "@/components/Content/ArticleCallout";
 import type { ClassDescriptionItem } from "@/components/ClassDescriptions/ClassDescriptions";
 import type { CtaPanelData } from "@/components/Action/CtaSection";
 import type { DoubleCard } from "@/components/Content/Double";
+import type { EventListItem } from "@/components/Events/EventList";
 import type {
   SingleContentParagraph,
   SingleContentProps,
@@ -198,6 +199,26 @@ export type SanityClassDescriptionsFields = {
   classItems?: ClassDescriptionItem[] | null;
 };
 
+export type SanityEventListItem = {
+  _key?: string | null;
+  dateLabel?: string | null;
+  defaultOpen?: boolean | null;
+  details?: string | null;
+  href?: string | null;
+  linkTarget?: CmsLinkTarget | null;
+  linkText?: string | null;
+  registerLabel?: string | null;
+  title?: string | null;
+};
+
+export type SanityEventListFields = {
+  description?: string | null;
+  events?: SanityEventListItem[] | null;
+  noPaddingTop?: boolean | null;
+  showChevrons?: boolean | null;
+  title?: string | null;
+};
+
 export type SanitySideTab = {
   _key?: string | null;
   label?: string | null;
@@ -271,6 +292,11 @@ export type CmsListBlock = CmsPageBlockBase &
 export type CmsClassDescriptionsBlock = CmsPageBlockBase &
   SanityClassDescriptionsFields & {
     _type: "classDescriptionsBlock";
+  };
+
+export type CmsEventListBlock = CmsPageBlockBase &
+  SanityEventListFields & {
+    _type: "eventListBlock";
   };
 
 export type CmsSideTabsBlock = CmsPageBlockBase & {
@@ -378,6 +404,7 @@ export type CmsPageBlock =
   | CmsSingleContentBlock
   | CmsDoubleContentBlock
   | CmsTripleContentBlock
+  | CmsEventListBlock
   | CmsListBlock
   | CmsClassDescriptionsBlock
   | CmsSideTabsBlock
@@ -389,3 +416,4 @@ export type CmsPageBlock =
   | CmsMediaGridBlock;
 
 export type ResolvedHighlightSlide = HighlightSlide;
+export type ResolvedEventListItem = EventListItem;

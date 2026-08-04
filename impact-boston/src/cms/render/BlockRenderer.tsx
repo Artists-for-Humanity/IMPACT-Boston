@@ -7,6 +7,7 @@ import ClassDescriptionsBlock from "./blocks/ClassDescriptionsBlock";
 import ContentBlock from "./blocks/ContentBlock";
 import CtaSectionBlock from "./blocks/CtaSectionBlock";
 import DoubleContentBlock from "./blocks/DoubleContentBlock";
+import EventListBlock from "./blocks/EventListBlock";
 import HighlightBannerBlock from "./blocks/HighlightBannerBlock";
 import HeroBlock from "./blocks/HeroBlock";
 import Hero3Block from "./blocks/Hero3Block";
@@ -125,6 +126,16 @@ export default function BlockRenderer({
           blockPath={blockPath}
           dataAttribute={dataAttribute}
           section={block}
+        />
+      );
+
+    case "eventListBlock":
+      return (
+        <EventListBlock
+          blockPath={blockPath}
+          dataAttribute={dataAttribute}
+          section={block}
+          fallback={fallbacks?.eventList}
         />
       );
 

@@ -115,6 +115,7 @@ export function definePageBlocksField() {
       defineArrayMember({type: 'actionPanelBlock'}),
       defineArrayMember({type: 'ctaSectionBlock'}),
       defineArrayMember({type: 'sideTabsBlock'}),
+      defineArrayMember({type: 'eventListBlock'}),
       defineArrayMember({type: 'listBlock'}),
       defineArrayMember({type: 'classDescriptionsBlock'}),
       defineArrayMember({type: 'tripleContentBlock'}),
@@ -198,7 +199,7 @@ export function definePageBlocksField() {
           {
             name: 'list',
             title: 'List',
-            of: ['listBlock', 'classDescriptionsBlock'],
+            of: ['eventListBlock', 'listBlock', 'classDescriptionsBlock'],
           },
           {
             name: 'testimonials',

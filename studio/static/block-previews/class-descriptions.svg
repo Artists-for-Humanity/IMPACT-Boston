@@ -1,0 +1,30 @@
+<svg width="640" height="360" viewBox="0 0 640 360" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Class descriptions block preview">
+  <rect width="640" height="360" fill="#FFFFFF"/>
+  <rect x="48" y="38" width="218" height="18" rx="4" fill="#311E41"/>
+  <rect x="48" y="72" width="330" height="9" rx="4.5" fill="#7B7281"/>
+  <rect x="48" y="92" width="274" height="9" rx="4.5" fill="#A098A7"/>
+  <rect x="500" y="45" width="92" height="9" rx="4.5" fill="#563672"/>
+
+  <rect x="48" y="124" width="544" height="146" rx="8" fill="#FFFFFF" stroke="#DDDDDD"/>
+  <rect x="48" y="124" width="308" height="146" rx="8" fill="#FCF9FF"/>
+  <path d="M356 124V270" stroke="#DDDDDD"/>
+  <rect x="72" y="150" width="48" height="10" rx="3" fill="#311E41"/>
+  <rect x="148" y="146" width="146" height="15" rx="4" fill="#111111"/>
+  <rect x="72" y="178" width="72" height="10" rx="3" fill="#563672"/>
+  <rect x="148" y="177" width="168" height="10" rx="5" fill="#7B7281"/>
+  <rect x="72" y="206" width="42" height="10" rx="3" fill="#563672"/>
+  <rect x="148" y="205" width="92" height="10" rx="5" fill="#7B7281"/>
+  <rect x="72" y="234" width="64" height="10" rx="3" fill="#563672"/>
+  <rect x="148" y="233" width="128" height="10" rx="5" fill="#7B7281"/>
+
+  <rect x="390" y="148" width="112" height="14" rx="4" fill="#311E41"/>
+  <rect x="390" y="180" width="156" height="9" rx="4.5" fill="#7B7281"/>
+  <rect x="390" y="199" width="176" height="9" rx="4.5" fill="#7B7281"/>
+  <rect x="390" y="218" width="154" height="9" rx="4.5" fill="#7B7281"/>
+  <rect x="390" y="237" width="102" height="9" rx="4.5" fill="#A098A7"/>
+
+  <rect x="48" y="288" width="544" height="54" rx="8" fill="#FFFFFF" stroke="#DDDDDD"/>
+  <rect x="72" y="310" width="48" height="8" rx="3" fill="#D8CFDF"/>
+  <rect x="148" y="306" width="156" height="13" rx="4" fill="#563672"/>
+  <rect x="390" y="309" width="138" height="9" rx="4.5" fill="#D8CFDF"/>
+</svg>
