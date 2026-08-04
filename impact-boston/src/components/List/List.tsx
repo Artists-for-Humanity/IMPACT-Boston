@@ -130,10 +130,9 @@ export default function List({
   const [allOpen, setAllOpen] = useState(false);
   const visibleItems = variant === "details" ? detailItems : items;
   const serviceCount = visibleItems.length;
-  const serviceLabel = serviceCount === 1 ? "service" : "services";
   const allOpenLabel = allOpen
-    ? `Close all ${serviceCount} ${serviceLabel}`
-    : `Show all ${serviceCount} ${serviceLabel}`;
+    ? `Close all ${serviceCount}`
+    : `Show all ${serviceCount}`;
 
   const toggleItem = (index: number) => {
     setOpenIndexes((current) => {

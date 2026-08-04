@@ -441,13 +441,13 @@ export default function Navigation({
           return (
             <li
               key={item.label}
-              className="relative"
+              className="relative cursor-pointer"
               onMouseEnter={() => setActiveDropdown(item.label)}
               onMouseLeave={() => setActiveDropdown(null)}
             >
               <button
                 className={`
-                  link flex items-center justify-center gap-1 px-2 py-0.5 text-black
+                  link flex cursor-pointer items-center justify-center gap-1 px-2 py-0.5 text-black
                   transition-colors duration-150
                   ${isActive ? "font-semibold" : ""}
                 `}
