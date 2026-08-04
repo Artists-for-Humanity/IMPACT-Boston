@@ -101,7 +101,7 @@ export default function MediaGrid({
                 }}>Most Recent</span>
                 <div className="flex flex-col gap-3">
                   <p className="p1-bold break-words" data-sanity={featured.dataAttributes?.title}>{featured.title}</p>
-                  <p className="p2 break-all" data-sanity={featured.dataAttributes?.description}>{featured.description}</p>
+                  <p className="p2 break-words" data-sanity={featured.dataAttributes?.description}>{featured.description}</p>
                   {(featured.date || featured.author) && (
                     <p className="p2" style={{ color: "var(--color-black-60)" }}>
                       <span data-sanity={featured.dataAttributes?.date}>{featured.date ? formatDate(featured.date) : null}</span>
@@ -185,7 +185,7 @@ export default function MediaGrid({
             >
               <div className="flex flex-col gap-3">
                 <p className="p1-bold break-words" data-sanity={item.dataAttributes?.title}>{item.title}</p>
-                <p className="p2 break-all" data-sanity={item.dataAttributes?.description}>{item.description}</p>
+                <p className="p2 break-words" data-sanity={item.dataAttributes?.description}>{item.description}</p>
                 {(item.date || item.author) && (
                   <p className="p2" style={{ color: "var(--color-black-60)" }}>
                     <span data-sanity={item.dataAttributes?.date}>{item.date ? formatDate(item.date) : null}</span>

@@ -191,7 +191,7 @@ export default function SingleContent({
               ) : null}
               {subtitleFirst && subtitle && (
                 <div
-                  className={`sub-2 ${subtitleClassName ?? "text-grey"}`}
+                  className={`sub-2 ${subtitleClassName ?? "text-secondary text-[16px] font-semibold"}`}
                   data-sanity={dataAttributes?.subtitle}
                 >
                   {subtitle}
@@ -207,7 +207,7 @@ export default function SingleContent({
               ) : null}
               {!subtitleFirst && subtitle && (
                 <div
-                  className={`sub-2 ${subtitleClassName ?? "text-grey"}`}
+                  className={`sub-2 ${subtitleClassName ?? "text-secondary text-[16px] font-semibold"}`}
                   data-sanity={dataAttributes?.subtitle}
                 >
                   {subtitle}
