@@ -16,8 +16,10 @@ export default function TrainerList({
   sortLabel: string;
   state: string;
 }) {
+  const availableStates = [...new Set(items.map((item) => item.state))].sort();
+  const initialState = availableStates.includes(state) ? state : (availableStates[0] ?? state);
   const [expanded, setExpanded] = useState(false);
-  const [selectedState, setSelectedState] = useState(state);
+  const [selectedState, setSelectedState] = useState(initialState);
   const [sortValue, setSortValue] = useState(getInitialSortValue(sortLabel));
   const filteredItems = items.filter((item) => item.state === selectedState);
   const sortedItems = [...filteredItems].sort((a, b) => {
@@ -56,7 +58,7 @@ export default function TrainerList({
           <TrainerListSelect
             label="State"
             onChange={handleStateChange}
-            options={usStates.map((stateName) => ({
+            options={availableStates.map((stateName) => ({
               label: stateName,
               value: stateName,
             }))}
@@ -172,58 +174,6 @@ const trainerSortOptions = [
   { label: "Organization", value: "organization" },
 ];
 
-const usStates = [
-  "Alabama",
-  "Alaska",
-  "Arizona",
-  "Arkansas",
-  "California",
-  "Colorado",
-  "Connecticut",
-  "Delaware",
-  "Florida",
-  "Georgia",
-  "Hawaii",
-  "Idaho",
-  "Illinois",
-  "Indiana",
-  "Iowa",
-  "Kansas",
-  "Kentucky",
-  "Louisiana",
-  "Maine",
-  "Maryland",
-  "Massachusetts",
-  "Michigan",
-  "Minnesota",
-  "Mississippi",
-  "Missouri",
-  "Montana",
-  "Nebraska",
-  "Nevada",
-  "New Hampshire",
-  "New Jersey",
-  "New Mexico",
-  "New York",
-  "North Carolina",
-  "North Dakota",
-  "Ohio",
-  "Oklahoma",
-  "Oregon",
-  "Pennsylvania",
-  "Rhode Island",
-  "South Carolina",
-  "South Dakota",
-  "Tennessee",
-  "Texas",
-  "Utah",
-  "Vermont",
-  "Virginia",
-  "Washington",
-  "West Virginia",
-  "Wisconsin",
-  "Wyoming",
-];
 
 function getInitialSortValue(sortLabel: string) {
   return (
