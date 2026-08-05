@@ -120,12 +120,17 @@ export default function TestimonialsBlock({
   const headingLevel = (stegaClean(resolvedSection.headingLevel) ?? "h2") as "h2" | "h3";
   const headingClassName = `${headingLevel} text-[#000] text-center md:text-center lg:text-left`;
 
+  const testimonialCount = resolvedSection.testimonials?.filter((t) => t.quote).length ?? 0;
+  const autoSubheading = testimonialCount > 0
+    ? `Hear from ${testimonialCount} ${testimonialCount === 1 ? "person" : "people"} who've worked with us.`
+    : undefined;
+
   return (
     <TestimonialsCarousel
       heading={resolvedSection.heading ?? undefined}
       headingLevel={headingLevel}
       headingClassName={headingClassName}
-      subheading={resolvedSection.subtext ?? undefined}
+      subheading={autoSubheading}
       testimonials={resolvedSection.testimonials?.map((testimonial, index) => {
         const testimonialPath = getArrayItemPath(
           blockPath,
@@ -157,10 +162,6 @@ export default function TestimonialsBlock({
       backgroundColor={getBackgroundColor(resolvedSection.backgroundColor)}
       dataAttributes={{
         heading: getFieldDataAttribute(dataAttribute, extendPath(blockPath, "heading")),
-        subheading: getFieldDataAttribute(
-          dataAttribute,
-          extendPath(blockPath, "subtext"),
-        ),
       }}
     />
   );

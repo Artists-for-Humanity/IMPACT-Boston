@@ -44,6 +44,7 @@ export const testimonialsBlockType = defineType({
       title: 'Subtext',
       type: 'string',
       description: 'Optional supporting text under the heading.',
+      hidden: ({parent}) => !isParticipantSpotlightBlock(parent),
     }),
     defineField({
       name: 'backgroundColor',
