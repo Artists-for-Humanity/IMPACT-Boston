@@ -88,13 +88,19 @@ function getOrdinal(n: number): string {
   }
 }
 
+const MONTH_NAMES = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+const FULL_MONTH_RE = /^(January|February|March|April|May|June|July|August|September|October|November|December)/;
+
 function formatEventDate(value?: string | null): string {
   const raw = stegaClean(value)?.trim();
   if (!raw) return "";
-  const match = raw.match(/^(\d{4})-(\d{2})-(\d{2})$/);
-  if (!match) return raw; // graceful fallback for any old string data
-  const month = parseInt(match[2], 10);
-  const day = parseInt(match[3], 10);
-  const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-  return `${monthNames[month - 1]} ${day}${getOrdinal(day)}`;
+  // ISO date from the date picker: YYYY-MM-DD
+  const isoMatch = raw.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+  if (isoMatch) {
+    const month = parseInt(isoMatch[2], 10);
+    const day = parseInt(isoMatch[3], 10);
+    return `${MONTH_NAMES[month - 1]} ${day}${getOrdinal(day)}`;
+  }
+  // Legacy string data — abbreviate any full month name to 3 letters
+  return raw.replace(FULL_MONTH_RE, (m) => m.slice(0, 3));
 }
