@@ -49,9 +49,9 @@ function resolveEventListItem(item: SanityEventListItem): EventListItem | null {
     : undefined;
   const resolvedItem: EventListItem = {
     _key: item._key,
-    dateLabel: displayText(item.dateLabel) || undefined,
+    dateLabel: formatEventDate(item.dateLabel) || undefined,
     defaultOpen: Boolean(item.defaultOpen),
-    details: displayText(item.details) || undefined,
+    details: item.details?.length ? item.details : undefined,
     href: link.href,
     linkText,
     openInNewTab: link.openInNewTab,
@@ -61,7 +61,7 @@ function resolveEventListItem(item: SanityEventListItem): EventListItem | null {
 
   if (
     !resolvedItem.dateLabel &&
-    !resolvedItem.details &&
+    !resolvedItem.details?.length &&
     !resolvedItem.href &&
     !resolvedItem.linkText &&
     !resolvedItem.registerLabel &&
@@ -75,4 +75,26 @@ function resolveEventListItem(item: SanityEventListItem): EventListItem | null {
 
 function displayText(value?: string | null) {
   return stegaClean(value)?.trim() || "";
+}
+
+function getOrdinal(n: number): string {
+  const v = n % 100;
+  if (v >= 11 && v <= 13) return "th";
+  switch (n % 10) {
+    case 1: return "st";
+    case 2: return "nd";
+    case 3: return "rd";
+    default: return "th";
+  }
+}
+
+function formatEventDate(value?: string | null): string {
+  const raw = stegaClean(value)?.trim();
+  if (!raw) return "";
+  const match = raw.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+  if (!match) return raw; // graceful fallback for any old string data
+  const month = parseInt(match[2], 10);
+  const day = parseInt(match[3], 10);
+  const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  return `${monthNames[month - 1]} ${day}${getOrdinal(day)}`;
 }

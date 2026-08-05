@@ -207,7 +207,7 @@ export type SanityEventListItem = {
   _key?: string | null;
   dateLabel?: string | null;
   defaultOpen?: boolean | null;
-  details?: string | null;
+  details?: PortableTextBlock[] | null;
   href?: string | null;
   linkTarget?: CmsLinkTarget | null;
   linkText?: string | null;

@@ -225,7 +225,18 @@ const PAGE_SECTIONS_PROJECTION = `
         linkTarget {
           ${LINK_TARGET_PROJECTION}
         },
-        details,
+        details[] {
+          ...,
+          markDefs[] {
+            ...,
+            linkTarget {
+              ${LINK_TARGET_PROJECTION}
+            }
+          },
+          children[] {
+            ...
+          }
+        },
         defaultOpen
       },
       showChevrons,

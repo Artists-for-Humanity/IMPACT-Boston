@@ -2,16 +2,18 @@
 
 import { ChevronDown, ChevronUp } from "lucide-react";
 import Link from "next/link";
+import { PortableText, type PortableTextBlock, type PortableTextComponents } from "next-sanity";
 import { useId, useState } from "react";
 
 import type { CmsLinkTarget } from "@/cms/links";
+import { resolveCmsLink } from "@/cms/links";
 import Grid from "@/components/common/Grid";
 
 export type EventListItem = {
   _key?: string | null;
   dateLabel?: string;
   defaultOpen?: boolean;
-  details?: string;
+  details?: PortableTextBlock[];
   href?: string;
   linkTarget?: CmsLinkTarget | null;
   linkText?: string;
@@ -37,6 +39,32 @@ export type EventListProps = {
     description?: string;
     title?: string;
   };
+};
+
+const detailsComponents: PortableTextComponents = {
+  block: {
+    normal: ({ children }) => <p className="p2">{children}</p>,
+  },
+  marks: {
+    strong: ({ children }) => <strong className="font-semibold">{children}</strong>,
+    em: ({ children }) => <em>{children}</em>,
+    link: ({ children, value }) => {
+      const link = resolveCmsLink(
+        (value as { linkTarget?: CmsLinkTarget })?.linkTarget,
+        (value as { href?: string })?.href,
+      );
+      if (!link.href) return <>{children}</>;
+      return (
+        <a
+          href={link.href}
+          target={link.openInNewTab ? "_blank" : undefined}
+          rel={link.openInNewTab ? "noopener noreferrer" : undefined}
+        >
+          {children}
+        </a>
+      );
+    },
+  },
 };
 
 export default function EventList({
@@ -103,7 +131,7 @@ export default function EventList({
         <div>
           {events.map((event, index) => {
             const detailsId = `${listId}-event-${index}`;
-            const hasDetails = Boolean(event.details);
+            const hasDetails = Boolean(event.details?.length);
             const isOpen = openIndexes.has(index);
 
             return (
@@ -114,7 +142,7 @@ export default function EventList({
                 <div className="grid grid-cols-[minmax(0,1fr)_auto] gap-x-4 gap-y-7 md:grid-cols-[78px_minmax(0,1fr)_auto] md:items-start md:gap-x-6 md:gap-y-3">
                   {event.dateLabel ? (
                     <div
-                      className="medium-label inline-flex min-h-[34px] min-w-[72px] items-center justify-center rounded-[8px] bg-bg-lavender px-3 py-2 text-center text-secondary md:col-start-1"
+                      className="medium-label inline-flex min-h-[34px] min-w-[72px] items-center justify-center rounded-[8px] bg-bg-lavender px-3 py-2 text-center text-secondary whitespace-nowrap md:col-start-1"
                       data-sanity={event.dataAttributes?.dateLabel}
                     >
                       <DateLabel label={event.dateLabel} />
@@ -141,35 +169,36 @@ export default function EventList({
                       </h3>
                     ) : null}
 
-                    {event.href || event.linkText || event.registerLabel ? (
-                      <p className="p2 max-w-[920px] text-black">
-                        {event.href ? (
-                          <Link
-                            className="text-secondary underline underline-offset-auto transition-colors hover:no-underline"
-                            data-sanity={event.dataAttributes?.registerLabel}
-                            href={event.href}
-                            rel={event.openInNewTab ? "noopener noreferrer" : undefined}
-                            target={event.openInNewTab ? "_blank" : undefined}
-                          >
-                            {event.registerLabel || event.linkText || event.href}
-                          </Link>
-                        ) : (
-                          <span data-sanity={event.dataAttributes?.registerLabel}>
-                            {event.registerLabel || event.linkText}
-                          </span>
-                        )}
-                      </p>
-                    ) : null}
+                    <p className="p2 max-w-[920px] text-black">
+                      {event.href ? (
+                        <Link
+                          className="text-secondary underline underline-offset-auto transition-colors hover:no-underline"
+                          data-sanity={event.dataAttributes?.registerLabel}
+                          href={event.href}
+                          rel={event.openInNewTab ? "noopener noreferrer" : undefined}
+                          target={event.openInNewTab ? "_blank" : undefined}
+                        >
+                          {event.registerLabel || event.linkText || event.href}
+                        </Link>
+                      ) : (
+                        <span data-sanity={event.dataAttributes?.registerLabel}>
+                          {event.registerLabel || event.linkText || "Registration link coming soon!"}
+                        </span>
+                      )}
+                    </p>
                   </div>
 
                   {hasDetails && isOpen ? (
-                    <p
-                      className="p2 col-span-full max-w-[920px] whitespace-pre-line text-black md:col-start-2"
+                    <div
+                      className="p2 col-span-full max-w-[920px] text-black md:col-start-2 [&_a]:text-secondary [&_a]:underline [&_a:hover]:no-underline"
                       data-sanity={event.dataAttributes?.details}
                       id={detailsId}
                     >
-                      {event.details}
-                    </p>
+                      <PortableText
+                        value={event.details!}
+                        components={detailsComponents}
+                      />
+                    </div>
                   ) : null}
                 </div>
               </article>

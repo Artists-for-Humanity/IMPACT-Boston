@@ -1,9 +1,30 @@
+import {LinkIcon} from 'lucide-react'
 import {defineField, defineType} from 'sanity'
 import {defineLinkTargetField} from '../linkTarget'
 import {blockPreviewMedia} from './blockPreviews'
 
 const DEFAULT_REGISTRATION_URL =
   'https://impactboston.app.neoncrm.com/np/clients/impactboston/eventRegistration.jsp?event=481&'
+
+function getOrdinal(n: number): string {
+  const v = n % 100
+  if (v >= 11 && v <= 13) return 'th'
+  switch (n % 10) {
+    case 1: return 'st'
+    case 2: return 'nd'
+    case 3: return 'rd'
+    default: return 'th'
+  }
+}
+
+function formatEventDate(isoDate: string): string {
+  const match = isoDate.match(/^(\d{4})-(\d{2})-(\d{2})$/)
+  if (!match) return isoDate
+  const month = parseInt(match[2], 10)
+  const day = parseInt(match[3], 10)
+  const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+  return `${monthNames[month - 1]} ${day}${getOrdinal(day)}`
+}
 
 export const eventListBlockType = defineType({
   name: 'eventListBlock',
@@ -46,9 +67,8 @@ export const eventListBlockType = defineType({
           fields: [
             defineField({
               name: 'dateLabel',
-              title: 'Date Label',
-              description: 'Short display date, e.g. Jul 10th.',
-              type: 'string',
+              title: 'Date',
+              type: 'date',
               validation: (rule) => rule.required(),
             }),
             defineField({
@@ -81,16 +101,44 @@ export const eventListBlockType = defineType({
             defineField({
               name: 'details',
               title: 'Expandable Details',
-              description: 'Optional content revealed when visitors open the row.',
-              type: 'text',
-              rows: 4,
+              description: 'Optional content revealed when visitors open the row. Select text to add links.',
+              type: 'array',
+              of: [
+                {
+                  type: 'block',
+                  styles: [{title: 'Normal', value: 'normal'}],
+                  marks: {
+                    decorators: [
+                      {title: 'Bold', value: 'strong'},
+                      {title: 'Italic', value: 'em'},
+                    ],
+                    annotations: [
+                      {
+                        name: 'link',
+                        title: 'Link',
+                        type: 'object',
+                        icon: LinkIcon,
+                        fields: [
+                          defineLinkTargetField({required: true}),
+                          defineField({
+                            name: 'href',
+                            title: 'Link URL',
+                            type: 'string',
+                            hidden: true,
+                          }),
+                        ],
+                      },
+                    ],
+                  },
+                },
+              ],
             }),
             defineField({
               name: 'defaultOpen',
               title: 'Open by Default',
               type: 'boolean',
               initialValue: false,
-              hidden: ({parent}) => !parent?.details,
+              hidden: ({parent}) => !parent?.details?.length,
             }),
           ],
           preview: {
@@ -101,7 +149,7 @@ export const eventListBlockType = defineType({
             prepare({dateLabel, title}) {
               return {
                 title: title || 'Event',
-                subtitle: dateLabel,
+                subtitle: dateLabel ? formatEventDate(dateLabel) : undefined,
               }
             },
           },
@@ -114,7 +162,7 @@ export const eventListBlockType = defineType({
     showChevrons: true,
     events: [
       {
-        dateLabel: 'Jul 10th',
+        dateLabel: '2025-07-10',
         title: 'Stranger Danger with Paul Renfro and Shameka Gregory',
         registerLabel: 'Register here:',
         linkTarget: {
