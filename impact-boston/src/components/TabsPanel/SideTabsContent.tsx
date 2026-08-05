@@ -52,7 +52,7 @@ const portableTextComponents: PortableTextComponents = {
             child.marks.includes("strong"),
         );
       return (
-        <p className={`p1-bold pt-4${hasStrongMark ? " lg:-mb-14" : ""}`}>
+        <p className={`p1-bold${hasStrongMark ? " pt-4 lg:-mb-14" : ""}`}>
           {children}
         </p>
       );
