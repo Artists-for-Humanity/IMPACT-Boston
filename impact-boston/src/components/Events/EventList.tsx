@@ -143,26 +143,19 @@ export default function EventList({
 
                     {event.href || event.linkText || event.registerLabel ? (
                       <p className="p2 max-w-[920px] text-black">
-                        {event.registerLabel ? (
-                          <>
-                            <span data-sanity={event.dataAttributes?.registerLabel}>
-                              {event.registerLabel}
-                            </span>{" "}
-                          </>
-                        ) : null}
                         {event.href ? (
                           <Link
                             className="text-secondary underline underline-offset-auto transition-colors hover:no-underline"
-                            data-sanity={event.dataAttributes?.linkText}
+                            data-sanity={event.dataAttributes?.registerLabel}
                             href={event.href}
                             rel={event.openInNewTab ? "noopener noreferrer" : undefined}
                             target={event.openInNewTab ? "_blank" : undefined}
                           >
-                            {event.linkText || event.href}
+                            {event.registerLabel || event.linkText || event.href}
                           </Link>
                         ) : (
-                          <span data-sanity={event.dataAttributes?.linkText}>
-                            {event.linkText}
+                          <span data-sanity={event.dataAttributes?.registerLabel}>
+                            {event.registerLabel || event.linkText}
                           </span>
                         )}
                       </p>
