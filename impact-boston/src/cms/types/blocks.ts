@@ -356,6 +356,8 @@ export type CmsImageGridMember = {
   bio?: string | null;
   image?: SanityImageSource | null;
   imageAlt?: string | null;
+  href?: string | null;
+  linkTarget?: CmsLinkTarget | null;
 };
 
 export type CmsImageGridBlock = CmsPageBlockBase & {

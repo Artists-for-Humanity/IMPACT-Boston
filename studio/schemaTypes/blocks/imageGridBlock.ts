@@ -3,6 +3,7 @@ import {LightBackgroundColorInput} from '../../components/LightBackgroundColorIn
 import {LimitedTextInput} from '../../components/LimitedTextInput'
 import {blockPreviewMedia} from './blockPreviews'
 import {BLOCK_DEFAULT_COPY} from './blockDefaults'
+import {defineLinkTargetField} from '../linkTarget'
 
 export const imageGridBlockType = defineType({
   name: 'imageGridBlock',
@@ -70,6 +71,16 @@ export const imageGridBlockType = defineType({
               title: 'Photo Alt Text',
               type: 'string',
               validation: (rule) => rule.required(),
+            }),
+            defineField({
+              name: 'href',
+              title: 'Link URL',
+              type: 'string',
+              hidden: true,
+            }),
+            defineLinkTargetField({
+              title: 'Card Link',
+              description: 'Optional. Links the entire card to an article or page.',
             }),
           ],
           preview: {

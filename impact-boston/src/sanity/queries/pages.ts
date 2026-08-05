@@ -294,7 +294,11 @@ const PAGE_SECTIONS_PROJECTION = `
         role,
         bio,
         image,
-        imageAlt
+        imageAlt,
+        href,
+        linkTarget {
+          ${LINK_TARGET_PROJECTION}
+        }
       },
       subheader,
       items[] {

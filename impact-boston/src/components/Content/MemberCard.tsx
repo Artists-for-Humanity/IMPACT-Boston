@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 
 export interface MemberCardProps {
   imageSrc: string;
@@ -6,11 +7,13 @@ export interface MemberCardProps {
   name: string;
   role: string;
   bio: string;
+  href?: string;
+  openInNewTab?: boolean | null;
 }
 
-export default function MemberCard({ imageSrc, imageAlt, name, role, bio }: MemberCardProps) {
-  return (
-    <div className="col-span-full flex flex-col gap-6 md:grid md:grid-cols-subgrid md:gap-x-6 lg:flex lg:flex-col lg:gap-6 lg:col-span-4 min-w-0 overflow-hidden">
+export default function MemberCard({ imageSrc, imageAlt, name, role, bio, href, openInNewTab }: MemberCardProps) {
+  const inner = (
+    <>
       <div className="col-span-2 overflow-hidden">
         <Image
           src={imageSrc}
@@ -29,6 +32,25 @@ export default function MemberCard({ imageSrc, imageAlt, name, role, bio }: Memb
         </div>
         <p className="p2 break-words">{bio}</p>
       </div>
+    </>
+  );
+
+  if (href) {
+    return (
+      <Link
+        href={href}
+        target={openInNewTab ? '_blank' : undefined}
+        rel={openInNewTab ? 'noopener noreferrer' : undefined}
+        className="col-span-full flex flex-col gap-6 md:grid md:grid-cols-subgrid md:gap-x-6 lg:flex lg:flex-col lg:gap-6 lg:col-span-4 min-w-0 overflow-hidden transition hover:opacity-80"
+      >
+        {inner}
+      </Link>
+    );
+  }
+
+  return (
+    <div className="col-span-full flex flex-col gap-6 md:grid md:grid-cols-subgrid md:gap-x-6 lg:flex lg:flex-col lg:gap-6 lg:col-span-4 min-w-0 overflow-hidden">
+      {inner}
     </div>
   );
 }
