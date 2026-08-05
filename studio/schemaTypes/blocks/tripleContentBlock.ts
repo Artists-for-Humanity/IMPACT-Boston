@@ -147,7 +147,7 @@ export const tripleContentBlockType = defineType({
   initialValue: {
     variant: 'filledCards',
     title: 'Our Approach to Self-Defense',
-    subtitle: 'Realistic Scenarios, De-escalation Skills & Rebuilding Safety and Confidence',
+    subtitle: 'Realistic Scenarios, De-Escalation Skills & Rebuilding Safety and Confidence',
     cards: defaultCards,
   },
   preview: {

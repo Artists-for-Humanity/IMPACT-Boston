@@ -26,7 +26,7 @@ export const CMS_PAGE_TITLES: Record<string, string> = {
   boardAndStaff: 'Board and Staff',
   booksByMegStone: 'Books by Meg Stone',
   communityOrganizations: 'Community Organizations',
-  deEscalation: 'De-escalation',
+  deEscalation: 'De-Escalation',
   disabilitiesPage: 'People with Disabilities',
   empowerment: 'Empowerment Self-Defense',
   factCheckFriday: 'Fact Check Friday',

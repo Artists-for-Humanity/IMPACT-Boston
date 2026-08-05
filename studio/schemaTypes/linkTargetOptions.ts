@@ -26,7 +26,7 @@ export const internalPageGroups = [
       {title: 'Ability', value: '/PeopleWithDisabilities/Ability'},
       {title: 'ASAP', value: '/PeopleWithDisabilities/ASAP'},
       {title: 'Abuse Prevention', value: '/PeopleWithDisabilities/AbusePrevention'},
-      {title: 'De-escalation', value: '/De-escalation'},
+      {title: 'De-Escalation', value: '/De-escalation'},
       {title: 'Community Organizations', value: '/CommunityOrganizations'},
       {title: 'Workplace Programs', value: '/WorkplacePrograms'},
       {title: 'Know Your Rights', value: '/KnowYourRights'},

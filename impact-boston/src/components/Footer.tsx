@@ -127,7 +127,7 @@ export default function Footer() {
                 </li>
                 <li>
                   <Link href={ROUTES.DE_ESCALATION} className="p2 text-text-grey-light hover:text-white transition-colors">
-                    De-escalation
+                    De-Escalation
                   </Link>
                 </li>
                 <li>

@@ -54,7 +54,7 @@ const presentationItems = [
     icon: "external" as const,
   },
   {
-    title: "De-escalation Workshop for Nobis Engineering",
+    title: "De-Escalation Workshop for Nobis Engineering",
     detail: "Feb 2, 2022",
     href: "#",
     icon: "external" as const,

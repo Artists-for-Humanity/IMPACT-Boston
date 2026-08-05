@@ -78,7 +78,7 @@ const DEFAULT_NAV_ITEMS: NavItem[] = [
           "Explore programs for people with disabilities and trainings for those who support them",
       },
       {
-        label: "De-escalation",
+        label: "De-Escalation",
         link: ROUTES.DE_ESCALATION,
         description: "Hire us for a de-escalation workshop",
       },

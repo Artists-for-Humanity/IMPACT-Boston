@@ -71,7 +71,7 @@ export const DEFAULT_TRIPLE_CONTENT_BLOCK_FIELDS: TripleProps = {
   variant: "filledCards",
   title: "Our Approach to Self-Defense",
   subtitle:
-    "Realistic Scenarios, De-escalation Skills & Rebuilding Safety and Confidence",
+    "Realistic Scenarios, De-Escalation Skills & Rebuilding Safety and Confidence",
   cards: DEFAULT_TRIPLE_CONTENT_CARDS.map((card) =>
     resolveTripleContentCard(card, "filledCards"),
   ),
