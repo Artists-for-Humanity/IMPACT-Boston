@@ -42,6 +42,9 @@ function resolveEventListItems(
 }
 
 function resolveEventListItem(item: SanityEventListItem): EventListItem | null {
+  const rawDate = stegaClean(item.dateLabel)?.trim();
+  const isoDate = rawDate?.match(/^\d{4}-\d{2}-\d{2}$/) ? rawDate : undefined;
+
   const link = resolveCmsLink(item.linkTarget, item.href);
   const linkText = displayText(item.linkText) || link.href;
   const registerLabel = linkText
@@ -50,6 +53,7 @@ function resolveEventListItem(item: SanityEventListItem): EventListItem | null {
   const resolvedItem: EventListItem = {
     _key: item._key,
     dateLabel: formatEventDate(item.dateLabel) || undefined,
+    isoDate,
     defaultOpen: Boolean(item.defaultOpen),
     details: item.details?.length ? item.details : undefined,
     href: link.href,

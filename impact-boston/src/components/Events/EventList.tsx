@@ -12,6 +12,7 @@ import Grid from "@/components/common/Grid";
 export type EventListItem = {
   _key?: string | null;
   dateLabel?: string;
+  isoDate?: string; // YYYY-MM-DD, used for auto past/upcoming categorization
   defaultOpen?: boolean;
   details?: PortableTextBlock[];
   href?: string;
@@ -75,10 +76,23 @@ export default function EventList({
   title,
   dataAttributes,
 }: EventListProps) {
+  const today = new Date().toISOString().slice(0, 10);
+  const upcoming = events.filter((e) => !e.isoDate || e.isoDate >= today);
+  const past = events.filter((e) => e.isoDate && e.isoDate < today);
+  const hasBoth = upcoming.length > 0 && past.length > 0;
+
+  const [activeTab, setActiveTab] = useState<"upcoming" | "past">(
+    upcoming.length > 0 ? "upcoming" : "past",
+  );
+
+  const displayedEvents = hasBoth
+    ? activeTab === "upcoming" ? upcoming : past
+    : events;
+
   const [openIndexes, setOpenIndexes] = useState<Set<number>>(
     () =>
       new Set(
-        events
+        displayedEvents
           .map((event, index) => (event.defaultOpen ? index : null))
           .filter((index): index is number => index !== null),
       ),
@@ -93,15 +107,18 @@ export default function EventList({
   const toggleEvent = (index: number) => {
     setOpenIndexes((current) => {
       const next = new Set(current);
-
       if (next.has(index)) {
         next.delete(index);
       } else {
         next.add(index);
       }
-
       return next;
     });
+  };
+
+  const handleTabChange = (tab: "upcoming" | "past") => {
+    setActiveTab(tab);
+    setOpenIndexes(new Set());
   };
 
   return (
@@ -129,10 +146,38 @@ export default function EventList({
         ) : null}
 
         <div>
-          {events.map((event, index) => {
+          {hasBoth ? (
+            <div className="mb-2 flex gap-6 border-b border-line-divider">
+              <button
+                className={`pb-3 sub-2 transition-colors border-b-2 -mb-px ${
+                  activeTab === "upcoming"
+                    ? "border-secondary text-secondary"
+                    : "border-transparent text-grey hover:text-black"
+                }`}
+                onClick={() => handleTabChange("upcoming")}
+                type="button"
+              >
+                Upcoming Events
+              </button>
+              <button
+                className={`pb-3 sub-2 transition-colors border-b-2 -mb-px ${
+                  activeTab === "past"
+                    ? "border-secondary text-secondary"
+                    : "border-transparent text-grey hover:text-black"
+                }`}
+                onClick={() => handleTabChange("past")}
+                type="button"
+              >
+                Past Events
+              </button>
+            </div>
+          ) : null}
+
+          {displayedEvents.map((event, index) => {
             const detailsId = `${listId}-event-${index}`;
             const hasDetails = Boolean(event.details?.length);
             const isOpen = openIndexes.has(index);
+            const isPast = event.isoDate ? event.isoDate < today : false;
 
             return (
               <article
@@ -169,8 +214,8 @@ export default function EventList({
                       </h3>
                     ) : null}
 
-                    <p className="p2 max-w-[920px] text-black">
-                      {event.href ? (
+                    {event.href ? (
+                      <p className="p2 max-w-[920px] text-black">
                         <Link
                           className="text-secondary underline underline-offset-auto transition-colors hover:no-underline"
                           data-sanity={event.dataAttributes?.registerLabel}
@@ -180,12 +225,20 @@ export default function EventList({
                         >
                           {event.registerLabel || event.linkText || event.href}
                         </Link>
-                      ) : (
+                      </p>
+                    ) : (event.registerLabel || event.linkText) ? (
+                      <p className="p2 max-w-[920px] text-black">
                         <span data-sanity={event.dataAttributes?.registerLabel}>
-                          {event.registerLabel || event.linkText || "Registration link coming soon!"}
+                          {event.registerLabel || event.linkText}
                         </span>
-                      )}
-                    </p>
+                      </p>
+                    ) : !isPast ? (
+                      <p className="p2 max-w-[920px] text-black">
+                        <span data-sanity={event.dataAttributes?.registerLabel}>
+                          Registration link coming soon!
+                        </span>
+                      </p>
+                    ) : null}
                   </div>
 
                   {hasDetails && isOpen ? (
