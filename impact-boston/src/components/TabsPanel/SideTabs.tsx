@@ -154,7 +154,7 @@ export default function SideTabs({ tabs, noPaddingTop }: { tabs: SideTab[]; noPa
           ))}
         </div>
 
-        <div className="col-span-full flex flex-col gap-6 lg:gap-16 lg:col-span-7">
+        <div className="col-span-full flex flex-col lg:col-span-7">
           <SideTabsContent content={activeContent} />
         </div>
       </Grid>

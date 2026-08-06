@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
+import { stegaClean } from "next-sanity";
 
 import type { TrainerListItem } from "./types";
 
@@ -16,12 +17,13 @@ export default function TrainerList({
   sortLabel: string;
   state: string;
 }) {
-  const availableStates = [...new Set(items.map((item) => item.state))].sort();
-  const initialState = availableStates.includes(state) ? state : (availableStates[0] ?? state);
+  const availableStates = [...new Set(items.map((item) => stegaClean(item.state) ?? item.state))].sort();
+  const cleanState = stegaClean(state) ?? state;
+  const initialState = availableStates.includes(cleanState) ? cleanState : (availableStates[0] ?? cleanState);
   const [expanded, setExpanded] = useState(false);
   const [selectedState, setSelectedState] = useState(initialState);
   const [sortValue, setSortValue] = useState(getInitialSortValue(sortLabel));
-  const filteredItems = items.filter((item) => item.state === selectedState);
+  const filteredItems = items.filter((item) => (stegaClean(item.state) ?? item.state) === selectedState);
   const sortedItems = [...filteredItems].sort((a, b) => {
     if (sortValue === "nameDesc") {
       return b.name.localeCompare(a.name);

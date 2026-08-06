@@ -24,7 +24,7 @@ import type {
 const portableTextComponents: PortableTextComponents = {
   block: {
     h1: ({ children }) => <h1 className="h1 pb-6">{children}</h1>,
-    h2: ({ children }) => <h2 className="h2 break-words">{children}</h2>,
+    h2: ({ children }) => <h2 className="h2 break-words pb-16">{children}</h2>,
     h3: ({ children }) => <h3 className="h3">{children}</h3>,
     h4: ({ children }) => <h3 className="text-lg font-bold">{children}</h3>,
     sub1: ({ children }) => <p className="sub-1">{children}</p>,
@@ -39,25 +39,11 @@ const portableTextComponents: PortableTextComponents = {
             Array.isArray(child.marks) &&
             child.marks.includes("strong"),
         );
-      return <p className={`p1 break-words${allStrong ? " pt-4 lg:-mb-14" : ""}`}>{children}</p>;
+      return <p className={`p1 break-words${allStrong ? " pt-4 pb-2" : " pb-8"}`}>{children}</p>;
     },
-    p1: ({ children }) => <p className="p1 break-words">{children}</p>,
-    p1Bold: ({ children, value }) => {
-      const hasStrongMark =
-        Array.isArray(value.children) &&
-        value.children.some(
-          (child: { _type?: string; marks?: string[] }) =>
-            child._type === "span" &&
-            Array.isArray(child.marks) &&
-            child.marks.includes("strong"),
-        );
-      return (
-        <p className={`p1-bold${hasStrongMark ? " pt-4 lg:-mb-14" : ""}`}>
-          {children}
-        </p>
-      );
-    },
-    p2: ({ children }) => <p className="p2">{children}</p>,
+    p1: ({ children }) => <p className="p1 break-words pb-8">{children}</p>,
+    p1Bold: ({ children }) => <p className="p1-bold pt-4 pb-2">{children}</p>,
+    p2: ({ children }) => <p className="p2 pb-12">{children}</p>,
     mediumLabel: ({ children }) => <p className="medium-label">{children}</p>,
     link: ({ children }) => <p className="link">{children}</p>,
     blockquote: ({ children }) => (
@@ -171,7 +157,7 @@ function renderStructuredContentBlock(
   switch (blockType) {
     case "heading":
       return (
-        <h2 className="h2 break-words" data-sanity={dataAttributes?.text} key={key}>
+        <h2 className="h2 break-words pb-16" data-sanity={dataAttributes?.text} key={key}>
           {"text" in block ? block.text : ""}
         </h2>
       );
@@ -190,7 +176,7 @@ function renderStructuredContentBlock(
     case "paragraph":
       return (
         <p
-          className={`p1 break-words${"bold" in block && block.bold ? " font-bold pt-4" : ""}`}
+          className={`p1 break-words pb-8${"bold" in block && block.bold ? " font-bold pt-4" : ""}`}
           data-sanity={dataAttributes?.text}
           key={key}
         >
@@ -267,7 +253,7 @@ function renderStructuredContentBlock(
     }
 
     case "divider":
-      return <hr className="border-line-divider -mb-6 lg:-mb-16" key={key} />;
+      return <hr className="border-line-divider pb-4" key={key} />;
 
     case "resourceList": {
       const items =
