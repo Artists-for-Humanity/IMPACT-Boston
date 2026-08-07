@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { draftMode } from "next/headers";
 
 import {
@@ -9,6 +10,21 @@ import { CmsPage } from "@/cms/render/CmsPage";
 import type { CmsPageBlock } from "@/cms/types/blocks";
 import { ROUTES } from "@/routes";
 import { getCmsPageData } from "@/sanity/pageData";
+
+export const metadata: Metadata = {
+  title: "Public Self-Defense Classes",
+  description:
+    "Browse IMPACT Boston's public classes for adults, youth, survivors, and LGBTQ+ communities. Trauma-informed, inclusive self-defense for all ages and abilities.",
+  openGraph: {
+    title: "Public Self-Defense Classes",
+    description:
+      "Browse IMPACT Boston's public classes for adults, youth, survivors, and LGBTQ+ communities. Trauma-informed, inclusive self-defense for all ages and abilities.",
+    url: "https://impactboston.org/public-classes",
+  },
+  alternates: {
+    canonical: "https://impactboston.org/public-classes",
+  },
+};
 
 const PUBLIC_CLASSES_PAGE_ID = "publicClassesPage";
 

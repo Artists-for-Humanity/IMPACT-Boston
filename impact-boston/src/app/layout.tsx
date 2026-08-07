@@ -20,9 +20,45 @@ const ibmPlexSans = IBM_Plex_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "IMPACT Boston",
+  metadataBase: new URL("https://impactboston.org"),
+  title: {
+    default: "IMPACT Boston",
+    template: "%s | IMPACT Boston",
+  },
   description:
-    "Self-defense and abuse prevention programs with practical, inclusive safety skills for individuals and communities.",
+    "IMPACT Boston offers empowerment self-defense training for individuals, schools, workplaces, and community organizations across Greater Boston.",
+  openGraph: {
+    siteName: "IMPACT Boston",
+    type: "website",
+    locale: "en_US",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+};
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "IMPACT Boston",
+  url: "https://impactboston.org",
+  logo: "https://impactboston.org/images/logos/logo-full-color.png",
+  telephone: "+1-617-597-4945",
+  email: "info@impactboston.org",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "89 South Street, Suite 600",
+    addressLocality: "Boston",
+    addressRegion: "MA",
+    postalCode: "02111",
+    addressCountry: "US",
+  },
+  sameAs: [
+    "https://instagram.com",
+    "https://twitter.com",
+    "https://facebook.com",
+  ],
 };
 
 export default async function RootLayout({
@@ -33,6 +69,10 @@ export default async function RootLayout({
   return (
     <html lang="en" className={`${poppins.variable} ${ibmPlexSans.variable}`}>
       <body className="antialiased">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         <Header />
 
         {children}

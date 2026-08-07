@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { draftMode } from "next/headers";
 
 import { DEFAULT_CMS_BLOCK_FALLBACKS } from "@/cms/fallbacks/blocks";
@@ -5,6 +6,21 @@ import { getCmsPageBlocks } from "@/cms/normalize/page";
 import { CmsPage } from "@/cms/render/CmsPage";
 import type { CmsPageBlock } from "@/cms/types/blocks";
 import { getCmsPageData } from "@/sanity/pageData";
+
+export const metadata: Metadata = {
+  title: "Accessibility Information",
+  description:
+    "IMPACT Boston is committed to accessible self-defense programs. Learn about ASL interpretation, physical accommodations, and disability-specific classes.",
+  openGraph: {
+    title: "Accessibility Information",
+    description:
+      "IMPACT Boston is committed to accessible self-defense programs. Learn about ASL interpretation, physical accommodations, and disability-specific classes.",
+    url: "https://impactboston.org/accessibility",
+  },
+  alternates: {
+    canonical: "https://impactboston.org/accessibility",
+  },
+};
 
 const ACCESSIBILITY_PAGE_ID = "accessibility";
 

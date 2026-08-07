@@ -25,13 +25,27 @@ export async function generateMetadata({
 
   if (!post) {
     return {
-      title: "Blog Post | IMPACT Boston",
+      title: "Blog Post",
+      alternates: {
+        canonical: `https://impactboston.org/blog/${slug}`,
+      },
     };
   }
 
+  const title = post.title ?? "Blog Post";
+  const description = post.description ?? undefined;
+
   return {
-    title: `${post.title ?? "Blog Post"} | IMPACT Boston`,
-    description: post.description ?? undefined,
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      url: `https://impactboston.org/blog/${slug}`,
+    },
+    alternates: {
+      canonical: `https://impactboston.org/blog/${slug}`,
+    },
   };
 }
 

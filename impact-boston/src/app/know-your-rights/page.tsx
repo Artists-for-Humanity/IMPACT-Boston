@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { draftMode } from "next/headers";
 
 import {
@@ -7,6 +8,21 @@ import {
 import { getCmsPageBlocks } from "@/cms/normalize/page";
 import { CmsPage } from "@/cms/render/CmsPage";
 import { getCmsPageData } from "@/sanity/pageData";
+
+export const metadata: Metadata = {
+  title: "Know Your Rights & Activist Safety",
+  description:
+    "IMPACT Boston's Know Your Rights program combines legal knowledge and personal safety skills for activists, organizers, and community members.",
+  openGraph: {
+    title: "Know Your Rights & Activist Safety",
+    description:
+      "IMPACT Boston's Know Your Rights program combines legal knowledge and personal safety skills for activists, organizers, and community members.",
+    url: "https://impactboston.org/know-your-rights",
+  },
+  alternates: {
+    canonical: "https://impactboston.org/know-your-rights",
+  },
+};
 
 const KNOW_YOUR_RIGHTS_PAGE_ID = "knowYourRights";
 

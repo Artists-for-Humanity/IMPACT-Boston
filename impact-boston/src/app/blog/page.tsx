@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { draftMode } from "next/headers";
 import { stegaClean } from "next-sanity";
 
@@ -11,6 +12,21 @@ import type { CmsMediaGridItem, CmsPageBlock } from "@/cms/types/blocks";
 import type { BlogPostSummary } from "@/cms/types/blog";
 import { getBlogPostSummaries } from "@/sanity/blogPosts";
 import { getCmsPageData } from "@/sanity/pageData";
+
+export const metadata: Metadata = {
+  title: "Blog",
+  description:
+    "Read the latest posts from IMPACT Boston on self-defense, safety, empowerment, and community well-being.",
+  openGraph: {
+    title: "Blog",
+    description:
+      "Read the latest posts from IMPACT Boston on self-defense, safety, empowerment, and community well-being.",
+    url: "https://impactboston.org/blog",
+  },
+  alternates: {
+    canonical: "https://impactboston.org/blog",
+  },
+};
 
 const BLOG_PAGE_ID = "blog";
 

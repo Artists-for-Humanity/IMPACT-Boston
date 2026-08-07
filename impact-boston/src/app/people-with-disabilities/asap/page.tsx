@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { draftMode } from "next/headers";
 
 import {
@@ -7,6 +8,21 @@ import {
 import { getCmsPageBlocks } from "@/cms/normalize/page";
 import { CmsPage } from "@/cms/render/CmsPage";
 import { getCmsPageData } from "@/sanity/pageData";
+
+export const metadata: Metadata = {
+  title: "ASAP Program",
+  description:
+    "The ASAP program from IMPACT Boston delivers specialized self-defense and safety training for people with a variety of disabilities and support needs.",
+  openGraph: {
+    title: "ASAP Program",
+    description:
+      "The ASAP program from IMPACT Boston delivers specialized self-defense and safety training for people with a variety of disabilities and support needs.",
+    url: "https://impactboston.org/people-with-disabilities/asap",
+  },
+  alternates: {
+    canonical: "https://impactboston.org/people-with-disabilities/asap",
+  },
+};
 
 const ASAP_PAGE_ID = "ASAPPage";
 

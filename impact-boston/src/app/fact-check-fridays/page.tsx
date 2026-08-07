@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { draftMode } from "next/headers";
 
 import {
@@ -7,6 +8,21 @@ import {
 import { getCmsPageBlocks } from "@/cms/normalize/page";
 import { CmsPage } from "@/cms/render/CmsPage";
 import { getCmsPageData } from "@/sanity/pageData";
+
+export const metadata: Metadata = {
+  title: "Fact Check Fridays",
+  description:
+    "Fact Check Fridays is IMPACT Boston's series debunking myths about violence, self-defense, and safety with evidence-based information.",
+  openGraph: {
+    title: "Fact Check Fridays",
+    description:
+      "Fact Check Fridays is IMPACT Boston's series debunking myths about violence, self-defense, and safety with evidence-based information.",
+    url: "https://impactboston.org/fact-check-fridays",
+  },
+  alternates: {
+    canonical: "https://impactboston.org/fact-check-fridays",
+  },
+};
 
 const FACT_CHECK_FRIDAY_PAGE_ID = "factCheckFriday";
 

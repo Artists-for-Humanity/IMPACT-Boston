@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { draftMode } from "next/headers";
 
 import { DEFAULT_CMS_BLOCK_FALLBACKS } from "@/cms/fallbacks/blocks";
@@ -5,6 +6,21 @@ import { getCmsPageBlocks } from "@/cms/normalize/page";
 import { CmsPage } from "@/cms/render/CmsPage";
 import type { CmsPageBlock } from "@/cms/types/blocks";
 import { getCmsPageData } from "@/sanity/pageData";
+
+export const metadata: Metadata = {
+  title: "Resources for Abuse Survivors",
+  description:
+    "A guide for abuse survivors considering IMPACT classes — understanding trauma-informed instruction, choosing the right class, and what to expect.",
+  openGraph: {
+    title: "Resources for Abuse Survivors",
+    description:
+      "A guide for abuse survivors considering IMPACT classes — understanding trauma-informed instruction, choosing the right class, and what to expect.",
+    url: "https://impactboston.org/resources/abuse-survivors",
+  },
+  alternates: {
+    canonical: "https://impactboston.org/resources/abuse-survivors",
+  },
+};
 
 const ABUSE_SURVIVORS_PAGE_ID = "abuseSurvivorsPage";
 

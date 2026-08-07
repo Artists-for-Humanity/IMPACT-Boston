@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { draftMode } from "next/headers";
 
 import { DEFAULT_CMS_BLOCK_FALLBACKS } from "@/cms/fallbacks/blocks";
@@ -6,6 +7,21 @@ import { CmsPage } from "@/cms/render/CmsPage";
 import type { CmsPageBlock } from "@/cms/types/blocks";
 import { ROUTES } from "@/routes";
 import { getCmsPageData } from "@/sanity/pageData";
+
+export const metadata: Metadata = {
+  title: "Resources",
+  description:
+    "Access presentations, IMPACT organization links, support services, and survivor resources curated by IMPACT Boston.",
+  openGraph: {
+    title: "Resources",
+    description:
+      "Access presentations, IMPACT organization links, support services, and survivor resources curated by IMPACT Boston.",
+    url: "https://impactboston.org/resources",
+  },
+  alternates: {
+    canonical: "https://impactboston.org/resources",
+  },
+};
 
 const RESOURCES_PAGE_ID = "resources";
 
