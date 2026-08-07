@@ -34,7 +34,7 @@ const LEGACY_PATH_MAP: Record<string, string> = {
   "/SchoolsAndColleges": "/schools-and-colleges",
   "/PeopleWithDisabilities": "/people-with-disabilities",
   "/PeopleWithDisabilities/Ability": "/people-with-disabilities/ability",
-  "/PeopleWithDisabilities/ASAP": "/asap",
+  "/PeopleWithDisabilities/ASAP": "/people-with-disabilities/asap",
   "/PeopleWithDisabilities/AbusePrevention": "/people-with-disabilities/abuse-prevention",
   "/CommunityOrganizations": "/community-organizations",
   "/WorkplacePrograms": "/workplace-programs",

@@ -14,7 +14,7 @@ export const ROUTES = {
   SCHOOLS_AND_COLLEGES: "/schools-and-colleges",
   PEOPLE_WITH_DISABILITIES: "/people-with-disabilities",
   PEOPLE_WITH_DISABILITIES_ABILITY: "/people-with-disabilities/ability",
-  PEOPLE_WITH_DISABILITIES_ASAP: "/asap",
+  PEOPLE_WITH_DISABILITIES_ASAP: "/people-with-disabilities/asap",
   PEOPLE_WITH_DISABILITIES_ABUSE_PREVENTION: "/people-with-disabilities/abuse-prevention",
   DE_ESCALATION: "/de-escalation",
   COMMUNITY_ORGANIZATIONS: "/community-organizations",

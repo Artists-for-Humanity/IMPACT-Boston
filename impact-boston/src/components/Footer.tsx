@@ -103,6 +103,11 @@ export default function Footer() {
                     Blog
                   </Link>
                 </li>
+                <li>
+                  <Link href={ROUTES.RESOURCES} className="p2 text-text-grey-light hover:text-white transition-colors">
+                    Resources
+                  </Link>
+                </li>
               </ul>
             </div>
 
