@@ -193,7 +193,7 @@ export default function Footer() {
             {/* Social Icons */}
             <div className="col-span-4 md:col-span-4 lg:col-span-6 flex items-center gap-0 md:gap-4">
               <a
-                href="https://instagram.com"
+                href="https://instagram.com/impact_boston"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 flex items-center justify-center hover:opacity-70 transition-opacity"
@@ -207,7 +207,7 @@ export default function Footer() {
               </a>
 
               <a
-                href="https://twitter.com"
+                href="https://twitter.com/IMPACT_Boston"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 flex items-center justify-center hover:opacity-70 transition-opacity"
@@ -219,7 +219,7 @@ export default function Footer() {
               </a>
 
               <a
-                href="https://facebook.com"
+                href="https://www.facebook.com/IMPACTBoston"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 flex items-center justify-center hover:opacity-70 transition-opacity"
