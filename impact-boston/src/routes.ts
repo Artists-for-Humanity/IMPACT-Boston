@@ -4,10 +4,10 @@ export const ROUTES = {
   ABOUT: "/about",
   ABOUT_IMPACT: "/about",
   BOARD_AND_STAFF: "/board-and-staff",
-  RESOURCES: "/Resources",
-  ABUSE_SURVIVORS: "/Resources/AbuseSurvivors",
+  RESOURCES: "/resources",
+  ABUSE_SURVIVORS: "/resources/abuse-survivors",
   BLOG: "/blog",
-  ACCESSIBILITY: "/Accessibility",
+  ACCESSIBILITY: "/accessibility",
 
   PROGRAMS: "/public-classes",
   PUBLIC_CLASSES: "/public-classes",
@@ -25,7 +25,7 @@ export const ROUTES = {
   LEARN_MORE: "/fact-check-fridays",
   FACT_CHECK_FRIDAY: "/fact-check-fridays",
   BOOKS_BY_MEG_STONE: "/books-by-meg-stone",
-  PRESS: "/Press",
+  PRESS: "/press",
   EMPOWERMENT: "/what-is-empowerment-self-defense",
 
   REGISTER: "/public-classes",
