@@ -76,14 +76,20 @@ export default function EventList({
   title,
   dataAttributes,
 }: EventListProps) {
-  const today = new Date().toISOString().slice(0, 10);
-  const upcoming = events.filter((e) => !e.isoDate || e.isoDate >= today);
-  const past = events.filter((e) => e.isoDate && e.isoDate < today);
+  // today is intentionally empty string on the first server render so that
+  // SSR and client initial hydration produce identical output (all events
+  // treated as upcoming).  After mount, useEffect sets the real date so the
+  // upcoming/past split is applied on the client without causing a mismatch.
+  const [today, setToday] = useState('');
+  useEffect(() => {
+    setToday(new Date().toISOString().slice(0, 10));
+  }, []);
+
+  const upcoming = events.filter((e) => !e.isoDate || !today || e.isoDate >= today);
+  const past = events.filter((e) => e.isoDate && today && e.isoDate < today);
   const hasBoth = upcoming.length > 0 && past.length > 0;
 
-  const [activeTab, setActiveTab] = useState<"upcoming" | "past">(
-    upcoming.length > 0 ? "upcoming" : "past",
-  );
+  const [activeTab, setActiveTab] = useState<"upcoming" | "past">("upcoming");
 
   const displayedEvents = hasBoth
     ? activeTab === "upcoming" ? upcoming : past

@@ -232,7 +232,7 @@ export default function Footer() {
             </div>
 
             {/* Copyright */}
-            <p className="col-span-4 md:col-span-4 lg:col-span-6 p2 text-text-grey-light text-left md:text-right">
+            <p className="col-span-4 md:col-span-4 lg:col-span-6 p2 text-text-grey-light text-left md:text-right" suppressHydrationWarning>
               All rights reserved © IMPACT Inc. {year}
             </p>
           </div>
