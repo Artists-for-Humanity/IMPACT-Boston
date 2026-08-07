@@ -63,7 +63,7 @@ export function resolveCmsLink(
   if (type === "blogPost") {
     const slug = clean(target.blogPost?.slug);
 
-    return { href: slug ? `/Blog/${slug}` : fallback };
+    return { href: slug ? `/blog/${slug}` : fallback };
   }
 
   if (type === "url") {
