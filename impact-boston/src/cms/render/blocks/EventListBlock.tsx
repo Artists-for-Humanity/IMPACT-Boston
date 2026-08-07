@@ -30,6 +30,7 @@ export default function EventListBlock({
   return (
     <EventList
       {...props}
+      today={new Date().toISOString().slice(0, 10)}
       dataAttributes={{
         description: getFieldDataAttribute(
           dataAttribute,
