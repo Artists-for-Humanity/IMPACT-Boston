@@ -25,6 +25,31 @@ export type ResolvedCmsLink = {
   openInNewTab?: boolean;
 };
 
+/** Redirect legacy camelCase CMS-stored paths to new kebab-case slugs */
+const LEGACY_PATH_MAP: Record<string, string> = {
+  "/AboutImpact": "/about",
+  "/BoardAndStaff": "/board-and-staff",
+  "/BooksByMegStone": "/books-by-meg-stone",
+  "/PublicClasses": "/public-classes",
+  "/SchoolsAndColleges": "/schools-and-colleges",
+  "/PeopleWithDisabilities": "/people-with-disabilities",
+  "/PeopleWithDisabilities/Ability": "/people-with-disabilities/ability",
+  "/PeopleWithDisabilities/ASAP": "/asap",
+  "/PeopleWithDisabilities/AbusePrevention": "/people-with-disabilities/abuse-prevention",
+  "/CommunityOrganizations": "/community-organizations",
+  "/WorkplacePrograms": "/workplace-programs",
+  "/KnowYourRights": "/know-your-rights",
+  "/De-escalation": "/de-escalation",
+  "/HealthyRelationships": "/healthy-relationships",
+  "/FactCheckFriday": "/fact-check-fridays",
+  "/Empowerment": "/what-is-empowerment-self-defense",
+  "/Blog": "/blog",
+  "/Press": "/press",
+  "/Accessibility": "/accessibility",
+  "/Resources": "/resources",
+  "/Resources/AbuseSurvivors": "/resources/abuse-survivors",
+};
+
 export function resolveCmsLink(
   target?: CmsLinkTarget | null,
   fallbackHref?: string | null,
@@ -55,7 +80,8 @@ export function resolveCmsLink(
   }
 
   if (type === "internal") {
-    const base = clean(target.internalPath) || fallback;
+    const raw = clean(target.internalPath) || fallback;
+    const base = raw ? (LEGACY_PATH_MAP[raw] ?? raw) : raw;
     const anchor = clean(target.anchor);
     return { href: base && anchor ? `${base}#${anchor}` : base };
   }
