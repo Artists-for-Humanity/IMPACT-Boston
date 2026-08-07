@@ -64,6 +64,6 @@ function getMediaGridItem(post: BlogPostSummary): CmsMediaGridItem | null {
     description,
     date: stegaClean(post.publishedAt)?.trim() || undefined,
     author: stegaClean(post.author)?.trim() || undefined,
-    href: `/Blog/${slug}`,
+    href: `/blog/${slug}`,
   };
 }

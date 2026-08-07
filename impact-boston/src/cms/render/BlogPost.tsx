@@ -103,7 +103,7 @@ export default function BlogPost({ post }: BlogPostProps) {
     <main className="bg-white">
       <Grid className="items-start gap-y-12 md:gap-y-14 lg:gap-y-18">
         <Link
-          href="/Blog"
+          href="/blog"
           className="link col-span-full text-grey underline underline-offset-2 transition hover:text-primary hover:no-underline md:col-span-2 lg:col-span-2"
         >
           &lt; Back to Blogs
