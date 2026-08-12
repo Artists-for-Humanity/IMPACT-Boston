@@ -32,13 +32,6 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
   },
-  icons: {
-    icon: [
-      { url: '/favicon.svg', type: 'image/svg+xml' },
-      { url: '/favicon.ico', sizes: '48x48' },
-    ],
-    apple: '/apple-touch-icon.png',
-  },
   robots: {
     index: true,
     follow: true,
@@ -78,6 +71,9 @@ export default async function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${poppins.variable} ${ibmPlexSans.variable}`} suppressHydrationWarning>
+      <head>
+        <meta name="apple-mobile-web-app-title" content="IMPACT Boston" />
+      </head>
       <body className="antialiased" suppressHydrationWarning>
         <script
           type="application/ld+json"
