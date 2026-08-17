@@ -21,6 +21,7 @@ const nextConfig: NextConfig = {
       // About
       { source: '/about/accessibility', destination: '/accessibility', permanent: true },
       { source: '/about/6278-2', destination: '/books-by-meg-stone', permanent: true },
+      { source: '/books', destination: '/books-by-meg-stone', permanent: true },
       { source: '/board', destination: '/board-and-staff', permanent: true },
       { source: '/about/7034-2', destination: '/about', permanent: true },
       { source: '/about/supporterspartners', destination: '/about', permanent: true },
