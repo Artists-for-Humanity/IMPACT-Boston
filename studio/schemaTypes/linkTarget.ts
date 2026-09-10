@@ -98,6 +98,13 @@ export const linkTargetType = defineType({
         rule.custom(() => true),
     }),
     defineField({
+      name: 'blogPost',
+      title: 'Blog Post',
+      type: 'reference',
+      to: [{type: 'blogPost'}],
+      hidden: ({parent}) => !isType(parent, 'blogPost'),
+    }),
+    defineField({
       name: 'anchor',
       title: 'Page Section (anchor)',
       type: 'string',
