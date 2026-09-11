@@ -157,10 +157,14 @@ export type SanityDoubleContentCard = {
   _key?: string | null;
   title?: DoubleCard["title"] | null;
   description?: string | null;
+  mediaType?: string | null;
   image?: SanityImageSource | null;
   imageSrc?: string | null;
   imageAlt?: string | null;
   showImagePlaceholder?: boolean | null;
+  videoSrc?: string | null;
+  videoTitle?: string | null;
+  scriptSrc?: string | null;
 };
 
 export type SanityTripleContentCard = {

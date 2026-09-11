@@ -172,7 +172,11 @@ const PAGE_SECTIONS_PROJECTION = `
         backgroundColor,
         image,
         imageAlt,
-        showImagePlaceholder
+        showImagePlaceholder,
+        mediaType,
+        videoSrc,
+        videoTitle,
+        scriptSrc
       },
       listItems[] {
         _key,
