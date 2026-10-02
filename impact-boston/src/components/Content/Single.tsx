@@ -162,7 +162,7 @@ export default function SingleContent({
       className={`${className ?? ""} ${backgroundColor ?? ""}`.trim()}
     >
       <Grid className={`gap-y-6 md:gap-y-10 lg:gap-y-16 ${gridClassName ?? ""}`.trim()}>
-        {reverse && (
+        {reverse && media && (
           <div
             className={`${imageCol} w-full md:w-full lg:h-full lg:flex lg:flex-col`}
           >
@@ -292,7 +292,7 @@ export default function SingleContent({
           </div>
         </div>
 
-        {!reverse && (
+        {!reverse && media && (
           <div
             className={`${imageCol} w-full object-cover md:w-full md:h-auto`}
           >

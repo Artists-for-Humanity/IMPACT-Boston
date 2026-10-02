@@ -259,12 +259,6 @@ export const singleContentBlockType = defineType({
       type: 'image',
       options: {hotspot: true},
       hidden: ({parent}) => usesPlaceholder(parent),
-      validation: (rule) =>
-        rule.custom((value, context) =>
-          value || usesPlaceholder(context.parent)
-            ? true
-            : 'Add an image or turn on the placeholder image.',
-        ),
     }),
     defineField({
       name: 'imageAlt',
