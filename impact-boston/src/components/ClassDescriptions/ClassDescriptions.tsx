@@ -113,15 +113,23 @@ export default function ClassDescriptions({
               ) : null}
             </div>
 
-            {hasMore ? (
-              <div className="hidden pt-1 lg:block text-right">
-                <button
-                  className="p2 text-secondary underline underline-offset-auto hover:no-underline transition-colors"
-                  onClick={() => setExpanded((v) => !v)}
-                  type="button"
-                >
-                  {expanded ? "See less" : `See all ${items.length} classes`}
-                </button>
+            {hasMore || seeAllLink ? (
+              <div className="hidden pt-1 lg:flex lg:flex-col lg:items-end lg:gap-2 text-right">
+                {hasMore ? (
+                  <button
+                    className="p2 text-secondary underline underline-offset-auto hover:no-underline transition-colors"
+                    onClick={() => setExpanded((v) => !v)}
+                    type="button"
+                  >
+                    {expanded ? "See less" : `See all ${items.length} classes`}
+                  </button>
+                ) : null}
+                {seeAllLink ? (
+                  <ClassDescriptionsAnchor
+                    dataAttribute={dataAttributes?.seeAllLinkText}
+                    link={seeAllLink}
+                  />
+                ) : null}
               </div>
             ) : null}
           </div>
@@ -136,15 +144,23 @@ export default function ClassDescriptions({
           ))}
         </div>
 
-        {hasMore ? (
-          <div className="lg:hidden">
-            <button
-              className="p2 text-secondary underline underline-offset-auto hover:no-underline transition-colors"
-              onClick={() => setExpanded((v) => !v)}
-              type="button"
-            >
-              {expanded ? "See less" : "See all"}
-            </button>
+        {hasMore || seeAllLink ? (
+          <div className="flex flex-col items-start gap-2 lg:hidden">
+            {hasMore ? (
+              <button
+                className="p2 text-secondary underline underline-offset-auto hover:no-underline transition-colors"
+                onClick={() => setExpanded((v) => !v)}
+                type="button"
+              >
+                {expanded ? "See less" : "See all"}
+              </button>
+            ) : null}
+            {seeAllLink ? (
+              <ClassDescriptionsAnchor
+                dataAttribute={dataAttributes?.seeAllLinkText}
+                link={seeAllLink}
+              />
+            ) : null}
           </div>
         ) : null}
       </section>
