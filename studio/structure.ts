@@ -26,6 +26,10 @@ const aboutPages: CmsPageListItem[] = [
     id: 'boardAndStaff',
   },
   {
+    title: getCmsPageTitle('joinOurTeamPage'),
+    id: 'joinOurTeamPage',
+  },
+  {
     title: getCmsPageTitle('resources'),
     id: 'resources',
   },

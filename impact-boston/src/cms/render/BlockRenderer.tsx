@@ -4,6 +4,7 @@ import type { CmsDataAttribute, CmsFieldPath } from "@/cms/visualEditing";
 import ActionPanelBlock from "./blocks/ActionPanelBlock";
 import ArticleCalloutBlock from "./blocks/ArticleCalloutBlock";
 import ClassDescriptionsBlock from "./blocks/ClassDescriptionsBlock";
+import JobListingsBlock from "./blocks/JobListingsBlock";
 import ContentBlock from "./blocks/ContentBlock";
 import CtaSectionBlock from "./blocks/CtaSectionBlock";
 import DoubleContentBlock from "./blocks/DoubleContentBlock";
@@ -123,6 +124,15 @@ export default function BlockRenderer({
     case "classDescriptionsBlock":
       return (
         <ClassDescriptionsBlock
+          blockPath={blockPath}
+          dataAttribute={dataAttribute}
+          section={block}
+        />
+      );
+
+    case "jobListingsBlock":
+      return (
+        <JobListingsBlock
           blockPath={blockPath}
           dataAttribute={dataAttribute}
           section={block}

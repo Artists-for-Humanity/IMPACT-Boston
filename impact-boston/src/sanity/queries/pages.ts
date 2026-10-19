@@ -220,6 +220,21 @@ const PAGE_SECTIONS_PROJECTION = `
         description,
         hiddenFromWebsite
       },
+      noOpeningsMessage,
+      positions[] {
+        _key,
+        title,
+        summary,
+        pdfFile {
+          asset->{
+            url,
+            originalFilename
+          }
+        },
+        fileButtonText,
+        applicationLink,
+        hiddenFromWebsite
+      },
       events[] {
         _key,
         dateLabel,

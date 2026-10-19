@@ -19,6 +19,7 @@ export const CMS_PAGE_TITLES: Record<string, string> = {
   AbusePreventionPage: 'Abuse Prevention',
   ASAPPage: 'ASAP',
   aboutImpactPage: 'About Impact',
+  joinOurTeamPage: 'Join Our Team',
   abuseSurvivorsPage: 'Abuse Survivors',
   accessibility: 'Accessibility',
   abilityPage: 'Ability',

@@ -118,6 +118,7 @@ export function definePageBlocksField() {
       defineArrayMember({type: 'eventListBlock'}),
       defineArrayMember({type: 'listBlock'}),
       defineArrayMember({type: 'classDescriptionsBlock'}),
+      defineArrayMember({type: 'jobListingsBlock'}),
       defineArrayMember({type: 'tripleContentBlock'}),
       defineArrayMember({type: 'imageGridBlock'}),
       defineArrayMember({type: 'mediaGridBlock'}),
@@ -199,7 +200,7 @@ export function definePageBlocksField() {
           {
             name: 'list',
             title: 'List',
-            of: ['eventListBlock', 'listBlock', 'classDescriptionsBlock'],
+            of: ['eventListBlock', 'listBlock', 'classDescriptionsBlock', 'jobListingsBlock'],
           },
           {
             name: 'testimonials',

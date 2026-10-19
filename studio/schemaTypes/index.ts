@@ -25,6 +25,7 @@ import {sideTabsBlockType} from './blocks/sideTabsBlock'
 import {singleContentBlockType} from './blocks/singleContentBlock'
 import {testimonialsBlockType} from './blocks/testimonialsBlock'
 import {tripleContentBlockType} from './blocks/tripleContentBlock'
+import {jobListingsBlockType} from './blocks/jobListingsBlock'
 
 export const schemaTypes = [
   // shared schema objects
@@ -56,4 +57,5 @@ export const schemaTypes = [
   imageGridBlockType,
   mediaGridBlockType,
   testimonialsBlockType,
+  jobListingsBlockType,
 ]
