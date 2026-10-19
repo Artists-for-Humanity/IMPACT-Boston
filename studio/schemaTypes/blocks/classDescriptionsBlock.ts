@@ -90,16 +90,25 @@ export const classDescriptionsBlockType = defineType({
               rows: 5,
               validation: (rule) => rule.required(),
             }),
+            defineField({
+              name: 'hiddenFromWebsite',
+              title: 'Hide from website',
+              type: 'boolean',
+              description:
+                'Turn on to remove this class from the Public Classes page. Use when no upcoming session is scheduled.',
+              initialValue: false,
+            }),
           ],
           preview: {
             select: {
               title: 'name',
               subtitle: 'summary',
+              hiddenFromWebsite: 'hiddenFromWebsite',
             },
-            prepare({title, subtitle}) {
+            prepare({title, subtitle, hiddenFromWebsite}) {
               return {
                 title: title || 'Class / Service',
-                subtitle,
+                subtitle: hiddenFromWebsite ? `${subtitle ?? ''}· Hidden`.trim() : subtitle,
               }
             },
           },

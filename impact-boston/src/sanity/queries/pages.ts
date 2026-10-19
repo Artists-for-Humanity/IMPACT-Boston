@@ -217,7 +217,8 @@ const PAGE_SECTIONS_PROJECTION = `
         linkTarget {
           ${LINK_TARGET_PROJECTION}
         },
-        description
+        description,
+        hiddenFromWebsite
       },
       events[] {
         _key,

@@ -19,7 +19,7 @@ const localPreviewOrigin = 'http://localhost:3000'
 const previewOrigin =
   process.env.SANITY_STUDIO_PREVIEW_ORIGIN ||
   (process.env.NODE_ENV === 'production' ? productionPreviewOrigin : localPreviewOrigin)
-const allowOrigins = Array.from(new Set(['http://localhost:*', previewOrigin]))
+const allowOrigins = Array.from(new Set(['http://localhost:*', productionPreviewOrigin, previewOrigin]))
 const cmsPageTypeFilter = `[
   ${CMS_PAGE_SCHEMA_TYPE_NAMES.map((type) => `"${type}"`).join(', ')}
 ]`

@@ -16,6 +16,8 @@ interface ButtonProps {
   disabled?: boolean
   style?: React.CSSProperties // <-- Add this line
   'data-sanity'?: string
+  'aria-expanded'?: boolean
+  'aria-controls'?: string
 }
 
 function ChevronIcon() {
@@ -39,6 +41,8 @@ export default function Button({
   disabled = false,
   style, // <-- Add this line
   'data-sanity': dataSanity,
+  'aria-expanded': ariaExpanded,
+  'aria-controls': ariaControls,
 }: ButtonProps) {
   const base = 'link flex items-center gap-x-22 transition-colors duration-150'
 
@@ -80,6 +84,8 @@ export default function Button({
       className={classes}
       data-sanity={dataSanity}
       style={style}
+      aria-expanded={ariaExpanded}
+      aria-controls={ariaControls}
     >
       {children}
       {(showChevron || size === 'lg') && <ChevronIcon />}
