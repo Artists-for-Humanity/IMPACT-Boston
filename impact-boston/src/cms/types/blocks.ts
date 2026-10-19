@@ -207,6 +207,28 @@ export type SanityClassDescriptionsFields = {
   classItems?: ClassDescriptionItem[] | null;
 };
 
+export type SanityJobListingItem = {
+  _key?: string | null;
+  title?: string | null;
+  summary?: string | null;
+  pdfFile?: {
+    asset?: {
+      url?: string | null;
+      originalFilename?: string | null;
+    } | null;
+  } | null;
+  fileButtonText?: string | null;
+  applicationLink?: string | null;
+  hiddenFromWebsite?: boolean | null;
+};
+
+export type SanityJobListingsFields = {
+  title?: string | null;
+  intro?: string | null;
+  noOpeningsMessage?: string | null;
+  positions?: SanityJobListingItem[] | null;
+};
+
 export type SanityEventListItem = {
   _key?: string | null;
   dateLabel?: string | null;
@@ -300,6 +322,11 @@ export type CmsListBlock = CmsPageBlockBase &
 export type CmsClassDescriptionsBlock = CmsPageBlockBase &
   SanityClassDescriptionsFields & {
     _type: "classDescriptionsBlock";
+  };
+
+export type CmsJobListingsBlock = CmsPageBlockBase &
+  SanityJobListingsFields & {
+    _type: "jobListingsBlock";
   };
 
 export type CmsEventListBlock = CmsPageBlockBase &
@@ -417,6 +444,7 @@ export type CmsPageBlock =
   | CmsEventListBlock
   | CmsListBlock
   | CmsClassDescriptionsBlock
+  | CmsJobListingsBlock
   | CmsSideTabsBlock
   | CmsHighlightBannerBlock
   | CmsHighlightsBlock

@@ -29,6 +29,7 @@ export type ResolvedCmsLink = {
 const LEGACY_PATH_MAP: Record<string, string> = {
   "/AboutImpact": "/about",
   "/BoardAndStaff": "/board-and-staff",
+  "/JoinOurTeam": "/join-our-team",
   "/BooksByMegStone": "/books-by-meg-stone",
   "/PublicClasses": "/public-classes",
   "/SchoolsAndColleges": "/schools-and-colleges",

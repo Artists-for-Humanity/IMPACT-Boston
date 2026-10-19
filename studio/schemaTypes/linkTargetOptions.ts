@@ -10,6 +10,7 @@ export const internalPageGroups = [
     pages: [
       {title: 'About Impact', value: '/about'},
       {title: 'Board and Staff', value: '/board-and-staff'},
+      {title: 'Join Our Team', value: '/join-our-team'},
       {title: 'Resources', value: '/resources'},
       {title: 'Guide for Abuse Survivors', value: '/resources/abuse-survivors'},
       {title: 'Blog', value: '/blog'},
@@ -72,6 +73,7 @@ export const pagePathToDocId: Record<string, string> = {
   '/accessibility': 'accessibility',
   '/blog': 'blog',
   '/board-and-staff': 'boardAndStaff',
+  '/join-our-team': 'joinOurTeamPage',
   '/books-by-meg-stone': 'booksByMegStone',
   '/community-organizations': 'communityOrganizations',
   '/de-escalation': 'deEscalation',

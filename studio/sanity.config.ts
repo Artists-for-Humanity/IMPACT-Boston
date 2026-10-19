@@ -46,6 +46,10 @@ const mainDocuments = defineDocuments([
     filter: cmsPageFilter('boardAndStaff'),
   },
   {
+    route: '/join-our-team',
+    filter: cmsPageFilter('joinOurTeamPage'),
+  },
+  {
     route: '/Blog',
     filter: cmsPageFilter('blog'),
   },

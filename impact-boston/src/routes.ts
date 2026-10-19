@@ -4,6 +4,7 @@ export const ROUTES = {
   ABOUT: "/about",
   ABOUT_IMPACT: "/about",
   BOARD_AND_STAFF: "/board-and-staff",
+  JOIN_OUR_TEAM: "/join-our-team",
   RESOURCES: "/resources",
   ABUSE_SURVIVORS: "/resources/abuse-survivors",
   BLOG: "/blog",
