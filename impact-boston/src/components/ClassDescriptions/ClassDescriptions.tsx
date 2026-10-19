@@ -4,6 +4,7 @@ import Link from "next/link";
 import React, { useState, type ReactNode } from "react";
 
 import type { CmsLinkTarget } from "@/cms/links";
+import Button from "@/components/common/Button";
 import Grid from "@/components/common/Grid";
 
 export type ClassDescriptionItem = {
@@ -18,6 +19,7 @@ export type ClassDescriptionItem = {
   linkTarget?: CmsLinkTarget | null;
   openInNewTab?: boolean | null;
   description?: string;
+  hiddenFromWebsite?: boolean | null;
   dataAttributes?: {
     cost?: string;
     dateTime?: string;
@@ -93,41 +95,27 @@ export default function ClassDescriptions({
     <Grid noPaddingTop={noPaddingTop}>
       <section className="col-span-full flex flex-col gap-y-8">
         {hasHeader ? (
-          <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
-            <div className="flex max-w-[760px] flex-col gap-3">
-              {title ? (
-                <h2
-                  className="h3 text-[#071526]"
-                  data-sanity={dataAttributes?.title}
-                >
-                  {title}
-                </h2>
-              ) : null}
-              {description ? (
-                <p
-                  className="p2 text-grey"
-                  data-sanity={dataAttributes?.description}
-                >
-                  {renderDescription(description, descriptionLinks)}
-                </p>
-              ) : null}
-            </div>
-
-            {hasMore ? (
-              <div className="hidden pt-1 lg:block text-right">
-                <button
-                  className="p2 text-secondary underline underline-offset-auto hover:no-underline transition-colors"
-                  onClick={() => setExpanded((v) => !v)}
-                  type="button"
-                >
-                  {expanded ? "See less" : `See all ${items.length} classes`}
-                </button>
-              </div>
+          <div className="flex max-w-[760px] flex-col gap-3">
+            {title ? (
+              <h2
+                className="h3 text-[#071526]"
+                data-sanity={dataAttributes?.title}
+              >
+                {title}
+              </h2>
+            ) : null}
+            {description ? (
+              <p
+                className="p2 text-grey"
+                data-sanity={dataAttributes?.description}
+              >
+                {renderDescription(description, descriptionLinks)}
+              </p>
             ) : null}
           </div>
         ) : null}
 
-        <div>
+        <div id="class-descriptions-list">
           {visibleItems.map((item, index) => (
             <ClassDescriptionArticle
               item={item}
@@ -137,15 +125,16 @@ export default function ClassDescriptions({
         </div>
 
         {hasMore ? (
-          <div className="lg:hidden">
-            <button
-              className="p2 text-secondary underline underline-offset-auto hover:no-underline transition-colors"
-              onClick={() => setExpanded((v) => !v)}
-              type="button"
-            >
-              {expanded ? "See less" : "See all"}
-            </button>
-          </div>
+          <Button
+            variant="outline"
+            onClick={() => setExpanded((v) => !v)}
+            type="button"
+            aria-expanded={expanded}
+            aria-controls="class-descriptions-list"
+            className="self-start"
+          >
+            {expanded ? "Show fewer classes" : `See all ${items.length} classes`}
+          </Button>
         ) : null}
       </section>
     </Grid>

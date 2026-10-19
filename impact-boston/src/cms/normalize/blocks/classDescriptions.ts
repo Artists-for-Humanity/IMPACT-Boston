@@ -11,7 +11,8 @@ export function resolveClassDescriptionsBlock(
   section: CmsClassDescriptionsBlock,
 ): ClassDescriptionsProps {
   const items = section.classItems
-    ?.map(resolveClassDescriptionItem)
+    ?.filter((item) => !item.hiddenFromWebsite)
+    .map(resolveClassDescriptionItem)
     .filter((item): item is ClassDescriptionItem => Boolean(item));
   const seeAllLink = resolveCmsLink(
     section.seeAllLinkTarget,
