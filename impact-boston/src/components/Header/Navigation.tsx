@@ -41,11 +41,6 @@ const DEFAULT_NAV_ITEMS: NavItem[] = [
         description: "Meet the people leading our mission forward.",
       },
       {
-        label: "Join Our Team",
-        link: ROUTES.JOIN_OUR_TEAM,
-        description: "Explore career opportunities at IMPACT Boston.",
-      },
-      {
         label: "Resources",
         link: ROUTES.RESOURCES,
         description: "Tools and guidance to support safer communities.",
